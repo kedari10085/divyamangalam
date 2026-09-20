@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Shlokas – Divya Mangalam</title>
+  <meta name="description" content="Powerful sacred shlokas, mantras and stotras with Sanskrit, transliteration and meaning." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  <style>
+    .shloka-filter-bar {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.4rem; border-radius: 50px;
+      border: 2px solid var(--gold); background: transparent;
+      color: var(--deep-red); font-weight: 700; font-size: 0.88rem;
+      cursor: pointer; transition: var(--transition);
+      font-family: 'Lato', sans-serif;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--deep-red); color: var(--white); border-color: var(--deep-red);
+    }
+    .shloka-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.8rem;
+    }
+    .shloka-card {
+      background: var(--white); border-radius: 16px;
+      box-shadow: 0 4px 24px var(--shadow);
+      overflow: hidden; transition: var(--transition);
+      border-top: 4px solid var(--gold);
+    }
+    .shloka-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px var(--shadow); }
+    .shloka-card-header {
+      background: linear-gradient(135deg, var(--deep-red), #5c1a00);
+      padding: 1.2rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .shloka-card-header h3 {
+      font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.1rem;
+    }
+    .shloka-card-header .deity-tag {
+      background: rgba(255,255,255,0.15); color: var(--gold);
+      padding: 3px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+    }
+    .shloka-card-body { padding: 1.5rem; }
+    .sanskrit-text {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      color: var(--deep-red); font-size: 1.05rem; line-height: 1.9;
+      border-left: 3px solid var(--gold); padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+    .transliteration {
+      font-size: 0.85rem; color: var(--text-mid);
+      font-style: italic; margin-bottom: 0.75rem; line-height: 1.7;
+    }
+    .meaning-toggle {
+      background: var(--light-bg); border: none; border-radius: 8px;
+      padding: 0.5rem 1rem; cursor: pointer; font-size: 0.85rem;
+      color: var(--deep-red); font-weight: 700; font-family: 'Lato', sans-serif;
+      transition: var(--transition); width: 100%; text-align: left;
+    }
+    .meaning-toggle:hover { background: var(--gold); color: var(--white); }
+    .meaning-text {
+      display: none; padding: 0.75rem 1rem; font-size: 0.9rem;
+      color: var(--text-mid); line-height: 1.7; background: var(--cream);
+      border-radius: 0 0 8px 8px;
+    }
+    .shloka-actions {
+      display: flex; gap: 0.5rem; margin-top: 1rem;
+    }
+    .play-btn {
+      flex: 1; padding: 0.6rem 1rem; border-radius: 50px; border: none;
+      font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+    }
+    .play-tone-btn { background: var(--light-bg); color: var(--deep-red); }
+    .play-tone-btn:hover { background: var(--deep-red); color: var(--white); }
+    .chant-count-btn { background: var(--gold); color: var(--text-dark); }
+    .chant-count-btn:hover { background: var(--saffron); color: var(--white); }
+    .chant-counter-display {
+      display: none; text-align: center; padding: 1rem;
+      background: linear-gradient(135deg, var(--deep-red), #5c0000);
+      border-radius: 12px; margin-top: 1rem; color: var(--white);
+    }
+    .chant-counter-display .count-num {
+      font-size: 2.5rem; font-weight: 700; color: var(--gold); display: block;
+    }
+    .chant-counter-display .count-label { font-size: 0.8rem; opacity: 0.8; }
+    .chant-counter-display .mala-progress {
+      height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; margin: 0.5rem 0;
+    }
+    .chant-counter-display .mala-fill {
+      height: 100%; background: var(--gold); border-radius: 3px; transition: width 0.3s;
+    }
+    .tap-btn {
+      background: var(--gold); color: var(--text-dark);
+      border: none; padding: 0.5rem 1.5rem; border-radius: 50px;
+      font-family: 'Lato', sans-serif; font-weight: 700; cursor: pointer;
+      transition: var(--transition); margin-top: 0.5rem;
+    }
+    .tap-btn:active { transform: scale(0.95); }
+    .reset-btn {
+      background: transparent; color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.3); padding: 0.3rem 1rem;
+      border-radius: 50px; font-size: 0.8rem; cursor: pointer;
+      font-family: 'Lato', sans-serif; margin-left: 0.5rem; transition: var(--transition);
+    }
+    .reset-btn:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+    @media (max-width: 640px) { .shloka-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="live-archana.html">Live Archana</a></li>
+      <li><a href="shlokas.html" class="active">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz Healing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-label" style="color:var(--gold);">Sacred Verses</p>
+  <h1>Powerful Shlokas & Mantras</h1>
+  <p>Sacred verses from the Vedas, Puranas and Agamas — with Sanskrit, transliteration, meaning and a built-in japa counter.</p>
+</div>
+
+<section>
+  <div class="section-inner">
+    <!-- Filter -->
+    <div class="shloka-filter-bar" id="filterBar">
+      <button class="filter-btn active" onclick="filterShlokas('all', this)">All</button>
+      <button class="filter-btn" onclick="filterShlokas('Shiva', this)">🔱 Shiva</button>
+      <button class="filter-btn" onclick="filterShlokas('Vishnu', this)">🪷 Vishnu</button>
+      <button class="filter-btn" onclick="filterShlokas('Devi', this)">🌺 Devi / Shakti</button>
+      <button class="filter-btn" onclick="filterShlokas('Ganesha', this)">🐘 Ganesha</button>
+      <button class="filter-btn" onclick="filterShlokas('Surya', this)">☀️ Surya</button>
+      <button class="filter-btn" onclick="filterShlokas('Universal', this)">🕉️ Universal</button>
+    </div>
+
+    <!-- Grid (built by JS) -->
+    <div class="shloka-grid" id="shlokaGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live-archana.html">Live Archana</a></li>
+        <li><a href="shlokas.html">Shlokas</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Puja Timings</h4>
+      <ul>
+        <li><a href="#">6:00 AM – Suprabhata</a></li>
+        <li><a href="#">12:00 PM – Madhyahna</a></li>
+        <li><a href="#">6:30 PM – Sandhya Aarti</a></li>
+        <li><a href="#">8:30 PM – Ratri Seva</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const shlokas = [
+  {
+    id: 1, deity: 'Universal',
+    name: 'Gayatri Mantra',
+    icon: '☀️',
+    sanskrit: 'ॐ भूर्भुवः स्वः\nतत्सवितुर्वरेण्यं\nभर्गो देवस्य धीमहि\nधियो यो नः प्रचोदयात् ॥',
+    transliteration: 'Oṃ bhūr bhuvaḥ svaḥ\ntatsaviturvareṇyaṃ\nbhargo devasya dhīmahi\ndhiyo yo naḥ pracodayāt',
+    meaning: 'We meditate upon the glorious spiritual light of the divine Creator (Savitr). May that divine light illuminate and guide our intellect and inspire us towards righteous action.',
+    freq: 432,
+  },
+  {
+    id: 2, deity: 'Shiva',
+    name: 'Maha Mrityunjaya Mantra',
+    icon: '🔱',
+    sanskrit: 'ॐ त्र्यम्बकं यजामहे\nसुगन्धिं पुष्टिवर्धनम्\nउर्वारुकमिव बन्धनान्\nमृत्योर्मुक्षीय माऽमृतात् ॥',
+    transliteration: 'Oṃ tryambakaṃ yajāmahe\nsugandhiṃ puṣṭivardhanam\nurvārukamiva bandhanān\nmṛtyormukṣīya māmṛtāt',
+    meaning: 'We worship the three-eyed Lord Shiva who is fragrant and who nourishes all beings. May He liberate us from death and grant us immortality, just as the cucumber is severed from its bondage to the vine.',
+    freq: 417,
+  },
+  {
+    id: 3, deity: 'Devi',
+    name: 'Devi Mahatmyam – Aparajita Stuti',
+    icon: '🌺',
+    sanskrit: 'या देवी सर्वभूतेषु\nशक्तिरूपेण संस्थिता ।\nनमस्तस्यै नमस्तस्यै\nनमस्तस्यै नमो नमः ॥',
+    transliteration: 'Yā devī sarvabhūteṣu\nśaktirūpeṇa saṃsthitā\nnamastasyai namastasyai\nnamastasyai namo namaḥ',
+    meaning: 'To that Devi who abides in all beings in the form of Power (Shakti) — salutations to Her, salutations to Her, salutations to Her, again and again we bow.',
+    freq: 528,
+  },
+  {
+    id: 4, deity: 'Vishnu',
+    name: 'Vishnu Sahasranama – Dhyana Shloka',
+    icon: '🪷',
+    sanskrit: 'शान्ताकारं भुजगशयनं\nपद्मनाभं सुरेशम् ।\nविश्वाधारं गगनसदृशं\nमेघवर्णं शुभाङ्गम् ॥',
+    transliteration: 'Śāntākāraṃ bhujaśayanaṃ\npadmanābhaṃ sureśam\nviśvādhāraṃ gaganasadṛśaṃ\nmeghavarṇaṃ śubhāṅgam',
+    meaning: 'He who has a serene form, who reclines on the serpent (Adishesha), whose navel is the lotus (from which Brahma was born), who is the lord of the gods, who is the support of the universe, who is like the sky (omnipresent), who has the complexion of clouds and auspicious limbs.',
+    freq: 639,
+  },
+  {
+    id: 5, deity: 'Ganesha',
+    name: 'Ganesha Pancharatnam',
+    icon: '🐘',
+    sanskrit: 'मुदाकरात्तमोदकं सदा विमुक्तिसाधकं\nकलाधरावतंसकं विलासिलोकरक्षकम् ।\nअनायकैकनायकं विनाशितेभदैत्यकं\nनताशुभाशुनाशकं नमामि तं विनायकम् ॥',
+    transliteration: 'Mudākarāttamodakaṃ sadā vimuktisādhakaṃ\nkalādharāvataṃsakaṃ vilāsilokarakṣakam\nanāyakaikānāyakaṃ vināśitebhadaityakaṃ\nnatāśubhāśunāśakaṃ namāmi taṃ vināyakam',
+    meaning: 'I bow to Vinayaka (Ganesha) who holds the sweet Modaka in his raised hand, who is always a means to liberation, who wears the moon as ornament, who protects the world of the playful, who is the sole leader of the leaderless, who destroyed the demon Gajamukhasura, and who destroys all inauspiciousness of His devotees.',
+    freq: 396,
+  },
+  {
+    id: 6, deity: 'Shiva',
+    name: 'Shiva Panchakshara Stotram',
+    icon: '🔱',
+    sanskrit: 'नागेन्द्रहाराय त्रिलोचनाय\nभस्माङ्गरागाय महेश्वराय ।\nनित्याय शुद्धाय दिगम्बराय\nतस्मै नकाराय नमः शिवाय ॥',
+    transliteration: 'Nāgendrahārāya trilocanāya\nbhasmāṅgarāgāya maheśvarāya\nnityāya śuddhāya digambarāya\ntasmai nakārāya namaḥ śivāya',
+    meaning: 'Salutations to Shiva, represented by the syllable "Na" — who wears the king of serpents as a garland, who has three eyes, whose body is smeared with sacred ash, who is the great Lord, who is eternal, who is ever pure, and who is clad in the directions (the sky-clad one).',
+    freq: 741,
+  },
+  {
+    id: 7, deity: 'Devi',
+    name: 'Mahishasura Mardini – Aigiri Nandini',
+    icon: '🌺',
+    sanskrit: 'अयि गिरिनन्दिनि नन्दितमेदिनि\nविश्वविनोदिनि नन्दिनुते ।\nगिरिवरविन्ध्यशिरोऽधिनिवासिनि\nविष्णुविलासिनि जिष्णुनुते ॥',
+    transliteration: 'Ayi girinandini nanditamedini\nviśvavinodini nandinute\ngirivara vindhyaśiro\'dhivāsini\nviṣṇu vilāsini jiṣṇunute',
+    meaning: 'O daughter of the mountain, who brings joy to the earth, who is the delight of the universe, who is praised by Nandi, who dwells on the great Vindhya mountain, who is the consort of Vishnu, who is praised by the victorious — we bow to you.',
+    freq: 528,
+  },
+  {
+    id: 8, deity: 'Surya',
+    name: 'Aditya Hridayam – Opening Verse',
+    icon: '☀️',
+    sanskrit: 'ततो युद्धपरिश्रान्तं समरे चिन्तया स्थितम् ।\nरावणं चाग्रतो दृष्ट्वा युद्धाय समुपस्थितम् ॥\nदैवतैश्च समागम्य द्रष्टुमभ्यागतो रणम् ।\nउपागम्याब्रवीद् राममगस्त्यो भगवांस्तदा ॥',
+    transliteration: 'Tato yuddhaparichrāntaṃ samare cintayā sthitam\nRāvaṇaṃ cāgrato dṛṣṭvā yuddhāya samupasthitam\nDaivataiśca samāgamya draṣṭumabhyāgato raṇam\nUpāgamyābravīd Rāmam agastyo bhagavāṃstadā',
+    meaning: 'Then the divine sage Agastya, who had come with the gods to witness the battle, approached Rama who stood exhausted and anxious in the battlefield, seeing Ravana ready to fight again — and spoke these words.',
+    freq: 963,
+  },
+  {
+    id: 9, deity: 'Universal',
+    name: 'Sarve Bhavantu Sukhinah',
+    icon: '🕉️',
+    sanskrit: 'सर्वे भवन्तु सुखिनः\nसर्वे सन्तु निरामयाः ।\nसर्वे भद्राणि पश्यन्तु\nमा कश्चिद् दुःखभाग् भवेत् ॥',
+    transliteration: 'Sarve bhavantu sukhinaḥ\nsarve santu nirāmayāḥ\nsarve bhadrāṇi paśyantu\nmā kaścid duḥkhabhāg bhavet',
+    meaning: 'May all beings be happy. May all beings be free from disease. May all beings behold auspicious things. May no one experience suffering.',
+    freq: 432,
+  },
+  {
+    id: 10, deity: 'Vishnu',
+    name: 'Om Namo Narayanaya',
+    icon: '🪷',
+    sanskrit: 'ॐ नमो नारायणाय\nनारायणाय नमः ।\nश्रीमन् नारायण नारायण\nनारायण हरि हरि ॥',
+    transliteration: 'Oṃ namo nārāyaṇāya\nnārāyaṇāya namaḥ\nśrīman nārāyaṇa nārāyaṇa\nnārāyaṇa hari hari',
+    meaning: 'Salutations to the Lord Narayana — the sustainer and protector of all creation. Hari, the remover of all sin and suffering, I bow to you again and again.',
+    freq: 639,
+  },
+  {
+    id: 11, deity: 'Ganesha',
+    name: 'Vakratunda Mahakaya',
+    icon: '🐘',
+    sanskrit: 'वक्रतुण्ड महाकाय\nसूर्यकोटि समप्रभ ।\nनिर्विघ्नं कुरु मे देव\nसर्वकार्येषु सर्वदा ॥',
+    transliteration: 'Vakratuṇḍa mahākāya\nsūryakoṭi samaprabha\nnirvighnaṃ kuru me deva\nsarvakāryeṣu sarvadā',
+    meaning: 'O Lord Ganesha of large body, curved trunk and with the brilliance of a million suns — please make all my works free of obstacles always.',
+    freq: 396,
+  },
+  {
+    id: 12, deity: 'Universal',
+    name: 'Asato Ma Sadgamaya',
+    icon: '🕉️',
+    sanskrit: 'असतो मा सद्गमय ।\nतमसो मा ज्योतिर्गमय ।\nमृत्योर्माऽमृतं गमय ।\nॐ शान्तिः शान्तिः शान्तिः ॥',
+    transliteration: 'Asato mā sadgamaya\ntamaso mā jyotirgamaya\nmṛtyormā amṛtaṃ gamaya\nOṃ śāntiḥ śāntiḥ śāntiḥ',
+    meaning: 'Lead me from untruth to truth. Lead me from darkness to light. Lead me from death to immortality. Om Peace, Peace, Peace.',
+    freq: 432,
+  },
+];
+
+let activeCounters = {};
+let audioCtx = null;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playFreq(freq, duration = 3) {
+  const ctx = getAudioCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.frequency.value = freq; osc.type = 'sine';
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.3);
+  gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration - 0.2);
+  osc.start(); osc.stop(ctx.currentTime + duration);
+}
+
+function filterShlokas(deity, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderShlokas(deity === 'all' ? shlokas : shlokas.filter(s => s.deity === deity));
+}
+
+function renderShlokas(list) {
+  const grid = document.getElementById('shlokaGrid');
+  grid.innerHTML = list.map(s => `
+    <div class="shloka-card" data-deity="${s.deity}">
+      <div class="shloka-card-header">
+        <h3>${s.icon} ${s.name}</h3>
+        <span class="deity-tag">${s.deity}</span>
+      </div>
+      <div class="shloka-card-body">
+        <div class="sanskrit-text">${s.sanskrit.replace(/\n/g,'<br/>')}</div>
+        <div class="transliteration">${s.transliteration.replace(/\n/g,'<br/>')}</div>
+        <button class="meaning-toggle" onclick="toggleMeaning(${s.id})">📖 Show Meaning</button>
+        <div class="meaning-text" id="meaning-${s.id}">${s.meaning}</div>
+        <div class="shloka-actions">
+          <button class="play-btn play-tone-btn" onclick="playFreq(${s.freq})">🎵 Play ${s.freq}Hz Tone</button>
+          <button class="play-btn chant-count-btn" onclick="toggleCounter(${s.id})">📿 Japa Counter</button>
+        </div>
+        <div class="chant-counter-display" id="counter-${s.id}">
+          <span class="count-num" id="count-num-${s.id}">0</span>
+          <span class="count-label">of 108 chants</span>
+          <div class="mala-progress"><div class="mala-fill" id="mala-fill-${s.id}" style="width:0%"></div></div>
+          <div>
+            <button class="tap-btn" onclick="tapChant(${s.id})">🙏 TAP TO CHANT</button>
+            <button class="reset-btn" onclick="resetChant(${s.id})">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleMeaning(id) {
+  const el = document.getElementById(`meaning-${id}`);
+  const btn = el.previousElementSibling;
+  if (el.style.display === 'block') {
+    el.style.display = 'none'; btn.textContent = '📖 Show Meaning';
+  } else {
+    el.style.display = 'block'; btn.textContent = '📖 Hide Meaning';
+  }
+}
+
+function toggleCounter(id) {
+  const el = document.getElementById(`counter-${id}`);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  if (!activeCounters[id]) activeCounters[id] = 0;
+}
+
+function tapChant(id) {
+  if (!activeCounters[id]) activeCounters[id] = 0;
+  activeCounters[id]++;
+  const count = activeCounters[id];
+  document.getElementById(`count-num-${id}`).textContent = count;
+  const pct = Math.min((count / 108) * 100, 100);
+  document.getElementById(`mala-fill-${id}`).style.width = pct + '%';
+  const s = shlokas.find(x => x.id === id);
+  if (s) playFreq(s.freq, 0.5);
+  if (count === 108) {
+    setTimeout(() => alert('🙏 One full mala complete! 108 chants done. Om Shanti!'), 200);
+  }
+}
+
+function resetChant(id) {
+  activeCounters[id] = 0;
+  document.getElementById(`count-num-${id}`).textContent = '0';
+  document.getElementById(`mala-fill-${id}`).style.width = '0%';
+}
+
+// Init
+renderShlokas(shlokas);
+</script>
+</body>
+</html>

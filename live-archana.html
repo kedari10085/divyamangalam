@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Archana – Divya Mangalam</title>
+  <meta name="description" content="Enter your name, date of birth and birth time — receive a personalised live archana with your nakshatra, rashi and deity mantra." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  <style>
+    /* ---- Live Archana Page Styles ---- */
+    .live-archana-wrap {
+      max-width: 820px; margin: 0 auto;
+    }
+    .birth-card {
+      background: var(--white); border-radius: 20px;
+      box-shadow: 0 10px 50px var(--shadow); overflow: hidden;
+    }
+    .birth-header {
+      background: linear-gradient(135deg, #4a0080, #8b0000);
+      padding: 2.5rem 2rem; text-align: center; color: var(--white);
+    }
+    .birth-header .icon { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    .birth-header h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; }
+    .birth-header p { opacity: 0.85; font-size: 0.95rem; margin-top: 0.5rem; }
+    .birth-body { padding: 2.5rem 2rem; }
+
+    /* ---- Result Panel ---- */
+    #archana-result {
+      display: none;
+      background: #0d0010;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--white);
+    }
+    .result-sky {
+      position: relative;
+      background: radial-gradient(ellipse at 50% 30%, #3d006b 0%, #0d0010 70%);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .stars-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+      background-size: 60px 60px, 100px 100px;
+      background-position: 0 0, 30px 30px;
+      opacity: 0.15;
+    }
+    .result-deity-img {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--gold);
+      box-shadow: 0 0 40px rgba(212,160,23,0.6);
+      margin: 0 auto 1.5rem;
+      animation: deity-glow 3s ease-in-out infinite;
+    }
+    @keyframes deity-glow {
+      0%,100% { box-shadow: 0 0 30px rgba(212,160,23,0.5); }
+      50%      { box-shadow: 0 0 60px rgba(212,160,23,0.9), 0 0 100px rgba(255,111,0,0.4); }
+    }
+    .result-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--gold); margin-bottom: 0.25rem;
+    }
+    .result-subtitle { opacity: 0.75; font-size: 0.9rem; }
+
+    .astro-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem; padding: 2rem;
+      background: rgba(255,255,255,0.04);
+    }
+    .astro-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 1.2rem 1rem; text-align: center;
+      border: 1px solid rgba(212,160,23,0.3);
+    }
+    .astro-card .astro-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .astro-card .astro-label { font-size: 0.72rem; letter-spacing: 1px; opacity: 0.65; text-transform: uppercase; }
+    .astro-card .astro-value { font-weight: 700; color: var(--gold); font-size: 1rem; margin-top: 0.2rem; }
+
+    .live-archana-animation {
+      padding: 2rem; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .flame-row { font-size: 2.5rem; letter-spacing: 8px; animation: flicker 1.5s ease-in-out infinite alternate; }
+    @keyframes flicker { from { opacity: 0.7; } to { opacity: 1; transform: scale(1.05); } }
+    .mantra-box {
+      background: rgba(212,160,23,0.1); border: 1px solid var(--gold);
+      border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;
+    }
+    .mantra-box .mantra-title { font-size: 0.75rem; letter-spacing: 2px; opacity: 0.65; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .mantra-box .mantra-main {
+      font-family: 'Playfair Display', serif; font-size: 1.3rem;
+      color: var(--gold); line-height: 1.8;
+    }
+    .mantra-box .mantra-meaning { font-size: 0.85rem; opacity: 0.7; margin-top: 0.75rem; font-style: italic; }
+
+    .blessing-text {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.1rem; line-height: 1.8; opacity: 0.9; margin: 1rem 0;
+    }
+    .prasad-section {
+      background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(139,0,0,0.2));
+      padding: 2rem; border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+    .prasad-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .prasad-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .flower-shower { font-size: 1.5rem; letter-spacing: 4px; animation: shower 2s linear infinite; display: block; }
+    @keyframes shower {
+      0% { transform: translateY(-10px); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(10px); opacity: 0; }
+    }
+    .result-actions { display: flex; gap: 1rem; justify-content: center; padding: 1.5rem; flex-wrap: wrap; }
+
+    /* Ritual steps */
+    .ritual-steps {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      padding: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .ritual-step {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(255,255,255,0.05); border-radius: 10px;
+      padding: 0.75rem 1rem;
+      animation: step-appear 0.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes step-appear { to { opacity: 1; } }
+    .ritual-step .step-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .ritual-step .step-text { font-size: 0.9rem; opacity: 0.85; }
+    .step-check { margin-left: auto; color: #4caf50; font-size: 1.2rem; }
+
+    /* Sound waves */
+    .sound-waves {
+      display: flex; align-items: center; justify-content: center;
+      gap: 4px; height: 40px; margin: 1rem auto;
+    }
+    .wave-bar {
+      width: 4px; background: var(--gold); border-radius: 2px;
+      animation: wave-anim 1s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(1) { animation-delay: 0s;    height: 20px; }
+    .wave-bar:nth-child(2) { animation-delay: 0.1s;  height: 35px; }
+    .wave-bar:nth-child(3) { animation-delay: 0.2s;  height: 25px; }
+    .wave-bar:nth-child(4) { animation-delay: 0.3s;  height: 40px; }
+    .wave-bar:nth-child(5) { animation-delay: 0.4s;  height: 30px; }
+    .wave-bar:nth-child(6) { animation-delay: 0.3s;  height: 40px; }
+    .wave-bar:nth-child(7) { animation-delay: 0.2s;  height: 25px; }
+    .wave-bar:nth-child(8) { animation-delay: 0.1s;  height: 35px; }
+    .wave-bar:nth-child(9) { animation-delay: 0s;    height: 20px; }
+    @keyframes wave-anim {
+      0%,100% { transform: scaleY(0.5); }
+      50%      { transform: scaleY(1); }
+    }
+
+    @media(max-width:600px){
+      .birth-body, .archana-body { padding: 1.5rem 1rem; }
+      .astro-grid { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="live-archana.html" class="active">Live Archana</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz Healing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero" style="background: linear-gradient(135deg, #4a0080 0%, #8b0000 100%);">
+  <p class="section-label" style="color:var(--gold);">Personalised Blessing</p>
+  <h1>🪔 Live Archana</h1>
+  <p>Enter your birth details — receive your Nakshatra, Rashi, presiding deity, and a live virtual archana performed just for you.</p>
+</div>
+
+<section style="background: var(--light-bg);">
+  <div class="section-inner">
+    <div class="live-archana-wrap">
+
+      <!-- Birth Details Form -->
+      <div class="birth-card" id="birthCard">
+        <div class="birth-header">
+          <div class="icon">🌟</div>
+          <h2>Enter Your Birth Details</h2>
+          <p>Your name, date of birth & time help us find your nakshatra and personalise the archana</p>
+        </div>
+        <div class="birth-body">
+          <form id="liveArchanaForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="la-fname">First Name <span style="color:var(--saffron)">*</span></label>
+                <input type="text" id="la-fname" placeholder="e.g. Priya" required />
+              </div>
+              <div class="form-group">
+                <label for="la-lname">Last Name <span style="color:var(--saffron)">*</span></label>
+                <input type="text" id="la-lname" placeholder="e.g. Sharma" required />
+              </div>
+              <div class="form-group">
+                <label for="la-gotra">Gotra</label>
+                <input type="text" id="la-gotra" placeholder="e.g. Kashyapa (if unknown)" />
+              </div>
+              <div class="form-group">
+                <label for="la-dob">Date of Birth <span style="color:var(--saffron)">*</span></label>
+                <input type="date" id="la-dob" required />
+              </div>
+              <div class="form-group">
+                <label for="la-time">Birth Time (if known)</label>
+                <input type="time" id="la-time" />
+              </div>
+              <div class="form-group">
+                <label for="la-place">Birth Place</label>
+                <input type="text" id="la-place" placeholder="e.g. Bengaluru, Karnataka" />
+              </div>
+              <div class="form-group full">
+                <label for="la-archana">Archana Type <span style="color:var(--saffron)">*</span></label>
+                <select id="la-archana" required>
+                  <option value="">Select Archana</option>
+                  <option>Sahasranama Archana (1000 names)</option>
+                  <option>Ashtottara Archana (108 names)</option>
+                  <option>Kumkumarchana</option>
+                  <option>Bilwarchana</option>
+                  <option>Pushparchana (Flower Offering)</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label for="la-wish">Your Wish / Prayer</label>
+                <textarea id="la-wish" placeholder="What do you seek blessings for?"></textarea>
+              </div>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-submit">🪔 Begin Live Archana</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Live Archana Result -->
+      <div id="archana-result">
+
+        <!-- Sky / Deity -->
+        <div class="result-sky">
+          <div class="stars-bg"></div>
+          <img class="result-deity-img" id="result-deity-img" src="" alt="Deity" />
+          <div class="result-name" id="result-name"></div>
+          <div class="result-subtitle" id="result-subtitle"></div>
+        </div>
+
+        <!-- Astrological Details -->
+        <div class="astro-grid" id="astroGrid"></div>
+
+        <!-- Ritual Steps -->
+        <div class="ritual-steps" id="ritualSteps"></div>
+
+        <!-- Live Archana Animation -->
+        <div class="live-archana-animation">
+          <div class="flame-row">🪔🌺🪔🌺🪔</div>
+          <div class="sound-waves">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <p style="opacity:0.7; font-size:0.9rem;">🎵 Archana is being recited with 432 Hz vibrations…</p>
+
+          <!-- Mantra Box -->
+          <div class="mantra-box">
+            <div class="mantra-title">Your Personalised Mantra</div>
+            <div class="mantra-main" id="result-mantra"></div>
+            <div class="mantra-meaning" id="result-mantra-meaning"></div>
+          </div>
+
+          <div class="blessing-text" id="result-blessing"></div>
+        </div>
+
+        <!-- Prasad -->
+        <div class="prasad-section">
+          <div class="prasad-icon">🍯</div>
+          <div class="prasad-title">Digital Prasad — God's Blessing for You</div>
+          <span class="flower-shower">🌸🌺🌼🌸🌺🌼</span>
+          <p style="opacity:0.8; margin-top:1rem; font-size:0.95rem;" id="prasad-message"></p>
+        </div>
+
+        <!-- Actions -->
+        <div class="result-actions">
+          <button class="btn btn-primary" onclick="shareBlessing()">📤 Share Blessings</button>
+          <button class="btn btn-outline" onclick="playArchanaTone()" style="border-color:var(--gold); color:var(--gold);">🎵 Play 432 Hz Archana Tone</button>
+          <button class="btn btn-outline" onclick="resetLiveArchana()" style="border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7);">🔄 New Archana</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live-archana.html">Live Archana</a></li>
+        <li><a href="shlokas.html">Shlokas</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Puja Timings</h4>
+      <ul>
+        <li><a href="#">6:00 AM – Suprabhata</a></li>
+        <li><a href="#">12:00 PM – Madhyahna</a></li>
+        <li><a href="#">6:30 PM – Sandhya Aarti</a></li>
+        <li><a href="#">8:30 PM – Ratri Seva</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* ============================================================
+   VEDIC ASTROLOGY – Nakshatra / Rashi Calculator (Simplified)
+   ============================================================ */
+const NAKSHATRAS = [
+  { name:'Ashwini',        lord:'Ketu',    deity:'Ashwini Kumaras', rashi:'Mesha (Aries)',       quality:'Swift, energetic, healing' },
+  { name:'Bharani',        lord:'Venus',   deity:'Yama',            rashi:'Mesha (Aries)',       quality:'Bearing, creative, transforming' },
+  { name:'Krittika',       lord:'Sun',     deity:'Agni',            rashi:'Mesha/Vrishabha',     quality:'Sharp, fiery, courageous' },
+  { name:'Rohini',         lord:'Moon',    deity:'Brahma',          rashi:'Vrishabha (Taurus)',  quality:'Growing, nourishing, creative' },
+  { name:'Mrigashira',     lord:'Mars',    deity:'Soma',            rashi:'Vrishabha/Mithuna',   quality:'Searching, gentle, curious' },
+  { name:'Ardra',          lord:'Rahu',    deity:'Rudra',           rashi:'Mithuna (Gemini)',    quality:'Stormy, transformative, intense' },
+  { name:'Punarvasu',      lord:'Jupiter', deity:'Aditi',           rashi:'Mithuna/Karka',       quality:'Renewal, generosity, abundance' },
+  { name:'Pushya',         lord:'Saturn',  deity:'Brihaspati',      rashi:'Karka (Cancer)',      quality:'Nourishment, protection, wisdom' },
+  { name:'Ashlesha',       lord:'Mercury', deity:'Nagas',           rashi:'Karka (Cancer)',      quality:'Entwining, mystic, perceptive' },
+  { name:'Magha',          lord:'Ketu',    deity:'Pitris',          rashi:'Simha (Leo)',         quality:'Royal, power, ancestral honour' },
+  { name:'Purva Phalguni', lord:'Venus',   deity:'Bhaga',           rashi:'Simha (Leo)',         quality:'Creative, pleasure, prosperity' },
+  { name:'Uttara Phalguni',lord:'Sun',     deity:'Aryaman',         rashi:'Simha/Kanya',         quality:'Patronage, contracts, steady' },
+  { name:'Hasta',          lord:'Moon',    deity:'Savitar',         rashi:'Kanya (Virgo)',       quality:'Skillful, healing, practical' },
+  { name:'Chitra',         lord:'Mars',    deity:'Tvashtr',         rashi:'Kanya/Tula',          quality:'Brilliant, artistic, technical' },
+  { name:'Swati',          lord:'Rahu',    deity:'Vayu',            rashi:'Tula (Libra)',        quality:'Independent, flexible, trading' },
+  { name:'Vishakha',       lord:'Jupiter', deity:'Indra-Agni',      rashi:'Tula/Vrischika',      quality:'Purposeful, determined, goal-oriented' },
+  { name:'Anuradha',       lord:'Saturn',  deity:'Mitra',           rashi:'Vrischika (Scorpio)', quality:'Devotion, friendship, balance' },
+  { name:'Jyeshtha',       lord:'Mercury', deity:'Indra',           rashi:'Vrischika (Scorpio)', quality:'Leadership, protection, courageous' },
+  { name:'Moola',          lord:'Ketu',    deity:'Nirriti',         rashi:'Dhanu (Sagittarius)', quality:'Uprooting, investigation, research' },
+  { name:'Purva Ashadha',  lord:'Venus',   deity:'Apas',            rashi:'Dhanu (Sagittarius)', quality:'Invincible, purifying, strength' },
+  { name:'Uttara Ashadha', lord:'Sun',     deity:'Vishwadevas',     rashi:'Dhanu/Makara',        quality:'Victorious, universal, lasting' },
+  { name:'Shravana',       lord:'Moon',    deity:'Vishnu',          rashi:'Makara (Capricorn)',  quality:'Learning, listening, connection' },
+  { name:'Dhanishtha',     lord:'Mars',    deity:'Ashta Vasus',     rashi:'Makara/Kumbha',       quality:'Wealth, music, fame' },
+  { name:'Shatabhisha',    lord:'Rahu',    deity:'Varuna',          rashi:'Kumbha (Aquarius)',   quality:'Healing, secretive, mystical' },
+  { name:'Purva Bhadrapada',lord:'Jupiter',deity:'Aja Ekapada',     rashi:'Kumbha/Meena',        quality:'Transforming, fiery, elevating' },
+  { name:'Uttara Bhadrapada',lord:'Saturn',deity:'Ahir Budhnya',    rashi:'Meena (Pisces)',      quality:'Deep, wise, serpentine wisdom' },
+  { name:'Revati',         lord:'Mercury', deity:'Pushan',          rashi:'Meena (Pisces)',      quality:'Nourishing, protecting, completion' },
+];
+
+const NAKSHATRA_MANTRAS = {
+  'Ashwini':         { mantra:'Om Ashwinkumarabhyam Namaha', meaning:'Blessings of the divine physicians, swift healing and vital energy.' },
+  'Bharani':         { mantra:'Om Yamaya Namaha', meaning:'Surrender to the divine law. May you be guided through transformation with courage.' },
+  'Krittika':        { mantra:'Om Agni Devaya Namaha', meaning:'May the sacred fire purify your path and illuminate your soul.' },
+  'Rohini':          { mantra:'Om Brahmane Namaha', meaning:'Creative abundance flows to you. May all your efforts bear sweet fruit.' },
+  'Mrigashira':      { mantra:'Om Chandramase Namaha', meaning:'May the moon\'s gentle light guide your seeking heart to its true home.' },
+  'Ardra':           { mantra:'Om Rudraya Namaha', meaning:'Through every storm, may Rudra\'s grace emerge as compassion and renewal.' },
+  'Punarvasu':       { mantra:'Om Aditaye Namaha', meaning:'Like the returning arrow, may you find renewal and endless abundance.' },
+  'Pushya':          { mantra:'Om Brihaspataye Namaha', meaning:'May Jupiter\'s wisdom nourish your spirit and bless every endeavour.' },
+  'Ashlesha':        { mantra:'Om Nagabhyam Namaha', meaning:'May the serpent wisdom coil around your consciousness and awaken your kundalini.' },
+  'Magha':           { mantra:'Om Pitribhyam Namaha', meaning:'Honour your ancestors; their blessings flow through you into the world.' },
+  'Purva Phalguni':  { mantra:'Om Bhagaya Namaha', meaning:'May joy, creativity and divine prosperity overflow in your life.' },
+  'Uttara Phalguni': { mantra:'Om Aryamanaya Namaha', meaning:'May steady grace, patronage and fulfilling relationships bless your life.' },
+  'Hasta':           { mantra:'Om Savitaye Namaha', meaning:'May your hands heal, create and serve — blessed by the skill of Savitar.' },
+  'Chitra':          { mantra:'Om Tvashtre Namaha', meaning:'May divine artistry flow through you — brilliance, beauty and inspired creation.' },
+  'Swati':           { mantra:'Om Vayave Namaha', meaning:'Like wind, may you move freely, independently and touch every heart with grace.' },
+  'Vishakha':        { mantra:'Om Indragnibhyam Namaha', meaning:'May focused purpose and divine fire carry your goals to triumphant completion.' },
+  'Anuradha':        { mantra:'Om Mitraya Namaha', meaning:'May friendship, devotion and divine alliance be your greatest blessings.' },
+  'Jyeshtha':        { mantra:'Om Indraya Namaha', meaning:'May the king of gods crown your leadership with protection and power.' },
+  'Moola':           { mantra:'Om Nirritaye Namaha', meaning:'May what must fall away do so gently, making space for your highest truth.' },
+  'Purva Ashadha':   { mantra:'Om Apam Napate Namaha', meaning:'May purifying waters of grace make you invincible in your spiritual path.' },
+  'Uttara Ashadha':  { mantra:'Om Vishwadevanam Namaha', meaning:'Universal blessings of all gods converge upon your noble, lasting victory.' },
+  'Shravana':        { mantra:'Om Vishnave Namaha', meaning:'May Vishnu\'s preserving grace sustain and protect all your cherished relationships.' },
+  'Dhanishtha':      { mantra:'Om Vasubhyam Namaha', meaning:'May the eight Vasus shower you with wealth, music, fame and auspiciousness.' },
+  'Shatabhisha':     { mantra:'Om Varunaya Namaha', meaning:'May cosmic ocean of Varuna wash away all karma, healing and freeing your soul.' },
+  'Purva Bhadrapada':{ mantra:'Om Aja Ekapadaya Namaha', meaning:'May the fiery serpent of transformation elevate your soul to its highest purpose.' },
+  'Uttara Bhadrapada':{ mantra:'Om Ahir Budhnyaya Namaha', meaning:'May the deep cosmic serpent\'s wisdom awaken in you — gentle, vast and luminous.' },
+  'Revati':          { mantra:'Om Pushnaya Namaha', meaning:'As you complete this cycle, may divine nourishment guide you safely into new light.' },
+};
+
+const DEITY_IMAGES = {
+  'Ashwini':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/400px-Lakshmi_by_Raja_Ravi_Varma.jpg',
+  'default':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/400px-Lakshmi_by_Raja_Ravi_Varma.jpg',
+};
+
+function calculateNakshatra(dobStr, timeStr) {
+  // Simplified Moon position estimate
+  // Reference: Jan 6, 2000 – Moon at start of Ashwini (0°)
+  // Moon avg daily motion: ~13.176°
+  const ref = new Date('2000-01-06T00:00:00');
+  const input = new Date(`${dobStr}T${timeStr || '12:00'}:00`);
+  const days = (input - ref) / 86400000;
+  let moonDeg = ((days * 13.176367) % 360 + 360) % 360;
+  const idx = Math.floor(moonDeg / (360 / 27));
+  return { nakshatra: NAKSHATRAS[idx], moonDeg: moonDeg.toFixed(1), idx };
+}
+
+function getRashi(moonDeg) {
+  const signs = ['Mesha (Aries)','Vrishabha (Taurus)','Mithuna (Gemini)','Karka (Cancer)',
+                 'Simha (Leo)','Kanya (Virgo)','Tula (Libra)','Vrischika (Scorpio)',
+                 'Dhanu (Sagittarius)','Makara (Capricorn)','Kumbha (Aquarius)','Meena (Pisces)'];
+  return signs[Math.floor(moonDeg / 30)];
+}
+
+let archanaAudioCtx = null;
+let archanaOsc = null;
+
+function playArchanaTone() {
+  if (!archanaAudioCtx) archanaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (archanaOsc) { archanaOsc.stop(); archanaOsc = null; return; }
+  const osc = archanaAudioCtx.createOscillator();
+  const gain = archanaAudioCtx.createGain();
+  const reverb = archanaAudioCtx.createConvolver();
+  osc.connect(gain); gain.connect(archanaAudioCtx.destination);
+  osc.frequency.value = 432; osc.type = 'sine';
+  gain.gain.setValueAtTime(0, archanaAudioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.25, archanaAudioCtx.currentTime + 1);
+  osc.start();
+  archanaOsc = osc;
+}
+
+function showResult(fname, lname, gotra, nakshataData, archanaType, wish) {
+  const { nakshatra, moonDeg, idx } = nakshataData;
+  const rashi = getRashi(parseFloat(moonDeg));
+  const mantraData = NAKSHATRA_MANTRAS[nakshatra.name] || { mantra: 'Om Namah Shivaya', meaning: 'Universal salutation to the divine.' };
+  const fullName = `${fname} ${lname}`;
+
+  // Fill result
+  document.getElementById('result-name').textContent = `🙏 ${fullName}`;
+  document.getElementById('result-subtitle').textContent = `${archanaType} — Offered at Divya Mangalam`;
+  document.getElementById('result-deity-img').src = DEITY_IMAGES['default'];
+  document.getElementById('result-mantra').innerHTML = mantraData.mantra;
+  document.getElementById('result-mantra-meaning').textContent = mantraData.meaning;
+  document.getElementById('result-blessing').innerHTML =
+    `"Dear ${fname}, born under the sacred star of <strong style="color:var(--gold)">${nakshatra.name}</strong>, the goddess of Divya Mangalam blesses you with her divine grace. May your ${wish ? `prayer for "${wish}"` : 'heart\'s deepest wishes'} be fulfilled.
+    May peace, prosperity and spiritual light always shine upon you and your family. 🌟"`;
+  document.getElementById('prasad-message').textContent =
+    `This digital prasad carries the pure vibrations of the archana performed for ${fullName} (Gotra: ${gotra || 'Kashyapa'}, Nakshatra: ${nakshatra.name}, Rashi: ${rashi}). May God's blessings reach you through this sacred offering. 🍯`;
+
+  // Astro grid
+  document.getElementById('astroGrid').innerHTML = `
+    <div class="astro-card"><div class="astro-icon">⭐</div><div class="astro-label">Nakshatra</div><div class="astro-value">${nakshatra.name}</div></div>
+    <div class="astro-card"><div class="astro-icon">🌙</div><div class="astro-label">Rashi</div><div class="astro-value">${rashi}</div></div>
+    <div class="astro-card"><div class="astro-icon">🪐</div><div class="astro-label">Nakshatra Lord</div><div class="astro-value">${nakshatra.lord}</div></div>
+    <div class="astro-card"><div class="astro-icon">🌺</div><div class="astro-label">Nakshatra Deity</div><div class="astro-value">${nakshatra.deity}</div></div>
+    <div class="astro-card"><div class="astro-icon">✨</div><div class="astro-label">Quality</div><div class="astro-value">${nakshatra.quality}</div></div>
+    <div class="astro-card"><div class="astro-icon">🌍</div><div class="astro-label">Moon Degree</div><div class="astro-value">${moonDeg}°</div></div>
+  `;
+
+  // Ritual steps with staggered animation
+  const steps = [
+    { icon:'🛁', text:`Purification (Shuddhi) — ${fullName}'s offering has been purified with sacred water and mantra.` },
+    { icon:'🌺', text:`Flower Offering (Pushparchana) — 108 sacred flowers offered at the deity's lotus feet.` },
+    { icon:'🪔', text:`Deepa Aradhana — The sacred flame has been waved before the deity in your name.` },
+    { icon:'🍯', text:`Naivedya — Sweet prasad offered to the deity on your behalf.` },
+    { icon:'📿', text:`${archanaType} — Completed with full devotion for ${fullName}, Nakshatra: ${nakshatra.name}.` },
+    { icon:'✅', text:`Mangala Aarti — The final auspicious aarti has been performed. Blessings have been invoked!` },
+  ];
+  const stepsEl = document.getElementById('ritualSteps');
+  stepsEl.innerHTML = steps.map((s, i) => `
+    <div class="ritual-step" style="animation-delay:${i * 0.4}s">
+      <span class="step-icon">${s.icon}</span>
+      <span class="step-text">${s.text}</span>
+      <span class="step-check">✓</span>
+    </div>
+  `).join('');
+
+  // Show result, hide form
+  document.getElementById('birthCard').style.display = 'none';
+  document.getElementById('archana-result').style.display = 'block';
+  document.getElementById('archana-result').scrollIntoView({ behavior:'smooth', block:'start' });
+
+  // Auto-play 432 Hz for 8 seconds
+  setTimeout(() => {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [432, 528, 396].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      const start = ctx.currentTime + i * 2.5;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.12, start + 0.5);
+      gain.gain.linearRampToValueAtTime(0, start + 2.2);
+      osc.start(start); osc.stop(start + 2.5);
+    });
+  }, 500);
+}
+
+function resetLiveArchana() {
+  document.getElementById('liveArchanaForm').reset();
+  document.getElementById('birthCard').style.display = 'block';
+  document.getElementById('archana-result').style.display = 'none';
+  document.getElementById('birthCard').scrollIntoView({ behavior:'smooth' });
+  if (archanaOsc) { archanaOsc.stop(); archanaOsc = null; }
+}
+
+function shareBlessing() {
+  const name = document.getElementById('result-name').textContent;
+  const text = `${name} received divine blessings through Live Archana at Divya Mangalam! 🕉️🪔\nVisit: https://divyamangalam.com\n#DivyaMangalam #Archana #Blessings`;
+  if (navigator.share) {
+    navigator.share({ title:'Divya Mangalam Blessings', text, url:'https://divyamangalam.com' });
+  } else {
+    navigator.clipboard.writeText(text).then(() => alert('Blessing message copied! Share it with your loved ones 🙏'));
+  }
+}
+
+// Form submit
+document.getElementById('liveArchanaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const fname = document.getElementById('la-fname').value.trim();
+  const lname = document.getElementById('la-lname').value.trim();
+  const dob   = document.getElementById('la-dob').value;
+  const time  = document.getElementById('la-time').value;
+  const gotra = document.getElementById('la-gotra').value.trim();
+  const archanaType = document.getElementById('la-archana').value;
+  const wish  = document.getElementById('la-wish').value.trim();
+
+  if (!fname || !lname) { alert('Please enter your full name.'); return; }
+  if (!dob) { alert('Please enter your date of birth.'); return; }
+  if (!archanaType) { alert('Please select an archana type.'); return; }
+
+  const nakshataData = calculateNakshatra(dob, time);
+  showResult(fname, lname, gotra, nakshataData, archanaType, wish);
+});
+</script>
+</body>
+</html>

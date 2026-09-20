@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>432 Hz Healing – Divya Mangalam</title>
+  <meta name="description" content="Experience 432 Hz and Solfeggio healing frequencies — pure tones for meditation, chakra balancing and spiritual upliftment." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  <style>
+    /* ===== 432 Hz Healing Page ===== */
+    body { background: #050510; }
+
+    .healing-hero {
+      background: radial-gradient(ellipse at 50% 40%, #1a0040 0%, #050510 70%);
+      padding: 5rem 1.5rem;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .healing-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .healing-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .healing-hero p { opacity: 0.8; font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+    /* ===== Visualizer Canvas ===== */
+    #visualizer {
+      display: block; margin: 0 auto;
+      width: 100%; max-width: 700px; height: 120px;
+    }
+
+    /* ===== Frequency Cards ===== */
+    .freq-section { padding: 4rem 1.5rem; }
+    .freq-section-inner { max-width: 1100px; margin: auto; }
+    .freq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .freq-card {
+      border-radius: 20px; overflow: hidden;
+      cursor: pointer; transition: var(--transition);
+      position: relative;
+    }
+    .freq-card:hover { transform: translateY(-6px); }
+    .freq-card-inner {
+      padding: 2rem 1.5rem;
+      color: var(--white);
+      position: relative; z-index: 1;
+    }
+    .freq-hz {
+      font-size: 3rem; font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, #fff, rgba(255,255,255,0.6));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .freq-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; margin: 0.5rem 0 0.25rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .freq-chakra { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.65; margin-bottom: 0.75rem; }
+    .freq-desc { font-size: 0.88rem; opacity: 0.8; line-height: 1.6; margin-bottom: 1.25rem; }
+    .freq-benefits { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .freq-benefit-tag {
+      background: rgba(255,255,255,0.12); border-radius: 50px;
+      padding: 3px 10px; font-size: 0.75rem; opacity: 0.85;
+    }
+    .freq-play-btn {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white); border-radius: 50px; padding: 0.6rem 1.4rem;
+      font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition); width: 100%;
+    }
+    .freq-play-btn:hover, .freq-play-btn.playing { background: rgba(255,255,255,0.9); color: #1a0040; }
+    .freq-play-btn.playing { animation: pulse-btn 1.5s ease-in-out infinite; }
+    @keyframes pulse-btn { 0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.4)} 50%{box-shadow:0 0 0 10px rgba(255,255,255,0)} }
+
+    /* ===== Meditation Timer ===== */
+    .timer-section {
+      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .timer-inner { max-width: 500px; margin: auto; }
+    .timer-display {
+      font-size: 4rem; font-weight: 900; letter-spacing: 4px;
+      background: linear-gradient(135deg, var(--gold), var(--saffron));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 1.5rem 0;
+      font-family: monospace;
+    }
+    .timer-ring {
+      width: 200px; height: 200px; margin: 0 auto 1rem;
+      position: relative;
+    }
+    .timer-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .timer-ring .ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 8; }
+    .timer-ring .ring-progress {
+      fill: none; stroke: url(#ringGrad); stroke-width: 8;
+      stroke-linecap: round; stroke-dasharray: 565;
+      stroke-dashoffset: 565; transition: stroke-dashoffset 1s linear;
+    }
+    .timer-center {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--white);
+    }
+    .timer-center .t-num { font-size: 1.8rem; font-weight: 900; color: var(--gold); font-family: monospace; }
+    .timer-center .t-label { font-size: 0.7rem; opacity: 0.6; letter-spacing: 1px; }
+
+    .timer-presets { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .preset-btn {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8); border-radius: 50px; padding: 0.5rem 1.2rem;
+      font-family: 'Lato', sans-serif; font-size: 0.85rem; cursor: pointer;
+      transition: var(--transition);
+    }
+    .preset-btn:hover, .preset-btn.active-preset { background: var(--gold); color: var(--text-dark); border-color: var(--gold); }
+    .timer-btns { display: flex; gap: 1rem; justify-content: center; }
+    .t-btn {
+      padding: 0.8rem 2rem; border-radius: 50px;
+      font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; border: none; transition: var(--transition);
+    }
+    .t-start { background: linear-gradient(135deg, var(--deep-red), var(--saffron)); color: var(--white); }
+    .t-reset { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); }
+    .t-btn:hover { transform: translateY(-2px); }
+
+    /* ===== Chakra Bar ===== */
+    .chakra-bar {
+      display: flex; justify-content: center; gap: 1.5rem;
+      padding: 2rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    .chakra-dot {
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      cursor: pointer; transition: var(--transition);
+    }
+    .chakra-dot:hover { transform: scale(1.1); }
+    .chakra-circle {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px var(--c);
+      transition: box-shadow 0.3s;
+    }
+    .chakra-circle.active-chakra { box-shadow: 0 0 40px var(--c), 0 0 80px var(--c); }
+    .chakra-dot span { font-size: 0.65rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 1px; color: var(--white); }
+
+    /* Overall page sections dark mode override */
+    .freq-section, .timer-section { color: var(--white); }
+    .freq-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      background: linear-gradient(135deg, #fff, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .freq-section p, .timer-section p { opacity: 0.7; }
+    .section-lbl { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--saffron); font-weight: 700; margin-bottom: 0.5rem; }
+    footer { margin-top: 0; }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="live-archana.html">Live Archana</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html" class="active">432 Hz Healing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="healing-hero">
+  <p class="section-label" style="color:var(--gold); position:relative; z-index:1;">Sound Healing</p>
+  <h1>432 Hz & Solfeggio<br/>Healing Frequencies</h1>
+  <p>Pure sacred tones generated directly in your browser. No downloads. Just divine vibration.</p>
+  <br/>
+  <!-- Live Visualizer -->
+  <canvas id="visualizer"></canvas>
+</div>
+
+<!-- Chakra Bar -->
+<div class="chakra-bar" id="chakraBar" style="background:#050510;"></div>
+
+<!-- Frequency Cards -->
+<div class="freq-section" style="background:#050510;">
+  <div class="freq-section-inner">
+    <div style="margin-bottom:2.5rem; text-align:center;">
+      <p class="section-lbl">Sacred Frequencies</p>
+      <h2>Choose Your Healing Frequency</h2>
+      <p style="color:rgba(255,255,255,0.6); max-width:600px; margin: 0 auto;">Click any card to play the pure tone. Each frequency activates a different layer of your being — physical, emotional, spiritual.</p>
+    </div>
+    <div class="freq-grid" id="freqGrid"></div>
+  </div>
+</div>
+
+<!-- Meditation Timer -->
+<div class="timer-section">
+  <div class="timer-inner">
+    <p class="section-lbl">Meditation Timer</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.8rem; background:linear-gradient(135deg,#fff,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.5rem;">Sacred Silence Timer</h2>
+    <p style="margin-bottom:2rem;">Set your meditation duration. The timer will play a gentle 432 Hz bell at start and end.</p>
+
+    <div class="timer-ring">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#D4A017"/>
+            <stop offset="100%" stop-color="#FF6F00"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-bg" cx="100" cy="100" r="90"/>
+        <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="90"/>
+      </svg>
+      <div class="timer-center">
+        <div class="t-num" id="timerDisplay">10:00</div>
+        <div class="t-label">REMAINING</div>
+      </div>
+    </div>
+
+    <div class="timer-presets">
+      <button class="preset-btn active-preset" onclick="setTimer(10, this)">10 min</button>
+      <button class="preset-btn" onclick="setTimer(15, this)">15 min</button>
+      <button class="preset-btn" onclick="setTimer(21, this)">21 min</button>
+      <button class="preset-btn" onclick="setTimer(30, this)">30 min</button>
+      <button class="preset-btn" onclick="setTimer(45, this)">45 min</button>
+    </div>
+    <div class="timer-btns">
+      <button class="t-btn t-start" id="timerStartBtn" onclick="toggleTimer()">▶ Start</button>
+      <button class="t-btn t-reset" onclick="resetTimer()">↺ Reset</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live-archana.html">Live Archana</a></li>
+        <li><a href="shlokas.html">Shlokas</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Puja Timings</h4>
+      <ul>
+        <li><a href="#">6:00 AM – Suprabhata</a></li>
+        <li><a href="#">12:00 PM – Madhyahna</a></li>
+        <li><a href="#">6:30 PM – Sandhya Aarti</a></li>
+        <li><a href="#">8:30 PM – Ratri Seva</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* ============================================================
+   432 Hz & SOLFEGGIO HEALING FREQUENCY ENGINE
+   Uses Web Audio API — pure browser, no downloads needed
+   ============================================================ */
+
+const FREQUENCIES = [
+  {
+    hz: 174,
+    name: 'Foundation Frequency',
+    chakra: 'Earth / Pain Relief',
+    icon: '🌍',
+    color: '#8B4513',
+    gradient: 'linear-gradient(135deg, #3e1f00, #8B4513)',
+    desc: 'The lowest Solfeggio frequency. Reduces pain, gives a sense of security and love to organs and cells.',
+    benefits: ['Pain relief','Security','Grounding','Organ healing'],
+  },
+  {
+    hz: 285,
+    name: 'Tissue Repair',
+    chakra: 'Physical Body',
+    icon: '🌿',
+    color: '#2e7d32',
+    gradient: 'linear-gradient(135deg, #0a280b, #2e7d32)',
+    desc: 'Influences energy fields, sending a message to restructure and heal damaged organs and tissue.',
+    benefits: ['Healing tissue','Cellular repair','Energy restoration','Immunity'],
+  },
+  {
+    hz: 396,
+    name: 'Liberation from Fear',
+    chakra: 'Root Chakra (Muladhara)',
+    icon: '🔴',
+    color: '#b71c1c',
+    gradient: 'linear-gradient(135deg, #3b0000, #b71c1c)',
+    desc: 'Liberates from fear and guilt. Transforms grief into joy and guilt into forgiveness.',
+    benefits: ['Release guilt','Remove fear','Grief to joy','Root grounding'],
+  },
+  {
+    hz: 417,
+    name: 'Undoing Situations',
+    chakra: 'Sacral Chakra (Svadhisthana)',
+    icon: '🟠',
+    color: '#e65100',
+    gradient: 'linear-gradient(135deg, #3b1500, #e65100)',
+    desc: 'Facilitates change. Cleanses traumatic experiences and clears destructive influences from the past.',
+    benefits: ['Change & transition','Clear trauma','New beginnings','Creativity'],
+  },
+  {
+    hz: 432,
+    name: 'Universal Harmony ✨',
+    chakra: 'Heart Chakra — The Natural Tone',
+    icon: '💛',
+    color: '#F9A825',
+    gradient: 'linear-gradient(135deg, #3b2a00, #F9A825)',
+    desc: '432 Hz is the "natural" frequency of the universe — mathematically consistent with nature. It opens the heart, promotes calm clarity, and aligns body-mind-spirit.',
+    benefits: ['Deep peace','Heart opening','Nature alignment','DNA harmony'],
+  },
+  {
+    hz: 528,
+    name: 'DNA Repair / Love',
+    chakra: 'Solar Plexus (Manipura)',
+    icon: '💚',
+    color: '#1b5e20',
+    gradient: 'linear-gradient(135deg, #002000, #1b5e20)',
+    desc: 'Known as the "Love Frequency". Repairs DNA, brings transformation, miracles, and increases inner peace.',
+    benefits: ['DNA repair','Miracle tone','Love frequency','Transformation'],
+  },
+  {
+    hz: 639,
+    name: 'Connecting Relationships',
+    chakra: 'Heart Chakra (Anahata)',
+    icon: '💚',
+    color: '#00695c',
+    gradient: 'linear-gradient(135deg, #001f1c, #00695c)',
+    desc: 'Enhances communication, understanding, tolerance and love. Reconnects you with harmonious relationships.',
+    benefits: ['Relationships','Communication','Love & tolerance','Community'],
+  },
+  {
+    hz: 741,
+    name: 'Awakening Intuition',
+    chakra: 'Throat Chakra (Vishuddha)',
+    icon: '🔵',
+    color: '#0277bd',
+    gradient: 'linear-gradient(135deg, #001520, #0277bd)',
+    desc: 'Detoxifies cells. Helps with expression, solutions, and self-realization. Opens the door to spiritual insight.',
+    benefits: ['Detox cells','Self-expression','Intuition','Problem solving'],
+  },
+  {
+    hz: 852,
+    name: 'Returning to Order',
+    chakra: 'Third Eye (Ajna)',
+    icon: '🟣',
+    color: '#4527a0',
+    gradient: 'linear-gradient(135deg, #10003b, #4527a0)',
+    desc: 'Awakens intuition and helps return to spiritual order. Replaces negative thoughts with positive ones.',
+    benefits: ['Third eye','Spiritual order','Inner strength','Positivity'],
+  },
+  {
+    hz: 963,
+    name: 'Divine Connection',
+    chakra: 'Crown Chakra (Sahasrara)',
+    icon: '👑',
+    color: '#880e4f',
+    gradient: 'linear-gradient(135deg, #1a0010, #880e4f)',
+    desc: 'The highest Solfeggio frequency. Activates the crown chakra and pineal gland. Connection to God / Source.',
+    benefits: ['Crown chakra','God connection','Pineal activation','Pure spirit'],
+  },
+];
+
+const CHAKRAS = [
+  { name:'Muladhara', icon:'🔴', color:'#b71c1c', hz:396 },
+  { name:'Svadhisthana', icon:'🟠', color:'#e65100', hz:417 },
+  { name:'Manipura', icon:'🟡', color:'#F9A825', hz:528 },
+  { name:'Anahata', icon:'💚', color:'#1b5e20', hz:639 },
+  { name:'Vishuddha', icon:'🔵', color:'#0277bd', hz:741 },
+  { name:'Ajna', icon:'🟣', color:'#4527a0', hz:852 },
+  { name:'Sahasrara', icon:'👑', color:'#880e4f', hz:963 },
+];
+
+let audioCtx = null;
+let currentOsc = null;
+let currentGain = null;
+let analyser = null;
+let animFrame = null;
+let activeHz = null;
+
+function getCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    analyser.connect(audioCtx.destination);
+  }
+  return audioCtx;
+}
+
+function playFrequency(hz) {
+  const ctx = getCtx();
+  if (activeHz === hz) {
+    stopFrequency();
+    return;
+  }
+  stopFrequency(false);
+  activeHz = hz;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(analyser);
+
+  osc.frequency.value = hz;
+  osc.type = 'sine';
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.8);
+
+  osc.start();
+  currentOsc = osc;
+  currentGain = gain;
+
+  updatePlayButtons(hz);
+  drawVisualizer();
+}
+
+function stopFrequency(resetActive = true) {
+  if (currentOsc) {
+    currentGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    currentOsc.stop(audioCtx.currentTime + 0.6);
+    currentOsc = null; currentGain = null;
+  }
+  if (resetActive) {
+    activeHz = null;
+    updatePlayButtons(null);
+    cancelAnimationFrame(animFrame);
+    clearVisualizer();
+  }
+}
+
+function updatePlayButtons(hz) {
+  document.querySelectorAll('.freq-play-btn').forEach(btn => {
+    const bHz = parseInt(btn.dataset.hz);
+    btn.classList.toggle('playing', bHz === hz);
+    btn.textContent = bHz === hz ? '⏹ Stop' : '▶ Play Frequency';
+  });
+  document.querySelectorAll('.chakra-circle').forEach(c => {
+    const cHz = parseInt(c.dataset.hz);
+    c.classList.toggle('active-chakra', cHz === hz);
+  });
+}
+
+function drawVisualizer() {
+  const canvas = document.getElementById('visualizer');
+  const ctx2 = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  const bufLen = analyser.frequencyBinCount;
+  const dataArr = new Uint8Array(bufLen);
+
+  function draw() {
+    animFrame = requestAnimationFrame(draw);
+    analyser.getByteTimeDomainData(dataArr);
+    ctx2.clearRect(0, 0, canvas.width, canvas.height);
+    const grad = ctx2.createLinearGradient(0, 0, canvas.width, 0);
+    grad.addColorStop(0, '#D4A017');
+    grad.addColorStop(0.5, '#FF6F00');
+    grad.addColorStop(1, '#8B0000');
+    ctx2.strokeStyle = grad;
+    ctx2.lineWidth = 2.5;
+    ctx2.beginPath();
+    const sliceW = canvas.width / bufLen;
+    let x = 0;
+    dataArr.forEach((v, i) => {
+      const y = (v / 128.0) * (canvas.height / 2);
+      i === 0 ? ctx2.moveTo(x, y) : ctx2.lineTo(x, y);
+      x += sliceW;
+    });
+    ctx2.lineTo(canvas.width, canvas.height / 2);
+    ctx2.stroke();
+  }
+  draw();
+}
+
+function clearVisualizer() {
+  const canvas = document.getElementById('visualizer');
+  const ctx2 = canvas.getContext('2d');
+  ctx2.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Build frequency cards
+document.getElementById('freqGrid').innerHTML = FREQUENCIES.map(f => `
+  <div class="freq-card" style="background:${f.gradient};" onclick="playFrequency(${f.hz})">
+    <div class="freq-card-inner">
+      <div class="freq-hz">${f.hz}</div>
+      <div style="font-size:0.7rem; letter-spacing:2px; opacity:0.5; text-transform:uppercase; margin:0.25rem 0;">Hz</div>
+      <div class="freq-name">${f.icon} ${f.name}</div>
+      <div class="freq-chakra">${f.chakra}</div>
+      <div class="freq-desc">${f.desc}</div>
+      <div class="freq-benefits">${f.benefits.map(b => `<span class="freq-benefit-tag">${b}</span>`).join('')}</div>
+      <button class="freq-play-btn" data-hz="${f.hz}">▶ Play Frequency</button>
+    </div>
+  </div>
+`).join('');
+
+// Build chakra bar
+document.getElementById('chakraBar').innerHTML = CHAKRAS.map(c => `
+  <div class="chakra-dot" onclick="playFrequency(${c.hz})">
+    <div class="chakra-circle" style="background:${c.color}20; border: 2px solid ${c.color}; --c:${c.color};" data-hz="${c.hz}">${c.icon}</div>
+    <span>${c.name}</span>
+  </div>
+`).join('');
+
+/* ============================================================
+   MEDITATION TIMER
+   ============================================================ */
+let timerDuration = 10 * 60; // seconds
+let timerRemaining = timerDuration;
+let timerInterval = null;
+let timerRunning = false;
+
+function setTimer(minutes, btn) {
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active-preset'));
+  btn.classList.add('active-preset');
+  timerDuration = minutes * 60;
+  timerRemaining = timerDuration;
+  timerRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById('timerStartBtn').textContent = '▶ Start';
+  updateTimerDisplay();
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerStartBtn').textContent = '▶ Resume';
+  } else {
+    playBell();
+    timerRunning = true;
+    document.getElementById('timerStartBtn').textContent = '⏸ Pause';
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      updateTimerDisplay();
+      if (timerRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timerStartBtn').textContent = '▶ Start';
+        playBell();
+        playBell(0.4);
+        playBell(0.8);
+        setTimeout(() => alert('🙏 Meditation complete! Om Shanti Shanti Shanti.'), 1200);
+        timerRemaining = timerDuration;
+        updateTimerDisplay();
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerRemaining = timerDuration;
+  document.getElementById('timerStartBtn').textContent = '▶ Start';
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerRemaining / 60);
+  const s = timerRemaining % 60;
+  document.getElementById('timerDisplay').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const circumference = 2 * Math.PI * 90;
+  const pct = timerRemaining / timerDuration;
+  document.getElementById('ringProgress').style.strokeDashoffset = circumference * (1 - pct);
+}
+
+function playBell(delay = 0) {
+  const ctx = getCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain); gain.connect(analyser);
+  osc.frequency.value = 432; osc.type = 'sine';
+  const t = ctx.currentTime + delay;
+  gain.gain.setValueAtTime(0, t);
+  gain.gain.linearRampToValueAtTime(0.4, t + 0.05);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
+  osc.start(t); osc.stop(t + 2.6);
+}
+
+updateTimerDisplay();
+</script>
+</body>
+</html>
