@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divya Mangalam – Virtual Darshan & Archana</title>
+  <meta name="description" content="Experience the divine presence of Divya Mangalam through virtual darshan and online archana. Offer your prayers from anywhere in the world." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+</head>
+<body>
+
+<!-- ===== PAGE LOADER ===== -->
+<div id="page-loader">
+  <div class="om">🕉️</div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html#darshan">Darshan</a></li>
+      <li><a href="index.html#archana">Archana</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    🌸 Welcome to Divya Mangalam &nbsp;|&nbsp; 🕯️ Morning Archana: 6:00 AM &nbsp;|&nbsp; 🌺 Madhyanna Puja: 12:00 PM &nbsp;|&nbsp; 🪔 Evening Aarti: 6:30 PM &nbsp;|&nbsp; 🌙 Ratri Seva: 8:30 PM &nbsp;|&nbsp; 📿 Om Namah Shivaya &nbsp;|&nbsp; 🌸 Jai Maa &nbsp;|&nbsp; 🙏 Virtual Darshan available 24×7 &nbsp;|&nbsp; 🌸 Online Archana – Offer from anywhere &nbsp;|&nbsp;
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">🙏 Sarve Bhavantu Sukhinah</div>
+    <h1>Seek Blessings from<br/><em>Divya Mangalam</em></h1>
+    <p>Experience the divine grace through Virtual Darshan and offer your heartfelt prayers with Online Archana — from wherever you are.</p>
+    <div class="hero-btns">
+      <a href="#darshan" class="btn btn-primary">🪔 Take Virtual Darshan</a>
+      <a href="#archana" class="btn btn-outline">📿 Book Archana</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES STRIP ===== -->
+<section style="background: var(--light-bg); padding: 3.5rem 1.5rem;">
+  <div class="section-inner">
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🪔</div>
+        <h3>Virtual Darshan</h3>
+        <p>Get an immersive, sacred darshan of the presiding deity 24 hours a day, seven days a week.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📿</div>
+        <h3>Online Archana</h3>
+        <p>Submit your name, gotra, and nakshatra — have archana performed on your behalf by the temple priest.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌺</div>
+        <h3>Daily Puja Schedule</h3>
+        <p>Follow the temple's daily puja timings and receive reminders for each seva.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🙏</div>
+        <h3>Prasad & Blessings</h3>
+        <p>After archana, receive a personalised digital prasad with the deity's mantra and blessings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIRTUAL DARSHAN ===== -->
+<section class="darshan-section" id="darshan">
+  <div class="section-inner">
+    <div class="darshan-grid">
+      <!-- Deity Viewer -->
+      <div class="darshan-viewer" onclick="openDarshanModal()">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/800px-Lakshmi_by_Raja_Ravi_Varma.jpg"
+          alt="Maa Lakshmi – Virtual Darshan"
+          loading="lazy"
+        />
+        <div class="darshan-glow"></div>
+        <div class="darshan-overlay">
+          <h3>🪔 Maa Lakshmi</h3>
+          <p>Click to take full-screen Virtual Darshan</p>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="darshan-info">
+        <p class="section-label">Virtual Darshan</p>
+        <div class="divider"></div>
+        <h2 class="section-title">Experience the Divine — Anytime, Anywhere</h2>
+        <p class="section-subtitle">Close your eyes, breathe, and open your heart to receive the blessings of Divya Mangalam's presiding deity.</p>
+
+        <div class="timing-list">
+          <div class="timing-item">
+            <span class="time">6:00 AM</span>
+            <span class="puja">☀️ Suprabhata Seva – Morning Awakening</span>
+          </div>
+          <div class="timing-item">
+            <span class="time">8:00 AM</span>
+            <span class="puja">🌺 Kalasha Puja – Daily Flower Offering</span>
+          </div>
+          <div class="timing-item">
+            <span class="time">12:00 PM</span>
+            <span class="puja">🍚 Madhyahna Aarti – Noon Worship</span>
+          </div>
+          <div class="timing-item">
+            <span class="time">6:30 PM</span>
+            <span class="puja">🪔 Sandhya Aarti – Evening Lamp</span>
+          </div>
+          <div class="timing-item">
+            <span class="time">8:30 PM</span>
+            <span class="puja">🌙 Ratri Seva – Night Blessing</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="openDarshanModal()">🪔 Open Virtual Darshan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ONLINE ARCHANA FORM ===== -->
+<section class="archana-section" id="archana">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:2rem;">
+      <p class="section-label">Online Archana</p>
+      <div class="divider" style="margin:0.5rem auto 1rem;"></div>
+      <h2 class="section-title">Offer Your Prayers</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Fill in your details below. Our temple priests will perform the archana on your behalf and God's blessings will reach you.</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="archana-card" id="archanaCard">
+      <div class="archana-header">
+        <div class="om-icon">🕉️</div>
+        <h2>Online Archana Registration</h2>
+        <p>Enter your details to receive personalised blessings from Divya Mangalam</p>
+      </div>
+      <div class="archana-body">
+        <form id="archanaForm" novalidate>
+          <div class="form-grid">
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="fname">First Name <span>*</span></label>
+              <input type="text" id="fname" name="fname" placeholder="e.g. Ramesh" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name <span>*</span></label>
+              <input type="text" id="lname" name="lname" placeholder="e.g. Sharma" required />
+            </div>
+
+            <!-- Gotra -->
+            <div class="form-group">
+              <label for="gotra">Gotra <span>*</span></label>
+              <input type="text" id="gotra" name="gotra" placeholder="e.g. Kashyapa" required />
+            </div>
+
+            <!-- Nakshatra -->
+            <div class="form-group">
+              <label for="nakshatra">Nakshatra (Birth Star)</label>
+              <select id="nakshatra" name="nakshatra">
+                <option value="">Select Nakshatra</option>
+                <option>Ashwini</option><option>Bharani</option><option>Krittika</option>
+                <option>Rohini</option><option>Mrigashira</option><option>Ardra</option>
+                <option>Punarvasu</option><option>Pushya</option><option>Ashlesha</option>
+                <option>Magha</option><option>Purva Phalguni</option><option>Uttara Phalguni</option>
+                <option>Hasta</option><option>Chitra</option><option>Swati</option>
+                <option>Vishakha</option><option>Anuradha</option><option>Jyeshtha</option>
+                <option>Moola</option><option>Purva Ashadha</option><option>Uttara Ashadha</option>
+                <option>Shravana</option><option>Dhanishtha</option><option>Shatabhisha</option>
+                <option>Purva Bhadrapada</option><option>Uttara Bhadrapada</option><option>Revati</option>
+              </select>
+            </div>
+
+            <!-- Rashi -->
+            <div class="form-group">
+              <label for="rashi">Rashi (Moon Sign)</label>
+              <select id="rashi" name="rashi">
+                <option value="">Select Rashi</option>
+                <option>Mesha (Aries)</option><option>Vrishabha (Taurus)</option>
+                <option>Mithuna (Gemini)</option><option>Karka (Cancer)</option>
+                <option>Simha (Leo)</option><option>Kanya (Virgo)</option>
+                <option>Tula (Libra)</option><option>Vrischika (Scorpio)</option>
+                <option>Dhanu (Sagittarius)</option><option>Makara (Capricorn)</option>
+                <option>Kumbha (Aquarius)</option><option>Meena (Pisces)</option>
+              </select>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="phone">Phone Number <span>*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" />
+            </div>
+
+            <!-- Archana Type -->
+            <div class="form-group full">
+              <label>Select Archana Type <span>*</span></label>
+              <div class="checkbox-group" id="archanaType">
+                <label><input type="checkbox" name="archana" value="Sahasranama Archana" /> Sahasranama Archana</label>
+                <label><input type="checkbox" name="archana" value="Ashtottara Archana" /> Ashtottara Archana</label>
+                <label><input type="checkbox" name="archana" value="Kumkumarchana" /> Kumkumarchana</label>
+                <label><input type="checkbox" name="archana" value="Bilwarchana" /> Bilwarchana</label>
+                <label><input type="checkbox" name="archana" value="Pushparchana" /> Pushparchana</label>
+                <label><input type="checkbox" name="archana" value="Prasadam Only" /> Prasadam Only</label>
+              </div>
+            </div>
+
+            <!-- Occasion -->
+            <div class="form-group">
+              <label for="occasion">Occasion / Purpose</label>
+              <select id="occasion" name="occasion">
+                <option value="">Select Occasion</option>
+                <option>Birthday Blessings</option>
+                <option>Wedding Anniversary</option>
+                <option>New Business / Career</option>
+                <option>Health & Recovery</option>
+                <option>Education & Exams</option>
+                <option>House Warming</option>
+                <option>New Year Blessings</option>
+                <option>General Prayer</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <!-- Preferred Date -->
+            <div class="form-group">
+              <label for="puja-date">Preferred Date for Archana</label>
+              <input type="date" id="puja-date" name="puja-date" />
+            </div>
+
+            <!-- Prayer -->
+            <div class="form-group full">
+              <label for="prayer">Your Prayer / Wish (Optional)</label>
+              <textarea id="prayer" name="prayer" placeholder="Share what you seek blessings for — health, happiness, peace, prosperity…"></textarea>
+            </div>
+
+          </div><!-- /form-grid -->
+
+          <div class="form-submit">
+            <button type="submit" class="btn-submit">🙏 Offer Archana &amp; Receive Blessings</button>
+          </div>
+        </form>
+      </div><!-- /archana-body -->
+    </div><!-- /archana-card -->
+
+    <!-- Success Banner (hidden initially) -->
+    <div id="archana-success">
+      <div class="success-om">🕉️</div>
+      <div class="devotee-name" id="successName"></div>
+      <h3>Your Archana has been Offered!</h3>
+      <p>Dear devotee, your prayers have been received. The temple priests will perform the selected archana on your behalf and God's blessings will be with you always.</p>
+      <div class="shloka">
+        "Sarve bhavantu sukhinaḥ<br/>
+        Sarve santu nirāmayāḥ<br/>
+        Sarve bhadrāṇi paśyantu<br/>
+        Mā kaścid duḥkhabhāg bhavet"<br/>
+        <small style="opacity:0.7;font-style:normal;">May all beings be happy, healthy, and free from suffering.</small>
+      </div>
+      <br/>
+      <button class="btn btn-outline" onclick="resetArchana()" style="border-color:var(--gold);color:var(--gold);">📿 Offer Another Archana</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== DARSHAN MODAL ===== -->
+<div class="darshan-modal" id="darshanModal">
+  <div class="modal-inner">
+    <div class="modal-top">
+      <h3>🪔 Virtual Darshan – Divya Mangalam</h3>
+      <button class="modal-close" onclick="closeDarshanModal()">✕</button>
+    </div>
+    <img
+      class="modal-darshan-img"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/800px-Lakshmi_by_Raja_Ravi_Varma.jpg"
+      alt="Maa Lakshmi – Virtual Darshan"
+    />
+    <div class="modal-mantra">
+      <div class="lamp-anim">🪔</div>
+      <div class="mantra-text" id="modalMantra">"Om Shreem Hreem Shreem Kamale Kamalalaye Praseed Praseed"</div>
+      <p>Maa Lakshmi blesses you with prosperity, peace, and abundance.</p>
+      <div class="mantra-ticker">
+        <p style="font-size:0.85rem; opacity:0.65;">🕉️ Take a moment of stillness. Fold your hands. Receive her blessings with a pure heart. 🙏</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology. Experience darshan, offer archana, and receive divine blessings from anywhere in the world.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#darshan">Virtual Darshan</a></li>
+        <li><a href="index.html#archana">Online Archana</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Puja Timings</h4>
+      <ul>
+        <li><a href="#">6:00 AM – Suprabhata</a></li>
+        <li><a href="#">8:00 AM – Kalasha Puja</a></li>
+        <li><a href="#">12:00 PM – Madhyahna</a></li>
+        <li><a href="#">6:30 PM – Sandhya Aarti</a></li>
+        <li><a href="#">8:30 PM – Ratri Seva</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

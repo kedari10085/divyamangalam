@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Divya Mangalam</title>
+  <meta name="description" content="Contact Divya Mangalam temple for queries about archana, special pujas, and virtual darshan." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+</head>
+<body>
+
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#darshan">Darshan</a></li>
+      <li><a href="index.html#archana">Archana</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <p class="section-label" style="color:var(--gold);">Get in Touch</p>
+  <h1>Contact Divya Mangalam</h1>
+  <p>For queries about archana, special seva, or virtual darshan — we are here to help.</p>
+</div>
+
+<!-- Contact Section -->
+<section>
+  <div class="section-inner">
+    <div class="contact-grid">
+      <!-- Info -->
+      <div class="contact-info">
+        <p class="section-label">Temple Information</p>
+        <div class="divider"></div>
+        <h2 class="section-title" style="margin-bottom:2rem;">We'd Love to Hear from You</h2>
+
+        <div class="contact-item">
+          <div class="icon">📍</div>
+          <div class="info">
+            <h4>Temple Address</h4>
+            <p>Divya Mangalam Temple<br/>Temple Street, Sacred Nagar<br/>Karnataka, India – 560 001</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">📞</div>
+          <div class="info">
+            <h4>Phone</h4>
+            <p>+91 98765 43210<br/>+91 80 1234 5678</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">📧</div>
+          <div class="info">
+            <h4>Email</h4>
+            <p>info@divyamangalam.org<br/>archana@divyamangalam.org</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="icon">🕐</div>
+          <div class="info">
+            <h4>Temple Hours</h4>
+            <p>6:00 AM – 9:00 PM (All days)<br/>Virtual Darshan: 24 × 7</p>
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div style="background: var(--light-bg); border-radius: var(--radius); padding: 2rem; text-align:center; margin-top:1rem; border: 2px dashed var(--gold);">
+          <div style="font-size:2.5rem; margin-bottom:0.5rem;">🗺️</div>
+          <p style="color:var(--text-mid); font-size:0.9rem;">Google Maps integration can be embedded here.<br/>Add your real temple coordinates.</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-card">
+        <p class="section-label">Send a Message</p>
+        <div class="divider"></div>
+        <h3 class="section-title" style="font-size:1.6rem; margin-bottom:1.5rem;">How Can We Help?</h3>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="cname">Your Name <span style="color:var(--saffron);">*</span></label>
+            <input type="text" id="cname" placeholder="Full Name" required />
+          </div>
+          <div class="form-group">
+            <label for="cemail">Email Address <span style="color:var(--saffron);">*</span></label>
+            <input type="email" id="cemail" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="cphone">Phone Number</label>
+            <input type="tel" id="cphone" placeholder="+91 98765 43210" />
+          </div>
+          <div class="form-group">
+            <label for="csubject">Subject</label>
+            <select id="csubject">
+              <option value="">Select a Subject</option>
+              <option>Archana Enquiry</option>
+              <option>Virtual Darshan</option>
+              <option>Special Puja / Homa</option>
+              <option>Temple Visit</option>
+              <option>Donation / Seva</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cmessage">Your Message <span style="color:var(--saffron);">*</span></label>
+            <textarea id="cmessage" placeholder="Type your message here…" style="min-height:120px;" required></textarea>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <button type="submit" class="btn-submit" style="width:100%;">🙏 Send Message</button>
+          </div>
+        </form>
+
+        <!-- Contact Success -->
+        <div id="contact-success" style="display:none; text-align:center; padding:2rem 1rem;">
+          <div style="font-size:3rem; margin-bottom:1rem;">🙏</div>
+          <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin-bottom:0.5rem;">Message Received!</h3>
+          <p style="color:var(--text-mid);">Thank you for reaching out. Our team will respond within 24 hours. May Maa Lakshmi bless you abundantly.</p>
+          <br/>
+          <button class="btn btn-primary" onclick="resetContact()" style="margin:auto;">Send Another Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--light-bg);">
+  <div class="section-inner" style="max-width:800px; margin:auto;">
+    <p class="section-label" style="text-align:center;">FAQ</p>
+    <div class="divider" style="margin: 0.5rem auto 1rem;"></div>
+    <h2 class="section-title" style="text-align:center; margin-bottom:2.5rem;">Frequently Asked Questions</h2>
+
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology. Experience darshan, offer archana, and receive divine blessings from anywhere in the world.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#darshan">Virtual Darshan</a></li>
+        <li><a href="index.html#archana">Online Archana</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Puja Timings</h4>
+      <ul>
+        <li><a href="#">6:00 AM – Suprabhata</a></li>
+        <li><a href="#">8:00 AM – Kalasha Puja</a></li>
+        <li><a href="#">12:00 PM – Madhyahna</a></li>
+        <li><a href="#">6:30 PM – Sandhya Aarti</a></li>
+        <li><a href="#">8:30 PM – Ratri Seva</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
