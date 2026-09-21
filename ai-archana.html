@@ -396,7 +396,7 @@
    GEMINI AI MULTI-AGENT SYSTEM
    ============================================= */
 
-const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
 
 /* ---- System Prompts for each Agent ---- */
 const SYSTEM_PROMPTS = {
@@ -466,10 +466,6 @@ let apiKey = localStorage.getItem('divyamangalam_gemini_key') || '';
 function saveKey() {
   const val = document.getElementById('apiKeyInput').value.trim();
   if (!val) { updateKeyStatus(false, 'Please enter your API key'); return; }
-  if (!val.startsWith('AIza')) {
-    updateKeyStatus(false, '❌ This doesn\'t look like a Gemini key. It must start with "AIza". Get one free at aistudio.google.com');
-    return;
-  }
   localStorage.setItem('divyamangalam_gemini_key', val);
   apiKey = val;
   document.getElementById('apiKeyInput').value = '••••••••••••••••••••••••••••••••••••••';
@@ -527,7 +523,7 @@ Today's presiding deity: ${p.dayDeity}`;
 
 /* ---- Call Gemini API ---- */
 async function callGemini(userMessage) {
-  if (!apiKey || !apiKey.startsWith('AIza')) {
+  if (!apiKey) {
     return '⚠️ Please save your Gemini API key first (the box at the top of this page). Get a free key at [aistudio.google.com](https://aistudio.google.com).';
   }
 
