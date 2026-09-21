@@ -22,7 +22,7 @@
       <span class="brand-name">Divya Mangalam</span>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
       <li><a href="gods.html">Choose Deity</a></li>
       <li><a href="live-archana.html">Live Archana</a></li>
       <li><a href="chalisa.html">Chalisa</a></li>
@@ -130,11 +130,11 @@
           alt="Maa Lakshmi – Virtual Darshan"
           loading="lazy"
         />
-        <div class="darshan-glow"></div>
-        <div class="darshan-overlay">
+        <span class="darshan-glow" aria-hidden="true"></span>
+        <span class="darshan-overlay">
           <span class="darshan-name">🪔 Maa Lakshmi</span>
           <span>Open your virtual darshan</span>
-        </div>
+        </span>
       </button>
 
       <!-- Info -->
@@ -332,7 +332,7 @@
         <small style="opacity:0.7;font-style:normal;">May all beings be happy, healthy, and free from suffering.</small>
       </div>
       <br/>
-      <button class="btn btn-outline" onclick="resetArchana()" style="border-color:var(--gold);color:var(--gold);">📿 Offer Another Archana</button>
+      <button class="btn btn-outline" onclick="resetArchana()" style="border-color:var(--gold);color:var(--gold);">📿 Prepare Another Intention</button>
     </div>
 
   </div>

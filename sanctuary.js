@@ -27,7 +27,7 @@
     // Ignore callbacks from canceled utterances when a new reading starts.
     activeUtterance = null;
     if (canSpeak) synth.cancel();
-    readButton.textContent = 'Read mantra';
+    readButton.textContent = !canSpeak ? 'Voice not supported' : (gods.length ? 'Read mantra' : 'Select a deity first');
     readButton.setAttribute('aria-pressed', 'false');
   }
 
