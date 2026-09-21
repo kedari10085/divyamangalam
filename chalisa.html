@@ -209,7 +209,8 @@
   <div class="controls-inner">
     <button class="c-btn c-btn-primary" onclick="toggleAutoScroll()" id="autoScrollBtn">⏵ Auto Scroll</button>
     <button class="c-btn c-btn-outline" onclick="toggleMeanings()" id="meaningsBtn">📖 Show Meanings</button>
-    <button class="c-btn c-btn-outline" onclick="playCurrentVerse432()" id="toneBtn">🎵 432 Hz</button>
+    <button class="c-btn c-btn-outline" onclick="toggleOmChant()" id="globalOmBtn">🕉️ Play Sacred Om</button>
+    <button class="c-btn c-btn-outline" onclick="playTempleBell(1.0)">🔔 Ring Temple Bell</button>
     <button class="c-btn c-btn-outline" onclick="restartChalisa()">↺ Restart</button>
     <div class="font-slider">
       <label>A</label>
@@ -217,6 +218,24 @@
       <label>A+</label>
     </div>
     <div class="progress-count" id="verseCounter">1 / 44</div>
+  </div>
+</div>
+
+<!-- Devotional Audio Player Card -->
+<div style="max-width:800px; margin: 1.5rem auto 0; padding: 0 1.5rem;">
+  <div class="devotional-audio-card">
+    <div class="devotional-audio-header">
+      <h3>🎶 Hanuman Chalisa Devotional Song</h3>
+      <span style="font-size:0.8rem; color:var(--gold); opacity:0.85;">Traditional Chanting · Soulful & Powerful</span>
+    </div>
+    <audio id="chalisaAudioPlayer" controls preload="metadata" style="width:100%; margin:0.5rem 0;">
+      <source src="https://archive.org/download/HanumanChalisa_201605/HanumanChalisa.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
+    <div style="display:flex; justify-content:space-between; font-size:0.8rem; opacity:0.75; color:var(--white); flex-wrap:wrap; gap:0.4rem;">
+      <span>🙏 Recite along with each Chaupai below</span>
+      <span style="color:var(--gold);">🔔 Click any verse to chime the sacred brass bell</span>
+    </div>
   </div>
 </div>
 
@@ -611,7 +630,11 @@ function selectVerse(idx) {
   const verseItems = allCards.filter(v => v.type !== 'section' && v.type !== 'closing');
   const pos = verseItems.findIndex((_, i) => allCards.indexOf(verseItems[i]) >= idx);
   updateCounter(pos + 1, verseItems.length);
-  play432();
+  if (typeof playTempleBell === 'function') {
+    playTempleBell(0.95 + (idx % 5) * 0.05);
+  } else {
+    play432();
+  }
 }
 
 function updateCounter(cur, total) {

@@ -359,7 +359,8 @@
     <div class="pooja-controls">
       <button class="ctrl-btn ctrl-auto" id="autoBtn" onclick="toggleAuto()">⏵ Auto Mode</button>
       <button class="ctrl-btn ctrl-next" id="nextBtn" onclick="nextStep()">Next Step →</button>
-      <button class="ctrl-btn ctrl-tone" onclick="playCurrentTone()">🎵 Play 432 Hz</button>
+      <button class="ctrl-btn ctrl-tone" onclick="toggleOmChant()" id="globalOmBtn">🕉️ Play Om</button>
+      <button class="ctrl-btn ctrl-tone" onclick="playTempleBell(1.0)">🔔 Ring Bell</button>
     </div>
 
   </div>
@@ -570,6 +571,11 @@ function getAudioCtx() {
 }
 
 function playStepTone(step) {
+  // Ring temple brass bell on each archana step transition
+  if (typeof playTempleBell === 'function') {
+    playTempleBell(step.name.toLowerCase().includes('aarti') ? 1.25 : 1.0);
+  }
+
   const ctx = getAudioCtx();
   const freqs = {
     'Achamana': [396], 'Sankalpa': [432], 'Dhyana': [528],

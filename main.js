@@ -18,6 +18,132 @@ function toggleNav() {
   if (links) links.classList.toggle('open');
 }
 
+/* ============  SACRED VEDIC AUDIO ENGINE  ============ */
+let globalAudioCtx = null;
+function getSharedAudioContext() {
+  if (!globalAudioCtx) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx) globalAudioCtx = new AudioCtx();
+  }
+  if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+    globalAudioCtx.resume();
+  }
+  return globalAudioCtx;
+}
+
+/**
+ * Authentic Temple Brass Ghanta (Bell) Sound
+ * Synthesizes physical bronze/brass harmonics:
+ * Fundamental (e.g. ~880 Hz / 1174 Hz) + rich inharmonic overtones
+ * with long exponential decay and shimmering metallic ring.
+ */
+function playTempleBell(pitchMultiplier = 1.0) {
+  const ctx = getSharedAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+
+  // Authentic brass bell overtone ratios and damping factors
+  const harmonics = [
+    { freq: 880 * pitchMultiplier, gain: 0.35, decay: 3.2 },
+    { freq: 1175 * pitchMultiplier, gain: 0.28, decay: 2.8 },
+    { freq: 1760 * pitchMultiplier, gain: 0.18, decay: 2.1 },
+    { freq: 2350 * pitchMultiplier, gain: 0.12, decay: 1.6 },
+    { freq: 3520 * pitchMultiplier, gain: 0.08, decay: 1.1 },
+    { freq: 4186 * pitchMultiplier, gain: 0.05, decay: 0.8 },
+  ];
+
+  harmonics.forEach(h => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(h.freq, now);
+
+    // Initial metallic strike (fast attack)
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(h.gain, now + 0.006);
+    // Exponential bell resonance ring
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + h.decay);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + h.decay);
+  });
+}
+
+/**
+ * Continuous Deep Om Sound (Earth Prana frequency: 136.1 Hz + harmonics)
+ * Rich Vedic hum layered with warm soothing chorus.
+ */
+let omNodes = null;
+function toggleOmChant() {
+  const ctx = getSharedAudioContext();
+  if (!ctx) return false;
+
+  if (omNodes) {
+    // Stop Om smoothly
+    const now = ctx.currentTime;
+    omNodes.masterGain.gain.linearRampToValueAtTime(0.0001, now + 1.5);
+    setTimeout(() => {
+      if (omNodes) {
+        omNodes.oscillators.forEach(o => o.stop());
+        omNodes = null;
+      }
+      updateOmUI(false);
+    }, 1500);
+    return false;
+  } else {
+    // Start Om smoothly
+    const now = ctx.currentTime;
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.0001, now);
+    masterGain.gain.linearRampToValueAtTime(0.22, now + 2.0);
+    masterGain.connect(ctx.destination);
+
+    // Sacred Om Frequencies: 136.1 Hz (Cosmic Om / Earth Year), 272.2 Hz, 68.05 Hz sub-bass
+    const freqs = [68.05, 136.1, 136.3, 272.2, 408.3];
+    const oscillators = [];
+
+    freqs.forEach((f, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = idx === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(f, now);
+      
+      const layerVol = idx === 1 ? 0.4 : (idx === 0 ? 0.35 : 0.15);
+      gain.gain.setValueAtTime(layerVol, now);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start(now);
+      oscillators.push(osc);
+    });
+
+    omNodes = { masterGain, oscillators };
+    playTempleBell(0.85); // Gentle chime on start
+    updateOmUI(true);
+    return true;
+  }
+}
+
+function updateOmUI(isPlaying) {
+  const btn = document.getElementById('globalOmBtn');
+  if (btn) {
+    btn.classList.toggle('playing', isPlaying);
+    btn.innerHTML = isPlaying ? '<span>🕉️</span> Om Playing… (Tap to Silence)' : '<span>🕉️</span> Play Sacred Om';
+  }
+}
+
+// Global click listener to play sacred brass bell on devotional buttons and links
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('button, .btn, .god-card, .offering-card, .verse-card, .astro-card, .service-card, .chakra-dot, .filter-btn, .tab-btn');
+  if (target) {
+    // Avoid double-chiming if clicked specifically on audio mute/bell toggle
+    playTempleBell(0.95 + Math.random() * 0.1);
+  }
+});
+
 /* ============  VIRTUAL DARSHAN MODAL  ============ */
 const mantras = [
   '"Om Shreem Hreem Shreem Kamale Kamalalaye Praseed Praseed"',

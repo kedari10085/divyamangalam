@@ -235,7 +235,11 @@
       <div class="mantra-label">Primary Mantra</div>
       <div class="mantra-main" id="primaryMantraText"></div>
       <div id="gayatriText" style="font-size:0.9rem; opacity:0.75; margin-bottom:0.5rem; font-style:italic;"></div>
-      <button class="play-mantra-btn" onclick="playMantraTone()">🎵 Play 432 Hz Mantra Tone</button>
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-top:1rem;">
+        <button class="play-mantra-btn" onclick="toggleOmChant()" id="globalOmBtn">🕉️ Play Sacred Om</button>
+        <button class="play-mantra-btn" onclick="playTempleBell(1.0)">🔔 Ring Temple Bell</button>
+        <button class="play-mantra-btn" onclick="playMantraTone()">🎵 432 Hz Tone</button>
+      </div>
     </div>
 
     <!-- Tabs -->

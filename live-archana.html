@@ -236,6 +236,22 @@
                 <label for="la-place">Birth Place</label>
                 <input type="text" id="la-place" placeholder="e.g. Bengaluru, Karnataka" />
               </div>
+              <div class="form-group">
+                <label for="la-god">Select Respected Deity <span style="color:var(--saffron)">*</span></label>
+                <select id="la-god" required>
+                  <option value="ganesha">🐘 Lord Ganesha (Vighnaharta)</option>
+                  <option value="shiva">🔱 Lord Shiva (Mahadeva)</option>
+                  <option value="lakshmi">🪷 Goddess Lakshmi (Prosperity)</option>
+                  <option value="durga">⚔️ Goddess Durga (Shakti)</option>
+                  <option value="hanuman">🙏 Lord Hanuman (Strength)</option>
+                  <option value="vishnu">🪷 Lord Vishnu (Protector)</option>
+                  <option value="saraswati">🎶 Goddess Saraswati (Wisdom)</option>
+                  <option value="krishna">🦚 Lord Krishna (Divine Joy)</option>
+                  <option value="murugan">⚡ Lord Murugan (Kartikeya)</option>
+                  <option value="surya">☀️ Lord Surya (Vitality)</option>
+                  <option value="saibaba">🕊️ Shirdi Sai Baba (Faith)</option>
+                </select>
+              </div>
               <div class="form-group full">
                 <label for="la-archana">Archana Type <span style="color:var(--saffron)">*</span></label>
                 <select id="la-archana" required>
@@ -309,7 +325,9 @@
         <!-- Actions -->
         <div class="result-actions">
           <button class="btn btn-primary" onclick="shareBlessing()">📤 Share Blessings</button>
-          <button class="btn btn-outline" onclick="playArchanaTone()" style="border-color:var(--gold); color:var(--gold);">🎵 Play 432 Hz Archana Tone</button>
+          <button class="btn btn-outline" onclick="toggleOmChant()" id="globalOmBtn" style="border-color:var(--gold); color:var(--gold);">🕉️ Play Sacred Om</button>
+          <button class="btn btn-outline" onclick="playTempleBell(1.0)" style="border-color:var(--gold); color:var(--gold);">🔔 Ring Temple Bell</button>
+          <button class="btn btn-outline" onclick="playArchanaTone()" style="border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7);">🎵 432 Hz Tone</button>
           <button class="btn btn-outline" onclick="resetLiveArchana()" style="border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.7);">🔄 New Archana</button>
         </div>
       </div>
@@ -458,23 +476,40 @@ function playArchanaTone() {
   archanaOsc = osc;
 }
 
-function showResult(fname, lname, gotra, nakshataData, archanaType, wish) {
+function showResult(fname, lname, gotra, nakshataData, archanaType, wish, godId = 'ganesha') {
   const { nakshatra, moonDeg, idx } = nakshataData;
   const rashi = getRashi(parseFloat(moonDeg));
   const mantraData = NAKSHATRA_MANTRAS[nakshatra.name] || { mantra: 'Om Namah Shivaya', meaning: 'Universal salutation to the divine.' };
   const fullName = `${fname} ${lname}`;
 
+  const selectedGod = (typeof GODS !== 'undefined') ? GODS.find(g => g.id === godId) : null;
+  const godName = selectedGod ? selectedGod.name : 'Lord Ganesha';
+  const godMantra = selectedGod ? selectedGod.primaryMantra : mantraData.mantra;
+  const godImage = selectedGod ? selectedGod.image : DEITY_IMAGES['default'];
+  const godEmoji = selectedGod ? selectedGod.emoji : '🪔';
+
+  // Ring auspicious temple brass bell on completion!
+  if (typeof playTempleBell === 'function') {
+    playTempleBell(1.0);
+    setTimeout(() => playTempleBell(1.2), 600);
+    setTimeout(() => playTempleBell(0.85), 1400);
+  }
+
   // Fill result
   document.getElementById('result-name').textContent = `🙏 ${fullName}`;
-  document.getElementById('result-subtitle').textContent = `${archanaType} — Offered at Divya Mangalam`;
-  document.getElementById('result-deity-img').src = DEITY_IMAGES['default'];
-  document.getElementById('result-mantra').innerHTML = mantraData.mantra;
+  document.getElementById('result-subtitle').textContent = `${archanaType} of ${godName} — Offered at Divya Mangalam`;
+  
+  const imgEl = document.getElementById('result-deity-img');
+  imgEl.src = godImage;
+  imgEl.alt = godName;
+
+  document.getElementById('result-mantra').innerHTML = `${godMantra}<br/><span style="font-size:0.92rem; opacity:0.85;">${mantraData.mantra}</span>`;
   document.getElementById('result-mantra-meaning').textContent = mantraData.meaning;
   document.getElementById('result-blessing').innerHTML =
-    `"Dear ${fname}, born under the sacred star of <strong style="color:var(--gold)">${nakshatra.name}</strong>, the goddess of Divya Mangalam blesses you with her divine grace. May your ${wish ? `prayer for "${wish}"` : 'heart\'s deepest wishes'} be fulfilled.
-    May peace, prosperity and spiritual light always shine upon you and your family. 🌟"`;
+    `"Dear ${fname}, born under the sacred star of <strong style="color:var(--gold)">${nakshatra.name}</strong>, ${godName} blesses you with divine grace and protection. May your ${wish ? `prayer for "${wish}"` : 'heart\'s deepest wishes'} be fulfilled.
+    May peace, prosperity, health and spiritual light always shine upon you and your family. 🌟"`;
   document.getElementById('prasad-message').textContent =
-    `This digital prasad carries the pure vibrations of the archana performed for ${fullName} (Gotra: ${gotra || 'Kashyapa'}, Nakshatra: ${nakshatra.name}, Rashi: ${rashi}). May God's blessings reach you through this sacred offering. 🍯`;
+    `This sacred digital prasad carries the divine vibrations of the ${godName} archana performed for ${fullName} (Gotra: ${gotra || 'Kashyapa'}, Nakshatra: ${nakshatra.name}, Rashi: ${rashi}). May God's blessings reach your home. 🍯`;
 
   // Astro grid
   document.getElementById('astroGrid').innerHTML = `
@@ -555,13 +590,13 @@ document.getElementById('liveArchanaForm').addEventListener('submit', function(e
   const archanaType = document.getElementById('la-archana').value;
   const wish  = document.getElementById('la-wish').value.trim();
 
-  if (!fname || !lname) { alert('Please enter your full name.'); return; }
-  if (!dob) { alert('Please enter your date of birth.'); return; }
-  if (!archanaType) { alert('Please select an archana type.'); return; }
+  const godSelect = document.getElementById('la-god');
+  const godId = godSelect ? godSelect.value : 'ganesha';
 
   const nakshataData = calculateNakshatra(dob, time);
-  showResult(fname, lname, gotra, nakshataData, archanaType, wish);
+  showResult(fname, lname, gotra, nakshataData, archanaType, wish, godId);
 });
 </script>
+<script src="gods-data.js"></script>
 </body>
 </html>
