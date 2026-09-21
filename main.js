@@ -19,8 +19,22 @@ setTimeout(dismissLoader, 1500); // Safety fallback so page never gets stuck beh
 /* ============  NAVBAR TOGGLE  ============ */
 function toggleNav() {
   const links = document.getElementById('navLinks');
-  if (links) links.classList.toggle('open');
+  const button = document.getElementById('hamburger');
+  if (!links) return;
+  const open = links.classList.toggle('open');
+  button?.setAttribute('aria-expanded', String(open));
+  button?.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
 }
+
+document.getElementById('navLinks')?.addEventListener('click', (event) => {
+  if (event.target.closest('a') && document.getElementById('navLinks').classList.contains('open')) toggleNav();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && document.getElementById('navLinks')?.classList.contains('open')) {
+    toggleNav();
+    document.getElementById('hamburger')?.focus();
+  }
+});
 
 /* ============  SACRED VEDIC AUDIO ENGINE  ============ */
 let globalAudioCtx = null;
@@ -30,7 +44,9 @@ function getSharedAudioContext() {
     if (AudioCtx) globalAudioCtx = new AudioCtx();
   }
   if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-    globalAudioCtx.resume();
+    globalAudioCtx.resume().catch(() => {
+      showToast('Audio could not start. Please try the sound button again.', 'error');
+    });
   }
   return globalAudioCtx;
 }
@@ -41,6 +57,16 @@ function getSharedAudioContext() {
  * Fundamental (e.g. ~880 Hz / 1174 Hz) + rich inharmonic overtones
  * with long exponential decay and shimmering metallic ring.
  */
+const activeBellNodes = new Set();
+function stopTempleBells() {
+  activeBellNodes.forEach(({ osc, gain }) => {
+    osc.stop();
+    osc.disconnect();
+    gain.disconnect();
+  });
+  activeBellNodes.clear();
+}
+
 function playTempleBell(pitchMultiplier = 1.0) {
   const ctx = getSharedAudioContext();
   if (!ctx) return;
@@ -64,13 +90,20 @@ function playTempleBell(pitchMultiplier = 1.0) {
 
     // Initial metallic strike (fast attack)
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(h.gain, now + 0.006);
+    gain.gain.linearRampToValueAtTime(h.gain * 0.45, now + 0.006);
     // Exponential bell resonance ring
     gain.gain.exponentialRampToValueAtTime(0.0001, now + h.decay);
 
     osc.connect(gain);
     gain.connect(ctx.destination);
 
+    const nodes = { osc, gain };
+    activeBellNodes.add(nodes);
+    osc.onended = () => {
+      osc.disconnect();
+      gain.disconnect();
+      activeBellNodes.delete(nodes);
+    };
     osc.start(now);
     osc.stop(now + h.decay);
   });
@@ -81,28 +114,41 @@ function playTempleBell(pitchMultiplier = 1.0) {
  * Rich Vedic hum layered with warm soothing chorus.
  */
 let omNodes = null;
+let omVolume = 0.14;
+function setOmVolume(value) {
+  const level = Number(value);
+  if (!Number.isFinite(level)) return;
+  omVolume = Math.max(0, Math.min(1, level)) * 0.4;
+  if (omNodes && globalAudioCtx) {
+    const now = globalAudioCtx.currentTime;
+    omNodes.masterGain.gain.cancelScheduledValues(now);
+    omNodes.masterGain.gain.setTargetAtTime(omVolume, now, 0.08);
+  }
+}
+
+function stopOmChant() {
+  if (!omNodes) return;
+  // Clear the active reference immediately so rapid toggles cannot stop a new session.
+  const previous = omNodes;
+  omNodes = null;
+  previous.masterGain.disconnect();
+  previous.oscillators.forEach(osc => { osc.stop(); osc.disconnect(); });
+  updateOmUI(false);
+}
+
 function toggleOmChant() {
   const ctx = getSharedAudioContext();
   if (!ctx) return false;
 
   if (omNodes) {
-    // Stop Om smoothly
-    const now = ctx.currentTime;
-    omNodes.masterGain.gain.linearRampToValueAtTime(0.0001, now + 1.5);
-    setTimeout(() => {
-      if (omNodes) {
-        omNodes.oscillators.forEach(o => o.stop());
-        omNodes = null;
-      }
-      updateOmUI(false);
-    }, 1500);
+    stopOmChant();
     return false;
   } else {
     // Start Om smoothly
     const now = ctx.currentTime;
     const masterGain = ctx.createGain();
     masterGain.gain.setValueAtTime(0.0001, now);
-    masterGain.gain.linearRampToValueAtTime(0.22, now + 2.0);
+    masterGain.gain.linearRampToValueAtTime(omVolume, now + 2.0);
     masterGain.connect(ctx.destination);
 
     // Sacred Om Frequencies: 136.1 Hz (Cosmic Om / Earth Year), 272.2 Hz, 68.05 Hz sub-bass
@@ -125,7 +171,6 @@ function toggleOmChant() {
     });
 
     omNodes = { masterGain, oscillators };
-    playTempleBell(0.85); // Gentle chime on start
     updateOmUI(true);
     return true;
   }
@@ -135,50 +180,27 @@ function updateOmUI(isPlaying) {
   const btn = document.getElementById('globalOmBtn');
   if (btn) {
     btn.classList.toggle('playing', isPlaying);
-    btn.innerHTML = isPlaying ? '<span>🕉️</span> Om Playing… (Tap to Silence)' : '<span>🕉️</span> Play Sacred Om';
+    btn.setAttribute('aria-pressed', String(isPlaying));
+    btn.textContent = isPlaying ? 'Stop Om ambience' : 'Play Om ambience';
   }
 }
 
-// Global click listener to play sacred brass bell on devotional buttons and links
-document.addEventListener('click', (e) => {
-  const target = e.target.closest('button, .btn, .god-card, .offering-card, .verse-card, .astro-card, .service-card, .chakra-dot, .filter-btn, .tab-btn');
-  if (target) {
-    // Avoid double-chiming if clicked specifically on audio mute/bell toggle
-    playTempleBell(0.95 + Math.random() * 0.1);
-  }
-});
+// Navigation stays quiet. Bell sounds are triggered only by explicit ritual/audio controls.
 
-/* ============  6:00 AM SUPRABHATA SEVA ENGINE  ============ */
+/* ============  USER-INITIATED SUPRABHATAM RECORDING  ============ */
 function playSuprabhatamNow() {
   const audio = document.getElementById('suprabhatamAudio');
   if (!audio) return;
   if (audio.paused) {
-    audio.play().then(() => {
+    audio.play().catch((error) => {
+      if (error.name === 'AbortError') return;
       const status = document.getElementById('suprabhatamStatus');
-      if (status) status.innerHTML = '🎵 <strong>Playing:</strong> Sri Venkateswara Suprabhatam (M.S. Subbulakshmi)';
-      playTempleBell(1.0);
-    }).catch(() => {
-      // Audio playback requires user interaction
+      if (status) status.textContent = 'Recording unavailable. Please try again later.';
     });
   } else {
     audio.pause();
-    const status = document.getElementById('suprabhatamStatus');
-    if (status) status.textContent = '⏸ Paused · Scheduled for 6:00 AM daily';
   }
 }
-
-// Check every 30 seconds if it is 6:00 AM to trigger morning Suprabhatam automatically
-let suprabhatamTriggeredToday = false;
-setInterval(() => {
-  const now = new Date();
-  if (now.getHours() === 6 && now.getMinutes() === 0 && !suprabhatamTriggeredToday) {
-    suprabhatamTriggeredToday = true;
-    playSuprabhatamNow();
-  }
-  if (now.getHours() === 7) {
-    suprabhatamTriggeredToday = false; // Reset for next day
-  }
-}, 30000);
 
 /* ============  VIRTUAL DARSHAN MODAL  ============ */
 const mantras = [
@@ -191,30 +213,53 @@ const mantras = [
 ];
 
 let mantraIdx = 0;
+let darshanTrigger = null;
 
 function openDarshanModal() {
   const modal = document.getElementById('darshanModal');
-  if (modal) {
+  if (modal && !modal.classList.contains('open')) {
+    darshanTrigger = document.activeElement;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    modal.querySelector('.modal-close')?.focus();
     startMantraRotation();
   }
 }
 
 function closeDarshanModal() {
   const modal = document.getElementById('darshanModal');
-  if (modal) {
+  if (modal?.classList.contains('open')) {
     modal.classList.remove('open');
     document.body.style.overflow = '';
     stopMantraRotation();
+    darshanTrigger?.focus();
   }
 }
+
+document.addEventListener('keydown', (event) => {
+  const modal = document.getElementById('darshanModal');
+  if (event.key !== 'Tab' || !modal?.classList.contains('open')) return;
+  const controls = [...modal.querySelectorAll('button, a[href], input, select, textarea, [tabindex="0"]')];
+  const first = controls[0];
+  const last = controls[controls.length - 1];
+  if (!first) { event.preventDefault(); modal.focus(); return; }
+  if (!modal.contains(document.activeElement) || (event.shiftKey && document.activeElement === first)) {
+    event.preventDefault();
+    (event.shiftKey ? last : first).focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
 
 let mantraTimer = null;
 
 function startMantraRotation() {
+  stopMantraRotation();
   updateMantra();
-  mantraTimer = setInterval(updateMantra, 4000);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    mantraTimer = setInterval(updateMantra, 4000);
+  }
 }
 
 function stopMantraRotation() {
@@ -289,7 +334,7 @@ if (archanaForm) {
     // Scroll to success
     if (success) success.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    showToast(`Archana offered for ${fullName}! 🪔`, 'success');
+    showToast(`Prayer intention preview for ${fullName}. No booking sent.`, 'success');
 
     console.log('Archana submission:', {
       name: fullName,
@@ -352,6 +397,7 @@ function showToast(message, type = 'success') {
 
   const toast = document.createElement('div');
   toast.id = 'dm-toast';
+  toast.setAttribute('role', 'status');
   toast.textContent = message;
   Object.assign(toast.style, {
     position: 'fixed',
@@ -455,7 +501,9 @@ if (faqList) {
 /* ============  SMOOTH SCROLL FOR ANCHOR LINKS  ============ */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
-    const target = document.querySelector(link.getAttribute('href'));
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    const target = document.getElementById(href.slice(1));
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
