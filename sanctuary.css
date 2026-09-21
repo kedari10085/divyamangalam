@@ -42,4 +42,142 @@
 .sacred-art { max-width: 450px; width: 100%; justify-self: center; }
 .sacred-arch { position: relative; overflow: hidden; min-height: 490px; padding: 56px 15px 32px; border-radius: 240px 240px 22px 22px; border: 1px solid #ba9867; background: radial-gradient(ellipse at 50% 52%, #624355, #301e36 70%); box-shadow: 0 24px 64px #482d442b, inset 0 0 0 9px #422c44; color: #ead3af; text-align: center; }
 .sacred-arch::before { content: ''; position: absolute; inset: 16px; border: 1px solid #c1a07155; border-radius: inherit; pointer-events: none; }
-.sacred-arch img { width: 100%; height: auto; margin: -15px auto -18px; animation
+.sacred-arch img { width: 100%; height: auto; margin: -15px auto -18px; animation: sacred-light 7s ease-in-out infinite alternate; }
+@keyframes sacred-light { from { opacity: .8; } to { opacity: 1; } }
+.arch-invocation { position: relative; z-index: 1; font-size: .95rem; margin-top: 25px; letter-spacing: 2px; }
+.arch-caption { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.15rem; }
+.arch-rule { display: block; height: 1px; width: 60px; background: #d1ad74; margin: 18px auto 0; }
+.arch-star { position: absolute; color: #e9c992; font-size: 1.4rem; }
+.star-one { top: 36%; left: 12%; }.star-two { top: 29%; right: 12%; }
+.art-caption { text-align: center; margin-top: 21px; font-size: .62rem; letter-spacing: 2px; color: #806044; }
+.art-caption span { padding-right: 9px; }
+.discover-link { display: flex; align-items: center; justify-content: center; gap: 12px; font-size: .74rem; color: #796654; padding: 32px 0 0; }
+.sanctuary-home .section-inner { max-width: 1180px; }
+.sanctuary-home section:not(.sanctuary-hero) { padding: 80px 24px; }
+.sanctuary-home .section-label { font-size: .67rem; letter-spacing: 2.4px; }
+.sanctuary-home .section-title { font-weight: 400; letter-spacing: -.8px; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.3; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 34px; }
+.section-heading .section-title { margin-bottom: 0; }
+.section-heading > p { max-width: 255px; color: var(--text-mid); font-size: .9rem; }
+.path-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.path-card { display: flex; flex-direction: column; padding: 26px 22px; border: 1px solid #e6dccc; border-radius: 16px; background: #fffdf8; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.path-card:hover { transform: translateY(-6px); border-color: #c9a977; box-shadow: 0 14px 35px var(--shadow); }
+.path-icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: #f3ecdf; font-size: 1.7rem; margin-bottom: 26px; }
+.path-number { color: #886344; font-size: .6rem; letter-spacing: 1.9px; font-weight: 700; }
+.path-card h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.15rem; font-weight: 400; margin: 10px 0; }
+.path-card p { font-size: .85rem; color: var(--text-mid); margin-bottom: 22px; }
+.path-link { display: flex; justify-content: space-between; gap: 12px; margin-top: auto; font-size: .78rem; font-weight: 700; }
+.deity-section { background: #f2ebe1; border-block: 1px solid #e7ddce; }
+.text-link { color: var(--deep-red); text-decoration: underline; text-underline-offset: 5px; font-size: .88rem; }
+.deity-showcase { display: grid; grid-template-columns: .9fr 1.1fr; gap: 65px; background: #fffaf2; padding: 34px; border: 1px solid #e1d2be; border-radius: 24px; align-items: center; }
+.deity-portrait { position: relative; overflow: hidden; background: radial-gradient(ellipse, #6a484c, #2c1d2f); border-radius: 200px 200px 16px 16px; border: 1px solid #cfb180; }
+.deity-portrait img { width: 100%; height: 430px; object-fit: contain; padding: 20px 20px 45px; }
+.portrait-caption { position: absolute; bottom: 0; left: 0; right: 0; background: #2f2033; padding: 12px; text-align: center; color: #e7cca0; font-size: .58rem; letter-spacing: 1.7px; }
+.deity-details { padding-right: 20px; min-width: 0; }
+.deity-details label { display: block; }
+.deity-details select { display: block; width: 100%; max-width: 300px; padding: 10px 12px; margin: 10px 0 25px; border: 1px solid #d5c3ab; border-radius: 8px; background: #fffdf8; color: var(--text-dark); min-height: 44px; }
+.deity-details h3 { font: 400 clamp(1.8rem, 3vw, 2.4rem)/1.3 'Playfair Display', Georgia, serif; margin-bottom: 8px; }
+#sanctuaryDeityTitle { color: var(--text-mid); font-size: .87rem; }
+.deity-sanskrit { font-size: 1.4rem; color: #956b30; margin-top: 25px; }
+.deity-mantra { color: var(--text-mid); font-size: .93rem; font-style: italic; margin: 10px 0 24px; }
+.gallery-controls { display: flex; gap: 18px; align-items: center; margin: 25px 0 12px; font-size: .8rem; color: var(--text-mid); }
+.gallery-controls button { width: 44px; height: 44px; border: 1px solid #cdb898; border-radius: 50%; background: transparent; color: var(--deep-red); cursor: pointer; }
+.gallery-controls button:hover { background: #eee3d4; }
+.small-note { color: var(--text-mid); font-size: .76rem; line-height: 1.7; }
+.sanctuary-home .listening-section { background: #342539; color: #f9f1e4; }
+.listening-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 75px; align-items: center; }
+.sanctuary-home .listening-section .section-label { color: #e3bf87; }
+.sanctuary-home .listening-section .section-title { color: #fff4e2; font-size: clamp(2rem, 3vw, 2.9rem); }
+.listening-intro > p:not(.section-label) { color: #d0c1cf; }
+.listening-intro > p { max-width: 370px; }
+.listening-intro .section-title em { color: #e3bf87; font-weight: 400; }
+.listening-ornament { font-size: 4rem; line-height: 1.4; color: #d4af76; margin: 20px 0; }
+.listening-card { padding: 30px; background: #423047; border: 1px solid #786079; border-radius: 20px; box-shadow: 0 20px 40px #1e142133; }
+.listening-card-heading { display: flex; gap: 16px; align-items: center; padding-bottom: 22px; }
+.listening-card-heading h3 { font: 400 1.3rem 'Playfair Display', Georgia, serif; }
+.listening-card-heading p { font-size: .78rem; color: #e2d2df; margin-top: 6px; }
+.listening-icon { display: grid; place-items: center; border-radius: 50%; background: #5d455c; color: #edc995; width: 46px; height: 46px; font-size: 1.6rem; flex-shrink: 0; }
+.sound-row { padding: 20px 0; border-top: 1px solid #725974; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.sound-row h4 { font-size: .88rem; font-weight: 700; }
+.sound-row p { font-size: .74rem; color: #d8c7d5; margin-top: 5px; }
+.sound-button { flex-shrink: 0; min-height: 44px; border: 1px solid #cba870; padding: 10px 15px; border-radius: 24px; color: #f8e3c3; background: transparent; cursor: pointer; font-size: .77rem !important; transition: background .2s ease; }
+.sound-button:hover, .sound-button[aria-pressed="true"] { background: #e2bf86; color: #35283a; }
+.sound-button:disabled { opacity: .55; cursor: not-allowed; }
+.volume-control { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 0 0 20px; color: #e2d2df; font-size: .73rem; }
+.volume-control input { flex: 1; min-width: 80px; accent-color: #e2bf86; min-height: 28px; }
+.volume-control output { min-width: 34px; }
+.listening-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; border-top: 1px solid #725974; padding-top: 20px; font-size: .77rem; }
+.listening-actions a { color: #f3d49f; text-decoration: underline; text-underline-offset: 4px; }
+.listening-actions button { margin-left: auto; border: 0; border-radius: 8px; background: #5d455c; color: white; padding: 10px 14px; min-height: 44px; cursor: pointer; }
+.listening-card noscript p { margin-top: 20px; font-size: .85rem; }
+.peace-blessing { text-align: center; padding: 42px 24px; border-bottom: 1px solid #e4d7c4; background: #f5eddc; }
+.peace-blessing > span:first-child { color: #936934; font-size: 1.6rem; }
+.peace-blessing p { color: #755531; font-size: 1.5rem; margin: 8px 0; }
+.peace-blessing > span:last-child { color: #716352; font-size: .85rem; }
+.sanctuary-home .darshan-section { background: #fcf8f0; }
+.sanctuary-home .darshan-viewer { border: 1px solid #ba9867; border-radius: 240px 240px 18px 18px; padding: 0; width: 100%; text-align: center; }
+.sanctuary-home .darshan-viewer img { object-fit: contain; }
+.sanctuary-home .darshan-overlay { background: linear-gradient(0deg, #302135ed, transparent 65%); }
+.darshan-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; }
+.sanctuary-home .timing-item { border-left-width: 2px; border-radius: 8px; box-shadow: none; }
+.sanctuary-home .timing-item .time { min-width: 75px; }
+.sanctuary-home .archana-section { background: #f2ebe1; }
+.sanctuary-home .archana-header, .sanctuary-home #archana-success { background: linear-gradient(135deg, #49304c, #302135); }
+.sanctuary-home .archana-card { border: 1px solid #e3d5c4; box-shadow: 0 16px 50px var(--shadow); }
+.sanctuary-home .btn-submit { background: #49304c; box-shadow: 0 6px 20px var(--shadow); letter-spacing: .3px; }
+.sanctuary-home .modal-inner { max-height: 90dvh; overflow-y: auto; }
+.sanctuary-home .modal-top { background: #49304c; }
+.sanctuary-home .modal-darshan-img { max-height: 45vh; object-fit: contain; }
+.sanctuary-home footer { background: #2e2232; }
+.sanctuary-home .footer-inner, .sanctuary-home .footer-bottom { max-width: 1180px; }
+.sanctuary-home #dm-toast { white-space: normal !important; width: max-content; max-width: calc(100vw - 32px); text-align: center; }
+@media (max-width: 1100px) {
+  .sanctuary-home .nav-links { display: none; position: absolute; top: 82px; left: 0; right: 0; background: #fcf8f0; padding: 20px 24px; border-bottom: 1px solid #d9cbb9; flex-direction: column; gap: 0; max-height: calc(100dvh - 82px); overflow-y: auto; }
+  .sanctuary-home .nav-links.open { display: flex; }
+  .sanctuary-home .nav-links a { display: block; padding: 12px 0; font-size: .95rem; }
+  .sanctuary-home .hamburger { display: flex; }
+  .sanctuary-hero-inner { gap: 30px; }
+  .sacred-arch { min-height: 430px; }
+  .path-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .listening-grid, .deity-showcase { gap: 32px; }
+}
+@media (max-width: 760px) {
+  .sanctuary-home section:not(.sanctuary-hero) { padding: 56px 20px; }
+  .sanctuary-home .sanctuary-hero { padding: 44px 20px 24px; }
+  .sanctuary-hero-inner, .listening-grid, .deity-showcase { grid-template-columns: 1fr; }
+  .sanctuary-intro { text-align: center; }
+  .sanctuary-intro h1 { font-size: clamp(2.3rem, 7.3vw, 3.5rem); letter-spacing: -1px; }
+  .hero-description { margin-inline: auto; }
+  .sanctuary-home .hero-btns { justify-content: center; }
+  .sacred-art { max-width: 360px; margin-top: 12px; }
+  .sacred-arch { min-height: auto; padding-top: 44px; }
+  .section-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .section-heading > p { max-width: none; }
+  .deity-showcase { padding: 24px; }
+  .deity-portrait { width: 100%; max-width: 360px; margin: auto; }
+  .deity-portrait img { height: 370px; }
+  .deity-details { padding: 0; }
+  .listening-intro > p { max-width: none; }
+  .listening-ornament { display: none; }
+  .listening-intro .small-note { margin-top: 20px; }
+  .sanctuary-home .darshan-viewer { max-width: 400px; margin: auto; }
+}
+@media (max-width: 440px) {
+  .welcome-ribbon { font-size: .68rem; }.welcome-ribbon span { padding: 0 3px; }
+  .sanctuary-home .nav-inner { padding: 0 16px; gap: 12px; }
+  .sanctuary-home .nav-brand .brand-name { font-size: 1.05rem; }
+  .path-grid { grid-template-columns: 1fr; }
+  .path-card { padding: 24px; }.path-icon { margin-bottom: 18px; }
+  .listening-card { padding: 22px 18px; }
+  .sound-row { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .sound-button { align-self: flex-start; }
+  .listening-actions button { margin-left: 0; }
+  .sanctuary-home .archana-body { padding: 24px 16px; }
+  .sanctuary-home .btn-submit { padding: 16px 22px; font-size: .9rem; }
+  .sanctuary-home .timing-item { gap: 8px; padding: 14px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sanctuary-home *, .sanctuary-home *::before, .sanctuary-home *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .sanctuary-home .timing-item { opacity: 1 !important; transform: none !important; }
+}
