@@ -42,7 +42,8 @@
 .sacred-art { max-width: 450px; width: 100%; justify-self: center; }
 .sacred-arch { position: relative; overflow: hidden; min-height: 490px; padding: 56px 15px 32px; border-radius: 240px 240px 22px 22px; border: 1px solid #ba9867; background: radial-gradient(ellipse at 50% 52%, #624355, #301e36 70%); box-shadow: 0 24px 64px #482d442b, inset 0 0 0 9px #422c44; color: #ead3af; text-align: center; }
 .sacred-arch::before { content: ''; position: absolute; inset: 16px; border: 1px solid #c1a07155; border-radius: inherit; pointer-events: none; }
-.sacred-arch img { width: 100%; height: auto; margin: -15px auto -18px; animation: sacred-light 7s ease-in-out infinite alternate; }
+.sacred-arch img { width: 100%; height: auto; margin: -15px auto -18px; animation: sacred-light 4s ease-in-out; }
+.sanctuary-home .darshan-glow, .sanctuary-home .lamp-anim, .sanctuary-home .success-om { animation: none; }
 @keyframes sacred-light { from { opacity: .8; } to { opacity: 1; } }
 .arch-invocation { position: relative; z-index: 1; font-size: .95rem; margin-top: 25px; letter-spacing: 2px; }
 .arch-caption { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.15rem; }

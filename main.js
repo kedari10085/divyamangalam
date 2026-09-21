@@ -257,7 +257,7 @@ let mantraTimer = null;
 function startMantraRotation() {
   stopMantraRotation();
   updateMantra();
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (!document.body.classList.contains('sanctuary-home') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     mantraTimer = setInterval(updateMantra, 4000);
   }
 }
