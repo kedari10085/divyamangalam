@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Archana – Divya Mangalam</title>
+  <meta name="description" content="Personalised deity archana with panchang-guided auspicious timing, mantras, offerings and visual pooja." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  <style>
+    /* ===== Pooja Page ===== */
+    .deity-hero {
+      min-height: 60vh; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: var(--white); padding: 4rem 1.5rem;
+    }
+    .deity-hero-bg {
+      position: absolute; inset: 0; background-size: cover;
+      background-position: center; filter: brightness(0.35);
+    }
+    .deity-hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(212,160,23,0.15) 0%, transparent 70%);
+    }
+    .deity-hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .deity-img-circle {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--gold);
+      box-shadow: 0 0 40px rgba(212,160,23,0.5);
+      margin: 0 auto 1.5rem; display: block;
+      animation: deity-glow 3s ease-in-out infinite;
+    }
+    @keyframes deity-glow {
+      0%,100%{box-shadow:0 0 30px rgba(212,160,23,0.4);}
+      50%{box-shadow:0 0 60px rgba(212,160,23,0.8), 0 0 100px rgba(255,111,0,0.3);}
+    }
+    .deity-emoji-big { font-size: 3rem; margin-bottom: 0.5rem; }
+    .deity-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); margin-bottom:0.5rem; }
+    .deity-hero .deity-sanskrit { font-size:1.3rem; color:var(--gold); font-style:italic; }
+    .deity-hero .deity-title { opacity:0.8; font-size:1rem; margin-top:0.5rem; }
+    .deity-hero .mantra-tag {
+      display:inline-block; background:rgba(255,255,255,0.1);
+      border:1px solid var(--gold); border-radius:50px;
+      padding:8px 20px; font-size:0.9rem; color:var(--gold);
+      margin-top:1.5rem; letter-spacing:1px;
+    }
+
+    /* ===== Layout Grid ===== */
+    .pooja-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2rem;
+      max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem;
+    }
+    @media(max-width:900px){ .pooja-layout{ grid-template-columns:1fr; } }
+
+    /* ===== Panchang Card ===== */
+    .panchang-card {
+      background: var(--white); border-radius: 16px;
+      box-shadow: 0 6px 30px var(--shadow);
+      overflow: hidden; margin-bottom: 1.5rem;
+    }
+    .panchang-card-header {
+      background: linear-gradient(135deg, #1a0040, #3d0000);
+      padding: 1rem 1.5rem; color: var(--white);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .panchang-card-header h3 { font-family:'Playfair Display',serif; font-size:1.1rem; }
+    .panchang-body { padding: 1.2rem 1.5rem; }
+    .panchang-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 0.6rem 0; border-bottom: 1px solid var(--light-bg);
+      font-size: 0.9rem;
+    }
+    .panchang-row:last-child { border-bottom: none; }
+    .panchang-row .label { color: var(--text-mid); font-size:0.82rem; }
+    .panchang-row .value { font-weight: 700; color: var(--text-dark); text-align:right; }
+    .rahukaal-row .value { color: #c62828; }
+    .abhijit-row .value { color: #2e7d32; }
+
+    /* ===== Auspicious Days Cards ===== */
+    .days-section { margin-bottom: 1.5rem; }
+    .days-section h3 { font-family:'Playfair Display',serif; color:var(--deep-red); margin-bottom:1rem; font-size:1.1rem; }
+    .day-item {
+      background: var(--white); border-radius: 10px;
+      padding: 0.8rem 1rem; margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      box-shadow: 0 2px 8px var(--shadow);
+      border-left: 4px solid var(--gold);
+    }
+    .day-item .day-date { font-weight:700; font-size:0.85rem; color:var(--deep-red); min-width:80px; }
+    .day-item .day-info { flex:1; }
+    .day-item .day-tithi { font-size:0.8rem; color:var(--text-mid); }
+    .day-item .day-stars { font-size:0.85rem; }
+
+    /* ===== Offerings Grid ===== */
+    .offerings-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .offering-card {
+      background: var(--white); border-radius: 12px;
+      padding: 1.2rem 1rem; text-align: center;
+      box-shadow: 0 2px 12px var(--shadow); transition: var(--transition);
+    }
+    .offering-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px var(--shadow); }
+    .offering-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .offering-name { font-weight: 700; font-size: 0.85rem; color: var(--deep-red); margin-bottom: 0.3rem; }
+    .offering-mantra { font-size: 0.72rem; color: var(--text-mid); line-height: 1.5; font-style: italic; }
+
+    /* ===== Ashtottara ===== */
+    .ashtottara-list {
+      columns: 2; column-gap: 1rem;
+      font-size: 0.85rem; color: var(--text-mid); line-height: 2;
+    }
+    .ashtottara-list li { break-inside: avoid; }
+
+    /* ===== Mantra Box ===== */
+    .mantra-display {
+      background: linear-gradient(135deg, var(--deep-red), #5c0000);
+      border-radius: 16px; padding: 2rem; color: var(--white);
+      text-align: center; margin-bottom: 2rem;
+    }
+    .mantra-display .mantra-main {
+      font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold);
+      line-height: 1.7; margin: 1rem 0;
+    }
+    .mantra-display .mantra-label { font-size:0.75rem; letter-spacing:2px; opacity:0.6; text-transform:uppercase; }
+    .mantra-display .play-mantra-btn {
+      background: rgba(255,255,255,0.15); border: 1px solid var(--gold);
+      color: var(--gold); border-radius: 50px; padding: 0.5rem 1.5rem;
+      font-family:'Lato',sans-serif; font-size:0.9rem; cursor:pointer;
+      transition:var(--transition); margin-top:1rem;
+    }
+    .mantra-display .play-mantra-btn:hover { background: var(--gold); color: var(--text-dark); }
+
+    /* ===== Begin Archana CTA ===== */
+    .begin-archana-cta {
+      background: linear-gradient(135deg, var(--deep-red), #5c0000);
+      border-radius: 20px; padding: 2.5rem 2rem;
+      text-align: center; color: var(--white); margin-bottom: 2rem;
+    }
+    .begin-archana-cta h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--gold); margin-bottom:0.5rem; }
+    .begin-archana-cta p { opacity:0.85; margin-bottom:1.5rem; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex; gap: 0; border-bottom: 2px solid var(--light-bg);
+      margin-bottom: 2rem; overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 0.75rem 1.4rem; border: none; background: transparent;
+      font-family:'Lato',sans-serif; font-weight:700; font-size:0.88rem;
+      cursor:pointer; color:var(--text-mid); border-bottom: 3px solid transparent;
+      margin-bottom: -2px; transition:var(--transition); white-space:nowrap;
+    }
+    .tab-btn.active { color:var(--deep-red); border-bottom-color:var(--deep-red); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* Festival items */
+    .festival-item {
+      display:flex; align-items:center; gap:1rem;
+      background: var(--light-bg); border-radius:10px;
+      padding:0.8rem 1rem; margin-bottom:0.75rem;
+      border-left: 4px solid var(--gold);
+    }
+    .festival-item .f-date { font-weight:700; font-size:0.85rem; color:var(--deep-red); min-width:90px; }
+    .festival-item .f-name { font-size:0.9rem; color:var(--text-dark); }
+    .festival-type-badge {
+      margin-left:auto; background:var(--gold); color:var(--text-dark);
+      border-radius:50px; padding:2px 8px; font-size:0.7rem; font-weight:700;
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gods.html">Choose Deity</a></li>
+      <li><a href="live-archana.html">Live Archana</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz</a></li>
+      <li><a href="chalisa.html">Chalisa</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Deity Hero (filled by JS) -->
+<div class="deity-hero" id="deityHero">
+  <div class="deity-hero-bg" id="deityBg"></div>
+  <div class="deity-hero-overlay"></div>
+  <div class="deity-hero-content">
+    <img class="deity-img-circle" id="deityImg" src="" alt="" />
+    <div class="deity-emoji-big" id="deityEmoji"></div>
+    <h1 id="deityName"></h1>
+    <div class="deity-sanskrit" id="deitySanskrit"></div>
+    <div class="deity-title" id="deityTitle"></div>
+    <div class="mantra-tag" id="deityMantraTag"></div>
+  </div>
+</div>
+
+<!-- Main Layout -->
+<div class="pooja-layout">
+
+  <!-- Left: Main Content -->
+  <div>
+    <!-- Begin Archana CTA -->
+    <div class="begin-archana-cta" id="beginCta">
+      <h2 id="ctaTitle">🪔 Begin Archana</h2>
+      <p id="ctaDesc">Enter your details and receive a fully personalised archana experience.</p>
+      <div class="cta-btns">
+        <a id="liveArchanaBtn" href="#" class="btn btn-primary" style="font-size:1rem;">🌟 Live Archana (with Birth Details)</a>
+        <a id="visualPoojaBtn" href="#" class="btn btn-outline" style="border-color:var(--gold);color:var(--gold);font-size:1rem;">🎬 Visual Pooja Simulation</a>
+      </div>
+    </div>
+
+    <!-- Primary Mantra -->
+    <div class="mantra-display">
+      <div class="mantra-label">Primary Mantra</div>
+      <div class="mantra-main" id="primaryMantraText"></div>
+      <div id="gayatriText" style="font-size:0.9rem; opacity:0.75; margin-bottom:0.5rem; font-style:italic;"></div>
+      <button class="play-mantra-btn" onclick="playMantraTone()">🎵 Play 432 Hz Mantra Tone</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab('offerings',this)">🌺 Offerings</button>
+      <button class="tab-btn" onclick="showTab('sequence',this)">📿 Archana Sequence</button>
+      <button class="tab-btn" onclick="showTab('ashtottara',this)">108 Names</button>
+      <button class="tab-btn" onclick="showTab('temples',this)">🏛️ Temples</button>
+    </div>
+
+    <!-- Tab: Offerings -->
+    <div class="tab-content active" id="tab-offerings">
+      <h3 class="section-title" style="margin-bottom:1.5rem;">Sacred Offerings</h3>
+      <div class="offerings-grid" id="offeringsGrid"></div>
+    </div>
+
+    <!-- Tab: Archana Sequence -->
+    <div class="tab-content" id="tab-sequence">
+      <h3 class="section-title" style="margin-bottom:1.5rem;">Complete Archana Sequence</h3>
+      <div id="sequenceList"></div>
+    </div>
+
+    <!-- Tab: Ashtottara -->
+    <div class="tab-content" id="tab-ashtottara">
+      <h3 class="section-title" style="margin-bottom:1rem;">Ashtottara Shatanamavali</h3>
+      <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:1.5rem;">108 sacred names of the deity — each name a complete mantra. Recite with devotion.</p>
+      <ul class="ashtottara-list" id="ashtottaraList"></ul>
+    </div>
+
+    <!-- Tab: Famous Temples -->
+    <div class="tab-content" id="tab-temples">
+      <h3 class="section-title" style="margin-bottom:1.5rem;">Famous Temples</h3>
+      <div id="templesList"></div>
+    </div>
+  </div>
+
+  <!-- Right: Panchang Sidebar -->
+  <div>
+    <!-- Today's Panchang -->
+    <div class="panchang-card">
+      <div class="panchang-card-header">
+        <span>📅</span>
+        <h3>Today's Panchang</h3>
+      </div>
+      <div class="panchang-body" id="todayPanchang"></div>
+    </div>
+
+    <!-- Auspicious Days -->
+    <div class="days-section">
+      <h3>✨ Best Days for Archana</h3>
+      <div id="auspiciousDays"></div>
+    </div>
+
+    <!-- Upcoming Festivals -->
+    <div>
+      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin-bottom:1rem; font-size:1.1rem;">🎊 Upcoming Festivals</h3>
+      <div id="upcomingFestivals"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gods.html">Choose Deity</a></li>
+        <li><a href="live-archana.html">Live Archana</a></li>
+        <li><a href="shlokas.html">Shlokas</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+        <li><a href="chalisa.html">Chalisa</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Other Deities</h4>
+      <ul id="otherDeitiesLinks"></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
+    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="gods-data.js"></script>
+<script src="panchang.js"></script>
+<script>
+/* ---- Get god from URL ---- */
+const params = new URLSearchParams(window.location.search);
+const godId = params.get('god') || 'ganesha';
+const god = GODS.find(g => g.id === godId) || GODS[0];
+
+/* ---- Set page title & meta ---- */
+document.getElementById('pageTitle').textContent = `${god.name} Archana – Divya Mangalam`;
+
+/* ---- Hero ---- */
+document.getElementById('deityBg').style.backgroundImage = `url('${god.image}')`;
+document.getElementById('deityImg').src = god.image;
+document.getElementById('deityImg').alt = god.name;
+document.getElementById('deityEmoji').textContent = god.emoji;
+document.getElementById('deityName').textContent = god.name;
+document.getElementById('deitySanskrit').textContent = god.sanskrit;
+document.getElementById('deityTitle').textContent = god.title;
+document.getElementById('deityMantraTag').textContent = god.primaryMantra;
+
+/* ---- CTA ---- */
+document.getElementById('ctaTitle').textContent = `🪔 Begin ${god.name} Archana`;
+document.getElementById('ctaDesc').textContent = `Enter your name, gotra and birth details to receive a completely personalised ${god.name} archana experience with ${god.primaryMantra}.`;
+document.getElementById('liveArchanaBtn').href = `live-archana.html?god=${god.id}`;
+document.getElementById('visualPoojaBtn').href = `visual-pooja.html?god=${god.id}`;
+
+/* ---- Primary Mantra ---- */
+document.getElementById('primaryMantraText').textContent = god.primaryMantra;
+document.getElementById('gayatriText').textContent = god.gayatri;
+
+/* ---- Offerings ---- */
+document.getElementById('offeringsGrid').innerHTML = god.offerings.map(o => `
+  <div class="offering-card">
+    <div class="offering-icon">${o.icon}</div>
+    <div class="offering-name">${o.name}</div>
+    <div class="offering-mantra">${o.mantra}</div>
+  </div>
+`).join('');
+
+/* ---- Archana Sequence ---- */
+document.getElementById('sequenceList').innerHTML = god.archanaSequence.map(s => `
+  <div style="display:flex;gap:1rem;padding:1rem;background:var(--white);border-radius:12px;margin-bottom:0.75rem;box-shadow:0 2px 10px var(--shadow);border-left:4px solid var(--gold);">
+    <div style="width:48px;height:48px;background:var(--light-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">${s.icon}</div>
+    <div>
+      <div style="font-weight:700;color:var(--deep-red);margin-bottom:0.2rem;">Step ${s.step}: ${s.name}</div>
+      <div style="font-style:italic;font-size:0.85rem;color:var(--text-mid);margin-bottom:0.4rem;">${s.mantra}</div>
+      <div style="font-size:0.82rem;color:var(--text-mid);">⏱ ~${s.duration}s · ${s.meaning}</div>
+    </div>
+  </div>
+`).join('');
+
+/* ---- Ashtottara ---- */
+document.getElementById('ashtottaraList').innerHTML =
+  god.ashtottara.map((name, i) => `<li>${i+1}. ${name}</li>`).join('');
+
+/* ---- Famous Temples ---- */
+document.getElementById('templesList').innerHTML = god.famousTemples.map(t => `
+  <div style="background:var(--light-bg);border-radius:10px;padding:1rem 1.2rem;margin-bottom:0.75rem;border-left:4px solid var(--gold);">
+    <span style="font-size:0.9rem;font-weight:700;color:var(--deep-red);">🏛️ ${t}</span>
+  </div>
+`).join('');
+
+/* ---- Other Deities Footer ---- */
+document.getElementById('otherDeitiesLinks').innerHTML =
+  GODS.filter(g => g.id !== god.id).slice(0,6).map(g =>
+    `<li><a href="pooja.html?god=${g.id}">${g.emoji} ${g.name}</a></li>`
+  ).join('');
+
+/* ---- Today's Panchang ---- */
+const todayP = PANCHANG.getPanchang(new Date());
+const todayRating = PANCHANG.getRatingForGod(todayP, god);
+document.getElementById('todayPanchang').innerHTML = `
+  <div class="panchang-row">
+    <span class="label">Day</span>
+    <span class="value">${todayP.dayName}</span>
+  </div>
+  <div class="panchang-row">
+    <span class="label">Tithi</span>
+    <span class="value">${todayP.tithi.name} (${todayP.tithi.pakshaShort})</span>
+  </div>
+  <div class="panchang-row">
+    <span class="label">Nakshatra</span>
+    <span class="value">${todayP.nakshatra.name} Pada ${todayP.nakshatra.pada}</span>
+  </div>
+  <div class="panchang-row">
+    <span class="label">Yoga</span>
+    <span class="value">${todayP.yoga}${todayP.isBadYoga ? ' ⚠️' : todayP.isGoodYoga ? ' ✅' : ''}</span>
+  </div>
+  <div class="panchang-row">
+    <span class="label">Karana</span>
+    <span class="value">${todayP.karana}</span>
+  </div>
+  <div class="panchang-row rahukaal-row">
+    <span class="label">⚠️ Rahukaal</span>
+    <span class="value">${todayP.rahukaal.start} – ${todayP.rahukaal.end}</span>
+  </div>
+  <div class="panchang-row abhijit-row">
+    <span class="label">✨ Abhijit</span>
+    <span class="value">${todayP.abhijit.start} – ${todayP.abhijit.end}</span>
+  </div>
+  <div style="margin-top:1rem;padding:1rem;background:${todayRating.score>=65?'#e8f5e9':'#fff3e0'};border-radius:10px;text-align:center;">
+    <div style="font-size:1.4rem;">${todayRating.stars}</div>
+    <div style="font-weight:700;color:${todayRating.score>=65?'#2e7d32':'#e65100'};font-size:0.95rem;">${todayRating.rating} day for ${god.name}</div>
+    ${todayRating.reasons.slice(0,2).map(r=>`<div style="font-size:0.78rem;color:var(--text-mid);margin-top:0.3rem;">${r}</div>`).join('')}
+  </div>
+`;
+
+/* ---- Auspicious Days ---- */
+const upcomingDays = PANCHANG.getUpcomingDays(god, 10).slice(0, 5);
+document.getElementById('auspiciousDays').innerHTML = upcomingDays.map(({panchang: p, rating}) => `
+  <div class="day-item">
+    <div class="day-date">${p.date.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})}</div>
+    <div class="day-info">
+      <div style="font-size:0.85rem;font-weight:700;">${p.dayName}</div>
+      <div class="day-tithi">${p.tithi.name} · ${p.nakshatra.name}</div>
+    </div>
+    <div class="day-stars" title="${rating.rating}">${rating.stars}</div>
+  </div>
+`).join('');
+
+/* ---- Upcoming Festivals ---- */
+const festivals = PANCHANG.getUpcomingFestivals(god.id, 4);
+if (festivals.length) {
+  document.getElementById('upcomingFestivals').innerHTML = festivals.map(f => `
+    <div class="festival-item">
+      <div class="f-date">${new Date(f.date).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
+      <div class="f-name">${f.name}</div>
+      <div class="festival-type-badge">${f.type==='major-festival'?'⭐ Major':f.type==='navratri'?'🌺 Navratri':'✨ Sacred'}</div>
+    </div>
+  `).join('');
+} else {
+  document.getElementById('upcomingFestivals').innerHTML = `<p style="color:var(--text-mid);font-size:0.9rem;">No upcoming special festivals in the next few months. Every day is auspicious for ${god.name}! 🙏</p>`;
+}
+
+/* ---- Tabs ---- */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ---- Play 432 Hz tone ---- */
+function playMantraTone() {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  [432, 528].forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = freq; osc.type = 'sine';
+    const t = ctx.currentTime + i * 2;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.2, t + 0.3);
+    gain.gain.linearRampToValueAtTime(0, t + 1.8);
+    osc.start(t); osc.stop(t + 2);
+  });
+}
+</script>
+</body>
+</html>
