@@ -1,0 +1,16 @@
+﻿{
+  "name": "Divya Mangalam AI Cloud Lab",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "esbenp.prettier-vscode",
+        "ritwickdey.LiveServer",
+        "GitHub.copilot"
+      ]
+    }
+  },
+  "forwardPorts": [5500, 8000],
+  "postCreateCommand": "echo '🕉️ Divya Mangalam Cloud Development Environment Ready!'"
+}
