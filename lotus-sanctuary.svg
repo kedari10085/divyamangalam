@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" fill="none">
+  <defs>
+    <radialGradient id="halo"><stop stop-color="#efc880" stop-opacity=".35"/><stop offset="1" stop-color="#efc880" stop-opacity="0"/></radialGradient>
+    <linearGradient id="petal" x1="260" y1="170" x2="260" y2="375" gradientUnits="userSpaceOnUse"><stop stop-color="#f8ddb0" stop-opacity=".32"/><stop offset="1" stop-color="#b57b40" stop-opacity=".04"/></linearGradient>
+    <linearGradient id="gold"><stop stop-color="#b88145"/><stop offset=".5" stop-color="#ffe7b7"/><stop offset="1" stop-color="#c89553"/></linearGradient>
+    <linearGradient id="fire" x1="260" y1="178" x2="260" y2="267" gradientUnits="userSpaceOnUse"><stop stop-color="#fff9de"/><stop offset="1" stop-color="#efaa43"/></linearGradient>
+  </defs>
+  <circle cx="260" cy="228" r="215" fill="url(#halo)"/>
+  <g stroke="url(#gold)">
+    <circle cx="260" cy="225" r="184" opacity=".25"/><circle cx="260" cy="225" r="172" stroke-dasharray="1 12" opacity=".6"/><circle cx="260" cy="225" r="151" opacity=".18"/>
+    <path d="M260 367C168 310 167 239 185 192c62 21 95 78 75 175Z" fill="url(#petal)"/>
+    <path d="M260 367c92-57 93-128 75-175-62 21-95 78-75 175Z" fill="url(#petal)"/>
+    <path d="M260 367C141 353 106 298 100 245c76-9 139 37 160 122Z" fill="url(#petal)"/>
+    <path d="M260 367c119-14 154-69 160-122-76-9-139 37-160 122Z" fill="url(#petal)"/>
+    <path d="M260 367C148 400 86 359 61 313c82-31 154-13 199 54Z" fill="url(#petal)"/>
+    <path d="M260 367c112 33 174-8 199-54-82-31-154-13-199 54Z" fill="url(#petal)"/>
+    <path d="M260 367c-53-50-53-110 0-164 53 54 53 114 0 164Z" fill="url(#petal)"/>
+    <path d="M207 270h106c-9 36-27 48-53 48s-44-12-53-48Z" fill="#b8894f" fill-opacity=".3" stroke-width="2"/>
+    <ellipse cx="260" cy="270" rx="54" ry="9" fill="#301b30"/>
+    <path d="M260 318v19m-22 0h44M170 405h180" opacity=".65"/>
+  </g>
+  <path d="M260 265c-33-25-16-48 6-81-4 34 28 59-6 81Z" fill="url(#fire)"/>
+  <path d="M260 261c-13-13-6-26 1-39 0 16 12 25-1 39Z" fill="#fff9e2"/>
+  <g fill="#f3d59d"><circle cx="119" cy="132" r="2"/><circle cx="402" cy="164" r="2"/><circle cx="335" cy="74" r="2"/><path d="m260 39 3 9 9 3-9 3-3 9-3-9-9-3 9-3ZM93 213l2 6 6 2-6 2-2 6-2-6-6-2 6-2ZM421 267l2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/></g>
+</svg>

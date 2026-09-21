@@ -7,18 +7,15 @@
   <title>Divya Mangalam – Virtual Darshan & Archana</title>
   <meta name="description" content="Experience the divine presence of Divya Mangalam through virtual darshan and online archana. Offer your prayers from anywhere in the world." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sanctuary.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
 </head>
-<body>
-
-<!-- ===== PAGE LOADER ===== -->
-<div id="page-loader">
-  <div class="om">🕉️</div>
-</div>
+<body class="sanctuary-home">
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- ===== NAVBAR ===== -->
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
       <span class="brand-om">🕉️</span>
@@ -35,68 +32,99 @@
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 
-<!-- ===== TICKER ===== -->
-<div class="ticker-bar">
-  <div class="ticker-inner">
-    🌸 Welcome to Divya Mangalam &nbsp;|&nbsp; 🕯️ Morning Archana: 6:00 AM &nbsp;|&nbsp; 🌺 Madhyanna Puja: 12:00 PM &nbsp;|&nbsp; 🪔 Evening Aarti: 6:30 PM &nbsp;|&nbsp; 🌙 Ratri Seva: 8:30 PM &nbsp;|&nbsp; 📿 Om Namah Shivaya &nbsp;|&nbsp; 🌸 Jai Maa &nbsp;|&nbsp; 🙏 Virtual Darshan available 24×7 &nbsp;|&nbsp; 🌸 Online Archana – Offer from anywhere &nbsp;|&nbsp;
-  </div>
-</div>
+<main id="main-content" tabindex="-1">
+<div class="welcome-ribbon"><span aria-hidden="true">✧</span> A little stillness. A little devotion. A space for you. <span aria-hidden="true">✧</span></div>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-tag">🙏 Sarve Bhavantu Sukhinah</div>
-    <h1>Seek Blessings from<br/><em>Divya Mangalam</em></h1>
-    <p>Experience the divine grace through Virtual Darshan and offer your heartfelt prayers with Online Archana — from wherever you are.</p>
-    <div class="hero-btns">
-      <a href="gods.html" class="btn btn-primary">🛕 Choose Deity & Pooja</a>
-      <a href="live-archana.html" class="btn btn-outline" style="border-color:var(--gold);color:var(--gold);">🌟 Live Archana</a>
-      <button onclick="toggleOmChant()" class="btn btn-outline" id="globalOmBtn" style="border-color:var(--gold);color:var(--gold);">🕉️ Play Sacred Om</button>
-      <a href="ai-archana.html" class="btn btn-outline" style="border-color:#c084fc;color:#c084fc;">🤖 Ask AI Pandit</a>
+<!-- ===== SANCTUARY HERO ===== -->
+<section class="sanctuary-hero" aria-labelledby="welcome-title">
+  <div class="hero-halo" aria-hidden="true"></div>
+  <div class="sanctuary-hero-inner">
+    <div class="sanctuary-intro">
+      <p class="eyebrow">WELCOME TO DIVYA MANGALAM</p>
+      <h1 id="welcome-title">A quiet moment.<br/>A sacred connection.<br/><em>A heart at peace.</em></h1>
+      <p class="hero-description">Step into your spiritual sanctuary. Discover divine darshan, offer a heartfelt archana, and fill your day with the beauty of prayer.</p>
+      <div class="hero-btns">
+        <a href="gods.html" class="btn btn-primary">Begin your pooja <span aria-hidden="true">↗</span></a>
+        <a href="#sacred-listening" class="btn btn-outline">Explore sacred sounds <span aria-hidden="true">♫</span></a>
+      </div>
+      <p class="hero-footnote"><span aria-hidden="true">🪔</span> Wherever you are, make room for the divine.</p>
+    </div>
+    <div class="sacred-art">
+      <div class="sacred-arch">
+        <span class="arch-star star-one" aria-hidden="true">✦</span>
+        <span class="arch-star star-two" aria-hidden="true">✧</span>
+        <p class="arch-invocation" lang="sa">ॐ शान्तिः शान्तिः शान्तिः</p>
+        <img src="lotus-sanctuary.svg" alt="A golden lotus opening around a glowing diya" width="520" height="460" fetchpriority="high" />
+        <p class="arch-caption">Let your light find its way.</p>
+        <span class="arch-rule" aria-hidden="true"></span>
+      </div>
+      <div class="art-caption"><span aria-hidden="true">✧</span> YOUR DAILY MOMENT OF DEVOTION</div>
     </div>
   </div>
+  <a class="discover-link" href="#devotional-paths">Discover your path <span aria-hidden="true">↓</span></a>
 </section>
 
-<!-- ===== SERVICES STRIP ===== -->
-<section style="background: var(--light-bg); padding: 3.5rem 1.5rem;">
+<section class="path-section" id="devotional-paths" aria-labelledby="paths-title">
   <div class="section-inner">
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🪔</div>
-        <h3>Virtual Darshan</h3>
-        <p>Get an immersive, sacred darshan of the presiding deity 24 hours a day, seven days a week.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📿</div>
-        <h3>Online Archana</h3>
-        <p>Submit your name, gotra, and nakshatra — have archana performed on your behalf by the temple priest.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🌺</div>
-        <h3>Daily Puja Schedule</h3>
-        <p>Follow the temple's daily puja timings and receive reminders for each seva.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🙏</div>
-        <h3>Prasad & Blessings</h3>
-        <p>After archana, receive a personalised digital prasad with the deity's mantra and blessings.</p>
+    <div class="section-heading">
+      <div><p class="section-label">DEVOTION, IN YOUR OWN WAY</p><h2 class="section-title" id="paths-title">Many paths. One sacred feeling.</h2></div>
+      <p>Come as you are. Begin with what speaks to your heart.</p>
+    </div>
+    <div class="path-grid">
+      <a class="path-card" href="#deity-sanctuary"><span class="path-icon" aria-hidden="true">🪷</span><span class="path-number">01 / DARSHAN</span><h3>Be in divine presence</h3><p>Meet your cherished deities in a peaceful visual sanctuary.</p><span class="path-link">Explore deities <span aria-hidden="true">↗</span></span></a>
+      <a class="path-card" href="live-archana.html"><span class="path-icon" aria-hidden="true">🪔</span><span class="path-number">02 / ARCHANA</span><h3>Offer from the heart</h3><p>Follow a personalised digital ritual with mantras and offerings.</p><span class="path-link">Begin digital archana <span aria-hidden="true">↗</span></span></a>
+      <a class="path-card" href="chalisa.html"><span class="path-icon" aria-hidden="true">📿</span><span class="path-number">03 / SACRED WORDS</span><h3>Let devotion speak</h3><p>Spend a little time with the Hanuman Chalisa and devotional verses.</p><span class="path-link">Explore Chalisa <span aria-hidden="true">↗</span></span></a>
+      <a class="path-card" href="shlokas.html"><span class="path-icon" aria-hidden="true">🌸</span><span class="path-number">04 / REFLECTION</span><h3>Carry peace with you</h3><p>Discover shlokas and find a meaningful prayer for your day.</p><span class="path-link">Read sacred shlokas <span aria-hidden="true">↗</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="deity-section" id="deity-sanctuary" aria-labelledby="deity-heading">
+  <div class="section-inner">
+    <div class="section-heading"><div><p class="section-label">THE DIVINE SANCTUARY</p><h2 class="section-title" id="deity-heading">A connection close to your heart.</h2></div><a class="text-link" href="gods.html">View all deities <span aria-hidden="true">↗</span></a></div>
+    <div class="deity-showcase">
+      <div class="deity-portrait"><img id="sanctuaryDeityImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/400px-Lakshmi_by_Raja_Ravi_Varma.jpg" alt="Maa Lakshmi devotional artwork" width="400" height="500" loading="lazy" /><span class="portrait-caption">DEVOTIONAL ART • VIRTUAL DARSHAN</span></div>
+      <div class="deity-details">
+        <label for="sanctuaryDeitySelect" class="section-label">Choose your deity</label>
+        <select id="sanctuaryDeitySelect"><option value="lakshmi">Maa Lakshmi</option></select>
+        <div aria-live="polite" aria-atomic="true"><h3 id="sanctuaryDeityName">Maa Lakshmi</h3><p id="sanctuaryDeityTitle">Goddess of Prosperity, Wealth &amp; Auspiciousness</p><p class="deity-sanskrit" id="sanctuaryDeitySanskrit" lang="sa">ॐ श्रीं महालक्ष्म्यै नमः</p><p class="deity-mantra" id="sanctuaryDeityMantra">Om Shreem Hreem Shreem Kamale Kamalalaye Praseed Praseed</p></div>
+        <a id="sanctuaryPoojaLink" class="btn btn-primary" href="pooja.html?god=lakshmi">Begin this deity’s pooja <span aria-hidden="true">↗</span></a>
+        <div class="gallery-controls" aria-label="Deity gallery controls"><button type="button" id="previousDeity" aria-label="Previous deity">←</button><span id="deityCounter">Explore the deity collection</span><button type="button" id="nextDeity" aria-label="Next deity">→</button></div>
+        <p class="small-note">A space for personal devotion, not a live temple broadcast.</p>
       </div>
     </div>
   </div>
 </section>
+
+<section class="listening-section" id="sacred-listening" aria-labelledby="listening-title">
+  <div class="section-inner listening-grid">
+    <div class="listening-intro"><p class="section-label">SOUNDS FOR THE SOUL</p><h2 class="section-title" id="listening-title">Let the world soften.<br/><em>Listen within.</em></h2><p>A gentle tone, a sacred verse, a moment just for you. Choose what you would like to hear.</p><div class="listening-ornament" aria-hidden="true">ॐ</div><p class="small-note">Sound starts only when you choose it. The Om ambience is synthesized; mantra reading uses your browser’s voice, not a priest’s recording or a deity’s voice.</p></div>
+    <div class="listening-card">
+      <div class="listening-card-heading"><span class="listening-icon" aria-hidden="true">♫</span><div><h3>Your devotional space</h3><p id="soundStatus" role="status">Silent and peaceful. Choose a sound below.</p></div></div>
+      <div class="sound-row"><div><h4>Om-inspired ambience</h4><p>A soft, continuous synthesized meditation tone</p></div><button type="button" class="sound-button" id="globalOmBtn" aria-pressed="false">Play Om ambience</button></div>
+      <label class="volume-control" for="ambienceVolume">Ambience volume <input type="range" id="ambienceVolume" min="0" max="100" value="35" /><output id="ambienceVolumeValue" for="ambienceVolume">35%</output></label>
+      <div class="sound-row"><div><h4>Read the selected deity’s mantra</h4><p id="mantraReaderLabel">Maa Lakshmi · Browser voice · Pronunciation may vary</p></div><button type="button" class="sound-button" id="readMantra" aria-pressed="false">Read mantra</button></div>
+      <div class="sound-row"><div><h4>A moment of arrival</h4><p>One synthesized temple bell chime</p></div><button type="button" class="sound-button" id="sanctuaryBell">Ring bell</button></div>
+      <div class="listening-actions"><a href="chalisa.html">Explore Chalisa →</a><a href="shlokas.html">Read shlokas →</a><button type="button" id="silenceSanctuary">Silence all</button></div>
+      <noscript><p>Enable JavaScript for the gallery and sound controls. You can still explore the pooja, Chalisa, and shloka pages.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<div class="peace-blessing"><span aria-hidden="true">✧</span><p lang="sa">सर्वे भवन्तु सुखिनः</p><span>May all beings be happy. May all hearts find peace.</span></div>
 
 <!-- ===== VIRTUAL DARSHAN ===== -->
 <section class="darshan-section" id="darshan">
   <div class="section-inner">
     <div class="darshan-grid">
       <!-- Deity Viewer -->
-      <div class="darshan-viewer" onclick="openDarshanModal()">
+      <button type="button" class="darshan-viewer" onclick="openDarshanModal()" aria-label="Open Maa Lakshmi virtual darshan">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Lakshmi_by_Raja_Ravi_Varma.jpg/800px-Lakshmi_by_Raja_Ravi_Varma.jpg"
           alt="Maa Lakshmi – Virtual Darshan"
@@ -104,10 +132,10 @@
         />
         <div class="darshan-glow"></div>
         <div class="darshan-overlay">
-          <h3>🪔 Maa Lakshmi</h3>
-          <p>Click to take full-screen Virtual Darshan</p>
+          <span class="darshan-name">🪔 Maa Lakshmi</span>
+          <span>Open your virtual darshan</span>
         </div>
-      </div>
+      </button>
 
       <!-- Info -->
       <div class="darshan-info">
@@ -126,12 +154,12 @@
               <span style="font-size:0.75rem; background:var(--gold); color:var(--text-dark); padding:2px 8px; border-radius:12px; font-weight:700;">Daily 6 AM Seva</span>
             </div>
             <p style="font-size:0.85rem; opacity:0.85; margin:0; line-height:1.5;">"Kausalya Supraja Rama Poorva Sandhya Pravarthathe" — Sacred morning awakening chant sung by Bharat Ratna M.S. Subbulakshmi.</p>
-            <audio id="suprabhatamAudio" controls preload="metadata" style="width:100%; height:36px; margin:0.3rem 0;">
+            <audio id="suprabhatamAudio" controls preload="none" style="width:100%; height:36px; margin:0.3rem 0;">
               <source src="https://archive.org/download/SriVenkateswaraSuprabhatam/SriVenkateswaraSuprabhatam.mp3" type="audio/mpeg">
               Your browser does not support audio.
             </audio>
             <div style="display:flex; gap:0.8rem; align-items:center; font-size:0.8rem; opacity:0.9; flex-wrap:wrap; width:100%; justify-content:space-between;">
-              <span id="suprabhatamStatus" style="color:var(--deep-red); font-weight:600;">⏰ Scheduled every morning at 6:00 AM</span>
+              <span id="suprabhatamStatus" role="status" style="color:var(--deep-red); font-weight:600;">Recorded audio · Press play to listen</span>
               <button onclick="playSuprabhatamNow()" class="btn" style="padding:4px 14px; font-size:0.78rem; background:var(--deep-red); color:var(--white); border-radius:50px; cursor:pointer;">▶ Play / Pause Song</button>
             </div>
           </div>
@@ -166,15 +194,15 @@
       <p class="section-label">Online Archana</p>
       <div class="divider" style="margin:0.5rem auto 1rem;"></div>
       <h2 class="section-title">Offer Your Prayers</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Fill in your details below. Our temple priests will perform the archana on your behalf and God's blessings will reach you.</p>
+      <p class="section-subtitle" style="margin:0 auto;">Prepare a personal prayer intention below. This form is a digital demonstration: it does not send a booking to a priest. For temple services, please <a class="text-link" href="contact.html">contact the center directly</a>.</p>
     </div>
 
     <!-- Form Card -->
     <div class="archana-card" id="archanaCard">
       <div class="archana-header">
         <div class="om-icon">🕉️</div>
-        <h2>Online Archana Registration</h2>
-        <p>Enter your details to receive personalised blessings from Divya Mangalam</p>
+        <h2>Your Personal Prayer Intention</h2>
+        <p>Digital preview only — no temple booking is submitted</p>
       </div>
       <div class="archana-body">
         <form id="archanaForm" novalidate>
@@ -284,7 +312,7 @@
           </div><!-- /form-grid -->
 
           <div class="form-submit">
-            <button type="submit" class="btn-submit">🙏 Offer Archana &amp; Receive Blessings</button>
+            <button type="submit" class="btn-submit">🙏 Preview My Prayer Intention</button>
           </div>
         </form>
       </div><!-- /archana-body -->
@@ -294,8 +322,8 @@
     <div id="archana-success">
       <div class="success-om">🕉️</div>
       <div class="devotee-name" id="successName"></div>
-      <h3>Your Archana has been Offered!</h3>
-      <p>Dear devotee, your prayers have been received. The temple priests will perform the selected archana on your behalf and God's blessings will be with you always.</p>
+      <h3>Your Prayer Intention</h3>
+      <p>Take a quiet moment with your intention. This is an on-screen preview only; no request has been sent to the temple and no priest-led archana has been booked.</p>
       <div class="shloka">
         "Sarve bhavantu sukhinaḥ<br/>
         Sarve santu nirāmayāḥ<br/>
@@ -310,12 +338,14 @@
   </div>
 </section>
 
+</main>
+
 <!-- ===== DARSHAN MODAL ===== -->
-<div class="darshan-modal" id="darshanModal">
+<div class="darshan-modal" id="darshanModal" role="dialog" aria-modal="true" aria-labelledby="darshanModalTitle" tabindex="-1">
   <div class="modal-inner">
     <div class="modal-top">
-      <h3>🪔 Virtual Darshan – Divya Mangalam</h3>
-      <button class="modal-close" onclick="closeDarshanModal()">✕</button>
+      <h3 id="darshanModalTitle">🪔 Virtual Darshan – Divya Mangalam</h3>
+      <button type="button" class="modal-close" onclick="closeDarshanModal()" aria-label="Close virtual darshan">✕</button>
     </div>
     <img
       class="modal-darshan-img"
@@ -373,5 +403,7 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="gods-data.js"></script>
+<script src="sanctuary.js"></script>
 </body>
 </html>
