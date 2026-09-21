@@ -317,3 +317,51 @@ document.querySelectorAll('.service-card, .timing-item, .value-card, .contact-it
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
 });
+
+/* ============  UNIVERSAL IMAGE FALLBACK  ============ */
+function getDeityFallbackSvg(label = '🕉️') {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+    <defs>
+      <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#3b0000"/>
+        <stop offset="50%" stop-color="#1a0026"/>
+        <stop offset="100%" stop-color="#08000f"/>
+      </radialGradient>
+      <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFF8EF"/>
+        <stop offset="50%" stop-color="#D4A017"/>
+        <stop offset="100%" stop-color="#FF6F00"/>
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+    <circle cx="200" cy="180" r="140" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.4"/>
+    <circle cx="200" cy="180" r="110" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.3"/>
+    <circle cx="200" cy="180" r="80" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.25"/>
+    <text x="200" y="220" font-size="96" text-anchor="middle" dominant-baseline="middle">${label}</text>
+    <text x="200" y="340" font-family="'Playfair Display', serif" font-size="20" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="3">DIVYA MANGALAM</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+document.addEventListener('error', (e) => {
+  if (e.target && e.target.tagName === 'IMG') {
+    const img = e.target;
+    if (img.dataset.fallbackTried) return;
+    img.dataset.fallbackTried = 'true';
+    const alt = (img.alt || '').toLowerCase();
+    let emoji = '🕉️';
+    if (alt.includes('ganesha')) emoji = '🐘';
+    else if (alt.includes('shiva')) emoji = '🔱';
+    else if (alt.includes('lakshmi')) emoji = '🪷';
+    else if (alt.includes('durga')) emoji = '⚔️';
+    else if (alt.includes('hanuman')) emoji = '🙏';
+    else if (alt.includes('vishnu')) emoji = '🪷';
+    else if (alt.includes('saraswati')) emoji = '🎶';
+    else if (alt.includes('krishna')) emoji = '🦚';
+    else if (alt.includes('murugan')) emoji = '⚡';
+    else if (alt.includes('surya')) emoji = '☀️';
+    else if (alt.includes('sai')) emoji = '🕊️';
+    else if (alt.includes('temple')) emoji = '🛕';
+    img.src = getDeityFallbackSvg(emoji);
+  }
+}, true);
