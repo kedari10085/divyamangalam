@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hanuman Chalisa – Divya Mangalam</title>
+  <meta name="description" content="Complete Hanuman Chalisa with Hindi, transliteration and English meaning. Auto-scroll, 432 Hz tone, verse counter." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🙏</text></svg>" />
+  <style>
+    body { background: #05000a; }
+
+    /* ===== Hero ===== */
+    .chalisa-hero {
+      background: radial-gradient(ellipse at 50% 30%, #3b0000 0%, #05000a 70%);
+      padding: 4rem 1.5rem; text-align: center; color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .chalisa-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,111,0,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .chalisa-hero img {
+      width: 140px; height: 140px; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--gold);
+      box-shadow: 0 0 40px rgba(255,111,0,0.5);
+      margin: 0 auto 1.5rem; display: block;
+      animation: hanuman-glow 3s ease-in-out infinite;
+      position: relative; z-index: 1;
+    }
+    @keyframes hanuman-glow {
+      0%,100%{box-shadow:0 0 30px rgba(255,111,0,0.4);}
+      50%{box-shadow:0 0 70px rgba(255,111,0,0.8), 0 0 120px rgba(212,160,23,0.3);}
+    }
+    .chalisa-hero h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,5vw,3.5rem);
+      background:linear-gradient(135deg,#fff,var(--gold));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:0.5rem; position:relative; z-index:1;
+    }
+    .chalisa-hero p { opacity:0.8; position:relative; z-index:1; }
+
+    /* ===== Controls Bar ===== */
+    .controls-bar {
+      position: sticky; top: 64px; z-index: 50;
+      background: rgba(5,0,10,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,111,0,0.2);
+      padding: 0.75rem 1.5rem;
+    }
+    .controls-inner {
+      max-width: 800px; margin: auto;
+      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .c-btn {
+      padding: 0.5rem 1.2rem; border-radius: 50px;
+      font-family:'Lato',sans-serif; font-weight:700; font-size:0.85rem;
+      cursor:pointer; border:none; transition:var(--transition);
+    }
+    .c-btn-primary { background:var(--saffron); color:var(--white); }
+    .c-btn-primary:hover { background:var(--deep-red); }
+    .c-btn-outline { background:transparent; border:1px solid rgba(255,111,0,0.4); color:rgba(255,255,255,0.8); }
+    .c-btn-outline:hover, .c-btn-outline.active { background:rgba(255,111,0,0.2); border-color:var(--saffron); color:var(--white); }
+    .font-slider { display:flex; align-items:center; gap:0.5rem; margin-left:auto; }
+    .font-slider label { font-size:0.8rem; color:rgba(255,255,255,0.5); }
+    .font-slider input { width:80px; accent-color:var(--saffron); }
+    .progress-count {
+      color:var(--gold); font-weight:700; font-size:0.9rem;
+      margin-left:auto; white-space:nowrap;
+    }
+
+    /* ===== Chalisa Content ===== */
+    .chalisa-wrap { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* Doha / Verse card */
+    .verse-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px; padding: 2rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid transparent;
+      transition: all 0.4s ease; cursor: pointer;
+      scroll-margin-top: 130px;
+    }
+    .verse-card:hover { background: rgba(255,111,0,0.06); border-left-color: var(--saffron); }
+    .verse-card.active-verse {
+      background: rgba(255,111,0,0.1);
+      border-left-color: var(--gold);
+      box-shadow: 0 0 30px rgba(255,111,0,0.15);
+    }
+    .verse-type {
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--saffron); font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .verse-num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--deep-red); color: var(--white);
+      font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .hindi-text {
+      font-size: var(--hindi-size, 1.3rem);
+      color: var(--gold); line-height: 2;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.75rem;
+    }
+    .transliteration {
+      font-size: var(--tr-size, 1rem);
+      color: rgba(255,255,255,0.7);
+      font-style: italic; line-height: 1.9;
+      margin-bottom: 0.75rem;
+    }
+    .meaning-toggle-btn {
+      background: rgba(255,111,0,0.12);
+      border: 1px solid rgba(255,111,0,0.25);
+      color: var(--saffron); border-radius: 50px;
+      padding: 4px 14px; font-size: 0.8rem;
+      cursor: pointer; font-family:'Lato',sans-serif; font-weight:700;
+      transition:var(--transition);
+    }
+    .meaning-toggle-btn:hover { background: rgba(255,111,0,0.25); }
+    .verse-meaning {
+      display: none; margin-top: 0.75rem;
+      color: rgba(255,255,255,0.6); font-size: 0.9rem;
+      line-height: 1.8; font-style: italic;
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;
+    }
+    .play-verse-btn {
+      background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.25);
+      color: var(--gold); border-radius: 50px;
+      padding: 4px 14px; font-size: 0.8rem;
+      cursor: pointer; font-family:'Lato',sans-serif; font-weight:700;
+      transition:var(--transition); margin-left:0.5rem;
+    }
+    .play-verse-btn:hover { background: rgba(212,160,23,0.25); }
+
+    /* Section divider */
+    .section-divider {
+      text-align: center; padding: 1.5rem 0; color: var(--gold);
+      font-family:'Playfair Display',serif; font-style:italic;
+      border-top: 1px solid rgba(212,160,23,0.15);
+      border-bottom: 1px solid rgba(212,160,23,0.15);
+      margin: 1rem 0 2rem; font-size: 1rem;
+    }
+
+    /* ===== Auto-scroll active verse highlight ===== */
+    .auto-scroll-on .verse-card.active-verse {
+      transform: scale(1.01);
+    }
+
+    /* ===== Floating progress ===== */
+    .floating-counter {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 100;
+      background: linear-gradient(135deg, var(--deep-red), #5c0000);
+      color: var(--white); border-radius: 16px; padding: 0.75rem 1.2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      text-align: center; min-width: 90px;
+    }
+    .floating-counter .fc-num { font-size: 1.6rem; font-weight: 900; color: var(--gold); }
+    .floating-counter .fc-label { font-size: 0.65rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
+
+    @media(max-width:600px){
+      .verse-card { padding: 1.2rem 1rem; }
+      .controls-inner { gap:0.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gods.html">Choose Deity</a></li>
+      <li><a href="live-archana.html">Live Archana</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz</a></li>
+      <li><a href="chalisa.html" class="active">Chalisa</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="chalisa-hero">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Hanuman_Ramayana.jpg/400px-Hanuman_Ramayana.jpg" alt="Lord Hanuman" />
+  <h1>🙏 Hanuman Chalisa</h1>
+  <p>The 40 sacred verses of Tulsidas — protection, courage, and unwavering devotion to Rama</p>
+  <br/>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;">
+    <span style="background:rgba(255,111,0,0.15);border:1px solid var(--saffron);border-radius:50px;padding:6px 16px;font-size:0.85rem;color:var(--gold);">📿 40 Chaupai + 2 Doha</span>
+    <span style="background:rgba(255,111,0,0.15);border:1px solid var(--saffron);border-radius:50px;padding:6px 16px;font-size:0.85rem;color:var(--gold);">🎵 432 Hz Tones</span>
+    <span style="background:rgba(255,111,0,0.15);border:1px solid var(--saffron);border-radius:50px;padding:6px 16px;font-size:0.85rem;color:var(--gold);">🔁 Auto-Scroll Mode</span>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="controls-bar">
+  <div class="controls-inner">
+    <button class="c-btn c-btn-primary" onclick="toggleAutoScroll()" id="autoScrollBtn">⏵ Auto Scroll</button>
+    <button class="c-btn c-btn-outline" onclick="toggleMeanings()" id="meaningsBtn">📖 Show Meanings</button>
+    <button class="c-btn c-btn-outline" onclick="playCurrentVerse432()" id="toneBtn">🎵 432 Hz</button>
+    <button class="c-btn c-btn-outline" onclick="restartChalisa()">↺ Restart</button>
+    <div class="font-slider">
+      <label>A</label>
+      <input type="range" min="14" max="28" value="20" oninput="changeFontSize(this.value)" />
+      <label>A+</label>
+    </div>
+    <div class="progress-count" id="verseCounter">1 / 44</div>
+  </div>
+</div>
+
+<!-- Floating counter -->
+<div class="floating-counter" id="floatingCounter">
+  <div class="fc-num" id="fcNum">1</div>
+  <div class="fc-label">of 44</div>
+</div>
+
+<!-- Chalisa Content -->
+<div class="chalisa-wrap" id="chalisaWrap"></div>
+
+<footer style="background:#05000a; border-top:1px solid rgba(255,111,0,0.1);">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3 style="color:var(--white);">Divya Mangalam</h3>
+      <p>A sacred digital space where devotion meets technology.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Prayers</h4>
+      <ul>
+        <li><a href="chalisa.html">Hanuman Chalisa</a></li>
+        <li><a href="shlokas.html">Shloka Library</a></li>
+        <li><a href="live-archana.html">Live Archana</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+        <li><a href="gods.html">Choose Deity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Deities</h4>
+      <ul>
+        <li><a href="pooja.html?god=hanuman">🙏 Hanuman</a></li>
+        <li><a href="pooja.html?god=shiva">🔱 Shiva</a></li>
+        <li><a href="pooja.html?god=lakshmi">🪷 Lakshmi</a></li>
+        <li><a href="pooja.html?god=ganesha">🐘 Ganesha</a></li>
+        <li><a href="pooja.html?god=krishna">🦚 Krishna</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. 🙏 Jai Bajrang Bali!</p>
+    <p><span style="color:var(--gold);">🕉️</span> Shri Ram Jai Ram Jai Jai Ram</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* =============================================
+   COMPLETE HANUMAN CHALISA DATA
+   44 verses: 2 Doha + 40 Chaupai + 2 closing Doha
+   ============================================= */
+const CHALISA = [
+  {
+    type: 'doha', num: 0, label: 'Opening Doha 1',
+    hindi: 'श्रीगुरु चरन सरोज रज निज मनु मुकुरु सुधारि।\nबरनउँ रघुबर बिमल जसु जो दायकु फल चारि॥',
+    tr:    'Shriguru charan saroj raj nij manu mukuru sudhaari,\nBarnau Raghubar bimal jasu jo daayaku phal chaari.',
+    meaning: 'Cleansing the mirror of my mind with the dust of the lotus feet of my Guru, I describe the pure, unblemished glory of Sri Ram, which grants the four fruits of life (Dharma, Artha, Kama, Moksha).'
+  },
+  {
+    type: 'doha', num: 0, label: 'Opening Doha 2',
+    hindi: 'बुद्धिहीन तनु जानिकै सुमिरौं पवन-कुमार।\nबल बुद्धि विद्या देहु मोहिं हरहु कलेस बिकार॥',
+    tr:    'Buddhiheen tanu jaanikai sumirau Pavan-Kumar,\nBal buddhi vidya dehu mohi harahu kales bikaar.',
+    meaning: 'Knowing my body to be devoid of intelligence, I remember you, O Son of the Wind (Hanuman). Please bless me with strength, intelligence and knowledge, and remove my miseries and faults.'
+  },
+  {
+    type: 'section', label: '॥ अथ श्रीहनुमान चालीसा ॥'
+  },
+  {
+    type: 'chaupai', num: 1,
+    hindi: 'जय हनुमान ज्ञान गुन सागर।\nजय कपीस तिहुँ लोक उजागर॥',
+    tr:    'Jai Hanuman gyan gun saagar,\nJai Kapees tihun lok ujaagar.',
+    meaning: 'Glory to Hanuman, the ocean of wisdom and virtue! Glory to the Lord of monkeys, who illuminates all the three worlds!'
+  },
+  {
+    type: 'chaupai', num: 2,
+    hindi: 'राम दूत अतुलित बल धामा।\nअंजनि-पुत्र पवनसुत नामा॥',
+    tr:    'Ram doot atalit bal dhaama,\nAnjani-putra Pavan-sut naama.',
+    meaning: 'You are the messenger of Ram and the abode of incomparable strength. You are known as the son of Anjani and the son of the Wind.'
+  },
+  {
+    type: 'chaupai', num: 3,
+    hindi: 'महाबीर बिक्रम बजरंगी।\nकुमति निवार सुमति के संगी॥',
+    tr:    'Mahaveer bikram Bajrangi,\nKumati nivaar sumati ke sangi.',
+    meaning: 'You are greatly brave, the mighty Bajrangi. You remove evil thoughts and are a companion of good sense and wisdom.'
+  },
+  {
+    type: 'chaupai', num: 4,
+    hindi: 'कंचन बरन बिराज सुबेसा।\nकानन कुण्डल कुँचित केसा॥',
+    tr:    'Kanchan baran biraaj subesa,\nKaanan kundal kunchit kesa.',
+    meaning: 'Your complexion is golden, radiant and beautifully adorned. You wear ear-rings and have curly hair.'
+  },
+  {
+    type: 'chaupai', num: 5,
+    hindi: 'हाथ बज्र औ ध्वजा बिराजै।\nकाँधे मूँज जनेउ साजै॥',
+    tr:    'Hath vajra au dhvaja birajai,\nKandhe moonj janeu sajai.',
+    meaning: 'In your hand shine the thunderbolt and the flag, and the sacred thread of munja grass adorns your shoulder.'
+  },
+  {
+    type: 'chaupai', num: 6,
+    hindi: 'शंकर सुवन केसरीनन्दन।\nतेज प्रताप महा जग वन्दन॥',
+    tr:    'Shankar suvan Kesarinandan,\nTej pratap maha jag vandan.',
+    meaning: 'You are the son of Shiva (by spiritual descent) and the joy of Kesari. Your glory and radiance are immense and you are worshipped throughout the world.'
+  },
+  {
+    type: 'chaupai', num: 7,
+    hindi: 'विद्यावान गुनी अति चातुर।\nराम काज करिबे को आतुर॥',
+    tr:    'Vidyavaan guni ati chaatur,\nRam kaaj karibe ko aatur.',
+    meaning: 'You are learned, virtuous and very clever. You are always eager to do the work of Sri Ram.'
+  },
+  {
+    type: 'chaupai', num: 8,
+    hindi: 'प्रभु चरित्र सुनिबे को रसिया।\nराम लखन सीता मन बसिया॥',
+    tr:    'Prabhu charitra sunibe ko rasiya,\nRam Lakhan Sita man basiya.',
+    meaning: 'You are a great lover of listening to the glories of your Lord. Sri Ram, Lakshmana and Sita live in your heart.'
+  },
+  {
+    type: 'chaupai', num: 9,
+    hindi: 'सूक्ष्म रूप धरि सियहिं दिखावा।\nबिकट रूप धरि लंक जरावा॥',
+    tr:    'Sukshm roop dhari Siyahi dikhava,\nBikat roop dhari Lanka jarawa.',
+    meaning: 'You assumed a tiny form to appear before Sita, and then a terrible form to burn Lanka to ashes.'
+  },
+  {
+    type: 'chaupai', num: 10,
+    hindi: 'भीम रूप धरि असुर सँहारे।\nरामचन्द्र के काज सँवारे॥',
+    tr:    'Bheem roop dhari asur sanhare,\nRamchandra ke kaaj sawarre.',
+    meaning: 'Assuming a mighty form, you destroyed the demons, and thus accomplished the work of Sri Ramachandra.'
+  },
+  {
+    type: 'chaupai', num: 11,
+    hindi: 'लाय सँजीवन लखन जियाये।\nश्री रघुबीर हरषि उर लाये॥',
+    tr:    'Laay sanjeevan Lakhan jiyaye,\nShri Raghubeer harashi ur laaye.',
+    meaning: 'You brought the Sanjivani herb and restored Lakshmana to life. Sri Raghubira (Ram) was overjoyed and embraced you warmly.'
+  },
+  {
+    type: 'chaupai', num: 12,
+    hindi: 'रघुपति कीन्हीं बहुत बड़ाई।\nतुम मम प्रिय भरतहि सम भाई॥',
+    tr:    'Raghupati keenhi bahut badai,\nTum mam priya Bharatahi sam bhai.',
+    meaning: 'Sri Ram praised you greatly and said, "You are as dear to me as my brother Bharata."'
+  },
+  {
+    type: 'chaupai', num: 13,
+    hindi: 'सहस बदन तुम्हरो यस गावैं।\nअस कहि श्रीपति कण्ठ लगावैं॥',
+    tr:    'Sahas badan tumharo yas gaavaim,\nAs kahi Shripati kanth lagaavaim.',
+    meaning: 'Saying "Even Sheshnaga with his thousand heads sings your praises," Sri Ram (the Lord of Lakshmi) embraced you to his bosom.'
+  },
+  {
+    type: 'chaupai', num: 14,
+    hindi: 'सनकादिक ब्रह्मादि मुनीसा।\nनारद सारद सहित अहीसा॥',
+    tr:    'Sanakadik Brahmadi Muneesa,\nNarad Sarad sahit Aheesa.',
+    meaning: 'Sanaka and the sages, Brahma and the chief of the saints, the sage Narada, Goddess Saraswati, and Shesha, the king of serpents —'
+  },
+  {
+    type: 'chaupai', num: 15,
+    hindi: 'जम कुबेर दिगपाल जहाँ ते।\nकबि कोबिद कहि सकैं कहाँ ते॥',
+    tr:    'Yam Kuber digpal jaham te,\nKabi kobid kahi sakaim kaham te.',
+    meaning: '— Yama, Kubera, the guardians of the eight directions — none of them, nor even the greatest of poets and scholars, can fully describe your glory.'
+  },
+  {
+    type: 'chaupai', num: 16,
+    hindi: 'तुम उपकार सुग्रीवहिं कीन्हा।\nराम मिलाय राज पद दीन्हा॥',
+    tr:    'Tum upkar Sugreevahi keenha,\nRam milaay raj pad deenha.',
+    meaning: 'You rendered a great service to Sugriva — you united him with Ram and gave him back his kingdom.'
+  },
+  {
+    type: 'chaupai', num: 17,
+    hindi: 'तुम्हरो मंत्र विभीषन माना।\nलंकेश्वर भए सब जग जाना॥',
+    tr:    'Tumhro mantr Vibhishan maana,\nLankeshvar bhaye sab jag jaana.',
+    meaning: 'Vibhishana heeded your counsel, and became the Lord of Lanka — this is known throughout the world.'
+  },
+  {
+    type: 'chaupai', num: 18,
+    hindi: 'जुग सहस्र जोजन पर भानू।\nलील्यो ताहि मधुर फल जानू॥',
+    tr:    'Jug sahastr jojan par Bhaanu,\nLeelyo taahi madhur phal jaanu.',
+    meaning: 'The sun, millions of leagues away, you swallowed thinking it to be a sweet fruit — what a feat of strength and playfulness!'
+  },
+  {
+    type: 'chaupai', num: 19,
+    hindi: 'प्रभु मुद्रिका मेलि मुख माहीं।\nजलधि लाँघि गये अचरज नाहीं॥',
+    tr:    'Prabhu mudrika meli mukh maahim,\nJaladhi langhi gaye acharaj naahin.',
+    meaning: 'Carrying the Lord\'s ring in your mouth, you leaped across the ocean — this is no wonder for you.'
+  },
+  {
+    type: 'chaupai', num: 20,
+    hindi: 'दुर्गम काज जगत के जेते।\nसुगम अनुग्रह तुम्हरे तेते॥',
+    tr:    'Durgam kaaj jagat ke jete,\nSugam anugraha tumhare tete.',
+    meaning: 'All the difficult tasks in the world become easy with your grace.'
+  },
+  {
+    type: 'chaupai', num: 21,
+    hindi: 'राम दुआरे तुम रखवारे।\nहोत न आज्ञा बिनु पैसारे॥',
+    tr:    'Ram duaare tum rakhwaare,\nHot na aagya binu paisaare.',
+    meaning: 'You are the guardian of Ram\'s door. Without your permission, no one can enter.'
+  },
+  {
+    type: 'chaupai', num: 22,
+    hindi: 'सब सुख लहैं तुम्हारी सरना।\nतुम रच्छक काहू को डरना॥',
+    tr:    'Sab sukh lahaim tumhaari sarna,\nTum rachak kaahu ko darna.',
+    meaning: 'All happiness comes to those who take shelter in you. When you are the protector, what is there to fear?'
+  },
+  {
+    type: 'chaupai', num: 23,
+    hindi: 'आपन तेज सम्हारो आपै।\nतीनों लोक हाँक तें काँपै॥',
+    tr:    'Aapan tej samharo aapai,\nTeenon lok haank ten kaampai.',
+    meaning: 'Only you can contain your own splendour. At your roar, all three worlds tremble.'
+  },
+  {
+    type: 'chaupai', num: 24,
+    hindi: 'भूत पिशाच निकट नहिं आवै।\nमहाबीर जब नाम सुनावै॥',
+    tr:    'Bhoot pishaach nikat nahi aavai,\nMahaveer jab naam sunaavai.',
+    meaning: 'Ghosts and evil spirits dare not come near when the name of the great hero Hanuman is recited.'
+  },
+  {
+    type: 'chaupai', num: 25,
+    hindi: 'नासै रोग हरै सब पीरा।\nजपत निरंतर हनुमत बीरा॥',
+    tr:    'Naasai rog harai sab peera,\nJapat nirantar Hanumat beera.',
+    meaning: 'All diseases are cured and all pain is removed for one who continually chants the name of the brave Hanuman.'
+  },
+  {
+    type: 'chaupai', num: 26,
+    hindi: 'संकट तें हनुमान छुड़ावै।\nमन क्रम बचन ध्यान जो लावै॥',
+    tr:    'Sankat tem Hanuman chhuravai,\nMan kram bachan dhyan jo laavai.',
+    meaning: 'Hanuman delivers from every distress those who remember him in thought, deed and word.'
+  },
+  {
+    type: 'chaupai', num: 27,
+    hindi: 'सब पर राम तपस्वी राजा।\nतिन के काज सकल तुम साजा॥',
+    tr:    'Sab par Ram tapasvi raja,\nTin ke kaaj sakal tum saaja.',
+    meaning: 'Ram the ascetic is the King above all. All his tasks are accomplished by you.'
+  },
+  {
+    type: 'chaupai', num: 28,
+    hindi: 'और मनोरथ जो कोई लावै।\nसोइ अमित जीवन फल पावै॥',
+    tr:    'Aur manorath jo koi laavai,\nSoi amit jeevan phal paavai.',
+    meaning: 'Whoever comes to you with any wish, they attain the infinite fruit of life.'
+  },
+  {
+    type: 'chaupai', num: 29,
+    hindi: 'चारों जुग परताप तुम्हारा।\nहै परसिद्ध जगत उजियारा॥',
+    tr:    'Charon jug partap tumhaara,\nHai parsiddh jagat ujiyara.',
+    meaning: 'Your splendour pervades all four ages (yugas). Your fame illuminates the entire world.'
+  },
+  {
+    type: 'chaupai', num: 30,
+    hindi: 'साधु-सन्त के तुम रखवारे।\nअसुर निकंदन राम दुलारे॥',
+    tr:    'Sadhu-sant ke tum rakhwaare,\nAsur nikandan Ram dulaare.',
+    meaning: 'You are the protector of saints and sages, the destroyer of demons, and the beloved of Ram.'
+  },
+  {
+    type: 'chaupai', num: 31,
+    hindi: 'अष्ट सिद्धि नव निधि के दाता।\nअस बर दीन जानकी माता॥',
+    tr:    'Asht siddhi nav nidhi ke daata,\nAs bar deen Jaanki maata.',
+    meaning: 'You are the giver of the eight siddhis (supernatural powers) and the nine nidhis (divine treasures) — such a boon was given to you by Mother Janaki (Sita).'
+  },
+  {
+    type: 'chaupai', num: 32,
+    hindi: 'राम रसायन तुम्हरे पासा।\nसदा रहो रघुपति के दासा॥',
+    tr:    'Ram rasayan tumhare paasa,\nSada raho Raghupati ke daasa.',
+    meaning: 'You hold the elixir of Ram\'s devotion. You are forever the devoted servant of Sri Ram.'
+  },
+  {
+    type: 'chaupai', num: 33,
+    hindi: 'तुम्हरे भजन राम को पावै।\nजनम-जनम के दुख बिसरावै॥',
+    tr:    'Tumhre bhajan Ram ko paavai,\nJanam-janam ke dukh bisraavai.',
+    meaning: 'By singing your praises, one attains Ram and forgets the sorrows of countless lifetimes.'
+  },
+  {
+    type: 'chaupai', num: 34,
+    hindi: 'अन्त काल रघुबर पुर जाई।\nजहाँ जन्म हरि-भक्त कहाई॥',
+    tr:    'Ant kaal Raghubar pur jaai,\nJaham janm Hari-bhakt kahaai.',
+    meaning: 'At the end of life, such a person goes to the abode of Sri Ram, and if born again, they are called a devotee of Hari.'
+  },
+  {
+    type: 'chaupai', num: 35,
+    hindi: 'और देवता चित्त न धरई।\nहनुमत सेइ सर्व सुख करई॥',
+    tr:    'Aur devata chitt na dharai,\nHanumat sei sarva sukh karai.',
+    meaning: 'One who serves Hanuman need not worry about any other deity — Hanuman gives all happiness.'
+  },
+  {
+    type: 'chaupai', num: 36,
+    hindi: 'संकट कटै मिटै सब पीरा।\nजो सुमिरै हनुमत बलबीरा॥',
+    tr:    'Sankat katai mitai sab peera,\nJo sumirai Hanumat balbeera.',
+    meaning: 'All distress is cut away and all pain is removed for those who remember the mighty hero Hanuman.'
+  },
+  {
+    type: 'chaupai', num: 37,
+    hindi: 'जय जय जय हनुमान गोसाईं।\nकृपा करहु गुरुदेव की नाईं॥',
+    tr:    'Jai jai jai Hanuman Gossain,\nKripa karahu Gurudev ki naim.',
+    meaning: 'Victory, victory, victory to you, O Lord Hanuman! Shower your grace upon me as my Guru.'
+  },
+  {
+    type: 'chaupai', num: 38,
+    hindi: 'जो सत बार पाठ कर कोई।\nछूटहि बंदि महा सुख होई॥',
+    tr:    'Jo sat baar paath kar koi,\nChhootahi bandi maha sukh hoi.',
+    meaning: 'Whoever recites the Chalisa a hundred times is released from bondage and attains supreme joy.'
+  },
+  {
+    type: 'chaupai', num: 39,
+    hindi: 'जो यह पढ़ै हनुमान चालीसा।\nहोय सिद्धि साखी गौरीसा॥',
+    tr:    'Jo yah padhai Hanuman Chalisa,\nHoy siddhi saakhi Gaurisa.',
+    meaning: 'Whoever reads this Hanuman Chalisa attains perfection — Lord Shiva himself bears witness to this.'
+  },
+  {
+    type: 'chaupai', num: 40,
+    hindi: 'तुलसीदास सदा हरि चेरा।\nकीजै नाथ हृदय मह डेरा॥',
+    tr:    'Tulsidas sada Hari chera,\nKeejai naath hriday mah dera.',
+    meaning: 'Tulsidas is always the servant of Hari. O Lord, make your abode in my heart.'
+  },
+  {
+    type: 'section', label: '॥ दोहा ॥'
+  },
+  {
+    type: 'doha', num: 0, label: 'Closing Doha 1',
+    hindi: 'पवन तनय संकट हरन मंगल मूरति रूप।\nराम लखन सीता सहित हृदय बसहु सुर भूप॥',
+    tr:    'Pavan tanay sankat haran mangal moorati roop,\nRam Lakhan Sita sahit hriday basahu sur bhoop.',
+    meaning: 'O Son of the Wind, reliever of distress, embodiment of auspiciousness — O King of the gods, please dwell in my heart together with Ram, Lakshmana and Sita.'
+  },
+  {
+    type: 'closing',
+    hindi: '॥ सियावर रामचन्द्र की जय। पवनसुत हनुमान की जय। बोलो भाई सब संतन की जय ॥',
+    tr:    'Siyavar Ramachandra ki jai! Pavan-sut Hanuman ki jai! Bolo bhai sab santan ki jai!',
+    meaning: 'Victory to Lord Ramachandra, consort of Sita! Victory to Hanuman, son of the Wind! Let all devotees proclaim victory to all saints!'
+  }
+];
+
+/* =============================================
+   RENDERING ENGINE
+   ============================================= */
+let currentVerseIdx = 0;
+let autoScrollActive = false;
+let autoScrollTimer = null;
+let meaningsVisible = false;
+let audioCtx = null;
+
+const chalisaVerses = CHALISA.filter(v => v.type !== 'section' && v.type !== 'closing');
+const allCards = CHALISA;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function play432(freq = 432, dur = 2) {
+  const ctx = getAudioCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.frequency.value = freq; osc.type = 'sine';
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.3);
+  gain.gain.linearRampToValueAtTime(0, ctx.currentTime + dur - 0.2);
+  osc.start(); osc.stop(ctx.currentTime + dur);
+}
+
+function renderChalisa() {
+  const wrap = document.getElementById('chalisaWrap');
+  let verseCount = 0;
+
+  wrap.innerHTML = allCards.map((item, idx) => {
+    if (item.type === 'section') {
+      return `<div class="section-divider">${item.label}</div>`;
+    }
+    if (item.type === 'closing') {
+      return `
+        <div class="verse-card" style="text-align:center; border-color:var(--gold);">
+          <div class="hindi-text" style="font-size:1.1rem;">${item.hindi}</div>
+          <div class="transliteration">${item.tr}</div>
+          <div class="verse-meaning" style="display:block;">${item.meaning}</div>
+        </div>`;
+    }
+    verseCount++;
+    const vid = `verse-${idx}`;
+    const label = item.type === 'doha' ? `🔸 ${item.label || 'Doha'}` : `📿 Chaupai <span class="verse-num-badge">${item.num}</span>`;
+    return `
+      <div class="verse-card" id="${vid}" onclick="selectVerse(${idx})">
+        <div class="verse-type">${label}</div>
+        <div class="hindi-text">${item.hindi.replace(/\n/g,'<br/>')}</div>
+        <div class="transliteration">${item.tr.replace(/\n/g,'<br/>')}</div>
+        <button class="meaning-toggle-btn" onclick="event.stopPropagation();toggleMeaning('${vid}')">📖 Meaning</button>
+        <button class="play-verse-btn" onclick="event.stopPropagation();play432()">🎵 432 Hz</button>
+        <div class="verse-meaning" id="meaning-${vid}">${item.meaning}</div>
+      </div>`;
+  }).join('');
+}
+
+function selectVerse(idx) {
+  const old = document.querySelector('.verse-card.active-verse');
+  if (old) old.classList.remove('active-verse');
+  currentVerseIdx = idx;
+  const el = document.getElementById(`verse-${idx}`);
+  if (el) { el.classList.add('active-verse'); el.scrollIntoView({ behavior:'smooth', block:'center' }); }
+  const verseItems = allCards.filter(v => v.type !== 'section' && v.type !== 'closing');
+  const pos = verseItems.findIndex((_, i) => allCards.indexOf(verseItems[i]) >= idx);
+  updateCounter(pos + 1, verseItems.length);
+  play432();
+}
+
+function updateCounter(cur, total) {
+  document.getElementById('verseCounter').textContent = `${cur} / ${total}`;
+  document.getElementById('fcNum').textContent = cur;
+}
+
+function toggleMeaning(vid) {
+  const el = document.getElementById(`meaning-${vid}`);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function toggleMeanings() {
+  meaningsVisible = !meaningsVisible;
+  document.querySelectorAll('.verse-meaning').forEach(el => {
+    el.style.display = meaningsVisible ? 'block' : 'none';
+  });
+  document.getElementById('meaningsBtn').classList.toggle('active', meaningsVisible);
+  document.getElementById('meaningsBtn').textContent = meaningsVisible ? '📖 Hide Meanings' : '📖 Show Meanings';
+}
+
+function playCurrentVerse432() { play432(432, 3); play432(528, 1.5); }
+
+function toggleAutoScroll() {
+  autoScrollActive = !autoScrollActive;
+  const btn = document.getElementById('autoScrollBtn');
+  btn.classList.toggle('active', autoScrollActive);
+  btn.textContent = autoScrollActive ? '⏸ Pause Scroll' : '⏵ Auto Scroll';
+  document.getElementById('chalisaWrap').classList.toggle('auto-scroll-on', autoScrollActive);
+
+  if (autoScrollActive) {
+    const contentCards = [...document.querySelectorAll('.verse-card[id]')];
+    let i = 0;
+    function advance() {
+      if (!autoScrollActive || i >= contentCards.length) {
+        autoScrollActive = false;
+        btn.classList.remove('active');
+        btn.textContent = '⏵ Auto Scroll';
+        return;
+      }
+      contentCards.forEach(c => c.classList.remove('active-verse'));
+      contentCards[i].classList.add('active-verse');
+      contentCards[i].scrollIntoView({ behavior:'smooth', block:'center' });
+      updateCounter(i + 1, contentCards.length);
+      play432(432, 1.5);
+      i++;
+      autoScrollTimer = setTimeout(advance, 8000); // 8s per verse
+    }
+    advance();
+  } else {
+    clearTimeout(autoScrollTimer);
+  }
+}
+
+function restartChalisa() {
+  clearTimeout(autoScrollTimer);
+  autoScrollActive = false;
+  document.getElementById('autoScrollBtn').classList.remove('active');
+  document.getElementById('autoScrollBtn').textContent = '⏵ Auto Scroll';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateCounter(1, 42);
+}
+
+function changeFontSize(val) {
+  document.querySelectorAll('.hindi-text').forEach(el => el.style.fontSize = val + 'px');
+  document.querySelectorAll('.transliteration').forEach(el => el.style.fontSize = (val - 4) + 'px');
+}
+
+/* ---- Intersection Observer for counter ---- */
+function setupIntersectionObserver() {
+  const cards = [...document.querySelectorAll('.verse-card[id]')];
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = cards.indexOf(entry.target);
+        if (idx >= 0) updateCounter(idx + 1, cards.length);
+      }
+    });
+  }, { rootMargin: '-40% 0px -40% 0px' });
+  cards.forEach(c => obs.observe(c));
+}
+
+/* ---- Init ---- */
+renderChalisa();
+setupIntersectionObserver();
+updateCounter(1, CHALISA.filter(v => v.type !== 'section' && v.type !== 'closing').length);
+</script>
+</body>
+</html>

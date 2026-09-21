@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Visual Pooja – Divya Mangalam</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  <style>
+    /* =============================================
+       VISUAL POOJA SIMULATION – Full Styles
+       ============================================= */
+    body { background: #050510; margin: 0; overflow-x: hidden; }
+
+    /* ===== Stage ===== */
+    .pooja-stage {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 30%, #1a0030 0%, #050510 65%);
+      display: flex; flex-direction: column;
+      align-items: center; position: relative;
+      overflow: hidden;
+    }
+
+    /* Starfield */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 80px 80px, 130px 130px;
+      background-position: 0 0, 40px 40px;
+    }
+
+    /* ===== Top Progress Bar ===== */
+    .progress-bar-wrap {
+      position: sticky; top: 64px; z-index: 50;
+      width: 100%; background: rgba(5,5,16,0.9);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+    .progress-steps {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0; overflow-x: auto;
+    }
+    .prog-step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px; min-width: 60px; cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .prog-step .step-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(212,160,23,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; transition: all 0.3s;
+    }
+    .prog-step.done .step-dot { background: #2e7d32; border-color: #4caf50; }
+    .prog-step.active .step-dot { background: var(--gold); border-color: var(--gold); color: #000; box-shadow: 0 0 15px rgba(212,160,23,0.6); }
+    .prog-step .step-label { font-size: 0.6rem; color: rgba(255,255,255,0.4); text-align: center; line-height: 1.2; }
+    .prog-step.active .step-label { color: var(--gold); }
+    .prog-connector { flex: 1; height: 2px; background: rgba(255,255,255,0.08); min-width: 10px; }
+    .prog-connector.done { background: #4caf50; }
+    .prog-bar-line {
+      width: 100%; height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px; margin-top: 0.5rem;
+      max-width: 900px; margin-left: auto; margin-right: auto;
+    }
+    .prog-bar-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--saffron));
+      transition: width 0.8s ease;
+    }
+
+    /* ===== Deity Stage Center ===== */
+    .deity-stage {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 2rem 1rem 1rem;
+      min-height: 420px; justify-content: center;
+    }
+    .deity-aura {
+      position: relative; width: 220px; height: 220px;
+    }
+    .aura-ring {
+      position: absolute; inset: -20px; border-radius: 50%;
+      border: 2px solid rgba(212,160,23,0.15);
+      animation: aura-pulse 2s ease-in-out infinite;
+    }
+    .aura-ring:nth-child(2) { inset: -35px; animation-delay: 0.5s; border-color: rgba(255,111,0,0.1); }
+    .aura-ring:nth-child(3) { inset: -50px; animation-delay: 1s; border-color: rgba(212,160,23,0.07); }
+    @keyframes aura-pulse {
+      0%,100% { opacity: 0.5; transform: scale(1); }
+      50%      { opacity: 1;   transform: scale(1.04); }
+    }
+    .deity-circle {
+      width: 220px; height: 220px; border-radius: 50%;
+      overflow: hidden; border: 4px solid var(--gold);
+      box-shadow: 0 0 50px rgba(212,160,23,0.4), 0 0 100px rgba(212,160,23,0.15);
+      position: relative; z-index: 2;
+    }
+    .deity-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Offering particles container */
+    #offeringsLayer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 3;
+      border-radius: 50%;
+    }
+    .offering-particle {
+      position: absolute;
+      font-size: 1.6rem;
+      animation: float-to-center var(--dur, 2s) ease-in-out forwards;
+      transform-origin: center;
+    }
+    @keyframes float-to-center {
+      0%   { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(0.5); }
+      30%  { opacity: 1; }
+      80%  { opacity: 0.8; transform: translate(calc(var(--sx) * 0.1), calc(var(--sy) * 0.1)) scale(1.2); }
+      100% { opacity: 0; transform: translate(0,0) scale(0.3); }
+    }
+
+    /* Aarti lamp arc */
+    .aarti-lamp {
+      position: absolute; z-index: 10;
+      font-size: 2.5rem;
+      animation: aarti-arc 3s ease-in-out infinite;
+      transform-origin: 50% 150px;
+      display: none;
+    }
+    @keyframes aarti-arc {
+      0%   { transform: rotate(-60deg); }
+      50%  { transform: rotate(60deg); }
+      100% { transform: rotate(-60deg); }
+    }
+
+    /* Flower shower */
+    .flower-shower-wrap {
+      position: fixed; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 100;
+    }
+    .flower-drop {
+      position: absolute; font-size: 1.2rem;
+      animation: flower-fall var(--spd) linear forwards;
+      opacity: 0;
+    }
+    @keyframes flower-fall {
+      0%   { top: -5%; opacity: 0; transform: rotate(0deg); }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.8; }
+      100% { top: 110%; opacity: 0; transform: rotate(360deg); }
+    }
+
+    /* Smoke effect */
+    .smoke-particle {
+      position: absolute; font-size: 1.8rem;
+      animation: smoke-rise 3s ease-out forwards;
+      opacity: 0;
+    }
+    @keyframes smoke-rise {
+      0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+      30%  { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-100px) scale(2); }
+    }
+
+    /* ===== Step Panel ===== */
+    .step-panel {
+      max-width: 700px; width: 100%;
+      padding: 0 1.5rem; z-index: 10;
+      margin-top: 1.5rem;
+    }
+    .step-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .step-num-badge {
+      background: var(--gold); color: #000;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1rem; flex-shrink: 0;
+    }
+    .step-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); }
+    .step-icon-big { font-size: 2rem; }
+
+    .mantra-panel {
+      background: rgba(212,160,23,0.08);
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 16px; padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .mantra-panel .mantra-label { font-size: 0.7rem; letter-spacing: 2px; opacity: 0.5; text-transform: uppercase; color: var(--white); margin-bottom: 0.75rem; }
+    .mantra-panel .mantra-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--gold); line-height: 1.8;
+      animation: mantra-fade 1s ease forwards;
+    }
+    @keyframes mantra-fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .mantra-panel .meaning-text { font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-top: 0.75rem; font-style: italic; line-height: 1.6; }
+
+    /* Wave visualizer */
+    .wave-viz { display: flex; align-items: center; justify-content: center; gap: 4px; height: 32px; margin: 0.75rem 0; }
+    .wave-viz .wbar { width: 4px; background: var(--gold); border-radius: 2px; animation: wav 1s ease-in-out infinite; }
+    .wave-viz .wbar:nth-child(1){height:12px;animation-delay:0s}
+    .wave-viz .wbar:nth-child(2){height:22px;animation-delay:.1s}
+    .wave-viz .wbar:nth-child(3){height:16px;animation-delay:.2s}
+    .wave-viz .wbar:nth-child(4){height:28px;animation-delay:.3s}
+    .wave-viz .wbar:nth-child(5){height:18px;animation-delay:.4s}
+    .wave-viz .wbar:nth-child(6){height:28px;animation-delay:.3s}
+    .wave-viz .wbar:nth-child(7){height:16px;animation-delay:.2s}
+    .wave-viz .wbar:nth-child(8){height:22px;animation-delay:.1s}
+    .wave-viz .wbar:nth-child(9){height:12px;animation-delay:0s}
+    @keyframes wav { 0%,100%{transform:scaleY(0.4)} 50%{transform:scaleY(1)} }
+
+    /* ===== Controls ===== */
+    .pooja-controls {
+      display: flex; gap: 1rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .ctrl-btn {
+      padding: 0.85rem 1.8rem; border-radius: 50px;
+      font-family: 'Lato', sans-serif; font-weight: 700;
+      font-size: 0.95rem; cursor: pointer; border: none;
+      transition: all 0.3s; display: flex; align-items: center; gap: 6px;
+    }
+    .ctrl-next { background: linear-gradient(135deg, var(--deep-red), var(--saffron)); color: var(--white); }
+    .ctrl-next:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(139,0,0,0.4); }
+    .ctrl-auto { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
+    .ctrl-auto:hover, .ctrl-auto.on { background: var(--gold); color: #000; border-color: var(--gold); }
+    .ctrl-tone { background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.3); color: var(--gold); }
+    .ctrl-tone:hover { background: rgba(212,160,23,0.3); }
+
+    /* ===== Countdown timer ===== */
+    .step-timer {
+      width: 60px; height: 60px; border-radius: 50%;
+      position: relative; margin: 0 auto 1.5rem;
+    }
+    .step-timer svg { transform: rotate(-90deg); width: 60px; height: 60px; }
+    .timer-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 5; }
+    .timer-progress { fill: none; stroke: var(--gold); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 163; transition: stroke-dashoffset 1s linear; }
+    .timer-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--gold); font-weight: 700; font-size: 0.85rem; }
+
+    /* ===== Completion ===== */
+    .completion-screen {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: radial-gradient(ellipse at center, #1a0040 0%, #050510 70%);
+      align-items: center; justify-content: center;
+      flex-direction: column; text-align: center;
+      padding: 2rem; color: var(--white);
+    }
+    .completion-screen.show { display: flex; }
+    .completion-om { font-size: 6rem; animation: om-spin 3s ease-in-out infinite; }
+    @keyframes om-spin { 0%,100%{transform:scale(1) rotate(0deg)} 50%{transform:scale(1.2) rotate(10deg)} }
+    .completion-screen h2 { font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--gold); margin:1rem 0 0.5rem; }
+    .completion-screen .blessing { font-size:1.1rem; max-width:600px; line-height:1.8; opacity:0.85; margin-bottom:2rem; }
+    .completion-screen .shloka-quote { font-family:'Playfair Display',serif; font-style:italic; color:var(--gold); font-size:1rem; border-top:1px solid rgba(255,255,255,0.15); padding-top:1.5rem; margin-top:1rem; }
+    .completion-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+
+    /* ===== Prasad Card Download ===== */
+    #prasadCanvas { display:none; }
+
+    @media(max-width:600px){
+      .deity-aura, .deity-circle { width:160px; height:160px; }
+      .mantra-panel { padding:1rem 1rem; }
+      .step-name { font-size:1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="page-loader"><div class="om">🕉️</div></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="gods.html">Choose Deity</a></li>
+      <li><a href="live-archana.html">Live Archana</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz</a></li>
+      <li><a href="chalisa.html">Chalisa</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Progress bar -->
+<div class="progress-bar-wrap">
+  <div class="progress-steps" id="progressSteps"></div>
+  <div class="prog-bar-line"><div class="prog-bar-fill" id="progBarFill" style="width:0%"></div></div>
+</div>
+
+<!-- Flower shower layer -->
+<div class="flower-shower-wrap" id="flowerLayer"></div>
+
+<!-- Stage -->
+<div class="pooja-stage">
+  <div class="stars"></div>
+
+  <!-- Deity -->
+  <div class="deity-stage">
+    <div class="deity-aura">
+      <div class="aura-ring"></div>
+      <div class="aura-ring"></div>
+      <div class="aura-ring"></div>
+      <div class="deity-circle">
+        <img id="deityImg" src="" alt="Deity" />
+        <div id="offeringsLayer"></div>
+      </div>
+      <div class="aarti-lamp" id="aartiLamp">🪔</div>
+    </div>
+    <div style="margin-top:1rem; text-align:center; color:var(--white);">
+      <div style="font-size:1.2rem; font-family:'Playfair Display',serif;" id="deityNameDisplay"></div>
+      <div style="font-size:0.85rem; color:var(--gold); opacity:0.8;" id="deityMantraDisplay"></div>
+    </div>
+  </div>
+
+  <!-- Step Panel -->
+  <div class="step-panel">
+
+    <!-- Timer ring -->
+    <div class="step-timer">
+      <svg viewBox="0 0 60 60">
+        <circle class="timer-bg" cx="30" cy="30" r="26"/>
+        <circle class="timer-progress" id="timerRing" cx="30" cy="30" r="26" style="stroke-dashoffset:0"/>
+      </svg>
+      <div class="timer-num" id="timerNum">—</div>
+    </div>
+
+    <!-- Step header -->
+    <div class="step-header">
+      <div class="step-num-badge" id="stepBadge">1</div>
+      <div>
+        <div class="step-icon-big" id="stepIcon"></div>
+        <div class="step-name" id="stepName"></div>
+      </div>
+    </div>
+
+    <!-- Mantra panel -->
+    <div class="mantra-panel">
+      <div class="mantra-label">🕉️ Sacred Mantra</div>
+      <div class="mantra-text" id="mantraText"></div>
+      <div class="wave-viz">
+        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
+        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
+        <div class="wbar"></div><div class="wbar"></div><div class="wbar"></div>
+      </div>
+      <div class="meaning-text" id="meaningText"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="pooja-controls">
+      <button class="ctrl-btn ctrl-auto" id="autoBtn" onclick="toggleAuto()">⏵ Auto Mode</button>
+      <button class="ctrl-btn ctrl-next" id="nextBtn" onclick="nextStep()">Next Step →</button>
+      <button class="ctrl-btn ctrl-tone" onclick="playCurrentTone()">🎵 Play 432 Hz</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Completion Screen -->
+<div class="completion-screen" id="completionScreen">
+  <div class="completion-om">🕉️</div>
+  <div id="comp-flower-shower"></div>
+  <h2 id="compTitle">Pooja Complete!</h2>
+  <div class="blessing" id="compBlessing"></div>
+  <div class="shloka-quote">
+    "Sarve bhavantu sukhinaḥ · Sarve santu nirāmayāḥ<br/>
+    Sarve bhadrāṇi paśyantu · Mā kaścid duḥkhabhāg bhavet"
+  </div>
+  <br/>
+  <div class="completion-btns">
+    <button class="btn btn-primary" onclick="downloadPrasad()">📥 Download Prasad Card</button>
+    <a href="gods.html" class="btn btn-outline" style="border-color:var(--gold);color:var(--gold);">🛕 Choose Another Deity</a>
+    <button class="btn btn-outline" onclick="restartPooja()" style="border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);">🔄 Restart Pooja</button>
+  </div>
+  <canvas id="prasadCanvas" width="800" height="450"></canvas>
+</div>
+
+<script src="main.js"></script>
+<script src="gods-data.js"></script>
+<script src="panchang.js"></script>
+<script>
+/* =============================================
+   VISUAL POOJA ENGINE
+   ============================================= */
+
+/* ---- Get god from URL ---- */
+const params = new URLSearchParams(window.location.search);
+const godId = params.get('god') || 'ganesha';
+const god = GODS.find(g => g.id === godId) || GODS[0];
+
+/* ---- Page Setup ---- */
+document.getElementById('pageTitle').textContent = `${god.name} Visual Pooja – Divya Mangalam`;
+document.getElementById('deityImg').src = god.image;
+document.getElementById('deityImg').alt = god.name;
+document.getElementById('deityNameDisplay').textContent = `${god.emoji} ${god.name}`;
+document.getElementById('deityMantraDisplay').textContent = god.primaryMantra;
+
+/* ---- Steps ---- */
+const steps = god.archanaSequence;
+let currentStep = 0;
+let autoMode = false;
+let autoTimer = null;
+let stepCountdown = null;
+let audioCtx = null;
+
+/* ---- Build progress steps ---- */
+function buildProgress() {
+  const container = document.getElementById('progressSteps');
+  container.innerHTML = steps.map((s, i) => `
+    ${i > 0 ? `<div class="prog-connector" id="conn-${i}"></div>` : ''}
+    <div class="prog-step" id="prog-${i}" onclick="jumpToStep(${i})">
+      <div class="step-dot">${s.icon}</div>
+      <div class="step-label">${s.name}</div>
+    </div>
+  `).join('');
+}
+
+/* ---- Update progress ---- */
+function updateProgress() {
+  steps.forEach((_, i) => {
+    const el = document.getElementById(`prog-${i}`);
+    if (!el) return;
+    el.classList.toggle('active', i === currentStep);
+    el.classList.toggle('done', i < currentStep);
+    const conn = document.getElementById(`conn-${i}`);
+    if (conn) conn.classList.toggle('done', i <= currentStep);
+  });
+  document.getElementById('progBarFill').style.width = ((currentStep / (steps.length - 1)) * 100) + '%';
+}
+
+/* ---- Render Step ---- */
+function renderStep() {
+  const step = steps[currentStep];
+  document.getElementById('stepBadge').textContent = step.step;
+  document.getElementById('stepIcon').textContent = step.icon;
+  document.getElementById('stepName').textContent = step.name;
+  document.getElementById('mantraText').innerHTML = step.mantra;
+  document.getElementById('mantraText').style.animation = 'none';
+  requestAnimationFrame(() => { document.getElementById('mantraText').style.animation = 'mantra-fade 0.8s ease forwards'; });
+  document.getElementById('meaningText').textContent = step.meaning;
+  document.getElementById('nextBtn').textContent = currentStep === steps.length - 1 ? '🙏 Complete Pooja' : 'Next Step →';
+  updateProgress();
+  triggerStepAnimation(step);
+  startStepTimer(step.duration);
+  playStepTone(step);
+}
+
+/* ---- Step Animations ---- */
+function triggerStepAnimation(step) {
+  const layer = document.getElementById('offeringsLayer');
+  layer.innerHTML = '';
+  const lamp = document.getElementById('aartiLamp');
+  lamp.style.display = 'none';
+
+  const offerings = god.offerings;
+  const offeringMap = {
+    'Avahana': ['🌸', '🌺', '🌼'],
+    'Pushparchana': ['🌺', '🌸', '🌼', '💐', '🌹'],
+    'Dhupa': ['🌫️', '✨', '🌫️'],
+    'Deepa': ['🪔', '✨', '🌟'],
+    'Abhisheka': ['💧', '🥛', '💧'],
+    'Panchamruta': ['🥛', '🍯', '💧', '🥛'],
+    'Naivedya': ['🍮', '🍯', '🌺'],
+    'Bilva Archana': ['🍃', '🍃', '🍃', '🍃'],
+    'Tulsi Archana': ['🌿', '🌿', '🌿', '🌿'],
+    'Lotus Archana': ['🪷', '🪷', '🌺', '🌸'],
+    'Kumkuma Archana': ['🔴', '✨', '🔴'],
+    'Sindoor Archana': ['🔴', '❤️', '🔴'],
+    'Flower Archana': ['🌺', '🌸', '🌼', '💐'],
+    'Red Lotus Archana': ['🌹', '🌹', '❤️'],
+    'Mangala Aarti': null, // special aarti animation
+    'Deepa Aarti': null,
+    'Aarti': null,
+    'Vel Puja': ['⚡', '✨', '⚡'],
+    'Pratar Arghya': ['💧', '✨', '💧'],
+    'Pustakapuja': ['📚', '📖', '✨'],
+    'Diya Lighting': ['🪔', '✨', '🪔'],
+  };
+
+  // Check if it's aarti
+  if (step.name.toLowerCase().includes('aarti') || step.name === 'Mangala Aarti' || step.name === 'Deepa Aarti' || step.name.includes('Aarti')) {
+    lamp.style.display = 'block';
+    startFlowerShower();
+    return;
+  }
+
+  // Pick emojis for this step
+  const emojis = offeringMap[step.name] || [step.icon, '✨', step.icon];
+
+  // Spawn offering particles
+  let count = 0;
+  const spawnInterval = setInterval(() => {
+    if (count >= 12) { clearInterval(spawnInterval); return; }
+    const angle = (Math.random() * 360) * Math.PI / 180;
+    const dist = 80 + Math.random() * 60;
+    const sx = Math.cos(angle) * dist;
+    const sy = Math.sin(angle) * dist;
+    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+    const particle = document.createElement('div');
+    particle.className = 'offering-particle';
+    particle.textContent = emoji;
+    particle.style.setProperty('--sx', sx + 'px');
+    particle.style.setProperty('--sy', sy + 'px');
+    particle.style.setProperty('--dur', (1.5 + Math.random()) + 's');
+    particle.style.left = (50 + Math.cos(angle) * dist / 2.2) + '%';
+    particle.style.top  = (50 + Math.sin(angle) * dist / 2.2) + '%';
+    layer.appendChild(particle);
+    setTimeout(() => particle.remove(), 3000);
+    count++;
+  }, 200);
+
+  // Special flower shower for Sankalpa or completion steps
+  if (step.name === 'Sankalpa' || step.step === 1) {
+    startFlowerShower(5);
+  }
+}
+
+/* ---- Flower Shower ---- */
+function startFlowerShower(count = 20) {
+  const layer = document.getElementById('flowerLayer');
+  const flowers = ['🌸', '🌺', '🌼', '🌹', '💐', '🌷'];
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'flower-drop';
+      el.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.setProperty('--spd', (2 + Math.random() * 3) + 's');
+      el.style.animationDelay = (Math.random() * 1) + 's';
+      layer.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
+    }, i * 100);
+  }
+}
+
+/* ---- Step Countdown Timer ---- */
+function startStepTimer(duration) {
+  clearInterval(stepCountdown);
+  let remaining = duration;
+  const circumference = 163;
+  const ring = document.getElementById('timerRing');
+  const numEl = document.getElementById('timerNum');
+  function tick() {
+    const progress = (remaining / duration);
+    ring.style.strokeDashoffset = circumference * (1 - progress);
+    numEl.textContent = remaining + 's';
+    if (remaining <= 0) {
+      clearInterval(stepCountdown);
+      if (autoMode) { setTimeout(nextStep, 500); }
+    }
+    remaining--;
+  }
+  tick();
+  stepCountdown = setInterval(tick, 1000);
+}
+
+/* ---- Audio ---- */
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playStepTone(step) {
+  const ctx = getAudioCtx();
+  const freqs = {
+    'Achamana': [396], 'Sankalpa': [432], 'Dhyana': [528],
+    'Avahana': [528], 'Pushparchana': [528], 'Abhisheka': [417],
+    'Deepa': [432], 'Mangala Aarti': [963], 'Deepa Aarti': [963],
+    'Aarti': [963], 'Naivedya': [639], 'Bilva Archana': [417],
+    'Tulsi Archana': [528], 'Visarjana': [432, 528],
+    'Prasad': [963, 432], 'Lotus Archana': [528],
+  };
+  const tones = freqs[step.name] || [432];
+  tones.forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = freq; osc.type = 'sine';
+    const t = ctx.currentTime + i * 1.5;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.15, t + 0.4);
+    gain.gain.linearRampToValueAtTime(0, t + 2);
+    osc.start(t); osc.stop(t + 2.2);
+  });
+}
+
+function playCurrentTone() { if (steps[currentStep]) playStepTone(steps[currentStep]); }
+
+/* ---- Navigation ---- */
+function nextStep() {
+  if (currentStep >= steps.length - 1) {
+    completePooja(); return;
+  }
+  currentStep++;
+  renderStep();
+}
+
+function jumpToStep(i) {
+  currentStep = i;
+  renderStep();
+}
+
+function toggleAuto() {
+  autoMode = !autoMode;
+  const btn = document.getElementById('autoBtn');
+  btn.classList.toggle('on', autoMode);
+  btn.textContent = autoMode ? '⏸ Auto On' : '⏵ Auto Mode';
+  document.getElementById('nextBtn').disabled = autoMode;
+}
+
+function restartPooja() {
+  currentStep = 0;
+  document.getElementById('completionScreen').classList.remove('show');
+  document.getElementById('aartiLamp').style.display = 'none';
+  renderStep();
+}
+
+/* ---- Completion ---- */
+function completePooja() {
+  clearInterval(stepCountdown);
+  if (autoMode) toggleAuto();
+  document.getElementById('aartiLamp').style.display = 'none';
+
+  document.getElementById('compTitle').textContent = `${god.emoji} ${god.name} Archana Complete!`;
+  document.getElementById('compBlessing').innerHTML =
+    `The entire ${god.name} archana has been performed with full devotion. Every mantra has been recited, every offering made.<br/><br/>
+    <strong style="color:var(--gold)">${god.primaryMantra}</strong><br/><br/>
+    May ${god.name}'s blessings — ${god.blessings.join(', ')} — flow abundantly into your life. 🙏`;
+
+  document.getElementById('completionScreen').classList.add('show');
+  startFlowerShower(40);
+
+  // Auto play completion tones
+  const ctx = getAudioCtx();
+  [963, 432, 528, 432].forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = freq; osc.type = 'sine';
+    const t = ctx.currentTime + i * 1.2;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.25, t + 0.3);
+    gain.gain.linearRampToValueAtTime(0, t + 1);
+    osc.start(t); osc.stop(t + 1.2);
+  });
+}
+
+/* ---- Prasad Card Download ---- */
+function downloadPrasad() {
+  const canvas = document.getElementById('prasadCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.style.display = 'block';
+
+  // Background
+  const bg = ctx.createLinearGradient(0, 0, 800, 450);
+  bg.addColorStop(0, '#1a0040');
+  bg.addColorStop(1, '#3d0000');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, 800, 450);
+
+  // Gold border
+  ctx.strokeStyle = '#D4A017';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(12, 12, 776, 426);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(212,160,23,0.4)';
+  ctx.strokeRect(20, 20, 760, 410);
+
+  // Om symbol
+  ctx.font = '48px serif'; ctx.fillStyle = '#D4A017'; ctx.textAlign = 'center';
+  ctx.fillText('🕉', 400, 70);
+
+  // Title
+  ctx.font = 'bold 28px serif'; ctx.fillStyle = '#D4A017';
+  ctx.fillText('Divya Mangalam – Digital Prasad', 400, 115);
+
+  // Deity name
+  ctx.font = 'italic 22px serif'; ctx.fillStyle = '#ffffff';
+  ctx.fillText(`${god.name} Archana Completed`, 400, 155);
+
+  // Mantra
+  ctx.font = '18px serif'; ctx.fillStyle = '#D4A017';
+  ctx.fillText(god.primaryMantra, 400, 200);
+
+  // Date
+  ctx.font = '14px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  const p = PANCHANG.getPanchang(new Date());
+  ctx.fillText(`${p.dateStr} · Tithi: ${p.tithi.name} · Nakshatra: ${p.nakshatra.name}`, 400, 235);
+
+  // Blessings
+  ctx.font = 'italic 16px serif'; ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.fillText(god.blessings.join('  ·  '), 400, 275);
+
+  // Shloka
+  ctx.font = '14px serif'; ctx.fillStyle = 'rgba(212,160,23,0.8)';
+  ctx.fillText('Sarve bhavantu sukhinaḥ · Sarve santu nirāmayāḥ', 400, 330);
+  ctx.fillText('May all beings be happy, healthy and free from suffering.', 400, 355);
+
+  // Footer
+  ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fillText('divyamangalam.com  ·  Free Virtual Archana for All Devotees  🙏', 400, 420);
+
+  // Download
+  const link = document.createElement('a');
+  link.download = `${god.id}-archana-prasad.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  canvas.style.display = 'none';
+}
+
+/* ---- Init ---- */
+buildProgress();
+renderStep();
+</script>
+</body>
+</html>
