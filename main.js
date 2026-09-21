@@ -148,6 +148,38 @@ document.addEventListener('click', (e) => {
   }
 });
 
+/* ============  6:00 AM SUPRABHATA SEVA ENGINE  ============ */
+function playSuprabhatamNow() {
+  const audio = document.getElementById('suprabhatamAudio');
+  if (!audio) return;
+  if (audio.paused) {
+    audio.play().then(() => {
+      const status = document.getElementById('suprabhatamStatus');
+      if (status) status.innerHTML = '🎵 <strong>Playing:</strong> Sri Venkateswara Suprabhatam (M.S. Subbulakshmi)';
+      playTempleBell(1.0);
+    }).catch(() => {
+      // Audio playback requires user interaction
+    });
+  } else {
+    audio.pause();
+    const status = document.getElementById('suprabhatamStatus');
+    if (status) status.textContent = '⏸ Paused · Scheduled for 6:00 AM daily';
+  }
+}
+
+// Check every 30 seconds if it is 6:00 AM to trigger morning Suprabhatam automatically
+let suprabhatamTriggeredToday = false;
+setInterval(() => {
+  const now = new Date();
+  if (now.getHours() === 6 && now.getMinutes() === 0 && !suprabhatamTriggeredToday) {
+    suprabhatamTriggeredToday = true;
+    playSuprabhatamNow();
+  }
+  if (now.getHours() === 7) {
+    suprabhatamTriggeredToday = false; // Reset for next day
+  }
+}, 30000);
+
 /* ============  VIRTUAL DARSHAN MODAL  ============ */
 const mantras = [
   '"Om Shreem Hreem Shreem Kamale Kamalalaye Praseed Praseed"',
