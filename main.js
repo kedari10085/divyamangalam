@@ -5,12 +5,16 @@
    ============================================= */
 
 /* ============  PAGE LOADER  ============ */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const loader = document.getElementById('page-loader');
-    if (loader) loader.classList.add('hidden');
-  }, 900);
-});
+function dismissLoader() {
+  const loader = document.getElementById('page-loader');
+  if (loader && !loader.classList.contains('hidden')) {
+    loader.classList.add('hidden');
+    setTimeout(() => { loader.style.display = 'none'; }, 600);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => { setTimeout(dismissLoader, 400); });
+window.addEventListener('load', () => { setTimeout(dismissLoader, 200); });
+setTimeout(dismissLoader, 1500); // Safety fallback so page never gets stuck behind loader
 
 /* ============  NAVBAR TOGGLE  ============ */
 function toggleNav() {
