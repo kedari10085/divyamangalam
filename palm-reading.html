@@ -411,9 +411,15 @@
   </div>
 
   <div class="scan-box-container" id="scanBox">
+    <div class="scan-placeholder" id="scanPlaceholder" style="text-align:center; padding:1.5rem; color:var(--white); z-index:2;">
+      <span style="font-size:3.5rem; display:block; margin-bottom:0.75rem; filter:drop-shadow(0 0 15px rgba(212,160,23,0.5));">✋</span>
+      <h3 style="font-size:1.15rem; color:var(--gold); margin:0 0 0.4rem; font-family:'Playfair Display',serif;">Ready for Palm Reading</h3>
+      <p style="font-size:0.85rem; opacity:0.8; margin:0 0 1.2rem; line-height:1.4;">Take a photo, upload an image, or try our instant demo hand.</p>
+      <button type="button" class="btn-primary" id="btnPlaceholderDemo" style="padding:0.6rem 1.4rem; font-size:0.88rem; margin:0 auto;">✨ Try Demo Hand</button>
+    </div>
     <video id="videoElement" autoplay playsinline></video>
     <img id="previewImage" alt="Palm Preview" />
-    <svg class="hand-guide" id="handGuide" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+    <svg class="hand-guide" id="handGuide" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" style="display:none;">
       <!-- Simple open hand outline -->
       <path d="M40,90 C40,80 30,60 25,50 C20,40 25,35 30,40 C35,45 40,55 40,55 L40,30 C40,25 45,25 45,30 L45,50 L45,20 C45,15 50,15 50,20 L50,50 L50,22 C50,17 55,17 55,22 L55,50 L55,35 C55,30 60,30 60,35 L60,60 C60,75 55,90 55,90 Z" fill="none" stroke="rgba(212,160,23,0.5)" stroke-width="2" stroke-dasharray="4" />
     </svg>
@@ -429,9 +435,10 @@
   <div class="action-buttons">
     <button class="btn-primary" id="btnCamera">📷 Take Photo</button>
     <button class="btn-secondary" id="btnUpload">📁 Upload Image</button>
+    <button class="btn-secondary" id="btnSample" style="border-color:var(--gold); color:var(--gold);">✨ Try Demo Hand</button>
     <input type="file" id="fileInput" accept="image/*" />
     <button class="btn-primary" id="btnScan" style="display:none; width:100%; justify-content:center;">✨ Start Vedic Reading</button>
-    <button class="btn-secondary" id="btnRetake" style="display:none;">↺ Retake</button>
+    <button class="btn-secondary" id="btnRetake" style="display:none;">↺ Retake / Try Another</button>
   </div>
 
   <div class="guidelines">

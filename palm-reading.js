@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnRightHand').classList.remove('active');
   });
 
+  const scanPlaceholder = document.getElementById('scanPlaceholder');
+  const btnSample = document.getElementById('btnSample');
+  const btnPlaceholderDemo = document.getElementById('btnPlaceholderDemo');
+
   // Start Camera
   btnCamera.addEventListener('click', async () => {
     try {
@@ -44,16 +48,113 @@ document.addEventListener('DOMContentLoaded', () => {
       video.style.display = 'block';
       preview.style.display = 'none';
       handGuide.style.display = 'block';
+      if (scanPlaceholder) scanPlaceholder.style.display = 'none';
       btnCamera.style.display = 'none';
       btnUpload.style.display = 'none';
+      if (btnSample) btnSample.style.display = 'none';
       btnScan.style.display = 'inline-flex';
       btnRetake.style.display = 'inline-flex';
       imageSource = video;
       resultsDashboard.style.display = 'none';
     } catch (err) {
-      alert("Camera access denied or unavailable. Please use 'Upload Image'.");
+      alert("Camera access denied or unavailable. Please use 'Upload Image' or 'Try Demo Hand'.");
     }
   });
+
+  // Demo Hand Generator
+  function loadDemoPalm() {
+    const demoCanvas = document.createElement('canvas');
+    demoCanvas.width = 600;
+    demoCanvas.height = 800;
+    const dCtx = demoCanvas.getContext('2d');
+
+    // Sacred dark background
+    dCtx.fillStyle = '#181226';
+    dCtx.fillRect(0, 0, 600, 800);
+
+    // Subtle cosmic glow
+    const grad = dCtx.createRadialGradient(300, 450, 50, 300, 450, 350);
+    grad.addColorStop(0, 'rgba(212,160,23,0.18)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    dCtx.fillStyle = grad;
+    dCtx.fillRect(0, 0, 600, 800);
+
+    // Draw stylized warm palm
+    dCtx.save();
+    dCtx.shadowColor = '#D4A017';
+    dCtx.shadowBlur = 18;
+    dCtx.fillStyle = '#e5b993';
+    dCtx.beginPath();
+    dCtx.moveTo(220, 780);
+    dCtx.lineTo(380, 780);
+    dCtx.quadraticCurveTo(425, 650, 445, 520);
+    // Little finger
+    dCtx.quadraticCurveTo(505, 480, 500, 355);
+    dCtx.quadraticCurveTo(495, 305, 465, 310);
+    dCtx.quadraticCurveTo(440, 315, 440, 420);
+    // Ring finger
+    dCtx.quadraticCurveTo(440, 240, 410, 175);
+    dCtx.quadraticCurveTo(385, 145, 360, 175);
+    dCtx.quadraticCurveTo(350, 240, 350, 410);
+    // Middle finger
+    dCtx.quadraticCurveTo(345, 180, 320, 110);
+    dCtx.quadraticCurveTo(295, 80, 270, 110);
+    dCtx.quadraticCurveTo(265, 195, 265, 410);
+    // Index finger
+    dCtx.quadraticCurveTo(255, 220, 230, 195);
+    dCtx.quadraticCurveTo(205, 175, 185, 205);
+    dCtx.quadraticCurveTo(180, 265, 200, 450);
+    // Thumb
+    dCtx.quadraticCurveTo(120, 500, 65, 475);
+    dCtx.quadraticCurveTo(35, 475, 45, 525);
+    dCtx.quadraticCurveTo(70, 600, 170, 640);
+    dCtx.quadraticCurveTo(180, 720, 220, 780);
+    dCtx.closePath();
+    dCtx.fill();
+    dCtx.restore();
+
+    // Natural skin lines & crease hints
+    dCtx.strokeStyle = 'rgba(145, 85, 55, 0.45)';
+    dCtx.lineWidth = 4;
+    dCtx.lineCap = 'round';
+    // Heart line hint
+    dCtx.beginPath();
+    dCtx.moveTo(460, 430);
+    dCtx.bezierCurveTo(360, 420, 280, 360, 235, 320);
+    dCtx.stroke();
+    // Head line hint
+    dCtx.beginPath();
+    dCtx.moveTo(195, 450);
+    dCtx.bezierCurveTo(260, 460, 340, 490, 430, 520);
+    dCtx.stroke();
+    // Life line hint
+    dCtx.beginPath();
+    dCtx.moveTo(195, 440);
+    dCtx.bezierCurveTo(170, 520, 210, 640, 280, 730);
+    dCtx.stroke();
+    // Fate line hint
+    dCtx.beginPath();
+    dCtx.moveTo(300, 740);
+    dCtx.bezierCurveTo(310, 600, 315, 450, 310, 300);
+    dCtx.stroke();
+
+    preview.src = demoCanvas.toDataURL('image/png');
+    preview.style.display = 'block';
+    video.style.display = 'none';
+    handGuide.style.display = 'none';
+    if (scanPlaceholder) scanPlaceholder.style.display = 'none';
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    btnCamera.style.display = 'none';
+    btnUpload.style.display = 'none';
+    if (btnSample) btnSample.style.display = 'none';
+    btnScan.style.display = 'inline-flex';
+    btnRetake.style.display = 'inline-flex';
+    imageSource = preview;
+    resultsDashboard.style.display = 'none';
+  }
+
+  if (btnSample) btnSample.addEventListener('click', loadDemoPalm);
+  if (btnPlaceholderDemo) btnPlaceholderDemo.addEventListener('click', loadDemoPalm);
 
   // Upload Image
   btnUpload.addEventListener('click', () => fileInput.click());
@@ -66,9 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
         preview.style.display = 'block';
         video.style.display = 'none';
         handGuide.style.display = 'none';
+        if (scanPlaceholder) scanPlaceholder.style.display = 'none';
         if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
         btnCamera.style.display = 'none';
         btnUpload.style.display = 'none';
+        if (btnSample) btnSample.style.display = 'none';
         btnScan.style.display = 'inline-flex';
         btnRetake.style.display = 'inline-flex';
         imageSource = preview;
@@ -83,9 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
     video.style.display = 'none';
     preview.style.display = 'none';
-    handGuide.style.display = 'block';
+    handGuide.style.display = 'none';
+    if (scanPlaceholder) scanPlaceholder.style.display = 'block';
     btnCamera.style.display = 'inline-flex';
     btnUpload.style.display = 'inline-flex';
+    if (btnSample) btnSample.style.display = 'inline-flex';
     btnScan.style.display = 'none';
     btnRetake.style.display = 'none';
     resultsDashboard.style.display = 'none';
