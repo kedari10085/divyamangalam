@@ -465,13 +465,20 @@ document.addEventListener('DOMContentLoaded', () => {
     scannerSection.style.display = 'none';
     resultsDashboard.style.display = 'block';
 
+    const nameInput = document.getElementById('userNameInput');
+    const userName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : '';
+    const titleEl = document.getElementById('linesCardTitle');
+    if (titleEl) {
+      titleEl.textContent = userName ? `Major Lines Analysis for ${userName}` : 'Major Lines Analysis';
+    }
+
     // Draw lines
     const rCtx = resultCanvas.getContext('2d');
     drawLinesOnCanvas(rCtx, resultCanvas.width, resultCanvas.height);
 
     // Hand Type
     const hType = pickFromArray(textPools.handTypes);
-    document.getElementById('resHandTypeTitle').innerText = hType.title;
+    document.getElementById('resHandTypeTitle').innerText = userName ? `${userName}'s Hand Type: ${hType.title}` : hType.title;
     document.getElementById('resHandTypeDesc').innerText = hType.desc;
 
     // Lines Accordion

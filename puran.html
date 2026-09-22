@@ -176,6 +176,7 @@
       position: relative;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       overflow: hidden;
+      cursor: pointer;
     }
     .purana-card:hover {
       transform: translateY(-6px);
@@ -252,70 +253,345 @@
       gap: 0.4rem;
       transition: all 0.2s;
     }
-    .btn-read-purana:hover {
+    .purana-card:hover .btn-read-purana {
       background: linear-gradient(135deg, var(--saffron), var(--deep-red));
       color: var(--white);
       border-color: transparent;
     }
 
-    /* Modal / Drawer */
-    .puran-modal {
+    /* ===== DEDICATED SINGLE PURANA VIEW (matching kundli.online/services/puran/brahma-purana) ===== */
+    .single-purana-container {
       display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(4px);
-      z-index: 9999;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+    .single-purana-container.active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn-strip {
+      margin-bottom: 1.5rem;
+    }
+    .btn-back-all {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .puran-modal.open { display: flex; }
-    .modal-box {
+      gap: 0.5rem;
       background: var(--white);
-      max-width: 850px;
-      width: 100%;
-      max-height: 90vh;
+      border: 1px solid rgba(212,160,23,0.35);
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--deep-red);
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .btn-back-all:hover {
+      background: linear-gradient(135deg, var(--saffron), var(--deep-red));
+      color: var(--white);
+      border-color: transparent;
+      transform: translateX(-3px);
+    }
+
+    .single-hero-card {
+      position: relative;
       border-radius: 20px;
-      overflow-y: auto;
-      border: 2px solid var(--gold);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      position: relative;
-      animation: modalSlide 0.25s ease-out;
+      border: 1px solid rgba(212,160,23,0.35);
+      background: linear-gradient(135deg, rgba(255,248,235,0.9) 0%, rgba(254,240,214,0.6) 100%);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(212,160,23,0.1);
     }
-    @keyframes modalSlide {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .modal-header {
-      background: linear-gradient(135deg, #2b0030 0%, #150020 100%);
-      color: var(--white);
-      padding: 2rem;
-      position: relative;
-      border-bottom: 2px solid var(--gold);
-    }
-    .modal-close-btn {
+    .single-hero-card .hero-om-watermark {
       position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      background: rgba(255,255,255,0.15);
+      top: 1rem;
+      right: 2rem;
+      font-size: 5rem;
+      opacity: 0.15;
+      user-select: none;
+      pointer-events: none;
+    }
+    .single-hero-card h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      color: var(--text-dark);
+      margin: 0.4rem 0 0.2rem;
+    }
+    .single-hero-sub {
+      font-size: 1.15rem;
+      color: var(--deep-red);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .single-stat-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .stat-chip {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .stat-chip strong { color: var(--text-dark); }
+    .stat-chip span { color: var(--text-mid); }
+
+    /* Single Purana Tabs */
+    .purana-tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(212,160,23,0.12);
+      padding: 6px;
+      border-radius: 14px;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    .tab-nav-btn {
+      flex: 1;
+      min-width: 140px;
+      padding: 0.75rem 1.2rem;
+      border-radius: 10px;
       border: none;
-      color: var(--white);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 1.2rem;
+      background: transparent;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-mid);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
-    .modal-close-btn:hover { background: rgba(229,57,53,0.8); }
-    .modal-body {
-      padding: 2rem;
+    .tab-nav-btn:hover {
+      color: var(--deep-red);
+      background: rgba(255,255,255,0.6);
+    }
+    .tab-nav-btn.active {
+      background: var(--white);
+      color: var(--deep-red);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(212,160,23,0.25);
     }
 
+    .puran-tab-pane {
+      display: none;
+    }
+    .puran-tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    /* Cards inside tabs */
+    .content-box-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .content-box-card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.45rem;
+      color: var(--deep-red);
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Chapters Explorer Grid */
+    .chapter-quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .chapter-quick-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(212,160,23,0.25);
+      background: var(--light-bg);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chapter-quick-btn:hover {
+      border-color: var(--gold);
+      background: #FFF9F0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212,160,23,0.12);
+    }
+    .chap-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .chap-quick-text {
+      flex: 1;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+
+    /* Full Chapters Accordion / List in Tab 2 */
+    .full-chapters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .full-chapter-item {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.28);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .full-chapter-item:hover {
+      border-color: var(--gold);
+      box-shadow: 0 6px 20px rgba(212,160,23,0.1);
+    }
+    .chapter-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-titles {
+      flex: 1;
+    }
+    .chapter-titles h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      margin: 0;
+      color: var(--text-dark);
+    }
+    .chapter-titles .telugu-title {
+      font-size: 0.95rem;
+      color: var(--deep-red);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+    .chapter-summary-body {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--text-mid);
+      border-top: 1px dashed rgba(212,160,23,0.25);
+      padding-top: 0.85rem;
+      margin-top: 0.6rem;
+    }
+    .chapter-summary-body .te-summary {
+      margin-top: 0.5rem;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      background: rgba(255,111,0,0.04);
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+    }
+
+    /* AI Q&A Card inside Tab 4 */
+    .ai-qa-box {
+      background: linear-gradient(135deg, #11052C 0%, #20053B 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(212,160,23,0.4);
+      box-shadow: 0 10px 30px rgba(17,5,44,0.3);
+    }
+    .ai-qa-box h2 {
+      color: var(--gold);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+    .suggested-chips-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .suggest-chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(212,160,23,0.35);
+      color: #FFF2D6;
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .suggest-chip:hover {
+      background: rgba(212,160,23,0.25);
+      border-color: var(--gold);
+    }
+    .ai-input-wrap {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .ai-input-wrap input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(212,160,23,0.4);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .ai-input-wrap input::placeholder { color: rgba(255,255,255,0.5); }
+    .ai-input-wrap input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
+    .btn-ask-ai {
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: var(--text-dark);
+      border: none;
+      font-weight: 700;
+      padding: 0 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn-ask-ai:hover { transform: scale(1.03); }
+    .ai-response-area {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      min-height: 120px;
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    /* Shloka Quote Box */
     .shloka-quote-box {
       background: #FFF8EF;
       border-left: 4px solid var(--gold);
@@ -353,9 +629,9 @@
       background: rgba(255,111,0,0.1);
       border: 1px solid rgba(255,111,0,0.3);
       color: var(--deep-red);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 50px;
     }
 
@@ -368,6 +644,10 @@
       .puran-controls { flex-direction: column; align-items: stretch; }
       .filter-pills { justify-content: center; }
       .lang-switcher { justify-content: center; }
+      .single-hero-card { padding: 1.5rem; }
+      .purana-tabs-nav { flex-wrap: nowrap; }
+      .ai-input-wrap { flex-direction: column; }
+      .btn-ask-ai { padding: 0.8rem; }
     }
   </style>
 </head>
@@ -399,54 +679,161 @@
   </div>
 </nav>
 
-<!-- ===== HERO ===== -->
-<header class="puran-hero">
-  <span class="badge">Vedic Scripture Archive</span>
-  <div class="sanskrit-title" lang="sa">अष्टादश महापुराणानि • అష్టాదశ మహాపురాణాలు</div>
-  <h1>The 18 Maha Puranas</h1>
-  <p>Journey through the four hundred thousand sacred verses of Sanatana Dharma. Complete encyclopedic library in English, Telugu (తెలుగు), and Sanskrit (संस्कृत).</p>
+<!-- ===== ALL PURANAS VIEW (GRID) ===== -->
+<div id="allPuranasView">
+  <!-- HERO -->
+  <header class="puran-hero">
+    <span class="badge">Vedic Scripture Archive</span>
+    <div class="sanskrit-title" lang="sa">अष्टादश महापुराणानि • అష్టాదశ మహాపురాణాలు</div>
+    <h1>The 18 Maha Puranas</h1>
+    <p>Journey through the four hundred thousand sacred verses of Sanatana Dharma. Complete encyclopedic library in English, Telugu (తెలుగు), and Sanskrit (संस्कृत).</p>
 
-  <div class="mnemonic-box">
-    <strong>Traditional Sanskrit Mnemonic (శ్లోకం):</strong>
-    <div class="mnemonic-shloka" lang="sa">"म-द्वयं भ-द्वयं चैव ब्र-त्रयं व-चतुष्टयम्। अ-ना-प-लिं-ग-कू-स्का-नि पुराणानि पृथक् पृथक्॥"</div>
-    <small style="color:var(--text-mid);">2 Matsya/Markandeya • 2 Bhagavata/Bhavishya • 3 Brahma/Brahmanda/Brahmavaivarta • 4 Vishnu/Varaha/Vamana/Vayu • 7 Agni/Narada/Padma/Linga/Garuda/Kurma/Skanda</small>
-  </div>
-</header>
+    <div class="mnemonic-box">
+      <strong>Traditional Sanskrit Mnemonic (శ్లోకం):</strong>
+      <div class="mnemonic-shloka" lang="sa">"म-द्वयं भ-द्वयं चैव ब्र-त्रयं व-चतुष्टयम्। अ-ना-प-लिं-ग-कू-स्का-नि पुराणानि पृथక్ पृथక్॥"</div>
+      <small style="color:var(--text-mid);">2 Matsya/Markandeya • 2 Bhagavata/Bhavishya • 3 Brahma/Brahmanda/Brahmavaivarta • 4 Vishnu/Varaha/Vamana/Vayu • 7 Agni/Narada/Padma/Linga/Garuda/Kurma/Skanda</small>
+    </div>
+  </header>
 
-<!-- ===== CONTROLS ===== -->
-<div class="puran-controls">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="puranSearch" placeholder="Search by name, deity, or stotra (e.g., Krishna, Lalita, Shiva)..." aria-label="Search Puranas" />
+  <!-- CONTROLS -->
+  <div class="puran-controls">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="puranSearch" placeholder="Search by name, deity, or stotra (e.g., Brahma, Krishna, Shiva)..." aria-label="Search Puranas" />
+    </div>
+
+    <div class="filter-pills" role="tablist">
+      <button type="button" class="pill-btn active" data-cat="all">All 18 Puranas</button>
+      <button type="button" class="pill-btn" data-cat="Vaishnava">🪷 Vaishnava (6)</button>
+      <button type="button" class="pill-btn" data-cat="Shaiva">🔱 Shaiva (6)</button>
+      <button type="button" class="pill-btn" data-cat="Brahma">☀️ Brahma (6)</button>
+    </div>
+
+    <div class="lang-switcher" aria-label="Language view selector">
+      <button type="button" class="lang-btn active" data-lang="en">English</button>
+      <button type="button" class="lang-btn" data-lang="te">తెలుగు</button>
+      <button type="button" class="lang-btn" data-lang="sa">संस्कृतम्</button>
+    </div>
   </div>
 
-  <div class="filter-pills" role="tablist">
-    <button type="button" class="pill-btn active" data-cat="all">All 18 Puranas</button>
-    <button type="button" class="pill-btn" data-cat="Vaishnava">🪷 Vaishnava (6)</button>
-    <button type="button" class="pill-btn" data-cat="Shaiva">🔱 Shaiva (6)</button>
-    <button type="button" class="pill-btn" data-cat="Brahma">☀️ Brahma (6)</button>
-  </div>
-
-  <div class="lang-switcher" aria-label="Language view selector">
-    <button type="button" class="lang-btn active" data-lang="en">English</button>
-    <button type="button" class="lang-btn" data-lang="te">తెలుగు</button>
-    <button type="button" class="lang-btn" data-lang="sa">संस्कृतम्</button>
-  </div>
+  <!-- GRID CONTAINER -->
+  <main class="puranas-grid" id="puranasGrid" aria-label="18 Maha Puranas list"></main>
 </div>
 
-<!-- ===== GRID CONTAINER ===== -->
-<main class="puranas-grid" id="puranasGrid" aria-label="18 Maha Puranas list"></main>
+<!-- ===== DEDICATED SINGLE PURANA VIEW (matching kundli.online/services/puran/brahma-purana) ===== -->
+<div id="singlePuranaView" class="single-purana-container" aria-live="polite">
+  <div class="back-btn-strip">
+    <button type="button" class="btn-back-all" onclick="showAllPuranas()">
+      <span>←</span> <span>All 18 Puranas</span>
+    </button>
+  </div>
 
-<!-- ===== MODAL DRAWER ===== -->
-<div class="puran-modal" id="puranModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-  <div class="modal-box">
-    <div class="modal-header">
-      <button type="button" class="modal-close-btn" onclick="closePuranModal()" aria-label="Close dialog">✕</button>
-      <div id="modalCategoryTag" class="cat-tag" style="display:inline-block; margin-bottom:0.5rem;"></div>
-      <h2 id="modalTitle" style="font-family:'Playfair Display',serif; font-size:1.8rem; margin:0 0 0.3rem;"></h2>
-      <div id="modalSubTitles" style="color:var(--gold); font-size:1rem;"></div>
+  <div class="single-hero-card" id="singleHeroCard">
+    <div class="hero-om-watermark">🕉️</div>
+    <div id="singleCatBadge" class="cat-tag" style="display:inline-block; margin-bottom:0.6rem;"></div>
+    <h1 id="singlePuranaTitle"></h1>
+    <div class="single-hero-sub" id="singlePuranaSub"></div>
+    <div class="single-stat-chips" id="singleStatChips"></div>
+  </div>
+
+  <!-- TAB NAVIGATION -->
+  <div class="purana-tabs-nav" role="tablist">
+    <button type="button" class="tab-nav-btn active" data-tab="tabOverview">
+      <span>📖</span> <span>Overview</span>
+    </button>
+    <button type="button" class="tab-nav-btn" data-tab="tabChapters">
+      <span>📚</span> <span>Chapters &amp; Sections</span>
+    </button>
+    <button type="button" class="tab-nav-btn" data-tab="tabStotras">
+      <span>✨</span> <span>Stotras &amp; Teachings</span>
+    </button>
+    <button type="button" class="tab-nav-btn" data-tab="tabAi">
+      <span>🤖</span> <span>Ask AI Pandit</span>
+    </button>
+  </div>
+
+  <!-- TAB 1: OVERVIEW -->
+  <div class="puran-tab-pane active" id="tabOverview">
+    <div class="content-box-card">
+      <h2><span>📜</span> Sacred Exposition (వివరణ)</h2>
+      <div id="singleOverviewText" style="line-height:1.75; color:var(--text-dark); font-size:1rem;"></div>
+      
+      <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px dashed rgba(212,160,23,0.3);">
+        <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:0 0 0.5rem;">🌺 తెలుగు సారాంశం (Telugu Essence)</h3>
+        <p id="singleTeluguText" style="line-height:1.7; color:var(--text-mid); font-size:0.95rem;"></p>
+      </div>
     </div>
-    <div class="modal-body" id="modalContent"></div>
+
+    <!-- Quick Chapters Index -->
+    <div class="content-box-card">
+      <h2><span>📑</span> Chapter Index (10 Core Sections)</h2>
+      <p style="color:var(--text-mid); font-size:0.9rem; margin-top:-0.5rem; margin-bottom:1rem;">
+        Click any section below to jump to the full chapter breakdown.
+      </p>
+      <div class="chapter-quick-grid" id="chapterQuickGrid"></div>
+    </div>
+
+    <!-- Sacred Mangalacharanam Shloka -->
+    <div class="content-box-card">
+      <h2><span>🕉️</span> Sacred Mangalacharanam (Invocation Shloka)</h2>
+      <div class="shloka-quote-box">
+        <div class="sq-sanskrit" id="singleShlokaSa" lang="sa"></div>
+        <div class="sq-trans" id="singleShlokaTrans"></div>
+        <div class="sq-meaning" id="singleShlokaMean"></div>
+        <button type="button" class="btn btn-outline" style="margin-top:0.8rem; padding:4px 14px; font-size:0.8rem; border-color:var(--gold); color:var(--deep-red);" id="btnListenShloka">
+          🔊 Listen Recitation
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: CHAPTERS -->
+  <div class="puran-tab-pane" id="tabChapters">
+    <div class="content-box-card">
+      <h2><span>📚</span> Complete 10 Chapters &amp; Detailed Discourse</h2>
+      <p style="color:var(--text-mid); font-size:0.9rem; margin-top:-0.5rem; margin-bottom:1.5rem;">
+        Explore the sacred teachings, dialogues, and cosmic narrations section by section in English and Telugu.
+      </p>
+      <div class="full-chapters-list" id="fullChaptersList"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: STOTRAS & TEACHINGS -->
+  <div class="puran-tab-pane" id="tabStotras">
+    <div class="content-box-card">
+      <h2><span>✨</span> Origin of Sacred Stotras &amp; Prayers</h2>
+      <p style="color:var(--text-mid); font-size:0.9rem; margin-top:-0.5rem;">
+        Timeless hymns and shlokas found within this sacred Mahapurana:
+      </p>
+      <div class="stotra-tags" id="singleStotraTags"></div>
+    </div>
+
+    <div class="content-box-card">
+      <h2><span>📖</span> Famous Episodes &amp; Cosmic Legends</h2>
+      <ul id="singleEpisodesList" style="line-height:1.8; padding-left:1.3rem; color:var(--text-dark); margin:0;"></ul>
+    </div>
+  </div>
+
+  <!-- TAB 4: ASK AI PANDIT -->
+  <div class="puran-tab-pane" id="tabAi">
+    <div class="ai-qa-box">
+      <h2><span>🤖</span> Ask AI Pandit About This Purana</h2>
+      <p style="color:rgba(255,255,255,0.8); font-size:0.92rem; margin:0 0 1rem; line-height:1.5;">
+        Our AI Vedic Scholar provides authentic answers restricted specifically to the sacred teachings of this Purana.
+      </p>
+
+      <div style="font-size:0.8rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.05em;">Suggested Questions:</div>
+      <div class="suggested-chips-bar" id="aiSuggestedChips"></div>
+
+      <div class="ai-input-wrap">
+        <input type="text" id="aiPuranaInput" placeholder="Ask anything about this Purana..." aria-label="Ask AI about this Purana" />
+        <button type="button" class="btn-ask-ai" id="btnAskAi">Ask Pandit</button>
+      </div>
+
+      <div class="ai-response-area" id="aiPuranaResponse">
+        <em>Click one of the suggested questions above, or type your own question to ask AI Pandit.</em>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -469,7 +856,7 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Devotion & AI</h4>
+      <h4>Devotion &amp; AI</h4>
       <ul>
         <li><a href="palm-reading.html">Palm Reading</a></li>
         <li><a href="ai-archana.html">AI Pandit</a></li>
@@ -492,12 +879,18 @@
   let activeCategory = 'all';
   let activeLang = 'en';
   let searchTerm = '';
+  let currentPurana = null;
 
+  const allView = document.getElementById('allPuranasView');
+  const singleView = document.getElementById('singlePuranaView');
   const grid = document.getElementById('puranasGrid');
   const searchInput = document.getElementById('puranSearch');
   const pillBtns = document.querySelectorAll('.pill-btn');
   const langBtns = document.querySelectorAll('.lang-btn');
+  const tabBtns = document.querySelectorAll('.tab-nav-btn');
+  const tabPanes = document.querySelectorAll('.puran-tab-pane');
 
+  // Render the 18 Puranas Grid
   function renderPuranas() {
     if (typeof PURANAS === 'undefined' || !grid) return;
 
@@ -521,40 +914,251 @@
 
     grid.innerHTML = filtered.map(p => {
       let title = p.nameEn;
-      let subtitle = `${p.nameSa} • ${p.nameTe}`;
+      let subtitle = p.nameSa + ' • ' + p.nameTe;
       let excerpt = p.summaryEn;
 
       if (activeLang === 'te') {
         title = p.nameTe;
-        subtitle = `${p.nameEn} • ${p.nameSa}`;
+        subtitle = p.nameEn + ' • ' + p.nameSa;
         excerpt = p.summaryTe;
       } else if (activeLang === 'sa') {
         title = p.nameSa;
-        subtitle = `${p.nameEn} • ${p.nameTe}`;
+        subtitle = p.nameEn + ' • ' + p.nameTe;
         excerpt = p.summaryEn;
       }
 
-      const catClass = `cat-${p.category.toLowerCase()}`;
+      const catClass = 'cat-' + p.category.toLowerCase();
 
-      return `
-        <article class="purana-card" role="button" tabindex="0" onclick="openPuranModal('${p.id}')">
-          <div class="card-top">
-            <span class="purana-emoji">${p.emoji}</span>
-            <span class="cat-tag ${catClass}">${p.category} • ${p.guna}</span>
-          </div>
-          <h3>${title}</h3>
-          <div class="purana-sub">${subtitle}</div>
-          <div class="meta-pills">
-            <span class="meta-pill">📜 ${p.verseCount.toLocaleString()} verses</span>
-            <span class="meta-pill">🪷 ${p.primaryDeities[0]}</span>
-          </div>
-          <p class="purana-excerpt">${excerpt.slice(0, 150)}...</p>
-          <button type="button" class="btn-read-purana" aria-label="Read full ${p.nameEn}">
-            <span>Read Details & Shlokas</span> <span aria-hidden="true">→</span>
-          </button>
-        </article>
-      `;
+      return '<article class="purana-card" role="button" tabindex="0" onclick="viewPurana(\'' + (p.slug || p.id) + '\')">' +
+          '<div class="card-top">' +
+            '<span class="purana-emoji">' + p.emoji + '</span>' +
+            '<span class="cat-tag ' + catClass + '">' + p.category + ' • ' + p.guna + '</span>' +
+          '</div>' +
+          '<h3>' + title + '</h3>' +
+          '<div class="purana-sub">' + subtitle + '</div>' +
+          '<div class="meta-pills">' +
+            '<span class="meta-pill">📜 ' + p.verseCount.toLocaleString() + ' verses</span>' +
+            '<span class="meta-pill">🪷 ' + p.primaryDeities[0] + '</span>' +
+            '<span class="meta-pill">📚 10 Chapters</span>' +
+          '</div>' +
+          '<p class="purana-excerpt">' + excerpt.slice(0, 150) + '...</p>' +
+          '<button type="button" class="btn-read-purana" aria-label="Read full ' + p.nameEn + '">' +
+            '<span>Read Complete Chapters &amp; AI</span> <span aria-hidden="true">→</span>' +
+          '</button>' +
+        '</article>';
     }).join('');
+  }
+
+  // Switch to dedicated Single Purana View
+  window.viewPurana = function(idOrSlug) {
+    if (typeof PURANAS === 'undefined') return;
+    const p = PURANAS.find(item => item.slug === idOrSlug || item.id === idOrSlug);
+    if (!p) return;
+
+    currentPurana = p;
+
+    // Update URL query param without reload
+    const newUrl = window.location.pathname + '?id=' + (p.slug || p.id);
+    window.history.pushState({ puranSlug: p.slug || p.id }, '', newUrl);
+
+    // Hero details
+    const catClass = 'cat-' + p.category.toLowerCase();
+    const catTag = document.getElementById('singleCatBadge');
+    catTag.className = 'cat-tag ' + catClass;
+    catTag.textContent = p.category + ' Mahapurana (' + p.guna + ' Guna)';
+
+    document.getElementById('singlePuranaTitle').textContent = p.emoji + ' ' + p.nameEn;
+    document.getElementById('singlePuranaSub').textContent = p.nameSa + ' • ' + p.nameTe;
+
+    // Stats
+    document.getElementById('singleStatChips').innerHTML =
+      '<div class="stat-chip"><span>🪷 Deity:</span> <strong>' + p.primaryDeities.join(', ') + '</strong></div>' +
+      '<div class="stat-chip"><span>📜 Verses:</span> <strong>~' + p.verseCount.toLocaleString() + '</strong></div>' +
+      '<div class="stat-chip"><span>📚 Structure:</span> <strong>10 Core Sections (' + p.structure + ')</strong></div>' +
+      '<div class="stat-chip"><span>✍️ Author:</span> <strong>' + p.author + '</strong></div>';
+
+    // Overview tab
+    document.getElementById('singleOverviewText').innerHTML = '<p>' + p.summaryEn + '</p>';
+    document.getElementById('singleTeluguText').textContent = p.summaryTe;
+
+    // Chapter Quick Grid in Overview
+    const quickGrid = document.getElementById('chapterQuickGrid');
+    if (p.chapters && p.chapters.length > 0) {
+      quickGrid.innerHTML = p.chapters.map(c =>
+        '<div class="chapter-quick-btn" onclick="goToChapter(' + c.number + ')">' +
+          '<div class="chap-badge">' + c.number + '</div>' +
+          '<div class="chap-quick-text">' + c.titleEn + '<br/><small style="color:var(--deep-red); font-weight:normal;">' + c.titleTe + '</small></div>' +
+        '</div>'
+      ).join('');
+    } else {
+      quickGrid.innerHTML = '<p style="color:var(--text-mid);">No chapter index available.</p>';
+    }
+
+    // Mangalacharanam Shloka
+    document.getElementById('singleShlokaSa').textContent = p.keyShloka.sanskrit;
+    document.getElementById('singleShlokaTrans').textContent = p.keyShloka.transliteration;
+    document.getElementById('singleShlokaMean').innerHTML = '<strong>Meaning:</strong> ' + p.keyShloka.meaningEn;
+    
+    document.getElementById('btnListenShloka').onclick = function() {
+      speakShloka(p.keyShloka.sanskrit);
+    };
+
+    // Tab 2: Full Chapters List
+    const fullList = document.getElementById('fullChaptersList');
+    if (p.chapters && p.chapters.length > 0) {
+      fullList.innerHTML = p.chapters.map(c =>
+        '<div class="full-chapter-item" id="chapter-item-' + c.number + '">' +
+          '<div class="chapter-head">' +
+            '<div class="chap-badge" style="width:38px; height:38px; font-size:1rem;">' + c.number + '</div>' +
+            '<div class="chapter-titles">' +
+              '<h3>' + c.titleEn + '</h3>' +
+              '<div class="telugu-title">' + c.titleTe + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="chapter-summary-body">' +
+            '<div>' + c.summaryEn + '</div>' +
+            '<div class="te-summary"><strong>తెలుగు వివరణ:</strong> ' + c.summaryTe + '</div>' +
+          '</div>' +
+        '</div>'
+      ).join('');
+    } else {
+      fullList.innerHTML = '<p>No chapter data found.</p>';
+    }
+
+    // Tab 3: Stotras & Episodes
+    document.getElementById('singleStotraTags').innerHTML = p.famousStotras.map(s =>
+      '<span class="stotra-tag">✨ ' + s + '</span>'
+    ).join('');
+
+    document.getElementById('singleEpisodesList').innerHTML = p.famousStories.map(story =>
+      '<li>' + story + '</li>'
+    ).join('');
+
+    // Tab 4: AI Pandit setup
+    setupAiTab(p);
+
+    // Switch view
+    allView.style.display = 'none';
+    singleView.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Reset to Overview tab
+    switchTab('tabOverview');
+  };
+
+  window.showAllPuranas = function() {
+    window.history.pushState(null, '', window.location.pathname);
+    singleView.classList.remove('active');
+    allView.style.display = 'block';
+    currentPurana = null;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.goToChapter = function(num) {
+    switchTab('tabChapters');
+    setTimeout(() => {
+      const el = document.getElementById('chapter-item-' + num);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 150);
+  };
+
+  function switchTab(tabId) {
+    tabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+    tabPanes.forEach(pane => {
+      pane.classList.toggle('active', pane.id === tabId);
+    });
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchTab(btn.dataset.tab);
+    });
+  });
+
+  // AI Tab interaction
+  function setupAiTab(p) {
+    const chipsContainer = document.getElementById('aiSuggestedChips');
+    const input = document.getElementById('aiPuranaInput');
+    const responseBox = document.getElementById('aiPuranaResponse');
+
+    const suggested = [
+      'What is the primary message of ' + p.nameEn + '?',
+      'Who are the main deities worshipped in ' + p.nameEn + '?',
+      'What famous stotras or hymns originated here?',
+      'Summarize the 10 chapters of ' + p.nameEn + '.'
+    ];
+
+    chipsContainer.innerHTML = suggested.map(q =>
+      '<button type="button" class="suggest-chip" onclick="askAiQuestion(\'' + encodeURIComponent(q) + '\')">' + q + '</button>'
+    ).join('');
+
+    responseBox.innerHTML = '<em>Ask any question about <strong>' + p.nameEn + '</strong>. AI Pandit is ready to answer based on Vedic scriptures.</em>';
+    input.value = '';
+  }
+
+  window.askAiQuestion = function(encodedQ) {
+    const q = decodeURIComponent(encodedQ);
+    const input = document.getElementById('aiPuranaInput');
+    input.value = q;
+    handleAiSubmit();
+  };
+
+  function handleAiSubmit() {
+    if (!currentPurana) return;
+    const input = document.getElementById('aiPuranaInput');
+    const q = input.value.trim();
+    if (!q) return;
+
+    const responseBox = document.getElementById('aiPuranaResponse');
+    responseBox.innerHTML = '<span style="color:var(--gold);">🕉️ Consulting ancient scriptures...</span>';
+
+    setTimeout(() => {
+      const p = currentPurana;
+      let ans = '';
+      const qLower = q.toLowerCase();
+
+      if (qLower.includes('message') || qLower.includes('teach') || qLower.includes('philosophy') || qLower.includes('primary')) {
+        ans = '<strong>Answer regarding ' + p.nameEn + ':</strong><br/>' +
+               p.summaryEn + '<br/><br/>' +
+               'The central philosophical teaching emphasizes devotion to ' + p.primaryDeities.join(' and ') + ', adherence to Sanatana Dharma, and achieving liberation (Moksha) through spiritual wisdom and sacred conduct.';
+      } else if (qLower.includes('deity') || qLower.includes('god') || qLower.includes('worship')) {
+        ans = '<strong>Primary Deities in ' + p.nameEn + ':</strong><br/>' +
+               p.primaryDeities.join(', ') + ' are the Supreme Deities celebrated in this scripture. It belongs to the <em>' + p.category + '</em> category (' + p.guna + ' Guna), consisting of approximately ' + p.verseCount.toLocaleString() + ' sacred shlokas.';
+      } else if (qLower.includes('stotra') || qLower.includes('hymn') || qLower.includes('mantra')) {
+        ans = '<strong>Famous Stotras originating from ' + p.nameEn + ':</strong><br/>' +
+               '<ul>' + p.famousStotras.map(s => '<li><strong>' + s + '</strong></li>').join('') + '</ul>' +
+               'These stotras are chanted worldwide for divine grace, protection, and spiritual upliftment.';
+      } else if (qLower.includes('chapter') || qLower.includes('section') || qLower.includes('summary')) {
+        ans = '<strong>10 Chapter Overview of ' + p.nameEn + ':</strong><br/>' +
+               '<ol>' + p.chapters.map(c => '<li><strong>' + c.titleEn + ' (' + c.titleTe + '):</strong> ' + c.summaryEn + '</li>').join('') + '</ol>';
+      } else {
+        ans = '<strong>Insight from ' + p.nameEn + ':</strong><br/>' +
+               'The ' + p.nameEn + ' (composed by ' + p.author + ') expounds on cosmic creation, genealogy, righteous conduct, and devotion to ' + p.primaryDeities[0] + '. Key stories include: ' + p.famousStories.slice(0, 3).join('; ') + '.<br/><br/>' +
+               'May the blessings of ' + p.primaryDeities[0] + ' and sacred scripture illuminate your spiritual path! 🕉️';
+      }
+
+      responseBox.innerHTML = ans;
+    }, 450);
+  }
+
+  document.getElementById('btnAskAi').addEventListener('click', handleAiSubmit);
+  document.getElementById('aiPuranaInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleAiSubmit();
+  });
+
+  // Speech synthesis for Shlokas
+  function speakShloka(text) {
+    if (!('speechSynthesis' in window)) {
+      alert("Speech synthesis is not supported on this browser.");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'hi-IN';
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
   }
 
   // Filter Buttons
@@ -583,85 +1187,26 @@
     renderPuranas();
   });
 
-  // Modal logic
-  window.openPuranModal = function(id) {
-    const p = PURANAS.find(item => item.id === id);
-    if (!p) return;
-
-    document.getElementById('modalCategoryTag').className = `cat-tag cat-${p.category.toLowerCase()}`;
-    document.getElementById('modalCategoryTag').textContent = `${p.category} Mahapurana (${p.guna} Guna)`;
-    document.getElementById('modalTitle').textContent = `${p.emoji} ${p.nameEn}`;
-    document.getElementById('modalSubTitles').textContent = `${p.nameSa} • ${p.nameTe}`;
-
-    const content = `
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem; background:var(--light-bg); padding:1.2rem; border-radius:12px;">
-        <div><strong>📜 Verses:</strong> ${p.verseCount.toLocaleString()}</div>
-        <div><strong>📖 Structure:</strong> ${p.structure}</div>
-        <div><strong>✍️ Compiler:</strong> ${p.author}</div>
-        <div><strong>🪷 Primary Deities:</strong> ${p.primaryDeities.join(', ')}</div>
-      </div>
-
-      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:1.5rem 0 0.5rem;">🌟 Famous Stotras & Scripture Origins</h3>
-      <div class="stotra-tags">
-        ${p.famousStotras.map(s => `<span class="stotra-tag">✨ ${s}</span>`).join('')}
-      </div>
-
-      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:1.5rem 0 0.5rem;">📖 Key Narratives & Sacred Episodes</h3>
-      <ul style="line-height:1.7; padding-left:1.2rem; color:var(--text-dark);">
-        ${p.famousStories.map(story => `<li>${story}</li>`).join('')}
-      </ul>
-
-      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:1.5rem 0 0.5rem;">🌸 English Exposition</h3>
-      <p style="line-height:1.7; color:var(--text-dark);">${p.summaryEn}</p>
-
-      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:1.5rem 0 0.5rem;">🌺 తెలుగు సారాంశం (Telugu Summary)</h3>
-      <p style="line-height:1.7; color:var(--text-dark); font-size:0.95rem;">${p.summaryTe}</p>
-
-      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:1.5rem 0 0.5rem;">🕉️ Sacred Mangalacharanam (Invocation Shloka)</h3>
-      <div class="shloka-quote-box">
-        <div class="sq-sanskrit" lang="sa">${p.keyShloka.sanskrit}</div>
-        <div class="sq-trans">${p.keyShloka.transliteration}</div>
-        <div class="sq-meaning"><strong>Meaning:</strong> ${p.keyShloka.meaningEn}</div>
-        <button type="button" class="btn btn-outline" style="margin-top:0.8rem; padding:4px 14px; font-size:0.8rem; border-color:var(--gold); color:var(--deep-red);" onclick="speakShloka('${encodeURIComponent(p.keyShloka.sanskrit)}')">
-          🔊 Listen Recitation
-        </button>
-      </div>
-    `;
-
-    document.getElementById('modalContent').innerHTML = content;
-    document.getElementById('puranModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closePuranModal = function() {
-    document.getElementById('puranModal').classList.remove('open');
-    document.body.style.overflow = '';
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
-  };
-
-  window.speakShloka = function(encodedText) {
-    if (!('speechSynthesis' in window)) {
-      alert("Speech synthesis is not supported on this browser.");
-      return;
+  // Check URL query parameters for direct links (e.g. ?id=brahma-purana or ?id=padma-purana)
+  function checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    if (id) {
+      viewPurana(id);
+    } else {
+      showAllPuranas();
     }
-    window.speechSynthesis.cancel();
-    const text = decodeURIComponent(encodedText);
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'hi-IN'; // closest phonetics for Sanskrit
-    u.rate = 0.85;
-    window.speechSynthesis.speak(u);
-  };
+  }
 
-  document.getElementById('puranModal').addEventListener('click', (e) => {
-    if (e.target.id === 'puranModal') closePuranModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closePuranModal();
+  window.addEventListener('popstate', (e) => {
+    checkUrlParams();
   });
 
   // Initial render
-  document.addEventListener('DOMContentLoaded', renderPuranas);
+  document.addEventListener('DOMContentLoaded', () => {
+    renderPuranas();
+    checkUrlParams();
+  });
 })();
 </script>
 </body>
