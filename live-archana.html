@@ -170,7 +170,7 @@
 <body>
 <div id="page-loader"><div class="om">🕉️</div></div>
 
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
       <span class="brand-om">🕉️</span>
@@ -178,18 +178,18 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="gods.html">Choose Deity</a></li>
-      <li><a href="live-archana.html" class="active">Live Archana</a></li>
+      <li><a href="palm-reading.html">Palm Reading</a></li>
+      <li><a href="panchang-calendar.html">Panchang</a></li>
+      <li><a href="gods.html">Deities</a></li>
+      <li><a href="live-archana.html" class="active" aria-current="page">Archana</a></li>
       <li><a href="chalisa.html">Chalisa</a></li>
       <li><a href="shlokas.html">Shlokas</a></li>
       <li><a href="healing.html">432 Hz</a></li>
       <li><a href="ai-archana.html">AI Pandit</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -556,7 +556,7 @@ function showResult(fname, lname, gotra, nakshataData, archanaType, wish, godId 
       const start = ctx.currentTime + i * 2.5;
       gain.gain.setValueAtTime(0, start);
       gain.gain.linearRampToValueAtTime(0.12, start + 0.5);
-      gain.gain.linearRampToValueAtTime(0, start + 2.2);
+      gain.gain.linearRampToValueAtTime(0.2, start + 2.2);
       osc.start(start); osc.stop(start + 2.5);
     });
   }, 500);

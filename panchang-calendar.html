@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedic Panchang Calendar | Divya Mangalam</title>
+  <link rel="stylesheet" href="style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+  <style>
+    /* Page specific styles */
+    :root {
+      --calendar-border: #D4A017;
+      --calendar-bg: #FFF8EF;
+      --calendar-highlight: rgba(212, 160, 23, 0.1);
+      --success-color: #2e7d32;
+      --error-color: #c62828;
+    }
+    
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+    }
+    
+    .calendar-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .hero h1 {
+      color: var(--saffron);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--calendar-bg);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--calendar-border);
+      margin-bottom: 1.5rem;
+    }
+    
+    .toolbar-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .toolbar select, .toolbar button {
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      border: 1px solid var(--gold);
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    
+    .toolbar button {
+      background: var(--saffron);
+      color: white;
+      border: none;
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+    }
+    
+    .weekday-header {
+      text-align: center;
+      font-weight: bold;
+      color: var(--text-mid);
+      padding: 0.5rem;
+    }
+    
+    .day-cell {
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      border-radius: 8px;
+      padding: 0.5rem;
+      min-height: 120px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .day-cell:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-color: var(--gold);
+    }
+    
+    .day-cell.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    
+    .day-cell.today {
+      border: 2px solid var(--gold);
+      background: var(--calendar-highlight);
+    }
+    
+    .day-cell.ekadashi {
+      background: rgba(46, 125, 50, 0.05);
+    }
+    
+    .date-num {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .tithi-name {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+    
+    .paksha-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #eee;
+      margin-bottom: 0.25rem;
+    }
+    
+    .paksha-badge.shukla { background: #e3f2fd; color: #1565c0; }
+    .paksha-badge.krishna { background: #eceff1; color: #455a64; }
+    
+    .nakshatra-name, .sunrise-time {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+    }
+    
+    .festival {
+      color: var(--saffron);
+      font-weight: bold;
+      font-size: 0.75rem;
+      margin-top: auto;
+    }
+    
+    .moon-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .filter-dot {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid white;
+      display: none;
+    }
+    
+    .filter-dot.good {
+      background: var(--success-color);
+      display: block;
+    }
+    
+    .filter-dot.bad {
+      background: var(--error-color);
+      display: block;
+    }
+    
+    .detail-panel {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--gold);
+      display: none;
+    }
+    
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    .detail-section h3 {
+      color: var(--saffron);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .choghadiya-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    
+    .choghadiya-table th, .choghadiya-table td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    
+    .choghadiya-table th {
+      background: var(--calendar-bg);
+    }
+    
+    .filter-section {
+      margin-top: 3rem;
+      background: var(--calendar-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--calendar-border);
+      text-align: center;
+    }
+    
+    .filter-section h2 {
+      color: var(--saffron);
+      margin-bottom: 1rem;
+    }
+    
+    .filter-form {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .filter-form select, .filter-form button {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--gold);
+      font-family: inherit;
+    }
+    
+    .filter-form button {
+      background: var(--saffron);
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+      .calendar-grid {
+        grid-template-columns: 1fr;
+      }
+      .weekday-header { display: none; }
+      .day-cell {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        min-height: auto;
+      }
+      .day-cell.empty { display: none; }
+      .date-num { margin-right: 1rem; min-width: 30px; }
+      .moon-icon { position: static; margin-left: 0.5rem; }
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <span class="brand-om">🕉️</span>
+        <span class="brand-name">Divya Mangalam</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="palm-reading.html">Palm Reading</a></li>
+        <li><a href="panchang-calendar.html" class="active">Panchang</a></li>
+        <li><a href="gods.html">Deities</a></li>
+        <li><a href="live-archana.html">Archana</a></li>
+        <li><a href="chalisa.html">Chalisa</a></li>
+        <li><a href="shlokas.html">Shlokas</a></li>
+        <li><a href="healing.html">432 Hz</a></li>
+        <li><a href="ai-archana.html">AI Pandit</a></li>
+      </ul>
+      <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="calendar-container">
+    <div class="hero">
+      <h1>📅 Vedic Panchang Calendar</h1>
+      <p>Discover auspicious timings, tithis, and festivals for your spiritual journey</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-controls">
+        <button id="prevMonth" aria-label="Previous Month">&larr;</button>
+        <select id="monthSelect" aria-label="Select Month"></select>
+        <select id="yearSelect" aria-label="Select Year"></select>
+        <button id="nextMonth" aria-label="Next Month">&rarr;</button>
+      </div>
+      <button id="todayBtn">Today</button>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid">
+      <div class="weekday-header">Sun</div>
+      <div class="weekday-header">Mon</div>
+      <div class="weekday-header">Tue</div>
+      <div class="weekday-header">Wed</div>
+      <div class="weekday-header">Thu</div>
+      <div class="weekday-header">Fri</div>
+      <div class="weekday-header">Sat</div>
+      <!-- Days will be generated here by JS -->
+    </div>
+
+    <div class="detail-panel" id="detailPanel">
+      <h2 id="detailTitle" style="text-align: center; color: var(--text-dark); margin-bottom: 1.5rem;"></h2>
+      <div class="detail-grid">
+        <div class="detail-section">
+          <h3>Panchang Elements</h3>
+          <div class="detail-item"><span>Tithi:</span><strong id="dTithi"></strong></div>
+          <div class="detail-item"><span>Nakshatra:</span><strong id="dNakshatra"></strong></div>
+          <div class="detail-item"><span>Yoga:</span><strong id="dYoga"></strong></div>
+          <div class="detail-item"><span>Karana:</span><strong id="dKarana"></strong></div>
+          <div class="detail-item"><span>Moon Rashi:</span><strong id="dMoonRashi"></strong></div>
+        </div>
+        
+        <div class="detail-section">
+          <h3>Muhurta & Timings</h3>
+          <div class="detail-item"><span>Sunrise/Sunset:</span><strong id="dSunTimes"></strong></div>
+          <div class="detail-item" style="color: var(--error-color)"><span>Rahukaal:</span><strong id="dRahukaal"></strong></div>
+          <div class="detail-item" style="color: var(--error-color)"><span>Yamagandam:</span><strong id="dYamagandam"></strong></div>
+          <div class="detail-item" style="color: var(--error-color)"><span>Gulika Kalam:</span><strong id="dGulika"></strong></div>
+          <div class="detail-item" style="color: var(--success-color)"><span>Abhijit:</span><strong id="dAbhijit"></strong></div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Day Choghadiya</h3>
+          <table class="choghadiya-table" id="dChoghadiyaDay">
+            <tbody></tbody>
+          </table>
+        </div>
+        
+        <div class="detail-section">
+          <h3>Night Choghadiya</h3>
+          <table class="choghadiya-table" id="dChoghadiyaNight">
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h2>Personalized Compatibility Filter</h2>
+      <p style="margin-bottom: 1rem;">Select your birth details to see auspicious days for you specifically.</p>
+      <div class="filter-form">
+        <select id="birthRashi" aria-label="Birth Rashi (Moon Sign)">
+          <option value="">Select Birth Rashi...</option>
+        </select>
+        <select id="birthNakshatra" aria-label="Birth Nakshatra">
+          <option value="">Select Birth Nakshatra...</option>
+        </select>
+        <button id="applyFilterBtn">Apply Filter</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto;">
+      <div class="footer-col">
+        <h3>Divya Mangalam</h3>
+        <p>Your digital sanctuary for Vedic wisdom, prayers, and spiritual growth.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="panchang-calendar.html">Panchang</a></li>
+          <li><a href="gods.html">Deities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Puja Timings</h3>
+        <p>Morning: 6:00 AM - 12:00 PM<br>Evening: 4:00 PM - 9:00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="panchang.js"></script>
+  <script>
+    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+    let selectedBirthRashi = '';
+    let selectedBirthNakshatra = '';
+    
+    function init() {
+      const monthSel = document.getElementById('monthSelect');
+      MONTHS.forEach((m, i) => {
+        const opt = document.createElement('option');
+        opt.value = i; opt.textContent = m;
+        monthSel.appendChild(opt);
+      });
+      
+      const yearSel = document.getElementById('yearSelect');
+      for (let y = 2024; y <= 2030; y++) {
+        const opt = document.createElement('option');
+        opt.value = y; opt.textContent = y;
+        yearSel.appendChild(opt);
+      }
+      
+      const rashiSel = document.getElementById('birthRashi');
+      PANCHANG.RASIS.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r; opt.textContent = r;
+        rashiSel.appendChild(opt);
+      });
+      
+      const nakSel = document.getElementById('birthNakshatra');
+      PANCHANG.NAKSHATRAS.forEach(n => {
+        const opt = document.createElement('option');
+        opt.value = n; opt.textContent = n;
+        nakSel.appendChild(opt);
+      });
+      
+      monthSel.value = currentMonth;
+      yearSel.value = currentYear;
+      
+      monthSel.addEventListener('change', (e) => { currentMonth = parseInt(e.target.value); renderCalendar(); });
+      yearSel.addEventListener('change', (e) => { currentYear = parseInt(e.target.value); renderCalendar(); });
+      
+      document.getElementById('prevMonth').addEventListener('click', () => {
+        currentMonth--;
+        if (currentMonth < 0) { currentMonth = 11; currentYear--; yearSel.value = currentYear; }
+        monthSel.value = currentMonth;
+        renderCalendar();
+      });
+      
+      document.getElementById('nextMonth').addEventListener('click', () => {
+        currentMonth++;
+        if (currentMonth > 11) { currentMonth = 0; currentYear++; yearSel.value = currentYear; }
+        monthSel.value = currentMonth;
+        renderCalendar();
+      });
+      
+      document.getElementById('todayBtn').addEventListener('click', () => {
+        const t = new Date();
+        currentMonth = t.getMonth();
+        currentYear = t.getFullYear();
+        monthSel.value = currentMonth;
+        yearSel.value = currentYear;
+        renderCalendar();
+      });
+      
+      document.getElementById('applyFilterBtn').addEventListener('click', () => {
+        selectedBirthRashi = rashiSel.value;
+        selectedBirthNakshatra = nakSel.value;
+        renderCalendar();
+      });
+      
+      renderCalendar();
+    }
+    
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      const headers = Array.from(grid.querySelectorAll('.weekday-header'));
+      grid.innerHTML = '';
+      headers.forEach(h => grid.appendChild(h));
+      
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+      const startDayOfWeek = firstDay.getDay();
+      
+      const today = new Date();
+      
+      for (let i = 0; i < startDayOfWeek; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'day-cell empty';
+        grid.appendChild(empty);
+      }
+      
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const dateObj = new Date(currentYear, currentMonth, d);
+        const pInfo = PANCHANG.getPanchangForDate(dateObj);
+        
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+        
+        if (dateObj.getDate() === today.getDate() && dateObj.getMonth() === today.getMonth() && dateObj.getFullYear() === today.getFullYear()) {
+          cell.classList.add('today');
+        }
+        
+        if (pInfo.tithi.name === 'Ekadashi') {
+          cell.classList.add('ekadashi');
+        }
+        
+        let moonIcon = '';
+        if (pInfo.tithi.isPurnima) moonIcon = '🌕';
+        if (pInfo.tithi.isAmavasya) moonIcon = '🌑';
+        
+        let pakshaClass = pInfo.tithi.pakshaShort.toLowerCase();
+        
+        let filterDot = '';
+        if (selectedBirthRashi || selectedBirthNakshatra) {
+          let isGood = true;
+          if (selectedBirthRashi && pInfo.moonRashi) {
+            const cb = PANCHANG.getChandrabalam(selectedBirthRashi, pInfo.moonRashi);
+            if (cb && !cb.isGood) isGood = false;
+          }
+          if (selectedBirthNakshatra && pInfo.nakshatra) {
+            const tb = PANCHANG.getTarabalam(selectedBirthNakshatra, pInfo.nakshatra.name);
+            if (tb && !tb.isGood) isGood = false;
+          }
+          filterDot = `<div class="filter-dot ${isGood ? 'good' : 'bad'}"></div>`;
+        }
+        
+        let festivalsHtml = pInfo.festivals.map(f => `<div class="festival">${f}</div>`).join('');
+        
+        cell.innerHTML = `
+          ${filterDot}
+          <div class="date-num">${d}</div>
+          <span class="paksha-badge ${pakshaClass}">${pInfo.tithi.pakshaShort}</span>
+          <div class="tithi-name">${pInfo.tithi.name}</div>
+          <div class="nakshatra-name">${pInfo.nakshatra.name} • ${pInfo.moonRashi.split(' ')[0]}</div>
+          <div class="sunrise-time">🌅 6:00 AM</div>
+          ${festivalsHtml}
+          ${moonIcon ? `<div class="moon-icon">${moonIcon}</div>` : ''}
+        `;
+        
+        cell.addEventListener('click', () => showDetails(dateObj, pInfo));
+        grid.appendChild(cell);
+      }
+    }
+    
+    function formatTime(d) {
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    function showDetails(dateObj, pInfo) {
+      document.getElementById('detailPanel').style.display = 'block';
+      document.getElementById('detailTitle').textContent = dateObj.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      
+      document.getElementById('dTithi').textContent = `${pInfo.tithi.name} (${pInfo.tithi.pakshaShort} Paksha)`;
+      document.getElementById('dNakshatra').textContent = pInfo.nakshatra.name;
+      document.getElementById('dYoga').textContent = pInfo.yoga;
+      document.getElementById('dKarana').textContent = pInfo.karana;
+      document.getElementById('dMoonRashi').textContent = pInfo.moonRashi;
+      
+      document.getElementById('dSunTimes').textContent = `6:00 AM / 6:00 PM`;
+      
+      const dayName = dateObj.toLocaleDateString('en-IN', { weekday: 'long' }).split(',')[0];
+      const rh = pInfo.rahukaal || {start:'-', end:'-'};
+      document.getElementById('dRahukaal').textContent = `${rh.start} - ${rh.end}`;
+      
+      const yg = PANCHANG.getYamagandam(dayName) || { start: '-', end: '-' };
+      document.getElementById('dYamagandam').textContent = `${yg.start} - ${yg.end}`;
+      
+      const gk = PANCHANG.getGulikaKalam(dayName) || { start: '-', end: '-' };
+      document.getElementById('dGulika').textContent = `${gk.start} - ${gk.end}`;
+      
+      document.getElementById('dAbhijit').textContent = `${pInfo.abhijit.start} - ${pInfo.abhijit.end}`;
+      
+      const chog = PANCHANG.getChoghadiya(pInfo.sunrise, pInfo.sunset);
+      
+      const dayTbody = document.querySelector('#dChoghadiyaDay tbody');
+      dayTbody.innerHTML = '';
+      chog.day.forEach(c => {
+        dayTbody.innerHTML += `<tr><td>${c.label}</td><td>${formatTime(c.start)} - ${formatTime(c.end)}</td></tr>`;
+      });
+      
+      const nightTbody = document.querySelector('#dChoghadiyaNight tbody');
+      nightTbody.innerHTML = '';
+      chog.night.forEach(c => {
+        nightTbody.innerHTML += `<tr><td>${c.label}</td><td>${formatTime(c.start)} - ${formatTime(c.end)}</td></tr>`;
+      });
+      
+      document.getElementById('detailPanel').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

@@ -293,6 +293,130 @@ const PANCHANG = (() => {
       .slice(0, limit);
   }
 
+  /* ---- Choghadiya ---- */
+  function getChoghadiya(sunrise, sunset) {
+    const dayLabels = ['Udveg', 'Char', 'Labh', 'Amrit', 'Kaal', 'Shubh', 'Rog', 'Udveg'];
+    const nightLabels = ['Rog', 'Kaal', 'Labh', 'Udveg', 'Shubh', 'Amrit', 'Char', 'Rog'];
+    const dayDuration = (sunset.getTime() - sunrise.getTime()) / 8;
+    const nextSunrise = new Date(sunrise.getTime() + 24 * 60 * 60 * 1000);
+    const nightDuration = (nextSunrise.getTime() - sunset.getTime()) / 8;
+
+    const day = dayLabels.map((label, i) => {
+      const start = new Date(sunrise.getTime() + i * dayDuration);
+      const end = new Date(sunrise.getTime() + (i + 1) * dayDuration);
+      return { label, start, end };
+    });
+
+    const night = nightLabels.map((label, i) => {
+      const start = new Date(sunset.getTime() + i * nightDuration);
+      const end = new Date(sunset.getTime() + (i + 1) * nightDuration);
+      return { label, start, end };
+    });
+
+    return { day, night };
+  }
+
+  /* ---- Yamagandam & Gulika Kalam ---- */
+  const YAMAGANDAM = {
+    Sunday: { start: '12:00 PM', end: '1:30 PM' },
+    Monday: { start: '10:30 AM', end: '12:00 PM' },
+    Tuesday: { start: '9:00 AM', end: '10:30 AM' },
+    Wednesday: { start: '7:30 AM', end: '9:00 AM' },
+    Thursday: { start: '1:30 PM', end: '3:00 PM' },
+    Friday: { start: '3:00 PM', end: '4:30 PM' },
+    Saturday: { start: '4:30 PM', end: '6:00 PM' }
+  };
+  function getYamagandam(weekday) {
+    return YAMAGANDAM[weekday];
+  }
+
+  const GULIKA_KALAM = {
+    Sunday: { start: '3:00 PM', end: '4:30 PM' },
+    Monday: { start: '1:30 PM', end: '3:00 PM' },
+    Tuesday: { start: '12:00 PM', end: '1:30 PM' },
+    Wednesday: { start: '10:30 AM', end: '12:00 PM' },
+    Thursday: { start: '9:00 AM', end: '10:30 AM' },
+    Friday: { start: '7:30 AM', end: '9:00 AM' },
+    Saturday: { start: '6:00 AM', end: '7:30 AM' }
+  };
+  function getGulikaKalam(weekday) {
+    return GULIKA_KALAM[weekday];
+  }
+
+  /* ---- Tarabalam ---- */
+  function getTarabalam(birthNakshatra, currentNakshatra) {
+    const bIndex = NAKSHATRAS.indexOf(birthNakshatra);
+    const cIndex = NAKSHATRAS.indexOf(currentNakshatra);
+    if (bIndex === -1 || cIndex === -1) return null;
+    
+    let diff = (cIndex - bIndex) >= 0 ? (cIndex - bIndex) + 1 : (cIndex - bIndex + 27) + 1;
+    const taraNum = diff % 9 === 0 ? 9 : diff % 9;
+    
+    const descriptions = [
+      { name: 'Janma', isGood: false, desc: 'Danger/Not ideal for new beginnings' },
+      { name: 'Sampat', isGood: true, desc: 'Wealth and prosperity' },
+      { name: 'Vipat', isGood: false, desc: 'Loss or accidents' },
+      { name: 'Kshema', isGood: true, desc: 'Prosperity and well-being' },
+      { name: 'Pratyari', isGood: false, desc: 'Obstacles and enmity' },
+      { name: 'Sadhaka', isGood: true, desc: 'Success and achievement' },
+      { name: 'Vadha', isGood: false, desc: 'Danger/Severe obstacles' },
+      { name: 'Mitra', isGood: true, desc: 'Friendship and support' },
+      { name: 'Parama Mitra', isGood: true, desc: 'Intimate friendship/Great support' }
+    ];
+    
+    const data = descriptions[taraNum - 1];
+    return { tara: taraNum, name: data.name, isGood: data.isGood, description: data.desc };
+  }
+
+  /* ---- Chandrabalam ---- */
+  function getChandrabalam(birthRashi, moonRashi) {
+    const bIndex = RASIS.indexOf(birthRashi);
+    const cIndex = RASIS.indexOf(moonRashi);
+    if (bIndex === -1 || cIndex === -1) return null;
+    
+    let position = (cIndex - bIndex) >= 0 ? (cIndex - bIndex) + 1 : (cIndex - bIndex + 12) + 1;
+    const badPositions = [1, 2, 3, 5, 7];
+    const isGood = !badPositions.includes(position);
+    
+    return { position, isGood, description: isGood ? 'Auspicious Moon transit' : 'Inauspicious Moon transit' };
+  }
+
+  /* ---- getPanchangForDate Wrapper ---- */
+  function getPanchangForDate(date) {
+    const p = getPanchang(date);
+    const yStr = date.getFullYear().toString();
+    const mStr = String(date.getMonth() + 1).padStart(2, '0');
+    const dStr = String(date.getDate()).padStart(2, '0');
+    const fullDateStr = `${yStr}-${mStr}-${dStr}`;
+    
+    const festivalsList = SPECIAL_DAYS[yStr] || [];
+    const todaysFestivals = festivalsList.filter(f => f.date === fullDateStr).map(f => f.name);
+
+    // Mock sunrise 6am and sunset 6pm local
+    const sunrise = new Date(date);
+    sunrise.setHours(6, 0, 0, 0);
+    const sunset = new Date(date);
+    sunset.setHours(18, 0, 0, 0);
+
+    return {
+      tithi: p.tithi,
+      nakshatra: p.nakshatra,
+      yoga: p.yoga,
+      karana: p.karana,
+      vara: p.dayName,
+      rahukaal: p.rahukaal,
+      abhijit: p.abhijit,
+      sunrise,
+      sunset,
+      moonRashi: p.rasi,
+      festivals: todaysFestivals
+    };
+  }
+
   /* Public API */
-  return { getPanchang, getRatingForGod, getUpcomingDays, getUpcomingFestivals, TITHIS, NAKSHATRAS, WEEKDAYS, RAHUKAAL, ABHIJIT };
+  return { 
+    getPanchang, getRatingForGod, getUpcomingDays, getUpcomingFestivals, 
+    getChoghadiya, getYamagandam, getGulikaKalam, getTarabalam, getChandrabalam, getPanchangForDate,
+    TITHIS, NAKSHATRAS, WEEKDAYS, RAHUKAAL, ABHIJIT, RASIS, festivals: SPECIAL_DAYS 
+  };
 })();

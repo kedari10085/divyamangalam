@@ -171,7 +171,7 @@
 <body>
 <div id="page-loader"><div class="om">🕉️</div></div>
 
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
       <span class="brand-om">🕉️</span>
@@ -179,16 +179,18 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="gods.html">Choose Deity</a></li>
-      <li><a href="live-archana.html">Live Archana</a></li>
-      <li><a href="chalisa.html" class="active">Chalisa</a></li>
+      <li><a href="palm-reading.html">Palm Reading</a></li>
+      <li><a href="panchang-calendar.html">Panchang</a></li>
+      <li><a href="gods.html">Deities</a></li>
+      <li><a href="live-archana.html">Archana</a></li>
+      <li><a href="chalisa.html" class="active" aria-current="page">Chalisa</a></li>
       <li><a href="shlokas.html">Shlokas</a></li>
       <li><a href="healing.html">432 Hz</a></li>
       <li><a href="ai-archana.html">AI Pandit</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -227,10 +229,16 @@
   <div class="devotional-audio-card">
     <div class="devotional-audio-header">
       <h3>🎶 Hanuman Chalisa Devotional Song</h3>
-      <span style="font-size:0.8rem; color:var(--gold); opacity:0.85;">Traditional Chanting · Soulful & Powerful</span>
+      <span style="font-size:0.8rem; color:var(--gold); opacity:0.85;">Traditional Chanting · Soulful &amp; Powerful</span>
     </div>
-    <audio id="chalisaAudioPlayer" controls preload="metadata" style="width:100%; margin:0.5rem 0;">
+    <div id="chalisaAudioStatus" role="status" style="font-size:0.82rem; padding:0.4rem 0.8rem; margin:0.3rem 0; border-radius:8px; background:rgba(255,111,0,0.1); color:var(--gold); display:flex; align-items:center; gap:0.5rem;">
+      <span class="audio-status-icon">🔇</span>
+      <span class="audio-status-text">Press play to begin the sacred chanting</span>
+    </div>
+    <audio id="chalisaAudioPlayer" controls preload="none" style="width:100%; margin:0.5rem 0;">
       <source src="https://archive.org/download/HanumanChalisa_201605/HanumanChalisa.mp3" type="audio/mpeg">
+      <source src="https://archive.org/download/hanuman-chalisa-by-gulshan-kumar/Hanuman-Chalisa.mp3" type="audio/mpeg">
+      <source src="https://archive.org/download/shree-hanuman-chalisa/Shree-Hanuman-Chalisa.mp3" type="audio/mpeg">
       Your browser does not support audio.
     </audio>
     <div style="display:flex; justify-content:space-between; font-size:0.8rem; opacity:0.75; color:var(--white); flex-wrap:wrap; gap:0.4rem;">
@@ -239,6 +247,24 @@
     </div>
   </div>
 </div>
+<script>
+(function(){
+  var a = document.getElementById('chalisaAudioPlayer');
+  var s = document.getElementById('chalisaAudioStatus');
+  if(!a||!s) return;
+  var ic = s.querySelector('.audio-status-icon');
+  var tx = s.querySelector('.audio-status-text');
+  function st(i,t,b){ic.textContent=i;tx.textContent=t;s.style.background=b||'rgba(255,111,0,0.1)';}
+  a.addEventListener('loadstart',function(){st('⏳','Loading devotional audio...');});
+  a.addEventListener('canplay',function(){st('🎵','Audio ready — press play to listen','rgba(76,175,80,0.15)');});
+  a.addEventListener('playing',function(){st('🎶','Now playing Hanuman Chalisa...','rgba(76,175,80,0.2)');});
+  a.addEventListener('pause',function(){if(!a.ended)st('⏸️','Paused — press play to resume');});
+  a.addEventListener('ended',function(){st('🙏','Chalisa completed. Jai Hanuman! 🙏','rgba(212,160,23,0.2)');});
+  a.addEventListener('error',function(){
+    st('⚠️','Audio unavailable — use verse buttons for 432 Hz tones & bell chimes','rgba(229,57,53,0.15)');
+  });
+})();
+</script>
 
 <!-- Floating counter -->
 <div class="floating-counter" id="floatingCounter">
