@@ -420,3 +420,11 @@ const PANCHANG = (() => {
     TITHIS, NAKSHATRAS, WEEKDAYS, RAHUKAAL, ABHIJIT, RASIS, festivals: SPECIAL_DAYS 
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.PANCHANG = PANCHANG;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { PANCHANG };
+}
+
