@@ -43,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateHandGuideOrientation() {
     if (!handGuide) return;
     if (isRightHand) {
-      handGuide.classList.add('left-hand');
-      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
-        handFitText.innerText = '✋ Place your Right Palm within the contour';
-      }
-    } else {
       handGuide.classList.remove('left-hand');
       if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
-        handFitText.innerText = '✋ Place your Left Palm within the contour';
+        handFitText.innerText = '✋ Place your Right Palm within the contour (Thumb on Right)';
+      }
+    } else {
+      handGuide.classList.add('left-hand');
+      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
+        handFitText.innerText = '✋ Place your Left Palm within the contour (Thumb on Left)';
       }
     }
   }
@@ -365,29 +365,34 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    tempCanvas.width = sW;
-    tempCanvas.height = sH;
-    const ctx = tempCanvas.getContext('2d');
-    
-    // Fill black in case of issues
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, sW, sH);
-    ctx.drawImage(imageSource, 0, 0, sW, sH);
+    // Compute exact crop matching scanBox viewfinder aspect ratio (3:4)
+    const targetAspect = 360 / 480; // 0.75
+    let cropX = 0, cropY = 0, cropW = sW, cropH = sH;
+    const currentAspect = sW / sH;
 
-    const imgData = ctx.getImageData(0, 0, sW, sH);
+    if (currentAspect > targetAspect) {
+      cropW = sH * targetAspect;
+      cropX = (sW - cropW) / 2;
+    } else {
+      cropH = sW / targetAspect;
+      cropY = (sH - cropH) / 2;
+    }
+
+    // Save pristine cropped image to result canvas (600x800 high-res)
+    resultCanvas.width = 600;
+    resultCanvas.height = 800;
+    const rCtx = resultCanvas.getContext('2d');
+    rCtx.fillStyle = '#120c1e';
+    rCtx.fillRect(0, 0, 600, 800);
+    rCtx.drawImage(imageSource, cropX, cropY, cropW, cropH, 0, 0, 600, 800);
+
+    const imgData = rCtx.getImageData(0, 0, 600, 800);
     // Simple hash: sum of pixel values
     let sum = 0;
-    // sample pixels to save time (every 40th value)
     for (let i = 0; i < imgData.data.length; i += 40) {
       sum += imgData.data[i] + imgData.data[i+1] + imgData.data[i+2];
     }
     hashSeed = sum + (isRightHand ? 1000 : 2000);
-
-    // Save image to result canvas
-    resultCanvas.width = sW;
-    resultCanvas.height = sH;
-    const rCtx = resultCanvas.getContext('2d');
-    rCtx.drawImage(imageSource, 0, 0, sW, sH);
 
     runScanAnimation();
   });
@@ -1014,62 +1019,62 @@ document.addEventListener('DOMContentLoaded', () => {
       rCtx.restore();
     };
 
-    // 1. LIFE LINE (Emerald Green) - around Mount of Venus
+    // 1. LIFE LINE (Emerald Green) - originates between thumb & index, curves broadly around Mount of Venus
     const lifePoints = [
-      { x: mx(0.36 + v()), y: 0.50 + v() },
-      { x: mx(0.40 + v()), y: 0.58 + v() },
-      { x: mx(0.43 + v()), y: 0.68 + v() },
-      { x: mx(0.41 + v()), y: 0.80 + v() },
-      { x: mx(0.34 + v()), y: 0.92 + v() }
+      { x: mx(0.58 + v()), y: 0.56 + v() },
+      { x: mx(0.54 + v()), y: 0.63 + v() },
+      { x: mx(0.51 + v()), y: 0.72 + v() },
+      { x: mx(0.49 + v()), y: 0.82 + v() },
+      { x: mx(0.46 + v()), y: 0.88 + v() }
     ];
     drawGlowPath(lifePoints, '#00ff88', '#00cc66', 3.5, filter === 'life', '🌿 Life Line (जीव रेखा)');
 
-    // 2. HEAD LINE (Electric Cyan) - across Plain of Mars
+    // 2. HEAD LINE (Electric Cyan) - starts with Life Line, traverses across Plain of Mars toward Upper Mars/Moon
     const headPoints = [
-      { x: mx(0.36 + v()), y: 0.50 + v() },
-      { x: mx(0.48 + v()), y: 0.55 + v() },
-      { x: mx(0.62 + v()), y: 0.59 + v() },
-      { x: mx(0.74 + v()), y: 0.64 + v() }
+      { x: mx(0.58 + v()), y: 0.56 + v() },
+      { x: mx(0.48 + v()), y: 0.59 + v() },
+      { x: mx(0.38 + v()), y: 0.63 + v() },
+      { x: mx(0.26 + v()), y: 0.67 + v() }
     ];
     drawGlowPath(headPoints, '#00e5ff', '#0099cc', 3.5, filter === 'head', '🧠 Head Line (मस्तिष्क रेखा)');
 
     // Writer's Fork on Head Line
     const headFork = [
-      { x: mx(0.66 + v()), y: 0.60 + v() },
-      { x: mx(0.75 + v()), y: 0.70 + v() }
+      { x: mx(0.38 + v()), y: 0.63 + v() },
+      { x: mx(0.28 + v()), y: 0.72 + v() }
     ];
     drawGlowPath(headFork, '#00e5ff', '#0099cc', 2.2, filter === 'head', '');
 
-    // 3. HEART LINE (Crimson Ruby) - under pinky sweeping to Jupiter
+    // 3. HEART LINE (Crimson Ruby) - under pinky (percussion side) sweeping gently to Mount Jupiter
     const heartPoints = [
-      { x: mx(0.80 + v()), y: 0.48 + v() },
-      { x: mx(0.65 + v()), y: 0.43 + v() },
-      { x: mx(0.50 + v()), y: 0.40 + v() },
-      { x: mx(0.38 + v()), y: 0.38 + v() }
+      { x: mx(0.24 + v()), y: 0.56 + v() },
+      { x: mx(0.35 + v()), y: 0.53 + v() },
+      { x: mx(0.46 + v()), y: 0.50 + v() },
+      { x: mx(0.56 + v()), y: 0.47 + v() }
     ];
     drawGlowPath(heartPoints, '#ff2a6d', '#ff0055', 3.5, filter === 'heart', '❤️ Heart Line (हृदय रेखा)');
 
     // Jupiter Trident on Heart Line
     const heartBranch = [
-      { x: mx(0.46 + v()), y: 0.41 + v() },
-      { x: mx(0.41 + v()), y: 0.34 + v() }
+      { x: mx(0.52 + v()), y: 0.49 + v() },
+      { x: mx(0.59 + v()), y: 0.43 + v() }
     ];
     drawGlowPath(heartBranch, '#ff2a6d', '#ff0055', 2.2, filter === 'heart', '');
 
-    // 4. FATE LINE (Sunburst Gold) - rising to Saturn
+    // 4. FATE LINE (Sunburst Gold) - rising from base of palm toward Saturn mount under middle finger
     const fatePoints = [
-      { x: mx(0.52 + v()), y: 0.93 + v() },
-      { x: mx(0.51 + v()), y: 0.75 + v() },
-      { x: mx(0.50 + v()), y: 0.55 + v() },
-      { x: mx(0.48 + v()), y: 0.36 + v() }
+      { x: mx(0.44 + v()), y: 0.88 + v() },
+      { x: mx(0.43 + v()), y: 0.74 + v() },
+      { x: mx(0.42 + v()), y: 0.61 + v() },
+      { x: mx(0.42 + v()), y: 0.47 + v() }
     ];
     drawGlowPath(fatePoints, '#ffb703', '#fb8500', 3.2, filter === 'fate', '⭐ Fate Line (भाग्य रेखा)');
 
-    // 5. SUN / APOLLO LINE (Warm Amber)
+    // 5. SUN / APOLLO LINE (Warm Amber) - under ring finger
     const sunPoints = [
-      { x: mx(0.62 + v()), y: 0.68 + v() },
-      { x: mx(0.63 + v()), y: 0.52 + v() },
-      { x: mx(0.64 + v()), y: 0.38 + v() }
+      { x: mx(0.35 + v()), y: 0.70 + v() },
+      { x: mx(0.34 + v()), y: 0.58 + v() },
+      { x: mx(0.33 + v()), y: 0.48 + v() }
     ];
     drawGlowPath(sunPoints, '#ffe600', '#ffaa00', 2.2, filter === 'fate' || filter === 'all', '');
 
@@ -1078,8 +1083,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rCtx.save();
       rCtx.globalAlpha = (filter === 'all' || filter === 'life') ? 0.75 : 0.15;
       rCtx.beginPath();
-      rCtx.moveTo(mx(0.32) * width, yPct * height);
-      rCtx.quadraticCurveTo(mx(0.50) * width, (yPct - 0.015) * height, mx(0.68) * width, yPct * height);
+      rCtx.moveTo(mx(0.31) * width, yPct * height);
+      rCtx.quadraticCurveTo(mx(0.44) * width, (yPct - 0.015) * height, mx(0.58) * width, yPct * height);
       rCtx.strokeStyle = '#d4a017';
       rCtx.lineWidth = 1.8;
       rCtx.shadowColor = '#d4a017';
@@ -1087,19 +1092,19 @@ document.addEventListener('DOMContentLoaded', () => {
       rCtx.stroke();
       rCtx.restore();
     };
-    drawBracelet(0.935, 'Manibandha 1');
-    drawBracelet(0.955, 'Manibandha 2');
-    drawBracelet(0.975, 'Manibandha 3');
+    drawBracelet(0.895, 'Manibandha 1');
+    drawBracelet(0.915, 'Manibandha 2');
+    drawBracelet(0.935, 'Manibandha 3');
 
     // 7. PLANETARY MOUNTS (Nodes & Halos)
     const mounts = [
-      { glyph: '♃', name: 'Jupiter', x: mx(0.38), y: 0.35, color: '#f1c40f' },
-      { glyph: '♄', name: 'Saturn', x: mx(0.49), y: 0.33, color: '#9b59b6' },
-      { glyph: '☉', name: 'Sun', x: mx(0.64), y: 0.36, color: '#f39c12' },
-      { glyph: '☿', name: 'Mercury', x: mx(0.78), y: 0.44, color: '#1abc9c' },
-      { glyph: '♂', name: 'Mars', x: mx(0.54), y: 0.54, color: '#e74c3c' },
-      { glyph: '♀', name: 'Venus', x: mx(0.28), y: 0.70, color: '#e91e63' },
-      { glyph: '☽', name: 'Moon', x: mx(0.74), y: 0.78, color: '#3498db' }
+      { glyph: '♃', name: 'Jupiter', x: mx(0.53), y: 0.45, color: '#f1c40f' },
+      { glyph: '♄', name: 'Saturn', x: mx(0.42), y: 0.44, color: '#9b59b6' },
+      { glyph: '☉', name: 'Sun', x: mx(0.33), y: 0.45, color: '#f39c12' },
+      { glyph: '☿', name: 'Mercury', x: mx(0.24), y: 0.49, color: '#1abc9c' },
+      { glyph: '♂', name: 'Mars', x: mx(0.40), y: 0.59, color: '#e74c3c' },
+      { glyph: '♀', name: 'Venus', x: mx(0.62), y: 0.69, color: '#e91e63' },
+      { glyph: '☽', name: 'Moon', x: mx(0.28), y: 0.75, color: '#3498db' }
     ];
 
     mounts.forEach(m => {
@@ -1521,6 +1526,135 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
+    // ======== SPECIAL MODULE: Master Age-Phased Vedic Life Timeline ========
+    const timelineEl = document.getElementById('vedicLifeTimeline');
+    if (timelineEl) {
+      const timelineNodes = [
+        {
+          age: "Age 20 – 28",
+          title: "Sadhana & Foundation Phase (विद्या व प्रारम्भिक कर्म)",
+          desc: "Formative period governed by Mercury and the Lower Plain of Mars. Early career experiments, foundational relationship milestones, and developing mental discipline. Vitality expands steadily."
+        },
+        {
+          age: "Age 29 – 38",
+          title: "Golden Inflection & Career Ascent (कर्मोदय व राजयोग काल)",
+          desc: "Crucial decade where Fate Line connects with Saturn's influence. Professional breakthrough, marriage stability, substantial wealth accumulation, and independent property decisions materialize."
+        },
+        {
+          age: "Age 39 – 48",
+          title: "Authority, Landed Assets & Expansion (प्रभुत्व एवं भूमि लाभ)",
+          desc: "Peak Bhumi Yoga activation. Significant real estate acquisitions, leadership authority in career or business, social influence, and safeguarding financial investments for descendants."
+        },
+        {
+          age: "Age 49 – 58",
+          title: "Maturity, Wisdom & Legacy Consolidation (कीर्ति व प्रतिष्ठा)",
+          desc: "Sun (Surya) Mount activation brings widespread recognition, mentoring roles, and fulfillment of long-term ambitions. Health requires balanced diet and daily pranayama."
+        },
+        {
+          age: "Age 59 – 85+",
+          title: "Moksha, Spiritual Fulfillment & Purna Ayur (आत्मज्ञान व पूर्णायु)",
+          desc: "Three unbroken Manibandha bracelets assure serene longevity, inner peace, pilgrimage, spiritual pursuits, and revered status among family and society."
+        }
+      ];
+
+      timelineEl.innerHTML = timelineNodes.map(node => `
+        <div class="timeline-node">
+          <span class="timeline-age-badge">${node.age}</span>
+          <h4 class="timeline-heading">${node.title}</h4>
+          <p class="timeline-desc">${node.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    // ======== SPECIAL MODULE: Critical Warning Periods & Health/Longevity ========
+    const warningsEl = document.getElementById('criticalWarningsAnalysis');
+    if (warningsEl) {
+      warningsEl.innerHTML = `
+        <div style="background:rgba(231,76,60,0.12); border:1px solid rgba(231,76,60,0.4); border-radius:14px; padding:1.1rem 1.3rem; margin-bottom:1.1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.4rem;">
+            <div style="font-weight:800; color:#ff7675; font-size:1.05rem; display:flex; align-items:center; gap:0.5rem;">
+              <span>⏳</span> Purna Ayur (Estimated Lifespan): 78 – 86 Years
+            </div>
+            <span style="background:rgba(46,204,113,0.2); border:1px solid #2ecc71; color:#2ecc71; padding:0.2rem 0.6rem; border-radius:50px; font-size:0.75rem; font-weight:700;">
+              Dirghayu (दीर्घायु)
+            </span>
+          </div>
+          <p style="font-size:0.86rem; line-height:1.55; opacity:0.88; margin:0;">
+            Derived from the deep, unbroken arc of your <strong>Ayur Rekha (Life Line)</strong> combined with <strong>Triveni Manibandha (3 Wrist Bracelets)</strong>. Traditional Samudrika Shastra strictly forbids fatalistic death date predictions; instead, it charts vulnerable astrological transit windows so you can take protective measures.
+          </p>
+        </div>
+
+        <div class="warning-item-card">
+          <div class="warning-header">
+            <span class="warning-title"><span>⚡</span> Rahu Stress Phase — Work Burnout & Mental Fatigue</span>
+            <span class="warning-age">Vulnerable Age: 28 – 30 Years</span>
+          </div>
+          <p style="font-size:0.84rem; line-height:1.5; opacity:0.85; margin:0 0 0.5rem;">
+            Horizontal stress lines emerging from Lower Mars cross toward the Head Line. Indicates career transition friction, sleep irregularities, or financial overextension.
+          </p>
+          <div class="warning-remedy-box">
+            <strong>Vedic Protection & Upaya:</strong> Chant <em>Maha Mrityunjaya Mantra</em> 108 times on Mondays, offer water to the Sun (Surya Arghya) daily, and avoid speculative financial gambles during this window.
+          </div>
+        </div>
+
+        <div class="warning-item-card">
+          <div class="warning-header">
+            <span class="warning-title"><span>🩸</span> Pitta & Cardiovascular Sensitivity Warning</span>
+            <span class="warning-age">Vulnerable Age: 39 – 42 Years</span>
+          </div>
+          <p style="font-size:0.84rem; line-height:1.5; opacity:0.85; margin:0 0 0.5rem;">
+            Minor island or chain marking near the middle Heart Line below Saturn. Highlights potential hypertension, digestive acidity (Pitta dosha), or eye strain.
+          </p>
+          <div class="warning-remedy-box">
+            <strong>Vedic Protection & Upaya:</strong> Adopt an Ayurvedic Sattvic diet, practice Anulom Vilom pranayama for 15 minutes each dawn, and wear a 5-Mukhi Rudraksha.
+          </div>
+        </div>
+
+        <div class="warning-item-card">
+          <div class="warning-header">
+            <span class="warning-title"><span>🦴</span> Shani Kantaka — Joint & Mobility Vigilance</span>
+            <span class="warning-age">Vulnerable Age: 63 – 66 Years</span>
+          </div>
+          <p style="font-size:0.84rem; line-height:1.5; opacity:0.85; margin:0 0 0.5rem;">
+            Base of the palm shows minor cross markings near the wrist-crease intersection, indicating susceptibility to Vata imbalances, joint stiffness, and bone density changes.
+          </p>
+          <div class="warning-remedy-box">
+            <strong>Vedic Protection & Upaya:</strong> Perform daily warm sesame oil Abhyanga (massage), light a mustard oil lamp under a Peepal tree on Saturdays, and recite the <em>Hanuman Chalisa</em>.
+          </div>
+        </div>
+      `;
+    }
+
+    // ======== SPECIAL MODULE: Auspicious Timing to Buy Land, Property & Gold ========
+    const assetEl = document.getElementById('assetTimingAnalysis');
+    if (assetEl) {
+      assetEl.innerHTML = `
+        <div class="asset-grid">
+          <div class="asset-card">
+            <div class="asset-type-badge land">🏡 Real Estate & Land (भूमि लाभ)</div>
+            <div class="asset-value-title">Prime Buying Age: 32 – 35 &amp; 43 – 46 Years</div>
+            <p class="asset-detail-text">
+              <strong>Vedic Palm Indicator:</strong> An unbroken square (Chatushkona) on the Mount of Venus coupled with a clear branch from the Life Line toward Upper Mars indicates <em>Bhumi Labha Yoga</em> (acquisition of landed property and ancestral blessings).
+            </p>
+            <div style="background:rgba(212,160,23,0.08); border-radius:8px; padding:0.5rem 0.7rem; font-size:0.8rem; margin-top:0.6rem;">
+              <strong>Auspicious Nakshatras for Property Registry:</strong> Rohini, Mrigashira, Uttara Phalguni, Chitra, Anuradha, and Revati during Shukla Paksha on Thursday or Friday.
+            </div>
+          </div>
+
+          <div class="asset-card">
+            <div class="asset-type-badge gold">🪙 Gold & Precious Assets (स्वर्ण लाभ)</div>
+            <div class="asset-value-title">Prime Accumulation Age: 29, 34, 41 &amp; 52 Years</div>
+            <p class="asset-detail-text">
+              <strong>Vedic Palm Indicator:</strong> <em>${ang.yavaType}</em> on the thumb joint combined with a luminous vertical line under Mount Apollo/Sun signifies compounding wealth in precious metals and gold ornaments.
+            </p>
+            <div style="background:rgba(212,160,23,0.08); border-radius:8px; padding:0.5rem 0.7rem; font-size:0.8rem; margin-top:0.6rem;">
+              <strong>Supreme Muhurats to Buy Gold:</strong> Guru Pushya Yoga, Ravi Pushya, Akshaya Tritiya, and Dhanteras. Purchasing gold during Jupiter or Venus Hora multiplies prosperity threefold.
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     // Interactive Panditji Q&A wireup (Synthesized Vyas + Shrimali + Wilson)
     const answerBox = document.getElementById('panditjiAnswer');
     const qButtons = document.querySelectorAll('.btn-quick-q');
@@ -1529,6 +1663,9 @@ document.addEventListener('DOMContentLoaded', () => {
       career: `<strong>Shastra Career Guidance:</strong> Based on your Fate Line rising toward Mount Saturn with support from Mount Jupiter, your strongest professional inflection point arrives between ages <strong>32 and 38</strong>. Shri Vasant Lal Vyas notes that when the Will phalanx is resolute, commercial partnerships entered after age 30 bring sustainable prosperity. Maintain ethical diligence to appease Shani Bhagavan.`,
       marriage: `<strong>Vivah Rekha & Relationship Insight:</strong> Your Heart Line curves harmoniously toward Jupiter, signifying devotion and high relationship ideals. The Shastra indicates marital harmony through a mature, supportive life partner. If any minor cross-lines appear near Mercury, chanting the Shukra Beej Mantra on Fridays ensures enduring domestic peace.`,
       wealth: `<strong>Dhana & Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
+      property: `<strong>Bhumi & Griha Yoga (Timing to Buy Land & House):</strong> Clear square formations on the Mount of Venus and an ascending branch from the Life Line indicate your strongest window to purchase land or residential property is between ages <strong>32 to 35</strong> and again at <strong>43 to 46</strong>. Plan registries during Rohini, Mrigashira, or Revati nakshatras on Thursdays or Fridays for lasting vastu harmony.`,
+      gold: `<strong>Suvarna Labha (Best Timing to Buy Gold):</strong> Your thumb's Yava mark and Apollo Sun line indicate auspicious gold accumulation at ages <strong>29, 34, 41, and 52</strong>. Purchasing gold during <em>Guru Pushya Nakshatra</em>, <em>Akshaya Tritiya</em>, or <em>Dhanteras</em> during Jupiter Hora multiplies family prosperity.`,
+      warnings: `<strong>Critical Warning Periods & Lifespan Guidance:</strong> Your Ayur Rekha and Manibandha indicate a healthy lifespan of <strong>78–86 years (Dirghayu)</strong>. Vedic texts strictly avoid fatalistic death predictions; instead, they highlight vulnerable stress periods at ages <strong>28–30 (work burnout/Rahu stress)</strong> and <strong>39–42 (cardiovascular/pitta fatigue)</strong>. Reciting the Maha Mrityunjaya Mantra and offering daily Surya Arghya neutralizes adverse planetary transits.`,
       travel: `<strong>Desh-Videsh Yatra (Travel & Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
       health: `<strong>Arogya & Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`,
       freewill: `<strong>Fate vs. Free Will (Left vs. Right Hand):</strong> As Joyce Wilson elucidates in <em>The Complete Book of Palmistry (1971)</em>, your Left Palm reveals the karmic cards you were dealt at birth, while your Right Palm illustrates how your free will, character, and choices play that hand. A marked improvement in line clarity in the Right hand confirms you have actively transcended hereditary obstacles.`
