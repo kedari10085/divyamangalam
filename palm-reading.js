@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultsDashboard = document.getElementById('resultsDashboard');
   const scannerSection = document.getElementById('scannerSection');
   const resultCanvas = document.getElementById('resultCanvas');
+  const handGuideWrap = document.getElementById('handGuideWrap');
+  const handFitIndicator = document.getElementById('handFitIndicator');
+  const handFitText = document.getElementById('handFitText');
 
   let stream = null;
   let imageSource = null; // Can be video or img element
@@ -27,6 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentDualStep = 'left'; // 'left' or 'right'
   let dualLeftSeed = null;
   let dualRightSeed = null;
+
+  function updateHandGuideOrientation() {
+    if (!handGuide) return;
+    if (isRightHand) {
+      handGuide.classList.remove('left-hand');
+      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
+        handFitText.innerText = '✋ Align your Right Palm inside the golden contour';
+      }
+    } else {
+      handGuide.classList.add('left-hand');
+      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
+        handFitText.innerText = '✋ Align your Left Palm inside the golden contour';
+      }
+    }
+  }
 
   // Dual-mode and Single-mode toggles
   const btnModeSingle = document.getElementById('btnModeSingle');
@@ -45,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dualPalmBanner) dualPalmBanner.style.display = 'none';
       if (dualPalmTabs) dualPalmTabs.style.display = 'none';
       if (singleHandRow) singleHandRow.style.display = 'block';
+      updateHandGuideOrientation();
     });
 
     btnModeDual.addEventListener('click', () => {
@@ -57,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isRightHand = false; // Start with Left palm in dual mode
       if (tabPalmLeft) tabPalmLeft.classList.add('active');
       if (tabPalmRight) tabPalmRight.classList.remove('active');
+      updateHandGuideOrientation();
     });
   }
 
@@ -66,12 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
       isRightHand = false;
       tabPalmLeft.classList.add('active');
       tabPalmRight.classList.remove('active');
+      updateHandGuideOrientation();
     });
     tabPalmRight.addEventListener('click', () => {
       currentDualStep = 'right';
       isRightHand = true;
       tabPalmRight.classList.add('active');
       tabPalmLeft.classList.remove('active');
+      updateHandGuideOrientation();
     });
   }
 
@@ -80,11 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     isRightHand = true;
     e.target.classList.add('active');
     document.getElementById('btnLeftHand').classList.remove('active');
+    updateHandGuideOrientation();
   });
   document.getElementById('btnLeftHand').addEventListener('click', (e) => {
     isRightHand = false;
     e.target.classList.add('active');
     document.getElementById('btnRightHand').classList.remove('active');
+    updateHandGuideOrientation();
   });
 
   const scanPlaceholder = document.getElementById('scanPlaceholder');
@@ -98,7 +122,15 @@ document.addEventListener('DOMContentLoaded', () => {
       video.srcObject = stream;
       video.style.display = 'block';
       preview.style.display = 'none';
-      handGuide.style.display = 'block';
+      if (handGuide) {
+        handGuide.style.display = 'block';
+        handGuide.classList.remove('locked');
+      }
+      if (handFitIndicator) {
+        handFitIndicator.style.display = 'flex';
+        handFitIndicator.classList.remove('locked');
+        updateHandGuideOrientation();
+      }
       if (scanPlaceholder) scanPlaceholder.style.display = 'none';
       btnCamera.style.display = 'none';
       btnUpload.style.display = 'none';
@@ -192,7 +224,15 @@ document.addEventListener('DOMContentLoaded', () => {
     preview.src = demoCanvas.toDataURL('image/png');
     preview.style.display = 'block';
     video.style.display = 'none';
-    handGuide.style.display = 'none';
+    if (handGuide) {
+      handGuide.style.display = 'block';
+      handGuide.classList.remove('locked');
+    }
+    if (handFitIndicator) {
+      handFitIndicator.style.display = 'flex';
+      handFitIndicator.classList.remove('locked');
+      updateHandGuideOrientation();
+    }
     if (scanPlaceholder) scanPlaceholder.style.display = 'none';
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
     btnCamera.style.display = 'none';
@@ -217,7 +257,15 @@ document.addEventListener('DOMContentLoaded', () => {
         preview.src = event.target.result;
         preview.style.display = 'block';
         video.style.display = 'none';
-        handGuide.style.display = 'none';
+        if (handGuide) {
+          handGuide.style.display = 'block';
+          handGuide.classList.remove('locked');
+        }
+        if (handFitIndicator) {
+          handFitIndicator.style.display = 'flex';
+          handFitIndicator.classList.remove('locked');
+          updateHandGuideOrientation();
+        }
         if (scanPlaceholder) scanPlaceholder.style.display = 'none';
         if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
         btnCamera.style.display = 'none';
@@ -237,7 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
     video.style.display = 'none';
     preview.style.display = 'none';
-    handGuide.style.display = 'none';
+    if (handGuide) {
+      handGuide.style.display = 'none';
+      handGuide.classList.remove('locked');
+    }
+    if (handFitIndicator) {
+      handFitIndicator.style.display = 'none';
+      handFitIndicator.classList.remove('locked');
+    }
     if (scanPlaceholder) scanPlaceholder.style.display = 'block';
     btnCamera.style.display = 'inline-flex';
     btnUpload.style.display = 'inline-flex';
@@ -249,6 +304,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Start Scan
   btnScan.addEventListener('click', () => {
+    // Lock hand guide and fit status
+    if (handGuide) handGuide.classList.add('locked');
+    if (handFitIndicator) {
+      handFitIndicator.classList.add('locked');
+      if (handFitText) handFitText.innerText = `✓ ${isRightHand ? 'RIGHT' : 'LEFT'} PALM CONTOURS LOCKED — 99.4% FIT ALIGNED`;
+    }
+
     // Capture to a temporary canvas to get ImageData for hash
     const tempCanvas = document.createElement('canvas');
     let sW, sH;
@@ -795,78 +857,220 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   };
 
+  const cachedPalmCanvas = document.createElement('canvas');
+  let currentActiveFilter = 'all';
+
   function drawLinesOnCanvas(rCtx, width, height) {
-    // We draw glowing bezier curves overlaying the palm.
-    // Coordinates are percentages to roughly fit a generic palm.
-    // The exact positions are slightly randomized based on the seed to make them unique.
+    renderBiometricPalmAnalysis(rCtx, width, height, 'all');
+  }
+
+  function renderBiometricPalmAnalysis(rCtx, width, height, filter = 'all') {
+    currentActiveFilter = filter;
     
-    const drawLine = (startX, startY, cp1X, cp1Y, cp2X, cp2Y, endX, endY, color) => {
+    // Draw base palm image
+    if (cachedPalmCanvas.width > 0) {
+      rCtx.clearRect(0, 0, width, height);
+      rCtx.drawImage(cachedPalmCanvas, 0, 0, width, height);
+    }
+
+    // Subtle dark vignette to make neon lines pop
+    rCtx.fillStyle = 'rgba(7, 3, 20, 0.28)';
+    rCtx.fillRect(0, 0, width, height);
+
+    // Variation offsets based on hash
+    const v = () => (seededRandom() - 0.5) * 0.04;
+
+    // X coordinate mapping (mirrors for left hand)
+    const mx = (x) => isRightHand ? x : (1 - x);
+
+    // Helper for glowing bezier curves
+    const drawGlowPath = (pts, strokeColor, glowColor, lineWidth, isSelected, labelText) => {
+      const alpha = (filter === 'all' || isSelected) ? 1.0 : 0.15;
+      rCtx.save();
+      rCtx.globalAlpha = alpha;
       rCtx.beginPath();
-      rCtx.moveTo(startX * width, startY * height);
-      rCtx.bezierCurveTo(
-        cp1X * width, cp1Y * height,
-        cp2X * width, cp2Y * height,
-        endX * width, endY * height
-      );
-      
+      rCtx.moveTo(pts[0].x * width, pts[0].y * height);
+
+      for (let i = 1; i < pts.length - 2; i++) {
+        const xc = (pts[i].x + pts[i + 1].x) / 2 * width;
+        const yc = (pts[i].y + pts[i + 1].y) / 2 * height;
+        rCtx.quadraticCurveTo(pts[i].x * width, pts[i].y * height, xc, yc);
+      }
+      if (pts.length > 2) {
+        const last = pts[pts.length - 1];
+        const prev = pts[pts.length - 2];
+        rCtx.quadraticCurveTo(prev.x * width, prev.y * height, last.x * width, last.y * height);
+      }
+
       rCtx.lineCap = 'round';
-      rCtx.lineWidth = 4;
-      rCtx.strokeStyle = color;
-      rCtx.shadowBlur = 15;
-      rCtx.shadowColor = color;
+      rCtx.lineJoin = 'round';
+
+      // Outer wide aura
+      rCtx.lineWidth = isSelected ? lineWidth + 6 : lineWidth + 3;
+      rCtx.strokeStyle = glowColor;
+      rCtx.shadowColor = glowColor;
+      rCtx.shadowBlur = isSelected ? 22 : 14;
       rCtx.stroke();
-      
-      // core white line
-      rCtx.lineWidth = 2;
-      rCtx.strokeStyle = 'rgba(255,255,255,0.8)';
+
+      // Core crisp path
+      rCtx.lineWidth = isSelected ? lineWidth : lineWidth - 1;
+      rCtx.strokeStyle = strokeColor;
       rCtx.shadowBlur = 0;
       rCtx.stroke();
+
+      // Core white center line
+      rCtx.lineWidth = 1.5;
+      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
+      rCtx.stroke();
+
+      // Pulsing nodes on extremities
+      pts.forEach((p, idx) => {
+        if (idx === 0 || idx === pts.length - 1 || idx === Math.floor(pts.length / 2)) {
+          rCtx.beginPath();
+          rCtx.arc(p.x * width, p.y * height, isSelected ? 4.5 : 3.5, 0, Math.PI * 2);
+          rCtx.fillStyle = '#ffffff';
+          rCtx.shadowColor = glowColor;
+          rCtx.shadowBlur = 10;
+          rCtx.fill();
+        }
+      });
+
+      // Label when selected or in 'all'
+      if ((filter === 'all' || isSelected) && labelText && pts.length > 2) {
+        const midPt = pts[Math.floor(pts.length / 2)];
+        rCtx.font = 'bold 11px system-ui, -apple-system, sans-serif';
+        rCtx.fillStyle = '#ffffff';
+        rCtx.shadowColor = '#000000';
+        rCtx.shadowBlur = 4;
+        rCtx.fillText(labelText, midPt.x * width + 8, midPt.y * height - 6);
+      }
+
+      rCtx.restore();
     };
 
-    // Variation offsets (-0.05 to 0.05)
-    const v = () => (seededRandom() - 0.5) * 0.1;
+    // 1. LIFE LINE (Emerald Green) - around Mount of Venus
+    const lifePoints = [
+      { x: mx(0.36 + v()), y: 0.50 + v() },
+      { x: mx(0.40 + v()), y: 0.58 + v() },
+      { x: mx(0.43 + v()), y: 0.68 + v() },
+      { x: mx(0.41 + v()), y: 0.80 + v() },
+      { x: mx(0.34 + v()), y: 0.92 + v() }
+    ];
+    drawGlowPath(lifePoints, '#00ff88', '#00cc66', 3.5, filter === 'life', '🌿 Life Line (जीव रेखा)');
 
-    let flip = isRightHand ? 1 : -1; 
-    // If left hand, we mirror the X coordinates around 0.5
-    const mx = (x) => isRightHand ? x : 1 - x;
+    // 2. HEAD LINE (Electric Cyan) - across Plain of Mars
+    const headPoints = [
+      { x: mx(0.36 + v()), y: 0.50 + v() },
+      { x: mx(0.48 + v()), y: 0.55 + v() },
+      { x: mx(0.62 + v()), y: 0.59 + v() },
+      { x: mx(0.74 + v()), y: 0.64 + v() }
+    ];
+    drawGlowPath(headPoints, '#00e5ff', '#0099cc', 3.5, filter === 'head', '🧠 Head Line (मस्तिष्क रेखा)');
 
-    // Heart Line (Red) - from under pinky across to index
-    drawLine(
-      mx(0.8 + v()), 0.4 + v(),
-      mx(0.6 + v()), 0.35 + v(),
-      mx(0.4 + v()), 0.3 + v(),
-      mx(0.2 + v()), 0.25 + v(),
-      '#ff0055'
-    );
+    // Writer's Fork on Head Line
+    const headFork = [
+      { x: mx(0.66 + v()), y: 0.60 + v() },
+      { x: mx(0.75 + v()), y: 0.70 + v() }
+    ];
+    drawGlowPath(headFork, '#00e5ff', '#0099cc', 2.2, filter === 'head', '');
 
-    // Head Line (Blue) - from thumb side across middle
-    drawLine(
-      mx(0.2 + v()), 0.45 + v(),
-      mx(0.4 + v()), 0.45 + v(),
-      mx(0.6 + v()), 0.5 + v(),
-      mx(0.75 + v()), 0.6 + v(),
-      '#00bbff'
-    );
+    // 3. HEART LINE (Crimson Ruby) - under pinky sweeping to Jupiter
+    const heartPoints = [
+      { x: mx(0.80 + v()), y: 0.48 + v() },
+      { x: mx(0.65 + v()), y: 0.43 + v() },
+      { x: mx(0.50 + v()), y: 0.40 + v() },
+      { x: mx(0.38 + v()), y: 0.38 + v() }
+    ];
+    drawGlowPath(heartPoints, '#ff2a6d', '#ff0055', 3.5, filter === 'heart', '❤️ Heart Line (हृदय रेखा)');
 
-    // Life Line (Green) - around thumb
-    drawLine(
-      mx(0.2 + v()), 0.45 + v(),
-      mx(0.3 + v()), 0.6 + v(),
-      mx(0.4 + v()), 0.8 + v(),
-      mx(0.3 + v()), 0.95 + v(),
-      '#00ff66'
-    );
+    // Jupiter Trident on Heart Line
+    const heartBranch = [
+      { x: mx(0.46 + v()), y: 0.41 + v() },
+      { x: mx(0.41 + v()), y: 0.34 + v() }
+    ];
+    drawGlowPath(heartBranch, '#ff2a6d', '#ff0055', 2.2, filter === 'heart', '');
 
-    // Fate Line (Gold) - vertical up center
-    if(seededRandom() > 0.2) { // 80% chance to have a strong fate line
-      drawLine(
-        mx(0.5 + v()), 0.9 + v(),
-        mx(0.5 + v()), 0.7 + v(),
-        mx(0.45 + v()), 0.5 + v(),
-        mx(0.45 + v()), 0.3 + v(),
-        '#ffaa00'
-      );
-    }
+    // 4. FATE LINE (Sunburst Gold) - rising to Saturn
+    const fatePoints = [
+      { x: mx(0.52 + v()), y: 0.93 + v() },
+      { x: mx(0.51 + v()), y: 0.75 + v() },
+      { x: mx(0.50 + v()), y: 0.55 + v() },
+      { x: mx(0.48 + v()), y: 0.36 + v() }
+    ];
+    drawGlowPath(fatePoints, '#ffb703', '#fb8500', 3.2, filter === 'fate', '⭐ Fate Line (भाग्य रेखा)');
+
+    // 5. SUN / APOLLO LINE (Warm Amber)
+    const sunPoints = [
+      { x: mx(0.62 + v()), y: 0.68 + v() },
+      { x: mx(0.63 + v()), y: 0.52 + v() },
+      { x: mx(0.64 + v()), y: 0.38 + v() }
+    ];
+    drawGlowPath(sunPoints, '#ffe600', '#ffaa00', 2.2, filter === 'fate' || filter === 'all', '');
+
+    // 6. MANIBANDHA WRIST BRACELETS (Gold arcs at base)
+    const drawBracelet = (yPct, label) => {
+      rCtx.save();
+      rCtx.globalAlpha = (filter === 'all' || filter === 'life') ? 0.75 : 0.15;
+      rCtx.beginPath();
+      rCtx.moveTo(mx(0.32) * width, yPct * height);
+      rCtx.quadraticCurveTo(mx(0.50) * width, (yPct - 0.015) * height, mx(0.68) * width, yPct * height);
+      rCtx.strokeStyle = '#d4a017';
+      rCtx.lineWidth = 1.8;
+      rCtx.shadowColor = '#d4a017';
+      rCtx.shadowBlur = 8;
+      rCtx.stroke();
+      rCtx.restore();
+    };
+    drawBracelet(0.935, 'Manibandha 1');
+    drawBracelet(0.955, 'Manibandha 2');
+    drawBracelet(0.975, 'Manibandha 3');
+
+    // 7. PLANETARY MOUNTS (Nodes & Halos)
+    const mounts = [
+      { glyph: '♃', name: 'Jupiter', x: mx(0.38), y: 0.35, color: '#f1c40f' },
+      { glyph: '♄', name: 'Saturn', x: mx(0.49), y: 0.33, color: '#9b59b6' },
+      { glyph: '☉', name: 'Sun', x: mx(0.64), y: 0.36, color: '#f39c12' },
+      { glyph: '☿', name: 'Mercury', x: mx(0.78), y: 0.44, color: '#1abc9c' },
+      { glyph: '♂', name: 'Mars', x: mx(0.54), y: 0.54, color: '#e74c3c' },
+      { glyph: '♀', name: 'Venus', x: mx(0.28), y: 0.70, color: '#e91e63' },
+      { glyph: '☽', name: 'Moon', x: mx(0.74), y: 0.78, color: '#3498db' }
+    ];
+
+    mounts.forEach(m => {
+      const showMount = (filter === 'all' || filter === 'mounts');
+      rCtx.save();
+      rCtx.globalAlpha = showMount ? 0.95 : 0.15;
+
+      const px = m.x * width;
+      const py = m.y * height;
+
+      // Pulsing mount halo
+      rCtx.beginPath();
+      rCtx.arc(px, py, filter === 'mounts' ? 18 : 13, 0, Math.PI * 2);
+      rCtx.strokeStyle = m.color;
+      rCtx.lineWidth = 1.5;
+      rCtx.shadowColor = m.color;
+      rCtx.shadowBlur = filter === 'mounts' ? 15 : 8;
+      rCtx.stroke();
+      rCtx.fillStyle = 'rgba(10, 5, 25, 0.75)';
+      rCtx.fill();
+
+      // Mount Glyph
+      rCtx.font = 'bold 12px serif';
+      rCtx.fillStyle = m.color;
+      rCtx.textAlign = 'center';
+      rCtx.textBaseline = 'middle';
+      rCtx.fillText(m.glyph, px, py);
+
+      // Name label when mounts filter is active
+      if (filter === 'mounts') {
+        rCtx.font = 'bold 10px system-ui, sans-serif';
+        rCtx.fillStyle = '#ffffff';
+        rCtx.fillText(m.name, px, py + 22);
+      }
+
+      rCtx.restore();
+    });
   }
 
   function generateDots(strength) {
@@ -888,9 +1092,30 @@ document.addEventListener('DOMContentLoaded', () => {
       titleEl.textContent = userName ? `Major Lines Analysis for ${userName}` : 'Major Lines Analysis';
     }
 
-    // Draw lines
+    // Cache pristine palm image
+    cachedPalmCanvas.width = resultCanvas.width;
+    cachedPalmCanvas.height = resultCanvas.height;
+    const cCtx = cachedPalmCanvas.getContext('2d');
+    cCtx.drawImage(resultCanvas, 0, 0);
+
+    // Draw lines & biometric features with glowing shaders
     const rCtx = resultCanvas.getContext('2d');
-    drawLinesOnCanvas(rCtx, resultCanvas.width, resultCanvas.height);
+    renderBiometricPalmAnalysis(rCtx, resultCanvas.width, resultCanvas.height, 'all');
+
+    // Wire up Line/Mount Inspector Tabs
+    const filterBtns = document.querySelectorAll('.btn-canvas-filter');
+    filterBtns.forEach(btn => {
+      btn.onclick = () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filterType = btn.getAttribute('data-filter') || 'all';
+        renderBiometricPalmAnalysis(rCtx, resultCanvas.width, resultCanvas.height, filterType);
+      };
+    });
+    filterBtns.forEach(b => {
+      if (b.getAttribute('data-filter') === 'all') b.classList.add('active');
+      else b.classList.remove('active');
+    });
 
     // Hand Type
     const hType = pickFromArray(textPools.handTypes);
@@ -1270,6 +1495,15 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('btnLeftHand').classList.add('active');
           document.getElementById('btnRightHand').classList.remove('active');
         }
+        updateHandGuideOrientation();
+        if (handGuide) {
+          handGuide.classList.remove('locked');
+          handGuide.style.display = 'block';
+        }
+        if (handFitIndicator) {
+          handFitIndicator.classList.remove('locked');
+          handFitIndicator.style.display = 'flex';
+        }
         resultsDashboard.style.display = 'none';
         scannerSection.style.display = 'block';
         scannerSection.scrollIntoView({ behavior: 'smooth' });
@@ -1283,6 +1517,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsDashboard.style.display = 'none';
         scannerSection.style.display = 'block';
         preview.style.display = 'none';
+        if (handGuide) {
+          handGuide.style.display = 'none';
+          handGuide.classList.remove('locked');
+        }
+        if (handFitIndicator) {
+          handFitIndicator.style.display = 'none';
+          handFitIndicator.classList.remove('locked');
+        }
         if (scanPlaceholder) scanPlaceholder.style.display = 'block';
         btnScan.style.display = 'none';
         btnRetake.style.display = 'none';

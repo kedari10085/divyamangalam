@@ -169,13 +169,127 @@
       object-fit: cover;
       display: none;
     }
-    .hand-guide {
+    /* Anatomical Hand Alignment Guide */
+    .hand-guide-wrap {
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%; height: 80%;
+      inset: 0;
       pointer-events: none;
-      opacity: 0.45;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+    .hand-guide-svg {
+      width: 88%;
+      height: 88%;
+      filter: drop-shadow(0 0 10px rgba(212,160,23,0.5));
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .hand-guide-svg.left-hand {
+      transform: scaleX(-1);
+    }
+    .hand-outline {
+      fill: rgba(212, 160, 23, 0.04);
+      stroke: var(--gold);
+      stroke-width: 2.2;
+      stroke-dasharray: 6 3;
+      animation: pulse-contour 2.5s ease-in-out infinite;
+    }
+    .hand-guide-svg.locked .hand-outline {
+      stroke: #00ffaa;
+      fill: rgba(0, 255, 170, 0.08);
+      stroke-dasharray: none;
+      filter: drop-shadow(0 0 14px rgba(0,255,170,0.85));
+    }
+    .guide-crease {
+      stroke-width: 1.5;
+      stroke-dasharray: 4 3;
+      opacity: 0.65;
+    }
+    .crease-life { stroke: #00ff88; }
+    .crease-head { stroke: #00ddff; }
+    .crease-heart { stroke: #ff3366; }
+    .crease-fate { stroke: #ffbb00; }
+    .mount-ring {
+      fill: rgba(255,255,255,0.03);
+      stroke: rgba(212,160,23,0.5);
+      stroke-width: 1.2;
+    }
+    .mount-text {
+      font-size: 11px;
+      font-weight: 700;
+      fill: var(--gold);
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    @keyframes pulse-contour {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; filter: drop-shadow(0 0 14px rgba(212,160,23,0.8)); }
+    }
+
+    .hand-fit-indicator {
+      position: absolute;
+      bottom: 12px;
+      background: rgba(11, 6, 26, 0.9);
+      border: 1px solid rgba(212,160,23,0.5);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      color: #FFF2D6;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 6;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      transition: all 0.3s;
+    }
+    .hand-fit-indicator.locked {
+      border-color: #00ffaa;
+      color: #00ffaa;
+      box-shadow: 0 0 15px rgba(0,255,170,0.4);
+    }
+    .fit-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+    }
+    .hand-fit-indicator.locked .fit-dot {
+      background: #00ffaa;
+      box-shadow: 0 0 8px #00ffaa;
+    }
+
+    /* Canvas Filter Controls */
+    .canvas-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      justify-content: center;
+    }
+    .btn-canvas-filter {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-canvas-filter:hover {
+      background: rgba(212,160,23,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .btn-canvas-filter.active {
+      background: linear-gradient(135deg, rgba(212,160,23,0.3), rgba(255,111,0,0.2));
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 8px rgba(212,160,23,0.3);
     }
     
     .action-buttons {
@@ -1069,9 +1183,79 @@
 
     <video id="videoElement" autoplay playsinline></video>
     <img id="previewImage" alt="Palm Preview" />
-    <svg class="hand-guide" id="handGuide" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" style="display:none;">
-      <path d="M40,90 C40,80 30,60 25,50 C20,40 25,35 30,40 C35,45 40,55 40,55 L40,30 C40,25 45,25 45,30 L45,50 L45,20 C45,15 50,15 50,20 L50,50 L50,22 C50,17 55,17 55,22 L55,50 L55,35 C55,30 60,30 60,35 L60,60 C60,75 55,90 55,90 Z" fill="none" stroke="rgba(212,160,23,0.6)" stroke-width="2" stroke-dasharray="4" />
-    </svg>
+
+    <!-- Anatomical Hand Guide Diagram with Mount Targets & Vedic Creases -->
+    <div class="hand-guide-wrap" id="handGuideWrap">
+      <svg class="hand-guide-svg" id="handGuide" viewBox="0 0 360 480" preserveAspectRatio="xMidYMid meet" style="display:none;">
+        <!-- Defs for glowing effects -->
+        <defs>
+          <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <!-- Main Anatomical Hand Silhouette -->
+        <path class="hand-outline" d="M 140 460 C 140 430 115 390 95 340 C 75 295 50 280 40 265 C 32 250 36 235 50 230 C 65 225 90 245 110 270 C 120 282 126 270 128 240 C 130 195 135 120 138 80 C 140 60 160 60 162 80 C 166 125 170 180 172 185 C 174 185 178 140 184 70 C 187 40 208 40 210 70 C 214 135 218 180 220 185 C 222 185 226 145 234 85 C 238 65 258 65 260 85 C 264 140 268 190 270 195 C 272 195 278 170 284 135 C 288 118 306 120 306 138 C 306 185 304 240 298 290 C 290 350 275 410 240 460 Z" />
+
+        <!-- Finger Phalanx Separation Lines -->
+        <line x1="140" y1="130" x2="160" y2="130" stroke="rgba(212,160,23,0.4)" stroke-width="1.2" stroke-dasharray="2 2" />
+        <line x1="185" y1="115" x2="209" y2="115" stroke="rgba(212,160,23,0.4)" stroke-width="1.2" stroke-dasharray="2 2" />
+        <line x1="235" y1="125" x2="259" y2="125" stroke="rgba(212,160,23,0.4)" stroke-width="1.2" stroke-dasharray="2 2" />
+        <line x1="282" y1="165" x2="304" y2="165" stroke="rgba(212,160,23,0.4)" stroke-width="1.2" stroke-dasharray="2 2" />
+        <line x1="60" y1="250" x2="85" y2="280" stroke="rgba(212,160,23,0.4)" stroke-width="1.2" stroke-dasharray="2 2" />
+
+        <!-- Internal Crease Guides -->
+        <!-- Life Line (Emerald Green) -->
+        <path class="guide-crease crease-life" d="M 128 240 C 145 275 160 330 148 420" />
+        <!-- Head Line (Cyan Blue) -->
+        <path class="guide-crease crease-head" d="M 128 240 C 165 265 220 280 275 295" />
+        <!-- Heart Line (Crimson Red) -->
+        <path class="guide-crease crease-heart" d="M 295 240 C 245 220 195 205 160 195" />
+        <!-- Fate Line (Sunburst Gold) -->
+        <path class="guide-crease crease-fate" d="M 190 430 L 195 190" />
+
+        <!-- Planetary Mount Target Rings with Glyphs -->
+        <!-- Jupiter (Index) -->
+        <circle cx="150" cy="195" r="14" class="mount-ring" />
+        <text x="150" y="196" class="mount-text">♃</text>
+
+        <!-- Saturn (Middle) -->
+        <circle cx="197" cy="185" r="14" class="mount-ring" />
+        <text x="197" y="186" class="mount-text">♄</text>
+
+        <!-- Sun / Apollo (Ring) -->
+        <circle cx="247" cy="195" r="14" class="mount-ring" />
+        <text x="247" y="196" class="mount-text">☉</text>
+
+        <!-- Mercury (Little) -->
+        <circle cx="286" cy="220" r="13" class="mount-ring" />
+        <text x="286" y="221" class="mount-text">☿</text>
+
+        <!-- Mars (Upper & Lower) -->
+        <circle cx="265" cy="270" r="11" class="mount-ring" />
+        <text x="265" y="271" class="mount-text">♂</text>
+
+        <!-- Venus (Thumb Ball) -->
+        <circle cx="115" cy="335" r="22" class="mount-ring" />
+        <text x="115" y="336" class="mount-text">♀</text>
+
+        <!-- Moon (Percussion Heel) -->
+        <circle cx="255" cy="370" r="20" class="mount-ring" />
+        <text x="255" y="371" class="mount-text">☽</text>
+
+        <!-- Manibandha Wrist Creases -->
+        <path d="M 148 440 C 185 435 205 435 235 440" stroke="rgba(212,160,23,0.6)" stroke-width="1.5" fill="none" />
+        <path d="M 145 450 C 185 445 205 445 238 450" stroke="rgba(212,160,23,0.5)" stroke-width="1.5" fill="none" />
+        <path d="M 142 460 C 185 455 205 455 240 460" stroke="rgba(212,160,23,0.4)" stroke-width="1.5" fill="none" />
+      </svg>
+
+      <!-- Biometric Fit Status Indicator Pill -->
+      <div class="hand-fit-indicator" id="handFitIndicator" style="display:none;">
+        <div class="fit-dot"></div>
+        <span id="handFitText">✋ Align your Right Palm inside the golden contour</span>
+      </div>
+    </div>
 
     <!-- Advanced Kundli-Style Biometric Scanning HUD -->
     <div id="scanOverlay">
@@ -1179,6 +1363,16 @@
     <div class="result-left">
       <div class="result-canvas-container">
         <canvas id="resultCanvas"></canvas>
+      </div>
+
+      <!-- Interactive Line & Mount Inspector Tabs -->
+      <div class="canvas-filter-bar" id="canvasFilterBar" style="margin-top: 1rem;">
+        <button type="button" class="btn-canvas-filter active" data-filter="all">✨ All Features</button>
+        <button type="button" class="btn-canvas-filter" data-filter="life">🌿 Life Line</button>
+        <button type="button" class="btn-canvas-filter" data-filter="head">🧠 Head Line</button>
+        <button type="button" class="btn-canvas-filter" data-filter="heart">❤️ Heart Line</button>
+        <button type="button" class="btn-canvas-filter" data-filter="fate">⭐ Fate Line</button>
+        <button type="button" class="btn-canvas-filter" data-filter="mounts">🪐 Mounts</button>
       </div>
       <div class="card-dark" style="margin-top:2rem;">
         <h3 class="card-title" id="resHandTypeTitle">Hand Type</h3>
