@@ -573,6 +573,225 @@
       min-height: 60px;
     }
 
+    /* ===== Chronological Tradition Headers ===== */
+    .tradition-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 2.5rem 0 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+    }
+    .tradition-badge {
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: #0b0518;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .tradition-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      color: #FFF4DC;
+      margin: 0;
+      font-weight: 700;
+    }
+    .tradition-sub {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      margin-left: auto;
+      font-style: italic;
+    }
+
+    /* ===== Kundli-Style Biometric Scanning HUD ===== */
+    .hud-scanner-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 12;
+    }
+    .hud-reticle-mandala {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px dashed rgba(212,160,23,0.65);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate-mandala 14s linear infinite;
+    }
+    .hud-reticle-inner {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,111,0,0.5);
+      position: absolute;
+      animation: rotate-mandala-rev 9s linear infinite;
+    }
+    .hud-crosshair-h, .hud-crosshair-v {
+      position: absolute;
+      background: rgba(212,160,23,0.3);
+    }
+    .hud-crosshair-h { width: 100%; height: 1px; }
+    .hud-crosshair-v { height: 100%; width: 1px; }
+    @keyframes rotate-mandala {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes rotate-mandala-rev {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    .hud-corner {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: var(--gold);
+      border-style: solid;
+    }
+    .hud-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+    .hud-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+    .hud-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+    .hud-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+    .hud-telemetry-panel {
+      position: absolute;
+      bottom: 85px;
+      left: 15px;
+      right: 15px;
+      background: rgba(7, 3, 18, 0.85);
+      border: 1px solid rgba(212,160,23,0.4);
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: #00ffaa;
+      text-shadow: 0 0 5px rgba(0,255,170,0.5);
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    /* ===== Dual-Palm Mode UI ===== */
+    .dual-palm-banner {
+      background: linear-gradient(135deg, rgba(212,160,23,0.12), rgba(255,111,0,0.06));
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .dual-palm-banner .icon { font-size: 1.8rem; }
+    .dual-palm-banner .text { font-size: 0.84rem; line-height: 1.45; opacity: 0.9; }
+
+    .palm-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+    .palm-tab-btn {
+      flex: 1;
+      max-width: 240px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+      color: #FFF2D6;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .palm-tab-btn.active {
+      background: rgba(212,160,23,0.2);
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 12px rgba(212,160,23,0.25);
+    }
+
+    /* ===== Customer Satisfaction & Dual-Scan Callout ===== */
+    .satisfaction-box {
+      background: linear-gradient(135deg, rgba(24, 15, 45, 0.95), rgba(40, 20, 65, 0.95));
+      border: 1px solid rgba(212,160,23,0.45);
+      border-radius: 18px;
+      padding: 1.6rem 2rem;
+      margin-top: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .satisfaction-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--saffron), var(--gold), #2ecc71);
+    }
+    .satisfaction-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin: 0 0 0.5rem;
+    }
+    .satisfaction-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 680px;
+      margin: 0 auto 1.3rem;
+      line-height: 1.55;
+    }
+    .satisfaction-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    /* ===== Esoteric 3-Tier Hand Architecture ===== */
+    .hand-tier-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    .hand-tier-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      position: relative;
+    }
+    .hand-tier-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.4rem;
+    }
+    .tier-physical { background: rgba(255,107,107,0.15); color: #ff8585; border: 1px solid rgba(255,107,107,0.3); }
+    .tier-worldly { background: rgba(255,170,0,0.15); color: #ffbe4a; border: 1px solid rgba(255,170,0,0.3); }
+    .tier-spiritual { background: rgba(0,187,255,0.15); color: #70d8ff; border: 1px solid rgba(0,187,255,0.3); }
+
     /* ===== Example Readings Carousel (matching kundli.online) ===== */
     .example-showcase {
       padding: 3rem 1.5rem;
@@ -786,8 +1005,32 @@
 <!-- ===== SCANNER / DROPZONE SECTION ===== -->
 <div class="scanner-section" id="scannerSection">
 
-  <!-- Gender & Hand Selection Panel (matching kundli.online) -->
+  <!-- Reading Mode & Hand Selection Panel (Integrated Vyas, Shrimali & Wilson Methodology) -->
   <div class="selection-panel">
+    <div class="selection-label">Reading Mode:</div>
+    <div class="toggle-row">
+      <button type="button" class="pill-toggle-btn active" id="btnModeSingle">✋ Single Palm Analysis</button>
+      <button type="button" class="pill-toggle-btn" id="btnModeDual">👐 Compare Both Hands (Left + Right)</button>
+    </div>
+
+    <div class="dual-palm-banner" id="dualPalmBanner" style="display:none;">
+      <div class="icon">📜</div>
+      <div class="text">
+        <strong>Dual-Palm Synthesis (Wilson, 1971 &amp; Vedic Tradition):</strong>
+        Comparing both hands provides the ultimate accuracy — your <strong>Left Palm</strong> reveals your innate birth destiny and karmic potential, while your <strong>Right Palm</strong> demonstrates how your conscious free will, character, and environment have transformed your life path.
+      </div>
+    </div>
+
+    <!-- Hand Switch Tabs for Dual-Mode -->
+    <div class="palm-tabs" id="dualPalmTabs" style="display:none;">
+      <button type="button" class="palm-tab-btn active" id="tabPalmLeft">
+        <span>👈</span> Step 1: Left Palm (Innate)
+      </button>
+      <button type="button" class="palm-tab-btn" id="tabPalmRight">
+        <span>👉</span> Step 2: Right Palm (Active)
+      </button>
+    </div>
+
     <div class="selection-label">I am:</div>
     <div class="toggle-row">
       <button type="button" class="pill-toggle-btn active" id="btnGenderMale">
@@ -800,14 +1043,16 @@
 
     <input type="text" id="userNameInput" placeholder="Your first name (optional)" maxlength="40" class="name-input-box" />
 
-    <div class="selection-label" style="margin-top:0.6rem;">Active Hand:</div>
-    <div class="toggle-row">
-      <button type="button" class="pill-toggle-btn active" id="btnRightHand">Right Hand (Active Karma)</button>
-      <button type="button" class="pill-toggle-btn" id="btnLeftHand">Left Hand (Innate Potential)</button>
+    <div id="singleHandRow">
+      <div class="selection-label" style="margin-top:0.6rem;">Active Hand for Single Reading:</div>
+      <div class="toggle-row">
+        <button type="button" class="pill-toggle-btn active" id="btnRightHand">Right Hand (Active Karma &amp; Free Will)</button>
+        <button type="button" class="pill-toggle-btn" id="btnLeftHand">Left Hand (Innate Potential &amp; Past Karma)</button>
+      </div>
     </div>
 
     <p class="gender-tip" id="genderHandTip">
-      💡 Tip: For men, Right hand shows active destiny. For women, traditional Vedic texts recommend Left hand for innate potential, or Right for career.
+      💡 Tip: For men, Right hand shows active destiny. For women, traditional Vedic texts recommend Left hand for innate potential, or Right for career. Dual-palm mode reads both together for total clarity.
     </p>
   </div>
 
@@ -828,10 +1073,34 @@
       <path d="M40,90 C40,80 30,60 25,50 C20,40 25,35 30,40 C35,45 40,55 40,55 L40,30 C40,25 45,25 45,30 L45,50 L45,20 C45,15 50,15 50,20 L50,50 L50,22 C50,17 55,17 55,22 L55,50 L55,35 C55,30 60,30 60,35 L60,60 C60,75 55,90 55,90 Z" fill="none" stroke="rgba(212,160,23,0.6)" stroke-width="2" stroke-dasharray="4" />
     </svg>
 
+    <!-- Advanced Kundli-Style Biometric Scanning HUD -->
     <div id="scanOverlay">
+      <div class="hud-scanner-overlay">
+        <!-- 4 Holographic Corner Reticles -->
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+
+        <!-- Rotating Astrological Mandala Reticle -->
+        <div class="hud-reticle-mandala">
+          <div class="hud-reticle-inner"></div>
+          <div class="hud-crosshair-h"></div>
+          <div class="hud-crosshair-v"></div>
+          <div style="font-size:1.6rem; opacity:0.8; filter:drop-shadow(0 0 8px var(--gold));">☸</div>
+        </div>
+
+        <!-- Real-Time Telemetry HUD Stream -->
+        <div class="hud-telemetry-panel" id="hudTelemetry">
+          <span>LAT_LOCK: 28.6139° N</span>
+          <span id="telemetryStatus">GEO_TRACING: PALM_CONTOURS</span>
+          <span>FPS: 60.0</span>
+        </div>
+      </div>
+
       <div class="laser-line"></div>
       <div class="scan-status-box">
-        <div id="scanMessage">Initializing...</div>
+        <div id="scanMessage">Initializing Biometric Vedic Scanner...</div>
         <div class="progress-bar"><div id="scanProgress"></div></div>
       </div>
     </div>
@@ -927,21 +1196,31 @@
     </div>
 
     <div class="result-right">
-      <div class="card-dark" style="margin-bottom:2rem;">
+
+      <!-- ============================================================
+           TRADITION I: ANCIENT VEDIC SAMUDRIKA SHASTRA (SHRI VASANT LAL VYAS, 1976)
+           ============================================================ -->
+      <div class="tradition-header">
+        <span class="tradition-badge">Tradition I</span>
+        <h3 class="tradition-title">Ancient Vedic Samudrika Shastra</h3>
+        <span class="tradition-sub">Shri Vasant Lal Vyas (1976, Janata Prakashan)</span>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
         <h3 class="card-title" id="linesCardTitle">Major Lines Analysis</h3>
         <div id="linesAccordion">
           <!-- Accordion items inserted via JS -->
         </div>
       </div>
 
-      <div class="card-dark" style="margin-bottom:2rem;">
+      <div class="card-dark" style="margin-bottom:1.5rem;">
         <h3 class="card-title">Angustha (Thumb) &amp; Yava Mark Analysis (अंगुष्ठ विचार)</h3>
         <div id="angusthaAnalysis">
           <!-- Populated via JS -->
         </div>
       </div>
 
-      <div class="card-dark" style="margin-bottom:2rem;">
+      <div class="card-dark" style="margin-bottom:1.5rem;">
         <h3 class="card-title">Manibandha (Wrist Lines) &amp; Longevity (मणिवन्ध विचार)</h3>
         <div id="manibandhaAnalysis">
           <!-- Populated via JS -->
@@ -949,13 +1228,90 @@
       </div>
 
       <div class="card-dark" style="margin-bottom:2rem;">
-        <h3 class="card-title">Auspicious Shastra Symbols (शुभ लक्षण व राजयोग)</h3>
+        <h3 class="card-title">Auspicious Shastra Symbols (शुभ सामुद्रिक चिह्न व राजयोग)</h3>
         <div class="shastra-symbols-grid" id="shastraSymbolsGrid">
           <!-- Populated via JS -->
         </div>
       </div>
 
+      <!-- ============================================================
+           TRADITION II: HASTA-REKHA YOGA & CLINICAL DIAGNOSTICS (DR. NARAYAN DATT SHRIMALI)
+           ============================================================ -->
+      <div class="tradition-header">
+        <span class="tradition-badge">Tradition II</span>
+        <h3 class="tradition-title">Hasta-Rekha Yoga &amp; Clinical Diagnostics</h3>
+        <span class="tradition-sub">Dr. Narayan Datt Shrimali (हस्त-रेखा शास्त्र)</span>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">240+ Hasta-Rekha Yogas Catalog &amp; Active Combinations (हस्तरेखा योग)</h3>
+        <div id="hastaRekhaYogas">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">Nail Diagnostics &amp; Health Indicators (नख लक्षण व स्वास्थ्य)</h3>
+        <div id="nailAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">Finger Knot Analysis (उँगलियों की गाँठें — Tarjani, Madhyama, Anamika, Kanishthika)</h3>
+        <div id="fingerKnotAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
       <div class="card-dark" style="margin-bottom:2rem;">
+        <h3 class="card-title">Palm Color, Texture &amp; Hand Dimensions (हथेली के वर्ण, स्पर्श व आकार)</h3>
+        <div id="palmPropertiesAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================
+           TRADITION III: ESOTERIC & DUAL-PALM SYNTHESIS (JOYCE WILSON, 1971)
+           ============================================================ -->
+      <div class="tradition-header">
+        <span class="tradition-badge">Tradition III</span>
+        <h3 class="tradition-title">Esoteric &amp; Dual-Palm Synthesis</h3>
+        <span class="tradition-sub">Joyce Wilson (The Complete Book of Palmistry, 1971)</span>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">Dual-Palm Polarity: Innate Destiny vs. Free Will Evolution</h3>
+        <div id="dualPalmComparisonResult">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">The Three Tiers of the Hand (Microcosmic Architecture)</h3>
+        <div id="handTiersAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:1.5rem;">
+        <h3 class="card-title">Esoteric Angles of Fortune &amp; Sacred Crosses</h3>
+        <div id="esotericAnglesAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:2rem;">
+        <h3 class="card-title">Special Occult Markings &amp; Planetary Rings</h3>
+        <div id="occultMarkingsAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- ============================================================
+           PLANETARY MOUNTS & VEDIC REMEDIES
+           ============================================================ -->
+      <div class="card-dark" style="margin-bottom:1.5rem;">
         <h3 class="card-title">Planetary Mounts (Graha Parvata)</h3>
         <div class="mounts-grid" id="mountsGrid">
           <!-- Mount cards inserted via JS -->
@@ -963,7 +1319,7 @@
       </div>
 
       <div class="card-dark" style="margin-bottom:2rem;">
-        <h3 class="card-title">Vedic Remedies (Upaya)</h3>
+        <h3 class="card-title">Vedic Remedies &amp; Planetary Gemstones (Upaya)</h3>
         <div class="remedy-grid" id="remediesGrid">
           <!-- Remedies inserted via JS -->
         </div>
@@ -974,22 +1330,36 @@
         <div class="panditji-header">
           <div class="panditji-avatar">🧘</div>
           <div>
-            <h4 class="panditji-title">Ask Panditji — Vedic Shastra Consultation</h4>
-            <p class="panditji-subtitle">Grounded in Shri Vasant Lal Vyas’s 1976 Samudrika Shastra</p>
+            <h4 class="panditji-title">Ask Panditji — Vedic &amp; Esoteric Shastra Consultation</h4>
+            <p class="panditji-subtitle">Synthesized from Vyas (1976), Shrimali &amp; Wilson (1971)</p>
           </div>
         </div>
-        <p style="font-size:0.85rem; color:rgba(255,255,255,0.75); margin:0 0 0.8rem;">Click a question below to consult the Shastra regarding your palm:</p>
+        <p style="font-size:0.85rem; color:rgba(255,255,255,0.75); margin:0 0 0.8rem;">Select a question below to consult the ancient and esoteric texts regarding your palm:</p>
         <div class="quick-questions">
-          <button type="button" class="btn-quick-q" data-q="career">📈 When is my career peak?</button>
-          <button type="button" class="btn-quick-q" data-q="marriage">💍 When is my marriage timing?</button>
-          <button type="button" class="btn-quick-q" data-q="wealth">💰 Do I have sudden wealth or Raj Yoga?</button>
-          <button type="button" class="btn-quick-q" data-q="travel">✈️ Overseas travel &amp; settlement?</button>
-          <button type="button" class="btn-quick-q" data-q="health">🌿 Longevity and constitution?</button>
+          <button type="button" class="btn-quick-q" data-q="career">📈 Career peak &amp; vocation?</button>
+          <button type="button" class="btn-quick-q" data-q="marriage">💍 Marriage timing &amp; affection lines?</button>
+          <button type="button" class="btn-quick-q" data-q="wealth">💰 Dhana, money lines &amp; Raj Yoga?</button>
+          <button type="button" class="btn-quick-q" data-q="travel">✈️ Travel lines &amp; relocation?</button>
+          <button type="button" class="btn-quick-q" data-q="health">🌿 Arogya, vitality &amp; health line?</button>
+          <button type="button" class="btn-quick-q" data-q="freewill">🔮 Fate vs. Free Will (Left vs. Right)?</button>
         </div>
         <div class="panditji-response-box" id="panditjiAnswer">
-          Select any question above or examine your personalized Samudrika blueprint to see Shastra guidance.
+          Select any question above or examine your multi-tradition blueprint to receive immediate Shastra guidance.
         </div>
       </div>
+
+      <!-- Customer Satisfaction & Dual-Palm Re-Scan Prompt -->
+      <div class="satisfaction-box" id="satisfactionBox">
+        <div class="satisfaction-title">✨ Quality &amp; Dual-Palm Accuracy Check</div>
+        <p class="satisfaction-desc">
+          Not fully satisfied with reading clarity, or want an aggregated Dual-Palm analysis? In classical palmistry, reading <strong>both your Left and Right palms together</strong> reveals how much your conscious choices have elevated your birth destiny.
+        </p>
+        <div class="satisfaction-actions">
+          <button type="button" class="btn-scanner-primary" id="btnScanOtherHand">✋ Scan Other Hand for Dual-Palm Synthesis</button>
+          <button type="button" class="btn-scanner-secondary" id="btnRetakeHighRes">↺ Re-scan with Brighter Lighting</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

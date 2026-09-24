@@ -23,8 +23,59 @@ document.addEventListener('DOMContentLoaded', () => {
   let imageSource = null; // Can be video or img element
   let hashSeed = 0;
   let isRightHand = true;
+  let isDualMode = false;
+  let currentDualStep = 'left'; // 'left' or 'right'
+  let dualLeftSeed = null;
+  let dualRightSeed = null;
 
-  // Toggle hand
+  // Dual-mode and Single-mode toggles
+  const btnModeSingle = document.getElementById('btnModeSingle');
+  const btnModeDual = document.getElementById('btnModeDual');
+  const dualPalmBanner = document.getElementById('dualPalmBanner');
+  const dualPalmTabs = document.getElementById('dualPalmTabs');
+  const singleHandRow = document.getElementById('singleHandRow');
+  const tabPalmLeft = document.getElementById('tabPalmLeft');
+  const tabPalmRight = document.getElementById('tabPalmRight');
+
+  if (btnModeSingle && btnModeDual) {
+    btnModeSingle.addEventListener('click', () => {
+      isDualMode = false;
+      btnModeSingle.classList.add('active');
+      btnModeDual.classList.remove('active');
+      if (dualPalmBanner) dualPalmBanner.style.display = 'none';
+      if (dualPalmTabs) dualPalmTabs.style.display = 'none';
+      if (singleHandRow) singleHandRow.style.display = 'block';
+    });
+
+    btnModeDual.addEventListener('click', () => {
+      isDualMode = true;
+      btnModeDual.classList.add('active');
+      btnModeSingle.classList.remove('active');
+      if (dualPalmBanner) dualPalmBanner.style.display = 'flex';
+      if (dualPalmTabs) dualPalmTabs.style.display = 'flex';
+      if (singleHandRow) singleHandRow.style.display = 'none';
+      isRightHand = false; // Start with Left palm in dual mode
+      if (tabPalmLeft) tabPalmLeft.classList.add('active');
+      if (tabPalmRight) tabPalmRight.classList.remove('active');
+    });
+  }
+
+  if (tabPalmLeft && tabPalmRight) {
+    tabPalmLeft.addEventListener('click', () => {
+      currentDualStep = 'left';
+      isRightHand = false;
+      tabPalmLeft.classList.add('active');
+      tabPalmRight.classList.remove('active');
+    });
+    tabPalmRight.addEventListener('click', () => {
+      currentDualStep = 'right';
+      isRightHand = true;
+      tabPalmRight.classList.add('active');
+      tabPalmLeft.classList.remove('active');
+    });
+  }
+
+  // Toggle hand for single mode
   document.getElementById('btnRightHand').addEventListener('click', (e) => {
     isRightHand = true;
     e.target.classList.add('active');
@@ -244,22 +295,38 @@ document.addEventListener('DOMContentLoaded', () => {
     let progress = 0;
     
     const messages = [
-      'Detecting palm boundary...',
-      'Segmenting hand region...',
-      'Tracing Heart Line...',
-      'Tracing Head Line...',
-      'Tracing Life Line...',
-      'Analyzing Mount of Venus...',
-      'Analyzing Mount of Jupiter...',
-      'Generating Vedic insights...'
+      'Detecting palm contours & boundary coordinates...',
+      'Segmenting hand region & identifying 3-Tier architecture...',
+      'Tracing Heart Line & Mount of Jupiter coordinates...',
+      'Tracing Head Line vector & calculating Angle of Luck...',
+      'Tracing Life Line arc & measuring Mount of Venus...',
+      'Topography: Evaluating Saturn, Sun/Apollo & Mercury mounts...',
+      'Cross-referencing Vyas (1976), Shrimali Yogas & Wilson (1971)...',
+      'Finalizing Multi-Tradition Karmic Blueprint...'
+    ];
+
+    const telemetries = [
+      'GEO_LOCK: PALM_CONTOURS_ACQUIRED [LAT: 28.61° N]',
+      'TIER_ANALYSIS: [BASE: 34%] [WORLDLY: 38%] [MIND: 28%]',
+      'VECTOR_TRACE: [CORDIS / HEART_LINE: 94.2%]',
+      'ANGLE_CALC: [ANG_LUCK: EXPANSIVE] [ANG_GENEROSITY: 72°]',
+      'ARC_MAPPING: [VITA / LIFE_LINE: 96.8%]',
+      'TOPOGRAPHY: [JUPITER: +2.4mm] [SATURN: STABLE] [VENUS: ELEVATED]',
+      'SHASTRA MATRIX: VYAS (1976) • SHRIMALI • WILSON (1971)',
+      'SYNTHESIS: COMPILING 3-TRADITION BLUEPRINT (100%)...'
     ];
     
     let msgIdx = 0;
     scanMessage.innerText = messages[0];
+    const telemetryEl = document.getElementById('telemetryStatus');
+    if (telemetryEl) telemetryEl.innerText = telemetries[0];
     
     const msgInterval = setInterval(() => {
       msgIdx++;
-      if(msgIdx < messages.length) scanMessage.innerText = messages[msgIdx];
+      if (msgIdx < messages.length) {
+        scanMessage.innerText = messages[msgIdx];
+        if (telemetryEl) telemetryEl.innerText = telemetries[msgIdx];
+      }
     }, 1000); // changes every 1s for 8s total
     
     const progInterval = setInterval(() => {
@@ -269,6 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(msgInterval);
         clearInterval(progInterval);
         scanOverlay.style.display = 'none';
+
+        if (isDualMode && currentDualStep === 'left' && !dualRightSeed) {
+          // Record left seed
+          dualLeftSeed = hashSeed;
+          // Pre-seed right for a balanced synthesis
+          dualRightSeed = hashSeed + 347;
+        }
+
         showResults();
       }
     }, 100);
@@ -484,6 +559,239 @@ document.addEventListener('DOMContentLoaded', () => {
       { gem: "Yellow Sapphire (Pukhraj)", color: "Yellow / Gold", day: "Thursday", mantra: "Om Brihaspataye Namah", number: 3 },
       { gem: "Diamond (Heera)", color: "White / Pink", day: "Friday", mantra: "Om Shukraya Namah", number: 6 },
       { gem: "Blue Sapphire (Neelam)", color: "Navy / Black", day: "Saturday", mantra: "Om Shanaishcharaya Namah", number: 8 }
+    ],
+    /* ============================================================
+       Dr. Narayan Datt Shrimali — हस्त-रेखा शास्त्र (हस्तरेखा योग)
+       Nail Analysis, Finger Knots, Palm Properties & Yoga System
+       ============================================================ */
+    nailTypes: [
+      {
+        type: "Purna Nakhun (पूर्ण नाखून — Perfect Nails)",
+        icon: "💅",
+        desc: "Slightly longer than wide with natural lustre. Shrimali designates this as the mark of elevated character, humanistic values, and continuous forward momentum. Such individuals succeed across all spheres of life.",
+        health: "Excellent cardiovascular and metabolic health.",
+        trait: "Noble, progressive, balanced temperament"
+      },
+      {
+        type: "Golaakar Nakhun (गोलाकार नाखून — Rounded Nails)",
+        icon: "⭕",
+        desc: "Nails with rounded tips indicate strong-willed individuals who make swift decisions and follow through with action. They possess executive capability and natural authority.",
+        health: "Strong nervous system and immune response.",
+        trait: "Decisive, action-oriented, commanding"
+      },
+      {
+        type: "Kalatmak Nakhun (कलात्मक नाखून — Artistic Nails)",
+        icon: "🎨",
+        desc: "Thin, long, and elegantly shaped nails reflect a refined aesthetic sensibility. Such individuals may be physically delicate but possess exceptional creative and spiritual depth.",
+        health: "Sensitive constitution; benefits from meditation and pranayama.",
+        trait: "Artistic, spiritually receptive, imaginative"
+      },
+      {
+        type: "Vargaakar Nakhun (वर्गाकार नाखून — Square Nails)",
+        icon: "⬜",
+        desc: "Square-shaped nails reveal a gentle, cautious temperament. According to Shrimali, this indicates humility and a preference for working behind the scenes rather than seeking the spotlight.",
+        health: "Monitor cardiac health; regular exercise recommended.",
+        trait: "Humble, careful, supportive nature"
+      }
+    ],
+    fingerKnots: [
+      {
+        finger: "Tarjani (तर्जनी — Index Finger)",
+        upperKnot: "Upper knot present: Skilled in practical affairs, strategic in career decisions.",
+        lowerKnot: "Lower knot present: Deep analytical intelligence, methodical thinker.",
+        bothKnots: "Both knots: May tend toward excessive deliberation; guard against indecisiveness.",
+        noKnots: "No knots: Clever, resourceful, and naturally successful in chosen endeavors."
+      },
+      {
+        finger: "Madhyama (मध्यमा — Middle Finger)",
+        upperKnot: "Upper knot: Firm determination; does not lose heart even after repeated setbacks.",
+        lowerKnot: "Lower knot: May face cyclical business reversals; persistence eventually pays off.",
+        bothKnots: "Both knots: Rapid rise followed by rapid correction — diversify investments.",
+        noKnots: "No knots: Profound scholar or magnanimous merchant who supports hundreds."
+      },
+      {
+        finger: "Anamika (अनामिका — Ring Finger)",
+        upperKnot: "Upper knot: Deeply reverent and spiritually inclined; may be overly cautious.",
+        lowerKnot: "Lower knot: Less interest in ritual dharma; pragmatic worldview.",
+        bothKnots: "Both knots: Self-focused; redirect energy toward community service for balance.",
+        noKnots: "No knots: Natural community leader with a definite higher purpose."
+      },
+      {
+        finger: "Kanishthika (कनिष्ठिका — Little Finger)",
+        upperKnot: "Upper knot: Socially active; dedicates life to constructive causes.",
+        lowerKnot: "Lower knot: Exceptionally shrewd; excels in law, negotiation, or trade.",
+        bothKnots: "Both knots: Guard against opportunism; channel talents ethically.",
+        noKnots: "No knots: Pure idealist; offers fresh contributions to society."
+      }
+    ],
+    palmProperties: [
+      {
+        palmColor: "Gulabi (गुलाबी — Rose Pink)",
+        palmColorDesc: "Healthy, progressive, and balanced. Such individuals rise from ordinary beginnings to extraordinary heights through their own effort and merit.",
+        palmTexture: "Chikni Tvacha (चिकनी त्वचा — Smooth Skin)",
+        palmTextureDesc: "Determined and goal-oriented. The life path is clear and the individual progresses toward it without distraction.",
+        palmSize: "Samanya Hast (सामान्य हाथ — Balanced Hand)",
+        palmSizeDesc: "Practically intelligent, socially adept, and skilled at adapting to changing circumstances. Earns respect in society through sustained effort."
+      },
+      {
+        palmColor: "Halka Lal (हल्का लाल — Light Red)",
+        palmColorDesc: "Energetic and passionate disposition. Strong willpower but should practice patience and mindfulness to channel intensity constructively.",
+        palmTexture: "Mulayam Tvacha (मुलायम त्वचा — Soft Skin)",
+        palmTextureDesc: "Imaginative and empathetic. Natural helper with a gentle, accommodating nature. Especially common in nurturing personalities.",
+        palmSize: "Lamba Hast (लम्बा हाथ — Long Hand)",
+        palmSizeDesc: "Highly perceptive, detail-oriented, and socially graceful. Excellent judges of character who see through to the heart of complex situations."
+      },
+      {
+        palmColor: "Svarna Aabha (स्वर्ण आभा — Golden Glow)",
+        palmColorDesc: "Radiant constitution indicating robust vitality and inner harmony. Associated with individuals who maintain physical and spiritual discipline.",
+        palmTexture: "Dridh Tvacha (दृढ़ त्वचा — Firm Skin)",
+        palmTextureDesc: "Hard-working and resilient. Does not give up when obstacles arise. Success comes through persistent effort and unwavering focus.",
+        palmSize: "Samchoras Hast (समचौरस हाथ — Square Palm)",
+        palmSizeDesc: "Healthy, calm, resolute, and self-made. Does not start a task without full confidence in its success, but once started, invests complete energy until completion."
+      }
+    ],
+    hastaRekhaYogas: [
+      {
+        name: "Gaj Lakshmi Yoga (गजलक्ष्मी योग)",
+        icon: "🐘",
+        meaning: "When the Fate Line rises strongly from the wrist to Saturn, and the Sun Line runs parallel with equal clarity, and both are supported by an unbroken Life Line — this triple conjunction forms the Gaj Lakshmi Yoga. Shrimali notes this is the mark of immense prosperity, leadership, and lasting legacy.",
+        effect: "Wealth, authority, and public honor throughout life."
+      },
+      {
+        name: "Raj Yoga (राज योग)",
+        icon: "👑",
+        meaning: "When the Fate Line terminates powerfully on Mount Saturn with ascending branches toward Jupiter, and the Head Line is long, deep, and unwavering — the native commands authority equivalent to kings. Career zenith arrives between ages 34-42.",
+        effect: "Supreme authority, governance, and executive power."
+      },
+      {
+        name: "Maha Bhagya Yoga (महाभाग्य योग)",
+        icon: "🌟",
+        meaning: "Formed when all four major lines (Life, Head, Heart, Fate) are deep, unbroken, and well-colored, combined with developed Jupiter and Sun mounts. This rare configuration grants extraordinary fortune across all life domains.",
+        effect: "Exceptional luck in career, relationships, health, and spiritual growth."
+      },
+      {
+        name: "Vidya Yoga (विद्या योग)",
+        icon: "📚",
+        meaning: "When Mercury mount is well-developed with a clear Sun Line and the Head Line extends across the full palm with a Writer's Fork — the native possesses exceptional intellectual gifts. Mastery in education, research, or literary arts.",
+        effect: "Scholarly excellence, literary fame, and intellectual authority."
+      },
+      {
+        name: "Dhan Vriddhi Yoga (धनवृद्धि योग)",
+        icon: "💰",
+        meaning: "When the Fate Line has ascending branches toward the Sun mount, and the second Manibandha bracelet is deep and unbroken, wealth accumulates steadily through one's own enterprise. Peak financial growth between ages 30-50.",
+        effect: "Progressive wealth accumulation and financial security."
+      },
+      {
+        name: "Moksha Prapti Yoga (मोक्ष प्राप्ति योग)",
+        icon: "🙏",
+        meaning: "When the Heart Line rises toward Jupiter with spiritual depth, and the Mount of Moon is well-developed with intuitive cross-marks — the native achieves profound spiritual liberation and inner peace in the latter half of life.",
+        effect: "Spiritual enlightenment, detachment, and inner peace."
+      },
+      {
+        name: "Kalatmak Yoga (कला योग)",
+        icon: "🎭",
+        meaning: "When the Sun mount is prominent with pink coloration, the ring finger is well-proportioned, and the Heart Line shows ascending branches — the native possesses innate artistic genius. Success in music, painting, theater, or literary arts.",
+        effect: "Artistic brilliance, creative fame, and aesthetic mastery."
+      },
+      {
+        name: "Purna Aayu Yoga (पूर्ण आयु योग)",
+        icon: "🌿",
+        meaning: "When the Life Line sweeps broadly around Venus mount without breaks, the three Manibandha bracelets are clear, and no adverse cross-marks appear on Saturn — the native enjoys a full, healthy lifespan with vigor maintained well into advanced years.",
+        effect: "Long life (75-90+ years), robust health, and graceful aging."
+      },
+      {
+        name: "Sainik Yoga (सैनिक योग)",
+        icon: "⚔️",
+        meaning: "When Mars mount (both upper and lower) is prominently developed, the thumb shows dominant Will phalanx, and the Life Line has a sister line — the native possesses warrior-like courage, physical prowess, and natural leadership in defense or competitive fields.",
+        effect: "Military aptitude, physical courage, and competitive dominance."
+      },
+      {
+        name: "Lakshmi Yoga (लक्ष्मी योग)",
+        icon: "🪷",
+        meaning: "When Venus mount is well-developed, the Heart Line ends with a trident near Jupiter, and the second bracelet of Manibandha is deeply etched — Goddess Lakshmi's perpetual grace ensures domestic harmony, beauty, and material comfort.",
+        effect: "Domestic bliss, beauty, material comfort, and loving relationships."
+      }
+    ],
+    /* ============================================================
+       Joyce Wilson — The Complete Book of Palmistry (1971)
+       Esoteric Hand Architecture, Dual-Palm Polarity, Angles & Markings
+       ============================================================ */
+    dualPalmPolarity: [
+      {
+        title: "Harmonious Destiny Realization (प्रारब्ध-क्रियामाण सामंजस्य)",
+        badge: "High Alignment",
+        desc: "Your Left Palm (innate blueprint) and Right Palm (active free will) show high congruence. What you were born to achieve is actively manifesting in your day-to-day decisions. Your conscious mind is in sync with your deeper soul calling.",
+        leftInsight: "Innate gifts of intuition, natural charm, and resilience.",
+        rightInsight: "Active career consolidation, deliberate habits, and steady material gain."
+      },
+      {
+        title: "Conscious Evolution Beyond Birth Limits (पुरुषार्थ विकास)",
+        badge: "Transcendent Path",
+        desc: "Your Right Palm demonstrates significantly stronger focus, deeper line clarity, and more organized mount topography than your Left. As Joyce Wilson notes, this proves that your personal will, discipline, and education have overcome early life limitations and created your own luck.",
+        leftInsight: "Sensitive beginnings, fluctuating emotional direction.",
+        rightInsight: "Sharp executive intellect, firm financial discipline, and command over fate."
+      },
+      {
+        title: "Protective Grounding & Karmic Mastery (कर्म शुद्धि)",
+        badge: "Disciplined Focus",
+        desc: "While your Left Palm displays a wide array of diffuse creative lines, your Right Palm has consolidated into steady, protective channels. You have learned to say no to distractions, anchoring your vital life force into lasting, enduring structures.",
+        leftInsight: "Restless imagination, wide spectrum of speculative interests.",
+        rightInsight: "Anchored purpose, grounded domestic stability, and protected vitality."
+      }
+    ],
+    handTiers: {
+      physicalBase: {
+        title: "The Base Tier (Physical Body & Subconscious Realm)",
+        ruler: "Encompasses Mount of Venus, Mount of Moon & Lower Plain of Mars",
+        reading: "The lower third of your palm reveals a robust reservoir of Prana and instinctual vitality. Grounded in the Mount of Venus, your vital forces supply continuous physical stamina, while the creative percussion of the Moon enriches your dreams and instinctual impulses."
+      },
+      worldlyMid: {
+        title: "The Worldly Mid-Tier (The Quadrangle & Battleground of Life)",
+        ruler: "Encompasses Plain of Mars, Quadrangle between Head & Heart Lines",
+        reading: "The central plain and quadrangle mediate between your emotional heart and rational intellect. Your spacious quadrangle ensures a generous, broad-minded outlook that avoids petty grudges, allowing you to negotiate life's conflicts with diplomatic poise."
+      },
+      spiritualUpper: {
+        title: "The Upper Tier (Intellect & Planetary Fingers)",
+        ruler: "Encompasses Jupiter, Saturn, Uranus/Apollo & Mercury Fingers",
+        reading: "Your upper finger segments show pronounced intellectual cushions. The Jupiter finger commands respect and professional dignity, while the Apollo/Uranus finger channels creative inspiration directly into your practical worldly ventures."
+      }
+    },
+    esotericAngles: [
+      {
+        name: "Angle of Generosity (उदारता कोण)",
+        icon: "🤲",
+        degree: "Wide (~65°–75°)",
+        desc: "Formed by the span between your thumb and index finger. In Wilson's esoteric system, a wide angle indicates an open-handed, magnanimous nature that readily shares wealth and knowledge, ensuring that abundance circulates freely in your life."
+      },
+      {
+        name: "Angle of Luck (भाग्य कोण)",
+        icon: "📐",
+        degree: "Expansive Triad",
+        desc: "Formed where the Head Line separates from the Life Line. An open angle denotes a courageous spirit that welcomes new ventures. When joined with the line of business/health, it forms the 'Lucky Triangle' (Plain of Mars), providing ample strategic room to conquer challenges."
+      },
+      {
+        name: "The Mystic Cross (रहस्यमय क्रास)",
+        icon: "✝️",
+        degree: "Mid-Palm Quadrangle",
+        desc: "Positioned directly between the Head Line and Heart Line. Joyce Wilson designates this as the supreme mark of the occult seeker and intuitive mind — one who perceives unseen truths, practices genuine spiritual empathy, and balances emotion with higher wisdom."
+      }
+    ],
+    occultMarkings: [
+      {
+        name: "Ring of Solomon (सुलेमान मुद्रिका)",
+        icon: "💍",
+        desc: "A soft arc circling the base of the index finger under Mount Jupiter. Symbolizes spiritual initiation, psychological insight into human nature, and natural counseling ability."
+      },
+      {
+        name: "Girdle of Venus (शुक्र मेखला)",
+        icon: "✨",
+        desc: "A luminous arc above the Heart Line. Indicates heightened aesthetic sensibility, emotional responsiveness, and an innate capacity to feel and express passionate artistic devotion."
+      },
+      {
+        name: "Via Lascivia / The Milky Way (क्षीर मार्ग — Line of Abundance)",
+        icon: "🌌",
+        desc: "Sister line running parallel to the Health Line. Channels raw vitality into imaginative and creative endeavors, protecting against mundane burnout through joyful inspiration."
+      }
     ]
   };
 
@@ -699,34 +1007,188 @@ document.addEventListener('DOMContentLoaded', () => {
       `).join('');
     }
 
-    // Interactive Panditji Q&A wireup
-    const answerBox = document.getElementById('panditjiAnswer');
-    const qButtons = document.querySelectorAll('.btn-quick-q');
-    
-    const panditjiResponses = {
-      career: `<strong>Shastra Career Guidance:</strong> Based on your Fate Line rising toward Mount Saturn with support from Mount Jupiter, your strongest professional inflection point arrives between ages <strong>32 and 38</strong>. Shri Vasant Lal Vyas notes that when the Will phalanx is resolute, commercial partnerships entered after age 30 bring sustainable prosperity. Maintain ethical diligence to appease Shani Bhagavan.`,
-      marriage: `<strong>Vivah Rekha & Relationship Insight:</strong> Your Heart Line curves harmoniously toward Jupiter, signifying devotion and high relationship ideals. The Shastra indicates marital harmony through a mature, supportive life partner. If any minor cross-lines appear near Mercury, chanting the Shukra Beej Mantra on Fridays ensures enduring domestic peace.`,
-      wealth: `<strong>Dhana & Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
-      travel: `<strong>Desh-Videsh Yatra (Travel & Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
-      health: `<strong>Arogya & Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`
-    };
+    // ======== Dr. Shrimali — Nail Diagnostics (नखून विश्लेषण) ========
+    const nailData = pickFromArray(textPools.nailTypes);
+    const nailEl = document.getElementById('nailAnalysis');
+    if (nailEl) {
+      nailEl.innerHTML = `
+        <div class="shastra-subcard">
+          <h4><span>${nailData.icon}</span> ${nailData.type}</h4>
+          <p style="font-size:0.88rem; line-height:1.55; opacity:0.85; margin:0 0 0.6rem;">${nailData.desc}</p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem;">
+            <div style="flex:1; min-width:140px; background:rgba(255,107,107,0.1); border:1px solid rgba(255,107,107,0.3); border-radius:10px; padding:0.5rem 0.7rem;">
+              <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:0.2rem;">Health Indicator</div>
+              <div style="font-size:0.82rem; color:#ff6b6b;">${nailData.health}</div>
+            </div>
+            <div style="flex:1; min-width:140px; background:rgba(46,204,113,0.1); border:1px solid rgba(46,204,113,0.3); border-radius:10px; padding:0.5rem 0.7rem;">
+              <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:0.2rem;">Core Trait</div>
+              <div style="font-size:0.82rem; color:#2ecc71;">${nailData.trait}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
-    qButtons.forEach(btn => {
-      btn.onclick = () => {
-        const qKey = btn.getAttribute('data-q');
-        if (answerBox && panditjiResponses[qKey]) {
-          answerBox.innerHTML = panditjiResponses[qKey];
-          answerBox.style.animation = 'none';
-          void answerBox.offsetWidth; // trigger reflow
-          answerBox.style.animation = 'fadeIn 0.3s ease';
-        }
-      };
-    });
+    // ======== Dr. Shrimali — Finger Knot Analysis (उँगलियों की गाँठें) ========
+    const knotEl = document.getElementById('fingerKnotAnalysis');
+    if (knotEl) {
+      const knotStates = ['upperKnot', 'lowerKnot', 'bothKnots', 'noKnots'];
+      let knotsHtml = '';
+      textPools.fingerKnots.forEach(fk => {
+        const state = knotStates[Math.floor(seededRandom() * knotStates.length)];
+        const reading = fk[state];
+        knotsHtml += `
+          <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.6rem 0.8rem; margin-bottom:0.5rem;">
+            <div style="font-weight:700; font-size:0.88rem; color:var(--gold); margin-bottom:0.25rem;">☝ ${fk.finger}</div>
+            <div style="font-size:0.82rem; line-height:1.5; opacity:0.85;">${reading}</div>
+          </div>
+        `;
+      });
+      knotEl.innerHTML = knotsHtml;
+    }
+
+    // ======== Dr. Shrimali — Palm Properties (हथेली के गुण) ========
+    const palmProp = pickFromArray(textPools.palmProperties);
+    const palmPropEl = document.getElementById('palmPropertiesAnalysis');
+    if (palmPropEl) {
+      palmPropEl.innerHTML = `
+        <div class="shastra-subcard">
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.6rem;">
+            <div style="text-align:center; background:rgba(255,170,0,0.08); border:1px solid rgba(255,170,0,0.25); border-radius:12px; padding:0.7rem 0.5rem;">
+              <div style="font-size:1.3rem; margin-bottom:0.3rem;">🎨</div>
+              <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:0.3rem;">Palm Color</div>
+              <div style="font-weight:700; font-size:0.82rem; color:var(--gold); margin-bottom:0.3rem;">${palmProp.palmColor}</div>
+              <div style="font-size:0.78rem; line-height:1.4; opacity:0.8;">${palmProp.palmColorDesc}</div>
+            </div>
+            <div style="text-align:center; background:rgba(46,204,113,0.08); border:1px solid rgba(46,204,113,0.25); border-radius:12px; padding:0.7rem 0.5rem;">
+              <div style="font-size:1.3rem; margin-bottom:0.3rem;">🤲</div>
+              <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:0.3rem;">Skin Texture</div>
+              <div style="font-weight:700; font-size:0.82rem; color:#2ecc71; margin-bottom:0.3rem;">${palmProp.palmTexture}</div>
+              <div style="font-size:0.78rem; line-height:1.4; opacity:0.8;">${palmProp.palmTextureDesc}</div>
+            </div>
+            <div style="text-align:center; background:rgba(0,187,255,0.08); border:1px solid rgba(0,187,255,0.25); border-radius:12px; padding:0.7rem 0.5rem;">
+              <div style="font-size:1.3rem; margin-bottom:0.3rem;">✋</div>
+              <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:0.3rem;">Hand Size</div>
+              <div style="font-weight:700; font-size:0.82rem; color:#00bbff; margin-bottom:0.3rem;">${palmProp.palmSize}</div>
+              <div style="font-size:0.78rem; line-height:1.4; opacity:0.8;">${palmProp.palmSizeDesc}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ======== Dr. Shrimali — Hasta-Rekha Yogas (हस्तरेखा योग) ========
+    const yogaEl = document.getElementById('hastaRekhaYogas');
+    if (yogaEl) {
+      const shuffledYogas = [...textPools.hastaRekhaYogas].sort(() => 0.5 - seededRandom());
+      const selectedYogas = shuffledYogas.slice(0, 3);
+      yogaEl.innerHTML = selectedYogas.map((yoga, idx) => `
+        <div style="background:linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,107,107,0.04)); border:1px solid rgba(255,170,0,0.2); border-radius:14px; padding:0.8rem 1rem; margin-bottom:0.6rem; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:-10px; right:-5px; font-size:2.5rem; opacity:0.12;">${yoga.icon}</div>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem;">
+            <span style="font-size:1.2rem;">${yoga.icon}</span>
+            <span style="font-weight:800; font-size:0.92rem; color:var(--gold);">${yoga.name}</span>
+          </div>
+          <p style="font-size:0.82rem; line-height:1.55; opacity:0.85; margin:0 0 0.5rem;">${yoga.meaning}</p>
+          <div style="display:inline-block; background:rgba(46,204,113,0.12); border:1px solid #2ecc71; color:#2ecc71; padding:0.25rem 0.7rem; border-radius:50px; font-size:0.78rem; font-weight:700;">
+            ✦ ${yoga.effect}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ======== Joyce Wilson (1971) — Dual-Palm Polarity ========
+    const dualCompEl = document.getElementById('dualPalmComparisonResult');
+    if (dualCompEl) {
+      const polarity = pickFromArray(textPools.dualPalmPolarity);
+      dualCompEl.innerHTML = `
+        <div class="shastra-subcard">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+            <h4 style="margin:0;"><span>⚖️</span> ${polarity.title}</h4>
+            <span style="background:rgba(212,160,23,0.2); border:1px solid var(--gold); color:var(--gold); padding:0.2rem 0.6rem; border-radius:50px; font-size:0.75rem; font-weight:800;">${polarity.badge}</span>
+          </div>
+          <p style="font-size:0.86rem; line-height:1.55; opacity:0.85; margin:0 0 0.8rem;">${polarity.desc}</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; font-size:0.82rem;">
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.6rem 0.8rem;">
+              <strong style="color:#70d8ff; display:block; margin-bottom:0.2rem;">Left Palm (Innate Blueprint):</strong>
+              ${polarity.leftInsight}
+            </div>
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.6rem 0.8rem;">
+              <strong style="color:var(--gold); display:block; margin-bottom:0.2rem;">Right Palm (Active Karma):</strong>
+              ${polarity.rightInsight}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ======== Joyce Wilson (1971) — Three Tiers of the Hand ========
+    const tiersEl = document.getElementById('handTiersAnalysis');
+    if (tiersEl) {
+      const tiers = textPools.handTiers;
+      tiersEl.innerHTML = `
+        <div class="hand-tier-grid">
+          <div class="hand-tier-card">
+            <span class="hand-tier-badge tier-spiritual">Upper Tier • Mind &amp; Ideals</span>
+            <div style="font-weight:700; font-size:0.9rem; color:#FFF2D6; margin-bottom:0.2rem;">${tiers.spiritualUpper.title}</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-bottom:0.4rem;">${tiers.spiritualUpper.ruler}</div>
+            <p style="font-size:0.82rem; line-height:1.5; opacity:0.85; margin:0;">${tiers.spiritualUpper.reading}</p>
+          </div>
+          <div class="hand-tier-card">
+            <span class="hand-tier-badge tier-worldly">Mid Tier • Worldly Quadrangle</span>
+            <div style="font-weight:700; font-size:0.9rem; color:#FFF2D6; margin-bottom:0.2rem;">${tiers.worldlyMid.title}</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-bottom:0.4rem;">${tiers.worldlyMid.ruler}</div>
+            <p style="font-size:0.82rem; line-height:1.5; opacity:0.85; margin:0;">${tiers.worldlyMid.reading}</p>
+          </div>
+          <div class="hand-tier-card">
+            <span class="hand-tier-badge tier-physical">Base Tier • Instinct &amp; Vitality</span>
+            <div style="font-weight:700; font-size:0.9rem; color:#FFF2D6; margin-bottom:0.2rem;">${tiers.physicalBase.title}</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin-bottom:0.4rem;">${tiers.physicalBase.ruler}</div>
+            <p style="font-size:0.82rem; line-height:1.5; opacity:0.85; margin:0;">${tiers.physicalBase.reading}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // ======== Joyce Wilson (1971) — Esoteric Angles & Sacred Crosses ========
+    const anglesEl = document.getElementById('esotericAnglesAnalysis');
+    if (anglesEl) {
+      anglesEl.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:0.75rem;">
+          ${textPools.esotericAngles.map(angItem => `
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:0.8rem 1rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.3rem;">
+                <span style="font-size:1.1rem;">${angItem.icon}</span>
+                <span style="font-size:0.75rem; color:var(--gold); font-weight:700;">${angItem.degree}</span>
+              </div>
+              <div style="font-weight:700; font-size:0.88rem; color:#FFF2D6; margin-bottom:0.3rem;">${angItem.name}</div>
+              <p style="font-size:0.8rem; line-height:1.45; opacity:0.85; margin:0;">${angItem.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // ======== Joyce Wilson (1971) — Special Occult Markings ========
+    const occultEl = document.getElementById('occultMarkingsAnalysis');
+    if (occultEl) {
+      occultEl.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:0.75rem;">
+          ${textPools.occultMarkings.map(occ => `
+            <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:0.8rem 1rem;">
+              <div style="font-size:1.3rem; margin-bottom:0.3rem;">${occ.icon}</div>
+              <div style="font-weight:700; font-size:0.88rem; color:var(--gold); margin-bottom:0.3rem;">${occ.name}</div>
+              <p style="font-size:0.8rem; line-height:1.45; opacity:0.85; margin:0;">${occ.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
 
     // Mounts
     const statuses = ['prominent', 'normal', 'flat'];
     let mountsHtml = '';
-    for(const [mName, mData] of Object.entries(textPools.mounts)) {
+    for (const [mName, mData] of Object.entries(textPools.mounts)) {
       const status = statuses[Math.floor(seededRandom() * 3)];
       mountsHtml += `
         <div class="mount-card">
@@ -767,9 +1229,73 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="remedy-value">${rem.number}</div>
       </div>
     `;
+
+    // Interactive Panditji Q&A wireup (Synthesized Vyas + Shrimali + Wilson)
+    const answerBox = document.getElementById('panditjiAnswer');
+    const qButtons = document.querySelectorAll('.btn-quick-q');
     
+    const panditjiResponses = {
+      career: `<strong>Shastra Career Guidance:</strong> Based on your Fate Line rising toward Mount Saturn with support from Mount Jupiter, your strongest professional inflection point arrives between ages <strong>32 and 38</strong>. Shri Vasant Lal Vyas notes that when the Will phalanx is resolute, commercial partnerships entered after age 30 bring sustainable prosperity. Maintain ethical diligence to appease Shani Bhagavan.`,
+      marriage: `<strong>Vivah Rekha & Relationship Insight:</strong> Your Heart Line curves harmoniously toward Jupiter, signifying devotion and high relationship ideals. The Shastra indicates marital harmony through a mature, supportive life partner. If any minor cross-lines appear near Mercury, chanting the Shukra Beej Mantra on Fridays ensures enduring domestic peace.`,
+      wealth: `<strong>Dhana & Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
+      travel: `<strong>Desh-Videsh Yatra (Travel & Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
+      health: `<strong>Arogya & Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`,
+      freewill: `<strong>Fate vs. Free Will (Left vs. Right Hand):</strong> As Joyce Wilson elucidates in <em>The Complete Book of Palmistry (1971)</em>, your Left Palm reveals the karmic cards you were dealt at birth, while your Right Palm illustrates how your free will, character, and choices play that hand. A marked improvement in line clarity in the Right hand confirms you have actively transcended hereditary obstacles.`
+    };
+
+    qButtons.forEach(btn => {
+      btn.onclick = () => {
+        const qKey = btn.getAttribute('data-q');
+        if (answerBox && panditjiResponses[qKey]) {
+          answerBox.innerHTML = panditjiResponses[qKey];
+          answerBox.style.animation = 'none';
+          void answerBox.offsetWidth; // trigger reflow
+          answerBox.style.animation = 'fadeIn 0.3s ease';
+        }
+      };
+    });
+
+    // Customer Satisfaction & Dual-Palm Actions
+    const btnScanOtherHand = document.getElementById('btnScanOtherHand');
+    const btnRetakeHighRes = document.getElementById('btnRetakeHighRes');
+
+    if (btnScanOtherHand) {
+      btnScanOtherHand.onclick = () => {
+        // Toggle to the other hand and scroll back to scanner
+        isRightHand = !isRightHand;
+        if (isRightHand) {
+          document.getElementById('btnRightHand').classList.add('active');
+          document.getElementById('btnLeftHand').classList.remove('active');
+        } else {
+          document.getElementById('btnLeftHand').classList.add('active');
+          document.getElementById('btnRightHand').classList.remove('active');
+        }
+        resultsDashboard.style.display = 'none';
+        scannerSection.style.display = 'block';
+        scannerSection.scrollIntoView({ behavior: 'smooth' });
+        // Trigger a complementary seed
+        hashSeed += 819;
+      };
+    }
+
+    if (btnRetakeHighRes) {
+      btnRetakeHighRes.onclick = () => {
+        resultsDashboard.style.display = 'none';
+        scannerSection.style.display = 'block';
+        preview.style.display = 'none';
+        if (scanPlaceholder) scanPlaceholder.style.display = 'block';
+        btnScan.style.display = 'none';
+        btnRetake.style.display = 'none';
+        btnCamera.style.display = 'inline-flex';
+        btnUpload.style.display = 'inline-flex';
+        if (btnSample) btnSample.style.display = 'inline-flex';
+        scannerSection.scrollIntoView({ behavior: 'smooth' });
+      };
+    }
+
     // Open the first accordion by default
-    document.querySelector('.accordion-content').classList.add('open');
+    const firstAcc = document.querySelector('.accordion-content');
+    if (firstAcc) firstAcc.classList.add('open');
     
     // Scroll to results
     resultsDashboard.scrollIntoView({ behavior: 'smooth' });
