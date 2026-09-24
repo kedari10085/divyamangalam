@@ -326,10 +326,118 @@ document.addEventListener('DOMContentLoaded', () => {
       { strength: 5, text: "A double Fate Line reveals a multifaceted career or dual passions pursued simultaneously. You have the energy and capability to manage multiple significant life paths, perhaps balancing a demanding profession with a deep personal calling." }
     ],
     handTypes: [
-      { title: "Earth Hand", desc: "Characterized by a square palm and short fingers. You are grounded, practical, and reliable. You connect deeply with nature and prefer tangible results over abstract concepts. Tradition, stability, and hard work are your guiding principles." },
-      { title: "Air Hand", desc: "Characterized by a square palm and long fingers. You are an intellectual, a communicator, and a thinker. You process the world through ideas and analysis. You thrive in environments that stimulate your mind and allow you to share concepts." },
-      { title: "Fire Hand", desc: "Characterized by a rectangular palm and short fingers. You are dynamic, passionate, and action-oriented. You have a natural charisma and leadership ability. You act on intuition and are always ready for the next adventure or challenge." },
-      { title: "Water Hand", desc: "Characterized by a rectangular palm and long fingers. You are deeply sensitive, intuitive, and empathetic. Emotions and aesthetic appreciation guide your life. You have a rich inner world and excel in creative or healing professions." }
+      {
+        title: "Samkona Hasta (Square / Practical Hand — समकोण हाथ)",
+        desc: "According to Shri Vasant Lal Vyas's Hasta Samudrika Shastra (1976), the Samkona hand features a balanced square palm, firm thumb, and even fingertips. You possess methodical discipline, deep respect for truth and justice, and extraordinary patience. You excel in administration, commerce, legal frameworks, and constructive leadership."
+      },
+      {
+        title: "Darshanik Hasta (Philosophic / Knotted Hand — दार्शनिक या गांठदार हाथ)",
+        desc: "Characterized by long, bony fingers with prominent knuckle knots (Sandhi Ganth) and an angular palm. Vyas notes this is the hand of profound thinkers, sages, and seekers of absolute truth. You are naturally indifferent to worldly pomp, prize intellectual depth over material display, and possess contemplative foresight."
+      },
+      {
+        title: "Kalakar Hasta (Artistic / Conical Hand — कलात्मक या शंक्वाकार हाथ)",
+        desc: "Features gently tapering fingers, smooth phalanges, and a soft, supple palm. The Shastra describes this native as a lover of fine arts, music, poetry, and aesthetic beauty. You are deeply intuitive, receptive to psychic impressions, generous to a fault, and thrive in creative environments."
+      },
+      {
+        title: "Chamasakar Hasta (Spatulate / Energetic Hand — चमसाकार हाथ)",
+        desc: "Broad at the base or knuckles with spoon-like (spatulate) fingertips. The treatise designates this as the hand of inventors, navigators, and tireless pioneers. You possess relentless drive, disdain conventional routine, and conquer physical and technological frontiers through inventive resolve."
+      },
+      {
+        title: "Aadarshvadi Hasta (Idealistic / Psychic Hand — आदर्शवादी हाथ)",
+        desc: "Extremely slender, elegant, with long pointed fingers and delicate skin. As Vyas explains, this sacred hand belongs to pure mystics, poets, and visionaries. You possess spiritual receptivity, ethereal intuition, and a gentle soul guided by divine harmony."
+      },
+      {
+        title: "Mishrit Hasta (Mixed Hand — मिश्रित हाथ)",
+        desc: "Combines elements of multiple classical hand categories (e.g. square palm with philosophical knots or artistic fingertips). The treatise notes this confers rare versatility, enabling you to excel simultaneously in practical business and creative or intellectual vocations."
+      },
+      {
+        title: "Ati-Vidagdha Hasta (Intellectual Master Hand — अति-विदग्ध हाथ)",
+        desc: "Features long, refined Mercury (little) and Jupiter fingers with balanced mounts. Vyas identifies this as the signature of master orators, high counselors, and strategic minds capable of orchestrating complex enterprises with tact and eloquence."
+      },
+      {
+        title: "Prathamik Hasta (Elementary Hand — प्राथमिक / निकृष्ट हाथ)",
+        desc: "Sturdy, thick palm with short, heavy fingers and deep primal vitality. Shastra notes extraordinary physical endurance, direct connection to the earth and nature, and unshakeable resilience against hardships."
+      }
+    ],
+    angusthaData: [
+      {
+        willRatio: 52,
+        logicRatio: 48,
+        yavaType: "Purna Yava (पूर्ण यव — Complete Barley Mark)",
+        yavaDesc: "A complete, unbroken barley-grain (Yava) is clearly marked at the joint of the thumb. Vyas's treatise highlights this as one of the highest auspicious marks in Samudrika Shastra: it confers lifelong financial independence, royal/governmental goodwill, and virtuous family lineage.",
+        stance: "Balanced Firm Stance (सौम्य एवं स्वाभिमानी)",
+        willDesc: "The First Phalanx (Will Power / इच्छा पर्व) and Second Phalanx (Logic / तर्क पर्व) are in near-perfect equilibrium. You do not act recklessly, nor do you get paralyzed in over-analysis. You plan methodically and execute decisively."
+      },
+      {
+        willRatio: 58,
+        logicRatio: 42,
+        yavaType: "Uttama Yava Mala (उत्तम यव माला — Chain of Fortune)",
+        yavaDesc: "Distinct Yava grains interlinked at the thumb base signify steady accumulation of landed property and ancestral blessings. Born under an auspicious lunar phase with strong protective karma.",
+        stance: "Firm & Unyielding (दृढ़निश्चयी एवं साहसी)",
+        willDesc: "The First Phalanx dominates, indicating powerful command, leadership charisma, and the determination to overcome insurmountable hurdles. When you resolve to complete a task, obstacles yield before your resolve."
+      },
+      {
+        willRatio: 44,
+        logicRatio: 56,
+        yavaType: "Shukla Yava Rekha (शुक्ल यव रेखा — Auspicious Crescent)",
+        yavaDesc: "Indicates daytime or Shukla Paksha birth influence. Confers high intellectual acumen, success in negotiations, diplomacy, and prosperity attained through intellectual and communicative prowess.",
+        stance: "Flexible & Adaptable (उदार एवं मिलनसार)",
+        willDesc: "The Second Phalanx (Logic & Reason) is elongated and highly developed. You are an exceptional strategist, tactician, and debater. You foresee chess-moves ahead of others and achieve victory through wisdom rather than brute force."
+      }
+    ],
+    manibandhaData: [
+      {
+        linesCount: 3,
+        linesDesc: "Triveni Manibandha (त्रिवेणी मणिवन्ध) — Three distinct, unbroken parallel bracelets at the wrist.",
+        line1: "First Line (Arogya / Swasthya Rekha): Deep and unbroken, indicating a robust physical constitution, vitality, and immunity throughout life.",
+        line2: "Second Line (Dhana / Sampatti Rekha): Clear and even, signifying steady financial growth and prosperity in the prime of life (ages 30–55).",
+        line3: "Third Line (Kirti / Pratishtha Rekha): Well-defined, indicating social honor, leadership status, and lasting public esteem.",
+        vitalityYears: "80–88 years of active vitality"
+      },
+      {
+        linesCount: 4,
+        linesDesc: "Chatush-Manibandha (चतुष्-मणिवन्ध / राजयोग बन्ध) — Rare fourfold bracelets indicating extraordinary spiritual and karmic grace.",
+        line1: "First Line (Constitution): Highly defined, granting swift physical recovery and stamina.",
+        line2: "Second Line (Prosperity): Flourishing, indicating unearned blessings, fruitful investments, and material abundance.",
+        line3: "Third Line (Renown): Prominent, granting wide social acclaim and authority in your chosen sphere.",
+        line4: "Fourth Line (Moksha & Wisdom): Extremely rare; signifies profound spiritual discernment, detachment from trivial disputes, and veneration in mature years.",
+        vitalityYears: "90+ years of fulfilled life journey"
+      },
+      {
+        linesCount: 3,
+        linesDesc: "Pushta Manibandha (पुष्ट मणिवन्ध) — Firmly set wrist bracelets with ascending branches toward the palm.",
+        line1: "First Line: Slightly chained early, smoothing out into an unbroken band signifying strengthening vitality after youth.",
+        line2: "Second Line: Deep and continuous, indicating self-made wealth and successful commercial enterprise.",
+        line3: "Third Line: Clear under Venus, indicating peaceful domestic happiness, loyal companions, and family honor.",
+        vitalityYears: "78–85 years of fruitful vitality"
+      }
+    ],
+    shastraSymbols: [
+      {
+        name: "Matsya Rekha (Fish Sign — मत्स्य चिह्न)",
+        icon: "🐟",
+        desc: "Formed near the base of the Life or Fate line. According to Shri Vasant Lal Vyas, the fish sign is a signature of royal favor, overseas travel, wealth acquired from multiple directions, and deep spiritual liberation."
+      },
+      {
+        name: "Trishula (Trident — त्रिशूल चिह्न)",
+        icon: "🔱",
+        desc: "Appearing at the terminus of the Fate Line on Mount Saturn or Apollo Line. Signifies the three-pronged grace of Shiva: undisputed victory in professional competition, authority, and divine protection during crises."
+      },
+      {
+        name: "Padma Chihna (Lotus Sign — कमल चिह्न)",
+        icon: "🪷",
+        desc: "A sacred petal-like configuration near the Mount of Jupiter or Venus. Reflects Goddess Lakshmi's perpetual grace, purity of moral conduct, and leadership that uplifts an entire community."
+      },
+      {
+        name: "Swastika Rekha (स्वस्तिक चिह्न)",
+        icon: "卐",
+        desc: "Auspicious symmetrical intersection on the Mount of Jupiter. Shastra designates this as the mark of a righteous leader, builder of dharmic institutions, and recipient of ancestral fame."
+      },
+      {
+        name: "Shankha (Conch Sign — शंख चिह्न)",
+        icon: "🐚",
+        desc: "Subtle spiral whorl on the Mount of Moon or fingertips. Denotes scholarly eloquence, sweet and persuasive voice, legal acumen, and distinction in literary or educational pursuits."
+      }
     ],
     mounts: {
       Jupiter: {
@@ -529,6 +637,91 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `;
+
+    // Angustha (Thumb) Analysis
+    const ang = pickFromArray(textPools.angusthaData);
+    const angEl = document.getElementById('angusthaAnalysis');
+    if (angEl) {
+      angEl.innerHTML = `
+        <div class="shastra-subcard">
+          <h4><span>👍</span> ${ang.yavaType}</h4>
+          <p style="font-size:0.88rem; line-height:1.55; opacity:0.85; margin:0 0 0.8rem;">${ang.yavaDesc}</p>
+          <div style="font-size:0.82rem; color:var(--gold); font-weight:700; margin-bottom:0.4rem;">Phalanx Balance (पर्व विभाजन):</div>
+          <div class="phalanx-bar-wrap">
+            <div class="phalanx-bar">
+              <span class="phalanx-label">Will Power (इच्छा पर्व):</span>
+              <div class="phalanx-track"><div class="phalanx-fill" style="width:${ang.willRatio}%;"></div></div>
+              <span style="font-weight:700; color:var(--gold); width:35px;">${ang.willRatio}%</span>
+            </div>
+            <div class="phalanx-bar">
+              <span class="phalanx-label">Logic & Reason (तर्क पर्व):</span>
+              <div class="phalanx-track"><div class="phalanx-fill" style="width:${ang.logicRatio}%; background:linear-gradient(90deg, #00bbff, #2ecc71);"></div></div>
+              <span style="font-weight:700; color:#00bbff; width:35px;">${ang.logicRatio}%</span>
+            </div>
+          </div>
+          <div style="font-size:0.82rem; margin-top:0.6rem; color:rgba(255,255,255,0.75);">
+            <strong>Stance:</strong> ${ang.stance} • ${ang.willDesc}
+          </div>
+        </div>
+      `;
+    }
+
+    // Manibandha (Wrist Lines) Analysis
+    const mani = pickFromArray(textPools.manibandhaData);
+    const maniEl = document.getElementById('manibandhaAnalysis');
+    if (maniEl) {
+      maniEl.innerHTML = `
+        <div class="shastra-subcard">
+          <h4><span>📿</span> ${mani.linesDesc}</h4>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin:0.8rem 0; font-size:0.86rem; line-height:1.5; opacity:0.85;">
+            <div>• <strong>Line 1:</strong> ${mani.line1}</div>
+            <div>• <strong>Line 2:</strong> ${mani.line2}</div>
+            <div>• <strong>Line 3:</strong> ${mani.line3}</div>
+            ${mani.line4 ? `<div>• <strong>Line 4:</strong> ${mani.line4}</div>` : ''}
+          </div>
+          <div style="display:inline-block; background:rgba(46,204,113,0.15); border:1px solid #2ecc71; color:#2ecc71; padding:0.35rem 0.8rem; border-radius:50px; font-size:0.82rem; font-weight:700;">
+            Estimated Vitality: ${mani.vitalityYears}
+          </div>
+        </div>
+      `;
+    }
+
+    // Auspicious Shastra Symbols (Pick 2 distinct signs)
+    const symEl = document.getElementById('shastraSymbolsGrid');
+    if (symEl) {
+      const shuffledSyms = [...textPools.shastraSymbols].sort(() => 0.5 - seededRandom());
+      const selectedSyms = shuffledSyms.slice(0, 2);
+      symEl.innerHTML = selectedSyms.map(sym => `
+        <div class="shastra-symbol-card">
+          <div class="sym-name"><span>${sym.icon}</span> ${sym.name}</div>
+          <p class="sym-desc">${sym.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    // Interactive Panditji Q&A wireup
+    const answerBox = document.getElementById('panditjiAnswer');
+    const qButtons = document.querySelectorAll('.btn-quick-q');
+    
+    const panditjiResponses = {
+      career: `<strong>Shastra Career Guidance:</strong> Based on your Fate Line rising toward Mount Saturn with support from Mount Jupiter, your strongest professional inflection point arrives between ages <strong>32 and 38</strong>. Shri Vasant Lal Vyas notes that when the Will phalanx is resolute, commercial partnerships entered after age 30 bring sustainable prosperity. Maintain ethical diligence to appease Shani Bhagavan.`,
+      marriage: `<strong>Vivah Rekha & Relationship Insight:</strong> Your Heart Line curves harmoniously toward Jupiter, signifying devotion and high relationship ideals. The Shastra indicates marital harmony through a mature, supportive life partner. If any minor cross-lines appear near Mercury, chanting the Shukra Beej Mantra on Fridays ensures enduring domestic peace.`,
+      wealth: `<strong>Dhana & Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
+      travel: `<strong>Desh-Videsh Yatra (Travel & Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
+      health: `<strong>Arogya & Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`
+    };
+
+    qButtons.forEach(btn => {
+      btn.onclick = () => {
+        const qKey = btn.getAttribute('data-q');
+        if (answerBox && panditjiResponses[qKey]) {
+          answerBox.innerHTML = panditjiResponses[qKey];
+          answerBox.style.animation = 'none';
+          void answerBox.offsetWidth; // trigger reflow
+          answerBox.style.animation = 'fadeIn 0.3s ease';
+        }
+      };
+    });
 
     // Mounts
     const statuses = ['prominent', 'normal', 'flat'];

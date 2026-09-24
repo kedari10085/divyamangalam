@@ -4,6 +4,9 @@
   <meta name="referrer" content="no-referrer" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, noarchive, nosnippet" />
+  <meta name="googlebot" content="index, follow, noarchive, nosnippet" />
+  <meta name="google-extended" content="none" />
   <title>Free Palm Reading Online (हस्त सामुद्रिक शास्त्र) — AI + Vedic Palmistry | Divya Mangalam</title>
   <meta name="description" content="Career peaks, marriage timing & key health phases — from your palm, in 30 seconds. 100% free Vedic Hasta Samudrika Shastra AI hand analysis." />
   <link rel="stylesheet" href="style.css" />
@@ -449,6 +452,127 @@
     .remedy-label { font-size: 0.75rem; opacity: 0.6; text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.05em; }
     .remedy-value { font-weight: 700; color: var(--gold); font-size: 0.92rem; }
 
+    /* Shastra Additions from Shri Vasant Lal Vyas (1976) */
+    .shastra-subcard {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,160,23,0.2);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .shastra-subcard h4 {
+      color: var(--gold);
+      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .phalanx-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin: 0.8rem 0;
+    }
+    .phalanx-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.84rem;
+    }
+    .phalanx-label { width: 150px; color: rgba(255,255,255,0.85); font-weight: 600; }
+    .phalanx-track {
+      flex: 1;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .phalanx-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--saffron));
+      border-radius: 4px;
+    }
+    .shastra-symbols-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+    .shastra-symbol-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .shastra-symbol-card .sym-name {
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 0.94rem;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .shastra-symbol-card .sym-desc {
+      font-size: 0.84rem;
+      opacity: 0.82;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .panditji-container {
+      background: linear-gradient(135deg, rgba(43,0,56,0.3) 0%, rgba(12,8,30,0.5) 100%);
+      border: 1px solid rgba(212,160,23,0.4);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .panditji-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .panditji-avatar {
+      font-size: 2rem;
+      background: rgba(212,160,23,0.15);
+      border-radius: 50%;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .panditji-title { font-weight: 700; color: #FFF8EF; font-size: 1.1rem; margin: 0; }
+    .panditji-subtitle { font-size: 0.8rem; color: var(--gold); margin: 0; }
+    .quick-questions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .btn-quick-q {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(212,160,23,0.3);
+      color: #FFE6B3;
+      padding: 0.45rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-quick-q:hover {
+      background: rgba(212,160,23,0.2);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+    .panditji-response-box {
+      background: rgba(0,0,0,0.45);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.3rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
+      min-height: 60px;
+    }
+
     /* ===== Example Readings Carousel (matching kundli.online) ===== */
     .example-showcase {
       padding: 3rem 1.5rem;
@@ -811,16 +935,59 @@
       </div>
 
       <div class="card-dark" style="margin-bottom:2rem;">
+        <h3 class="card-title">Angustha (Thumb) &amp; Yava Mark Analysis (अंगुष्ठ विचार)</h3>
+        <div id="angusthaAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:2rem;">
+        <h3 class="card-title">Manibandha (Wrist Lines) &amp; Longevity (मणिवन्ध विचार)</h3>
+        <div id="manibandhaAnalysis">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:2rem;">
+        <h3 class="card-title">Auspicious Shastra Symbols (शुभ लक्षण व राजयोग)</h3>
+        <div class="shastra-symbols-grid" id="shastraSymbolsGrid">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-bottom:2rem;">
         <h3 class="card-title">Planetary Mounts (Graha Parvata)</h3>
         <div class="mounts-grid" id="mountsGrid">
           <!-- Mount cards inserted via JS -->
         </div>
       </div>
 
-      <div class="card-dark">
+      <div class="card-dark" style="margin-bottom:2rem;">
         <h3 class="card-title">Vedic Remedies (Upaya)</h3>
         <div class="remedy-grid" id="remediesGrid">
           <!-- Remedies inserted via JS -->
+        </div>
+      </div>
+
+      <!-- Interactive Panditji Companion -->
+      <div class="panditji-container" id="panditjiContainer">
+        <div class="panditji-header">
+          <div class="panditji-avatar">🧘</div>
+          <div>
+            <h4 class="panditji-title">Ask Panditji — Vedic Shastra Consultation</h4>
+            <p class="panditji-subtitle">Grounded in Shri Vasant Lal Vyas’s 1976 Samudrika Shastra</p>
+          </div>
+        </div>
+        <p style="font-size:0.85rem; color:rgba(255,255,255,0.75); margin:0 0 0.8rem;">Click a question below to consult the Shastra regarding your palm:</p>
+        <div class="quick-questions">
+          <button type="button" class="btn-quick-q" data-q="career">📈 When is my career peak?</button>
+          <button type="button" class="btn-quick-q" data-q="marriage">💍 When is my marriage timing?</button>
+          <button type="button" class="btn-quick-q" data-q="wealth">💰 Do I have sudden wealth or Raj Yoga?</button>
+          <button type="button" class="btn-quick-q" data-q="travel">✈️ Overseas travel &amp; settlement?</button>
+          <button type="button" class="btn-quick-q" data-q="health">🌿 Longevity and constitution?</button>
+        </div>
+        <div class="panditji-response-box" id="panditjiAnswer">
+          Select any question above or examine your personalized Samudrika blueprint to see Shastra guidance.
         </div>
       </div>
     </div>
