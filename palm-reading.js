@@ -31,20 +31,32 @@ document.addEventListener('DOMContentLoaded', () => {
   let dualLeftSeed = null;
   let dualRightSeed = null;
 
+  const btnCapturePalm = document.getElementById('btnCapturePalm');
+
+  function resetScanHighlightLines() {
+    ['scanHeartLine', 'scanHeadLine', 'scanLifeLine', 'scanFateLine', 'pinHeart', 'pinHead', 'pinLife', 'pinFate'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('active');
+    });
+  }
+
   function updateHandGuideOrientation() {
     if (!handGuide) return;
     if (isRightHand) {
-      handGuide.classList.remove('left-hand');
-      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
-        handFitText.innerText = '✋ Align your Right Palm inside the golden contour';
-      }
-    } else {
       handGuide.classList.add('left-hand');
       if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
-        handFitText.innerText = '✋ Align your Left Palm inside the golden contour';
+        handFitText.innerText = '✋ Place your Right Palm within the contour';
+      }
+    } else {
+      handGuide.classList.remove('left-hand');
+      if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
+        handFitText.innerText = '✋ Place your Left Palm within the contour';
       }
     }
   }
+
+  // Initial orientation call
+  updateHandGuideOrientation();
 
   // Dual-mode and Single-mode toggles
   const btnModeSingle = document.getElementById('btnModeSingle');
@@ -63,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dualPalmBanner) dualPalmBanner.style.display = 'none';
       if (dualPalmTabs) dualPalmTabs.style.display = 'none';
       if (singleHandRow) singleHandRow.style.display = 'block';
+      isRightHand = true;
       updateHandGuideOrientation();
     });
 
@@ -115,6 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSample = document.getElementById('btnSample');
   const btnPlaceholderDemo = document.getElementById('btnPlaceholderDemo');
 
+  // Floating Capture Button (Kundli.online)
+  if (btnCapturePalm) {
+    btnCapturePalm.addEventListener('click', () => {
+      if (stream) {
+        btnScan.click();
+      } else if (preview && preview.style.display === 'block') {
+        btnScan.click();
+      } else {
+        btnCamera.click();
+      }
+    });
+  }
+
   // Start Camera
   btnCamera.addEventListener('click', async () => {
     try {
@@ -131,6 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
         handFitIndicator.classList.remove('locked');
         updateHandGuideOrientation();
       }
+      if (btnCapturePalm) {
+        btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">📷</span> Capture Palm';
+      }
       if (scanPlaceholder) scanPlaceholder.style.display = 'none';
       btnCamera.style.display = 'none';
       btnUpload.style.display = 'none';
@@ -140,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       imageSource = video;
       resultsDashboard.style.display = 'none';
     } catch (err) {
-      alert("Camera access denied or unavailable. Please use 'Upload Image' or 'Try Demo Hand'.");
+      alert("Camera access denied or unavailable. Please use 'Upload Photo' or 'Try Demo Hand'.");
     }
   });
 
@@ -233,6 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
       handFitIndicator.classList.remove('locked');
       updateHandGuideOrientation();
     }
+    if (btnCapturePalm) {
+      btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">✨</span> Scan Palm';
+    }
     if (scanPlaceholder) scanPlaceholder.style.display = 'none';
     if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
     btnCamera.style.display = 'none';
@@ -266,6 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
           handFitIndicator.classList.remove('locked');
           updateHandGuideOrientation();
         }
+        if (btnCapturePalm) {
+          btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">✨</span> Scan Palm';
+        }
         if (scanPlaceholder) scanPlaceholder.style.display = 'none';
         if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
         btnCamera.style.display = 'none';
@@ -286,14 +321,19 @@ document.addEventListener('DOMContentLoaded', () => {
     video.style.display = 'none';
     preview.style.display = 'none';
     if (handGuide) {
-      handGuide.style.display = 'none';
+      handGuide.style.display = 'block';
       handGuide.classList.remove('locked');
     }
     if (handFitIndicator) {
-      handFitIndicator.style.display = 'none';
+      handFitIndicator.style.display = 'flex';
       handFitIndicator.classList.remove('locked');
+      updateHandGuideOrientation();
     }
-    if (scanPlaceholder) scanPlaceholder.style.display = 'block';
+    resetScanHighlightLines();
+    if (btnCapturePalm) {
+      btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">⛶</span> Capture';
+    }
+    if (scanPlaceholder) scanPlaceholder.style.display = 'none';
     btnCamera.style.display = 'inline-flex';
     btnUpload.style.display = 'inline-flex';
     if (btnSample) btnSample.style.display = 'inline-flex';
@@ -354,7 +394,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function runScanAnimation() {
     scanOverlay.style.display = 'flex';
+    resetScanHighlightLines();
     let progress = 0;
+
+    const scanHeartLine = document.getElementById('scanHeartLine');
+    const scanHeadLine = document.getElementById('scanHeadLine');
+    const scanLifeLine = document.getElementById('scanLifeLine');
+    const scanFateLine = document.getElementById('scanFateLine');
+    const pinHeart = document.getElementById('pinHeart');
+    const pinHead = document.getElementById('pinHead');
+    const pinLife = document.getElementById('pinLife');
+    const pinFate = document.getElementById('pinFate');
     
     const messages = [
       'Detecting palm contours & boundary coordinates...',
@@ -388,6 +438,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (msgIdx < messages.length) {
         scanMessage.innerText = messages[msgIdx];
         if (telemetryEl) telemetryEl.innerText = telemetries[msgIdx];
+
+        // Progressive in-scanning line highlight & pins at exact anatomical positions
+        if (msgIdx === 2) {
+          if (scanHeartLine) scanHeartLine.classList.add('active');
+          if (pinHeart) pinHeart.classList.add('active');
+        } else if (msgIdx === 3) {
+          if (scanHeadLine) scanHeadLine.classList.add('active');
+          if (pinHead) pinHead.classList.add('active');
+        } else if (msgIdx === 4) {
+          if (scanLifeLine) scanLifeLine.classList.add('active');
+          if (pinLife) pinLife.classList.add('active');
+        } else if (msgIdx === 5 || msgIdx === 6) {
+          if (scanFateLine) scanFateLine.classList.add('active');
+          if (pinFate) pinFate.classList.add('active');
+        }
       }
     }, 1000); // changes every 1s for 8s total
     
@@ -398,6 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(msgInterval);
         clearInterval(progInterval);
         scanOverlay.style.display = 'none';
+        resetScanHighlightLines();
 
         if (isDualMode && currentDualStep === 'left' && !dualRightSeed) {
           // Record left seed
@@ -1504,6 +1570,10 @@ document.addEventListener('DOMContentLoaded', () => {
           handFitIndicator.classList.remove('locked');
           handFitIndicator.style.display = 'flex';
         }
+        if (btnCapturePalm) {
+          btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">⛶</span> Capture';
+        }
+        resetScanHighlightLines();
         resultsDashboard.style.display = 'none';
         scannerSection.style.display = 'block';
         scannerSection.scrollIntoView({ behavior: 'smooth' });
@@ -1518,14 +1588,19 @@ document.addEventListener('DOMContentLoaded', () => {
         scannerSection.style.display = 'block';
         preview.style.display = 'none';
         if (handGuide) {
-          handGuide.style.display = 'none';
+          handGuide.style.display = 'block';
           handGuide.classList.remove('locked');
         }
         if (handFitIndicator) {
-          handFitIndicator.style.display = 'none';
+          handFitIndicator.style.display = 'flex';
           handFitIndicator.classList.remove('locked');
+          updateHandGuideOrientation();
         }
-        if (scanPlaceholder) scanPlaceholder.style.display = 'block';
+        if (btnCapturePalm) {
+          btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">⛶</span> Capture';
+        }
+        resetScanHighlightLines();
+        if (scanPlaceholder) scanPlaceholder.style.display = 'none';
         btnScan.style.display = 'none';
         btnRetake.style.display = 'none';
         btnCamera.style.display = 'inline-flex';
