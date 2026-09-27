@@ -34,7 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCapturePalm = document.getElementById('btnCapturePalm');
 
   function resetScanHighlightLines() {
-    ['scanHeartLine', 'scanHeadLine', 'scanLifeLine', 'scanFateLine', 'pinHeart', 'pinHead', 'pinLife', 'pinFate'].forEach(id => {
+    [
+      'scanHeartLineR', 'scanHeadLineR', 'scanLifeLineR', 'scanFateLineR',
+      'pinHeartR', 'pinHeadR', 'pinLifeR', 'pinFateR',
+      'scanHeartLineL', 'scanHeadLineL', 'scanLifeLineL', 'scanFateLineL',
+      'pinHeartL', 'pinHeadL', 'pinLifeL', 'pinFateL'
+    ].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     });
@@ -42,13 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateHandGuideOrientation() {
     if (!handGuide) return;
+    const rightGroup = document.getElementById('handGuideRightGroup');
+    const leftGroup = document.getElementById('handGuideLeftGroup');
+
     if (isRightHand) {
-      handGuide.classList.remove('left-hand');
+      if (rightGroup) rightGroup.style.display = 'inline';
+      if (leftGroup) leftGroup.style.display = 'none';
       if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
         handFitText.innerText = '✋ Place your Right Palm within the contour (Thumb on Right)';
       }
     } else {
-      handGuide.classList.add('left-hand');
+      if (rightGroup) rightGroup.style.display = 'none';
+      if (leftGroup) leftGroup.style.display = 'inline';
       if (handFitText && (!handFitIndicator || !handFitIndicator.classList.contains('locked'))) {
         handFitText.innerText = '✋ Place your Left Palm within the contour (Thumb on Left)';
       }
@@ -128,9 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSample = document.getElementById('btnSample');
   const btnPlaceholderDemo = document.getElementById('btnPlaceholderDemo');
 
-  // Floating Capture Button (Kundli.online)
+  // Floating Capture Button with Camera Shutter Flash (Kundli.online Style)
   if (btnCapturePalm) {
     btnCapturePalm.addEventListener('click', () => {
+      // Trigger instant camera shutter flash effect
+      const flashEl = document.getElementById('cameraShutterFlash');
+      if (flashEl) {
+        flashEl.classList.add('flash');
+        setTimeout(() => flashEl.classList.remove('flash'), 350);
+      }
+
       if (stream) {
         btnScan.click();
       } else if (preview && preview.style.display === 'block') {
@@ -174,106 +191,76 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Demo Hand Generator
+  // Demo Hand Loader (Loads authentic reference palm print image)
   function loadDemoPalm() {
-    const demoCanvas = document.createElement('canvas');
-    demoCanvas.width = 600;
-    demoCanvas.height = 800;
-    const dCtx = demoCanvas.getContext('2d');
-
-    // Sacred dark background
-    dCtx.fillStyle = '#181226';
-    dCtx.fillRect(0, 0, 600, 800);
-
-    // Subtle cosmic glow
-    const grad = dCtx.createRadialGradient(300, 450, 50, 300, 450, 350);
-    grad.addColorStop(0, 'rgba(212,160,23,0.18)');
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    dCtx.fillStyle = grad;
-    dCtx.fillRect(0, 0, 600, 800);
-
-    // Draw stylized warm palm
-    dCtx.save();
-    dCtx.shadowColor = '#D4A017';
-    dCtx.shadowBlur = 18;
-    dCtx.fillStyle = '#e5b993';
-    dCtx.beginPath();
-    dCtx.moveTo(220, 780);
-    dCtx.lineTo(380, 780);
-    dCtx.quadraticCurveTo(425, 650, 445, 520);
-    // Little finger
-    dCtx.quadraticCurveTo(505, 480, 500, 355);
-    dCtx.quadraticCurveTo(495, 305, 465, 310);
-    dCtx.quadraticCurveTo(440, 315, 440, 420);
-    // Ring finger
-    dCtx.quadraticCurveTo(440, 240, 410, 175);
-    dCtx.quadraticCurveTo(385, 145, 360, 175);
-    dCtx.quadraticCurveTo(350, 240, 350, 410);
-    // Middle finger
-    dCtx.quadraticCurveTo(345, 180, 320, 110);
-    dCtx.quadraticCurveTo(295, 80, 270, 110);
-    dCtx.quadraticCurveTo(265, 195, 265, 410);
-    // Index finger
-    dCtx.quadraticCurveTo(255, 220, 230, 195);
-    dCtx.quadraticCurveTo(205, 175, 185, 205);
-    dCtx.quadraticCurveTo(180, 265, 200, 450);
-    // Thumb
-    dCtx.quadraticCurveTo(120, 500, 65, 475);
-    dCtx.quadraticCurveTo(35, 475, 45, 525);
-    dCtx.quadraticCurveTo(70, 600, 170, 640);
-    dCtx.quadraticCurveTo(180, 720, 220, 780);
-    dCtx.closePath();
-    dCtx.fill();
-    dCtx.restore();
-
-    // Natural skin lines & crease hints
-    dCtx.strokeStyle = 'rgba(145, 85, 55, 0.45)';
-    dCtx.lineWidth = 4;
-    dCtx.lineCap = 'round';
-    // Heart line hint
-    dCtx.beginPath();
-    dCtx.moveTo(460, 430);
-    dCtx.bezierCurveTo(360, 420, 280, 360, 235, 320);
-    dCtx.stroke();
-    // Head line hint
-    dCtx.beginPath();
-    dCtx.moveTo(195, 450);
-    dCtx.bezierCurveTo(260, 460, 340, 490, 430, 520);
-    dCtx.stroke();
-    // Life line hint
-    dCtx.beginPath();
-    dCtx.moveTo(195, 440);
-    dCtx.bezierCurveTo(170, 520, 210, 640, 280, 730);
-    dCtx.stroke();
-    // Fate line hint
-    dCtx.beginPath();
-    dCtx.moveTo(300, 740);
-    dCtx.bezierCurveTo(310, 600, 315, 450, 310, 300);
-    dCtx.stroke();
-
-    preview.src = demoCanvas.toDataURL('image/png');
-    preview.style.display = 'block';
-    video.style.display = 'none';
-    if (handGuide) {
-      handGuide.style.display = 'block';
-      handGuide.classList.remove('locked');
-    }
-    if (handFitIndicator) {
-      handFitIndicator.style.display = 'flex';
-      handFitIndicator.classList.remove('locked');
-      updateHandGuideOrientation();
-    }
-    if (btnCapturePalm) {
-      btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">✨</span> Scan Palm';
-    }
-    if (scanPlaceholder) scanPlaceholder.style.display = 'none';
-    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
-    btnCamera.style.display = 'none';
-    btnUpload.style.display = 'none';
-    if (btnSample) btnSample.style.display = 'none';
-    btnScan.style.display = 'inline-flex';
-    btnRetake.style.display = 'inline-flex';
-    imageSource = preview;
-    resultsDashboard.style.display = 'none';
+    const demoImg = new Image();
+    demoImg.onload = () => {
+      preview.src = demoImg.src;
+      preview.style.display = 'block';
+      video.style.display = 'none';
+      if (handGuide) {
+        handGuide.style.display = 'block';
+        handGuide.classList.remove('locked');
+      }
+      if (handFitIndicator) {
+        handFitIndicator.style.display = 'flex';
+        handFitIndicator.classList.remove('locked');
+        updateHandGuideOrientation();
+      }
+      if (btnCapturePalm) {
+        btnCapturePalm.innerHTML = '<span style="font-size:1.15rem;">✨</span> Scan Palm';
+      }
+      if (scanPlaceholder) scanPlaceholder.style.display = 'none';
+      if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+      btnCamera.style.display = 'none';
+      btnUpload.style.display = 'none';
+      if (btnSample) btnSample.style.display = 'none';
+      btnScan.style.display = 'inline-flex';
+      btnRetake.style.display = 'inline-flex';
+      imageSource = preview;
+      resultsDashboard.style.display = 'none';
+    };
+    demoImg.onerror = () => {
+      // Fallback procedural canvas if file is not found
+      const demoCanvas = document.createElement('canvas');
+      demoCanvas.width = 600;
+      demoCanvas.height = 800;
+      const dCtx = demoCanvas.getContext('2d');
+      dCtx.fillStyle = '#181226';
+      dCtx.fillRect(0, 0, 600, 800);
+      dCtx.fillStyle = '#e5b993';
+      dCtx.beginPath();
+      dCtx.moveTo(220, 780);
+      dCtx.lineTo(380, 780);
+      dCtx.quadraticCurveTo(425, 650, 445, 520);
+      dCtx.quadraticCurveTo(505, 480, 500, 355);
+      dCtx.quadraticCurveTo(495, 305, 465, 310);
+      dCtx.quadraticCurveTo(440, 315, 440, 420);
+      dCtx.quadraticCurveTo(440, 240, 410, 175);
+      dCtx.quadraticCurveTo(385, 145, 360, 175);
+      dCtx.quadraticCurveTo(350, 240, 350, 410);
+      dCtx.quadraticCurveTo(345, 180, 320, 110);
+      dCtx.quadraticCurveTo(295, 80, 270, 110);
+      dCtx.quadraticCurveTo(265, 195, 265, 410);
+      dCtx.quadraticCurveTo(255, 220, 230, 195);
+      dCtx.quadraticCurveTo(205, 175, 185, 205);
+      dCtx.quadraticCurveTo(180, 265, 200, 450);
+      dCtx.quadraticCurveTo(120, 500, 65, 475);
+      dCtx.quadraticCurveTo(35, 475, 45, 525);
+      dCtx.quadraticCurveTo(70, 600, 170, 640);
+      dCtx.quadraticCurveTo(180, 720, 220, 780);
+      dCtx.closePath();
+      dCtx.fill();
+      preview.src = demoCanvas.toDataURL('image/png');
+      preview.style.display = 'block';
+      video.style.display = 'none';
+      if (handGuide) handGuide.style.display = 'block';
+      if (handFitIndicator) handFitIndicator.style.display = 'flex';
+      imageSource = preview;
+      btnScan.style.display = 'inline-flex';
+      btnRetake.style.display = 'inline-flex';
+    };
+    demoImg.src = 'images/demo-palm-print.png';
   }
 
   if (btnSample) btnSample.addEventListener('click', loadDemoPalm);
@@ -402,14 +389,15 @@ document.addEventListener('DOMContentLoaded', () => {
     resetScanHighlightLines();
     let progress = 0;
 
-    const scanHeartLine = document.getElementById('scanHeartLine');
-    const scanHeadLine = document.getElementById('scanHeadLine');
-    const scanLifeLine = document.getElementById('scanLifeLine');
-    const scanFateLine = document.getElementById('scanFateLine');
-    const pinHeart = document.getElementById('pinHeart');
-    const pinHead = document.getElementById('pinHead');
-    const pinLife = document.getElementById('pinLife');
-    const pinFate = document.getElementById('pinFate');
+    const sfx = isRightHand ? 'R' : 'L';
+    const scanHeartLine = document.getElementById('scanHeartLine' + sfx);
+    const scanHeadLine = document.getElementById('scanHeadLine' + sfx);
+    const scanLifeLine = document.getElementById('scanLifeLine' + sfx);
+    const scanFateLine = document.getElementById('scanFateLine' + sfx);
+    const pinHeart = document.getElementById('pinHeart' + sfx);
+    const pinHead = document.getElementById('pinHead' + sfx);
+    const pinLife = document.getElementById('pinLife' + sfx);
+    const pinFate = document.getElementById('pinFate' + sfx);
     
     const messages = [
       'Detecting palm contours & boundary coordinates...',
@@ -929,29 +917,202 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const cachedPalmCanvas = document.createElement('canvas');
+  const extractedPalmCanvas = document.createElement('canvas');
+  const xrayPalmCanvas = document.createElement('canvas');
+  let currentViewMode = 'extract'; // 'extract', 'photo', 'xray'
   let currentActiveFilter = 'all';
 
   function drawLinesOnCanvas(rCtx, width, height) {
     renderBiometricPalmAnalysis(rCtx, width, height, 'all');
   }
 
-  function renderBiometricPalmAnalysis(rCtx, width, height, filter = 'all') {
-    currentActiveFilter = filter;
-    
-    // Draw base palm image
-    if (cachedPalmCanvas.width > 0) {
-      rCtx.clearRect(0, 0, width, height);
-      rCtx.drawImage(cachedPalmCanvas, 0, 0, width, height);
+  // Authentic Biometric Palm Print Extraction Algorithm
+  // Isolates hand, applies dermatoglyphic crease extraction, and renders deep cerulean/slate print matching reference
+  function extractBiometricPalmPrint(sourceCanvas, isRight) {
+    const extractCanvas = document.createElement('canvas');
+    extractCanvas.width = 600;
+    extractCanvas.height = 800;
+    const eCtx = extractCanvas.getContext('2d');
+
+    // 1. Deep cosmic navy/slate background
+    const bgGrad = eCtx.createRadialGradient(300, 450, 40, 300, 450, 420);
+    bgGrad.addColorStop(0, '#0d1830');
+    bgGrad.addColorStop(0.7, '#070d1e');
+    bgGrad.addColorStop(1, '#040711');
+    eCtx.fillStyle = bgGrad;
+    eCtx.fillRect(0, 0, 600, 800);
+
+    // 2. Draw source to temp canvas at 600x800
+    const sCanvas = document.createElement('canvas');
+    sCanvas.width = 600;
+    sCanvas.height = 800;
+    const sCtx = sCanvas.getContext('2d');
+    sCtx.drawImage(sourceCanvas, 0, 0, 600, 800);
+    const srcData = sCtx.getImageData(0, 0, 600, 800);
+    const src = srcData.data;
+
+    const outData = eCtx.createImageData(600, 800);
+    const dst = outData.data;
+    const w = 600;
+    const h = 800;
+
+    // Luminance buffer for fast spatial edge & crease differential
+    const lum = new Float32Array(w * h);
+    for (let i = 0, j = 0; i < src.length; i += 4, j++) {
+      lum[j] = 0.299 * src[i] + 0.587 * src[i + 1] + 0.114 * src[i + 2];
     }
 
-    // Subtle dark vignette to make neon lines pop
-    rCtx.fillStyle = 'rgba(7, 3, 20, 0.28)';
-    rCtx.fillRect(0, 0, width, height);
+    // Process pixels to extract biometric palm print
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const idx = (y * w + x) * 4;
+        const pLum = lum[y * w + x];
+        const r = src[idx];
+        const g = src[idx + 1];
+        const b = src[idx + 2];
+
+        // Hand/skin detection
+        const isWarmSkin = (r > 45 && g > 28 && b > 15 && r > b && (r - g) > 6);
+        const isInkedPrint = (pLum > 35 && (x > 80 && x < 520 && y > 60 && y < 760));
+        const isHand = isWarmSkin || isInkedPrint;
+
+        if (isHand) {
+          // Crease / ridge detection via local differential operator
+          const x1 = Math.max(0, x - 2);
+          const x2 = Math.min(w - 1, x + 2);
+          const y1 = Math.max(0, y - 2);
+          const y2 = Math.min(h - 1, y + 2);
+
+          const lLeft = lum[y * w + x1];
+          const lRight = lum[y * w + x2];
+          const lTop = lum[y1 * w + x];
+          const lBottom = lum[y2 * w + x];
+          const localAvg = (lLeft + lRight + lTop + lBottom) * 0.25;
+
+          // Crease factor: contrast shifts or darker grooves in skin
+          const diff = Math.abs(pLum - localAvg) + (localAvg - pLum) * 1.5;
+          const isCrease = diff > 8.0;
+
+          if (isCrease) {
+            // Luminous etched dermal crease / ridge line (bright cyan-white)
+            const intensity = Math.min(255, 180 + diff * 12);
+            dst[idx] = Math.min(255, Math.floor(intensity * 0.88));     // R
+            dst[idx + 1] = Math.min(255, Math.floor(intensity * 0.96)); // G
+            dst[idx + 2] = 255;                                        // B
+            dst[idx + 3] = 255;
+          } else {
+            // Biometric palm dermis (deep cerulean indigo/slate matching media_1790528058595.png)
+            const dermisShade = Math.min(1.2, pLum / 140);
+            dst[idx] = Math.floor(22 + dermisShade * 14);     // R: 22-38
+            dst[idx + 1] = Math.floor(38 + dermisShade * 22); // G: 38-64
+            dst[idx + 2] = Math.floor(62 + dermisShade * 32); // B: 62-100
+            dst[idx + 3] = 255;
+          }
+        } else {
+          // Dark cosmic background with starlight depth
+          dst[idx] = 6;
+          dst[idx + 1] = 10;
+          dst[idx + 2] = 20;
+          dst[idx + 3] = 255;
+        }
+      }
+    }
+
+    eCtx.putImageData(outData, 0, 0);
+
+    // Overlay subtle holographic alignment grid and biometric reticle rings
+    eCtx.save();
+    eCtx.strokeStyle = 'rgba(0, 229, 255, 0.08)';
+    eCtx.lineWidth = 1;
+    for (let gy = 80; gy < 750; gy += 60) {
+      eCtx.beginPath();
+      eCtx.moveTo(40, gy);
+      eCtx.lineTo(560, gy);
+      eCtx.stroke();
+    }
+    for (let gx = 60; gx < 560; gx += 60) {
+      eCtx.beginPath();
+      eCtx.moveTo(gx, 60);
+      eCtx.lineTo(gx, 760);
+      eCtx.stroke();
+    }
+
+    // Sacred center mandala reticle
+    eCtx.strokeStyle = 'rgba(212, 160, 23, 0.16)';
+    eCtx.beginPath();
+    eCtx.arc(300, 480, 85, 0, Math.PI * 2);
+    eCtx.stroke();
+    eCtx.beginPath();
+    eCtx.arc(300, 480, 140, 0, Math.PI * 2);
+    eCtx.stroke();
+    eCtx.restore();
+
+    return extractCanvas;
+  }
+
+  // Prana X-Ray Cosmic Aura Generator
+  function generateXrayPalm(sourceCanvas, isRight) {
+    const xrayCanvas = document.createElement('canvas');
+    xrayCanvas.width = 600;
+    xrayCanvas.height = 800;
+    const xCtx = xrayCanvas.getContext('2d');
+
+    xCtx.fillStyle = '#06020f';
+    xCtx.fillRect(0, 0, 600, 800);
+
+    const sCanvas = document.createElement('canvas');
+    sCanvas.width = 600;
+    sCanvas.height = 800;
+    const sCtx = sCanvas.getContext('2d');
+    sCtx.drawImage(sourceCanvas, 0, 0, 600, 800);
+    const srcData = sCtx.getImageData(0, 0, 600, 800);
+    const src = srcData.data;
+
+    const outData = xCtx.createImageData(600, 800);
+    const dst = outData.data;
+
+    for (let i = 0; i < src.length; i += 4) {
+      const r = src[i];
+      const g = src[i + 1];
+      const b = src[i + 2];
+      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+      const isHand = (lum > 30);
+
+      if (isHand) {
+        dst[i] = Math.min(255, 120 + Math.floor(lum * 0.6));
+        dst[i + 1] = Math.floor(lum * 0.45);
+        dst[i + 2] = Math.min(255, 180 + Math.floor(lum * 0.4));
+        dst[i + 3] = 255;
+      } else {
+        dst[i] = 6;
+        dst[i + 1] = 2;
+        dst[i + 2] = 14;
+        dst[i + 3] = 255;
+      }
+    }
+    xCtx.putImageData(outData, 0, 0);
+    return xrayCanvas;
+  }
+
+  function renderBiometricPalmAnalysis(rCtx, width, height, filter = 'all') {
+    currentActiveFilter = filter;
+    rCtx.clearRect(0, 0, width, height);
+
+    // Draw active background image according to currentViewMode
+    if (currentViewMode === 'extract' && extractedPalmCanvas.width > 0) {
+      rCtx.drawImage(extractedPalmCanvas, 0, 0, width, height);
+    } else if (currentViewMode === 'xray' && xrayPalmCanvas.width > 0) {
+      rCtx.drawImage(xrayPalmCanvas, 0, 0, width, height);
+    } else if (cachedPalmCanvas.width > 0) {
+      rCtx.drawImage(cachedPalmCanvas, 0, 0, width, height);
+      rCtx.fillStyle = 'rgba(7, 3, 20, 0.28)';
+      rCtx.fillRect(0, 0, width, height);
+    }
 
     // Variation offsets based on hash
-    const v = () => (seededRandom() - 0.5) * 0.04;
+    const v = () => (seededRandom() - 0.5) * 0.03;
 
-    // X coordinate mapping (mirrors for left hand)
+    // Symmetrical X coordinate mapping: mirrors for Left Hand
     const mx = (x) => isRightHand ? x : (1 - x);
 
     // Helper for glowing bezier curves
@@ -1019,17 +1180,17 @@ document.addEventListener('DOMContentLoaded', () => {
       rCtx.restore();
     };
 
-    // 1. LIFE LINE (Emerald Green) - originates between thumb & index, curves broadly around Mount of Venus
+    // 1. LIFE LINE (Emerald Green) - strictly within palm: y in [0.55, 0.86]
     const lifePoints = [
-      { x: mx(0.58 + v()), y: 0.56 + v() },
-      { x: mx(0.54 + v()), y: 0.63 + v() },
-      { x: mx(0.51 + v()), y: 0.72 + v() },
-      { x: mx(0.49 + v()), y: 0.82 + v() },
-      { x: mx(0.46 + v()), y: 0.88 + v() }
+      { x: mx(0.58 + v()), y: 0.55 + v() },
+      { x: mx(0.54 + v()), y: 0.62 + v() },
+      { x: mx(0.51 + v()), y: 0.71 + v() },
+      { x: mx(0.48 + v()), y: 0.80 + v() },
+      { x: mx(0.45 + v()), y: 0.86 + v() }
     ];
     drawGlowPath(lifePoints, '#00ff88', '#00cc66', 3.5, filter === 'life', '🌿 Life Line (जीव रेखा)');
 
-    // 2. HEAD LINE (Electric Cyan) - starts with Life Line, traverses across Plain of Mars toward Upper Mars/Moon
+    // 2. HEAD LINE (Electric Cyan) - strictly within palm: y in [0.56, 0.67]
     const headPoints = [
       { x: mx(0.58 + v()), y: 0.56 + v() },
       { x: mx(0.48 + v()), y: 0.59 + v() },
@@ -1041,40 +1202,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Writer's Fork on Head Line
     const headFork = [
       { x: mx(0.38 + v()), y: 0.63 + v() },
-      { x: mx(0.28 + v()), y: 0.72 + v() }
+      { x: mx(0.28 + v()), y: 0.71 + v() }
     ];
     drawGlowPath(headFork, '#00e5ff', '#0099cc', 2.2, filter === 'head', '');
 
-    // 3. HEART LINE (Crimson Ruby) - under pinky (percussion side) sweeping gently to Mount Jupiter
+    // 3. HEART LINE (Crimson Ruby) - strictly on palm bed: y in [0.50, 0.57]
     const heartPoints = [
-      { x: mx(0.24 + v()), y: 0.56 + v() },
+      { x: mx(0.24 + v()), y: 0.57 + v() },
       { x: mx(0.35 + v()), y: 0.53 + v() },
-      { x: mx(0.46 + v()), y: 0.50 + v() },
-      { x: mx(0.56 + v()), y: 0.47 + v() }
+      { x: mx(0.46 + v()), y: 0.51 + v() },
+      { x: mx(0.56 + v()), y: 0.50 + v() }
     ];
     drawGlowPath(heartPoints, '#ff2a6d', '#ff0055', 3.5, filter === 'heart', '❤️ Heart Line (हृदय रेखा)');
 
     // Jupiter Trident on Heart Line
     const heartBranch = [
-      { x: mx(0.52 + v()), y: 0.49 + v() },
-      { x: mx(0.59 + v()), y: 0.43 + v() }
+      { x: mx(0.50 + v()), y: 0.52 + v() },
+      { x: mx(0.58 + v()), y: 0.50 + v() }
     ];
     drawGlowPath(heartBranch, '#ff2a6d', '#ff0055', 2.2, filter === 'heart', '');
 
-    // 4. FATE LINE (Sunburst Gold) - rising from base of palm toward Saturn mount under middle finger
+    // 4. FATE LINE (Sunburst Gold) - strictly within palm: y in [0.51, 0.86]
     const fatePoints = [
-      { x: mx(0.44 + v()), y: 0.88 + v() },
-      { x: mx(0.43 + v()), y: 0.74 + v() },
+      { x: mx(0.44 + v()), y: 0.86 + v() },
+      { x: mx(0.43 + v()), y: 0.73 + v() },
       { x: mx(0.42 + v()), y: 0.61 + v() },
-      { x: mx(0.42 + v()), y: 0.47 + v() }
+      { x: mx(0.42 + v()), y: 0.51 + v() }
     ];
     drawGlowPath(fatePoints, '#ffb703', '#fb8500', 3.2, filter === 'fate', '⭐ Fate Line (भाग्य रेखा)');
 
-    // 5. SUN / APOLLO LINE (Warm Amber) - under ring finger
+    // 5. SUN / APOLLO LINE (Warm Amber) - strictly within palm: y in [0.52, 0.70]
     const sunPoints = [
       { x: mx(0.35 + v()), y: 0.70 + v() },
-      { x: mx(0.34 + v()), y: 0.58 + v() },
-      { x: mx(0.33 + v()), y: 0.48 + v() }
+      { x: mx(0.34 + v()), y: 0.60 + v() },
+      { x: mx(0.33 + v()), y: 0.52 + v() }
     ];
     drawGlowPath(sunPoints, '#ffe600', '#ffaa00', 2.2, filter === 'fate' || filter === 'all', '');
 
@@ -1096,15 +1257,15 @@ document.addEventListener('DOMContentLoaded', () => {
     drawBracelet(0.915, 'Manibandha 2');
     drawBracelet(0.935, 'Manibandha 3');
 
-    // 7. PLANETARY MOUNTS (Nodes & Halos)
+    // 7. PLANETARY MOUNTS (Nodes & Halos strictly within palm boundaries)
     const mounts = [
-      { glyph: '♃', name: 'Jupiter', x: mx(0.53), y: 0.45, color: '#f1c40f' },
-      { glyph: '♄', name: 'Saturn', x: mx(0.42), y: 0.44, color: '#9b59b6' },
-      { glyph: '☉', name: 'Sun', x: mx(0.33), y: 0.45, color: '#f39c12' },
-      { glyph: '☿', name: 'Mercury', x: mx(0.24), y: 0.49, color: '#1abc9c' },
-      { glyph: '♂', name: 'Mars', x: mx(0.40), y: 0.59, color: '#e74c3c' },
-      { glyph: '♀', name: 'Venus', x: mx(0.62), y: 0.69, color: '#e91e63' },
-      { glyph: '☽', name: 'Moon', x: mx(0.28), y: 0.75, color: '#3498db' }
+      { glyph: '♃', name: 'Jupiter', x: mx(0.55), y: 0.51, color: '#f1c40f' },
+      { glyph: '♄', name: 'Saturn', x: mx(0.44), y: 0.50, color: '#9b59b6' },
+      { glyph: '☉', name: 'Sun', x: mx(0.34), y: 0.51, color: '#f39c12' },
+      { glyph: '☿', name: 'Mercury', x: mx(0.24), y: 0.53, color: '#1abc9c' },
+      { glyph: '♂', name: 'Mars', x: mx(0.40), y: 0.62, color: '#e74c3c' },
+      { glyph: '♀', name: 'Venus', x: mx(0.60), y: 0.72, color: '#e91e63' },
+      { glyph: '☽', name: 'Moon', x: mx(0.27), y: 0.76, color: '#3498db' }
     ];
 
     mounts.forEach(m => {
@@ -1169,8 +1330,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const cCtx = cachedPalmCanvas.getContext('2d');
     cCtx.drawImage(resultCanvas, 0, 0);
 
-    // Draw lines & biometric features with glowing shaders
+    // Extract biometric palm print and generate xray
+    const extracted = extractBiometricPalmPrint(cachedPalmCanvas, isRightHand);
+    extractedPalmCanvas.width = resultCanvas.width;
+    extractedPalmCanvas.height = resultCanvas.height;
+    extractedPalmCanvas.getContext('2d').drawImage(extracted, 0, 0);
+
+    const xray = generateXrayPalm(cachedPalmCanvas, isRightHand);
+    xrayPalmCanvas.width = resultCanvas.width;
+    xrayPalmCanvas.height = resultCanvas.height;
+    xrayPalmCanvas.getContext('2d').drawImage(xray, 0, 0);
+
     const rCtx = resultCanvas.getContext('2d');
+
+    // Default view mode: 'extract' (Biometric Print matching reference)
+    currentViewMode = 'extract';
+    const viewModeBtns = document.querySelectorAll('.btn-view-mode');
+    viewModeBtns.forEach(b => {
+      if (b.getAttribute('data-mode') === 'extract') b.classList.add('active');
+      else b.classList.remove('active');
+      b.onclick = () => {
+        viewModeBtns.forEach(btn => btn.classList.remove('active'));
+        b.classList.add('active');
+        currentViewMode = b.getAttribute('data-mode') || 'extract';
+        const badge = document.getElementById('extractBadge');
+        if (badge) {
+          if (currentViewMode === 'extract') {
+            badge.innerHTML = '<span>✓</span> Biometric Palm Extract (Dermatoglyphic Trace)';
+          } else if (currentViewMode === 'photo') {
+            badge.innerHTML = '<span>📷</span> Original High-Res Camera Capture';
+          } else {
+            badge.innerHTML = '<span>⚡</span> Prana X-Ray Cosmic Aura Analysis';
+          }
+        }
+        renderBiometricPalmAnalysis(rCtx, resultCanvas.width, resultCanvas.height, currentActiveFilter);
+      };
+    });
+
+    // Draw lines & biometric features with glowing shaders
     renderBiometricPalmAnalysis(rCtx, resultCanvas.width, resultCanvas.height, 'all');
 
     // Wire up Line/Mount Inspector Tabs
@@ -1660,14 +1857,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const qButtons = document.querySelectorAll('.btn-quick-q');
     
     const panditjiResponses = {
-      career: `<strong>Shastra Career Guidance:</strong> Based on your Fate Line rising toward Mount Saturn with support from Mount Jupiter, your strongest professional inflection point arrives between ages <strong>32 and 38</strong>. Shri Vasant Lal Vyas notes that when the Will phalanx is resolute, commercial partnerships entered after age 30 bring sustainable prosperity. Maintain ethical diligence to appease Shani Bhagavan.`,
-      marriage: `<strong>Vivah Rekha & Relationship Insight:</strong> Your Heart Line curves harmoniously toward Jupiter, signifying devotion and high relationship ideals. The Shastra indicates marital harmony through a mature, supportive life partner. If any minor cross-lines appear near Mercury, chanting the Shukra Beej Mantra on Fridays ensures enduring domestic peace.`,
-      wealth: `<strong>Dhana & Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
-      property: `<strong>Bhumi & Griha Yoga (Timing to Buy Land & House):</strong> Clear square formations on the Mount of Venus and an ascending branch from the Life Line indicate your strongest window to purchase land or residential property is between ages <strong>32 to 35</strong> and again at <strong>43 to 46</strong>. Plan registries during Rohini, Mrigashira, or Revati nakshatras on Thursdays or Fridays for lasting vastu harmony.`,
+      career: `<strong>Job vs Business (नौकरी या व्यापार — Vocation Blueprint):</strong><br>
+Based on your Fate Line rising firmly toward Mount Saturn with strong secondary branches toward Mount Mercury (Budha Parvata), the Shastras indicate:
+<ul style="margin:0.5rem 0 0.5rem 1.2rem; padding:0; line-height:1.7;">
+  <li><strong>Ages 24–31 (Service / Naukri Foundation):</strong> High distinction in structured corporate leadership, technology, finance, advisory, or governance. You excel where logical analysis and organized execution are rewarded.</li>
+  <li><strong>Ages 32+ (Vyapar / Independent Enterprise Yoga):</strong> When the Mercury branch activates after age 32, a strong Raj Yoga for independent business, consultancy, or partnership enterprise flourishes.</li>
+  <li><strong>Recommendation:</strong> Consolidate domain mastery in employment first; launch independent commercial enterprise between ages 32 and 35 during Jupiter transits for maximum prosperity.</li>
+</ul>`,
+      marriage: `<strong>Vivah Rekha &amp; Marriage Timing Analysis (विवाह आयु व जीवनसाथी):</strong><br>
+In Hasta Samudrika Shastra (Vyas 1976), the marriage lines (Vivah Rekha) situated on the percussion between the Heart Line and the base of the little finger (Mercury Mount) indicate your primary matrimonial window between ages <strong>27 and 30</strong>.
+<ul style="margin:0.5rem 0 0.5rem 1.2rem; padding:0; line-height:1.7;">
+  <li><strong>Spouse Nature:</strong> A clear horizontal line with a gentle upward inclination indicates a warm, supportive, and emotionally grounded spouse from a respectable family.</li>
+  <li><strong>Direction of Spouse:</strong> The orientation of Mount Moon and Venus points toward the North or North-East direction from your birthplace.</li>
+  <li><strong>Love vs. Arranged:</strong> The graceful curve of your Heart Line toward Mount Jupiter denotes a marriage based on mutual spiritual affinity, deep respect, and lifelong companionship.</li>
+  <li><strong>Marital Upaya:</strong> If minor stress lines appear near Mercury, perform <em>Gauri-Shankar Pooja</em> and chant the <em>Shukra Beej Mantra</em> (ॐ शुं शुक्राय नमः) on Fridays to ensure perpetual marital harmony.</li>
+</ul>`,
+      ishta: `<strong>Ishta Devata &amp; Kula Devata (इष्ट देवता एवं कुलदेवता विचार):</strong><br>
+According to ancient Vedic Samudrika Shastra, your elevated Mount of Jupiter combined with the <em>${ang.yavaType}</em> on your thumb joint reveals your supreme Ishta Devata to be <strong>Bhagavan Shiva (Mahadev)</strong>, with maternal protection from <strong>Devi Mahalakshmi</strong>.
+<div style="background:rgba(212,160,23,0.12); padding:0.6rem 0.8rem; border-radius:8px; margin:0.6rem 0; font-family:serif; font-size:1.05rem; color:var(--gold); text-align:center;">
+  ॐ नमः शिवाय (Om Namah Shivaya)
+</div>
+<p style="margin:0.4rem 0 0; line-height:1.6; font-size:0.88rem;">
+  Daily recitation of 108 chants at Brahma Muhurta or Sandhya Kal awakens your intuitive third eye, clarifies your Head line intellectual vector, and shields your household from ancestral karmic afflictions.
+</p>`,
+      pooja: `<strong>Prescribed Vedic Poojas &amp; Upayas (शास्त्र सम्मत अनुष्ठान):</strong><br>
+To activate the auspicious Raj Yogas on your palm and appease planetary transits, the Shastras recommend:
+<ol style="margin:0.5rem 0 0.5rem 1.2rem; padding:0; line-height:1.7;">
+  <li><strong>Laghu Rudrabhishek:</strong> Perform on Shukla Paksha Mondays or Pradosh to solidify longevity, vitality, and mental tranquility.</li>
+  <li><strong>Sundarkand Path or Hanuman Chalisa (11 times):</strong> Every Tuesday evening to remove Mangal/Angarak line obstructions and grant triumph in disputes.</li>
+  <li><strong>Surya Arghya at Dawn:</strong> Offer water mixed with red chandan and akshat in a copper vessel facing East to energize the Apollo Sun line for social honor and career fame.</li>
+  <li><strong>Shukra Gayatri &amp; Kheer Offering:</strong> On Fridays to multiply domestic happiness, vehicle yogas, and luxury asset gains.</li>
+</ol>`,
+      dosha: `<strong>Palm Doshas &amp; Vedic Neutralization (दोष विचार एवं शांति):</strong><br>
+<ul style="margin:0.5rem 0 0.5rem 1.2rem; padding:0; line-height:1.7;">
+  <li><strong>Rahu Chinta Rekhas (राहु / चिंता रेखाएं):</strong> Fine horizontal lines cutting the Life Line between ages 28–31. These indicate temporary mental anxiety, career restlessness, or overthinking. <em>Remedy:</em> Feed stray dogs on Saturdays and chant <em>Om Raam Rahve Namah</em>.</li>
+  <li><strong>Mangal Rekha Influence (मंगल प्रभाव):</strong> Subtle cross near the lower thumb joint. Signifies passion and occasional impulsiveness in partnerships. <em>Remedy:</em> Offer red vermilion (sindoor) to Hanumanji on Tuesdays.</li>
+  <li><strong>Shani Mudrika / Kantaka Line (शनि कंटक प्रभाव):</strong> A faint semi-circular curve beneath the middle finger causing delayed rewards. <em>Remedy:</em> Light a mustard oil lamp under a Peepal tree on Saturday evenings.</li>
+</ul>`,
+      wealth: `<strong>Dhana &amp; Raj Yoga Analysis:</strong> Your thumb reveals <em>${ang.yavaType}</em>, complemented by the second bracelet of Manibandha. In Hasta Samudrika Shastra, this combination indicates that wealth is accumulated through your own intellectual enterprise rather than passive inheritance. Substantial assets and property manifest after age 34.`,
+      property: `<strong>Bhumi &amp; Griha Yoga (Timing to Buy Land &amp; House):</strong> Clear square formations on the Mount of Venus and an ascending branch from the Life Line indicate your strongest window to purchase land or residential property is between ages <strong>32 to 35</strong> and again at <strong>43 to 46</strong>. Plan registries during Rohini, Mrigashira, or Revati nakshatras on Thursdays or Fridays for lasting vastu harmony.`,
       gold: `<strong>Suvarna Labha (Best Timing to Buy Gold):</strong> Your thumb's Yava mark and Apollo Sun line indicate auspicious gold accumulation at ages <strong>29, 34, 41, and 52</strong>. Purchasing gold during <em>Guru Pushya Nakshatra</em>, <em>Akshaya Tritiya</em>, or <em>Dhanteras</em> during Jupiter Hora multiplies family prosperity.`,
-      warnings: `<strong>Critical Warning Periods & Lifespan Guidance:</strong> Your Ayur Rekha and Manibandha indicate a healthy lifespan of <strong>78–86 years (Dirghayu)</strong>. Vedic texts strictly avoid fatalistic death predictions; instead, they highlight vulnerable stress periods at ages <strong>28–30 (work burnout/Rahu stress)</strong> and <strong>39–42 (cardiovascular/pitta fatigue)</strong>. Reciting the Maha Mrityunjaya Mantra and offering daily Surya Arghya neutralizes adverse planetary transits.`,
-      travel: `<strong>Desh-Videsh Yatra (Travel & Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
-      health: `<strong>Arogya & Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`,
+      warnings: `<strong>Critical Warning Periods &amp; Lifespan Guidance:</strong> Your Ayur Rekha and Manibandha indicate a healthy lifespan of <strong>78–86 years (Dirghayu)</strong>. Vedic texts strictly avoid fatalistic death predictions; instead, they highlight vulnerable stress periods at ages <strong>28–30 (work burnout/Rahu stress)</strong> and <strong>39–42 (cardiovascular/pitta fatigue)</strong>. Reciting the Maha Mrityunjaya Mantra and offering daily Surya Arghya neutralizes adverse planetary transits.`,
+      travel: `<strong>Desh-Videsh Yatra (Travel &amp; Settlement):</strong> Clear ascending branches emerging from the Mount of Moon toward the middle palm denote successful voyages, relocation, or trade across waters. Vyas emphasizes that travel undertaken for spiritual learning or career expansion brings lasting goodwill.`,
+      health: `<strong>Arogya &amp; Prana Shakti:</strong> Your Life Line and Manibandha indicate <em>${mani.vitalityYears}</em>. To preserve vital Ojas, adhere to an early-morning routine, practice Surya Namaskar at dawn, and keep stress in check through regular pranayama.`,
       freewill: `<strong>Fate vs. Free Will (Left vs. Right Hand):</strong> As Joyce Wilson elucidates in <em>The Complete Book of Palmistry (1971)</em>, your Left Palm reveals the karmic cards you were dealt at birth, while your Right Palm illustrates how your free will, character, and choices play that hand. A marked improvement in line clarity in the Right hand confirms you have actively transcended hereditary obstacles.`
     };
 

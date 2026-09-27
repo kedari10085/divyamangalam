@@ -186,17 +186,67 @@
     .hand-guide-svg {
       width: 92%;
       height: 92%;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.35s ease;
     }
-    .hand-guide-svg.left-hand {
-      transform: scaleX(-1);
+
+    /* Camera shutter flash effect */
+    .camera-shutter-flash {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 25;
+      transition: opacity 0.08s ease-out;
     }
-    /* Un-flip text and badges when SVG is mirrored */
-    .hand-guide-svg.left-hand .scan-line-pin text,
-    .hand-guide-svg.left-hand .scan-line-pin rect {
-      transform-box: fill-box;
-      transform-origin: center;
-      transform: scaleX(-1);
+    .camera-shutter-flash.active {
+      opacity: 0.88;
+    }
+
+    /* Results Biometric Extract View Switcher */
+    .view-mode-bar {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-view-mode {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(212, 160, 23, 0.35);
+      color: #FFF2D6;
+      padding: 0.4rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-view-mode:hover {
+      background: rgba(212, 160, 23, 0.2);
+      border-color: var(--gold);
+    }
+    .btn-view-mode.active {
+      background: linear-gradient(135deg, rgba(212, 160, 23, 0.35), rgba(255, 111, 0, 0.25));
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 10px rgba(212, 160, 23, 0.3);
+    }
+    .extract-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0, 255, 170, 0.12);
+      border: 1px solid rgba(0, 255, 170, 0.35);
+      color: #00ffaa;
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
     }
 
     /* Full Hand Contour Silhouette (Kundli.online White Glowing Outline) */
@@ -319,8 +369,9 @@
       align-items: center;
       gap: 0.6rem;
       box-shadow: 0 8px 24px rgba(234, 88, 12, 0.45);
-      cursor: pointer;
-      z-index: 10;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      z-index: 15;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .btn-capture-floating:hover {
@@ -1451,73 +1502,132 @@
           </filter>
         </defs>
 
-        <!-- 4 Corner Viewfinder Brackets (Kundli.online Style) -->
-        <g class="viewfinder-corners" stroke="rgba(234, 138, 62, 0.55)" stroke-width="3" stroke-linecap="round" fill="none">
-          <path d="M 24 52 A 26 26 0 0 1 50 26" />
-          <path d="M 290 26 A 26 26 0 0 1 316 52" />
-          <path d="M 24 428 A 26 26 0 0 0 50 454" />
-          <path d="M 290 454 A 26 26 0 0 0 316 428" />
+        <!-- 4 Corner Viewfinder Brackets (Fixed Kundli.online Style) -->
+        <g class="viewfinder-corners" stroke="rgba(234, 138, 62, 0.65)" stroke-width="3" stroke-linecap="round" fill="none">
+          <path d="M 22 50 A 24 24 0 0 1 46 26" />
+          <path d="M 294 26 A 24 24 0 0 1 318 50" />
+          <path d="M 22 430 A 24 24 0 0 0 46 454" />
+          <path d="M 294 454 A 24 24 0 0 0 318 430" />
         </g>
 
-        <!-- Full Hand Contour Silhouette (Kundli.online White Glowing Outline) -->
-        <path class="hand-outline" id="handOutlinePath"
-          d="M 105 430 C 85 390 72 330 70 280 C 68 240 52 205 45 178 C 38 152 64 148 72 170 C 78 195 84 225 88 242 C 90 200 93 145 95 112 C 96 90 120 90 121 112 C 122 145 124 200 126 230 C 128 180 132 115 135 80 C 137 58 162 58 164 80 C 166 125 166 190 168 230 C 171 190 174 140 177 105 C 179 84 203 84 205 105 C 206 150 205 220 206 260 C 208 290 220 300 245 300 C 265 300 286 280 298 294 C 306 304 298 325 282 335 C 260 350 235 385 215 415 C 208 426 200 430 195 430 C 170 436 130 436 105 430 Z" />
+        <!-- ==========================================
+             RIGHT HAND GROUP (Thumb on Right, Pinky on Left)
+             Anatomically calibrated to natural hand print posture
+             ========================================== -->
+        <g id="handGuideRightGroup">
+          <!-- Tilted Natural Right Hand Contour Silhouette -->
+          <path class="hand-outline" id="handOutlinePathR"
+            d="M 115 430 C 95 385 88 330 82 290 C 80 275 80 260 85 260 C 90 260 92 185 95 160 C 97 140 110 140 110 160 C 110 215 110 245 112 245 C 115 245 125 140 132 100 C 135 80 148 80 148 100 C 148 165 145 235 148 235 C 152 235 165 110 172 70 C 175 50 188 50 188 70 C 188 150 185 240 188 240 C 192 240 210 130 218 98 C 222 80 234 82 232 105 C 230 175 228 255 228 255 C 228 275 230 295 232 295 C 240 295 285 280 310 310 C 322 325 315 345 295 358 C 275 370 252 395 232 418 C 228 424 225 430 220 430 Z" />
 
-        <!-- In-Scanning Major Lines (Point Highlights directly at position) -->
-        <!-- 1. Heart Line (Ruby Pink) -->
-        <path id="scanHeartLine" class="scan-line-path heart" d="M 80 270 C 110 260 145 250 178 238 C 188 234 195 230 200 220" />
+          <!-- In-Scanning Major Lines (Strictly inside palm region) -->
+          <!-- 1. Heart Line (Ruby Pink) - Under pinky curving to Jupiter -->
+          <path id="scanHeartLineR" class="scan-line-path heart" d="M 85 275 C 120 268 160 260 205 255" />
 
-        <!-- 2. Head Line (Electric Cyan) -->
-        <path id="scanHeadLine" class="scan-line-path head" d="M 198 268 C 165 285 130 300 85 320" />
+          <!-- 2. Head Line (Electric Cyan) - Starts between thumb/index across mid-palm -->
+          <path id="scanHeadLineR" class="scan-line-path head" d="M 215 280 C 175 295 130 315 85 335" />
 
-        <!-- 3. Life Line (Emerald Green) -->
-        <path id="scanLifeLine" class="scan-line-path life" d="M 198 268 C 182 300 170 345 168 395 C 167 408 163 416 155 422" />
+          <!-- 3. Life Line (Emerald Green) - Sweeps around thumb ball to wrist -->
+          <path id="scanLifeLineR" class="scan-line-path life" d="M 215 280 C 205 320 185 370 165 420" />
 
-        <!-- 4. Fate Line (Sunburst Gold) -->
-        <path id="scanFateLine" class="scan-line-path fate" d="M 148 420 C 146 360 144 300 142 225" />
+          <!-- 4. Fate Line (Sunburst Gold) - From wrist rising straight to middle finger base -->
+          <path id="scanFateLineR" class="scan-line-path fate" d="M 165 420 C 163 360 160 305 158 250" />
 
-        <!-- Floating Callout Pins with Leader Lines & Badges -->
-        <!-- Heart Line Pin -->
-        <g id="pinHeart" class="scan-line-pin pin-heart">
-          <circle cx="130" cy="254" r="4" class="pin-pulse-dot" />
-          <line x1="130" y1="254" x2="65" y2="225" class="pin-stem-line" />
-          <circle cx="65" cy="225" r="3" class="pin-end-dot" />
-          <g transform="translate(10, 208)">
-            <rect width="105" height="24" rx="12" class="pin-badge-bg heart" />
-            <text x="52" y="16" text-anchor="middle" class="pin-badge-text">❤️ Heart Line</text>
+          <!-- Floating Callout Pins with Leader Lines & Badges (Right Hand) -->
+          <g id="pinHeartR" class="scan-line-pin pin-heart">
+            <circle cx="130" cy="268" r="4" class="pin-pulse-dot" />
+            <line x1="130" y1="268" x2="55" y2="230" class="pin-stem-line" />
+            <circle cx="55" cy="230" r="3" class="pin-end-dot" />
+            <g transform="translate(10, 215)">
+              <rect width="105" height="24" rx="12" class="pin-badge-bg heart" />
+              <text x="52" y="16" text-anchor="middle" class="pin-badge-text">❤️ Heart Line</text>
+            </g>
+          </g>
+
+          <g id="pinHeadR" class="scan-line-pin pin-head">
+            <circle cx="145" cy="305" r="4" class="pin-pulse-dot" />
+            <line x1="145" y1="305" x2="55" y2="340" class="pin-stem-line" />
+            <circle cx="55" cy="340" r="3" class="pin-end-dot" />
+            <g transform="translate(10, 325)">
+              <rect width="100" height="24" rx="12" class="pin-badge-bg head" />
+              <text x="50" y="16" text-anchor="middle" class="pin-badge-text">🧠 Head Line</text>
+            </g>
+          </g>
+
+          <g id="pinLifeR" class="scan-line-pin pin-life">
+            <circle cx="195" cy="345" r="4" class="pin-pulse-dot" />
+            <line x1="195" y1="345" x2="240" y2="370" class="pin-stem-line" />
+            <circle cx="240" cy="370" r="3" class="pin-end-dot" />
+            <g transform="translate(230, 355)">
+              <rect width="96" height="24" rx="12" class="pin-badge-bg life" />
+              <text x="48" y="16" text-anchor="middle" class="pin-badge-text">🌿 Life Line</text>
+            </g>
+          </g>
+
+          <g id="pinFateR" class="scan-line-pin pin-fate">
+            <circle cx="160" cy="300" r="4" class="pin-pulse-dot" />
+            <line x1="160" y1="300" x2="240" y2="270" class="pin-stem-line" />
+            <circle cx="240" cy="270" r="3" class="pin-end-dot" />
+            <g transform="translate(230, 255)">
+              <rect width="96" height="24" rx="12" class="pin-badge-bg fate" />
+              <text x="48" y="16" text-anchor="middle" class="pin-badge-text">⭐ Fate Line</text>
+            </g>
           </g>
         </g>
 
-        <!-- Head Line Pin -->
-        <g id="pinHead" class="scan-line-pin pin-head">
-          <circle cx="140" cy="294" r="4" class="pin-pulse-dot" />
-          <line x1="140" y1="294" x2="68" y2="338" class="pin-stem-line" />
-          <circle cx="68" cy="338" r="3" class="pin-end-dot" />
-          <g transform="translate(16, 326)">
-            <rect width="100" height="24" rx="12" class="pin-badge-bg head" />
-            <text x="50" y="16" text-anchor="middle" class="pin-badge-text">🧠 Head Line</text>
-          </g>
-        </g>
+        <!-- ==========================================
+             LEFT HAND GROUP (Thumb on Left, Pinky on Right)
+             True geometric mirror with crisp unmirrored text
+             ========================================== -->
+        <g id="handGuideLeftGroup" style="display:none;">
+          <!-- Tilted Natural Left Hand Contour Silhouette -->
+          <path class="hand-outline" id="handOutlinePathL"
+            d="M 225 430 C 245 385 252 330 258 290 C 260 275 260 260 255 260 C 250 260 248 185 245 160 C 243 140 230 140 230 160 C 230 215 230 245 228 245 C 225 245 215 140 208 100 C 205 80 192 80 192 100 C 192 165 195 235 192 235 C 188 235 175 110 168 70 C 165 50 152 50 152 70 C 152 150 155 240 152 240 C 148 240 130 130 122 98 C 118 80 106 82 108 105 C 110 175 112 255 112 255 C 112 275 110 295 108 295 C 100 295 55 280 30 310 C 18 325 25 345 45 358 C 65 370 88 395 108 418 C 112 424 115 430 120 430 Z" />
 
-        <!-- Life Line Pin -->
-        <g id="pinLife" class="scan-line-pin pin-life">
-          <circle cx="174" cy="346" r="4" class="pin-pulse-dot" />
-          <line x1="174" y1="346" x2="240" y2="372" class="pin-stem-line" />
-          <circle cx="240" cy="372" r="3" class="pin-end-dot" />
-          <g transform="translate(225, 360)">
-            <rect width="96" height="24" rx="12" class="pin-badge-bg life" />
-            <text x="48" y="16" text-anchor="middle" class="pin-badge-text">🌿 Life Line</text>
-          </g>
-        </g>
+          <!-- In-Scanning Major Lines (Left Hand) -->
+          <path id="scanHeartLineL" class="scan-line-path heart" d="M 255 275 C 220 268 180 260 135 255" />
+          <path id="scanHeadLineL" class="scan-line-path head" d="M 125 280 C 165 295 210 315 255 335" />
+          <path id="scanLifeLineL" class="scan-line-path life" d="M 125 280 C 135 320 155 370 175 420" />
+          <path id="scanFateLineL" class="scan-line-path fate" d="M 175 420 C 177 360 180 305 182 250" />
 
-        <!-- Fate Line Pin -->
-        <g id="pinFate" class="scan-line-pin pin-fate">
-          <circle cx="145" cy="318" r="4" class="pin-pulse-dot" />
-          <line x1="145" y1="318" x2="235" y2="288" class="pin-stem-line" />
-          <circle cx="235" cy="288" r="3" class="pin-end-dot" />
-          <g transform="translate(222, 276)">
-            <rect width="96" height="24" rx="12" class="pin-badge-bg fate" />
-            <text x="48" y="16" text-anchor="middle" class="pin-badge-text">⭐ Fate Line</text>
+          <!-- Floating Callout Pins (Left Hand) -->
+          <g id="pinHeartL" class="scan-line-pin pin-heart">
+            <circle cx="210" cy="268" r="4" class="pin-pulse-dot" />
+            <line x1="210" y1="268" x2="285" y2="230" class="pin-stem-line" />
+            <circle cx="285" cy="230" r="3" class="pin-end-dot" />
+            <g transform="translate(225, 215)">
+              <rect width="105" height="24" rx="12" class="pin-badge-bg heart" />
+              <text x="52" y="16" text-anchor="middle" class="pin-badge-text">❤️ Heart Line</text>
+            </g>
+          </g>
+
+          <g id="pinHeadL" class="scan-line-pin pin-head">
+            <circle cx="195" cy="305" r="4" class="pin-pulse-dot" />
+            <line x1="195" y1="305" x2="285" y2="340" class="pin-stem-line" />
+            <circle cx="285" cy="340" r="3" class="pin-end-dot" />
+            <g transform="translate(225, 325)">
+              <rect width="100" height="24" rx="12" class="pin-badge-bg head" />
+              <text x="50" y="16" text-anchor="middle" class="pin-badge-text">🧠 Head Line</text>
+            </g>
+          </g>
+
+          <g id="pinLifeL" class="scan-line-pin pin-life">
+            <circle cx="145" cy="345" r="4" class="pin-pulse-dot" />
+            <line x1="145" y1="345" x2="90" y2="370" class="pin-stem-line" />
+            <circle cx="90" cy="370" r="3" class="pin-end-dot" />
+            <g transform="translate(10, 355)">
+              <rect width="96" height="24" rx="12" class="pin-badge-bg life" />
+              <text x="48" y="16" text-anchor="middle" class="pin-badge-text">🌿 Life Line</text>
+            </g>
+          </g>
+
+          <g id="pinFateL" class="scan-line-pin pin-fate">
+            <circle cx="180" cy="300" r="4" class="pin-pulse-dot" />
+            <line x1="180" y1="300" x2="90" y2="270" class="pin-stem-line" />
+            <circle cx="90" cy="270" r="3" class="pin-end-dot" />
+            <g transform="translate(10, 255)">
+              <rect width="96" height="24" rx="12" class="pin-badge-bg fate" />
+              <text x="48" y="16" text-anchor="middle" class="pin-badge-text">⭐ Fate Line</text>
+            </g>
           </g>
         </g>
       </svg>
@@ -1528,10 +1638,14 @@
         <span id="handFitText">✋ Place your Right Palm within the contour</span>
       </div>
 
-      <!-- Floating Capture Button (Kundli.online Style) -->
+      <!-- Floating Capture Button (Clickable, Prominent Kundli.online Style) -->
       <button type="button" class="btn-capture-floating" id="btnCapturePalm">
-        <span style="font-size:1.15rem;">⛶</span> Capture
+        <span style="font-size:1.15rem;">📷</span> Capture Palm
       </button>
+
+      <!-- Camera Shutter Flash Animation Overlay -->
+      <div class="camera-shutter-flash" id="cameraShutterFlash"></div>
+    </div>
     </div>
 
     <!-- Advanced Kundli-Style Biometric Scanning HUD -->
@@ -1638,6 +1752,24 @@
 <div id="resultsDashboard">
   <div class="results-grid">
     <div class="result-left">
+      <!-- Biometric Extract View Mode Switcher -->
+      <div style="text-align:center; margin-bottom: 0.6rem;">
+        <div class="extract-badge" id="extractBadge">
+          <span>✓</span> Biometric Palm Extract (Dermatoglyphic Trace)
+        </div>
+      </div>
+      <div class="view-mode-bar" id="viewModeBar">
+        <button type="button" class="btn-view-mode active" data-mode="extract">
+          <span>🔬</span> Biometric Print
+        </button>
+        <button type="button" class="btn-view-mode" data-mode="photo">
+          <span>📷</span> Real Photo
+        </button>
+        <button type="button" class="btn-view-mode" data-mode="xray">
+          <span>⚡</span> Prana X-Ray
+        </button>
+      </div>
+
       <div class="result-canvas-container">
         <canvas id="resultCanvas"></canvas>
       </div>
@@ -1841,15 +1973,17 @@
         </div>
         <p style="font-size:0.85rem; color:rgba(255,255,255,0.75); margin:0 0 0.8rem;">Select a question below to consult the ancient and esoteric texts regarding your palm:</p>
         <div class="quick-questions">
-          <button type="button" class="btn-quick-q" data-q="career">📈 Career peak &amp; vocation?</button>
-          <button type="button" class="btn-quick-q" data-q="marriage">💍 Marriage timing &amp; affection lines?</button>
-          <button type="button" class="btn-quick-q" data-q="wealth">💰 Dhana, money lines &amp; Raj Yoga?</button>
-          <button type="button" class="btn-quick-q" data-q="property">🏡 Best time to buy Land &amp; Property?</button>
-          <button type="button" class="btn-quick-q" data-q="gold">🪙 Best time to buy Gold &amp; Assets?</button>
-          <button type="button" class="btn-quick-q" data-q="warnings">⚠️ Critical health &amp; warning periods?</button>
-          <button type="button" class="btn-quick-q" data-q="travel">✈️ Travel lines &amp; relocation?</button>
-          <button type="button" class="btn-quick-q" data-q="health">🌿 Arogya, vitality &amp; longevity?</button>
-          <button type="button" class="btn-quick-q" data-q="freewill">🔮 Fate vs. Free Will (Left vs. Right)?</button>
+          <button type="button" class="btn-quick-q" data-q="marriage">💍 Marriage Timing &amp; Spouse (विवाह आयु व जीवनसाथी)</button>
+          <button type="button" class="btn-quick-q" data-q="ishta">🕉️ Ishta &amp; Kula Devata (इष्ट व कुलदेवता)</button>
+          <button type="button" class="btn-quick-q" data-q="pooja">🪔 Prescribed Vedic Poojas &amp; Upayas (पूजा एवं अनुष्ठान)</button>
+          <button type="button" class="btn-quick-q" data-q="dosha">⚡ Palm Doshas &amp; Shanti (मांगलिक, राहु व शनि दोष)</button>
+          <button type="button" class="btn-quick-q" data-q="career">💼 Job vs Business — Naukri ya Vyapar? (नौकरी या व्यापार)</button>
+          <button type="button" class="btn-quick-q" data-q="wealth">💰 Dhana, Money Lines &amp; Raj Yoga (धन व लक्ष्मी योग)</button>
+          <button type="button" class="btn-quick-q" data-q="property">🏡 Best Time to Buy Land &amp; Property (भूमि व गृह योग)</button>
+          <button type="button" class="btn-quick-q" data-q="gold">🪙 Best Time to Buy Gold &amp; Assets (स्वर्ण लाभ मुहूर्त)</button>
+          <button type="button" class="btn-quick-q" data-q="warnings">⚠️ Critical Warning Periods &amp; Health (अरिष्ट एवं आयु मान)</button>
+          <button type="button" class="btn-quick-q" data-q="travel">✈️ Travel Lines &amp; Relocation (विदेश यात्रा व योग)</button>
+          <button type="button" class="btn-quick-q" data-q="freewill">🔮 Fate vs. Free Will (Left vs Right Hand)</button>
         </div>
         <div class="panditji-response-box" id="panditjiAnswer">
           Select any question above or examine your multi-tradition blueprint to receive immediate Shastra guidance.
