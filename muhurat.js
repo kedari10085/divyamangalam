@@ -633,11 +633,508 @@ const MUHURAT = (function () {
       tithi: tithiName,
       nakshatra: nakshatraName,
       nakshatraGana: gana,
+      stellarFacing: getStellarFacing(nakshatraName),
       specialYogas,
       timeWindow: timing.windowText,
       rahuKaal: timing.rahuKaal,
       reasonEn,
       reasonTe
+    };
+  }
+
+  /* ============================================================
+     KALAPRAKASIKA (कालप्रकाशिका) BY SAGE NARASIMHA
+     1. Stellar Motion Facing (ऊर्ध्व, अधो, तिर्यङ्मुख नक्षत्राणि)
+     2. Dasa Kootas — Ten Considerations for Marriage (दश कूट निर्णयः)
+     3. Mantra Siddha-Chakra (सिद्धचक्रम्)
+     4. Dosha Neutralization Principles (दोषशान्तिः)
+     ============================================================ */
+
+  const STELLAR_FACING = {
+    'oordhwa': {
+      id: 'oordhwa',
+      titleSa: 'ऊर्ध्वमुख नक्षत्र (Oordhwa-Mukha)',
+      titleEn: 'Upward-Facing Stars',
+      nature: 'Auspicious for ascending, erecting, growing, and elevating works',
+      nakshatras: ['Rohini', 'Uttara Phalguni', 'Uttara Ashadha', 'Uttara Bhadrapada', 'Pushya', 'Shravana', 'Dhanishtha', 'Shatabhisha', 'Ardra'],
+      recommended: ['Coronation & Royal honors', 'Griha Pravesh & house foundation', 'Temple construction & hoisting flags', 'Planting tall trees and orchards', 'Laying foundation stones']
+    },
+    'atho': {
+      id: 'atho',
+      titleSa: 'अधोमुख नक्षत्र (Atho-Mukha)',
+      titleEn: 'Downward-Facing Stars',
+      nature: 'Auspicious for subterranean, deep, and excavating works',
+      nakshatras: ['Bharani', 'Krittika', 'Ashlesha', 'Magha', 'Purva Phalguni', 'Vishakha', 'Moola', 'Purva Ashadha', 'Purva Bhadrapada'],
+      recommended: ['Digging wells, tanks & ponds', 'Underground vaults & treasure cellars', 'Mining and geological excavation', 'Setting boundary demarcations']
+    },
+    'thiryag': {
+      id: 'thiryag',
+      titleSa: 'तिर्यङ्मुख नक्षत्र (Thiryag-Mukha)',
+      titleEn: 'Transverse / Horizontal-Facing Stars',
+      nature: 'Auspicious for horizontal motion, voyages, vehicles, and pathways',
+      nakshatras: ['Ashwini', 'Mrigashira', 'Punarvasu', 'Hasta', 'Chitra', 'Swati', 'Anuradha', 'Jyeshtha', 'Revati'],
+      recommended: ['Travel, voyages & pilgrimages (Yatra)', 'Purchasing and driving vehicles (Vahana)', 'Riding horses and elephants', 'Building roads, pathways and bridges']
+    }
+  };
+
+  function getStellarFacing(nakshatraName) {
+    for (const [key, val] of Object.entries(STELLAR_FACING)) {
+      if (val.nakshatras.includes(nakshatraName)) return val;
+    }
+    return STELLAR_FACING['thiryag'];
+  }
+
+  /* ------------------------------------------------------------
+     THE 10 CONSIDERATIONS (दश कूटानि / DASA KOOTAS)
+     Kalaprakasika Chapter XIII (Decision of Marriage)
+     ------------------------------------------------------------ */
+  const NAKSHATRA_ORDER = [
+    'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira', 'Ardra',
+    'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'Purva Phalguni', 'Uttara Phalguni',
+    'Hasta', 'Chitra', 'Swati', 'Vishakha', 'Anuradha', 'Jyeshtha',
+    'Moola', 'Purva Ashadha', 'Uttara Ashadha', 'Shravana', 'Dhanishtha',
+    'Shatabhisha', 'Purva Bhadrapada', 'Uttara Bhadrapada', 'Revati'
+  ];
+
+  const RASI_ORDER = [
+    'Mesha', 'Vrishabha', 'Mithuna', 'Karka', 'Simha', 'Kanya',
+    'Tula', 'Vrischika', 'Dhanu', 'Makara', 'Kumbha', 'Meena'
+  ];
+
+  // 1. Dhinam: Count from Bride to Groom
+  function checkDhinam(bIdx, gIdx) {
+    const diff = ((gIdx - bIdx + 27) % 27) + 1; // 1-indexed
+    const remainder = diff % 9;
+    const isVadhaVainasika = (diff === 22 || diff === 27);
+    
+    // 2=Sampat, 4=Kshema, 6=Sadhaka, 8=Mitra, 0/9=Parama-Mitra
+    const isAuspicious = [2, 4, 6, 8, 0].includes(remainder) && !isVadhaVainasika;
+    
+    let desc = '';
+    if (isVadhaVainasika) {
+      desc = `Count is ${diff} (Vadha-Vainasika / 22nd or 27th star) — strictly inauspicious.`;
+    } else if (isAuspicious) {
+      const names = { 2: 'Sampath (Fortune)', 4: 'Kshema (Well-being)', 6: 'Sadhaka (Success)', 8: 'Mitra (Friendship)', 0: 'Parama-Mitra (Intimate Love)' };
+      desc = `Count is ${diff} — ${names[remainder]} brings health, longevity and mutual harmony.`;
+    } else {
+      const badNames = { 1: 'Jenma (Obstacle)', 3: 'Vipath (Disaster)', 5: 'Prathyara (Enmity)', 7: 'Vadham (Discord)' };
+      desc = `Count is ${diff} — ${badNames[remainder]} indicates friction; requires remedial benefic aspects.`;
+    }
+    return { name: 'Dhinam (दिनम्)', isMatch: isAuspicious, score: isAuspicious ? 3 : 0, maxScore: 3, desc };
+  }
+
+  // 2. Ganam: Deva, Manushya, Rakshasa
+  const GANA_MAP = {
+    'Deva': ['Ashwini', 'Mrigashira', 'Punarvasu', 'Pushya', 'Hasta', 'Swati', 'Anuradha', 'Shravana', 'Revati'],
+    'Manushya': ['Bharani', 'Rohini', 'Ardra', 'Purva Phalguni', 'Uttara Phalguni', 'Purva Ashadha', 'Uttara Ashadha', 'Purva Bhadrapada', 'Uttara Bhadrapada'],
+    'Rakshasa': ['Krittika', 'Ashlesha', 'Magha', 'Chitra', 'Vishakha', 'Jyeshtha', 'Moola', 'Dhanishtha', 'Shatabhisha']
+  };
+
+  function getGana(star) {
+    for (const [g, list] of Object.entries(GANA_MAP)) {
+      if (list.includes(star)) return g;
+    }
+    return 'Manushya';
+  }
+
+  function checkGanam(bStar, gStar, bIdx, gIdx) {
+    const bG = getGana(bStar);
+    const gG = getGana(gStar);
+    let score = 0;
+    let desc = '';
+    const diff = ((gIdx - bIdx + 27) % 27) + 1;
+
+    if (bG === gG) {
+      score = 6;
+      desc = `Both belong to ${bG} Gana — exceptional mutual compatibility and temperamental harmony.`;
+    } else if ((bG === 'Deva' && gG === 'Manushya') || (bG === 'Manushya' && gG === 'Deva')) {
+      score = 4;
+      desc = `Deva and Manushya union — peaceful and supportive marriage.`;
+    } else if (bG === 'Rakshasa' && gG === 'Deva') {
+      score = 2;
+      desc = `Rakshasa bride and Deva groom — acceptable with maturity and mutual respect.`;
+    } else if (diff > 14) {
+      score = 3;
+      desc = `Gana difference neutralized as the Bride's star is beyond the 14th star from the Groom's star (Kalaprakasika exemption).`;
+    } else {
+      score = 0;
+      desc = `Manushya bride and Rakshasa groom within 14 stars — sharp temperamental clash; requires astrological remedies.`;
+    }
+    return { name: 'Ganam (गणम्)', isMatch: score >= 3, score, maxScore: 6, desc: `Bride: ${bG}, Groom: ${gG}. ${desc}` };
+  }
+
+  // 3. Mahendhram
+  function checkMahendhram(bIdx, gIdx) {
+    const diff = ((gIdx - bIdx + 27) % 27) + 1;
+    const isM = [4, 7, 10, 13, 16, 19, 22, 25].includes(diff);
+    return {
+      name: 'Mahendhram (माहेन्द्रम्)',
+      isMatch: isM,
+      score: isM ? 1 : 0,
+      maxScore: 1,
+      desc: isM
+        ? `Count is ${diff} — Mahendhra Yoga present! Promotes deep attachment, prosperity, and longevity of progeny.`
+        : `Count is ${diff} — Mahendhra not formed (neutral).`
+    };
+  }
+
+  // 4. Sthree-Dheergham
+  function checkSthreeDheergham(bIdx, gIdx) {
+    const diff = ((gIdx - bIdx + 27) % 27) + 1;
+    const isSD = diff > 7; // beyond 7th or 13th star
+    const isFull = diff > 13;
+    return {
+      name: 'Sthree-Dheergham (स्त्रीदीर्घम्)',
+      isMatch: isSD,
+      score: isFull ? 1 : (isSD ? 0.5 : 0),
+      maxScore: 1,
+      desc: isSD
+        ? `Groom's star is ${diff} stars ahead of Bride's — bestows sustained happiness, auspicious welfare, and long life to the bride.`
+        : `Groom's star is within the first 7 stars of the bride — limited Sthree-Dheergham.`
+    };
+  }
+
+  // 5. Yoni (14 Animal species)
+  const YONI_MAP = {
+    'Ashwini': 'Horse', 'Shatabhisha': 'Horse',
+    'Bharani': 'Elephant', 'Revati': 'Elephant',
+    'Pushya': 'Sheep', 'Krittika': 'Sheep',
+    'Rohini': 'Serpent', 'Mrigashira': 'Serpent',
+    'Punarvasu': 'Cat', 'Ashlesha': 'Cat',
+    'Magha': 'Rat', 'Purva Phalguni': 'Rat',
+    'Uttara Phalguni': 'Cow', 'Uttara Ashadha': 'Cow', 'Uttara Bhadrapada': 'Cow',
+    'Hasta': 'Buffalo', 'Swati': 'Buffalo',
+    'Chitra': 'Tiger', 'Vishakha': 'Tiger',
+    'Anuradha': 'Deer', 'Jyeshtha': 'Deer',
+    'Moola': 'Dog', 'Ardra': 'Dog',
+    'Purva Ashadha': 'Monkey', 'Shravana': 'Monkey',
+    'Dhanishtha': 'Lion', 'Purva Bhadrapada': 'Lion'
+  };
+
+  const HOSTILE_YONIS = [
+    ['Cow', 'Tiger'], ['Elephant', 'Lion'], ['Horse', 'Buffalo'],
+    ['Dog', 'Deer'], ['Rat', 'Cat'], ['Serpent', 'Rat'], ['Monkey', 'Sheep']
+  ];
+
+  function checkYoni(bStar, gStar) {
+    const bY = YONI_MAP[bStar] || 'Deer';
+    const gY = YONI_MAP[gStar] || 'Deer';
+    let isHostile = false;
+
+    for (const pair of HOSTILE_YONIS) {
+      if ((pair[0] === bY && pair[1] === gY) || (pair[1] === bY && pair[0] === gY)) {
+        isHostile = true; break;
+      }
+    }
+
+    let score = 2;
+    let desc = '';
+    if (bY === gY) {
+      score = 4;
+      desc = `Both share ${bY} Yoni — supreme biological and psychological concord!`;
+    } else if (isHostile) {
+      score = 0;
+      desc = `Hostile Yoni clash (${bY} vs ${gY}) — mutual friction; requires mature adjustments.`;
+    } else {
+      score = 2;
+      desc = `Neutral Yoni relationship (${bY} & ${gY}) — harmonious domestic life.`;
+    }
+    return { name: 'Yoni (योनिः)', isMatch: !isHostile, score, maxScore: 4, desc };
+  }
+
+  // 6. Rasi Koota
+  function checkRasi(bRasiIdx, gRasiIdx) {
+    const diff = ((gRasiIdx - bRasiIdx + 12) % 12) + 1;
+    // Kalaprakasika exemptions for 6/8: Aries/Virgo, Taurus/Sagittarius, Gemini/Scorpio, Cancer/Aquarius, Leo/Capricorn, Libra/Pisces
+    const isExempt68 = (diff === 6 || diff === 8) && (
+      (bRasiIdx === 0 && gRasiIdx === 5) || (bRasiIdx === 5 && gRasiIdx === 0) ||
+      (bRasiIdx === 1 && gRasiIdx === 8) || (bRasiIdx === 8 && gRasiIdx === 1) ||
+      (bRasiIdx === 2 && gRasiIdx === 7) || (bRasiIdx === 7 && gRasiIdx === 2) ||
+      (bRasiIdx === 3 && gRasiIdx === 10) || (bRasiIdx === 10 && gRasiIdx === 3) ||
+      (bRasiIdx === 4 && gRasiIdx === 9) || (bRasiIdx === 9 && gRasiIdx === 4) ||
+      (bRasiIdx === 6 && gRasiIdx === 11) || (bRasiIdx === 11 && gRasiIdx === 6)
+    );
+
+    let score = 0;
+    let desc = '';
+    if (diff === 7) {
+      score = 7;
+      desc = `Sama-Saptaka (7th sign opposite) — supreme planetary harmony and lifelong happiness.`;
+    } else if ([3, 4, 10, 11].includes(diff)) {
+      score = 7;
+      desc = `Groom Rasi is ${diff}th from Bride — fosters family expansion, wealth, and mutual support.`;
+    } else if (diff === 2 && (gRasiIdx % 2 === 1)) {
+      // Even sign exemption
+      score = 5;
+      desc = `2nd house position in an even sign (Kalaprakasika exemption) — auspicious longevity.`;
+    } else if (isExempt68) {
+      score = 5;
+      desc = `Shadashtaka (6/8) cancelled by Sage Narasimha's classical friendship exemption.`;
+    } else if (diff === 1) {
+      score = 5;
+      desc = `Same Moon Sign (Eka Rasi) — harmonious shared mental wavelengths.`;
+    } else {
+      score = 0;
+      desc = `Rasi distance ${diff} indicates Dwi-Dwadasha (2/12) or uncancelled Shadashtaka (6/8); requires benefic planetary aspects.`;
+    }
+    return { name: 'Rasi (राशिः)', isMatch: score >= 5, score, maxScore: 7, desc };
+  }
+
+  // 7. Rasyadhipathi (Friendship of sign lords)
+  const PLANET_FRIENDS = {
+    'Surya': ['Chandra', 'Mangala', 'Guru'],
+    'Chandra': ['Surya', 'Budha'],
+    'Mangala': ['Surya', 'Chandra', 'Guru'],
+    'Budha': ['Surya', 'Shukra'],
+    'Guru': ['Surya', 'Chandra', 'Mangala'],
+    'Shukra': ['Budha', 'Shani'],
+    'Shani': ['Budha', 'Shukra']
+  };
+
+  const RASI_LORDS = ['Mangala', 'Shukra', 'Budha', 'Chandra', 'Surya', 'Budha', 'Shukra', 'Mangala', 'Guru', 'Shani', 'Shani', 'Guru'];
+
+  function checkRasyadhipathi(bRasiIdx, gRasiIdx) {
+    const bLord = RASI_LORDS[bRasiIdx];
+    const gLord = RASI_LORDS[gRasiIdx];
+    let score = 0;
+    let desc = '';
+
+    if (bLord === gLord) {
+      score = 5;
+      desc = `Same sign lord (${bLord}) — supreme mental fellowship and shared family values.`;
+    } else {
+      const bFr = (PLANET_FRIENDS[bLord] || []).includes(gLord);
+      const gFr = (PLANET_FRIENDS[gLord] || []).includes(bLord);
+      if (bFr && gFr) {
+        score = 5;
+        desc = `Mutual friendship between ${bLord} and ${gLord} — enduring peace and goodwill.`;
+      } else if (bFr || gFr) {
+        score = 3;
+        desc = `Friendly relationship between ${bLord} and ${gLord} — cordial and supportive union.`;
+      } else {
+        score = 1;
+        desc = `Neutral or restrained relationship between ${bLord} and ${gLord}.`;
+      }
+    }
+    return { name: 'Rasyadhipathi (राश्याधिपतिः)', isMatch: score >= 3, score, maxScore: 5, desc };
+  }
+
+  // 8. Vasyam
+  const VASYAM_PAIRS = {
+    0: [4, 7], 1: [3, 4], 2: [5], 3: [7, 8], 4: [6], 5: [2, 11],
+    6: [9], 7: [5, 3], 8: [11], 9: [10, 0], 10: [0], 11: [9]
+  };
+
+  function checkVasyam(bRasiIdx, gRasiIdx) {
+    const bV = (VASYAM_PAIRS[bRasiIdx] || []).includes(gRasiIdx);
+    const gV = (VASYAM_PAIRS[gRasiIdx] || []).includes(bRasiIdx);
+    const isV = bV || gV;
+    return {
+      name: 'Vasyam (वश्यम्)',
+      isMatch: isV,
+      score: isV ? 2 : 0,
+      maxScore: 2,
+      desc: isV
+        ? 'Mutual Vasyam present! Fosters natural emotional attraction, mutual surrender, and harmony.'
+        : 'Vasyam is neutral.'
+    };
+  }
+
+  // 9. Rajju (5 Divisions) — Fundamental & Mandatory!
+  const RAJJU_GROUPS = {
+    'Padha': ['Ashwini', 'Ashlesha', 'Magha', 'Jyeshtha', 'Moola', 'Revati'],
+    'Ooroo': ['Bharani', 'Pushya', 'Purva Phalguni', 'Anuradha', 'Purva Ashadha', 'Uttara Bhadrapada'],
+    'Nabhi': ['Krittika', 'Punarvasu', 'Uttara Phalguni', 'Vishakha', 'Uttara Ashadha', 'Purva Bhadrapada'],
+    'Kanta': ['Rohini', 'Ardra', 'Hasta', 'Swati', 'Shravana', 'Shatabhisha'],
+    'Siro': ['Mrigashira', 'Chitra', 'Dhanishtha']
+  };
+
+  function getRajju(star) {
+    for (const [r, list] of Object.entries(RAJJU_GROUPS)) {
+      if (list.includes(star)) return r;
+    }
+    return 'Kanta';
+  }
+
+  function checkRajju(bStar, gStar, bRasiIdx, gRasiIdx) {
+    const bR = getRajju(bStar);
+    const gR = getRajju(gStar);
+    const isSame = (bR === gR);
+
+    // Kalaprakasika Exemption: Same Rasi lord or friendly lords or Sama-Saptaka cancels Rajju dosha!
+    const bLord = RASI_LORDS[bRasiIdx];
+    const gLord = RASI_LORDS[gRasiIdx];
+    const isExempt = (bLord === gLord) || (Math.abs(bRasiIdx - gRasiIdx) === 6);
+
+    let isMatch = !isSame || isExempt;
+    let desc = '';
+    if (!isSame) {
+      desc = `Different Rajjus (Bride: ${bR} Rajju, Groom: ${gR} Rajju) — Auspicious! Blesses the union with prolonged wedded bliss (Deergha Sumangali Yoga).`;
+    } else if (isExempt) {
+      desc = `Both belong to ${bR} Rajju, but cancelled by Sage Narasimha's classical exemption (shared lord or Sama-Saptaka signs).`;
+    } else {
+      const threats = { 'Siro': 'threatens longevity of the groom', 'Kanta': 'threatens health of the bride', 'Nabhi': 'affects welfare of progeny', 'Ooroo': 'causes financial drain', 'Padha': 'causes frequent distant separations' };
+      desc = `Rajju Dosha: Both belong to ${bR} Rajju (${threats[bR] || 'discord'}). Requires special Vedic remedies.`;
+    }
+    return { name: 'Rajju (रज्जुः)', isMatch, score: isMatch ? 5 : 0, maxScore: 5, hasDosha: isSame && !isExempt, desc };
+  }
+
+  // 10. Vedhai (13 Repellent pairs)
+  const VEDHAI_PAIRS = [
+    ['Ashwini', 'Jyeshtha'], ['Bharani', 'Anuradha'], ['Krittika', 'Vishakha'],
+    ['Rohini', 'Swati'], ['Ardra', 'Shravana'], ['Punarvasu', 'Uttara Ashadha'],
+    ['Pushya', 'Purva Ashadha'], ['Ashlesha', 'Moola'], ['Magha', 'Revati'],
+    ['Purva Phalguni', 'Uttara Bhadrapada'], ['Uttara Phalguni', 'Purva Bhadrapada'],
+    ['Hasta', 'Shatabhisha'], ['Mrigashira', 'Chitra'], ['Chitra', 'Dhanishtha'], ['Mrigashira', 'Dhanishtha']
+  ];
+
+  function checkVedhai(bStar, gStar, bRasiIdx, gRasiIdx) {
+    let isRepellent = false;
+    for (const pair of VEDHAI_PAIRS) {
+      if ((pair[0] === bStar && pair[1] === gStar) || (pair[1] === bStar && pair[0] === gStar)) {
+        isRepellent = true; break;
+      }
+    }
+
+    const bLord = RASI_LORDS[bRasiIdx];
+    const gLord = RASI_LORDS[gRasiIdx];
+    const isExempt = (bLord === gLord) || (Math.abs(bRasiIdx - gRasiIdx) === 6);
+
+    let isMatch = !isRepellent || isExempt;
+    let desc = '';
+    if (!isRepellent) {
+      desc = 'Vedhai clear — stars are free from mutual stellar repulsion; promotes flourishing progeny and harmony.';
+    } else if (isExempt) {
+      desc = `Vedhai pair observed (${bStar} and ${gStar}), but neutralized by Sage Narasimha's Rasyadhipathi exemption.`;
+    } else {
+      desc = `Vedhai Dosha: ${bStar} and ${gStar} are mutually repellent asterisms. Strictly avoided without special propitiation.`;
+    }
+    return { name: 'Vedhai (वेधः)', isMatch, score: isMatch ? 2 : 0, maxScore: 2, hasDosha: isRepellent && !isExempt, desc };
+  }
+
+  // Complete Dasa Kootas Evaluation Wrapper
+  function calculateDasaKootas(brideStar, groomStar, brideRasi, groomRasi) {
+    const bIdx = NAKSHATRA_ORDER.indexOf(brideStar) >= 0 ? NAKSHATRA_ORDER.indexOf(brideStar) : 0;
+    const gIdx = NAKSHATRA_ORDER.indexOf(groomStar) >= 0 ? NAKSHATRA_ORDER.indexOf(groomStar) : 0;
+    const bRasiIdx = RASI_ORDER.indexOf(brideRasi) >= 0 ? RASI_ORDER.indexOf(brideRasi) : 0;
+    const gRasiIdx = RASI_ORDER.indexOf(groomRasi) >= 0 ? RASI_ORDER.indexOf(groomRasi) : 0;
+
+    const kootas = [
+      checkDhinam(bIdx, gIdx),
+      checkGanam(brideStar, groomStar, bIdx, gIdx),
+      checkMahendhram(bIdx, gIdx),
+      checkSthreeDheergham(bIdx, gIdx),
+      checkYoni(brideStar, groomStar),
+      checkRasi(bRasiIdx, gRasiIdx),
+      checkRasyadhipathi(bRasiIdx, gRasiIdx),
+      checkVasyam(bRasiIdx, gRasiIdx),
+      checkRajju(brideStar, groomStar, bRasiIdx, gRasiIdx),
+      checkVedhai(brideStar, groomStar, bRasiIdx, gRasiIdx)
+    ];
+
+    let totalScore = 0;
+    let maxScore = 0;
+    let matchedCount = 0;
+    let rajjuDosha = false;
+    let vedhaiDosha = false;
+
+    kootas.forEach(k => {
+      totalScore += k.score;
+      maxScore += k.maxScore;
+      if (k.isMatch) matchedCount++;
+      if (k.hasDosha && k.name.includes('Rajju')) rajjuDosha = true;
+      if (k.hasDosha && k.name.includes('Vedhai')) vedhaiDosha = true;
+    });
+
+    const percentage = Math.round((totalScore / maxScore) * 100);
+
+    let verdict = 'Uttamam (Highly Auspicious)';
+    let verdictClass = 'badge-excellent';
+    if (rajjuDosha || vedhaiDosha || matchedCount < 5 || percentage < 50) {
+      verdict = 'Varjyam (Dosha Observed / Consult Pandit)';
+      verdictClass = 'badge-avoid';
+    } else if (percentage >= 70 && matchedCount >= 7) {
+      verdict = 'Uttamam (Supreme Compatibility)';
+      verdictClass = 'badge-excellent';
+    } else {
+      verdict = 'Madhyamam (Good / Favorable)';
+      verdictClass = 'badge-good';
+    }
+
+    return {
+      brideStar, groomStar, brideRasi, groomRasi,
+      kootas,
+      matchedCount,
+      totalKootas: 10,
+      totalScore,
+      maxScore,
+      percentage,
+      rajjuDosha,
+      vedhaiDosha,
+      verdict,
+      verdictClass,
+      ruleText: 'As per Kalaprakasika Chapter XIII: At least 5 out of 10 Considerations must agree. Dhinam and Rajju are paramount for long wedded life.'
+    };
+  }
+
+  /* ------------------------------------------------------------
+     MANTRA SIDDHA-CHAKRA (4x4 MATRIX)
+     Kalaprakasika Chapter X (Initiation in a Manthra)
+     ------------------------------------------------------------ */
+  const SANSKRIT_ALPHABET = [
+    'a', 'aa', 'i', 'ii', 'u', 'uu', 'ri', 'rii', 'lri', 'e', 'ai', 'o', 'au', 'am', 'ah',
+    'ka', 'kha', 'ga', 'gha', 'nga',
+    'cha', 'chha', 'ja', 'jha', 'nya',
+    'ta', 'tha', 'da', 'dha', 'na',
+    'ta2', 'tha2', 'da2', 'dha2', 'na2',
+    'pa', 'pha', 'ba', 'bha', 'ma',
+    'ya', 'ra', 'la', 'va', 'sha', 'sha2', 'sa', 'ha', 'ksha'
+  ];
+
+  function getMantraChakra(seekerName, mantraName) {
+    const sChar = (seekerName || 'a').trim().toLowerCase()[0];
+    const mChar = (mantraName || 'o').trim().toLowerCase()[0];
+
+    const sCode = sChar.charCodeAt(0) % 4;
+    const mCode = mChar.charCodeAt(0) % 4;
+
+    const squares = ['Siddha', 'Saddhya', 'Swasiddha', 'Ari'];
+    const cages = [
+      ['Siddha-Siddham', 'Siddha-Saddhyam', 'Siddha-Swasiddham', 'Siddha-Ari'],
+      ['Saddhya-Siddham', 'Saddhya-Saddhyam', 'Saddhya-Swasiddham', 'Saddhya-Ari'],
+      ['Swasiddha-Siddham', 'Swasiddha-Saddhyam', 'Swasiddha-Swasiddham', 'Swasiddha-Ari'],
+      ['Ari-Siddham', 'Ari-Saddhyam', 'Ari-Swasiddham', 'Ari-Ari']
+    ];
+
+    const cageResult = cages[sCode][mCode];
+    let fruition = '';
+    let recommendation = '';
+
+    if (cageResult.includes('Swasiddham') || cageResult === 'Siddha-Siddham') {
+      fruition = 'Immediate Siddhi & Divine Grace';
+      recommendation = 'Reciting the mantra half the required count brings instantaneous blessings and spiritual awakening.';
+    } else if (cageResult.includes('Saddhyam')) {
+      fruition = 'Progressive Fulfillment with Devotion';
+      recommendation = 'Recite the full count as prescribed by the Gurus to unlock the mantra devata power.';
+    } else if (cageResult.includes('Ari')) {
+      fruition = 'Cautionary Alignment';
+      recommendation = 'Sage Narasimha prescribes initiation under a realized Guru with Kavacha protection or chanting Mahamrityunjaya.';
+    } else {
+      fruition = 'Steady Spiritual Attainment';
+      recommendation = 'Pure dedication and regular japa brings lasting peace and focus.';
+    }
+
+    return {
+      seekerName, mantraName,
+      userSquare: squares[sCode],
+      sRow: sCode,
+      mCol: mCode,
+      squares,
+      cages,
+      cageResult,
+      fruition,
+      recommendation,
+      shlokaRef: 'Kalaprakasika Chapter X (Initiation in a Manthra): Siddha Chakra 16-Square Diagram'
     };
   }
 
@@ -664,8 +1161,14 @@ const MUHURAT = (function () {
   return {
     CATEGORIES,
     NAKSHATRA_PRAKARANA,
+    STELLAR_FACING,
+    NAKSHATRA_ORDER,
+    RASI_ORDER,
+    getStellarFacing,
     getNakshatraGana,
     checkSpecialYogas,
+    calculateDasaKootas,
+    getMantraChakra,
     evaluateDay,
     getMonthMuhurats,
     getTodayMuhurat
@@ -675,3 +1178,4 @@ const MUHURAT = (function () {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { MUHURAT };
 }
+
