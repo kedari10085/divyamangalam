@@ -1522,21 +1522,44 @@ const MUHURAT = (function () {
   ];
 
   function findRasiNakshatraByDOB(dobInput, hour = 12, minute = 0) {
-    let dateObj;
-    if (dobInput instanceof Date) {
-      dateObj = new Date(dobInput.getTime());
+    let dateObj = null;
+
+    if (dobInput instanceof Date && !isNaN(dobInput.getTime())) {
+      dateObj = new Date(dobInput.getFullYear(), dobInput.getMonth(), dobInput.getDate(), hour, minute);
     } else if (typeof dobInput === 'string') {
-      const parts = dobInput.trim().split('-');
-      if (parts.length === 3) {
-        dateObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), hour, minute);
-      } else {
-        dateObj = new Date(dobInput);
+      const str = dobInput.trim();
+      const delims = ['-', '/', '.', ' '];
+      for (const delim of delims) {
+        if (str.includes(delim)) {
+          const parts = str.split(delim).map(p => parseInt(p, 10));
+          if (parts.length === 3 && !parts.some(isNaN)) {
+            let y, m, d;
+            if (parts[0] > 1000) {
+              // YYYY-MM-DD
+              y = parts[0]; m = parts[1] - 1; d = parts[2];
+            } else if (parts[2] > 1000) {
+              // DD-MM-YYYY
+              d = parts[0]; m = parts[1] - 1; y = parts[2];
+            } else {
+              d = parts[0]; m = parts[1] - 1; y = parts[2] < 50 ? 2000 + parts[2] : 1900 + parts[2];
+            }
+            const dt = new Date(y, m, d, hour, minute);
+            if (!isNaN(dt.getTime())) {
+              dateObj = dt;
+              break;
+            }
+          }
+        }
       }
-    } else {
-      dateObj = new Date();
+      if (!dateObj) {
+        const parsed = new Date(str);
+        if (!isNaN(parsed.getTime())) {
+          dateObj = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), hour, minute);
+        }
+      }
     }
 
-    if (isNaN(dateObj.getTime())) {
+    if (!dateObj || isNaN(dateObj.getTime())) {
       dateObj = new Date();
     }
 

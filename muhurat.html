@@ -1216,11 +1216,15 @@
     <div class="dob-form-row">
       <div class="form-field">
         <label for="birthDateInput"><strong>Date of Birth (పుట్టిన తేదీ):</strong></label>
-        <input type="date" id="birthDateInput" class="dob-input" value="1998-05-12" />
+        <div style="position:relative; display:flex; align-items:center;">
+          <input type="text" id="birthDateInput" class="dob-input" placeholder="DD-MM-YYYY (e.g. 11-01-1992)" value="11-01-1992" style="padding-right:2.8rem; font-weight:600;" autocomplete="off" />
+          <input type="date" id="nativeDatePicker" style="position:absolute; right:6px; opacity:0; width:36px; height:36px; cursor:pointer;" title="Choose date from calendar" />
+          <button type="button" id="calendarPickerBtn" style="position:absolute; right:8px; background:none; border:none; font-size:1.25rem; cursor:pointer; padding:0; line-height:1;" title="Choose date from calendar">📅</button>
+        </div>
       </div>
       <div class="form-field">
         <label for="birthTimeInput"><strong>Time of Birth (పుట్టిన సమయం):</strong></label>
-        <input type="time" id="birthTimeInput" class="dob-input" value="12:00" />
+        <input type="time" id="birthTimeInput" class="dob-input" value="10:04" style="font-weight:600;" />
       </div>
       <div>
         <button type="button" id="calcDobBtn" class="koota-calc-btn" style="padding:0.8rem 1.8rem; width:100%;">
@@ -1229,8 +1233,8 @@
       </div>
     </div>
     <div style="font-size:0.84rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem; margin-top:-0.5rem; margin-bottom:1rem;">
-      <input type="checkbox" id="approxTimeCheck" checked />
-      <label for="approxTimeCheck">Approximate birth time (12:00 PM noon is used if exact minute is unknown)</label>
+      <input type="checkbox" id="approxTimeCheck" />
+      <label for="approxTimeCheck">Approximate birth time (check if exact minute is unknown — will default to 12:00 PM noon)</label>
     </div>
 
     <!-- Results Box -->
@@ -1907,6 +1911,8 @@
 
   // ===== DATE OF BIRTH (DOB) RASI & NAKSHATRA FINDER =====
   const birthDateInput = document.getElementById('birthDateInput');
+  const nativeDatePicker = document.getElementById('nativeDatePicker');
+  const calendarPickerBtn = document.getElementById('calendarPickerBtn');
   const birthTimeInput = document.getElementById('birthTimeInput');
   const approxTimeCheck = document.getElementById('approxTimeCheck');
   const calcDobBtn = document.getElementById('calcDobBtn');
@@ -1916,29 +1922,66 @@
     if (!calcDobBtn || typeof MUHURAT === 'undefined') return;
 
     calcDobBtn.addEventListener('click', calculateAndRenderDOB);
+    birthDateInput.addEventListener('input', calculateAndRenderDOB);
     birthDateInput.addEventListener('change', calculateAndRenderDOB);
+    birthTimeInput.addEventListener('input', calculateAndRenderDOB);
     birthTimeInput.addEventListener('change', calculateAndRenderDOB);
+
+    if (nativeDatePicker) {
+      nativeDatePicker.addEventListener('change', () => {
+        if (nativeDatePicker.value) {
+          const parts = nativeDatePicker.value.split('-');
+          if (parts.length === 3) {
+            birthDateInput.value = `${parts[2]}-${parts[1]}-${parts[0]}`;
+          } else {
+            birthDateInput.value = nativeDatePicker.value;
+          }
+          calculateAndRenderDOB();
+        }
+      });
+    }
+
+    if (calendarPickerBtn && nativeDatePicker) {
+      calendarPickerBtn.addEventListener('click', () => {
+        if (typeof nativeDatePicker.showPicker === 'function') {
+          try { nativeDatePicker.showPicker(); } catch (e) { nativeDatePicker.focus(); }
+        } else {
+          nativeDatePicker.focus();
+        }
+      });
+    }
+
     approxTimeCheck.addEventListener('change', () => {
       if (approxTimeCheck.checked) {
         birthTimeInput.value = '12:00';
         birthTimeInput.disabled = true;
       } else {
         birthTimeInput.disabled = false;
+        if (!birthTimeInput.value) birthTimeInput.value = '10:04';
       }
       calculateAndRenderDOB();
     });
 
     if (approxTimeCheck.checked) {
       birthTimeInput.disabled = true;
+    } else {
+      birthTimeInput.disabled = false;
     }
 
     calculateAndRenderDOB();
   }
 
   function calculateAndRenderDOB() {
-    if (typeof MUHURAT === 'undefined' || !MUHURAT.findRasiNakshatraByDOB) return;
-    const dobStr = birthDateInput.value;
-    if (!dobStr) return;
+    if (typeof MUHURAT === 'undefined' || !MUHURAT.findRasiNakshatraByDOB || !dobResultWrap) return;
+    const dobStr = (birthDateInput.value || '').trim();
+    if (!dobStr) {
+      dobResultWrap.innerHTML = `
+        <div style="background:#FFF8E1; border:1px solid #FFE082; color:#B71C1C; padding:1rem 1.25rem; border-radius:10px; font-size:0.95rem; text-align:center;">
+          ⚠️ <strong>దయచేసి పుట్టిన తేదీని నమోదు చేయండి</strong> (ఉదాహరణ: <code>11-01-1992</code> లేదా <code>1992-01-11</code>).
+        </div>
+      `;
+      return;
+    }
 
     let hour = 12;
     let min = 0;
@@ -1950,7 +1993,21 @@
       }
     }
 
-    const res = MUHURAT.findRasiNakshatraByDOB(dobStr, hour, min);
+    let res;
+    try {
+      res = MUHURAT.findRasiNakshatraByDOB(dobStr, hour, min);
+    } catch (err) {
+      console.error('DOB Calculation error:', err);
+    }
+
+    if (!res) {
+      dobResultWrap.innerHTML = `
+        <div style="background:#FFF8E1; border:1px solid #FFE082; color:#B71C1C; padding:1rem 1.25rem; border-radius:10px; font-size:0.95rem; text-align:center;">
+          ⚠️ <strong>చెల్లని తేదీ</strong>. దయచేసి DD-MM-YYYY ఫార్మాట్‌లో తేదీని నమోదు చేయండి (ఉదాహరణ: <code>11-01-1992</code>).
+        </div>
+      `;
+      return;
+    }
 
     dobResultWrap.innerHTML = `
       <div class="dob-result-box">
@@ -2011,7 +2068,7 @@
           </div>
           <div class="dob-metric-item">
             <div class="lbl">Stellar Facing (గతి)</div>
-            <div class="val">${res.stellarFacing.titleSa.split('(')[0]}</div>
+            <div class="val">${res.stellarFacing ? res.stellarFacing.titleSa.split('(')[0] : 'తిర్యఙ్ముఖ'}</div>
           </div>
         </div>
 
@@ -2021,19 +2078,27 @@
       </div>
     `;
 
-    document.getElementById('setAsBrideBtn').addEventListener('click', () => {
-      brideStarSelect.value = res.star;
-      brideRasiSelect.value = res.rasi;
-      renderDasaKootas();
-      document.getElementById('dasaKootasSection').scrollIntoView({ behavior: 'smooth' });
-    });
+    const brideBtn = document.getElementById('setAsBrideBtn');
+    if (brideBtn && typeof brideStarSelect !== 'undefined' && brideStarSelect && typeof brideRasiSelect !== 'undefined' && brideRasiSelect) {
+      brideBtn.addEventListener('click', () => {
+        brideStarSelect.value = res.star;
+        brideRasiSelect.value = res.rasi;
+        renderDasaKootas();
+        const el = document.getElementById('dasaKootasSection');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
 
-    document.getElementById('setAsGroomBtn').addEventListener('click', () => {
-      groomStarSelect.value = res.star;
-      groomRasiSelect.value = res.rasi;
-      renderDasaKootas();
-      document.getElementById('dasaKootasSection').scrollIntoView({ behavior: 'smooth' });
-    });
+    const groomBtn = document.getElementById('setAsGroomBtn');
+    if (groomBtn && typeof groomStarSelect !== 'undefined' && groomStarSelect && typeof groomRasiSelect !== 'undefined' && groomRasiSelect) {
+      groomBtn.addEventListener('click', () => {
+        groomStarSelect.value = res.star;
+        groomRasiSelect.value = res.rasi;
+        renderDasaKootas();
+        const el = document.getElementById('dasaKootasSection');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
   }
 
   // ===== DIRECTORY OF 12 RASIS & 27 NAKSHATRAS =====
