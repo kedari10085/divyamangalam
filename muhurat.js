@@ -1521,11 +1521,26 @@ const MUHURAT = (function () {
     }
   ];
 
-  function findRasiNakshatraByDOB(dobInput, hour = 12, minute = 0) {
-    let dateObj = null;
+  function findRasiNakshatraByDOB(dobInput, hour = 12, minute = 0, cityKey = 'nellore') {
+    let pMod;
+    if (typeof PANCHANG !== 'undefined') {
+      pMod = PANCHANG;
+    } else {
+      try {
+        pMod = require('./panchang.js').PANCHANG;
+      } catch (e) {}
+    }
+
+    const city = (pMod && pMod.getCity) ? pMod.getCity(cityKey) : { id: 'nellore', name: 'Nellore (నెల్లూరు)', state: 'Andhra Pradesh', lat: 14.4426, lon: 79.9865, tz: 5.5, tzName: 'IST' };
+
+    let y = 1992, m = 0, d = 11;
+    let validDateFound = false;
 
     if (dobInput instanceof Date && !isNaN(dobInput.getTime())) {
-      dateObj = new Date(dobInput.getFullYear(), dobInput.getMonth(), dobInput.getDate(), hour, minute);
+      y = dobInput.getFullYear();
+      m = dobInput.getMonth();
+      d = dobInput.getDate();
+      validDateFound = true;
     } else if (typeof dobInput === 'string') {
       const str = dobInput.trim();
       const delims = ['-', '/', '.', ' '];
@@ -1533,7 +1548,6 @@ const MUHURAT = (function () {
         if (str.includes(delim)) {
           const parts = str.split(delim).map(p => parseInt(p, 10));
           if (parts.length === 3 && !parts.some(isNaN)) {
-            let y, m, d;
             if (parts[0] > 1000) {
               // YYYY-MM-DD
               y = parts[0]; m = parts[1] - 1; d = parts[2];
@@ -1543,36 +1557,51 @@ const MUHURAT = (function () {
             } else {
               d = parts[0]; m = parts[1] - 1; y = parts[2] < 50 ? 2000 + parts[2] : 1900 + parts[2];
             }
-            const dt = new Date(y, m, d, hour, minute);
-            if (!isNaN(dt.getTime())) {
-              dateObj = dt;
-              break;
-            }
+            validDateFound = true;
+            break;
           }
         }
       }
-      if (!dateObj) {
+      if (!validDateFound) {
         const parsed = new Date(str);
         if (!isNaN(parsed.getTime())) {
-          dateObj = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), hour, minute);
+          y = parsed.getFullYear();
+          m = parsed.getMonth();
+          d = parsed.getDate();
+          validDateFound = true;
         }
       }
     }
 
-    if (!dateObj || isNaN(dateObj.getTime())) {
-      dateObj = new Date();
+    if (!validDateFound) {
+      const now = new Date();
+      y = now.getFullYear();
+      m = now.getMonth();
+      d = now.getDate();
     }
 
+    // Convert local birth time in the specified city to Universal Time (UTC)
+    const localMs = Date.UTC(y, m, d, hour, minute);
+    const utcMs = localMs - (city.tz * 3600 * 1000);
+    const dateUTC = new Date(utcMs);
+    const localDate = new Date(y, m, d, hour, minute);
+
     let p;
-    if (typeof PANCHANG !== 'undefined' && PANCHANG.getPanchang) {
-      p = PANCHANG.getPanchang(dateObj);
-    } else {
-      try {
-        const { PANCHANG: pMod } = require('./panchang.js');
-        p = pMod.getPanchang(dateObj);
-      } catch (e) {
-        p = { nakshatra: { name: 'Rohini', pada: 1, index: 3 }, rasi: 'Vrishabha (Taurus)', tithi: { name: 'Panchami', pakshaShort: 'Shukla' }, yoga: 'Siddha', karana: 'Bava' };
+    let padaTimings = null;
+    if (pMod && pMod.getPanchang) {
+      p = pMod.getPanchang(dateUTC, city.id);
+      if (pMod.getNakshatraPadaTimings) {
+        padaTimings = pMod.getNakshatraPadaTimings(dateUTC, city.id);
       }
+    } else {
+      p = { 
+        nakshatra: { name: 'Uttara Bhadrapada', pada: 1, index: 25 }, 
+        rasi: 'Meena (Pisces)', 
+        tithi: { name: 'Shashthi', pakshaShort: 'Shukla' }, 
+        yoga: 'Parigha', 
+        karana: 'Bava',
+        ayanamsaDeg: '23.75°'
+      };
     }
 
     const starName = p.nakshatra.name;
@@ -1586,11 +1615,14 @@ const MUHURAT = (function () {
     const facing = getStellarFacing(starName);
 
     return {
-      date: dateObj,
-      formattedDate: dateObj.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+      date: localDate,
+      dateUTC,
+      city,
+      formattedDate: localDate.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
       formattedTime: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`,
       star: starName,
       pada,
+      padaTimings,
       rasi: rasiKey,
       rasiFullName: rasiRaw,
       rasiInfo,
@@ -1605,7 +1637,12 @@ const MUHURAT = (function () {
       nakshatraLord: nakInfo.lord,
       rasiLord: rasiInfo.lord,
       yoni: nakInfo.yoni,
-      rajju: nakInfo.rajju
+      rajju: nakInfo.rajju,
+      ayanamsaDeg: p.ayanamsaDeg || '23.75°',
+      sunLon: p.sunLon,
+      moonLon: p.moonLon,
+      sunriseStr: p.sunriseStr,
+      sunsetStr: p.sunsetStr
     };
   }
 

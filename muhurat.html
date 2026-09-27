@@ -1213,7 +1213,7 @@
   </div>
 
   <div class="dob-calc-card">
-    <div class="dob-form-row">
+    <div class="dob-form-row" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:1rem; align-items:end;">
       <div class="form-field">
         <label for="birthDateInput"><strong>Date of Birth (పుట్టిన తేదీ):</strong></label>
         <div style="position:relative; display:flex; align-items:center;">
@@ -1226,8 +1226,36 @@
         <label for="birthTimeInput"><strong>Time of Birth (పుట్టిన సమయం):</strong></label>
         <input type="time" id="birthTimeInput" class="dob-input" value="10:04" style="font-weight:600;" />
       </div>
+      <div class="form-field">
+        <label for="birthCitySelect"><strong>Birth City (జన్మ ప్రదేశం):</strong></label>
+        <select id="birthCitySelect" class="dob-input" style="font-weight:600; cursor:pointer;">
+          <option value="nellore" selected>📍 Nellore, AP (నెల్లూరు) [IST +5:30]</option>
+          <option value="hyderabad">📍 Hyderabad, TS (హైదరాబాద్) [IST +5:30]</option>
+          <option value="tirupati">📍 Tirupati, AP (తిరుపతి) [IST +5:30]</option>
+          <option value="vijayawada">📍 Vijayawada, AP (విజయవాడ) [IST +5:30]</option>
+          <option value="visakhapatnam">📍 Visakhapatnam, AP (విశాఖపట్నం) [IST +5:30]</option>
+          <option value="delhi">📍 New Delhi / Delhi (ఢిల్లీ) [IST +5:30]</option>
+          <option value="bengaluru">📍 Bengaluru, KA (బెంగళూరు) [IST +5:30]</option>
+          <option value="chennai">📍 Chennai, TN (చెన్నై) [IST +5:30]</option>
+          <option value="mumbai">📍 Mumbai, MH (ముంబై) [IST +5:30]</option>
+          <option value="kolkata">📍 Kolkata, WB (కోల్‌కతా) [IST +5:30]</option>
+          <option value="varanasi">📍 Varanasi / Kashi (వారణాసి) [IST +5:30]</option>
+          <option value="ayodhya">📍 Ayodhya (అయోధ్య) [IST +5:30]</option>
+          <option value="madurai">📍 Madurai, TN (మదురై) [IST +5:30]</option>
+          <option value="kochi">📍 Kochi, KL (కొచ్చి) [IST +5:30]</option>
+          <option value="ahmedabad">📍 Ahmedabad, GJ (అహ్మదాబాద్) [IST +5:30]</option>
+          <option value="pune">📍 Pune, MH (పూణే) [IST +5:30]</option>
+          <option value="jaipur">📍 Jaipur, RJ (జైపూర్) [IST +5:30]</option>
+          <option value="london">🌍 London, United Kingdom [GMT/BST]</option>
+          <option value="newyork">🌍 New York, USA [EST UTC-5]</option>
+          <option value="sanfrancisco">🌍 San Francisco, USA [PST UTC-8]</option>
+          <option value="dubai">🌍 Dubai, UAE [GST UTC+4]</option>
+          <option value="singapore">🌍 Singapore [SGT UTC+8]</option>
+          <option value="sydney">🌍 Sydney, Australia [AEST UTC+10]</option>
+        </select>
+      </div>
       <div>
-        <button type="button" id="calcDobBtn" class="koota-calc-btn" style="padding:0.8rem 1.8rem; width:100%;">
+        <button type="button" id="calcDobBtn" class="koota-calc-btn" style="padding:0.8rem 1.8rem; width:100%; white-space:nowrap;">
           <span>🔍</span> Calculate My Rasi &amp; Star
         </button>
       </div>
@@ -1538,6 +1566,7 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="astronomy.browser.min.js"></script>
 <script src="panchang.js"></script>
 <script src="muhurat.js"></script>
 <script>
@@ -1914,6 +1943,7 @@
   const nativeDatePicker = document.getElementById('nativeDatePicker');
   const calendarPickerBtn = document.getElementById('calendarPickerBtn');
   const birthTimeInput = document.getElementById('birthTimeInput');
+  const birthCitySelect = document.getElementById('birthCitySelect');
   const approxTimeCheck = document.getElementById('approxTimeCheck');
   const calcDobBtn = document.getElementById('calcDobBtn');
   const dobResultWrap = document.getElementById('dobResultWrap');
@@ -1926,6 +1956,9 @@
     birthDateInput.addEventListener('change', calculateAndRenderDOB);
     birthTimeInput.addEventListener('input', calculateAndRenderDOB);
     birthTimeInput.addEventListener('change', calculateAndRenderDOB);
+    if (birthCitySelect) {
+      birthCitySelect.addEventListener('change', calculateAndRenderDOB);
+    }
 
     if (nativeDatePicker) {
       nativeDatePicker.addEventListener('change', () => {
@@ -1993,9 +2026,11 @@
       }
     }
 
+    const cityKey = (birthCitySelect && birthCitySelect.value) ? birthCitySelect.value : 'nellore';
+
     let res;
     try {
-      res = MUHURAT.findRasiNakshatraByDOB(dobStr, hour, min);
+      res = MUHURAT.findRasiNakshatraByDOB(dobStr, hour, min, cityKey);
     } catch (err) {
       console.error('DOB Calculation error:', err);
     }
@@ -2009,16 +2044,26 @@
       return;
     }
 
+    const cityName = res.city ? res.city.name : 'Nellore (నెల్లూరు)';
+    const tzName = res.city ? res.city.tzName : 'IST';
+
     dobResultWrap.innerHTML = `
       <div class="dob-result-box">
         <div class="dob-result-top">
           <div>
-            <small style="color:var(--deep-red); font-weight:700; text-transform:uppercase;">CALCULATED JANMA KUNDALI • ${res.formattedDate} (${res.formattedTime})</small>
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.25rem;">
+              <small style="color:var(--deep-red); font-weight:700; text-transform:uppercase;">
+                CALCULATED JANMA KUNDALI &bull; ${res.formattedDate} (${res.formattedTime})
+              </small>
+              <span style="font-size:0.75rem; background:rgba(212,160,23,0.18); color:var(--deep-red); padding:0.15rem 0.55rem; border-radius:12px; font-weight:700;">
+                📍 ${cityName} [${tzName}]
+              </span>
+            </div>
             <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:baseline; margin-top:0.4rem;">
               <div>
                 <div style="font-size:0.85rem; color:var(--text-mid); font-weight:700;">🌟 JANMA NAKSHATRA (జన్మ నక్షత్రం):</div>
                 <div class="dob-core-val">${res.nakInfo.nameTe} (${res.star}) &bull; Pada ${res.pada}</div>
-                <small style="color:var(--deep-red); font-weight:600;">Deity: ${res.nakInfo.deity}</small>
+                <small style="color:var(--deep-red); font-weight:600;">Deity: ${res.nakInfo.deity} &bull; Lord: ${res.nakshatraLord}</small>
               </div>
               <div>
                 <div style="font-size:0.85rem; color:var(--text-mid); font-weight:700;">🌙 CHANDRA RASI (చంద్ర రాశి):</div>
@@ -2034,6 +2079,55 @@
             <button type="button" class="dob-action-btn groom-btn" id="setAsGroomBtn">
               🤵 Use as Groom (వరుడిగా)
             </button>
+          </div>
+        </div>
+
+        <!-- 4 Padas Exact Timings Table -->
+        <div class="pada-timings-card" style="margin:1.1rem 0; background:linear-gradient(135deg, #FFFDF7 0%, #FFF8EE 100%); border:1px solid rgba(212,160,23,0.35); border-radius:12px; padding:1.1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+            <h4 style="margin:0; font-size:1rem; color:var(--deep-red); display:flex; align-items:center; gap:0.4rem;">
+              <span>⏱️</span> <strong>${res.star} (${res.nakInfo.nameTe}) — 4 Padas Exact Timings (పాద సమయాలు)</strong>
+            </h4>
+            <span style="font-size:0.8rem; background:rgba(212,160,23,0.15); color:var(--text-dark); padding:0.2rem 0.6rem; border-radius:16px; font-weight:600;">
+              Lahiri Ayanamsa: ${res.ayanamsaDeg} &bull; Sidereal Moon: ${res.moonLon}&deg;
+            </span>
+          </div>
+          
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.88rem; text-align:left;">
+              <thead>
+                <tr style="background:rgba(212,160,23,0.15); color:var(--deep-red); border-bottom:2px solid rgba(212,160,23,0.3);">
+                  <th style="padding:0.5rem 0.8rem;">Pada (పాదం)</th>
+                  <th style="padding:0.5rem 0.8rem;">Starts (ప్రారంభం)</th>
+                  <th style="padding:0.5rem 0.8rem;">Ends (ముగింపు)</th>
+                  <th style="padding:0.5rem 0.8rem; text-align:center;">Birth Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${[1, 2, 3, 4].map(pNum => {
+                  const pt = res.padaTimings ? res.padaTimings['pada' + pNum] : null;
+                  const isActive = res.pada === pNum;
+                  const rowStyle = isActive 
+                    ? 'background:rgba(255,235,160,0.45); font-weight:700;' 
+                    : 'background:transparent;';
+                  const badge = isActive 
+                    ? '<span style="background:var(--saffron); color:#fff; padding:0.25rem 0.65rem; border-radius:12px; font-size:0.78rem; display:inline-flex; align-items:center; gap:0.2rem;">⭐ YOUR BIRTH PADA</span>' 
+                    : '<span style="color:var(--text-mid); font-size:0.8rem;">—</span>';
+                  return `
+                    <tr style="border-bottom:1px solid rgba(0,0,0,0.06); ${rowStyle}">
+                      <td style="padding:0.55rem 0.8rem;">${pNum}వ పాదం (Pada ${pNum})</td>
+                      <td style="padding:0.55rem 0.8rem;">${pt ? pt.start : '—'}</td>
+                      <td style="padding:0.55rem 0.8rem;">${pt ? pt.end : '—'}</td>
+                      <td style="padding:0.55rem 0.8rem; text-align:center;">${badge}</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div style="display:flex; justify-content:space-between; flex-wrap:wrap; font-size:0.78rem; color:var(--text-mid); margin-top:0.6rem;">
+            <span>🌅 Local Sunrise: ${res.sunriseStr || '6:37 AM'} &bull; 🌇 Local Sunset: ${res.sunsetStr || '5:57 PM'}</span>
+            <span>Drik Ganita / Chitrapaksha Lahiri Standard</span>
           </div>
         </div>
 
