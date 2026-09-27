@@ -58,8 +58,8 @@ const PANCHANG = (() => {
 
   /* ---- Julian Day Number ---- */
   function julianDay(date) {
-    const y = date.getFullYear();
-    const m = date.getMonth() + 1;
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
     const d = date.getDate() + (date.getHours() + (date.getMinutes() / 60)) / 24;
     if (m <= 2) { y -= 1; m += 12; }
     const A = Math.floor(y / 100);

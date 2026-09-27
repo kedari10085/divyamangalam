@@ -839,6 +839,280 @@
       margin: 0 0 0.5rem;
     }
 
+    /* ===== DOB RASI & NAKSHATRA FINDER STYLES ===== */
+    .dob-calc-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.4);
+      border-radius: 20px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 35px rgba(212,160,23,0.12);
+      margin-bottom: 2rem;
+    }
+    .dob-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1.2rem;
+      align-items: flex-end;
+      margin-bottom: 1.2rem;
+    }
+    .dob-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(212,160,23,0.4);
+      background: var(--white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .dob-input:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(255,111,0,0.15);
+    }
+    .dob-result-box {
+      background: linear-gradient(135deg, #FFFDF9 0%, #FFF8EF 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 18px;
+      padding: 1.8rem;
+      box-shadow: 0 8px 25px rgba(212,160,23,0.12);
+      margin-top: 1.5rem;
+    }
+    .dob-result-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px dashed rgba(212,160,23,0.35);
+      margin-bottom: 1.2rem;
+    }
+    .dob-core-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--deep-red);
+      line-height: 1.1;
+      margin: 0.2rem 0;
+    }
+    .dob-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+    .dob-metric-item {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+    .dob-metric-item .lbl {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-mid);
+      margin-bottom: 0.2rem;
+    }
+    .dob-metric-item .val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .dob-actions-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .dob-action-btn {
+      padding: 0.65rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+    .dob-action-btn.bride-btn {
+      background: linear-gradient(135deg, #E91E63, #C2185B);
+      color: white;
+      box-shadow: 0 4px 12px rgba(233,30,99,0.25);
+    }
+    .dob-action-btn.groom-btn {
+      background: linear-gradient(135deg, #1E88E5, #1565C0);
+      color: white;
+      box-shadow: 0 4px 12px rgba(30,136,229,0.25);
+    }
+    .dob-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+
+    /* ===== DIRECTORY OF 12 RASIS & 27 NAKSHATRAS ===== */
+    .dir-tabs-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .dir-tab-btn {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.4);
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dir-tab-btn.active {
+      background: linear-gradient(135deg, var(--saffron), var(--deep-red));
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(139,0,0,0.25);
+    }
+    .dir-search-wrap {
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    .dir-search-input {
+      width: 100%;
+      padding: 0.75rem 1.4rem;
+      border-radius: 50px;
+      border: 1px solid rgba(212,160,23,0.45);
+      background: var(--white);
+      font-size: 0.95rem;
+      outline: none;
+      box-shadow: 0 4px 15px rgba(212,160,23,0.08);
+      transition: all 0.2s;
+    }
+    .dir-search-input:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(255,111,0,0.15);
+    }
+
+    /* Rasi Cards Grid */
+    .rasi-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.4rem;
+    }
+    .rasi-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.35);
+      border-radius: 18px;
+      padding: 1.6rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .rasi-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(212,160,23,0.18);
+      border-color: var(--gold);
+    }
+    .rasi-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+      padding-bottom: 0.8rem;
+    }
+    .rasi-symbol-badge {
+      font-size: 1.8rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #FFF8EF;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .rasi-detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      padding: 0.2rem 0;
+    }
+    .rasi-detail-row .k { color: var(--text-mid); font-weight: 600; }
+    .rasi-detail-row .v { color: var(--text-dark); font-weight: 700; text-align: right; }
+
+    /* Nakshatra Cards Grid */
+    .nak-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.4rem;
+    }
+    .nak-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.35);
+      border-radius: 18px;
+      padding: 1.6rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nak-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(212,160,23,0.18);
+      border-color: var(--gold);
+    }
+    .nak-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+      padding-bottom: 0.8rem;
+    }
+    .nak-num-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron), var(--deep-red));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .nak-attrs-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin: 0.2rem 0;
+    }
+    .nak-attr-pill {
+      background: #FFF8EF;
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .gana-cols { grid-template-columns: 1fr; }
@@ -849,6 +1123,8 @@
       .chakra-controls { grid-template-columns: 1fr; }
       .chakra-matrix-container { grid-template-columns: 100px repeat(4, 90px); }
       .koota-score-block { width: 100%; }
+      .dob-form-row { grid-template-columns: 1fr; }
+      .rasi-cards-grid, .nak-cards-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -889,11 +1165,12 @@
   <p>Find auspicious planetary windows for weddings, housewarmings, vehicle purchases, gold, property investments, mantra initiation, and marriage compatibility based on Sage Narasimha's <strong>Kālaprakāśikā</strong> and Daivajña Rāma's <strong>Muhūrta Cintāmaṇi</strong>.</p>
 
   <div class="hero-links-wrap">
-    <a href="jyotishyam.html" class="hero-pill-link">🔭 Ancient Astronomy: Vedanga Jyotisha →</a>
+    <a href="#dobCalculatorSection" class="hero-pill-link">🌟 Find Rasi &amp; Nakshatra by Birth Date ↓</a>
+    <a href="#directorySection" class="hero-pill-link">📜 12 Rasis &amp; 27 Nakshatras Directory ↓</a>
     <a href="#dasaKootasSection" class="hero-pill-link">💍 Dasa Kootas Vivaha Match (10 Poruthams) ↓</a>
     <a href="#mantraChakraSection" class="hero-pill-link">📿 Mantra Siddha-Chakra ↓</a>
     <a href="#stellarFacingSection" class="hero-pill-link">🧭 Stellar Motion Facing ↓</a>
-    <a href="#nakshatraPrakaranaSection" class="hero-pill-link">📖 Muhurta Chintamani Nakshatras ↓</a>
+    <a href="jyotishyam.html" class="hero-pill-link">🔭 Ancient Vedanga Jyotisha →</a>
   </div>
 </header>
 
@@ -925,6 +1202,70 @@
   </div>
 
   <div class="dates-grid" id="datesGrid"></div>
+</section>
+
+<!-- ===== FIND RASI & NAKSHATRA BY DATE OF BIRTH ===== -->
+<section class="kala-section" id="dobCalculatorSection" aria-labelledby="dobHeading">
+  <div class="kala-header">
+    <span class="kala-badge">Janma Kundali Quick Calculator • జన్మ రాశి &amp; నక్షత్ర దర్శిని</span>
+    <h2 id="dobHeading">Find Your Rasi &amp; Nakshatra by Date of Birth</h2>
+    <p>Enter your birth date and time to accurately determine your Janma Nakshatra (birth star), Pada, Chandra Rasi (moon sign), ruling lords, and attributes — then instantly apply them to Marriage Compatibility or Panchang filters.</p>
+  </div>
+
+  <div class="dob-calc-card">
+    <div class="dob-form-row">
+      <div class="form-field">
+        <label for="birthDateInput"><strong>Date of Birth (పుట్టిన తేదీ):</strong></label>
+        <input type="date" id="birthDateInput" class="dob-input" value="1998-05-12" />
+      </div>
+      <div class="form-field">
+        <label for="birthTimeInput"><strong>Time of Birth (పుట్టిన సమయం):</strong></label>
+        <input type="time" id="birthTimeInput" class="dob-input" value="12:00" />
+      </div>
+      <div>
+        <button type="button" id="calcDobBtn" class="koota-calc-btn" style="padding:0.8rem 1.8rem; width:100%;">
+          <span>🔍</span> Calculate My Rasi &amp; Star
+        </button>
+      </div>
+    </div>
+    <div style="font-size:0.84rem; color:var(--text-mid); display:flex; align-items:center; gap:0.5rem; margin-top:-0.5rem; margin-bottom:1rem;">
+      <input type="checkbox" id="approxTimeCheck" checked />
+      <label for="approxTimeCheck">Approximate birth time (12:00 PM noon is used if exact minute is unknown)</label>
+    </div>
+
+    <!-- Results Box -->
+    <div id="dobResultWrap"></div>
+  </div>
+</section>
+
+<!-- ===== COMPLETE DIRECTORY OF 12 RASIS & 27 NAKSHATRAS ===== -->
+<section class="kala-section" id="directorySection" aria-labelledby="dirHeading">
+  <div class="kala-header">
+    <span class="kala-badge">Vedic Astrological Reference • ద్వాదశ రాశులు &amp; సప్తవింశతి నక్షత్రములు</span>
+    <h2 id="dirHeading">Complete Directory of 12 Rasis &amp; 27 Nakshatras</h2>
+    <p>Browse the exhaustive classical details of all 12 Zodiac Moon Signs (Chandra Rasis) and 27 Lunar Mansions (Janma Nakshatras), complete with planetary lords, elements, deities, Ganas, Yonis, Rajjus, and constituent Padas.</p>
+  </div>
+
+  <!-- Directory Tab Switcher -->
+  <div class="dir-tabs-wrap">
+    <button type="button" id="tabRasisBtn" class="dir-tab-btn active">
+      <span>♈</span> 12 Chandra Rasis (ద్వాదశ రాశులు)
+    </button>
+    <button type="button" id="tabNakshatrasBtn" class="dir-tab-btn">
+      <span>⭐</span> 27 Janma Nakshatras (సప్తవింశతి నక్షత్రములు)
+    </button>
+  </div>
+
+  <!-- Search Box -->
+  <div class="dir-search-wrap">
+    <input type="text" id="dirSearchInput" class="dir-search-input" placeholder="🔍 Search by name, lord, element, deity, or gemstone..." />
+  </div>
+
+  <!-- 12 Rasis Grid -->
+  <div id="rasisGridWrap" class="rasi-cards-grid"></div>
+
+  <!-- 27 Nakshatras Grid (Initially hidden) -->
+  <div id="nakshatrasGridWrap" class="nak-cards-grid" style="display:none;"></div>
 </section>
 
 <!-- ===== DASA KOOTAS MARRIAGE COMPATIBILITY (KALAPRAKASIKA CHAPTER XIII) ===== -->
@@ -1564,6 +1905,260 @@
     `;
   }
 
+  // ===== DATE OF BIRTH (DOB) RASI & NAKSHATRA FINDER =====
+  const birthDateInput = document.getElementById('birthDateInput');
+  const birthTimeInput = document.getElementById('birthTimeInput');
+  const approxTimeCheck = document.getElementById('approxTimeCheck');
+  const calcDobBtn = document.getElementById('calcDobBtn');
+  const dobResultWrap = document.getElementById('dobResultWrap');
+
+  function initDobCalculator() {
+    if (!calcDobBtn || typeof MUHURAT === 'undefined') return;
+
+    calcDobBtn.addEventListener('click', calculateAndRenderDOB);
+    birthDateInput.addEventListener('change', calculateAndRenderDOB);
+    birthTimeInput.addEventListener('change', calculateAndRenderDOB);
+    approxTimeCheck.addEventListener('change', () => {
+      if (approxTimeCheck.checked) {
+        birthTimeInput.value = '12:00';
+        birthTimeInput.disabled = true;
+      } else {
+        birthTimeInput.disabled = false;
+      }
+      calculateAndRenderDOB();
+    });
+
+    if (approxTimeCheck.checked) {
+      birthTimeInput.disabled = true;
+    }
+
+    calculateAndRenderDOB();
+  }
+
+  function calculateAndRenderDOB() {
+    if (typeof MUHURAT === 'undefined' || !MUHURAT.findRasiNakshatraByDOB) return;
+    const dobStr = birthDateInput.value;
+    if (!dobStr) return;
+
+    let hour = 12;
+    let min = 0;
+    if (!approxTimeCheck.checked && birthTimeInput.value) {
+      const parts = birthTimeInput.value.split(':');
+      if (parts.length >= 2) {
+        hour = parseInt(parts[0], 10);
+        min = parseInt(parts[1], 10);
+      }
+    }
+
+    const res = MUHURAT.findRasiNakshatraByDOB(dobStr, hour, min);
+
+    dobResultWrap.innerHTML = `
+      <div class="dob-result-box">
+        <div class="dob-result-top">
+          <div>
+            <small style="color:var(--deep-red); font-weight:700; text-transform:uppercase;">CALCULATED JANMA KUNDALI • ${res.formattedDate} (${res.formattedTime})</small>
+            <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:baseline; margin-top:0.4rem;">
+              <div>
+                <div style="font-size:0.85rem; color:var(--text-mid); font-weight:700;">🌟 JANMA NAKSHATRA (జన్మ నక్షత్రం):</div>
+                <div class="dob-core-val">${res.nakInfo.nameTe} (${res.star}) &bull; Pada ${res.pada}</div>
+                <small style="color:var(--deep-red); font-weight:600;">Deity: ${res.nakInfo.deity}</small>
+              </div>
+              <div>
+                <div style="font-size:0.85rem; color:var(--text-mid); font-weight:700;">🌙 CHANDRA RASI (చంద్ర రాశి):</div>
+                <div class="dob-core-val">${res.rasiInfo.symbol.split(' ')[0]} ${res.rasiInfo.nameTe}</div>
+                <small style="color:var(--text-dark); font-weight:600;">Lord: ${res.rasiLord} &bull; ${res.rasiInfo.element}</small>
+              </div>
+            </div>
+          </div>
+          <div class="dob-actions-wrap">
+            <button type="button" class="dob-action-btn bride-btn" id="setAsBrideBtn">
+              👰 Use as Bride (వధువుగా)
+            </button>
+            <button type="button" class="dob-action-btn groom-btn" id="setAsGroomBtn">
+              🤵 Use as Groom (వరుడిగా)
+            </button>
+          </div>
+        </div>
+
+        <div class="dob-metrics-grid">
+          <div class="dob-metric-item">
+            <div class="lbl">Nakshatra Lord (నక్షత్రాధిపతి)</div>
+            <div class="val">${res.nakshatraLord}</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Rasi Lord (రాశ్యాధిపతి)</div>
+            <div class="val">${res.rasiLord}</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Janma Tithi (తిథి)</div>
+            <div class="val">${res.tithiName} (${res.paksha})</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Yoga & Karana (యోగం/కరణం)</div>
+            <div class="val">${res.yoga} &bull; ${res.karana}</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Vedic Gana (గణము)</div>
+            <div class="val">${res.nakInfo.gana} Gana</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Yoni Animal (యోని)</div>
+            <div class="val">${res.yoni}</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Rajju Cord (రజ్జు)</div>
+            <div class="val">${res.rajju} Rajju</div>
+          </div>
+          <div class="dob-metric-item">
+            <div class="lbl">Stellar Facing (గతి)</div>
+            <div class="val">${res.stellarFacing.titleSa.split('(')[0]}</div>
+          </div>
+        </div>
+
+        <div style="background:#FFFDF9; border-radius:10px; padding:0.8rem 1.1rem; border:1px solid rgba(212,160,23,0.25); font-size:0.86rem; line-height:1.5;">
+          <strong>Auspicious Deeds for this Birth Star:</strong> ${res.nakInfo.goodDeeds}
+        </div>
+      </div>
+    `;
+
+    document.getElementById('setAsBrideBtn').addEventListener('click', () => {
+      brideStarSelect.value = res.star;
+      brideRasiSelect.value = res.rasi;
+      renderDasaKootas();
+      document.getElementById('dasaKootasSection').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('setAsGroomBtn').addEventListener('click', () => {
+      groomStarSelect.value = res.star;
+      groomRasiSelect.value = res.rasi;
+      renderDasaKootas();
+      document.getElementById('dasaKootasSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ===== DIRECTORY OF 12 RASIS & 27 NAKSHATRAS =====
+  const tabRasisBtn = document.getElementById('tabRasisBtn');
+  const tabNakshatrasBtn = document.getElementById('tabNakshatrasBtn');
+  const dirSearchInput = document.getElementById('dirSearchInput');
+  const rasisGridWrap = document.getElementById('rasisGridWrap');
+  const nakshatrasGridWrap = document.getElementById('nakshatrasGridWrap');
+
+  let activeDirTab = 'rasis';
+
+  function initDirectoryView() {
+    if (!tabRasisBtn || typeof MUHURAT === 'undefined') return;
+
+    tabRasisBtn.addEventListener('click', () => {
+      activeDirTab = 'rasis';
+      tabRasisBtn.classList.add('active');
+      tabNakshatrasBtn.classList.remove('active');
+      rasisGridWrap.style.display = 'grid';
+      nakshatrasGridWrap.style.display = 'none';
+      filterDirectory();
+    });
+
+    tabNakshatrasBtn.addEventListener('click', () => {
+      activeDirTab = 'nakshatras';
+      tabNakshatrasBtn.classList.add('active');
+      tabRasisBtn.classList.remove('active');
+      rasisGridWrap.style.display = 'none';
+      nakshatrasGridWrap.style.display = 'grid';
+      filterDirectory();
+    });
+
+    dirSearchInput.addEventListener('input', filterDirectory);
+
+    renderRasisGrid(MUHURAT.RASI_DETAILS || []);
+    renderNakshatrasGrid(MUHURAT.NAKSHATRA_DETAILS || []);
+  }
+
+  function renderRasisGrid(rasisList) {
+    if (!rasisGridWrap) return;
+    rasisGridWrap.innerHTML = rasisList.map(r => `
+      <article class="rasi-card">
+        <div class="rasi-card-top">
+          <div>
+            <h3 style="margin:0; font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--deep-red);">${r.nameTe}</h3>
+            <div style="font-size:0.88rem; color:var(--text-mid); font-weight:600;">${r.nameSa}</div>
+          </div>
+          <div class="rasi-symbol-badge">${r.symbol.split(' ')[0]}</div>
+        </div>
+        <div>
+          <div class="rasi-detail-row"><span class="k">Ruling Lord (అధిపతి):</span><span class="v">${r.lord}</span></div>
+          <div class="rasi-detail-row"><span class="k">Element (తత్వము):</span><span class="v">${r.element}</span></div>
+          <div class="rasi-detail-row"><span class="k">Nature (స్వభావం):</span><span class="v">${r.quality}</span></div>
+          <div class="rasi-detail-row"><span class="k">Lucky Gemstone (రత్నం):</span><span class="v">${r.gemstone}</span></div>
+          <div class="rasi-detail-row"><span class="k">Auspicious Color:</span><span class="v">${r.color}</span></div>
+        </div>
+        <div style="background:#FFFDF9; border-radius:10px; padding:0.8rem; border:1px solid rgba(212,160,23,0.2); font-size:0.82rem; line-height:1.5;">
+          <strong>Nakshatra Padas:</strong> ${r.padas}
+        </div>
+        <p style="margin:0; font-size:0.84rem; color:var(--text-mid); line-height:1.5;">${r.description}</p>
+      </article>
+    `).join('');
+  }
+
+  function renderNakshatrasGrid(nakList) {
+    if (!nakshatrasGridWrap) return;
+    nakshatrasGridWrap.innerHTML = nakList.map(n => `
+      <article class="nak-card">
+        <div class="nak-card-top">
+          <div>
+            <h3 style="margin:0; font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--deep-red);">${n.index}. ${n.nameTe}</h3>
+            <div style="font-size:0.85rem; color:var(--text-mid); font-weight:600;">${n.nameSa} (${n.name})</div>
+          </div>
+          <div class="nak-num-badge">${n.index}</div>
+        </div>
+        <div class="nak-attrs-wrap">
+          <span class="nak-attr-pill">🪐 Lord: ${n.lord}</span>
+          <span class="nak-attr-pill">🕊️ Gana: ${n.gana}</span>
+          <span class="nak-attr-pill">🐾 Yoni: ${n.yoni}</span>
+          <span class="nak-attr-pill">🧬 Rajju: ${n.rajju}</span>
+          <span class="nak-attr-pill">🧭 ${n.facing.split('(')[0]}</span>
+        </div>
+        <div style="font-size:0.86rem; line-height:1.5;">
+          <div><strong>Presiding Devata:</strong> ${n.deity}</div>
+          <div style="margin-top:0.2rem;"><strong>Rasi Span:</strong> ${n.rasiSpan}</div>
+          <div style="margin-top:0.2rem; color:var(--deep-red);"><strong>Muhurta Nature:</strong> ${n.prakarana}</div>
+        </div>
+        <div style="background:#FFFDF9; border-radius:8px; padding:0.7rem; border:1px solid rgba(212,160,23,0.2); font-size:0.82rem; line-height:1.4; color:var(--text-dark);">
+          <strong>Best Undertakings:</strong> ${n.goodDeeds}
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function filterDirectory() {
+    const q = (dirSearchInput.value || '').trim().toLowerCase();
+    if (activeDirTab === 'rasis') {
+      const allRasis = MUHURAT.RASI_DETAILS || [];
+      const filtered = allRasis.filter(r => 
+        r.nameSa.toLowerCase().includes(q) ||
+        r.nameTe.toLowerCase().includes(q) ||
+        r.id.toLowerCase().includes(q) ||
+        r.lord.toLowerCase().includes(q) ||
+        r.element.toLowerCase().includes(q) ||
+        r.padas.toLowerCase().includes(q) ||
+        r.gemstone.toLowerCase().includes(q)
+      );
+      renderRasisGrid(filtered);
+    } else {
+      const allNaks = MUHURAT.NAKSHATRA_DETAILS || [];
+      const filtered = allNaks.filter(n =>
+        n.name.toLowerCase().includes(q) ||
+        n.nameSa.toLowerCase().includes(q) ||
+        n.nameTe.toLowerCase().includes(q) ||
+        n.lord.toLowerCase().includes(q) ||
+        n.deity.toLowerCase().includes(q) ||
+        n.gana.toLowerCase().includes(q) ||
+        n.yoni.toLowerCase().includes(q) ||
+        n.rajju.toLowerCase().includes(q) ||
+        n.rasiSpan.toLowerCase().includes(q)
+      );
+      renderNakshatrasGrid(filtered);
+    }
+  }
+
   function updateAllViews() {
     renderTodayStatus();
     renderMonthlyGrid();
@@ -1585,6 +2180,8 @@
     renderCeremonyButtons();
     updateAllViews();
     renderNakshatraPrakarana();
+    initDobCalculator();
+    initDirectoryView();
     initDasaKootas();
     initMantraChakra();
   });

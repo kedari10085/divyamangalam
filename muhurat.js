@@ -1138,6 +1138,454 @@ const MUHURAT = (function () {
     };
   }
 
+  /* ============================================================
+     DIRECTORY OF 12 RASIS & 27 NAKSHATRAS
+     Birth Date (DOB) Rasi & Nakshatra Calculation Engine
+     ============================================================ */
+
+  const RASI_DETAILS = [
+    {
+      id: 'Mesha',
+      nameSa: 'मेष (Mesha)',
+      nameTe: 'మేషం (Aries)',
+      symbol: '♈ Ram',
+      lord: 'Kuja / Mangala (Mars)',
+      element: 'Agni (Fire)',
+      quality: 'Chara (Movable)',
+      gemstone: 'Red Coral (పగడం)',
+      color: 'Red / Saffron',
+      padas: 'Ashwini (1, 2, 3, 4), Bharani (1, 2, 3, 4), Krittika (1)',
+      description: 'Dynamic, courageous, pioneering, and natural leaders full of energy and vigor.'
+    },
+    {
+      id: 'Vrishabha',
+      nameSa: 'वृषभ (Vrishabha)',
+      nameTe: 'వృషభం (Taurus)',
+      symbol: '♉ Bull',
+      lord: 'Shukra (Venus)',
+      element: 'Prithvi (Earth)',
+      quality: 'Sthira (Fixed)',
+      gemstone: 'Diamond (వజ్రం)',
+      color: 'White / Cream / Silver',
+      padas: 'Krittika (2, 3, 4), Rohini (1, 2, 3, 4), Mrigashira (1, 2)',
+      description: 'Steadfast, patient, artistic, lovers of luxury, music, fine food, and stability.'
+    },
+    {
+      id: 'Mithuna',
+      nameSa: 'मिथुन (Mithuna)',
+      nameTe: 'మిథునం (Gemini)',
+      symbol: '♊ Twins',
+      lord: 'Budha (Mercury)',
+      element: 'Vayu (Air)',
+      quality: 'Dwiswabhava (Dual)',
+      gemstone: 'Emerald (మరకతం)',
+      color: 'Green',
+      padas: 'Mrigashira (3, 4), Ardra (1, 2, 3, 4), Punarvasu (1, 2, 3)',
+      description: 'Intellectual, communicative, witty, versatile, and endowed with sharp analytical prowess.'
+    },
+    {
+      id: 'Karka',
+      nameSa: 'कर्क (Karka)',
+      nameTe: 'కర్కాటకం (Cancer)',
+      symbol: '♋ Crab',
+      lord: 'Chandra (Moon)',
+      element: 'Jala (Water)',
+      quality: 'Chara (Movable)',
+      gemstone: 'Pearl (ముత్యం)',
+      color: 'Pearl White / Silver',
+      padas: 'Punarvasu (4), Pushya (1, 2, 3, 4), Ashlesha (1, 2, 3, 4)',
+      description: 'Empathetic, nurturing, deeply intuitive, family-oriented, and emotionally protective.'
+    },
+    {
+      id: 'Simha',
+      nameSa: 'सिंह (Simha)',
+      nameTe: 'సింహం (Leo)',
+      symbol: '♌ Lion',
+      lord: 'Surya (Sun)',
+      element: 'Agni (Fire)',
+      quality: 'Sthira (Fixed)',
+      gemstone: 'Ruby (మాణిక్యం)',
+      color: 'Gold / Orange',
+      padas: 'Magha (1, 2, 3, 4), Purva Phalguni (1, 2, 3, 4), Uttara Phalguni (1)',
+      description: 'Regal, magnanimous, authoritative, generous, dignified, and natural commanders.'
+    },
+    {
+      id: 'Kanya',
+      nameSa: 'कन्या (Kanya)',
+      nameTe: 'కన్య (Virgo)',
+      symbol: '♍ Maiden',
+      lord: 'Budha (Mercury)',
+      element: 'Prithvi (Earth)',
+      quality: 'Dwiswabhava (Dual)',
+      gemstone: 'Emerald (మరకతం)',
+      color: 'Emerald Green',
+      padas: 'Uttara Phalguni (2, 3, 4), Hasta (1, 2, 3, 4), Chitra (1, 2)',
+      description: 'Methodical, detail-oriented, analytical, service-minded, and intellectually sharp.'
+    },
+    {
+      id: 'Tula',
+      nameSa: 'तुला (Tula)',
+      nameTe: 'తుల (Libra)',
+      symbol: '♎ Balance Scales',
+      lord: 'Shukra (Venus)',
+      element: 'Vayu (Air)',
+      quality: 'Chara (Movable)',
+      gemstone: 'Diamond (వజ్రం)',
+      color: 'White / Sky Blue',
+      padas: 'Chitra (3, 4), Swati (1, 2, 3, 4), Vishakha (1, 2, 3)',
+      description: 'Harmonious, just, diplomatic, aesthetic lovers of balance, peace, and partnership.'
+    },
+    {
+      id: 'Vrischika',
+      nameSa: 'वृश्चिक (Vrischika)',
+      nameTe: 'వృశ్చికం (Scorpio)',
+      symbol: '♏ Scorpion',
+      lord: 'Kuja / Mangala (Mars)',
+      element: 'Jala (Water)',
+      quality: 'Sthira (Fixed)',
+      gemstone: 'Red Coral (పగడం)',
+      color: 'Deep Red / Maroon',
+      padas: 'Vishakha (4), Anuradha (1, 2, 3, 4), Jyeshtha (1, 2, 3, 4)',
+      description: 'Profoundly intuitive, passionate, determined, secretive, and spiritually transformative.'
+    },
+    {
+      id: 'Dhanu',
+      nameSa: 'धनु (Dhanu)',
+      nameTe: 'ధనుస్సు (Sagittarius)',
+      symbol: '♐ Archer / Bow',
+      lord: 'Guru (Jupiter)',
+      element: 'Agni (Fire)',
+      quality: 'Dwiswabhava (Dual)',
+      gemstone: 'Yellow Sapphire (పుష్యరాగం)',
+      color: 'Yellow / Gold',
+      padas: 'Moola (1, 2, 3, 4), Purva Ashadha (1, 2, 3, 4), Uttara Ashadha (1)',
+      description: 'Philosophical, optimistic, truth-seeking, righteous, adventurous, and scholarly.'
+    },
+    {
+      id: 'Makara',
+      nameSa: 'मकर (Makara)',
+      nameTe: 'మకరం (Capricorn)',
+      symbol: '♑ Sea-Monster / Crocodile',
+      lord: 'Shani (Saturn)',
+      element: 'Prithvi (Earth)',
+      quality: 'Chara (Movable)',
+      gemstone: 'Blue Sapphire (నీలం)',
+      color: 'Dark Blue / Black',
+      padas: 'Uttara Ashadha (2, 3, 4), Shravana (1, 2, 3, 4), Dhanishtha (1, 2)',
+      description: 'Disciplined, industrious, perseverant, strategic, prudent, and persevering.'
+    },
+    {
+      id: 'Kumbha',
+      nameSa: 'कुम्भ (Kumbha)',
+      nameTe: 'కుంభం (Aquarius)',
+      symbol: '♒ Water Bearer',
+      lord: 'Shani (Saturn)',
+      element: 'Vayu (Air)',
+      quality: 'Sthira (Fixed)',
+      gemstone: 'Blue Sapphire (నీలం)',
+      color: 'Electric Blue / Cyan',
+      padas: 'Dhanishtha (3, 4), Shatabhisha (1, 2, 3, 4), Purva Bhadrapada (1, 2, 3)',
+      description: 'Visionary, humanitarian, philosophical, unconventional, and universal thinkers.'
+    },
+    {
+      id: 'Meena',
+      nameSa: 'मीन (Meena)',
+      nameTe: 'మీనం (Pisces)',
+      symbol: '♓ Two Fishes',
+      lord: 'Guru (Jupiter)',
+      element: 'Jala (Water)',
+      quality: 'Dwiswabhava (Dual)',
+      gemstone: 'Yellow Sapphire (పుష్యరాగం)',
+      color: 'Yellow / Saffron',
+      padas: 'Purva Bhadrapada (4), Uttara Bhadrapada (1, 2, 3, 4), Revati (1, 2, 3, 4)',
+      description: 'Compassionate, devotional, mystic, spiritually inclined, intuitive, and benevolent.'
+    }
+  ];
+
+  const NAKSHATRA_DETAILS = [
+    {
+      index: 1, name: 'Ashwini', nameSa: 'अश्विनी', nameTe: 'అశ్విని',
+      lord: 'Ketu', deity: 'Ashvini Kumaras (Divine Physicians)',
+      gana: 'Deva', yoni: 'Horse (గుర్రం)', rajju: 'Padha (పాదం)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Kshipra / Laghu',
+      rasiSpan: 'Mesha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Medical treatments, healing, starting journeys, acquiring vehicles, study of scriptures.'
+    },
+    {
+      index: 2, name: 'Bharani', nameSa: 'भरणी', nameTe: 'భరణి',
+      lord: 'Shukra (Venus)', deity: 'Yama Dharmaraja (Lord of Dharma & Time)',
+      gana: 'Manushya', yoni: 'Elephant (ఏనుగు)', rajju: 'Ooroo (తొడ)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Ugra / Krura',
+      rasiSpan: 'Mesha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Demolition, underground research, severe austerities, overcoming adversaries.'
+    },
+    {
+      index: 3, name: 'Krittika', nameSa: 'कृत्तिका', nameTe: 'కృత్తిక',
+      lord: 'Surya (Sun)', deity: 'Agni Deva (Sacred Fire)',
+      gana: 'Rakshasa', yoni: 'Sheep / Goat (గొర్రె)', rajju: 'Nabhi (నాభి)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Mishra / Sadharana',
+      rasiSpan: 'Mesha (Pada 1) & Vrishabha (Padas 2, 3, 4)',
+      goodDeeds: 'Agnihotra havans, metallurgy, clearing debts, fire ceremonies, purification rituals.'
+    },
+    {
+      index: 4, name: 'Rohini', nameSa: 'रोहिणी', nameTe: 'రోహిణి',
+      lord: 'Chandra (Moon)', deity: 'Brahma / Prajapati (Creator of the Cosmos)',
+      gana: 'Manushya', yoni: 'Serpent (పాము)', rajju: 'Kanta (కంఠం)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Dhruva / Sthira',
+      rasiSpan: 'Vrishabha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Griha Pravesh, weddings, buying land/property, planting trees, wearing new garments.'
+    },
+    {
+      index: 5, name: 'Mrigashira', nameSa: 'मृगशिरा', nameTe: 'మృగశిర',
+      lord: 'Mangala (Mars)', deity: 'Soma (Moon God / Nectar of Immortality)',
+      gana: 'Deva', yoni: 'Serpent (పాము)', rajju: 'Siro (శిరస్సు)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Mridu / Maitra',
+      rasiSpan: 'Vrishabha (Padas 1, 2) & Mithuna (Padas 3, 4)',
+      goodDeeds: 'Music, arts, weddings, friendship, wearing gems, beginning research, journeys.'
+    },
+    {
+      index: 6, name: 'Ardra', nameSa: 'आर्द्रा', nameTe: 'ఆర్ద్ర',
+      lord: 'Rahu', deity: 'Rudra (Fierce Aspect of Shiva)',
+      gana: 'Manushya', yoni: 'Dog (కుక్క)', rajju: 'Kanta (కంఠం)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Tikshna / Daruna',
+      rasiSpan: 'Mithuna (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Destruction of negative habits, intense research, surgery, breaking bindings.'
+    },
+    {
+      index: 7, name: 'Punarvasu', nameSa: 'पुनर्वसु', nameTe: 'పునర్వసు',
+      lord: 'Guru (Jupiter)', deity: 'Aditi (Mother of the Cosmic Adityas)',
+      gana: 'Deva', yoni: 'Cat (పిల్లి)', rajju: 'Nabhi (నాభి)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Chala / Chara',
+      rasiSpan: 'Mithuna (Padas 1, 2, 3) & Karka (Pada 4)',
+      goodDeeds: 'Renewal of enterprises, returning home, pilgrimages, taking medicine, starting business.'
+    },
+    {
+      index: 8, name: 'Pushya', nameSa: 'पुष्य', nameTe: 'పుష్యమి',
+      lord: 'Shani (Saturn)', deity: 'Brihaspati (Spiritual Guru of the Gods)',
+      gana: 'Deva', yoni: 'Sheep / Goat (గొర్రె)', rajju: 'Ooroo (తొడ)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Kshipra / Laghu',
+      rasiSpan: 'Karka (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Foremost star for buying Gold (Ravi/Guru Pushya), initiation into Mantras, ceremonies.'
+    },
+    {
+      index: 9, name: 'Ashlesha', nameSa: 'आश्लेषा', nameTe: 'ఆశ్లేష',
+      lord: 'Budha (Mercury)', deity: 'Sarpas (Naga Divine Serpents)',
+      gana: 'Rakshasa', yoni: 'Cat (పిల్లి)', rajju: 'Padha (పాదం)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Tikshna / Daruna',
+      rasiSpan: 'Karka (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Kundalini yoga, occult sciences, defense strategy, herbal medicine collection.'
+    },
+    {
+      index: 10, name: 'Magha', nameSa: 'मघा', nameTe: 'మఖ',
+      lord: 'Ketu', deity: 'Pitris (Venerated Ancestral Forefathers)',
+      gana: 'Rakshasa', yoni: 'Rat (ఎలుక)', rajju: 'Padha (పాదం)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Ugra / Krura',
+      rasiSpan: 'Simha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Ancestral ceremonies (Tarpana/Shraddha), assuming leadership, historical research.'
+    },
+    {
+      index: 11, name: 'Purva Phalguni', nameSa: 'पूर्वफाल्गुनी', nameTe: 'పూర్వఫల్గుని',
+      lord: 'Shukra (Venus)', deity: 'Bhaga (God of Fortune & Prosperity)',
+      gana: 'Manushya', yoni: 'Rat (ఎలుక)', rajju: 'Ooroo (తొడ)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Ugra / Krura',
+      rasiSpan: 'Simha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Fine arts, music, romance, theater, leisure, creative ventures.'
+    },
+    {
+      index: 12, name: 'Uttara Phalguni', nameSa: 'उत्तरफाल्गुनी', nameTe: 'ఉత్తరఫల్గుని',
+      lord: 'Surya (Sun)', deity: 'Aryaman (God of Friendship & Contracts)',
+      gana: 'Manushya', yoni: 'Cow (ఆవు)', rajju: 'Nabhi (నాభి)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Dhruva / Sthira',
+      rasiSpan: 'Simha (Pada 1) & Kanya (Padas 2, 3, 4)',
+      goodDeeds: 'Marriage ceremonies, signing covenants, real estate acquisition, philanthropy.'
+    },
+    {
+      index: 13, name: 'Hasta', nameSa: 'हस्त', nameTe: 'హస్త',
+      lord: 'Chandra (Moon)', deity: 'Savitur (Sun God of Vital Energy & Light)',
+      gana: 'Deva', yoni: 'Buffalo (గేదె)', rajju: 'Kanta (కంఠం)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Kshipra / Laghu',
+      rasiSpan: 'Kanya (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Handicrafts, commercial trading, buying gold, medicine preparation, art.'
+    },
+    {
+      index: 14, name: 'Chitra', nameSa: 'चित्रा', nameTe: 'చిత్త',
+      lord: 'Mangala (Mars)', deity: 'Tvashtar / Vishvakarma (Architect of the Universe)',
+      gana: 'Rakshasa', yoni: 'Tiger (పులి)', rajju: 'Siro (శిరస్సు)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Mridu / Maitra',
+      rasiSpan: 'Kanya (Padas 1, 2) & Tula (Padas 3, 4)',
+      goodDeeds: 'Architecture, design, gem cutting, interior decor, photography, weddings.'
+    },
+    {
+      index: 15, name: 'Swati', nameSa: 'स्वाती', nameTe: 'స్వాతి',
+      lord: 'Rahu', deity: 'Vayu (Lord of Wind & Prana)',
+      gana: 'Deva', yoni: 'Buffalo (గేదె)', rajju: 'Kanta (కంఠం)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Chala / Chara',
+      rasiSpan: 'Tula (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Business expansion, aviation, learning technology, travel, purchasing cars.'
+    },
+    {
+      index: 16, name: 'Vishakha', nameSa: 'विशाखा', nameTe: 'విశాఖ',
+      lord: 'Guru (Jupiter)', deity: 'Indragni (Indra & Agni united)',
+      gana: 'Rakshasa', yoni: 'Tiger (పులి)', rajju: 'Nabhi (నాభి)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Mishra / Sadharana',
+      rasiSpan: 'Tula (Padas 1, 2, 3) & Vrischika (Pada 4)',
+      goodDeeds: 'Triumph over competition, achieving complex goals, vows, ceremonies of devotion.'
+    },
+    {
+      index: 17, name: 'Anuradha', nameSa: 'अनुराधा', nameTe: 'అనూరాధ',
+      lord: 'Shani (Saturn)', deity: 'Mitra (Divine Deity of Friendship & Compassion)',
+      gana: 'Deva', yoni: 'Deer / Hare (జింక)', rajju: 'Ooroo (తొడ)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Mridu / Maitra',
+      rasiSpan: 'Vrischika (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Weddings, deep friendships, meditation, music, spiritual pilgrimages.'
+    },
+    {
+      index: 18, name: 'Jyeshtha', nameSa: 'ज्येष्ठा', nameTe: 'జ్యేష్ఠ',
+      lord: 'Budha (Mercury)', deity: 'Indra (Sovereign Lord of the Heavens)',
+      gana: 'Rakshasa', yoni: 'Deer / Hare (జింక)', rajju: 'Padha (పాదం)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Tikshna / Daruna',
+      rasiSpan: 'Vrischika (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Administrative management, legal defence, heroic endeavors, courage in adversity.'
+    },
+    {
+      index: 19, name: 'Moola', nameSa: 'मूल', nameTe: 'మూల',
+      lord: 'Ketu', deity: 'Nirriti (Goddess of Deep Roots & Transformation)',
+      gana: 'Rakshasa', yoni: 'Dog (కుక్క)', rajju: 'Padha (పాదం)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Tikshna / Daruna',
+      rasiSpan: 'Dhanu (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Herbal medicine, research into root causes, intense introspection, philosophy.'
+    },
+    {
+      index: 20, name: 'Purva Ashadha', nameSa: 'पूर्वाषाढा', nameTe: 'పూర్వాషాఢ',
+      lord: 'Shukra (Venus)', deity: 'Apas (Cosmic Deified Waters)',
+      gana: 'Manushya', yoni: 'Monkey (కోతి)', rajju: 'Ooroo (తొడ)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Ugra / Krura',
+      rasiSpan: 'Dhanu (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Sea voyages, construction of water reservoirs, settling disputes, art.'
+    },
+    {
+      index: 21, name: 'Uttara Ashadha', nameSa: 'उत्तराषाढा', nameTe: 'ఉత్తరాషాఢ',
+      lord: 'Surya (Sun)', deity: 'Vishvedevas (All the Universal Gods of Virtue)',
+      gana: 'Manushya', yoni: 'Mongoose (ముంగిస)', rajju: 'Nabhi (నాభి)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Dhruva / Sthira',
+      rasiSpan: 'Dhanu (Pada 1) & Makara (Padas 2, 3, 4)',
+      goodDeeds: 'Laying property foundations, permanent contracts, building houses, government work.'
+    },
+    {
+      index: 22, name: 'Shravana', nameSa: 'श्रवण', nameTe: 'శ్రవణం',
+      lord: 'Chandra (Moon)', deity: 'Lord Maha Vishnu (Preserver of the Cosmos)',
+      gana: 'Deva', yoni: 'Monkey (కోతి)', rajju: 'Kanta (కంఠం)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Chala / Chara',
+      rasiSpan: 'Makara (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Vedic learning, chanting shlokas, deity installation, sacred travels, education.'
+    },
+    {
+      index: 23, name: 'Dhanishtha', nameSa: 'धनिष्ठा', nameTe: 'ధనిష్ఠ',
+      lord: 'Mangala (Mars)', deity: 'Ashta Vasus (Eight Gods of Universal Opulence)',
+      gana: 'Rakshasa', yoni: 'Lion (సింహం)', rajju: 'Siro (శిరస్సు)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Chala / Chara',
+      rasiSpan: 'Makara (Padas 1, 2) & Kumbha (Padas 3, 4)',
+      goodDeeds: 'Music, dancing, treasury investment, building palaces/temples, leadership.'
+    },
+    {
+      index: 24, name: 'Shatabhisha', nameSa: 'शतभिषा', nameTe: 'శతభిషం',
+      lord: 'Rahu', deity: 'Varuna Deva (Lord of the Waters and Divine Healer)',
+      gana: 'Rakshasa', yoni: 'Horse (గుర్రం)', rajju: 'Kanta (కంఠం)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Chala / Chara',
+      rasiSpan: 'Kumbha (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Medical treatments, pharmacology, astronomy, meditative solitude.'
+    },
+    {
+      index: 25, name: 'Purva Bhadrapada', nameSa: 'पूर्वभाद्रपदा', nameTe: 'పూర్వాభాద్ర',
+      lord: 'Guru (Jupiter)', deity: 'Aja Ekapada (Cosmic Pillar of Light / Ascetic Shiva)',
+      gana: 'Manushya', yoni: 'Lion (సింహం)', rajju: 'Nabhi (నాభి)',
+      facing: 'Atho-Mukha (Downward)', prakarana: 'Ugra / Krura',
+      rasiSpan: 'Kumbha (Padas 1, 2, 3) & Meena (Pada 4)',
+      goodDeeds: 'Spiritual discipline, fasting, penance, occult investigations, charity.'
+    },
+    {
+      index: 26, name: 'Uttara Bhadrapada', nameSa: 'उत्तरभाद्रपदा', nameTe: 'ఉత్తరాభాద్ర',
+      lord: 'Shani (Saturn)', deity: 'Ahirbudhnya (Serpent of the Primordial Depths)',
+      gana: 'Manushya', yoni: 'Cow (ఆవు)', rajju: 'Ooroo (తొడ)',
+      facing: 'Oordhwa-Mukha (Upward)', prakarana: 'Dhruva / Sthira',
+      rasiSpan: 'Meena (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Weddings, Griha Pravesh, permanent foundations, long-term covenants, meditation.'
+    },
+    {
+      index: 27, name: 'Revati', nameSa: 'रेवती', nameTe: 'రేవతి',
+      lord: 'Budha (Mercury)', deity: 'Pushan (God of Nourishment & Guide of Travelers)',
+      gana: 'Deva', yoni: 'Elephant (ఏనుగు)', rajju: 'Padha (పాదం)',
+      facing: 'Thiryag-Mukha (Horizontal)', prakarana: 'Mridu / Maitra',
+      rasiSpan: 'Meena (Padas 1, 2, 3, 4)',
+      goodDeeds: 'Safe journeys, commercial voyages, wearing ornaments, marriage, learning arts.'
+    }
+  ];
+
+  function findRasiNakshatraByDOB(dobInput, hour = 12, minute = 0) {
+    let dateObj;
+    if (dobInput instanceof Date) {
+      dateObj = new Date(dobInput.getTime());
+    } else if (typeof dobInput === 'string') {
+      const parts = dobInput.trim().split('-');
+      if (parts.length === 3) {
+        dateObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), hour, minute);
+      } else {
+        dateObj = new Date(dobInput);
+      }
+    } else {
+      dateObj = new Date();
+    }
+
+    if (isNaN(dateObj.getTime())) {
+      dateObj = new Date();
+    }
+
+    let p;
+    if (typeof PANCHANG !== 'undefined' && PANCHANG.getPanchang) {
+      p = PANCHANG.getPanchang(dateObj);
+    } else {
+      try {
+        const { PANCHANG: pMod } = require('./panchang.js');
+        p = pMod.getPanchang(dateObj);
+      } catch (e) {
+        p = { nakshatra: { name: 'Rohini', pada: 1, index: 3 }, rasi: 'Vrishabha (Taurus)', tithi: { name: 'Panchami', pakshaShort: 'Shukla' }, yoga: 'Siddha', karana: 'Bava' };
+      }
+    }
+
+    const starName = p.nakshatra.name;
+    const pada = p.nakshatra.pada;
+    const rasiRaw = p.rasi;
+    const rasiKey = rasiRaw.split(' ')[0];
+
+    const rasiInfo = RASI_DETAILS.find(r => r.id === rasiKey) || RASI_DETAILS[0];
+    const nakInfo = NAKSHATRA_DETAILS.find(n => n.name === starName) || NAKSHATRA_DETAILS[0];
+    const gana = getNakshatraGana(starName);
+    const facing = getStellarFacing(starName);
+
+    return {
+      date: dateObj,
+      formattedDate: dateObj.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+      formattedTime: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`,
+      star: starName,
+      pada,
+      rasi: rasiKey,
+      rasiFullName: rasiRaw,
+      rasiInfo,
+      nakInfo,
+      tithiName: p.tithi.name,
+      paksha: p.tithi.pakshaShort,
+      yoga: p.yoga,
+      karana: p.karana,
+      ganaTitleSa: gana.titleSa,
+      ganaTitleEn: gana.titleEn,
+      stellarFacing: facing,
+      nakshatraLord: nakInfo.lord,
+      rasiLord: rasiInfo.lord,
+      yoni: nakInfo.yoni,
+      rajju: nakInfo.rajju
+    };
+  }
+
   // Get ranked auspicious days for a month
   function getMonthMuhurats(year, month, categoryKey) {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -1164,6 +1612,9 @@ const MUHURAT = (function () {
     STELLAR_FACING,
     NAKSHATRA_ORDER,
     RASI_ORDER,
+    RASI_DETAILS,
+    NAKSHATRA_DETAILS,
+    findRasiNakshatraByDOB,
     getStellarFacing,
     getNakshatraGana,
     checkSpecialYogas,
