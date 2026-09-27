@@ -413,10 +413,23 @@ const PANCHANG = (() => {
     };
   }
 
+  /* ---- Vedanga Jyotisha 5-Year Yuga Integration ---- */
+  function getVedangaYugaPanchang(date) {
+    if (typeof VEDANGA_JYOTISHA !== 'undefined') {
+      return VEDANGA_JYOTISHA.getYugaStateForDate(date);
+    }
+    try {
+      const v = require('./vedanga-jyotisha.js').VEDANGA_JYOTISHA;
+      if (v) return v.getYugaStateForDate(date);
+    } catch (e) { /* ignore */ }
+    return null;
+  }
+
   /* Public API */
   return { 
     getPanchang, getRatingForGod, getUpcomingDays, getUpcomingFestivals, 
     getChoghadiya, getYamagandam, getGulikaKalam, getTarabalam, getChandrabalam, getPanchangForDate,
+    getVedangaYugaPanchang,
     TITHIS, NAKSHATRAS, WEEKDAYS, RAHUKAAL, ABHIJIT, RASIS, festivals: SPECIAL_DAYS 
   };
 })();

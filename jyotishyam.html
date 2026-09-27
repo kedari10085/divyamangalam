@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedanga Jyotisha of Sage Lagadha (वेदाङ्ग ज्योतिषम्) — Ancient 5-Year Yuga Astronomy | Divya Mangalam</title>
+  <meta name="description" content="Explore the authentic mathematical astronomy of Vedanga Jyotisha by Sage Lagadha (c. 1400 BCE). Interactive 5-Year Yuga calendar, Parva-Bhamsa calculator, Aharmana water-clock, and shloka treasury based on INSA 1985." />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+  <style>
+    /* Vedanga Jyotisha Custom Styling */
+    :root {
+      --vedic-gold: #D4A017;
+      --vedic-saffron: #FF6F00;
+      --vedic-crimson: #8B0000;
+      --vedic-bg: #FFFDF9;
+      --card-bg: #FFFFFF;
+      --copper: #B87333;
+    }
+
+    body {
+      background-color: var(--vedic-bg);
+      color: var(--text-dark);
+    }
+
+    .jyotish-hero {
+      background: linear-gradient(135deg, rgba(255, 111, 0, 0.12) 0%, rgba(212, 160, 23, 0.22) 50%, rgba(139, 0, 0, 0.12) 100%);
+      padding: 4.5rem 1.5rem 2.8rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.3);
+      position: relative;
+    }
+
+    .jyotish-hero .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--vedic-saffron), var(--vedic-gold));
+      color: white;
+      padding: 5px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .jyotish-hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--text-dark);
+      margin: 0 0 0.5rem;
+    }
+
+    .jyotish-hero .sanskrit-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--vedic-crimson);
+      margin-bottom: 0.8rem;
+    }
+
+    .shloka-banner {
+      max-width: 800px;
+      margin: 1.5rem auto 0;
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.4);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 8px 24px rgba(212, 160, 23, 0.12);
+    }
+
+    .shloka-banner p.sanskrit {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--vedic-crimson);
+      margin: 0 0 0.4rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .shloka-banner p.trans {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Container */
+    .jyotish-container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Section Headers */
+    .section-head {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin: 0 0 0.4rem;
+    }
+
+    .section-head p {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Yuga Samvatsara Cards */
+    .samvatsara-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .samvatsara-card {
+      background: white;
+      border: 2px solid rgba(212, 160, 23, 0.3);
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .samvatsara-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(212, 160, 23, 0.15);
+      border-color: var(--vedic-gold);
+    }
+
+    .samvatsara-card.active {
+      background: linear-gradient(135deg, rgba(255, 111, 0, 0.08), rgba(212, 160, 23, 0.18));
+      border-color: var(--vedic-crimson);
+      box-shadow: 0 8px 25px rgba(139, 0, 0, 0.12);
+    }
+
+    .samvatsara-card .year-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--vedic-saffron);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .samvatsara-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 0.2rem 0;
+      color: var(--text-dark);
+    }
+
+    .samvatsara-card .deity {
+      font-size: 0.85rem;
+      color: var(--vedic-crimson);
+      font-weight: 600;
+    }
+
+    /* Interactive Parvan Slider Box */
+    .slider-box {
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.4);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(212, 160, 23, 0.1);
+      margin-bottom: 3rem;
+    }
+
+    .slider-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .slider-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .slider-val-badge {
+      background: linear-gradient(135deg, var(--vedic-saffron), var(--vedic-gold));
+      color: white;
+      padding: 6px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .range-input {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #E0E0E0;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--vedic-saffron);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    /* Parvan Live Readout Display */
+    .readout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .readout-item {
+      background: var(--vedic-bg);
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem;
+      position: relative;
+    }
+
+    .readout-item .label {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .readout-item .val {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--vedic-crimson);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .readout-item .subval {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      margin-top: 0.2rem;
+    }
+
+    /* Adhimasa Banner */
+    .adhimasa-alert {
+      background: rgba(255, 111, 0, 0.12);
+      border: 2px dashed var(--vedic-saffron);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-top: 1.5rem;
+      display: none;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .adhimasa-alert.active { display: flex; }
+
+    /* Water Clock (Clepsydra) Section */
+    .water-clock-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.4);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(212, 160, 23, 0.1);
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+
+    .clepsydra-visual {
+      background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
+      border: 3px solid var(--vedic-gold);
+      border-radius: 16px;
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 20px;
+    }
+
+    .clepsydra-bowl {
+      width: 140px;
+      height: 70px;
+      background: linear-gradient(135deg, #B87333, #D4AF37);
+      border-radius: 0 0 70px 70px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      position: relative;
+      transition: transform 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .water-fill {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(33, 150, 243, 0.4);
+      transition: height 0.3s ease;
+      border-top: 2px solid rgba(21, 101, 192, 0.6);
+    }
+
+    /* Comparison Table */
+    .comp-table-wrap {
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.4);
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(212, 160, 23, 0.1);
+      margin-bottom: 3rem;
+      overflow-x: auto;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .comp-table th {
+      background: var(--vedic-bg);
+      padding: 1rem;
+      border-bottom: 2px solid var(--vedic-gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--vedic-crimson);
+    }
+
+    .comp-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+      font-size: 0.95rem;
+    }
+
+    /* Shloka Card */
+    .shloka-card {
+      background: white;
+      border: 1px solid rgba(212, 160, 23, 0.3);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .shloka-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--vedic-saffron);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .shloka-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--vedic-crimson);
+      margin: 0 0 0.6rem;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .shloka-translit {
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      margin: 0 0 0.6rem;
+      line-height: 1.5;
+    }
+
+    .shloka-meaning {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 0 0 0.6rem;
+    }
+
+    .shloka-comm {
+      background: var(--vedic-bg);
+      border-left: 3px solid var(--vedic-gold);
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      border-radius: 0 8px 8px 0;
+    }
+
+    @media (max-width: 768px) {
+      .water-clock-wrap { grid-template-columns: 1fr; }
+      .samvatsara-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jyotishyam.html" class="active" aria-current="page">Jyotishyam</a></li>
+      <li><a href="palm-reading.html">Palm Reading</a></li>
+      <li><a href="panchang-calendar.html">Panchang</a></li>
+      <li><a href="muhurat.html">Muhurat</a></li>
+      <li><a href="puran.html">18 Puranas</a></li>
+      <li><a href="gods.html">Deities</a></li>
+      <li><a href="live-archana.html">Archana</a></li>
+      <li><a href="chalisa.html">Chalisa</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz</a></li>
+      <li><a href="ai-archana.html">AI Pandit</a></li>
+    </ul>
+    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="jyotish-hero">
+  <span class="badge">Vedic Astronomy & Jyotisha Shastra</span>
+  <div class="sanskrit-title" lang="sa">वेदाङ्ग ज्योतिषम् • Sage Lagadha (c. 1400–1200 BCE)</div>
+  <h1>Vedanga Jyotisha Calculator & Explorer</h1>
+  <p>Authentic mathematical astronomy of the 5-Year Vedic Yuga (*Pancha-samvatsaramaya Yuga*) based on INSA 1985 Critical Edition by Prof. T.S. Kuppanna Sastry.</p>
+
+  <div class="shloka-banner">
+    <p class="sanskrit">यथा शिखा मयूराणां नागानां मणयो यथा ।<br/>तद्वद् वेदाङ्गशास्त्राणां गणितं मूर्ध्नि वर्तते ॥</p>
+    <p class="trans">"Like the crest on the peacock, like the gem atop a serpent's hood, so stands Ganita (astronomy) at the supreme crest of all Vedanga sciences!" — Yajusha Jyotisha 1</p>
+  </div>
+</header>
+
+<main class="jyotish-container">
+
+  <!-- ===== 1. FIVE-YEAR YUGA EXPLORER ===== -->
+  <section aria-labelledby="yugaExplorerTitle">
+    <div class="section-head">
+      <h2 id="yugaExplorerTitle">1. Five-Year Yuga Explorer (पञ्चसंवत्सरमय युग)</h2>
+      <p>A full Vedic cycle comprises 1830 Savana days, 62 synodic months, 67 sidereal months, and 124 Parvans (fortnights). Select any year or slide through the 124 Parvans below.</p>
+    </div>
+
+    <!-- 5 Samvatsara Cards -->
+    <div class="samvatsara-grid" id="samvatsaraGrid"></div>
+
+    <!-- Parvan Slider Box -->
+    <div class="slider-box">
+      <div class="slider-controls">
+        <div class="slider-top-row">
+          <div>
+            <h3 style="margin:0; font-family:'Playfair Display',serif; font-size:1.3rem;">Fortnight Navigation (पर्व निर्णय)</h3>
+            <span style="font-size:0.85rem; color:var(--text-mid);">Select any Parvan from 1 to 124 across the 5 years</span>
+          </div>
+          <div class="slider-val-badge" id="parvanBadge">Parvan 1 of 124</div>
+        </div>
+
+        <input type="range" min="1" max="124" value="1" class="range-input" id="parvanSlider">
+
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-mid); font-weight:600;">
+          <span>Parvan 1 (Magha Shukla)</span>
+          <span>Parvan 31 (1st Adhimasa)</span>
+          <span>Parvan 62 (Mid-Point)</span>
+          <span>Parvan 93 (Vernal Vishuvat)</span>
+          <span>Parvan 124 (2nd Adhimasa)</span>
+        </div>
+      </div>
+
+      <!-- Live Readout Grid -->
+      <div class="readout-grid">
+        <div class="readout-item">
+          <div class="label">Current Samvatsara</div>
+          <div class="val" id="readoutSamvatsara">Samvatsara</div>
+          <div class="subval" id="readoutDeity">Deity: Agni (Year 1)</div>
+        </div>
+
+        <div class="readout-item">
+          <div class="label">Sun's Nakshatra (Surya)</div>
+          <div class="val" id="readoutSunStar">Shatabhisha</div>
+          <div class="subval" id="readoutSunBhamsha">11/124 Bhamshas</div>
+        </div>
+
+        <div class="readout-item">
+          <div class="label">Moon's Nakshatra (Parva-Bhamsa)</div>
+          <div class="val" id="readoutMoonStar">Magha</div>
+          <div class="subval" id="readoutMoonBhamsha">73/124 Bhamshas</div>
+        </div>
+
+        <div class="readout-item">
+          <div class="label">Elapsed Savana Days</div>
+          <div class="val" id="readoutCivilDays">15 Days</div>
+          <div class="subval" id="readoutPaksha">Shukla Paksha</div>
+        </div>
+
+        <div class="readout-item">
+          <div class="label">Current Season & Ayana</div>
+          <div class="val" id="readoutSeason">Shishira Ritu</div>
+          <div class="subval" id="readoutAyana">Uttarayana (Northward)</div>
+        </div>
+
+        <div class="readout-item">
+          <div class="label">Equinox / Vishuvat Status</div>
+          <div class="val" id="readoutVishuvat">Regular Parvan</div>
+          <div class="subval" id="readoutVishuvatSub">Day/Night varying</div>
+        </div>
+      </div>
+
+      <!-- Adhimasa Alert -->
+      <div class="adhimasa-alert" id="adhimasaBox">
+        <span style="font-size:2rem;">🌕</span>
+        <div>
+          <strong style="color:var(--vedic-crimson); font-size:1.05rem;" id="adhimasaTitle">Adhimasa (Intercalary Month) Inserted!</strong>
+          <p style="margin:0.2rem 0 0; font-size:0.88rem; color:var(--text-dark);" id="adhimasaDesc"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. AHARMANA & WATER CLOCK (CLEPSYDRA) SIMULATOR ===== -->
+  <section aria-labelledby="waterClockTitle">
+    <div class="section-head">
+      <h2 id="waterClockTitle">2. Aharmana & Vedic Clepsydra (Water Clock) Simulator</h2>
+      <p>Sage Lagadha formulated day-length variation using a water clock (Khadaprastha). Day grows by 1 Palaprastha of water (4/61 Nadika) per day from 12 Muhurtas (Winter Solstice) to 18 Muhurtas (Summer Solstice).</p>
+    </div>
+
+    <div class="water-clock-wrap">
+      <div class="clepsydra-visual">
+        <div class="water-fill" id="waterFill" style="height: 50%;"></div>
+        <div class="clepsydra-bowl" id="clepsydraBowl">
+          <span>Ghatika Yantra</span>
+        </div>
+        <div style="position:absolute; top:12px; left:15px; font-size:0.75rem; color:#0D47A1; font-weight:700;">
+          CLEPSYDRA (WATER BOWL)
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h3 style="margin:0; font-family:'Playfair Display',serif; font-size:1.3rem;">Seasonal Day-Length Slider</h3>
+          <span class="slider-val-badge" id="daysFromSolsticeBadge">Day 0 (Solstice)</span>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <label style="font-size:0.85rem; font-weight:600; color:var(--text-mid);">Days Elapsed from Solstice (0 to 183):</label>
+          <input type="range" min="0" max="183" value="0" class="range-input" id="solsticeSlider">
+        </div>
+
+        <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
+          <button type="button" class="btn btn-primary" id="btnUttarayana" style="flex:1; padding:0.6rem;">☀️ Uttarayana (Growing)</button>
+          <button type="button" class="btn btn-outline" id="btnDakshinayana" style="flex:1; padding:0.6rem;">🌙 Dakshinayana (Decreasing)</button>
+        </div>
+
+        <div class="readout-grid" style="grid-template-columns: 1fr 1fr; gap:0.8rem;">
+          <div class="readout-item">
+            <div class="label">Day-Length (Ahar-mana)</div>
+            <div class="val" id="dayLengthVal" style="color:#2E7D32;">12h 00m</div>
+            <div class="subval" id="dayLengthUnits">24 Nadikas / 12 Muhurtas</div>
+          </div>
+          <div class="readout-item">
+            <div class="label">Night-Length (Ratri-mana)</div>
+            <div class="val" id="nightLengthVal" style="color:#C62828;">12h 00m</div>
+            <div class="subval" id="nightLengthUnits">36 Nadikas / 18 Muhurtas</div>
+          </div>
+          <div class="readout-item">
+            <div class="label">Water Measure (Palaprasthas)</div>
+            <div class="val" id="waterPalasVal">0 Prasthas</div>
+            <div class="subval">Copper Bowl Discharge</div>
+          </div>
+          <div class="readout-item">
+            <div class="label">Time in Kalas</div>
+            <div class="val" id="kalasVal">241 Kalas</div>
+            <div class="subval">1 Savana Day = 603 Kalas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. TRI-SYSTEM ASTRONOMICAL COMPARISON ===== -->
+  <section aria-labelledby="compTitle">
+    <div class="section-head">
+      <h2 id="compTitle">3. Tri-System Astronomical Comparison</h2>
+      <p>Compare Sage Lagadha's 1400 BCE coordinates with Classical Surya Siddhanta and Modern Drik Ganita, demonstrating the 54° Precession of the Equinoxes.</p>
+    </div>
+
+    <div class="comp-table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Astronomical Attribute</th>
+            <th>Vedanga Jyotisha (Sage Lagadha)</th>
+            <th>Surya Siddhanta (Classical)</th>
+            <th>Drik Ganita (Modern Ephemeris)</th>
+          </tr>
+        </thead>
+        <tbody id="compTableBody">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+
+      <div style="margin-top:1.5rem; background:var(--vedic-bg); border-left:4px solid var(--vedic-saffron); padding:1rem 1.2rem; border-radius:0 10px 10px 0;">
+        <strong style="color:var(--vedic-crimson); font-size:1rem;">🌌 Understanding the Precession of Equinoxes (Ayanamsha):</strong>
+        <p style="margin:0.3rem 0 0; font-size:0.9rem; line-height:1.6;" id="precessionExplanationText"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. SANSKRIT SHLOKA TREASURY ===== -->
+  <section aria-labelledby="shlokaTreasuryTitle">
+    <div class="section-head">
+      <h2 id="shlokaTreasuryTitle">4. Vedanga Jyotisha Shloka Treasury (मूल श्लोकाः)</h2>
+      <p>Core verses from Archajyotisha (Rigveda) and Yajushajyotisha (Yajurveda) with English translation and mathematical commentary by Prof. T.S. Kuppanna Sastry (INSA 1985).</p>
+    </div>
+
+    <div id="shlokaContainer"></div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-om">🕉️</div>
+      <h3>Divya Mangalam</h3>
+      <p>Preserving sacred Vedic astronomy and classical Jyotisha shastras with mathematical fidelity.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Astrology & Astronomy</h4>
+      <ul>
+        <li><a href="jyotishyam.html">Vedanga Jyotisha Engine</a></li>
+        <li><a href="muhurat.html">Shubh Muhurat Finder</a></li>
+        <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
+        <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sacred Scriptures</h4>
+      <ul>
+        <li><a href="puran.html">18 Maha Puranas</a></li>
+        <li><a href="shlokas.html">Shloka Library</a></li>
+        <li><a href="chalisa.html">Hanuman Chalisa</a></li>
+        <li><a href="healing.html">432 Hz Healing</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Divya Mangalam. Dedicated to Sage Lagadha & Vedic Rishis.</p>
+    <p><span class="om-footer">🕉️</span> ॐ शान्तिः शान्तिः शान्तिः</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script src="vedanga-jyotisha.js"></script>
+<script>
+(function() {
+  if (typeof VEDANGA_JYOTISHA === 'undefined') return;
+
+  const V = VEDANGA_JYOTISHA;
+  let currentParvan = 1;
+  let isUttarayana = true;
+  let daysFromSolstice = 0;
+
+  // DOM Elements
+  const samvatsaraGrid = document.getElementById('samvatsaraGrid');
+  const parvanSlider = document.getElementById('parvanSlider');
+  const parvanBadge = document.getElementById('parvanBadge');
+
+  const readoutSamvatsara = document.getElementById('readoutSamvatsara');
+  const readoutDeity = document.getElementById('readoutDeity');
+  const readoutSunStar = document.getElementById('readoutSunStar');
+  const readoutSunBhamsha = document.getElementById('readoutSunBhamsha');
+  const readoutMoonStar = document.getElementById('readoutMoonStar');
+  const readoutMoonBhamsha = document.getElementById('readoutMoonBhamsha');
+  const readoutCivilDays = document.getElementById('readoutCivilDays');
+  const readoutPaksha = document.getElementById('readoutPaksha');
+  const readoutSeason = document.getElementById('readoutSeason');
+  const readoutAyana = document.getElementById('readoutAyana');
+  const readoutVishuvat = document.getElementById('readoutVishuvat');
+  const readoutVishuvatSub = document.getElementById('readoutVishuvatSub');
+
+  const adhimasaBox = document.getElementById('adhimasaBox');
+  const adhimasaTitle = document.getElementById('adhimasaTitle');
+  const adhimasaDesc = document.getElementById('adhimasaDesc');
+
+  const solsticeSlider = document.getElementById('solsticeSlider');
+  const daysFromSolsticeBadge = document.getElementById('daysFromSolsticeBadge');
+  const btnUttarayana = document.getElementById('btnUttarayana');
+  const btnDakshinayana = document.getElementById('btnDakshinayana');
+  const dayLengthVal = document.getElementById('dayLengthVal');
+  const dayLengthUnits = document.getElementById('dayLengthUnits');
+  const nightLengthVal = document.getElementById('nightLengthVal');
+  const nightLengthUnits = document.getElementById('nightLengthUnits');
+  const waterPalasVal = document.getElementById('waterPalasVal');
+  const kalasVal = document.getElementById('kalasVal');
+  const waterFill = document.getElementById('waterFill');
+  const clepsydraBowl = document.getElementById('clepsydraBowl');
+
+  const compTableBody = document.getElementById('compTableBody');
+  const precessionExplanationText = document.getElementById('precessionExplanationText');
+  const shlokaContainer = document.getElementById('shlokaContainer');
+
+  // Render 5 Samvatsara Cards
+  function renderSamvatsaraGrid() {
+    samvatsaraGrid.innerHTML = V.SAMVATSARAS.map(s => {
+      const active = Math.floor((currentParvan - 1) / 25) === s.index ? 'active' : '';
+      return `
+        <div class="samvatsara-card ${active}" data-idx="${s.index}">
+          <div class="year-badge">Year ${s.yearNum} of 5</div>
+          <h3>${s.nameSa}</h3>
+          <div class="deity">${s.deity}</div>
+          <div style="font-size:0.75rem; color:var(--text-mid); margin-top:0.4rem;">${s.element}</div>
+        </div>
+      `;
+    }).join('');
+
+    samvatsaraGrid.querySelectorAll('.samvatsara-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.idx, 10);
+        currentParvan = idx * 25 + 1;
+        parvanSlider.value = currentParvan;
+        updateParvanView();
+      });
+    });
+  }
+
+  // Update Parvan View
+  function updateParvanView() {
+    parvanBadge.textContent = `Parvan ${currentParvan} of 124`;
+    const P = currentParvan - 1;
+
+    // Yuga Year
+    const yearIdx = Math.min(4, Math.floor(P / 25));
+    const s = V.SAMVATSARAS[yearIdx];
+    readoutSamvatsara.textContent = `${s.nameSa} (${s.nameEn})`;
+    readoutDeity.textContent = `Deity: ${s.deity} • Year ${s.yearNum}`;
+
+    // Solar & Lunar positions
+    const sun = V.calculateSuryaNakshatra(P);
+    const moon = V.calculateParvaBhamsa(P);
+
+    readoutSunStar.textContent = sun.vedangaName;
+    readoutSunBhamsha.textContent = `${sun.bhamshaText} (${sun.decimalDeg}°)`;
+
+    readoutMoonStar.textContent = moon.vedangaName;
+    readoutMoonBhamsha.textContent = `${moon.bhamshaText} (${moon.decimalDeg}°)`;
+
+    // Savana days
+    const civilDays = Math.round((P * 1830) / 124);
+    readoutCivilDays.textContent = `${civilDays} Savana Days`;
+    readoutPaksha.textContent = (P % 2 === 0) ? 'Shukla Paksha (Bright Fortnight)' : 'Krishna Paksha (Dark Fortnight)';
+
+    // Season & Ayana
+    const daysInYear = civilDays % 366;
+    const isUtt = daysInYear < 183;
+    const rituIdx = Math.min(5, Math.floor(daysInYear / 61));
+    const ritu = V.RITUS[rituIdx];
+
+    readoutSeason.textContent = `${ritu.nameSa} Ritu (${ritu.season})`;
+    readoutAyana.textContent = isUtt ? 'Uttarayana (Northward Solar Course)' : 'Dakshinayana (Southward Solar Course)';
+
+    // Equinox / Vishuvat
+    const vishMatch = V.VISHUVATS.find(v => v.parvanIndex === currentParvan);
+    if (vishMatch) {
+      readoutVishuvat.textContent = `⚖️ ${vishMatch.season} Vishuvat!`;
+      readoutVishuvatSub.textContent = 'Day & Night exactly equal: 15 Muhurtas (30 Nadikas)';
+      readoutVishuvat.style.color = '#2E7D32';
+    } else {
+      readoutVishuvat.textContent = 'Regular Fortnight';
+      readoutVishuvatSub.textContent = 'Day/Night length in dynamic transit';
+      readoutVishuvat.style.color = 'var(--vedic-crimson)';
+    }
+
+    // Adhimasa check
+    const adhimasa = V.checkAdhimasa(currentParvan);
+    if (adhimasa.isAdhimasa) {
+      adhimasaBox.classList.add('active');
+      adhimasaTitle.textContent = `🌕 ${adhimasa.nameSa} (${adhimasa.nameEn})`;
+      adhimasaDesc.textContent = `${adhimasa.samvatsara} • ${adhimasa.reason}`;
+    } else {
+      adhimasaBox.classList.remove('active');
+    }
+
+    renderSamvatsaraGrid();
+  }
+
+  // Water Clock Slider View
+  function updateWaterClockView() {
+    daysFromSolsticeBadge.textContent = `Day ${daysFromSolstice} (${isUttarayana ? 'Uttarayana' : 'Dakshinayana'})`;
+    const res = V.calculateAharmana(daysFromSolstice, isUttarayana);
+
+    dayLengthVal.textContent = res.dayLengthFormatted;
+    dayLengthUnits.textContent = `${res.dayNadikas} Nadikas • ${res.dayMuhurtas} Muhurtas`;
+
+    nightLengthVal.textContent = res.nightLengthFormatted;
+    nightLengthUnits.textContent = `${res.nightNadikas} Nadikas • ${res.nightMuhurtas} Muhurtas`;
+
+    waterPalasVal.textContent = `${res.palaprasthasWater} Palaprasthas`;
+    kalasVal.textContent = `${res.kalas} Kalas`;
+
+    // Clepsydra Animation
+    const fillPercent = Math.min(95, Math.max(10, (res.dayMuhurtas - 12) / 6 * 85 + 10));
+    waterFill.style.height = `${fillPercent}%`;
+    const bowlSink = (fillPercent / 100) * 80;
+    clepsydraBowl.style.transform = `translateY(${bowlSink}px)`;
+  }
+
+  // Comparison Table
+  function renderComparisonTable() {
+    const comp = V.compareAstronomicalSystems(new Date());
+
+    const rows = [
+      { attr: 'Historical Authority', v: comp.vedanga.authority, ss: comp.suryaSiddhanta.authority, dg: comp.drikGanita.authority },
+      { attr: 'Computational Model', v: comp.vedanga.model, ss: comp.suryaSiddhanta.model, dg: comp.drikGanita.model },
+      { attr: 'Winter Solstice Position', v: comp.vedanga.solsticeAnchor, ss: comp.suryaSiddhanta.solsticeAnchor, dg: comp.drikGanita.solsticeAnchor },
+      { attr: 'Sun Nakshatra Today', v: `⭐ ${comp.vedanga.sunNakshatra} (${comp.vedanga.bhamshas})`, ss: `⭐ ${comp.suryaSiddhanta.sunNakshatra}`, dg: `⭐ ${comp.drikGanita.sunNakshatra}` },
+      { attr: 'Sun Longitude Degrees', v: `${comp.vedanga.sunDegrees}° (from Dhanishtha)`, ss: `${comp.suryaSiddhanta.sunDegrees}° (Nirayana)`, dg: `${comp.drikGanita.sunDegrees}° (Chitra Paksha)` },
+      { attr: 'Day-Length Calculation', v: `${comp.vedanga.dayLength} (Clepsydra ratio 3:2)`, ss: comp.suryaSiddhanta.dayLength, dg: comp.drikGanita.dayLength }
+    ];
+
+    compTableBody.innerHTML = rows.map(r => `
+      <tr>
+        <td><strong>${r.attr}</strong></td>
+        <td><span style="color:var(--vedic-crimson); font-weight:600;">${r.v}</span></td>
+        <td>${r.ss}</td>
+        <td><span style="color:#1565C0; font-weight:600;">${r.dg}</span></td>
+      </tr>
+    `).join('');
+
+    precessionExplanationText.textContent = comp.precessionExplanation;
+  }
+
+  // Render Shlokas
+  function renderShlokas() {
+    shlokaContainer.innerHTML = V.SHLOKA_TREASURY.map(sh => `
+      <article class="shloka-card">
+        <div class="shloka-meta">
+          <span>${sh.category}</span>
+          <span>Verse ${sh.verseNum}</span>
+        </div>
+        <p class="shloka-text" lang="sa">${sh.shloka}</p>
+        <p class="shloka-translit">${sh.transliteration}</p>
+        <p class="shloka-meaning"><strong>English Meaning:</strong> ${sh.meaning}</p>
+        <div class="shloka-comm"><strong>INSA 1985 Commentary:</strong> ${sh.commentary}</div>
+      </article>
+    `).join('');
+  }
+
+  // Event Listeners
+  parvanSlider.addEventListener('input', (e) => {
+    currentParvan = parseInt(e.target.value, 10);
+    updateParvanView();
+  });
+
+  solsticeSlider.addEventListener('input', (e) => {
+    daysFromSolstice = parseInt(e.target.value, 10);
+    updateWaterClockView();
+  });
+
+  btnUttarayana.addEventListener('click', () => {
+    isUttarayana = true;
+    btnUttarayana.className = 'btn btn-primary';
+    btnDakshinayana.className = 'btn btn-outline';
+    updateWaterClockView();
+  });
+
+  btnDakshinayana.addEventListener('click', () => {
+    isUttarayana = false;
+    btnDakshinayana.className = 'btn btn-primary';
+    btnUttarayana.className = 'btn btn-outline';
+    updateWaterClockView();
+  });
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    renderSamvatsaraGrid();
+    updateParvanView();
+    updateWaterClockView();
+    renderComparisonTable();
+    renderShlokas();
+  });
+})();
+</script>
+</body>
+</html>
