@@ -921,6 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const xrayPalmCanvas = document.createElement('canvas');
   let currentViewMode = 'extract'; // 'extract', 'photo', 'xray'
   let currentActiveFilter = 'all';
+  let activeCreaseMap = new Float32Array(600 * 800);
 
   function drawLinesOnCanvas(rCtx, width, height) {
     renderBiometricPalmAnalysis(rCtx, width, height, 'all');
@@ -956,6 +957,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const w = 600;
     const h = 800;
 
+    // Reset crease map for fresh dynamic trace
+    activeCreaseMap.fill(0);
+
     // Luminance buffer for fast spatial edge & crease differential
     const lum = new Float32Array(w * h);
     for (let i = 0, j = 0; i < src.length; i += 4, j++) {
@@ -989,9 +993,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const lBottom = lum[y2 * w + x];
           const localAvg = (lLeft + lRight + lTop + lBottom) * 0.25;
 
-          // Crease factor: contrast shifts or darker grooves in skin
-          const diff = Math.abs(pLum - localAvg) + (localAvg - pLum) * 1.5;
-          const isCrease = diff > 8.0;
+          // Crease factor: captures both dark groove valleys (camera photos) and bright ridge lines (X-rays/inked prints)
+          const contrastDiff = Math.abs(pLum - localAvg);
+          const darkValleyBoost = (localAvg > pLum) ? (localAvg - pLum) * 0.9 : 0;
+          const diff = contrastDiff + darkValleyBoost;
+          const isCrease = diff > 7.0;
+
+          // Store normalized crease confidence in activeCreaseMap for dynamic line snapping
+          if (diff > 3.5) {
+            activeCreaseMap[y * w + x] = Math.min(1.0, (diff - 3.5) / 15.0);
+          }
 
           if (isCrease) {
             // Luminous etched dermal crease / ridge line (bright cyan-white)
@@ -1094,6 +1105,90 @@ document.addEventListener('DOMContentLoaded', () => {
     return xrayCanvas;
   }
 
+  // Crease alignment: dynamically snaps an anatomical coordinate (xPct, yPct)
+  // to the nearest real crease/ridge peak in activeCreaseMap
+  function snapToCrease(xPct, yPct, searchRadiusX = 26, searchRadiusY = 26) {
+    const w = 600, h = 800;
+    const cx = Math.round(xPct * w);
+    const cy = Math.round(yPct * h);
+
+    if (!activeCreaseMap || activeCreaseMap.length === 0) {
+      return { x: xPct, y: yPct };
+    }
+
+    let maxScore = 0;
+    let bestX = cx;
+    let bestY = cy;
+
+    for (let dy = -searchRadiusY; dy <= searchRadiusY; dy += 2) {
+      const py = cy + dy;
+      if (py < 40 || py >= h - 40) continue;
+      for (let dx = -searchRadiusX; dx <= searchRadiusX; dx += 2) {
+        const px = cx + dx;
+        if (px < 40 || px >= w - 40) continue;
+
+        const score = activeCreaseMap[py * w + px];
+        if (score <= 0) continue;
+
+        // Quadratic distance penalty so it prefers the nearest true crease ridge
+        const distSq = (dx * dx) + (dy * dy);
+        const maxDistSq = (searchRadiusX * searchRadiusX) + (searchRadiusY * searchRadiusY);
+        const penalty = 1.0 - (distSq / maxDistSq) * 0.45;
+        const totalScore = score * penalty;
+
+        if (totalScore > maxScore) {
+          maxScore = totalScore;
+          bestX = px;
+          bestY = py;
+        }
+      }
+    }
+
+    // If a genuine crease ridge was detected nearby, snap 80% to the detected peak!
+    if (maxScore > 0.15) {
+      const finalX = (cx * 0.20 + bestX * 0.80) / w;
+      const finalY = (cy * 0.20 + bestY * 0.80) / h;
+      return { x: finalX, y: finalY };
+    }
+
+    return { x: xPct, y: yPct };
+  }
+
+  // Draw clean, non-overlapping HUD callout badge
+  function drawPillBadge(ctx, width, height, bx, by, text, borderColor) {
+    ctx.save();
+    ctx.font = 'bold 11px system-ui, -apple-system, sans-serif';
+    const textWidth = ctx.measureText(text).width;
+    const padX = 8;
+    const bw = textWidth + padX * 2;
+    const bh = 22;
+
+    // Keep badge inside canvas bounds
+    const rx = Math.max(12, Math.min(width - bw - 12, bx));
+    const ry = Math.max(12, Math.min(height - bh - 12, by));
+
+    // Pill background
+    ctx.fillStyle = 'rgba(6, 12, 26, 0.90)';
+    ctx.beginPath();
+    ctx.roundRect(rx, ry, bw, bh, 11);
+    ctx.fill();
+
+    // Glowing border
+    ctx.strokeStyle = borderColor;
+    ctx.lineWidth = 1.4;
+    ctx.shadowColor = borderColor;
+    ctx.shadowBlur = 8;
+    ctx.stroke();
+
+    // Text
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowBlur = 0;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, rx + padX, ry + bh / 2);
+    ctx.restore();
+  }
+
   function renderBiometricPalmAnalysis(rCtx, width, height, filter = 'all') {
     currentActiveFilter = filter;
     rCtx.clearRect(0, 0, width, height);
@@ -1109,14 +1204,17 @@ document.addEventListener('DOMContentLoaded', () => {
       rCtx.fillRect(0, 0, width, height);
     }
 
-    // Variation offsets based on hash
-    const v = () => (seededRandom() - 0.5) * 0.03;
-
     // Symmetrical X coordinate mapping: mirrors for Left Hand
     const mx = (x) => isRightHand ? x : (1 - x);
 
-    // Helper for glowing bezier curves
-    const drawGlowPath = (pts, strokeColor, glowColor, lineWidth, isSelected, labelText) => {
+    // Crease-alignment helper: snaps nominal anchor to actual detected palm creases
+    const snapPt = (xr, yr, rx = 24, ry = 24) => {
+      const xBase = isRightHand ? xr : (1 - xr);
+      return snapToCrease(xBase, yr, rx, ry);
+    };
+
+    // Helper for glowing bezier curves with smart callouts
+    const drawGlowPath = (pts, strokeColor, glowColor, lineWidth, isSelected, labelText, lineType = '') => {
       const alpha = (filter === 'all' || isSelected) ? 1.0 : 0.15;
       rCtx.save();
       rCtx.globalAlpha = alpha;
@@ -1167,75 +1265,91 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Label when selected or in 'all'
-      if ((filter === 'all' || isSelected) && labelText && pts.length > 2) {
-        const midPt = pts[Math.floor(pts.length / 2)];
-        rCtx.font = 'bold 11px system-ui, -apple-system, sans-serif';
-        rCtx.fillStyle = '#ffffff';
-        rCtx.shadowColor = '#000000';
-        rCtx.shadowBlur = 4;
-        rCtx.fillText(labelText, midPt.x * width + 8, midPt.y * height - 6);
+      // Dedicated, collision-free callout badge placement
+      if ((filter === 'all' || isSelected) && labelText && lineType) {
+        let lx, ly;
+        if (lineType === 'heart') {
+          // Upper curve on percussion side
+          lx = (isRightHand ? pts[0].x : pts[pts.length - 1].x) * width + (isRightHand ? 8 : -110);
+          ly = pts[1].y * height - 20;
+        } else if (lineType === 'head') {
+          // Lower terminus towards Mount Moon
+          lx = (isRightHand ? pts[pts.length - 1].x : pts[0].x) * width + (isRightHand ? -25 : 8);
+          ly = pts[pts.length - 1].y * height + 16;
+        } else if (lineType === 'life') {
+          // Inside thumb curve
+          lx = (isRightHand ? pts[3].x - 0.12 : pts[3].x + 0.02) * width;
+          ly = pts[3].y * height + 14;
+        } else if (lineType === 'fate') {
+          // Lower third near wrist
+          lx = pts[0].x * width + (isRightHand ? 14 : -110);
+          ly = pts[0].y * height - 16;
+        }
+
+        if (lx !== undefined && ly !== undefined) {
+          drawPillBadge(rCtx, width, height, lx, ly, labelText, glowColor);
+        }
       }
 
       rCtx.restore();
     };
 
-    // 1. LIFE LINE (Emerald Green) - strictly within palm: y in [0.55, 0.86]
+    // 1. LIFE LINE (Emerald Green) - curves around Mount of Venus hugging the thumb
     const lifePoints = [
-      { x: mx(0.58 + v()), y: 0.55 + v() },
-      { x: mx(0.54 + v()), y: 0.62 + v() },
-      { x: mx(0.51 + v()), y: 0.71 + v() },
-      { x: mx(0.48 + v()), y: 0.80 + v() },
-      { x: mx(0.45 + v()), y: 0.86 + v() }
+      snapPt(0.58, 0.49, 22, 26),
+      snapPt(0.64, 0.57, 32, 28),
+      snapPt(0.64, 0.66, 32, 30),
+      snapPt(0.58, 0.74, 28, 28),
+      snapPt(0.48, 0.82, 24, 26)
     ];
-    drawGlowPath(lifePoints, '#00ff88', '#00cc66', 3.5, filter === 'life', '🌿 Life Line (जीव रेखा)');
+    drawGlowPath(lifePoints, '#00ff88', '#00cc66', 3.5, filter === 'life', '🌿 Life Line (जीव रेखा)', 'life');
 
-    // 2. HEAD LINE (Electric Cyan) - strictly within palm: y in [0.56, 0.67]
+    // 2. HEAD LINE (Electric Cyan) - traverses across palm from radial edge towards Mount Moon
     const headPoints = [
-      { x: mx(0.58 + v()), y: 0.56 + v() },
-      { x: mx(0.48 + v()), y: 0.59 + v() },
-      { x: mx(0.38 + v()), y: 0.63 + v() },
-      { x: mx(0.26 + v()), y: 0.67 + v() }
+      snapPt(0.58, 0.49, 22, 28),
+      snapPt(0.48, 0.54, 26, 30),
+      snapPt(0.38, 0.59, 26, 30),
+      snapPt(0.27, 0.64, 24, 32)
     ];
-    drawGlowPath(headPoints, '#00e5ff', '#0099cc', 3.5, filter === 'head', '🧠 Head Line (मस्तिष्क रेखा)');
+    drawGlowPath(headPoints, '#00e5ff', '#0099cc', 3.5, filter === 'head', '🧠 Head Line (मस्तिष्क रेखा)', 'head');
 
     // Writer's Fork on Head Line
     const headFork = [
-      { x: mx(0.38 + v()), y: 0.63 + v() },
-      { x: mx(0.28 + v()), y: 0.71 + v() }
+      headPoints[2],
+      snapPt(0.28, 0.70, 24, 28)
     ];
     drawGlowPath(headFork, '#00e5ff', '#0099cc', 2.2, filter === 'head', '');
 
-    // 3. HEART LINE (Crimson Ruby) - strictly on palm bed: y in [0.50, 0.57]
+    // 3. HEART LINE (Crimson Ruby) - upper palm crease under fingers curving to Mount Jupiter
     const heartPoints = [
-      { x: mx(0.24 + v()), y: 0.57 + v() },
-      { x: mx(0.35 + v()), y: 0.53 + v() },
-      { x: mx(0.46 + v()), y: 0.51 + v() },
-      { x: mx(0.56 + v()), y: 0.50 + v() }
+      snapPt(0.24, 0.49, 20, 32),
+      snapPt(0.35, 0.46, 24, 30),
+      snapPt(0.45, 0.44, 24, 30),
+      snapPt(0.55, 0.43, 22, 28)
     ];
-    drawGlowPath(heartPoints, '#ff2a6d', '#ff0055', 3.5, filter === 'heart', '❤️ Heart Line (हृदय रेखा)');
+    drawGlowPath(heartPoints, '#ff2a6d', '#ff0055', 3.5, filter === 'heart', '❤️ Heart Line (हृदय रेखा)', 'heart');
 
     // Jupiter Trident on Heart Line
     const heartBranch = [
-      { x: mx(0.50 + v()), y: 0.52 + v() },
-      { x: mx(0.58 + v()), y: 0.50 + v() }
+      heartPoints[2],
+      snapPt(0.57, 0.41, 20, 24)
     ];
     drawGlowPath(heartBranch, '#ff2a6d', '#ff0055', 2.2, filter === 'heart', '');
 
-    // 4. FATE LINE (Sunburst Gold) - strictly within palm: y in [0.51, 0.86]
+    // 4. FATE LINE (Sunburst Gold) - vertical line rising from base of palm toward Saturn mount
     const fatePoints = [
-      { x: mx(0.44 + v()), y: 0.86 + v() },
-      { x: mx(0.43 + v()), y: 0.73 + v() },
-      { x: mx(0.42 + v()), y: 0.61 + v() },
-      { x: mx(0.42 + v()), y: 0.51 + v() }
+      snapPt(0.45, 0.82, 26, 20),
+      snapPt(0.45, 0.70, 28, 24),
+      snapPt(0.44, 0.57, 28, 24),
+      snapPt(0.44, 0.45, 24, 20)
     ];
-    drawGlowPath(fatePoints, '#ffb703', '#fb8500', 3.2, filter === 'fate', '⭐ Fate Line (भाग्य रेखा)');
+    drawGlowPath(fatePoints, '#ffb703', '#fb8500', 3.2, filter === 'fate', '⭐ Fate Line (भाग्य रेखा)', 'fate');
 
-    // 5. SUN / APOLLO LINE (Warm Amber) - strictly within palm: y in [0.52, 0.70]
+    // 5. SUN / APOLLO LINE (Warm Amber) - under ring finger
     const sunPoints = [
-      { x: mx(0.35 + v()), y: 0.70 + v() },
-      { x: mx(0.34 + v()), y: 0.60 + v() },
-      { x: mx(0.33 + v()), y: 0.52 + v() }
+      snapPt(0.35, 0.68, 20, 22),
+      snapPt(0.35, 0.56, 22, 22),
+      snapPt(0.35, 0.46, 20, 20)
     ];
     drawGlowPath(sunPoints, '#ffe600', '#ffaa00', 2.2, filter === 'fate' || filter === 'all', '');
 
@@ -1259,13 +1373,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. PLANETARY MOUNTS (Nodes & Halos strictly within palm boundaries)
     const mounts = [
-      { glyph: '♃', name: 'Jupiter', x: mx(0.55), y: 0.51, color: '#f1c40f' },
-      { glyph: '♄', name: 'Saturn', x: mx(0.44), y: 0.50, color: '#9b59b6' },
-      { glyph: '☉', name: 'Sun', x: mx(0.34), y: 0.51, color: '#f39c12' },
-      { glyph: '☿', name: 'Mercury', x: mx(0.24), y: 0.53, color: '#1abc9c' },
-      { glyph: '♂', name: 'Mars', x: mx(0.40), y: 0.62, color: '#e74c3c' },
-      { glyph: '♀', name: 'Venus', x: mx(0.60), y: 0.72, color: '#e91e63' },
-      { glyph: '☽', name: 'Moon', x: mx(0.27), y: 0.76, color: '#3498db' }
+      { glyph: '♃', name: 'Jupiter', x: mx(0.55), y: 0.43, color: '#f1c40f' },
+      { glyph: '♄', name: 'Saturn', x: mx(0.45), y: 0.41, color: '#9b59b6' },
+      { glyph: '☉', name: 'Sun', x: mx(0.35), y: 0.42, color: '#f39c12' },
+      { glyph: '☿', name: 'Mercury', x: mx(0.25), y: 0.46, color: '#1abc9c' },
+      { glyph: '♂', name: 'Mars', x: mx(0.42), y: 0.56, color: '#e74c3c' },
+      { glyph: '♀', name: 'Venus', x: mx(0.68), y: 0.67, color: '#e91e63' },
+      { glyph: '☽', name: 'Moon', x: mx(0.28), y: 0.72, color: '#3498db' }
     ];
 
     mounts.forEach(m => {
