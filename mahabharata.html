@@ -710,8 +710,11 @@
         <button type="button" class="parva-sel-btn" id="btnParvaDrona" onclick="selectReaderParva('drona')">
           ⚔️ Vol VI: Drona Parva (8 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaVol7" onclick="selectReaderParva('vol7')">
+        <button type="button" class="parva-sel-btn" id="btnParvaVol7" onclick="selectReaderParva('vol7')">
           🏹 Vol VII: Karna, Salya, Sauptika &amp; Stree (9 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVol8" onclick="selectReaderParva('vol8')">
+          🕊️ Vol VIII: Shanti Parva I (రాజధర్మ &amp; ఆపద్ధర్మ - 2 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -776,6 +779,13 @@
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Yudhishthira wish to renounce the kingdom in grief and what was the debate with his brothers and Draupadi?')">🕊️ Yudhishthira's Grief &amp; Renunciation Debate (ధర్మరాజు వైరాగ్యం &amp; సంవాదం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the origin of kingship and the supreme doctrine of Danda-Niti according to Bhishma?')">👑 Danda-Niti &amp; Origin of Kingship (దండనీతి, పృథు చక్రవర్తి &amp; రాజా కాలస్య కారణమ్)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How should a king collect taxes according to the doctrines of the bee, calf, and mother tiger?')">🐝 Taxation Doctrine: Bee &amp; Mother Tiger (తేనెటీగ &amp; పులి పిల్లల పన్నుల విధానం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Sage Viswamitra eat dog meat from a Chandala during the 12-year famine in Apaddharma Parva?')">🐕 Sage Viswamitra &amp; Dog Meat in 12-Year Famine (విశ్వామిత్రుని శునక మాంస భక్షణ)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the alliance between Palita the mouse and Lomasa the cat in the hunter net and what does it teach about friendship?')">🐭 Palita the Mouse &amp; Lomasa the Cat (ఎలుక-పిల్లి సంవాదం &amp; నిత్యశత్రుత్వ తత్వం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the discourse between the Ocean and the Reed on yielding to irresistible force?')">🌾 Ocean and the Reed (సముద్రము-రెల్లుగడ్డి సంవాదం &amp; వినమ్రతా తత్వం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the story of Rajadharman the Crane Prince and why is ingratitude the most unpardonable sin?')">🦩 Rajadharman the Crane &amp; Unforgivable Betrayal (రాజధర్మ కొంగ &amp; కృతఘ్నత పాపం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did the duel between Arjuna and Karna unfold on the 17th day and how did the Anjalika weapon slay Karna?')">🏹 Karna vs Arjuna &amp; Fall of Karna (కర్ణ-అర్జున ద్వంద్వయుద్ధం &amp; అంజలికాస్త్రం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima tear open Duhsasana\'s chest, drink his heart-blood, and tie Draupadi\'s hair?')">🩸 Bhima Drinking Duhsasana\'s Blood (దుశ్శాసన వధ &amp; రక్తపానం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Duryodhana hide in Dvaipayana Lake and how was he defeated by Bhima in the mace duel?')">🌊 Duryodhana in Dvaipayana Lake &amp; Mace Duel (ద్వైపాయన మడుగు &amp; ఊరుభంగం)</button>
@@ -912,6 +922,7 @@
   const btnParvaBhishma = document.getElementById('btnParvaBhishma');
   const btnParvaDrona = document.getElementById('btnParvaDrona');
   const btnParvaVol7 = document.getElementById('btnParvaVol7');
+  const btnParvaVol8 = document.getElementById('btnParvaVol8');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -966,7 +977,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7, btnParvaVol8].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -1004,6 +1015,10 @@
       if (btnParvaVol7) btnParvaVol7.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'కర్ణ, శల్య, సౌప్తిక & స్త్రీ పర్వములు (Volume VII) — 9 ఉపపర్వాలు సంపూర్ణం' : 'Volume VII: Karna, Salya, Sauptika & Stree Parvas — All 9 Upa-Parvas Complete';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VII: కర్ణుని సేనాధిపత్యం & అంజలికాస్త్ర పతనం, దుశ్శాసన రక్తపానం, శల్యవధ, ద్వైపాయన మడుగు & గదాయుద్ధం (ఊరుభంగం), కపిధ్వజ రథ దహనం, సౌప్తిక రాత్రి మారణహోమం, ఐషీకాస్త్రం & అశ్వత్థామకు 3000 ఏళ్ళ శాపం, లోహభీముడు, గాంధారీ విలాపం & శ్రీకృష్ణునికి శాపం, కుంతి కర్ణ రహస్యం & స్త్రీజాతికి శాపం.' : 'Volume VII: Karna\'s command & fall via Anjalika, Bhima drinking Duhsasana\'s blood, Shalya slain, Dvaipayana Lake, Gada-yuddha thigh-strike, Kapidhwaja chariot incinerated, Sauptika nocturnal slaughter, Aishika weapon & 3,000-year curse on Ashwatthaman, iron statue of Bhima, Gandhari\'s lament & curse to Krishna, and Karna\'s secret unveiled.';
+    } else if (parvaKey === 'vol8') {
+      if (btnParvaVol8) btnParvaVol8.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'శాంతి పర్వము - భాగం 1 (Shanti Parva Part I) — 2 ఉపపర్వాలు సంపూర్ణం' : 'Volume VIII: Shanti Parva (Part I - Rajadharma & Apaddharma) — Complete 2 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VIII: యుద్ధానంతర శోకం, సంసార వైరాగ్యం, చార్వాక వధ, పట్టాభిషేకం, అంపశయ్యపై భీష్మ దర్శనం, రాజధర్మ సర్వస్వం (దండనీతి, పన్నులు, విదేశాంగ విధానం) & ఆపద్ధర్మం (విశ్వామిత్ర శునక మాంస భక్షణ, ఎలుక-పిల్లి మైత్రి, రాజధర్మ కొంగ కథ).' : 'Volume VIII: Post-war grief, renunciation debate, Charvaka slain, coronation, visiting Bhishma on bed of arrows, Rajadharma (kingship, Danda, justice, Mandala theory), and Apaddharma (emergency ethics, Viswamitra, mouse-cat alliance, and Rajadharman crane).';
     }
 
     renderUpaParvas();
@@ -1042,6 +1057,7 @@
     if (currentParva === 'bhishma') return window.BHISHMA_PARVA_UPAPARVAS || [];
     if (currentParva === 'drona') return window.DRONA_PARVA_UPAPARVAS || [];
     if (currentParva === 'vol7') return window.VOLUME_VII_UPAPARVAS || [];
+    if (currentParva === 'vol8') return window.VOLUME_VIII_UPAPARVAS || [];
     return [];
   }
 
@@ -1149,7 +1165,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : (v.volNumber === 6 ? 'drona' : (v.volNumber === 7 ? 'vol7' : 'adi'))))))}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : (v.volNumber === 6 ? 'drona' : (v.volNumber === 7 ? 'vol7' : (v.volNumber === 8 ? 'vol8' : 'adi')))))))}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1188,6 +1204,7 @@
     else if (parvaKey === 'bhishma') { dataset = window.BHISHMA_PARVA_UPAPARVAS; parvaLabel = 'BHISHMA PARVA (VOL V)'; }
     else if (parvaKey === 'drona') { dataset = window.DRONA_PARVA_UPAPARVAS; parvaLabel = 'DRONA PARVA (VOL VI)'; }
     else if (parvaKey === 'vol7') { dataset = window.VOLUME_VII_UPAPARVAS; parvaLabel = 'VOLUME VII (KARNA, SALYA, SAUPTIKA, STREE)'; }
+    else if (parvaKey === 'vol8') { dataset = window.VOLUME_VIII_UPAPARVAS; parvaLabel = 'VOLUME VIII (SHANTI PARVA PART I)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1324,13 +1341,79 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV, V, VI &amp; VII)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV, V, VI, VII &amp; VIII)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('anjalika') || (qLower.includes('karna') && (qLower.includes('arjuna') || qLower.includes('fall') || qLower.includes('slain') || qLower.includes('ashwasena') || qLower.includes('sinking wheel') || qLower.includes('wheel sunk') || qLower.includes('cursed wheel') || qLower.includes('parashurama curse')))) {
+      if (qLower.includes('renounce') || qLower.includes('renunciation') || (qLower.includes('grief') && qLower.includes('yudhishthira')) || qLower.includes('shodasa-rajika') || qLower.includes('charvaka') || (qLower.includes('beggar') && qLower.includes('yudhishthira'))) {
+        answer = `
+          <strong>🕊️ Yudhishthira's Grief, Renunciation Debate &amp; Coronation (రాజధర్మానుశాసన పర్వము / Rajadharmanusasana Parva - Volume VIII):</strong><br/><br/>
+          • <strong>The Crisis of Victor's Remorse:</strong> Having completed the water rites for millions of fallen heroes on the sacred Ganga and discovered that Karna was his eldest brother, King Yudhishthira is overwhelmed with desolation: <em>"What kingdom is this, gained by bathing in the blood of our kinsmen, teachers, sons, and friends? Fie on Kshatriya life!"</em> He announces his resolve to renounce sovereignty, adopt ascetic robes, take the begging bowl, and retire into the deep forest.<br/><br/>
+          • <strong>The Pandava Brothers &amp; Draupadi's Rebukes:</strong><br/>
+            &bull; <strong>Arjuna:</strong> Rebukes Yudhishthira, explaining that without wealth (<em>Artha</em>) and sovereign power, all religious rites, charities, and social protection perish: <em>"Poverty is a sin in kings! Wealth alone sustains virtue!"</em><br/>
+            &bull; <strong>Bhima:</strong> Roars in indignation: <em>"If we were destined to live as mendicant ascetics in the woods, why did we endure twelve years in exile, slaughter eleven Akshauhinis, and butcher millions of Kshatriyas? Renunciation before fulfilling kingly duty is the refuge of weaklings!"</em><br/>
+            &bull; <strong>Nakula &amp; Sahadeva:</strong> Argue that the domestic life (<em>Garhasthya</em>) of a righteous king is the sacred mother and foundation of all other three Ashramas.<br/>
+            &bull; <strong>Queen Draupadi:</strong> Speaks with razor-sharp eloquence: <em>"Forgiveness without chastisement (Danda) destroys a realm! A monarch who abandons his kingdom leaves subjects prey to the anarchy of fish (Matsya-nyaya). Thy duty is to rule with justice, not weep in forest hermitages!"</em><br/><br/>
+          • <strong>The Shodasa-rajika Discourse:</strong> Sages Krishna-Dwaipayana Vyasa and Narada narrate the ancient history of the <strong>Sixteen Illustrious Kings (Shodasa-rajika)</strong>—Marutta, Suhotra, Paurava, Sibi, Rama Dasarathi, Bhagiratha, Mandhatri, and others—who performed imperial sacrifices, conquered the earth, yet all departed this life, demonstrating that mortality is the universal law of existence.<br/><br/>
+          • <strong>Entry into Hastinapura &amp; Slaying of Charvaka:</strong> Pacified by Sri Krishna, Yudhishthira enters Hastinapura in a grand golden car. A demon named <strong>Charvaka</strong> (a secret friend of Duryodhana disguised as a mendicant Brahmana) steps forth and reviles the king before the assembly: <em>"Fie on thee, destroyer of thy race!"</em> The genuine learned Brahmanas, blazing with yogic fire, utter the sacred sound <strong>"HUM!"</strong>, instantly reducing the demonic impostor to ashes! Yudhishthira is anointed Emperor with divine Vedic hymns.
+        `;
+      } else if (qLower.includes('danda') || qLower.includes('origin of king') || qLower.includes('prithu') || qLower.includes('raja kalasya') || qLower.includes('matsya-nyaya') || (qLower.includes('bed of arrows') && qLower.includes('bhishma')) || (qLower.includes('saratalpa') && qLower.includes('bhishma'))) {
+        answer = `
+          <strong>👑 Danda-Niti &amp; Origin of Kingship: Bhishma's Rajadharma (రాజధర్మ సర్వస్వం &amp; రాజా కాలస్య కారణమ్ - Volume VIII):</strong><br/><br/>
+          • <strong>Bhishma on the Bed of Arrows (Saratalpa):</strong> Lord Sri Krishna leads the Pandavas to Kurukshetra where Grandfather Bhishma lies awaiting the auspicious northern solstice (<em>Uttarayana</em>). Touching Bhishma, Sri Krishna removes all physical burning, exhaustion, and delusion, endowing him with celestial omniscience to deliver the ultimate encyclopedia of governance.<br/><br/>
+          • <strong>State of Nature &amp; Collapse of Society:</strong> Bhishma narrates that in the Golden Age (Krita Yuga), there was neither king nor kingdom, neither punishment nor punisher (<em>"Naiva rajyam na raja-sinna dando na ca dandikah"</em>). All beings protected each other through spontaneous Dharma. Over time, delusion (<em>Moha</em>), cupidity (<em>Lobha</em>), and passion (<em>Kama</em>) corrupted mankind; the strong began devouring the weak like larger fish swallowing smaller ones (<strong>Matsya-nyaya</strong>).<br/><br/>
+          • <strong>Brahma's 100,000-Chapter Treatise:</strong> Approached by the terrified Devas, Lord Brahma composed a monumental hundred-thousand-chapter treatise covering Dharma, Artha, Kama, and Moksha. From this cosmic treatise emerged <strong>Danda-Niti</strong> (the Science of Chastisement). Chastisement alone keeps the worlds awake and prevents society from lapsing into bestial chaos (<em>"Dandena rakshyate dharmah"</em>).<br/><br/>
+          • <strong>King Prithu Vainya:</strong> From the churned right arm of the tyrant king Vena, the righteous <strong>Prithu</strong> was born with celestial weapons and armor. Anointed the first consecrated monarch (<em>Raja</em>—one who pleases his people), Prithu took the solemn vow: <em>"I will ever protect Dharma and never chastise a Brahmana!"</em> He leveled the earth, established cities, agriculture, and prosperity.<br/><br/>
+          • <strong>Raja Kalasya Karanam:</strong> Bhishma settles the ultimate philosophical question of historical determinism: <em>"Whether it is the age that produces the king, or the king that produces the age? Have no doubt: The King is the creator of the Age (రాజా కాలస్య కారణమ్)! When the king exercises Danda righteously, Krita Yuga prevails; when he sleeps in neglect, Kali Yuga covers the earth!"</em>
+        `;
+      } else if (qLower.includes('tax') || qLower.includes('bee') || qLower.includes('tiger') || qLower.includes('calf') || qLower.includes('leech') || qLower.includes('mandala') || qLower.includes('saptanga') || qLower.includes('shadgunya')) {
+        answer = `
+          <strong>🐝 Taxation Doctrine: The Bee, Calf &amp; Mother Tiger (తేనెటీగ, దూడ &amp; పులి పిల్లల పన్నుల విధానం - Volume VIII):</strong><br/><br/>
+          • <strong>The Philosophy of Royal Revenue:</strong> Grandfather Bhishma teaches King Yudhishthira that a kingdom's treasury (<em>Kosha</em>) is the root of its army, defense, and religious welfare, but extortionate taxation destroys the king and the realm alike.<br/><br/>
+          • <strong>The Golden Analogies of Taxation:</strong><br/>
+            &bull; <strong>The Bee (Madhukara):</strong> As the honey-bee collects nectar drop by drop from flowers without bruising petals or disturbing fragrance, so must a king draw taxes gently from merchants, farmers, and artisans without crushing their productive enterprise.<br/>
+            &bull; <strong>The Calf (Vatsa):</strong> As the calf milks the mother cow without biting or wounding her udder, leaving sufficient nourishment for the calf's growth, taxation must nurture the source of revenue.<br/>
+            &bull; <strong>The Leech (Jalauka):</strong> Drawing blood so gently that the subject feels no irritation or distress.<br/>
+            &bull; <strong>The Mother Tiger (Vyaghri):</strong> A sovereign must handle his subjects like a mother tiger carrying her cubs in her mouth—holding them firmly so they do not fall, yet gently so her razor-sharp teeth never pierce their flesh!<br/><br/>
+          • <strong>Rajamandala &amp; Four Expedients:</strong> Bhishma expounds the <strong>Saptanga</strong> (7 limbs of the state: King, Ministers, Realm, Fort, Treasury, Army, and Ally), the 12-state <strong>Mandala Theory</strong> (Ari, Mitra, Ari-mitra, Udasina, Madhyama), the <strong>Shadgunya</strong> (6 foreign policies: Peace, War, Marching, Neutrality, Dual Alliance, and Seeking Protection), and the skillful deployment of <strong>Sama</strong> (conciliation), <strong>Dana</strong> (gifts), <strong>Bheda</strong> (division), and <strong>Danda</strong> (force).
+        `;
+      } else if (qLower.includes('viswamitra') || (qLower.includes('dog') && (qLower.includes('meat') || qLower.includes('chandala') || qLower.includes('thigh'))) || qLower.includes('12-year famine') || qLower.includes('twelve-year famine') || qLower.includes('prana-raksha')) {
+        answer = `
+          <strong>🐕 Sage Viswamitra &amp; The Dog's Meat in 12-Year Famine (ఆపద్ధర్మం &amp; విశ్వామిత్రుని శునక మాంస భక్షణ - Volume VIII):</strong><br/><br/>
+          • <strong>The Catastrophic Famine:</strong> In the Apaddharmanusasana Parva, Bhishma narrates how a horrific twelve-year drought afflicted the three worlds. Rivers evaporated, grain failed, and holy sacrifices ceased. Starving and near death, the renowned royal sage <strong>Viswamitra</strong> wandered into a forest settlement of outcaste Chandala hunters.<br/><br/>
+          • <strong>The Chandala's Hut:</strong> Searching desperately for any edible scrap in the dead of night, Viswamitra entered the hut of a Chandala and discovered a raw, unclean canine thigh-meat (<em>Sva-jangha</em>) hanging from a rope.<br/><br/>
+          • <strong>The Profound Moral Duel:</strong> Awoken by the noise, the Chandala challenged the sage: <em>"O revered Rishi, how canst thou, a master of the Vedas, steal the impure flesh of a dog from an outcaste? It will destroy thy sacred status and spiritual effulgence!"</em><br/><br/>
+          • <strong>The Supreme Law of Self-Preservation (Atma-Raksha):</strong> Viswamitra replied with the foundational maxim of Apaddharma: <em>"Life is superior to ceremonial purity! A living person can perform penance and regain spiritual luster, but a corpse can practice no virtue (జీవన్‌భద్రాణి పశ్యతి — If I survive, I can practice penance and cleanse this stain; but if I perish, Dharma itself dies with me)! When life is at stake, all foods become permissible to sustain existence!"</em><br/><br/>
+          • <strong>Cosmic Rain &amp; Divine Blessing:</strong> Viswamitra took the dog's thigh to the wilderness, bathed, and consecrated the flesh according to Vedic rites for offering to the Devas and Pitris. Moved by the sage's unshakeable determination to preserve life, Lord Indra caused torrential rains to pour upon the parched earth, revitalizing all crops and restoring the world!
+        `;
+      } else if (qLower.includes('palita') || qLower.includes('lomasa') || (qLower.includes('mouse') && qLower.includes('cat')) || (qLower.includes('hunter') && qLower.includes('net') && qLower.includes('cat'))) {
+        answer = `
+          <strong>🐭 Palita the Mouse &amp; Lomasa the Cat: Strategic Alliance (ఎలుక-పిల్లి సంవాదం &amp; నిత్యశత్రుత్వ తత్వం - Volume VIII):</strong><br/><br/>
+          • <strong>The Triple Trap:</strong> In a vast banyan tree, <strong>Lomasa the cat</strong> is ensnared in a hunter's heavy cord net. <strong>Palita the mouse</strong>, foraging nearby, suddenly finds himself surrounded by two mortal predators: a mongoose stalking him on the ground and an owl (<strong>Harita</strong>) hovering above him in the branches!<br/><br/>
+          • <strong>The Strategic Compact:</strong> Surrounded by inevitable death, Palita approaches his natural enemy, the ensnared cat, and proposes a treaty of mutual survival: <em>"Thou art trapped by the hunter; I am threatened by the mongoose and owl. Let me hide under thy body for protection, and in return, I will gnaw thy bonds and set thee free!"</em> Recognizing shared doom, Lomasa accepts.<br/><br/>
+          • <strong>Under the Predator's Breast:</strong> Palita crawls into the cat's fur. Seeing the mouse protected by the feline, the disappointed owl and mongoose abandon the hunt. Palita deliberately gnaws the net cords at a measured pace, keeping one single strong cord uncut until the hunter approaches with weapons.<br/><br/>
+          • <strong>The Moment of Escape:</strong> As the hunter enters the clearing, Palita severs the final cord. The cat darts up into the highest branches of the tree, Palita dives into his underground burrow, and the empty-handed hunter departs in frustration.<br/><br/>
+          • <strong>The Timeless Truth of Political Realism:</strong> When Lomasa later purrs affectionately at the burrow entrance, inviting Palita to be his eternal friend and brother, the wise mouse refuses to emerge, delivering the immortal political maxim: <em>"There is no natural friend and no natural enemy; circumstance and interest alone make friends and foes! Alliance born of mutual peril dissolves the moment that peril ends. A weak creature who trusts a stronger predator out of sentimentality signs his own death warrant!"</em>
+        `;
+      } else if ((qLower.includes('ocean') && qLower.includes('reed')) || qLower.includes('vetasa') || qLower.includes('bending') || (qLower.includes('tree') && qLower.includes('river') && qLower.includes('ocean'))) {
+        answer = `
+          <strong>🌾 The Ocean and the Reed: Wisdom of Yielding to Force (సముద్రము-రెల్లుగడ్డి సంవాదం &amp; వినమ్రతా తత్వం - Volume VIII):</strong><br/><br/>
+          • <strong>The Ocean's Inquiry:</strong> Ocean Deva (<em>Sagara</em>) addresses the holy rivers headed by Ganga: <em>"You sweep down giant, mighty trees—massive Sal, Arjuna, and banian trees with trunks of iron strength—uprooting them and washing them into my waters. Yet never do you bring me a single slender, humble Reed (Vetasa)! How does the fragile reed escape your torrential fury?"</em><br/><br/>
+          • <strong>The Secret of the Reed (Vetasa-Vritti):</strong> The holy River Ganga reveals the profound secret of survival: <em>"The giant trees stand rigid, proud, and defiant against our rushing currents; because they refuse to yield, our irresistible waters tear out their roots and cast them down into ruin. But the humble reed (Vetasa) bends flat to the ground the moment our torrent rushes over it, offering no resistance; when the flood subsides, it rises unharmed, standing erect once more!"</em><br/><br/>
+          • <strong>Political &amp; Ethical Lesson:</strong> Grandfather Bhishma uses this fable to teach King Yudhishthira the supreme rule of survival during calamitous times (<em>Apaddharma</em>): Confronted by an overwhelmingly superior foe or irresistible cosmic adversity, a ruler must not perish through rigid stubbornness. He should bend with humility like the reed, preserve his life and resources, and rise with renewed vigor when the tempest passes!
+        `;
+      } else if (qLower.includes('rajadharman') || (qLower.includes('crane') && (qLower.includes('gautama') || qLower.includes('ingratitude') || qLower.includes('brahmadatta') || qLower.includes('roasted')))) {
+        answer = `
+          <strong>🦩 Rajadharman the Crane &amp; The Sin of Ingratitude (రాజధర్మ కొంగ &amp; కృతఘ్నత పాపం - Volume VIII):</strong><br/><br/>
+          • <strong>The Celestial Crane:</strong> Bhishma narrates the tragic tale of <strong>Rajadharman</strong>, a colossal, radiant crane (a son of Sage Kasyapa and beloved friend of Lord Brahma), who dwells beneath a banyan tree. A destitute, ignominious Brahmana named <strong>Gautama</strong>, wandering in misery, arrives at the crane's dwelling.<br/><br/>
+          • <strong>Sacred Hospitality:</strong> Rajadharman receives Gautama with touching love and reverence, lighting a sacred fire to warm his freezing guest, feeding him celestial fruits and fish, and treating him as his most honored family member.<br/><br/>
+          • <strong>The Heinous Betrayal:</strong> As Rajadharman sleeps peacefully beside the fire, Gautama—consumed by greed and wicked hunger—smashes the trusting bird's head with a heavy firebrand, plucks his golden plumage, and roasts his flesh over the embers to eat on his journey home!<br/><br/>
+          • <strong>King Brahmadatta's Retribution:</strong> When Rajadharman fails to appear in Brahma's assembly, his sworn friend <strong>King Brahmadatta</strong> of the Rakshasas sends scouts. Discovering the charred bones and feathers, the Rakshasas capture Gautama, execute him, and cast his ungrateful corpse to the dogs. King Brahmadatta arranges a funeral pyre for Rajadharman, and by the divine boon of Kamadhenu's celestial milk, the glorious bird is restored to life!<br/><br/>
+          • <strong>The Incurable Sin of Ingratitude:</strong> Bhishma proclaims the ultimate moral verdict: <em>"There is expiation prescribed in the holy scriptures for the slayer of a Brahmana, for a drinker of wine, for a thief, and for a breaker of vows; but for an ungrateful man (Kritaghna), there is NO expiation whatsoever in all the worlds (కృతఘ్నతకు ఎన్నటికీ ప్రాయశ్చిత్తం లేదు)!"</em>
+        `;
+      } else       if (qLower.includes('anjalika') || (qLower.includes('karna') && (qLower.includes('arjuna') || qLower.includes('fall') || qLower.includes('slain') || qLower.includes('ashwasena') || qLower.includes('sinking wheel') || qLower.includes('wheel sunk') || qLower.includes('cursed wheel') || qLower.includes('parashurama curse')))) {
         answer = `
           <strong>🏹 The Duel of Titans: Arjuna vs. Karna &amp; Fall of Karna (కర్ణ పర్వము / Karna Parva - Volume VII):</strong><br/><br/>
           • <strong>The 17th Day Climax:</strong> Karna commands the Kaurava army as supreme general. Salya, King of Madra, acts as Karna's charioteer on the condition of speaking his mind freely, constantly demoralizing Karna with the biting fable of the haughty crow and the royal swans (<em>Hamsa-Kaka Akhyana</em>).<br/><br/>
@@ -1659,8 +1742,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through VII (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, and Stree Parvas).<br/><br/>
-          You can explore all 9 Upa-Parvas of Volume VII (Karna Parva &amp; Anjalika Astra, Shalya-badha, Hrada-pravesha &amp; Dvaipayana Lake, Gada-yuddha mace duel, Sauptika nocturnal slaughter, Aishika weapon &amp; 3,000-year curse on Ashwatthaman, Jalapradanika &amp; Iron Bhima, Stree-vilapa &amp; 36-year Yadava curse, and Sraddha Parva &amp; Karna's secret revealed) or switch to Volumes I–VI in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through VIII (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, Stree, and Shanti Parva Part I).<br/><br/>
+          You can explore both comprehensive Upa-Parvas of Volume VIII (Rajadharmanusasana Parva: Danda-Niti, origin of kingship, bee taxation doctrine, and Shodasa-rajika; and Apaddharmanusasana Parva: Viswamitra's dog-meat, Palita the mouse and Lomasa the cat, Ocean and the Reed, and Rajadharman the Crane) or switch to Volumes I–VII in the reader above!
         `;
       }
 
@@ -1680,7 +1763,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('vol7');
+    selectReaderParva('vol8');
   });
 })();
 </script>

@@ -1661,6 +1661,40 @@ const VOLUME_VII_UPAPARVAS = [
   }
 ];
 
+/* ===== VOLUME VIII: SANTI PARVA (PART I - RAJADHARMA & APADDHARMA) =====
+   Translated into English prose from the original Sanskrit text by Pratap Chandra Roy, C.I.E.
+   Volume VIII covers Sections I to CLXXIII across 2 Canonical Upa-Parvas */
+const VOLUME_VIII_UPAPARVAS = [
+  {
+    number: 1,
+    parva: "Santi Parva",
+    nameEn: "Rajadharmanusasana Parva (Duties of Kings, Post-War Renunciation Debate & Bhishma's Statecraft)",
+    nameSa: "राजधर्मानुशासनपर्वन्",
+    nameTe: "రాజధర్మానుశాసన పర్వము (యుధిష్ఠిరుని వైరాగ్యం, చార్వాక వధ, అంపశయ్యపై భీష్ముని రాజనీతి & దండధర్మ ప్రబోధం)",
+    sections: "Santi Sections I - CXXX",
+    versesApprox: 4725,
+    keyCharacters: ["King Yudhishthira", "Bhagavan Sri Krishna", "Grandfather Bhishma", "Arjuna", "Bhima", "Maharshi Vyasa", "Sage Narada", "Draupadi", "Vidura", "Charvaka Rakshasa"],
+    summaryEn: "Following the conclusion of the funeral rites on the sacred Ganga, King Yudhishthira is plunged into paralyzing grief and inconsolable remorse. Tormented by the memory of millions of slaughtered kin, the butchery of Abhimanyu, and having slain his own eldest brother Karna, Yudhishthira bitterly denounces royal sovereignty as hollow murder and declares his steadfast resolution to renounce the throne, strip off his royal robes, and live in the deep wilderness as a naked, silent forest mendicant. An extraordinary multi-chapter philosophical assembly convenes on the riverbank to heal the King's wounded soul. Arjuna delivers an impassioned defense of Wealth (Artha) and Sovereign Power (Danda), proving that without royal wealth, sacrifices cannot be performed, guests cannot be fed, and the world sinks into anarchy. Bhima rebukes Yudhishthira's dull understanding, declaring that the true hero must conquer his inner mental foes rather than abandoning his duty after slaughtering eighteen Akshauhinis. Nakula demonstrates that the Householder mode of life (Grihastha Ashrama) is the supreme foundation that supports all other three ashramas. Sahadeva proclaims that the word 'Mama' (Mine - two letters) is Death, while 'Na-Mama' (Not Mine - three letters) is eternal Brahman. Draupadi passionately castigates his weakness, comparing a king without the rod of punishment (Danda) to a eunuch. Sages Vyasa, Narada, Devasthana, and Kanwa intervene; Vyasa narrates the moral history of Sankha and Likhita (where Likhita demanded the severance of his hands for taking fruit without permission and his hands regrew as lotuses through righteous punishment) and King Hayagriva who consecrated battlefield courage into a celestial sacrifice. Sri Krishna then narrates the immortal 'Shodasa-rajika' (sixteen legendary monarchs of ancient Bharatavarsha who possessed peerless virtue, charity, and might, yet all succumbed to the irresistible wheel of Time and Death). Persuaded at last to fulfill his Kshatriya destiny, Yudhishthira enters the imperial city of Hastinapura in triumph amidst flowers, conches, and chanting Brahmanas. As Yudhishthira sits upon the golden throne, a wicked demon named Charvaka (a friend of Duryodhana disguised as a mendicant Brahmana) steps forward to curse and revile the King in the name of the sages; enraged by his deceitful blasphemy, the assembled holy Brahmanas roar the sacred syllable 'HUM' and incinerate the demon to ashes with the fire of their ascetic energy! Yudhishthira is consecrated Emperor and distributes the governing offices to Bhima, Vidura, Sanjaya, Nakula, and Arjuna. Visiting Sri Krishna in his chambers, Yudhishthira finds the Lord absorbed in deep yogic trance; Krishna reveals He is worshiping Grandfather Bhishma, who lies on his bed of arrows at Kurukshetra awaiting the auspicious northern solstice (Uttarayana). Krishna warns that with Bhishma's passing, all cosmic knowledge of statecraft, the Vedas, and morality will be extinguished from the earth. The Pandavas and Krishna journey to Kurukshetra and behold the venerable grandsire. Bhishma sings a sublime divine hymn to Krishna; the Lord touches Bhishma, instantly removing all burning pain, fever, hunger, and weakness from his wounded frame, endowing him with divine omniscience and unclouded intellect. In a monumental, encyclopedic discourse spanning seventy-four sections, Grandfather Bhishma expounds the supreme science of Rajadharma: the origin of Kingship from Lord Brahma's 100,000-chapter cosmic treatise; the coronation of King Prithu Vainya; the divine doctrine that the King creates the Age (Raja Kalasya Karanam); the fourfold Varnas and Ashramas; the Rod of Chastisement (Danda) as the cosmic maintainer of property, family, and virtue; taxation collected gently like a bee gathering nectar from flowers or a mother tiger carrying cubs in her teeth; the twelve-king geopolitical Mandala theory; the four expedients (Sama, Dana, Bheda, Danda); the six foreign policies; the deployment of spies as the King's eyes; and righteous governance as the highest sacrifice leading to celestial beatitude.",
+    summaryTe: "గంగా తీరాన శ్రాద్ధ కర్మలు ముగిసిన పిమ్మట, బంధుమిత్రుల మరణం, అభిమన్యుని వీరమరణం మరియు కన్న అన్న కర్ణుని వధ తలచుకుని ధర్మరాజు తీవ్ర వైరాగ్యంతో, పశ్చాత్తాపంతో కుమిలిపోవుట. రక్తసిక్తమైన రాజ్యాన్ని త్యజించి, వస్త్రాలను విడిచి అడవులలో దిగంబర మౌన మునిగా జీవిస్తానని భీషణ ప్రతిజ్ఞ చేయుట. ధర్మరాజును కర్తవ్యోన్ముఖుడిని చేయడానికి పంచపాండవులు, ద్రౌపది, వ్యాస-నారద-దేవస్థాన మహర్షుల మధ్య అద్భుతమైన తాత్విక సంవాదం జరుగుట: సంపద (అర్థం) మరియు దండనీతి లేనిదే ధర్మం నిలవదని, సన్యాసం క్షత్రియుడి ధర్మం కాదని అర్జునుడు వాదించుట; అంతఃశత్రువైన మనస్సును జయించడమే నిజమైన యుద్ధమని భీముడు ప్రబోధించుట; గృహస్థాశ్రమమే సమస్త ఆశ్రమాలకు జీవనాధారమని నకులుడు నిరూపించుట; 'మమ' (నాది) అనే రెండక్షరాలు మృత్యువని, 'న-మమ' (నాది కాదు) అనే మూడక్షరాలు పరబ్రహ్మమని సహదేవుని అమృతబోధ; దండనీతి లేని రాజు నపుంసకుడితో సమానమని ద్రౌపది హెచ్చరించుట; శంఖ-లిఖితుల కథ (దొంగతనానికి చేతులు నరికించుకుని, దండన ద్వారా పవిత్రుడై తిరిగి పద్మాల్లాంటి చేతులు పొందిన కథ) మరియు హయగ్రీవుని త్యాగాన్ని వ్యాసుడు వివరించుట; శ్రీకృష్ణుడు షోడశరాజుల చరిత్ర (మరుత్త, భరత, శ్రీరామ, భగీరథ, దిలీప, మాంధాత వంటి 16 మంది చక్రవర్తులు సైతం కాలగర్భంలో కలిసిపోయారని) వివరించి ధర్మరాజు శోకాన్ని ఉపశమింపజేయుట. హస్తినాపుర ప్రవేశం & సింహాసనాధిష్టానం; దుర్యోధనుని మిత్రుడైన చార్వాక రాక్షసుడు బ్రాహ్మణ వేషంలో ధర్మరాజును దూషించగా, మహర్షులు క్రోధంతో 'హుం'కార నాదంతో వాడిని భస్మం చేయుట. శ్రీకృష్ణుడు అంపశయ్యపై ఉన్న భీష్మ పితామహుని ధ్యానించుట; కురుక్షేత్ర రణరంగంలో భీష్ముని దర్శనం; శ్రీకృష్ణుని దివ్యస్పర్శతో భీష్ముని సమస్త బాణాల బాధలు, దప్పిక, తాపం మాయమై దివ్యజ్ఞానం ప్రాప్తించుట. భీష్ముడు ధర్మరాజుకు ఉపదేశించిన రాజధర్మ సర్వస్వం: బ్రహ్మదేవుని లక్ష అధ్యాయాల దండనీతి, పృథు చక్రవర్తి అవతరణం, 'రాజా కాలస్య కారణమ్' (రాజే యుగాన్ని సృష్టిస్తాడు), తేనెటీగ పువ్వుల నుండి మకరందం సేకరించినట్లు సున్నితమైన పన్నుల విధానం, 12 రాజుల మండలాలు, సామ-దాన-భేద-దండాలు, గూఢచారుల వ్యవస్థ మరియు ధర్మపాలనయే పరమ యాగమని విశదీకరించుట.",
+    keyQuoteRoy: "Vyasa said: 'Wielding the rod of chastisement, O king, is the duty of kings and not the shaving of the head! A life of retirement in the woods, casting off the duties of domesticity, has not been laid down for thee! As a snake devours a mouse, even so the Earth devours a king who is inclined to peace and a Brahmana who is addicted to domesticity!'",
+    dharmaInsight: "True renunciation (Tyaga) is not cowardly flight from royal duty into forest solitude, but the fearless, detached exercise of sovereign force (Danda) to protect the righteous, punish transgressors, and maintain the cosmic moral order."
+  },
+  {
+    number: 2,
+    parva: "Santi Parva",
+    nameEn: "Apaddharmanusasana Parva (Duties in Times of Distress, Emergency Ethics & Strategic Prudence)",
+    nameSa: "आपद्धर्मानुशासनपर्वन्",
+    nameTe: "ఆపద్ధర్మానుశాసన పర్వము (ఆపత్కాల ధర్మాలు, విశ్వామిత్రుని శునక మాంస భక్షణ, సముద్ర-రెల్లుగడ్డి సంవాదం & రాజధర్మ కొంగ కథ)",
+    sections: "Santi Sections CXXXI - CLXXIII",
+    versesApprox: 1540,
+    keyCharacters: ["Grandfather Bhishma", "King Yudhishthira", "Sage Viswamitra", "Chandala", "Palita (Mouse)", "Lomasa (Cat)", "Gautama (Ungrateful Brahmana)", "Rajadharman (Crane Prince)", "King Virupaksha", "Indra"],
+    summaryEn: "King Yudhishthira questions Grandfather Bhishma on the intricate, perilous moral dilemmas that arise when the normal social, political, and cosmic order collapses—in times of catastrophic famine, invasion, devastation of the treasury, and existential crisis (Apad-Dharma / Emergency Ethics). Bhishma reveals that self-preservation (Atma-raksha) is the supreme foundational duty of all living beings, because only a living man can practice virtue, perform sacrifices, and atone for minor infractions once prosperity returns; a dead man cannot achieve Dharma. Bhishma outlines how the four varnas may adapt their occupations during severe calamity: a Brahmana may take up the weapons of a Kshatriya or the trade of a Vaisya (avoiding forbidden goods such as wine, poison, salt, and flesh), and a Kshatriya may legitimately seize wealth from non-sacrificing hoarders to save the state and feed starving subjects. To illustrate this profound principle, Bhishma narrates the famous history of Sage Viswamitra during a horrific twelve-year drought: emaciated, delirious with hunger, and on the verge of death, the great Brahmana sage wanders into an outcaste Chandala settlement at midnight; finding only the severed, putrid thigh-flesh of a dog (Sva-jangha) hanging in a butcher's hut, Viswamitra resolves to steal and consume it. The Chandala awakens and pleads with the sage not to commit such an abhorrent sin that degrades his exalted ascetic status. Viswamitra delivers the historic doctrine of Apaddharma: 'Life is superior to theoretical purity! If I survive, I can regain spiritual effulgence through penance, study, and japa; but if I perish of starvation, no virtue can ever be achieved!' Viswamitra offers portions of the dog's meat unto the gods and ancestral Pitris according to Vedic rites, quenches his starvation, and immediately Indra pours down torrential rains, ending the twelve-year famine. Bhishma then imparts masterful parables of strategic diplomacy and prudence: The Fable of Palita the Mouse and Lomasa the Cat trapped together in a hunter's net, where natural enemies form an alliance of survival against the mongoose and the owl, only for the mouse to refuse false affection once freed, establishing the immortal maxim: 'There are no eternal friends and no eternal enemies; interest alone creates friendships and enmities!' The Discourse of the Ocean and the Rivers: the ocean asks why rivers uproot giant, unbending trees but never the supple reed (Vetasa); the rivers explain that the rigid tree resists the flood and is shattered, while the humble reed bends before the deluge and rises unharmed once the current subsides—teaching adaptive resilience in the face of overwhelming adversity. Finally, Bhishma narrates the poignant tragedy of the Prince of Cranes, Rajadharman (son of Kasyapa), and the ungrateful Brahmana Gautama: the hospitable, virtuous crane feeds and shelters the destitute Gautama and procures him golden treasures from King Virupaksha; at midnight, the vile Gautama brutally kills his sleeping benefactor and roasts his flesh; King Virupaksha slays the murderer and revives the saintly bird with amrita; the story demonstrates the absolute cosmic law: 'Expiation exists in the scriptures for the slayer of a cow, a thief, or a drunkard; but for the treacherous betrayer of a trusting friend (Kritaghna), there is no expiation or salvation anywhere in the universe!'",
+    summaryTe: "తీవ్రమైన కరవు, రాజ్య పతనం, ఖజానా ఖాళీ అవడం వంటి అత్యవసర విపత్కర పరిస్థితులలో ధర్మనియమాలు ఎలా రూపాంతరం చెందుతాయో (ఆపద్ధర్మం) ధర్మరాజు అడుగగా భీష్మ పితామహుడు వివరించుట. ప్రాణరక్షణయే (ఆత్మరక్షణ) సమస్త ధర్మాలకు ప్రథమ మూలమని, జీవించి ఉంటేనే మనిషి ధర్మాన్ని ఆచరించగలడని, ప్రాయశ్చిత్తం చేసుకోగలడని భీష్ముడు ప్రబోధించుట. 12 సంవత్సరాల భయంకరమైన అనావృష్టి కరవు కాలంలో బ్రహ్మర్షి విశ్వామిత్రుని వృత్తాంతం: ఆకలితో ప్రాణాలు పోయే స్థితిలో విశ్వామిత్రుడు అర్ధరాత్రి చండాలుని గుడిసెలోకి ప్రవేశించి శునక మాంసాన్ని (కుక్క తొడ మాంసం) దొంగిలించి తినబోవుట; చండాలుడు మేల్కొని బ్రాహ్మణోత్తముడైన ఋషి కుక్క మాంసం తిని భ్రష్టుడు కావద్దని వేడుకోగా, 'ప్రాణం నిలిస్తేనే తపస్సు, ధర్మం నిలుస్తాయి; చనిపోతే ధర్మమే లేదు' అని ఆపద్ధర్మ సూత్రాన్ని ప్రకటించి, ఆ మాంసంతో దేవతలకు, పితృదేవతలకు హవిస్సులు అర్పించి ఆరగించుట; ఆయన వివేకానికి సంతసించి ఇంద్రుడు కుండపోతగా వర్షం కురిపించి కరవును పోగొట్టుట. పాలిత అనే ఎలుక, లోమశ అనే పిల్లి వేటగాడి వలలో చిక్కుకున్నప్పుడు సహజీవనం చేసి ప్రాణాలు కాపాడుకున్న కథ: 'లోకంలో శాశ్వత మిత్రులుగానీ, శాశ్వత శత్రువులు గానీ ఉండరు; స్వార్థ ప్రయోజనాలే బంధాలను నిర్ణయిస్తాయి' అనే అంతర్జాతీయ దౌత్య నీతిని బోధించుట. సముద్రము-నదుల సంవాదం: ప్రచండ వరదల్లో మహా వృక్షాలు కూలిపోతాయి కానీ వినమ్రంగా వంగే రెల్లుగడ్డి (వేతస) సురక్షితంగా ఉంటుందని, ఆపదల్లో కాలానికి అనుగుణంగా వంగి ఉండాలనే జీవన చాతుర్యం. కృతఘ్నత పాపం & రాజధర్మ కొంగ కథ: ఆశ్రయమిచ్చి బంగారం ఇప్పించిన రాజధర్మ అనే పుణ్య కొంగను ఆకలితో చంపి తిన్న గౌతముడనే దుష్టుని వృత్తాంతం; బ్రహ్మహత్య చేసినా ప్రాయశ్చిత్తం ఉంటుంది కానీ, చేసిన మేలు మరిచి విశ్వాసఘాతుకానికి ఒడిగట్టిన కృతఘ్నుడికి ముల్లోకాలలోనూ నిష్కృతి లేదని చాటుట.",
+    keyQuoteRoy: "Viswamitra said: 'By keeping life, one can practice virtue and win heaven! If I die of hunger, how shall I ever practice virtue? A living man may atone for his acts; by preserving life, therefore, I shall practice righteousness again! Life is the highest of all possessions!'",
+    dharmaInsight: "Dharma is not a rigid, brittle dogma, but living wisdom; in moments of catastrophic crisis, preserving life and adapting with humble resilience surpasses ritual orthodoxy, provided one returns to righteousness when the flood subsides."
+  }
+];
+
 /* ===== MAHABHARATA 12-VOLUME MASTER MAPPING =====
    Systematic alignment of Pratap Chandra Roy's 12-Volume Canonical Translation */
 const MAHABHARATA_VOLUMES = [
@@ -1736,13 +1770,13 @@ const MAHABHARATA_VOLUMES = [
   },
   {
     volNumber: 8,
-    titleEn: "Volume VIII: Shanti Parva (Part I - Rajadharma)",
-    titleTe: "సంపుటము 8: శాంతి పర్వము (రాజధర్మము)",
-    parvaId: "shanti1",
-    upaParvasCount: 1,
-    status: "PLANNED",
+    titleEn: "Volume VIII: Shanti Parva (Part I - Rajadharma & Apaddharma)",
+    titleTe: "సంపుటము 8: శాంతి పర్వము (రాజధర్మ & ఆపద్ధర్మ పర్వములు)",
+    parvaId: "vol8",
+    upaParvasCount: 2,
+    status: "COMPLETE",
     sections: "Sections I - CLXXIII",
-    description: "Yudhishthira's grief, Bhishma's supreme discourse on governance, justice, leadership, and statecraft from arrow bed."
+    description: "Yudhishthira's post-war grief, debate on renunciation vs action, Charvaka slain, coronation, Krishna meditating on Bhishma, journey to Kurukshetra, Bhishma's supreme discourse on Rajadharma (kingship, Danda, justice, Mandala theory), and Apaddharma (emergency ethics, Viswamitra & dog's meat, ocean and the reed, and Rajadharman crane)."
   },
   {
     volNumber: 9,
@@ -1800,6 +1834,8 @@ if (typeof window !== 'undefined') {
   window.DRONA_PARVA_UPAPARVAS = DRONA_PARVA_UPAPARVAS;
   window.VOLUME_VII_UPAPARVAS = VOLUME_VII_UPAPARVAS;
   window.KARNA_PARVA_UPAPARVAS = VOLUME_VII_UPAPARVAS;
+  window.VOLUME_VIII_UPAPARVAS = VOLUME_VIII_UPAPARVAS;
+  window.SHANTI_PARVA_PART1_UPAPARVAS = VOLUME_VIII_UPAPARVAS;
   window.MAHABHARATA_VOLUMES = MAHABHARATA_VOLUMES;
   window.MAHABHARATA_CHARACTERS = MAHABHARATA_CHARACTERS;
 }
@@ -1818,6 +1854,8 @@ if (typeof module !== 'undefined' && module.exports) {
     DRONA_PARVA_UPAPARVAS,
     VOLUME_VII_UPAPARVAS,
     KARNA_PARVA_UPAPARVAS: VOLUME_VII_UPAPARVAS,
+    VOLUME_VIII_UPAPARVAS,
+    SHANTI_PARVA_PART1_UPAPARVAS: VOLUME_VIII_UPAPARVAS,
     MAHABHARATA_VOLUMES,
     MAHABHARATA_CHARACTERS
   };
