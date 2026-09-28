@@ -581,12 +581,3 @@ document.addEventListener('error', (e) => {
   }
 }, true);
 
-// Shared language and devotional controls load after each page's own data scripts.
-const devotionStyles = document.createElement('link');
-devotionStyles.rel = 'stylesheet';
-devotionStyles.href = 'devotion.css';
-document.head.appendChild(devotionStyles);
-const devotionScript = document.createElement('script');
-devotionScript.src = 'devotion.js';
-devotionScript.onerror = () => showToast('Devotional controls could not load. Please refresh.', 'error');
-document.body.appendChild(devotionScript);

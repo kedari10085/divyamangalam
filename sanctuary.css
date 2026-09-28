@@ -1,28 +1,18 @@
 /* Homepage sanctuary: scoped so existing ritual pages keep their layouts. */
 .sanctuary-home {
-  --cream: #fcf8f0; --light-bg: #f4ede1; --deep-red: #49304c;
-  --gold: #dcb77c; --saffron: #895b2a; --text-dark: #35283a; --text-mid: #6d6070;
-  --shadow: rgba(56, 36, 57, .09);
+  --cream: #FFF8EF; --light-bg: #FFF3E0; --deep-red: #8B0000;
+  --gold: #D4A017; --saffron: #FF6F00; --text-dark: #2C1A0E; --text-mid: #5C3D1E;
+  --shadow: rgba(44, 26, 14, 0.12);
   background: var(--cream); -webkit-font-smoothing: antialiased;
 }
 .sanctuary-home button, .sanctuary-home select { font: inherit; }
 .sanctuary-home button, .sanctuary-home a, .sanctuary-home input, .sanctuary-home select { -webkit-tap-highlight-color: transparent; }
-.sanctuary-home :focus-visible { outline: 3px solid #966326; outline-offset: 5px; }
+.sanctuary-home :focus-visible { outline: 3px solid var(--saffron); outline-offset: 5px; }
 .sanctuary-home [id] { scroll-margin-top: 105px; }
 .sanctuary-home .skip-link { position: fixed; top: 8px; left: 16px; transform: translateY(-150%); z-index: 1001; background: white; padding: 12px 20px; border-radius: 8px; }
 .sanctuary-home .skip-link:focus { transform: translateY(0); }
-.sanctuary-home .navbar { background: rgba(252,248,240,.97); border-bottom: 1px solid #e7ddce; box-shadow: none; }
-.sanctuary-home .nav-inner { max-width: 1320px; height: 82px; gap: 24px; }
-.sanctuary-home .nav-brand { flex-shrink: 0; }
-.sanctuary-home .nav-brand .brand-name { color: var(--deep-red); font-size: 1.22rem; letter-spacing: -.3px; }
-.sanctuary-home .nav-brand .brand-om { font-size: 1.6rem; }
-.sanctuary-home .nav-links { gap: 1.15rem; }
-.sanctuary-home .nav-links a { font-size: .78rem; color: var(--text-mid); letter-spacing: .1px; }
-.sanctuary-home .nav-links a:hover, .sanctuary-home .nav-links a.active { color: var(--deep-red); }
-.sanctuary-home .hamburger { border: 1px solid #d8c9b5; border-radius: 10px; padding: 12px; background: transparent; min-height: 44px; }
-.sanctuary-home .hamburger span { background: var(--deep-red); }
-.welcome-ribbon { text-align: center; padding: 10px 18px; background: #eee5d7; color: #66503d; font-size: .77rem; letter-spacing: .7px; }
-.welcome-ribbon span { padding: 0 12px; color: #8c6435; }
+.welcome-ribbon { text-align: center; padding: 8px 18px; background: linear-gradient(90deg, rgba(255,111,0,0.06), rgba(212,160,23,0.12), rgba(255,111,0,0.06)); color: var(--text-mid); font-size: .8rem; letter-spacing: .7px; border-bottom: 1px solid rgba(212,160,23,0.2); }
+.welcome-ribbon span { padding: 0 12px; color: var(--saffron); }
 .sanctuary-home .sanctuary-hero { position: relative; isolation: isolate; overflow: hidden; padding: 64px 24px 28px; background: radial-gradient(ellipse at 80% 50%, #e9dbdb 0, transparent 57%), linear-gradient(115deg, #fcf8f0, #f7f0e5); }
 .sanctuary-hero-inner { max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1.12fr 1fr; align-items: center; gap: 60px; }
 .hero-halo { position: absolute; width: 720px; height: 720px; border: 1px solid #e3d5c7; border-radius: 50%; right: -190px; top: -120px; z-index: -1; }

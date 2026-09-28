@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vedic Panchang Calendar | Divya Mangalam</title>
-  <meta name="description" content="Free Vedic Panchang Calendar with Tithi, Nakshatra, Yoga, Karana, Rahu Kaal & Abhijit Muhurta. Personalized by birth Rashi and Nakshatra." />
+  <meta name="description" content="Free Vedic Panchang Calendar with Tithi, Nakshatra, Yoga, Karana, Rahu Kaal &amp; Abhijit Muhurta. Personalized by birth Rashi and Nakshatra." />
   <meta name="keywords" content="panchang today, vedic calendar, tithi today, nakshatra today, rahu kaal, hindu calendar 2026" />
   <meta property="og:title" content="Free Vedic Panchang Calendar | Divya Mangalam" />
-  <meta property="og:description" content="Today's Tithi, Nakshatra, Yoga, Rahu Kaal & Abhijit Muhurta. Monthly grid with festivals." />
+  <meta property="og:description" content="Today's Tithi, Nakshatra, Yoga, Rahu Kaal &amp; Abhijit Muhurta. Monthly grid with festivals." />
   <meta property="og:url" content="https://divyamangalam.com/panchang-calendar.html" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_IN" />
@@ -294,10 +294,10 @@
   <nav class="navbar" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">
-        <span class="brand-om">ðŸ•‰ï¸</span>
+        <span class="brand-om">🕉️</span>
         <span class="brand-name">Divya Mangalam</span>
       </a>
-              <ul class="nav-links" id="navLinks">
+          <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="jyotishyam.html">Jyotishyam</a></li>
       <li><a href="palm-reading.html">Palm Reading</a></li>
@@ -321,11 +321,11 @@
 
   <main class="calendar-container">
     <div class="hero">
-      <h1>ðŸ“… Vedic Panchang Calendar</h1>
+      <h1>📅 Vedic Panchang Calendar</h1>
       <p>Discover auspicious timings, tithis, and festivals for your spiritual journey</p>
       <div style="margin-top:1.2rem; display:flex; justify-content:center; gap:0.8rem; flex-wrap:wrap;">
-        <a href="jyotishyam.html" style="display:inline-flex; align-items:center; gap:0.4rem; background:white; border:1px solid var(--gold); border-radius:50px; padding:6px 18px; color:var(--deep-red); font-size:0.82rem; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(212,160,23,0.12);">ðŸ”­ Explore Ancient Vedanga Jyotisha (Sage Lagadha 5-Year Yuga) â†’</a>
-        <a href="muhurat.html" style="display:inline-flex; align-items:center; gap:0.4rem; background:white; border:1px solid var(--gold); border-radius:50px; padding:6px 18px; color:var(--saffron); font-size:0.82rem; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(212,160,23,0.12);">â³ Kalaprakasika &amp; Muhurta Chintamani Finder â†’</a>
+        <a href="jyotishyam.html" style="display:inline-flex; align-items:center; gap:0.4rem; background:white; border:1px solid var(--gold); border-radius:50px; padding:6px 18px; color:var(--deep-red); font-size:0.82rem; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(212,160,23,0.12);">🔭 Explore Ancient Vedanga Jyotisha (Sage Lagadha 5-Year Yuga) →</a>
+        <a href="muhurat.html" style="display:inline-flex; align-items:center; gap:0.4rem; background:white; border:1px solid var(--gold); border-radius:50px; padding:6px 18px; color:var(--saffron); font-size:0.82rem; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(212,160,23,0.12);">⏳ Muhūrta Cintāmaṇi Nakshatra Finder →</a>
       </div>
     </div>
 
@@ -389,7 +389,7 @@
 
     <div class="filter-section">
       <h2>Personalized Compatibility Filter</h2>
-      <p style="margin-bottom: 1rem;">Select your birth details to see auspicious days for you specifically. Don't know your Rashi or Nakshatra? <a href="muhurat.html#dobCalculatorSection" style="color:var(--deep-red); font-weight:700; text-decoration:underline;">Find it by Date of Birth here â†’</a></p>
+      <p style="margin-bottom: 1rem;">Select your birth details to see auspicious days for you specifically.</p>
       <div class="filter-form">
         <select id="birthRashi" aria-label="Birth Rashi (Moon Sign)">
           <option value="">Select Birth Rashi...</option>
@@ -536,8 +536,8 @@
         }
         
         let moonIcon = '';
-        if (pInfo.tithi.isPurnima) moonIcon = 'ðŸŒ•';
-        if (pInfo.tithi.isAmavasya) moonIcon = 'ðŸŒ‘';
+        if (pInfo.tithi.isPurnima) moonIcon = '🌕';
+        if (pInfo.tithi.isAmavasya) moonIcon = '🌑';
         
         let pakshaClass = pInfo.tithi.pakshaShort.toLowerCase();
         
@@ -562,8 +562,8 @@
           <div class="date-num">${d}</div>
           <span class="paksha-badge ${pakshaClass}">${pInfo.tithi.pakshaShort}</span>
           <div class="tithi-name">${pInfo.tithi.name}</div>
-          <div class="nakshatra-name">${pInfo.nakshatra.name} â€¢ ${pInfo.moonRashi.split(' ')[0]}</div>
-          <div class="sunrise-time">ðŸŒ… 6:00 AM</div>
+          <div class="nakshatra-name">${pInfo.nakshatra.name} • ${pInfo.moonRashi.split(' ')[0]}</div>
+          <div class="sunrise-time">🌅 6:00 AM</div>
           ${festivalsHtml}
           ${moonIcon ? `<div class="moon-icon">${moonIcon}</div>` : ''}
         `;
