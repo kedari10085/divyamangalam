@@ -1520,6 +1520,147 @@ const DRONA_PARVA_UPAPARVAS = [
   }
 ];
 
+/* ===== VOLUME VII: KARNA, SALYA, SAUPTIKA & STREE PARVAS (ALL 9 UPA-PARVAS COMPLETE) =====
+   Translated from Sanskrit by Pratap Chandra Roy, C.I.E. (Oriental Publishing Co., Calcutta)
+   Covering: Karna Parva (XCVI Sections), Salya Parva (LXV Sections), Sauptika Parva (XVIII Sections), Stree Parva (XXVII Sections) */
+const VOLUME_VII_UPAPARVAS = [
+  {
+    number: 1,
+    id: "karna-parva",
+    parva: "Karna Parva",
+    nameEn: "Karna Parva (The Command & Fall of Karna)",
+    nameSa: "कर्णपर्वन्",
+    nameTe: "కర్ణ పర్వము (కర్ణుని సేనాధిపత్యం, దుశ్శాసన వధ, నాగాస్త్రం & కర్ణ-అర్జున మహాసంగ్రామం)",
+    sections: "Karna Sections I - XCVI",
+    versesApprox: 4964,
+    keyCharacters: ["Karna", "Arjuna", "Bhagavan Sri Krishna", "King Shalya", "Bhima", "Duhsasana", "King Yudhishthira", "Vrishasena"],
+    summaryEn: "Following Drona's demise, Duryodhana installs Karna as supreme commander of the Kaurava army for days 16 and 17. Day 16: Karna arrays the Makara formation against the Pandavas' Crescent formation; Nakula and Sahadeva engage Karna, but Karna spares their lives in remembrance of his pledge to Queen Kunti. Day 17: Karna demands King Shalya of Madra serve as his charioteer to match Krishna driving Arjuna. Shalya reluctantly consents on condition that he speak his mind freely, constantly demoralizing Karna with scathing rebukes and the fable of the crow and royal swans (Hamsa-Kaka Akhyana). Yudhishthira is severely mangled by Karna's shafts and retreats to his tent; when Arjuna visits him without having slain Karna, Yudhishthira insults the Gandiva bow, prompting Arjuna to draw his sword to kill his brother per his terrible vow; Krishna defuses the crisis with profound philosophical wisdom on Truth vs. Non-violence. Returning to combat, Bhima confronts prince Duhsasana, shatters his chariot, tears open his chest with bare hands, drinks his warm heart-blood to fulfill his Sabha oath, and washes Draupadi's hair with it. Arjuna slays Karna's son Vrishasena before his eyes. The climactic duel between the two greatest archers begins: Karna invokes the Naga arrow (Ashwasena), but Krishna depresses Arjuna's chariot five fingers into the earth with His foot, saving Arjuna's throat as the arrow only shatters his golden diadem. The fateful curses manifest: the earth swallows Karna's left chariot wheel (Brahmana's curse), and Parashurama's curse causes him to forget the Brahmastra invocation in his hour of doom. As Karna dismounts to lift his wheel and pleads for fair Kshatriya rules, Lord Krishna rebukes him with devastating moral indictment: 'Where was your Dharma when Draupadi was dragged into the sabha? Where was your Dharma when six maharathas butchered the boy Abhimanyu from behind?' Guided by Krishna, Arjuna invokes the crescent-headed Anjalika weapon and severs Karna's head; an ethereal effulgence rises from Karna's body and merges directly into Surya Deva.",
+    summaryTe: "ద్రోణవధ అనంతరం దుర్యోధనుడు కర్ణుని సర్వసైన్యాధ్యక్షునిగా నియమించుట. 16వ రోజు కర్ణుడు మకర వ్యూహాన్ని పన్నగా పాండవులు అర్ధచంద్ర వ్యూహం పన్నుట. నకుల-సహదేవులను కర్ణుడు ఓడించినా కుంతికిచ్చిన మాట ప్రకారం ప్రాణాలతో విడిచిపెట్టుట. 17వ రోజు ఉదయం అర్జునునికి శ్రీకృష్ణుడు సారథిగా ఉన్నట్లు, తనకు సారథ్యం వహించమని మద్రరాజైన శల్యుని కర్ణుడు కోరుట. శల్యుడు అంగీకరిస్తూనే కర్ణుని అహంకారాన్ని అణచడానికి హంస-కాక కథను చెప్పి ఎగతాళి చేయుట. కర్ణుని బాణాలకు గాయపడి ధర్మరాజు శిబిరానికి చేరుకొనుట; కర్ణుని చంపకుండా వచ్చినందుకు ధర్మరాజు గాండీవాన్ని నిందించగా, గాండీవాన్ని నిందించినవారిని చంపుతానన్న ప్రతిజ్ఞతో అర్జునుడు ఖడ్గం దూయుట; శ్రీకృష్ణుడు సమయస్ఫూర్తితో సత్య-అహింసల ధర్మరహస్యాన్ని బోధించి సోదరులిద్దరినీ రక్షించుట. రణరంగంలో దుశ్శాసనుని వక్షఃస్థలాన్ని భీముడు తన చేతులతో చీల్చి, గుండెల రక్తాన్ని తాగి 13 ఏళ్ళ క్రితం ద్యూతసభలో చేసిన భీషణ ప్రతిజ్ఞను నెరవేర్చుకుని ద్రౌపది వేణిని ముడివేయుట. కర్ణుని కళ్ళముందే ఆయన కుమారుడు వృషసేనుని అర్జునుడు వధించుట. కర్ణ-అర్జునుల తుది మహాయుద్ధం: కర్ణుడు ప్రయోగించిన నాగాస్త్రం (అశ్వసేనుడు) నుండి రక్షించడానికి శ్రీకృష్ణుడు రథాన్ని ఐదంగుళాలు భూమిలోకి తొక్కగా, బాణం అర్జునుని కిరీటాన్ని మాత్రమే ఎగురగొట్టుట. కర్ణునికి గతంలో లభించిన శాపాలు ఒకేసారి పనిచేయుట: బ్రాహ్మణ శాపంతో రథచక్రం భూమిలో కూరుకుపోవుట, పరశురాముని శాపంతో బ్రహ్మాస్త్ర మంత్రం మతిమరపునకు గురియగుట. రథచక్రాన్ని పైకి లేపుతూ ధర్మం మాట్లాడిన కర్ణుని శ్రీకృష్ణుడు తీవ్రంగా నిలదీయుట ('ద్రౌపదీ వస్త్రాపహరణం నాడు, లక్కయింటి దహనం నాడు, అభిమన్యుని అధర్మంగా చంపిననాడు నీ ధర్మం ఎక్కడికి పోయింది?'). శ్రీకృష్ణుని ఆజ్ఞతో అర్జునుడు 'అంజలికాస్త్రం' ప్రయోగించి కర్ణుని శిరస్సును ఖండించుట; కర్ణుని దేహం నుండి వెలువడిన దివ్యతేజస్సు సూర్యునిలో లీనమగుట.",
+    keyQuoteRoy: "Addressing the fallen Karna, Vasudeva said: 'Remembering all those wicked deeds of thine, dost thou now preach virtue? When thou calledst the princess of Panchala as the wife of slaves, where had this virtue of thine gone? Strike him, O son of Pandu, with a celestial weapon before he mounteth his car!' Then with an arrow of the splendour of the sun, Partha smote off the head of the Suta's son!",
+    dharmaInsight: "Dharma does not protect the one who selectively invokes righteousness only in adversity after championing adharma in prosperity; divine retribution unerringly balances cosmic justice."
+  },
+  {
+    number: 2,
+    id: "shalya-badha-parva",
+    parva: "Salya Parva",
+    nameEn: "Shalya-badha Parva (The Fall of King Shalya & Slaying of Sakuni)",
+    nameSa: "शल्यवधपर्वन्",
+    nameTe: "శల్యవధ పర్వము (శల్యుని సేనాధిపత్యం, ధర్మరాజు చేతిలో శల్యవధ & సహదేవుని శకుని వధ)",
+    sections: "Salya Sections I - XXII",
+    versesApprox: 1100,
+    keyCharacters: ["King Shalya", "King Yudhishthira", "Sahadeva", "Sakuni", "Duryodhana", "Bhima", "Kripa"],
+    summaryEn: "Following the fall of Karna, King Duryodhana installs King Shalya of Madra as the fourth and final daytime Senapati of the Kauravas for the 18th day of war. Shalya arrays his remaining forces with desperate valor. Sri Krishna instructs Yudhishthira that Shalya can be vanquished only by Yudhishthira himself, as Shalya's fierce martial pride can only be quelled by the tranquil, righteous wrath of the eldest Pandava. A ferocious clash unfolds on the 18th morning. Shalya wreaks immense havoc among the Pandava troops, shatters Yudhishthira's chariot, and challenges him with showers of arrows. Yudhishthira invokes a blazing, universe-destroying spear crafted by Tvashtri and empowered by Lord Shiva, hurling it with all his spiritual might. The fiery spear pierces Shalya's chest and enters deep into the earth; Shalya falls lifeless like a mountain summit riven by thunder. Simultaneously, Sahadeva corners Prince Sakuni of Gandhara, the architect of the dice game. Sahadeva recites Sakuni's treacherous acts and severs Sakuni's head with a crescent-headed arrow, fulfilling his oath and destroying the primary instigator of the Kurukshetra war.",
+    summaryTe: "కర్ణుని పతనం తర్వాత శోకంలో మునిగిన కౌరవులకు అశ్వత్థామ సలహాతో దుర్యోధనుడు 18వ రోజు యుద్ధానికి మద్రరాజైన శల్యుని సేనాధిపతిగా అభిషేకించుట. శ్రీకృష్ణుడు ధర్మరాజుతో 'శల్యుని తేజస్సును ఎదుర్కొని సంహరించగల శక్తి నీ ఒక్కనికే కలదు' అని చెప్పుట. 18వ రోజు ఉదయం శల్యుడు అద్భుత శౌర్యంతో పాండవ సేనలను తుత్తునియలు చేయుట. ధర్మరాజు-శల్యుల మధ్య హోరాహోరీ అస్త్రయుద్ధం జరుగుట; చివరకు పరమేశ్వరుని తత్వంతో కూడిన దివ్య శక్తిసాయకాన్ని ధర్మరాజు ప్రయోగించగా, అది శల్యుని వక్షాన్ని చీల్చి భూమిలోకి దూసుకుపోవుటతో శల్యుడు నేలకొరుగుట. మరోవైపు సహదేవుడు ద్యూత కారకుడైన శకునిని ఎదుర్కొని, ద్యూతసభలోని దురాగతాలను గుర్తుచేస్తూ వాడియైన అర్ధచంద్రాకార బాణంతో శకుని శిరస్సును ఖండించి తన శపథాన్ని నెరవేర్చుకొనుట.",
+    keyQuoteRoy: "Sanjaya said: 'Then king Yudhishthira the just hurled with great force at the king of the Madras that terrible dart adorned with gold, blazing like the rod of Death! Piercing through the chest of the heroic Shalya, that dart entered the earth, and the ruler of the Madras fell down like a hill topped with trees!'",
+    dharmaInsight: "True leadership is not mere physical aggression; righteous restraint and moral purity possess the spiritual potency to vanquish even the most ferocious worldly power."
+  },
+  {
+    number: 3,
+    id: "hrada-pravesha-parva",
+    parva: "Salya Parva",
+    nameEn: "Hrada-pravesha Parva (Duryodhana Hiding in Dvaipayana Lake)",
+    nameSa: "ह्रदप्रवेशपर्वन्",
+    nameTe: "హ్రదప్రవేశ పర్వము (ద్వైపాయన మడుగులో దుర్యోధనుని జలస్తంభన & ధర్మరాజు సవాలు)",
+    sections: "Salya Sections XXIII - XXIX",
+    versesApprox: 580,
+    keyCharacters: ["Duryodhana", "King Yudhishthira", "Bhagavan Sri Krishna", "Bhima", "Sanjaya", "Ashwatthaman"],
+    summaryEn: "With his entire army annihilated and every brother slain, King Duryodhana stands alone on the corpse-strewn field of Kurukshetra, bearing only his heavy iron mace. Bleeding and exhausted, he retreats to Lake Dvaipayana, using his water-stanching magic (Jala-stambhana) to solidify the water and conceal himself at the lake's bottom. Sanjaya encounters the three surviving Kauravas (Ashwatthaman, Kripa, Kritavarman), who visit the lake and urge Duryodhana to fight, but the king asks to rest for one night. Tired hunters carrying meat overhear their voices and report the location to the Pandavas. The Pandavas and Krishna surround the lake. Standing at the shore, Yudhishthira mocks Duryodhana's cowardice: 'Where is thy pride, O king? Thou who plunged the earth into war hidest now beneath water like a serpent!' Provoked, Duryodhana speaks from the deep, offering the kingdom to the Pandavas since he has no kin left to enjoy it. Yudhishthira rejects the offer: 'The earth is ours by conquest! Rise and fight! Choose any one of us five brothers, fight with any weapon of thy choice, and if thou slayest him, the entire kingdom shall be thine!' Krishna rebukes Yudhishthira in horror, reminding him that Duryodhana has practiced mace-combat on iron statues for 13 years and is superior to all warriors; Yudhishthira's reckless chivalry has once again gambled away their hard-won victory.",
+    summaryTe: "11 అక్షౌహిణుల సైన్యం, 99 మంది సోదరులు, సర్వ సేనాపతులు మరణించగా ఒంటరిగా మిగిలిన దుర్యోధనుడు చేతిలో గదతో పారిపోయి ద్వైపాయన మడుగులో 'జలస్తంభన' విద్యతో నీటిని స్తంభింపజేసి లోపల దాగుకొనుట. వేటగాళ్ళ ద్వారా సమాచారం తెలుసుకున్న పాండవులు శ్రీకృష్ణునితో కలిసి మడుగు వద్దకు చేరుకొనుట. ధర్మరాజు ఒడ్డున నిలబడి 'ఈ మహా వినాశనానికి కారణమైన నీవు పిరికివానివలె నీటిలో దాక్కున్నావా? బయటకు రా!' అని నిలదీయుట. దుర్యోధనుడు 'నా బంధుమిత్రులంతా పోయాక ఈ రాజ్యం నాకెందుకు, మీకే దానం ఇస్తున్నాను' అనగా, ధర్మరాజు 'నీవు దానమివ్వడానికి రాజ్యం నీ సొత్తా? దానం వద్దు, బయటకు వచ్చి పోరాడు. మా ఐదుగురిలో ఎవరినైనా ఒకరిని ఎంచుకో, నీకిష్టమైన ఆయుధంతో పోరాడు, వారిని చంపితే సమస్త రాజ్యమూ నీదే' అని అమాయకంగా సవాలు విసరుట. 13 ఏళ్ళు ఇనుప విగ్రహాలతో గదా యుద్ధ సాధన చేసిన దుర్యోధనుని ఎదుట ధర్మరాజు మరోసారి రాజ్యాన్ని జూదంలా పణంగా పెట్టాడని శ్రీకృష్ణుడు తీవ్రంగా మందలించుట.",
+    keyQuoteRoy: "Vasudeva said: 'What reckless words hast thou spoken, O King! If Duryodhana selecteth any one among you except Bhima, or if he fighteth with the mace, ye will all be ruined! For thirteen years hath he practised with the mace on iron statues! Once again hast thou placed victory in the hands of the foe!'",
+    dharmaInsight: "Misplaced chivalry toward unrepentant evil is a form of self-destructive delusion; righteousness must be paired with strategic realism, or virtue itself becomes a tool for Adharma's resurrection."
+  },
+  {
+    number: 4,
+    id: "gada-yuddha-parva",
+    parva: "Salya Parva",
+    nameEn: "Gada-yuddha Parva (The Final Mace Duel & Saraswati Pilgrimage)",
+    nameSa: "गदायुद्धपर्वन्",
+    nameTe: "గదాయుద్ధ పర్వము (బలరాముని ఆగమనం, భీమ-దుర్యోధనుల గదాయుద్ధం, ఊరుభంగం & కృష్ణుని రథ దహనం)",
+    sections: "Salya Sections XXX - LXV",
+    versesApprox: 1540,
+    keyCharacters: ["Bhima", "Duryodhana", "Bhagavan Sri Krishna", "Balarama", "Arjuna", "King Yudhishthira"],
+    summaryEn: "Accepting Yudhishthira's challenge, Duryodhana rises from the lake with water streaming from his shoulders, mace in hand, and chooses Bhimasena as his opponent for a mace duel to the death. Lord Balarama arrives, having concluded his 42-day pilgrimage along the sacred Saraswati River (detailed in the sacred Saraswati Tirtha-Yatra episodes), acting as an impartial judge of his two disciples. The duel begins at Samantapanchaka: the two titans circle each other, executing the 14 classical mace maneuvers (Mandala, Gomutraka, Kausika). Duryodhana's superior agility tires Bhima out. Seeing Bhima bleeding, Lord Krishna slaps His own left thigh, prompting Arjuna. Arjuna slaps his thigh in full view of Bhima. Bhima recalls the assembly hall where Duryodhana lewdly slapped his bare thigh and ordered Draupadi to sit upon it, and his vow to smash those thighs. As Duryodhana leaps into the air with the agile Avasthana maneuver, Bhima strikes Duryodhana's thighs with his heavy mace, shattering the bones. Duryodhana falls writhing in agony, and Bhima kicks his crowned head with his left foot. Balarama erupts in fury, seizing his plow to kill Bhima for striking below the navel. Krishna restrains Balarama, citing Maitreya's curse, Bhima's solemn vow at the dice game, and the inevitability of Kali Yuga. Balarama departs for Dvaraka. The Pandavas visit Duryodhana's royal camp. Lord Krishna insists that Arjuna dismount from the Kapidhwaja chariot first, followed by Krishna Himself. The moment Krishna steps off the car, the celestial banner vanishes, and the chariot bursts into roaring flames, reducing to white ashes! Krishna reveals that the chariot had already been incinerated by the astras of Bhishma, Drona, and Karna, and was sustained solely by His divine presence. Dying Duryodhana glorifies his life, boasts that he lived as an emperor and died on the battlefield, while celestials shower fragrant flowers upon him.",
+    summaryTe: "ధర్మరాజు సవాలును స్వీకరించి చేతిలో గదతో మడుగు నుండి లేచివచ్చిన దుర్యోధనుడు భీముని గదాయుద్ధానికి ఆహ్వానించుట. 42 రోజుల సరస్వతీ నదీ తీర్థయాత్రను ముగించుకుని బలరాముడు అక్కడకు చేరుకుని తటస్థ న్యాయనిర్ణేతగా కూర్చుండుట. భీమ-దుర్యోధనుల మధ్య భీకర గదాయుద్ధం ప్రారంభమగుట. 14 రకాల గదా విన్యాసాలలో ఆరితేరిన దుర్యోధనుని దెబ్బలకు భీముడు అలసిపోవుట గమనించి, శ్రీకృష్ణుడు తన ఎడమ తొడను చరుచుకుంటూ అర్జునునికి సైగ చేయుట. అర్జునుని సైగతో భీముడు ద్యూతసభలో ద్రౌపదిని అవమానిస్తూ దుర్యోధనుడు తొడ చూపిన దృశ్యాన్ని, తన శపథాన్ని గుర్తుచేసుకొనుట. దుర్యోధనుడు పైకి ఎగిరిన క్షణంలో భీముడు గదతో దుర్యోధనుని తొడలపై బలంగా మోది తొడలను విరగ్గొట్టుట (ఊరుభంగం). నేలకూలిన దుర్యోధనుని తలను భీముడు ఎడమ కాలితో తన్నగా, నాభి దిగువన కొట్టడం గదాయుద్ధ ధర్మ విరుద్ధమని బలరాముడు ఆగ్రహంతో నాగలితో భీమునిపైకి దూకుట. మైత్రేయ మహర్షి శాపం, ద్యూతసభ నాటి భీముని ప్రతిజ్ఞ, మరియు కలియుగ ధర్మాన్ని వివరిస్తూ శ్రీకృష్ణుడు బలరాముని శాంతింపజేయుట. యుద్ధానంతరం పాండవులు శిబిరానికి చేరినప్పుడు అర్జునుని ముందుగా రథం దిగమని, ఆ తర్వాత శ్రీకృష్ణుడు దిగగానే కపిధ్వజ రథం భగ్గున మండి బూడిదగుట (భీష్మ, ద్రోణ, కర్ణుల బ్రహ్మాస్త్రాల వేడికి ఎప్పుడో కాలిపోయిన రథాన్ని తన పాద స్పర్శతో శ్రీకృష్ణుడు నిలిపి ఉంచాడని వెల్లడించుట). ప్రాణాలు విడుస్తున్న దుర్యోధనుడు తాను చక్రవర్తిగా బ్రతికి వీరమరణం పొందుతున్నానని గర్వంగా పలకగా, ఆకాశం నుండి పుష్పవృష్టి కురియుట.",
+    keyQuoteRoy: "Vasudeva said: 'Dismount first, O Dhananjaya, and take down thy celestial bows and quivers! Then did the holy one himself alight from the car. Thereupon, O monarch, that car, consumed by the celestial weapons of Bhishma and Drona and Karna, was reduced in a moment to ashes!'",
+    dharmaInsight: "When unyielding arrogance uses the letter of the law to shield decades of ruthless injustice, divine necessity sanctions a higher, substantive justice to eradicate tyranny forever."
+  },
+  {
+    number: 5,
+    id: "sauptika-parva",
+    parva: "Sauptika Parva",
+    nameEn: "Sauptika Parva (The Nocturnal Massacre of the Sleeping Camp)",
+    nameSa: "सौप्तिकपर्वन्",
+    nameTe: "సౌప్తిక పర్వము (అశ్వత్థామ రాత్రి దండయాత్ర, ఉపపాండవుల వధ & శివసాక్షాత్కారం)",
+    sections: "Sauptika Sections I - IX",
+    versesApprox: 480,
+    keyCharacters: ["Ashwatthaman", "Kripa", "Kritavarman", "Duryodhana", "Lord Shiva", "Dhrishtadyumna", "Upapandavas"],
+    summaryEn: "The three surviving Kaurava warriors—Ashwatthaman, Kripacharya, and Kritavarman—find King Duryodhana lying paralyzed in the dust with broken thighs. Weeping bitterly, Duryodhana consecrates Ashwatthaman with water as the fifth and supreme generalissimo. As the three rest under a gigantic banyan tree that night, Ashwatthaman observes an owl silently enter the foliage and slaughter sleeping crows in their nests. Inspired by the owl's tactic, Ashwatthaman resolves to launch a midnight raid upon the sleeping Pandava encampment to avenge his father and king. Kripa protests that striking sleeping, disarmed warriors is an abominable sin, but Ashwatthaman rejects morality, declaring vengeance is his sole Dharma. Approaching the Pandava camp at midnight, Ashwatthaman is halted by a colossal golden phantom whose mouth spouts blazing fires. Recognizing Lord Shiva, Ashwatthaman prostrates and offers his own life and soul as a sacrifice into the altar of fire. Pleased, Lord Shiva enters Ashwatthaman's body and bestows an infallible celestial sword. Ashwatthaman enters the camp while Kripa and Kritavarman guard the gates. He enters Dhrishtadyumna's tent, drags him from bed, and kicks and chokes him to death like an animal, refusing him a warrior's weapon death because Dhrishtadyumna had beheaded Drona in yoga. Moving like a demon of destruction, Ashwatthaman slaughters Shikhandin, the five sleeping sons of Draupadi (Upapandavas: Prativindhya, Sutasoma, Satanika, Srutakarman, Srutakirti), and the entire Panchala army in the dark. Kripa and Kritavarman set fire to the tents and slaughter fleeing soldiers. The three return to Duryodhana at dawn and announce the extermination of the Pandava host and Dhrishtadyumna; Duryodhana smiles in triumphant ecstasy, forgives all grievances, and breathes his last.",
+    summaryTe: "రక్తం కారుతూ నేలపై పడియున్న దుర్యోధనుని చూసి అశ్వత్థామ, కృపాచార్యుడు, కృతవర్మలు విలపించుట; దుర్యోధనుడు అశ్వత్థామను చివరి సేనాపతిగా నియమించుట. రాత్రి ఒక మర్రిచెట్టు కింద విశ్రమించినప్పుడు, గుడ్లగూబ నిద్రిస్తున్న కాకులను చంపడం చూసి అశ్వత్థామ నిద్రిస్తున్న పాండవుల శిబిరంపై రాత్రి దాడి చేయాలని నిర్ణయించుట. కృపాచార్యుడు ఇది పరమ నీచమైన అధర్మమని వారించినా అశ్వత్థామ వినకపోవుట. అర్ధరాత్రి శిబిర ద్వారం వద్ద అగ్నిజ్వాలలు చిమ్ముతున్న భయంకర భూతాన్ని చూసి అది పరమేశ్వరుని రూపమని గ్రహించి, అశ్వత్థామ తన శరీరాన్ని అగ్నికి ఆహుతిగా సమర్పించుకుంటూ శివపూజ చేయుట. శివుడు ప్రసన్నుడై అశ్వత్థామ శరీరంలో ప్రవేశించి దివ్య ఖడ్గాన్ని ప్రసాదించుట. శిబిరంలోకి ప్రవేశించిన అశ్వత్థామ, నిద్రిస్తున్న దృష్టద్యుమ్నుని కాళ్ళతో తొక్కి, గొంతు నులిమి పశువును చంపినట్లు చంపుట. శిఖండిని, ద్రౌపది ఐదుగురు కుమారులైన ఉపపాండవులను అత్యంత కిరాతకంగా నరికివేయుట. కృప-కృతవర్మలు గుడారాలకు నిప్పుపెట్టి పారిపోతున్న సైన్యాన్ని నరికివేయుట. పాండవ సైన్యం సర్వనాశనమైన వార్తను అశ్వత్థామ దుర్యోధనునికి తెలుపగా, దుర్యోధనుడు ఆనందంతో ప్రాణాలు విడిచి స్వర్గారోహణ చేయుట.",
+    keyQuoteRoy: "Sanjaya said: 'Taking up his sword of celestial temper, Drona's son entered the tent of Dhrishtadyumna. Awaking him with a kick, he seized him by the hair and threw him down upon the Earth. While he cried, Slay me with a weapon, Drona's son replied, Slayers of preceptors have no right to die by weapons, and crushed him to death with his feet!'",
+    dharmaInsight: "Blind vengeance born of unprocessed grief surrenders the soul to demonic madness, turning warriors into nocturnal butchers and dragging both perpetrator and cause into eternal ignominy."
+  },
+  {
+    number: 6,
+    id: "aishika-parva",
+    parva: "Sauptika Parva",
+    nameEn: "Aishika Parva (The Brahmashira Astra & The Eternal Curse on Ashwatthaman)",
+    nameSa: "ऐषीकपर्वन्",
+    nameTe: "ఐషీక పర్వము (ద్రౌపది శోకం, బ్రహ్మశిరోనామకాస్త్ర ప్రయోగం, ఉత్తర గర్భ సంరక్షణ & అశ్వత్థామ శాపం)",
+    sections: "Sauptika Sections X - XVIII",
+    versesApprox: 390,
+    keyCharacters: ["Queen Draupadi", "Ashwatthaman", "Bhagavan Sri Krishna", "Arjuna", "Bhima", "Maharshi Vyasa", "Uttara"],
+    summaryEn: "Dawn brings the horrifying discovery of the slaughtered camp; Queen Draupadi collapses in agony over the corpses of her five sons, brother Dhrishtadyumna, and kinsmen. She declares a vow of fast unto death unless the innate, effulgent jewel (Chudamani) on Ashwatthaman's forehead is brought to her. Bhima, Arjuna, and Krishna pursue Ashwatthaman in a golden chariot to the hermitage of Sage Vyasa on the banks of the Bhagirathi. Seeing the divine chariot approach, Ashwatthaman plucks a blade of sacred grass (Ishiika) and, uttering the supreme Vedic mantra, invokes the universe-destroying Brahmashira Astra, directing it: 'For the total annihilation of the Pandavas!' To counteract the cataclysm, Krishna urges Arjuna to invoke his own Brahmashira. The two apocalyptic fiery spheres clash in the sky, threatening to incinerate the three worlds and dry up the cosmic oceans. Sage Narada and Maharshi Vyasa manifest between the blazing spheres, ordering both warriors to withdraw their weapons. Arjuna, having maintained immaculate Brahmacharya and righteousness, reverently withdraws his weapon. Ashwatthaman, having invoked it in malice and devoid of self-mastery, admits he cannot withdraw it; instead, in venomous spite, he directs the weapon into the wombs of Pandava women: 'Let this weapon fall upon the womb of Uttara (Abhimanyu's widow), so the last seed of the Pandavas is destroyed!' Lord Sri Krishna roars with incandescent divine fury, pronouncing an immortal curse upon Ashwatthaman: 'Thou shalt wander alone, friendless, through desolate forests and burning wastelands for three thousand continuous years, foul with the stench of blood and pus, racked by every disease, shunned by all mortals! As for the unborn infant slain in Uttara's womb, I Myself shall revive him by My pristine virtue and Truth; he shall rule the earth as King Parikshit!' Bhima strips the sparkling jewel from Ashwatthaman's forehead, leaving a weeping, bleeding wound, and presents it to Queen Draupadi, who places it upon King Yudhishthira's crown.",
+    summaryTe: "తెల్లవారిన తర్వాత పాండవులకు విషయం తెలిసి శిబిరానికి చేరుకొనుట; ఐదుగురు పుత్రుల మృతదేహాలను చూసి ద్రౌపది గుండెలు పగిలేలా విలపించుట. అశ్వత్థామ నుదుటిపై పుట్టుకతో వచ్చిన దివ్యమణిని తీసుకువస్తేనే ప్రాణాలు దక్కించుకుంటానని, లేదంటే ప్రాయోపవేశం చేస్తానని శపథం చేయుట. శ్రీకృష్ణార్జునులు, భీముడు అశ్వత్థామను వెంబడించి వ్యాసాశ్రమం వద్ద పట్టుకొనుట. భయపడిన అశ్వత్థామ ఒక దర్భపుల్లను (ఐషీకము) తీసి 'పాండవ వంశ నాశనమగుగాక' అని పరమ విధ్వంసకర బ్రహ్మశిరోనామకాస్త్రాన్ని ప్రయోగించుట. దాన్ని నివారించడానికి అర్జునుడు కూడా బ్రహ్మశిరోనామకాస్త్రాన్ని వేయగా, లోకాలు దహించుకుపోయే పరిస్థితిలో వ్యాసుడు, నారదుడు వచ్చి అస్త్రాలను ఉపసంహరించుకోమనుట. బ్రహ్మచర్యం, ధర్మనిష్ఠ గల అర్జునుడు తన అస్త్రాన్ని ఉపసంహరించుకోగా, ఉపసంహరణ చేతగాని అశ్వత్థామ ఆ అస్త్రాన్ని అభిమన్యుని భార్య ఉత్తర గర్భంపైకి మళ్ళించుట. శ్రీకృష్ణ పరమాత్మ రౌద్రరూపం దాల్చి 'నీవు 3,000 సంవత్సరాలు కుష్టువ్యాధితో, రక్తపు చీము దుర్గంధంతో ఎవరూ లేని అడవుల్లో ఒంటరిగా తిరుగుతూ నరకయాతన అనుభవించు' అని శాపమిచ్చుట. ఉత్తర గర్భంలోని మృతశిశువును తన సత్యనిష్ఠతో బ్రతికిస్తానని, అతడే 'పరీక్షిత్తు' మహారాజై రాజ్యమేలుతాడని కృష్ణుడు వరమిచ్చుట. అశ్వత్థామ నుదుటి మణిని ఊడబీకి ద్రౌపదికి సమర్పించగా, ఆమె దానిని ధర్మరాజు కిరీటంలో ధరింపజేయుట.",
+    keyQuoteRoy: "The holy one said: 'Thou shalt, O wretch, wander over the earth for three thousand years, destitute of companions and unable to talk with any one! Besmeared with pus and blood, and smelling of death, thou shalt wander in solitary wildernesses!' Then Bhima took the jewel from his head and gave it to Draupadi.",
+    dharmaInsight: "When malice targets the unborn future to extinguish life itself, the Supreme Divine intervenes with absolute grace, ensuring that truth and virtue are eternally resurrected while evil rots in solitary torment."
+  },
+  {
+    number: 7,
+    id: "jalapradanika-parva",
+    parva: "Stree Parva",
+    nameEn: "Jalapradanika Parva (The Forest of Life Allegory & The Iron Bhima)",
+    nameSa: "जलप्रदानिकपर्वन्",
+    nameTe: "జలప్రదానిక పర్వము (ధృతరాష్ట్రునికి విదుర తత్వబోధ, సంసార చక్రం & లోహభీముని కౌగిలి)",
+    sections: "Stree Sections I - XV",
+    versesApprox: 420,
+    keyCharacters: ["King Dhritarashtra", "Mahatma Vidura", "Queen Gandhari", "Bhagavan Sri Krishna", "Bhima", "King Yudhishthira"],
+    summaryEn: "Learning of the annihilation of his 100 sons, King Dhritarashtra falls to the earth unconscious in boundless grief. Mahatma Vidura consoles the blind monarch through profound philosophical parables, expounding the transience of all material glory and the immortal allegory of the Forest of Life (Samsara-Kantara): a traveler wandering in a perilous forest full of predators falls into a dark pit, dangling upside down by a cluster of creeping vines; at the bottom of the pit lurks a monstrous dragon; at the mouth of the pit stands a gigantic elephant with six faces and twelve feet; two mice (one white, one black—symbolizing day and night) continuously gnaw away at the vines; yet from a honeycomb on an overhead branch, occasional drops of honey fall into the traveler's mouth, and intoxicated by those drops of sensory pleasure, the man clings to life and forgets his impending destruction! Dhritarashtra, Gandhari, and the royal women travel to Kurukshetra. The Pandavas arrive to offer obeisance. Lord Krishna, reading Dhritarashtra's heart, perceives that the king intends to crush Bhima to death in a lethal embrace of grief and vengeance. Krishna swiftly pushes forward an iron statue of Bhima (Loha-Bhima); the blind king, possessing the strength of ten thousand elephants, crushes the hollow iron statue into powder against his chest, vomiting blood in the exertion! Weeping and believing he has murdered Bhima, Dhritarashtra's fury dissolves in remorse. Krishna reveals the deception: 'Behold, O King, Bhimasena liveth! I knew thy intent and saved thee from the sin of murdering thy nephew!' Dhritarashtra embraces the real Bhima with genuine affection. Queen Gandhari, burning to curse Yudhishthira, is approached by Yudhishthira, who bows and touches her feet: 'I am Yudhishthira, the slayer of thy sons; curse me, for I am the cause of this carnage!' Disarmed by his absolute humility, Gandhari's wrath softens, but a sliver of her burning gaze from beneath her blindfold falls upon Yudhishthira's toenails, permanently scorching them blue-black.",
+    summaryTe: "100 మంది కుమారులు మరణించారని విని ధృతరాష్ట్రుడు స్పృహతప్పి నేలపై పడి రోదించుట. విదురుడు 'సంసార కాంతారము' (జీవితారణ్యం) అను అద్భుత ఆధ్యాత్మిక ఉపమానంతో ధృతరాష్ట్రునికి తత్వబోధ చేయుట: ఒక అడవిలో క్రూరమృగాలకు భయపడి బావిలోకి జారిన వ్యక్తి, తీగలను పట్టుకుని తలకిందులుగా వేలాడుతూ ఉంటాడు; బావి అడుగున కొండచిలువ, పైన ఆరు ముఖాల ఏనుగు (సంవత్సర కాలం), తీగలను కొరుకుతున్న నలుపు-తెలుపు ఎలుకలు (రాత్రింబవళ్ళు) ఉండగా, పైన తేనెపట్టు నుండి కారుతున్న తేనె బిందువుల రుచికి మురిసిపోయి చావును మరచిపోతాడు; ఇదే సంసార మాయ అని విదురుడు బోధించుట. ధృతరాష్ట్రుడు, గాంధారి కురుక్షేత్రానికి వెళ్ళగా పాండవులు వారి దర్శనానికి వచ్చుట. భీమునిపై ధృతరాష్ట్రునికి గల ద్వేషాన్ని గ్రహించిన శ్రీకృష్ణుడు, భీమునికి బదులుగా ఒక 'ఇనుప విగ్రహాన్ని' (లోహభీముడు) ముందుంచగా, 10,000 ఏనుగుల బలంగల ధృతరాష్ట్రుడు దానిని కౌగిలించుకుని పిండిపిండి చేసి రక్తపు వాంతులు చేసుకునుట. భీముడు చనిపోయాడని రోదిస్తున్న ధృతరాష్ట్రునికి అసలు విషయం చెప్పి కృష్ణుడు శాంతింపజేయుట. కుమారులను చంపిన పాండవులను శపించబోయిన గాంధారి కాళ్ళపై ధర్మరాజు సాష్టాంగపడి 'నీ కుమారుల చావుకు నేనే కారణం, నన్ను శపించు' అని లొంగిపోగా, ఆయన వినయానికి కరిగి ఆమె శాంతించుట; అయితే గాంధారి కంటి గంతల సందు నుండి పడిన ఆమె ఉగ్ర దృష్టి ధర్మరాజు కాలిగోళ్ళను నల్లగా మార్చివేయుట.",
+    keyQuoteRoy: "Vasudeva said: 'Knowing thy mind, O King, I dragged Bhima away and placed that iron statue before thee! Endued with the might of ten thousand elephants, thou didst break that iron statue into pieces! Bhimasena is yet alive; cast off thy wrath, O monarch, and embrace the sons of Pandu!'",
+    dharmaInsight: "Grief unchecked turns murderous, seeking revenge on the righteous; but genuine humility and absolute surrender disarm even the most devastating curses of righteous anger."
+  },
+  {
+    number: 8,
+    id: "stree-vilapa-parva",
+    parva: "Stree Parva",
+    nameEn: "Stree-vilapa Parva (The Lamentation of the Women & The Curse of Gandhari)",
+    nameSa: "स्त्रीविलापपर्वन्",
+    nameTe: "స్త్రీవిలాప పర్వము (గాంధారీ విలాపం, రణభూమి దర్శనం & శ్రీకృష్ణునికి గాంధారి శాపం)",
+    sections: "Stree Sections XVI - XXV",
+    versesApprox: 590,
+    keyCharacters: ["Queen Gandhari", "Bhagavan Sri Krishna", "Queen Kunti", "Queen Draupadi", "King Dhritarashtra"],
+    summaryEn: "Blessed by Sage Vyasa with divine celestial vision, Queen Gandhari walks the apocalyptic expanse of Kurukshetra accompanied by Lord Sri Krishna. The battlefield presents a horrifying sight: millions of dismembered corpses, headless trunks, jackals and vultures tearing at the royal flesh of kings, and shattered chariots strewn like broken toys. Gandhari delivers world literature's most heart-rending lamentation, describing with agonizing beauty the fallen heroes: Grandfather Bhishma on his bed of arrows; Drona's body surrounded by weeping disciples; Karna lying in the dust like a fallen sun; youthful Abhimanyu with his locks soaked in blood; Duhsasana's torn chest; and her own beloved Duryodhana lying with broken thighs, guarded only by mourning Queen Bhanumati. As her maternal grief crests into overwhelming cosmic anguish, Gandhari turns upon Lord Sri Krishna, holding Him responsible for the holocaust: 'Thou art Govinda, master of all the senses! Thou hadst the divine power to prevent this fratricidal slaughter of cousins, yet Thou didst deliberately permit the destruction of the Kurus! Therefore, by the power of my lifelong ascetic devotion to my husband, I curse Thee, O Wielder of the Discus! Exactly thirty-six years from this day, Thy own kinsmen, the Vrishnis, Andhakas, and Bhojas, shall butcher one another in fratricidal madness! Thou shalt wander alone in desolate forests and be slain by an ignoble hunter! And the women of Dvaraka shall weep and wail in the dust, even as the daughters of the Kurus are weeping today!' Lord Sri Krishna serenely smiles with boundless compassion and accepts the curse: 'I know this already, O blessed mother; Thou hast only uttered that which was preordained by Time! None in the three worlds could destroy the Yadavas except the Yadavas themselves; Thy curse shall be fulfilled in its hour.'",
+    summaryTe: "వ్యాస మహర్షి ప్రసాదించిన దివ్యదృష్టితో గాంధారీ దేవి శ్రీకృష్ణుని వెంటబెట్టుకుని కురుక్షేత్ర రణభూమిని దర్శించుట. కోట్లాది కళేబరాలు, నక్కలు, రాబందులు పీక్కుతింటున్న రాజదేహాలు, అంపశయ్యపై భీష్ముడు, దుమ్ములో పడియున్న కర్ణుడు, నరికివేయబడిన బాల అభిమన్యుడు, వక్షం చీల్చబడిన దుశ్శాసనుడు, తొడలు విరిగి పడియున్న దుర్యోధనుని మృతదేహాలను చూసి గాంధారి చేసిన విలాపం జగత్ప్రసిద్ధమైనది. పుత్రశోకంతో రగిలిపోయిన గాంధారి, సర్వశక్తిమంతుడవై ఉండి కూడా ఈ కురువంశ నాశనాన్ని ఆపలేకపోయినందుకు శ్రీకృష్ణుని నిందిస్తూ భయంకరమైన శాపమిచ్చుట: 'ఓ గోవిందా! పతివ్రతానైన నా తపోశక్తితో నిన్ను శపిస్తున్నాను. ఇప్పటి నుండి సరిగ్గా 36వ సంవత్సరంలో నీ యాదవ వంశం పరస్పరం కలహించుకుని సర్వనాశనమగును గాక! నీవు అడవిలో దిక్కులేనివానివలె ఒక వేటగాని బాణానికి మరణించెదవు గాక! ఈనాడు కురువంశ స్త్రీలు విలపిస్తున్నట్లే నాడు ద్వారకా నగర స్త్రీలు శోకసంద్రంలో మునిగెదరు గాక!' శ్రీకృష్ణ పరమాత్మ చిరునవ్వుతో ప్రసన్నంగా ఆ శాపాన్ని స్వీకరిస్తూ 'అమ్మా! కాలధర్మాన్ని నీవు పలికావు. యాదవులను యాదవులు తప్ప మరెవరూ నశింపజేయలేరు, నీ శాపం తప్పక నెరవేరుతుంది' అని బదులిచ్చుట.",
+    keyQuoteRoy: "Gandhari said: 'By the little merit I have acquired by serving my husband, I curse thee, O Wielder of the discus! Since thou wert indifferent to the Kurus and the Pandavas while they slaughtered each other, thirty-six years from now, thy own kinsmen shall slay each other, and thou shalt perish in the wilderness by ignoble means!' The holy one smilingly replied: 'I know this already, O mother; there is none other who can destroy the Vrishnis save themselves!'",
+    dharmaInsight: "Even the Supreme Avatar voluntarily subordinates Himself to the inexorable laws of Karma and a mother's grief, demonstrating that divine sovereignty operates through moral responsibility rather than arbitrary immunity."
+  },
+  {
+    number: 9,
+    id: "sraddha-parva",
+    parva: "Stree Parva",
+    nameEn: "Sraddha Parva (Funeral Obsequies, Karna's Secret Revealed & The Curse on Womankind)",
+    nameSa: "श्राद्धपर्वन्",
+    nameTe: "శ్రాద్ధ పర్వము (గంగా తీరాన అంత్యక్రియలు, కుంతి కర్ణ రహస్య ప్రకటన & స్త్రీజాతికి ధర్మరాజు శాపం)",
+    sections: "Stree Sections XXVI - XXVII",
+    versesApprox: 185,
+    keyCharacters: ["Queen Kunti", "King Yudhishthira", "Bhagavan Sri Krishna", "Arjuna", "Bhima", "Dhritarashtra"],
+    summaryEn: "Led by King Yudhishthira and Dhritarashtra, the royal survivors proceed to the sacred banks of the Ganga to perform the Vedic funeral obsequies (Sraddha) and water-libations (Tarpanam) for the millions of fallen kings and warriors. Thousands of sandalwood pyres illuminate the riverbank as priests chant Vedic hymns. As Yudhishthira prepares to conclude the rites, Queen Kunti breaks down in uncontrollable, agonizing weeping. Kneeling beside Yudhishthira, she reveals the shattering secret kept hidden for decades: 'Offer water-libations also, O my son, unto that hero of peerless splendor, Karna! He was thy elder brother, born of my maiden womb by Surya Deva before my marriage to Pandu; he was the firstborn Kaunteya and your eldest brother!' Hearing this earth-shaking revelation, King Yudhishthira collapses in absolute horror and inconsolable grief: 'Alas, what cosmic sin have we committed! Karna was our elder brother! Had I known this, I would have crowned him Emperor of the world and served his feet as his humble servant! For a handful of earth, we have butchered our own brother!' Arjuna, Bhima, and the twins weep bitterly in sorrow and guilt. Yudhishthira performs lavish funeral rites for Karna, bestowing vast wealth, jewels, and lands upon Karna's widows and dependents. Overwhelmed with anguish that his own mother's silence caused this fratricidal horror, King Yudhishthira pronounces the historic Curse upon Womankind: 'Henceforth, no woman in the entire world shall ever possess the power to keep a secret (స్త్రీజాతి ఏ రహస్యాన్నీ దాచలేదు)!' The Sraddha rites conclude, and the Pandavas purify themselves in the sacred waters of the Ganga, ending the epic Volume VII and preparing for the accession to the throne in Shanti Parva.",
+    summaryTe: "ధర్మరాజు ఆధ్వర్యంలో గంగా నదీ తీరాన కురుక్షేత్రంలో మరణించిన కోట్లాది వీరులకు శాస్త్రోక్తంగా అంత్యక్రియలు, జలతర్పణాలు నిర్వహించుట. తర్పణ క్రతువు ముగిసే సమయంలో కుంతీదేవి కన్నీరుమున్నీరై ధర్మరాజుతో 'నాయనా! కర్ణునికి కూడా తర్పణం విడవండి, ఆయన నా కన్యకగా ఉన్నప్పుడు సూర్యభగవానుని అనుగ్రహంతో జన్మించిన మీ అందరి అన్నయ్య, మొదటి కౌంతేయుడు' అని దశాబ్దాలుగా దాచిన పరమ రహస్యాన్ని వెల్లడించుట. ఈ మాట విన్న ధర్మరాజు గుండె పగిలి నేలపై కూలిపోయి 'హా దైవమా! మా కన్న అన్నయ్యను మేమే చంపుకున్నామా! ఈ విషయం ముందే తెలిసి ఉంటే కర్ణునికే పట్టాభిషేకం చేసి ఆయన పాదాల వద్ద దాసునిగా సేవ చేసేవాడిని కదా!' అని శోకించుట. కర్ణుని భార్యలకు, సంతానానికి అపారమైన ధనధాన్యాలు ఇచ్చి కర్ణునికి ఘనంగా శ్రాద్ధ కర్మలు జరిపించుట. తల్లి దాచిన ఈ రహస్యం ఇంతటి ఘోర మహాభారత యుద్ధానికి, అన్నదమ్ముల హననానికి కారణమైనందుకు తీవ్ర వేదనతో ధర్మరాజు సమస్త స్త్రీజాతిని ఉద్దేశించి 'ఇకపై ఈ లోకంలో ఏ స్త్రీ కూడా ఎటువంటి రహస్యాన్నీ దాచలేదు' అని శాపమిచ్చుటతో వాల్యూమ్ VII పరిసమాప్తమగుట.",
+    keyQuoteRoy: "Kunti, weeping bitterly, said: 'Offer oblations of water unto that hero, viz., Karna! He was your eldest brother, born of me by Surya!' Hearing these words of his mother, King Yudhishthira fell down on the earth, exceedingly afflicted, and cried: 'Alas, in consequence of the concealment of this secret by our mother, we have been burnt by the fire of fratricide!'",
+    dharmaInsight: "Secrets hidden to preserve personal honor can unleash generational catastrophes of fratricidal tragedy; absolute transparency in truth is the foundational bedrock of universal Dharma."
+  }
+];
+
 /* ===== MAHABHARATA 12-VOLUME MASTER MAPPING =====
    Systematic alignment of Pratap Chandra Roy's 12-Volume Canonical Translation */
 const MAHABHARATA_VOLUMES = [
@@ -1585,58 +1726,58 @@ const MAHABHARATA_VOLUMES = [
   },
   {
     volNumber: 7,
-    titleEn: "Volume VII: Karna Parva & Shalya Parva",
-    titleTe: "సంపుటము 7: కర్ణ పర్వము & శల్య పర్వము",
-    parvaId: "karna_shalya",
-    upaParvasCount: 5,
-    status: "PLANNED",
-    sections: "Karna Sections I - LXIX; Shalya Sections I - LIX",
-    description: "Duhsasana's blood drunk, Karna vs Arjuna duel, Shalya slain, Dvaipayana lake, Bhima vs Duryodhana mace duel."
+    titleEn: "Volume VII: Karna, Salya, Sauptika & Stree Parvas",
+    titleTe: "సంపుటము 7: కర్ణ, శల్య, సౌప్తిక & స్త్రీ పర్వములు",
+    parvaId: "vol7",
+    upaParvasCount: 9,
+    status: "COMPLETE",
+    sections: "Karna I-XCVI, Salya I-LXV, Sauptika I-XVIII, Stree I-XXVII",
+    description: "Karna's command & fall, Duhsasana's blood drunk, Shalya slain, Dvaipayana lake, Bhima-Duryodhana mace duel, nocturnal massacre of sleeping camp, Brahmashira & Ashwatthaman's curse, iron statue of Bhima, Gandhari's lament & curse to Krishna, and Karna's secret revealed."
   },
   {
     volNumber: 8,
-    titleEn: "Volume VIII: Sauptika Parva & Stree Parva",
-    titleTe: "సంపుటము 8: సౌప్తిక పర్వము & స్త్రీ పర్వము",
-    parvaId: "sauptika_stree",
-    upaParvasCount: 8,
-    status: "PLANNED",
-    sections: "Sauptika Sections I - XVIII; Stree Sections I - XXVII",
-    description: "Nocturnal raid, Upapandavas slain, Brahmashira, Gandhari's lament, Gandhari's curse to Krishna, Karna's secret."
-  },
-  {
-    volNumber: 9,
-    titleEn: "Volume IX: Shanti Parva (Part I - Rajadharma)",
-    titleTe: "సంపుటము 9: శాంతి పర్వము (రాజధర్మము)",
+    titleEn: "Volume VIII: Shanti Parva (Part I - Rajadharma)",
+    titleTe: "సంపుటము 8: శాంతి పర్వము (రాజధర్మము)",
     parvaId: "shanti1",
     upaParvasCount: 1,
     status: "PLANNED",
-    sections: "Sections I - CXXVIII",
+    sections: "Sections I - CLXXIII",
     description: "Yudhishthira's grief, Bhishma's supreme discourse on governance, justice, leadership, and statecraft from arrow bed."
   },
   {
-    volNumber: 10,
-    titleEn: "Volume X: Shanti Parva (Part II - Mokshadharma)",
-    titleTe: "సంపుటము 10: శాంతి పర్వము (మోక్షధర్మము)",
+    volNumber: 9,
+    titleEn: "Volume IX: Shanti Parva (Part II - Mokshadharma)",
+    titleTe: "సంపుటము 9: శాంతి పర్వము (మోక్షధర్మము)",
     parvaId: "shanti2",
     upaParvasCount: 2,
     status: "PLANNED",
-    sections: "Sections CXXIX - CCCLIII",
+    sections: "Sections CLXXIV - CCCLXV",
     description: "Apaddharma, Mokshadharma, Samkhya, Yoga, Sulabha-Janaka dialogue, cosmic liberation."
   },
   {
-    volNumber: 11,
-    titleEn: "Volume XI: Anushasana Parva",
-    titleTe: "సంపుటము 11: అనుశాసన పర్వము",
-    parvaId: "anushasana",
-    upaParvasCount: 2,
+    volNumber: 10,
+    titleEn: "Volume X: Anushasana Parva (Part I)",
+    titleTe: "సంపుటము 10: అనుశాసన పర్వము (భాగం 1)",
+    parvaId: "anushasana1",
+    upaParvasCount: 1,
     status: "PLANNED",
-    sections: "Sections I - CLIV",
-    description: "Sri Vishnu Sahasranama Stotram, Shiva Sahasranama, Dana Dharma, passing of Grandfather Bhishma (ఉత్తరాయణ పుణ్యకాలం)."
+    sections: "Sections I - CVI",
+    description: "Dana Dharma, duties of life stages, sacred dialogues on righteous conduct."
+  },
+  {
+    volNumber: 11,
+    titleEn: "Volume XI: Anushasana Parva (Part II)",
+    titleTe: "సంపుటము 11: అనుశాసన పర్వము (భాగం 2)",
+    parvaId: "anushasana2",
+    upaParvasCount: 1,
+    status: "PLANNED",
+    sections: "Sections CVII - CLXVI",
+    description: "Sri Vishnu Sahasranama Stotram, Shiva Sahasranama, passing of Grandfather Bhishma (ఉత్తరాయణ పుణ్యకాలం)."
   },
   {
     volNumber: 12,
-    titleEn: "Volume XII: Ashvamedhika to Svargarohana Parva",
-    titleTe: "సంపుటము 12: ఆశ్వమేధిక నుండి స్వర్గారోహణ పర్వము",
+    titleEn: "Volume XII: Ashvamedhika to Svargarohana Parva & Harivamsa",
+    titleTe: "సంపుటము 12: ఆశ్వమేధిక నుండి స్వర్గారోహణ పర్వము & హరివంశము",
     parvaId: "ashvamedha_svarga",
     upaParvasCount: 8,
     status: "PLANNED",
@@ -1657,7 +1798,27 @@ if (typeof window !== 'undefined') {
   window.UDYOGA_PARVA_UPAPARVAS = UDYOGA_PARVA_UPAPARVAS;
   window.BHISHMA_PARVA_UPAPARVAS = BHISHMA_PARVA_UPAPARVAS;
   window.DRONA_PARVA_UPAPARVAS = DRONA_PARVA_UPAPARVAS;
+  window.VOLUME_VII_UPAPARVAS = VOLUME_VII_UPAPARVAS;
+  window.KARNA_PARVA_UPAPARVAS = VOLUME_VII_UPAPARVAS;
   window.MAHABHARATA_VOLUMES = MAHABHARATA_VOLUMES;
   window.MAHABHARATA_CHARACTERS = MAHABHARATA_CHARACTERS;
 }
 
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    MAHABHARATA_METADATA,
+    MAHABHARATA_PARVAS,
+    ADI_PARVA_UPAPARVAS,
+    SABHA_PARVA_UPAPARVAS,
+    VANA_PARVA_PART1_UPAPARVAS,
+    VANA_PARVA_PART2_UPAPARVAS,
+    VIRATA_PARVA_UPAPARVAS,
+    UDYOGA_PARVA_UPAPARVAS,
+    BHISHMA_PARVA_UPAPARVAS,
+    DRONA_PARVA_UPAPARVAS,
+    VOLUME_VII_UPAPARVAS,
+    KARNA_PARVA_UPAPARVAS: VOLUME_VII_UPAPARVAS,
+    MAHABHARATA_VOLUMES,
+    MAHABHARATA_CHARACTERS
+  };
+}

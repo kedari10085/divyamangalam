@@ -707,8 +707,11 @@
         <button type="button" class="parva-sel-btn" id="btnParvaBhishma" onclick="selectReaderParva('bhishma')">
           🏹 Vol V: Bhishma Parva &amp; Gita (5 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaDrona" onclick="selectReaderParva('drona')">
+        <button type="button" class="parva-sel-btn" id="btnParvaDrona" onclick="selectReaderParva('drona')">
           ⚔️ Vol VI: Drona Parva (8 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVol7" onclick="selectReaderParva('vol7')">
+          🏹 Vol VII: Karna, Salya, Sauptika &amp; Stree (9 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -773,6 +776,13 @@
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did the duel between Arjuna and Karna unfold on the 17th day and how did the Anjalika weapon slay Karna?')">🏹 Karna vs Arjuna &amp; Fall of Karna (కర్ణ-అర్జున ద్వంద్వయుద్ధం &amp; అంజలికాస్త్రం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima tear open Duhsasana\'s chest, drink his heart-blood, and tie Draupadi\'s hair?')">🩸 Bhima Drinking Duhsasana\'s Blood (దుశ్శాసన వధ &amp; రక్తపానం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Duryodhana hide in Dvaipayana Lake and how was he defeated by Bhima in the mace duel?')">🌊 Duryodhana in Dvaipayana Lake &amp; Mace Duel (ద్వైపాయన మడుగు &amp; ఊరుభంగం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened in the nocturnal massacre of the sleeping Pandava camp by Ashwatthaman in Sauptika Parva?')">🦉 Nocturnal Massacre of Sleeping Camp (సౌప్తిక రాత్రి దాడి &amp; ఉపపాండవుల వధ)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Ashwatthaman unleash the Brahmashira on a blade of grass and receive Krishna\'s 3000-year curse?')">💥 Ashwatthama\'s Brahmashira &amp; 3000-Year Curse (ఐషీకాస్త్రం &amp; శాపం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Krishna save Bhima from Dhritarashtra with an iron statue and what was Gandhari\'s curse to Krishna?')">🗿 Iron Bhima &amp; Gandhari\'s Curse to Krishna (లోహభీముడు &amp; గాంధారీ శాపం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How was Karna\'s true identity revealed by Kunti on the Ganga and why did Yudhishthira curse all womankind?')">🌊 Karna\'s Secret Revealed &amp; Curse on Womankind (కుంతి కర్ణ రహస్యం &amp; స్త్రీజాతి శాపం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Abhimanyu penetrate the Chakravyuha and achieve martyrdom fighting six Maharathas alone?')">🛡️ Chakravyuha &amp; Abhimanyu's Martyrdom (చక్రవ్యూహం &amp; బాలవీరుడు)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What was Arjuna\'s fierce sunset vow to slay Jayadratha and how did he receive the Pashupatastra again?')">🏹 Arjuna\'s Sunset Vow against Jayadratha (అర్జునుని భీషణ ప్రతిజ్ఞ)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sri Krishna create the solar eclipse illusion to enable the slaying of Jayadratha?')">☀️ Krishna\'s Solar Illusion &amp; Jayadratha Vadha (సూర్యగ్రహణ లీల &amp; జయద్రథ వధ)</button>
@@ -901,6 +911,7 @@
   const btnParvaUdyoga = document.getElementById('btnParvaUdyoga');
   const btnParvaBhishma = document.getElementById('btnParvaBhishma');
   const btnParvaDrona = document.getElementById('btnParvaDrona');
+  const btnParvaVol7 = document.getElementById('btnParvaVol7');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -955,7 +966,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -989,6 +1000,10 @@
       if (btnParvaDrona) btnParvaDrona.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'ద్రోణ పర్వము (Drona Parva) — 8 ఉపపర్వాలు సంపూర్ణం' : 'Drona Parva (Book of Drona) — All 8 Upa-Parvas Complete';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VI: ద్రోణాభిషేకం, సంశప్తక వధ, వైష్ణవాస్త్ర మాలిక, చక్రవ్యూహం & బాలవీరుడు అభిమన్యుని వీరస్వర్గం, అర్జునుని సూర్యాస్తమయ ప్రతిజ్ఞ, జయద్రథ వధ, ఘోర రాత్రి యుద్ధం, ఘటోత్కచుని ఆత్మత్యాగం (వాసవి శక్తి), అశ్వత్థామ హతః కుంజరః (ద్రోణవధ) & నారాయణాస్త్ర శరణాగతి తత్వం.' : 'Volume VI: Dronabhisheka, Samsaptakas, Vaishnavastra garland, Chakravyuha & Abhimanyu\'s martyrdom, Arjuna\'s sunset vow, Jayadratha Vadha, epic Night Battle, Ghatotkacha\'s sacrifice of Vasavi Shakti, fall of Drona, and Narayana Astra complete surrender.';
+    } else if (parvaKey === 'vol7') {
+      if (btnParvaVol7) btnParvaVol7.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'కర్ణ, శల్య, సౌప్తిక & స్త్రీ పర్వములు (Volume VII) — 9 ఉపపర్వాలు సంపూర్ణం' : 'Volume VII: Karna, Salya, Sauptika & Stree Parvas — All 9 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VII: కర్ణుని సేనాధిపత్యం & అంజలికాస్త్ర పతనం, దుశ్శాసన రక్తపానం, శల్యవధ, ద్వైపాయన మడుగు & గదాయుద్ధం (ఊరుభంగం), కపిధ్వజ రథ దహనం, సౌప్తిక రాత్రి మారణహోమం, ఐషీకాస్త్రం & అశ్వత్థామకు 3000 ఏళ్ళ శాపం, లోహభీముడు, గాంధారీ విలాపం & శ్రీకృష్ణునికి శాపం, కుంతి కర్ణ రహస్యం & స్త్రీజాతికి శాపం.' : 'Volume VII: Karna\'s command & fall via Anjalika, Bhima drinking Duhsasana\'s blood, Shalya slain, Dvaipayana Lake, Gada-yuddha thigh-strike, Kapidhwaja chariot incinerated, Sauptika nocturnal slaughter, Aishika weapon & 3,000-year curse on Ashwatthaman, iron statue of Bhima, Gandhari\'s lament & curse to Krishna, and Karna\'s secret unveiled.';
     }
 
     renderUpaParvas();
@@ -1026,6 +1041,7 @@
     if (currentParva === 'udyoga') return window.UDYOGA_PARVA_UPAPARVAS || [];
     if (currentParva === 'bhishma') return window.BHISHMA_PARVA_UPAPARVAS || [];
     if (currentParva === 'drona') return window.DRONA_PARVA_UPAPARVAS || [];
+    if (currentParva === 'vol7') return window.VOLUME_VII_UPAPARVAS || [];
     return [];
   }
 
@@ -1133,7 +1149,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : (v.volNumber === 6 ? 'drona' : 'adi')))))}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : (v.volNumber === 6 ? 'drona' : (v.volNumber === 7 ? 'vol7' : 'adi'))))))}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1171,6 +1187,7 @@
     else if (parvaKey === 'udyoga') { dataset = window.UDYOGA_PARVA_UPAPARVAS; parvaLabel = 'UDYOGA PARVA (VOL IV)'; }
     else if (parvaKey === 'bhishma') { dataset = window.BHISHMA_PARVA_UPAPARVAS; parvaLabel = 'BHISHMA PARVA (VOL V)'; }
     else if (parvaKey === 'drona') { dataset = window.DRONA_PARVA_UPAPARVAS; parvaLabel = 'DRONA PARVA (VOL VI)'; }
+    else if (parvaKey === 'vol7') { dataset = window.VOLUME_VII_UPAPARVAS; parvaLabel = 'VOLUME VII (KARNA, SALYA, SAUPTIKA, STREE)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1307,13 +1324,75 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV, V &amp; VI)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV, V, VI &amp; VII)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('abhimanyu') || qLower.includes('chakravyuha') || qLower.includes('padmavyuha') || qLower.includes('lakshmana') || (qLower.includes('martyrdom') && qLower.includes('six'))) {
+      if (qLower.includes('anjalika') || (qLower.includes('karna') && (qLower.includes('arjuna') || qLower.includes('fall') || qLower.includes('slain') || qLower.includes('ashwasena') || qLower.includes('sinking wheel') || qLower.includes('wheel sunk') || qLower.includes('cursed wheel') || qLower.includes('parashurama curse')))) {
+        answer = `
+          <strong>🏹 The Duel of Titans: Arjuna vs. Karna &amp; Fall of Karna (కర్ణ పర్వము / Karna Parva - Volume VII):</strong><br/><br/>
+          • <strong>The 17th Day Climax:</strong> Karna commands the Kaurava army as supreme general. Salya, King of Madra, acts as Karna's charioteer on the condition of speaking his mind freely, constantly demoralizing Karna with the biting fable of the haughty crow and the royal swans (<em>Hamsa-Kaka Akhyana</em>).<br/><br/>
+          • <strong>Fratricidal Crisis Defused:</strong> Wounded by Karna, King Yudhishthira retreats to his tent and bitterly reproaches Arjuna: <em>"Fie on thy Gandiva! Hand it to Krishna or another!"</em> Bound by a solemn vow to slay anyone who demands he surrender Gandiva, Arjuna draws his sword to decapitate his elder brother! Lord Sri Krishna intervenes with the supreme discourse on the subtlety of Truth: <em>"An insult to an elder from a younger is equivalent to his death!"</em> Arjuna verbally rebukes Yudhishthira to fulfill his oath, then falls at his feet in tears, defusing fratricide through righteous wisdom.<br/><br/>
+          • <strong>The Ashwasena Serpent Missile:</strong> Arjuna slays Karna's heroic son Vrishasena before Karna's eyes. In ferocious vengeance, Karna shoots the blazing snake-arrow <strong>Ashwasena</strong> (a vengeful Naga from Khandava forest) aimed at Arjuna's neck. Lord Krishna presses His divine toes into the floorboards of the chariot, sinking the chariot five fingers deep into the earth; the horses sink to their knees, and the snake-arrow strikes only Arjuna's golden crown, knocking it to the dust!<br/><br/>
+          • <strong>Curses Manifest &amp; Sinking Wheel:</strong> As Karna attempts to invoke the cosmic Brahmastra, Sage Parashurama's ancient curse causes him to forget the sacred mantras in his hour of doom! Simultaneously, the Brahmana's curse manifests: the left rear wheel of Karna's chariot sinks deep into the earth (<em>"Eat this wheel, O Earth!"</em>). Leaping down to lift the sunken wheel with his bare arms, Karna appeals to the ancient chivalric code of Kshatriya Dharma, begging Arjuna to pause combat.<br/><br/>
+          • <strong>Krishna's Enumeration of Adharmas:</strong> Lord Sri Krishna thunders in righteous condemnation: <em>"Where was thy Dharma, O Karna, when Draupadi, clad in a single garment, was dragged weeping into the assembly? Where was thy Dharma when Shakuni cheated Yudhishthira with loaded dice? Where was thy Dharma when six Maharathas surrounded and butchered sixteen-year-old Abhimanyu from behind?"</em> Struck to the heart with shame, Karna hangs his head in silence.<br/><br/>
+          • <strong>The Anjalika Astra:</strong> Guided by Krishna, Arjuna draws the crescent-headed, effulgent <strong>Anjalika weapon</strong>, swearing: <em>"If I have practiced penance, served my preceptors, and honored Dharma, let this arrow sever the head of Karna!"</em> Gandiva roars, and the celestial missile severs Karna's head from his body like the radiant sun setting from the heavens. A divine luminescent energy rises from Karna's fallen corpse and merges into Surya Deva!
+        `;
+      } else if (qLower.includes('duhsasana') || qLower.includes('drinking blood') || qLower.includes('heart-blood') || qLower.includes('chest torn') || (qLower.includes('bhima') && (qLower.includes('blood') || qLower.includes('draupadi hair') || qLower.includes('braid')))) {
+        answer = `
+          <strong>🩸 Bhima Slaying Duhsasana &amp; Drinking Heart-Blood (దుశ్శాసన వధ &amp; రక్తపానం - Volume VII):</strong><br/><br/>
+          • <strong>The Moment of Terrible Retribution:</strong> On the 17th day of battle, Bhima confronts Prince Duhsasana—the perpetrator who dragged Queen Draupadi by her open hair into the Kaurava court and attempted to disrobe her thirteen years earlier.<br/><br/>
+          • <strong>The Ferocious Mace Duel:</strong> Bhima smashes Duhsasana's chariot, slaughters his steeds and charioteer, and fells Duhsasana to the earth with a shattering blow of his heavy mace. Remembering the vows made in the gambling hall, Bhima pins Duhsasana to the dust under his foot.<br/><br/>
+          • <strong>Severing the Disrobing Arm:</strong> Bhima roars before both trembling armies: <em>"This is the arm that dragged Draupadi's hair! This is the arm that pulled her garments!"</em> Bhima wrenches Duhsasana's right arm out of its socket and flings it onto the ground.<br/><br/>
+          • <strong>Tearing the Chest &amp; Drinking the Blood:</strong> Bhima tears open Duhsasana's breastplate and chest with his bare fingers and sword, drinking the hot, spurting heart-blood directly from the wound! Bhima dances upon the bloody earth with wild roars, shouting: <em>"The taste of this heart-blood is sweeter than mother's milk, honey, butter, or heavenly nectar!"</em><br/><br/>
+          • <strong>Binding Draupadi's Hair:</strong> Taking a handful of Duhsasana's warm blood, Bhima rides back to Queen Draupadi and washes her hair in it, finally tying up the tresses that had remained loose for thirteen long years of exile, fulfilling his terrible vow before gods and mortals.
+        `;
+      } else if (qLower.includes('dvaipayana') || qLower.includes('gada-yuddha') || qLower.includes('thigh') || qLower.includes('urubhanga') || (qLower.includes('duryodhana') && (qLower.includes('lake') || qLower.includes('mace') || qLower.includes('balarama') || qLower.includes('kapidhwaja')))) {
+        answer = `
+          <strong>🌊 Duryodhana in Dvaipayana Lake &amp; The Mace Duel (ద్వైపాయన మడుగు &amp; ఊరుభంగం - Volume VII):</strong><br/><br/>
+          • <strong>Hiding in Lake Dvaipayana:</strong> The sole surviving Kaurava prince among one hundred brothers, King Duryodhana flees with his mace and submerges himself in the waters of <strong>Lake Dvaipayana</strong> using magical water-solidifying arts (<em>Jala-stambhana</em>). Discovered by hunters who inform the Pandavas, Duryodhana is surrounded by Krishna and the five brothers.<br/><br/>
+          • <strong>Yudhishthira's Reckless Chivalry:</strong> King Yudhishthira taunts Duryodhana to emerge, foolishly offering: <em>"Fight any one of us five brothers with any weapon of thy choice; if thou winnest, the entire kingdom is thine!"</em> Krishna rebukes Yudhishthira in disbelief: <em>"What reckless gambling is this? Duryodhana hath practiced thirty-two years on iron effigies! None save Bhima can match his mace, and even Bhima is inferior in technical skill!"</em><br/><br/>
+          • <strong>Balarama as Umpire &amp; The 14 Mandalas:</strong> Duryodhana emerges and chooses Bhima for a mace duel (<em>Gada-yuddha</em>). Lord Balarama arrives, having concluded a 42-day pilgrimage along the sacred Saraswati, to witness his two supreme disciples. The duel rages through 14 intricate mace maneuvers; Duryodhana repeatedly evades Bhima's ferocious blows with dazzling aerial footwork.<br/><br/>
+          • <strong>The Thigh-Strike (Urubhanga):</strong> Seeing Bhima tire, Krishna prompts Arjuna to remind Bhima of his vow to break Duryodhana's thighs. Arjuna slaps his left thigh. Bhima understands: as Duryodhana leaps high into the air with the maneuver <em>Avasthana</em>, Bhima swings his heavy mace horizontally under the leap, shattering both of Duryodhana's thighs with a deafening crack!<br/><br/>
+          • <strong>Balarama Pacified &amp; Chariot Incineration:</strong> Balarama raises his golden plow (<em>Hala</em>) in rage to slay Bhima for striking below the navel. Krishna restrains Balarama, explaining that Bhima was bound by his sacred public vow to avenge Draupadi, and Duryodhana had reaped the fruit of Maitreya's ancient curse. Later, when Krishna guides Arjuna to step down first from their chariot, Krishna dismounts: instantly, the Kapidhwaja war-chariot bursts into roaring flames and burns to ashes! Krishna reveals that the chariot had already been incinerated by celestial astras and was held together only by His divine presence!
+        `;
+      } else if (qLower.includes('sauptika') || qLower.includes('sleeping camp') || qLower.includes('massacre') || qLower.includes('upapandava') || (qLower.includes('ashwatthaman') && (qLower.includes('night') || qLower.includes('owl') || qLower.includes('shiva') || qLower.includes('dhrishtadyumna')))) {
+        answer = `
+          <strong>🦉 Sauptika Parva: The Nocturnal Massacre of the Sleeping Camp (సౌప్తిక రాత్రి దాడి &amp; ఉపపాండవుల వధ - Volume VII):</strong><br/><br/>
+          • <strong>The Owl's Strategy:</strong> Consecrated as supreme commander by the dying Duryodhana, Ashwatthaman rests beneath a banyan tree with Kripacharya and Kritavarman. Watching a nocturnal owl slaughter sleeping crows in their nests, Ashwatthaman resolves to launch a midnight raid on the sleeping Pandava camp. Kripa warns that attacking sleeping, unarmed warriors violates sacred Kshatriya ethics, but Ashwatthaman's fury over his father Drona's death knows no restraint.<br/><br/>
+          • <strong>Lord Shiva's Entrance:</strong> At the entrance of the camp, Ashwatthaman is halted by a colossal, fiery phantom absorbing all his weapons. Recognizing Lord Mahadeva (Shiva), Ashwatthaman offers his own body as an oblation on a blazing golden altar. Pleased with his unswerving devotion, Lord Shiva enters Ashwatthaman's body, gifts him an invincible celestial sword, and proclaims: <em>"I have shielded the Panchalas to honor Krishna; their past merits are now exhausted."</em><br/><br/>
+          • <strong>The Midnight Holocaust:</strong> While Kripa and Kritavarman guard the exits and set fire to the tents, Ashwatthaman enters like Death personified. He pulls Dhrishtadyumna from bed, kicking and choking him to death like a sacrificial animal (denying him death by weapons), slaughters Shikhandin, and butchers all five young <strong>Upapandavas</strong> (Draupadi's sons: Prativindhya, Sutasoma, Satanika, Srutakarma, and Srutasena) in their sleep!<br/><br/>
+          • <strong>Duryodhana's Peaceful Passing:</strong> Returning to Lake Dvaipayana, Ashwatthaman informs the dying Duryodhana that the entire Pandava host and Dhrishtadyumna are exterminated. Filled with deep peace and vindication, Duryodhana embraces Ashwatthaman and breathes his last, ascending to the realms of heroes.
+        `;
+      } else if (qLower.includes('aishika') || qLower.includes('brahmashira') || qLower.includes('3000') || qLower.includes('3,000') || qLower.includes('parikshit') || qLower.includes('blade of grass') || qLower.includes('chudamani') || (qLower.includes('ashwatthaman') && (qLower.includes('curse') || qLower.includes('jewel') || qLower.includes('womb')))) {
+        answer = `
+          <strong>💥 Aishika Parva: Ashwatthaman's Brahmashira &amp; The 3,000-Year Curse (ఐషీకాస్త్రం &amp; శాపం - Volume VII):</strong><br/><br/>
+          • <strong>Draupadi's Grief &amp; The Pursuit:</strong> Queen Draupadi sits in fasting unto death over her five murdered sons, declaring she will touch neither food nor water until the celestial forehead-jewel (<em>Chudamani</em>) of Ashwatthaman is brought to her. Bhima, Arjuna, and Krishna pursue Ashwatthaman to Sage Vyasa's hermitage on the Ganga.<br/><br/>
+          • <strong>The Blade of Grass (Aishika):</strong> Cornered, Ashwatthaman plucks a slender blade of grass (<em>Ishiika</em>), charges it with the universe-destroying <strong>Brahmashira weapon</strong>, and unleashes it, screaming: <em>"For the annihilation of the Pandavas!"</em> Arjuna counters with his own Brahmashira. Sages Vyasa and Narada stand between the twin cataclysms, commanding both warriors to retract their missiles to prevent cosmic incineration.<br/><br/>
+          • <strong>Retraction &amp; Uttara's Womb:</strong> Arjuna, a pure celibate practitioner of Dharma, easily withdraws his weapon. Ashwatthaman, unable to withdraw it, maliciously redirects the fiery projectile into the womb of Princess Uttara to kill the unborn child of Abhimanyu and exterminate the Pandava lineage!<br/><br/>
+          • <strong>Krishna Revives Parikshit:</strong> Lord Sri Krishna proclaims His supreme divine vow: <em>"Even as this child perisheth by thy wicked weapon, I shall revive him with My divine energy!"</em> Krishna enters the womb and breathes life back into the stillborn child, naming him <strong>Parikshit</strong>, who will rule for sixty glorious years.<br/><br/>
+          • <strong>The 3,000-Year Wandering Curse:</strong> Krishna curses Ashwatthaman: <em>"Because thou hast butchered sleeping children and struck an unborn babe, thou shalt wander the earth for three thousand years, solitary and friendless, racked by foul diseases, oozing blood and pus, banished from human habitation!"</em> The natural jewel on Ashwatthaman's forehead is extracted from his skull and presented to Draupadi, who places it on King Yudhishthira's crown.
+        `;
+      } else if (qLower.includes('iron bhima') || qLower.includes('loha-bhima') || qLower.includes('gandhari') || qLower.includes('stree-vilapa') || qLower.includes('samsara-kantara') || (qLower.includes('curse') && qLower.includes('36'))) {
+        answer = `
+          <strong>🗿 Iron Bhima &amp; Gandhari's Curse to Sri Krishna (లోహభీముడు &amp; గాంధారీ శాపం - Volume VII):</strong><br/><br/>
+          • <strong>Samsara-Kantara Allegory:</strong> Mahatma Vidura comforts grieving King Dhritarashtra with the profound Vedantic allegory of the Forest of Existence (<em>Samsara-Kantara</em>): a traveler trapped in a well by vines gnawed by black and white mice (night and day), surrounded by serpents and beasts, yet distracted by drops of honey—illustrating mortal entrapment in worldly desires amid inevitable death.<br/><br/>
+          • <strong>The Iron Effigy of Bhima (Loha-Bhima):</strong> Meeting the victorious Pandavas, blind Dhritarashtra seeks to embrace Bhima. Knowing Dhritarashtra possessed the strength of 10,000 elephants and intended to crush Bhima to death in vengeful fury, omniscient Sri Krishna pushes forward a lifesize cast-iron statue of Bhima! Dhritarashtra crushes the iron effigy to powder in his massive embrace, vomiting blood from the violent exertion. Calmed by Krishna, the king weeps and embraces the real Bhima with genuine affection.<br/><br/>
+          • <strong>Gandhari's Glare &amp; Stree-Vilapa:</strong> Queen Gandhari casts a glance from beneath her blindfold onto King Yudhishthira's feet, scorching his toenails black. Gandhari walks across the Kurukshetra field, giving voice to the world-famous <strong>Stree-Vilapa</strong> (Lamentation of Women), mourning over the shattered corpses of Duryodhana, Karna, Duhsasana, and countless warriors.<br/><br/>
+          • <strong>The 36-Year Yadava Curse:</strong> Overcome by grief and holding Krishna responsible for not halting the war despite possessing cosmic power, Gandhari curses the Lord: <em>"In the thirty-sixth year from this day, Thy own kinsmen (the Vrishnis and Andhakas) shall slaughter one another in fratricidal civil war; Thy women shall weep like the Bharata women; and Thou Thyself shalt perish by ignoble means in the wilderness!"</em><br/><br/>
+          • <strong>Krishna's Divine Smile:</strong> Sri Krishna smiles with serene tranquility: <em>"O Mother, thou hast only uttered what was already decreed! None in the three worlds could destroy the Yadavas except themselves. I accept thy curse with joy."</em>
+        `;
+      } else if (qLower.includes('kunti') || qLower.includes('secret revealed') || qLower.includes('womankind') || (qLower.includes('karna') && (qLower.includes('brother') || qLower.includes('surya') || qLower.includes('remorse') || qLower.includes('tarpanam')))) {
+        answer = `
+          <strong>🌊 Kunti's Secret Revealed &amp; Curse on Womankind (కుంతి కర్ణ రహస్యం &amp; స్త్రీజాతికి శాపం - Volume VII):</strong><br/><br/>
+          • <strong>Funeral Rites on the Sacred Ganga:</strong> In the Sraddha Parva of Stree Parva, King Yudhishthira and his brothers gather on the banks of the holy Bhagirathi (Ganga) to perform the water oblations (<em>Tarpanam</em>) and sacred funeral rites for all fallen warriors, preceptors, and kings.<br/><br/>
+          • <strong>Kunti's Agonized Confession:</strong> As Yudhishthira completes the rites, Queen Mother Kunti breaks down in inconsolable weeping and discloses the epic's most agonizing secret: <em>"Offer water oblations unto that foremost of heroes, viz., Karna! Know that he was your eldest brother, born of me before marriage by Surya Deva!"</em><br/><br/>
+          • <strong>Yudhishthira's Remorse:</strong> Hearing this, King Yudhishthira collapses to the earth in paroxysms of grief, crying: <em>"Alas! In consequence of the concealment of this secret by our mother, we have been burnt in the fire of fratricide! Had I known that Karna was our eldest brother, neither this horrific slaughter would have occurred, nor would I have allowed any warrior to perish! I would have placed the crown upon his head and served him as his humble servant!"</em><br/><br/>
+          • <strong>The Universal Curse on Womankind:</strong> Tormented by unbearable sorrow over having unknowingly ordered the death of his own eldest brother, King Yudhishthira pronounces a historic curse upon all womankind for all time: <em>"Henceforth, let no woman across the entire earth ever be capable of keeping any secret hidden in her heart (స్త్రీ జాతి ఎన్నడూ రహస్యాన్ని దాచలేకపోవుగాక)!"</em> The Pandavas then perform the grandest imperial funeral ceremonies and golden charities for Karna.
+        `;
+      } else if (qLower.includes('abhimanyu') || qLower.includes('chakravyuha') || qLower.includes('padmavyuha') || qLower.includes('lakshmana') || (qLower.includes('martyrdom') && qLower.includes('six'))) {
         answer = `
           <strong>🛡️ The Chakravyuha &amp; Martyrdom of Abhimanyu (చక్రవ్యూహం &amp; బాలవీరుడు అభిమన్యుని వీరస్వర్గం - Volume VI):</strong><br/><br/>
           • <strong>The 13th Day &amp; The Invincible Array:</strong> With Arjuna lured far to the south by the death-bound Samsaptakas, Acharya Drona arrays the formidable, swirling <strong>Chakravyuha (Padmavyuha)</strong>. Sixteen-year-old Prince Abhimanyu alone knows how to pierce its outer perimeter, having heard Arjuna explain the penetration method to Subhadra while still in the womb (Subhadra having fallen asleep before the exit strategy was explained).<br/><br/>
@@ -1580,8 +1659,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, IV, V, and VI (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, and Drona Parvas).<br/><br/>
-          You can explore all 8 Upa-Parvas of Volume VI (Drona Parva: Dronabhisheka, Samsaptakabadha &amp; Vaishnavastra, Chakravyuha &amp; Abhimanyu's Martyrdom, Pratigya Parva &amp; Kailasa Journey, Jayadratha Vadha &amp; Solar Illusion, Ratri-Yuddha &amp; Ghatotkacha's Sacrifice of Vasavi Shakti, Drona-badha &amp; Ashwatthama Hatah Kunjara, and Narayana-astra Prayoga) or switch to Volumes I–V in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through VII (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, and Stree Parvas).<br/><br/>
+          You can explore all 9 Upa-Parvas of Volume VII (Karna Parva &amp; Anjalika Astra, Shalya-badha, Hrada-pravesha &amp; Dvaipayana Lake, Gada-yuddha mace duel, Sauptika nocturnal slaughter, Aishika weapon &amp; 3,000-year curse on Ashwatthaman, Jalapradanika &amp; Iron Bhima, Stree-vilapa &amp; 36-year Yadava curse, and Sraddha Parva &amp; Karna's secret revealed) or switch to Volumes I–VI in the reader above!
         `;
       }
 
@@ -1601,7 +1680,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('drona');
+    selectReaderParva('vol7');
   });
 })();
 </script>
