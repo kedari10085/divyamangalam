@@ -704,8 +704,11 @@
         <button type="button" class="parva-sel-btn" id="btnParvaUdyoga" onclick="selectReaderParva('udyoga')">
           ⚔️ Vol IV: Udyoga Parva (11 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaBhishma" onclick="selectReaderParva('bhishma')">
+        <button type="button" class="parva-sel-btn" id="btnParvaBhishma" onclick="selectReaderParva('bhishma')">
           🏹 Vol V: Bhishma Parva &amp; Gita (5 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaDrona" onclick="selectReaderParva('drona')">
+          ⚔️ Vol VI: Drona Parva (8 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -770,6 +773,12 @@
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Abhimanyu penetrate the Chakravyuha and achieve martyrdom fighting six Maharathas alone?')">🛡️ Chakravyuha &amp; Abhimanyu's Martyrdom (చక్రవ్యూహం &amp; బాలవీరుడు)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What was Arjuna\'s fierce sunset vow to slay Jayadratha and how did he receive the Pashupatastra again?')">🏹 Arjuna\'s Sunset Vow against Jayadratha (అర్జునుని భీషణ ప్రతిజ్ఞ)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sri Krishna create the solar eclipse illusion to enable the slaying of Jayadratha?')">☀️ Krishna\'s Solar Illusion &amp; Jayadratha Vadha (సూర్యగ్రహణ లీల &amp; జయద్రథ వధ)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened in the terrifying Midnight Battle and why did Krishna rejoice at Ghatotkacha\'s sacrifice of Vasavi Shakti?')">⚡ Midnight Battle &amp; Ghatotkacha\'s Vasavi Shakti (రాత్రి యుద్ధం &amp; వాసవి శక్తి)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Drona fall on the 15th day and why did Yudhishthira\'s chariot touch the ground at Ashwatthama Hatah Kunjara?')">🐘 Ashwatthama Hatah Kunjara &amp; Fall of Drona (ద్రోణవధ &amp; రథం నేలకొరుగుట)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Lord Krishna command absolute surrender to baffle Ashwatthaman\'s Narayana Astra?')">🕉️ Narayana Astra &amp; Absolute Surrender (నారాయణాస్త్రం &amp; శరణాగతి తత్వం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What is the core message and 18 chapters of Srimad Bhagavad Gita in Bhishma Parva?')">🪷 Srimad Bhagavad Gita (శ్రీమద్భగవద్గీత)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sage Vyasa grant Sanjaya divine celestial vision (Divya-Drishti)?')">👁️ Sanjaya's Celestial Vision (దివ్య దృష్టి)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Sri Krishna charge Bhishma with the chariot wheel breaking His vow?')">☸️ Krishna Charging with Chariot Wheel (చక్రపాణి)</button>
@@ -891,6 +900,7 @@
   const btnParvaVirata = document.getElementById('btnParvaVirata');
   const btnParvaUdyoga = document.getElementById('btnParvaUdyoga');
   const btnParvaBhishma = document.getElementById('btnParvaBhishma');
+  const btnParvaDrona = document.getElementById('btnParvaDrona');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -945,7 +955,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -975,6 +985,10 @@
       if (btnParvaBhishma) btnParvaBhishma.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'భీష్మ పర్వము & శ్రీమద్భగవద్గీత (Bhishma Parva & Gita) — 5 ఉపపర్వాలు సంపూర్ణం' : 'Bhishma Parva & Srimad Bhagavad Gita — All 5 Upa-Parvas Complete';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ V: కురుక్షేత్ర ఉత్పాతాలు, సంజయుని దివ్యదృష్టి, శ్రీమద్భగవద్గీతా ప్రబోధం (18 అధ్యాయాలు), యుధిష్ఠిరుని పాదపూజ, యుయుత్సుని పక్షమార్పిడి, 10 రోజుల మహాయుద్ధం, చక్రపాణిగా శ్రీకృష్ణుడు, భీష్ముని అంపశయ్య, బాణగంగ & కర్ణుని సమాగమం.' : 'Volume V: Kurukshetra portents, Sanjaya\'s Divya-Drishti, Srimad Bhagavad Gita (18 Chapters complete), Yudhishthira touching elders\' feet, Yuyutsu\'s defection, 10 days of ferocious war, Krishna charging with the chariot wheel, Bhishma on the Bed of Arrows, and Ganga water spring.';
+    } else if (parvaKey === 'drona') {
+      if (btnParvaDrona) btnParvaDrona.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'ద్రోణ పర్వము (Drona Parva) — 8 ఉపపర్వాలు సంపూర్ణం' : 'Drona Parva (Book of Drona) — All 8 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VI: ద్రోణాభిషేకం, సంశప్తక వధ, వైష్ణవాస్త్ర మాలిక, చక్రవ్యూహం & బాలవీరుడు అభిమన్యుని వీరస్వర్గం, అర్జునుని సూర్యాస్తమయ ప్రతిజ్ఞ, జయద్రథ వధ, ఘోర రాత్రి యుద్ధం, ఘటోత్కచుని ఆత్మత్యాగం (వాసవి శక్తి), అశ్వత్థామ హతః కుంజరః (ద్రోణవధ) & నారాయణాస్త్ర శరణాగతి తత్వం.' : 'Volume VI: Dronabhisheka, Samsaptakas, Vaishnavastra garland, Chakravyuha & Abhimanyu\'s martyrdom, Arjuna\'s sunset vow, Jayadratha Vadha, epic Night Battle, Ghatotkacha\'s sacrifice of Vasavi Shakti, fall of Drona, and Narayana Astra complete surrender.';
     }
 
     renderUpaParvas();
@@ -1011,6 +1025,7 @@
     if (currentParva === 'virata') return window.VIRATA_PARVA_UPAPARVAS || [];
     if (currentParva === 'udyoga') return window.UDYOGA_PARVA_UPAPARVAS || [];
     if (currentParva === 'bhishma') return window.BHISHMA_PARVA_UPAPARVAS || [];
+    if (currentParva === 'drona') return window.DRONA_PARVA_UPAPARVAS || [];
     return [];
   }
 
@@ -1118,7 +1133,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : 'adi'))))}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : (v.volNumber === 6 ? 'drona' : 'adi')))))}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1155,6 +1170,7 @@
     else if (parvaKey === 'virata') { dataset = window.VIRATA_PARVA_UPAPARVAS; parvaLabel = 'VIRATA PARVA (VOL IV)'; }
     else if (parvaKey === 'udyoga') { dataset = window.UDYOGA_PARVA_UPAPARVAS; parvaLabel = 'UDYOGA PARVA (VOL IV)'; }
     else if (parvaKey === 'bhishma') { dataset = window.BHISHMA_PARVA_UPAPARVAS; parvaLabel = 'BHISHMA PARVA (VOL V)'; }
+    else if (parvaKey === 'drona') { dataset = window.DRONA_PARVA_UPAPARVAS; parvaLabel = 'DRONA PARVA (VOL VI)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1291,13 +1307,73 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV &amp; V)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV, V &amp; VI)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('bhagavad gita') || qLower.includes('gita') || qLower.includes('visada') || qLower.includes('karmanye') || qLower.includes('sthitaprajna') || qLower.includes('purushottama') || qLower.includes('sarva-dharman') || qLower.includes('nashto mohah')) {
+      if (qLower.includes('abhimanyu') || qLower.includes('chakravyuha') || qLower.includes('padmavyuha') || qLower.includes('lakshmana') || (qLower.includes('martyrdom') && qLower.includes('six'))) {
+        answer = `
+          <strong>🛡️ The Chakravyuha &amp; Martyrdom of Abhimanyu (చక్రవ్యూహం &amp; బాలవీరుడు అభిమన్యుని వీరస్వర్గం - Volume VI):</strong><br/><br/>
+          • <strong>The 13th Day &amp; The Invincible Array:</strong> With Arjuna lured far to the south by the death-bound Samsaptakas, Acharya Drona arrays the formidable, swirling <strong>Chakravyuha (Padmavyuha)</strong>. Sixteen-year-old Prince Abhimanyu alone knows how to pierce its outer perimeter, having heard Arjuna explain the penetration method to Subhadra while still in the womb (Subhadra having fallen asleep before the exit strategy was explained).<br/><br/>
+          • <strong>The Lonely Breakthrough:</strong> Urged by King Yudhishthira, Abhimanyu commands Sumitra to drive his chariot directly into Drona's gaping maw. Abhimanyu breaches the frontline array alone. King Jayadratha of Sindhu, empowered by Lord Shiva's divine boon granting him victory over all Pandavas except Arjuna for one single day, seals the breach behind Abhimanyu, barring Yudhishthira, Bhima, Nakula, and Sahadeva from entering!<br/><br/>
+          • <strong>Incomparable Valor:</strong> Trapped deep inside enemy lines, the teenage lion fights with incandescent fury, annihilating entire divisions. Abhimanyu slays Duryodhana's beloved son Prince Lakshmana, King Brihadbala of Kosala, Asmaka, and thousands of royal champions, scattering the terrified Kaurava army like sheep.<br/><br/>
+          • <strong>The Unrighteous Slaughter by Six Maharathas:</strong> Despairing of victory, six supreme Maharathas—<strong>Drona, Karna, Kripa, Ashwatthaman, Kritavarman, and Duhsasana's son</strong>—surround the lone boy, flagrantly violating all ancient codes of righteous combat (Kshatriya Dharma). On Drona's technical advice, Karna sneaks behind Abhimanyu and severs his bowstring; Drona shoots his bow from his hands; Kripa kills his charioteer and Kritavarman slaughters his horses.<br/><br/>
+          • <strong>Heroic Last Stand:</strong> Disarmed, the young hero leaps from his shattered chariot with sword and shield. When Drona shatters his sword, Abhimanyu seizes a massive, bronze-rimmed war-chariot wheel, brandishing it above his head and whirling it like Lord Vishnu with the Sudarshana Chakra, striking terror into the surrounding kings! Finally fighting with a heavy mace, Abhimanyu duels Duhsasana's son; as both collapse exhausted to the ground, Duhsasana's son strikes Abhimanyu's head while he attempts to rise. Abhimanyu ascends to the heavens as an incarnation of Varchas (son of Soma), immortalized forever as the epitome of supreme youthful courage.
+        `;
+      } else if ((qLower.includes('sunset vow') || qLower.includes('pratigya') || qLower.includes('agni-pravesha') || qLower.includes('kailasa')) && (qLower.includes('jayadratha') || qLower.includes('arjuna') || qLower.includes('vow') || qLower.includes('shiva'))) {
+        answer = `
+          <strong>🏹 Arjuna's Earth-Shaking Sunset Vow against Jayadratha (ప్రతిజ్ఞా పర్వము / Pratigya Parva - Volume VI):</strong><br/><br/>
+          • <strong>The Agony of Fatherhood:</strong> Returning at twilight after annihilating thousands of Samsaptakas, Arjuna finds the Pandava camp drowned in inconsolable mourning. Learning that his 16-year-old son Abhimanyu was trapped, unrighteously butchered from behind, and kicked in the head by Jayadratha, Arjuna collapses in paroxysms of grief, weeping over the broken body of his heroic boy.<br/><br/>
+          • <strong>The Dreadful Oath:</strong> Rising like a blazing sacrificial fire, Arjuna washes his face and hands and roars an earth-shaking vow before all kings: <em>"Truly do I swear that tomorrow before the sun sets, I shall slay the wretched Jayadratha, the cause of my child's slaughter! If tomorrow's sun set without my having slain that vile prince of Sindhu, let me not attain the realms of the righteous, but let me enter a blazing fire (Agni-pravesha) and perish in flames!"</em><br/><br/>
+          • <strong>Terror in the Kaurava Camp:</strong> Hearing the roar of Gandiva and Arjuna's oath, King Jayadratha trembles violently and begs Duryodhana for permission to flee Kurukshetra. Drona comforts Jayadratha and constructs a titanic 12-mile deep composite tactical array—combining Sakata (Cart), Padma (Lotus), and Suchimukha (Needle-point) formations—placing Jayadratha six miles deep in the rear, shielded directly by six Maharathas.<br/><br/>
+          • <strong>Yogic Flight to Mount Kailasa:</strong> That night, Lord Sri Krishna visits Arjuna in his tent, warning him that Jayadratha is heavily guarded and urging him to seek Lord Mahadeva's supreme grace to renew the celestial Pashupatastra. In a profound, shared yogic vision, Krishna and Arjuna soar through heavenly spheres, cross the Himalayas, and arrive at the crystal summit of Mount Kailasa. Beholding Lord Shiva (Hara) seated in glory surrounded by Bhutas, Krishna and Arjuna prostrate and chant divine Vedic hymns. Shiva directs them to a celestial lake where divine serpents transform into the celestial bow and fiery Pashupata arrow, recharging Arjuna's martial spirit with invincible cosmic power!
+        `;
+      } else if (qLower.includes('solar illusion') || qLower.includes('eclipse illusion') || qLower.includes('jayadratha vadha') || (qLower.includes('jayadratha') && (qLower.includes('head') || qLower.includes('lap') || qLower.includes('vriddhakshatra') || qLower.includes('slain') || qLower.includes('badha')))) {
+        answer = `
+          <strong>☀️ Sri Krishna's Solar Illusion &amp; Jayadratha Vadha (జయద్రథవధ పర్వము / Jayadratha-badha Parva - Volume VI):</strong><br/><br/>
+          • <strong>The 14th Day Epic Breakthrough:</strong> Arjuna advances relentlessly from sunrise, circumambulating Drona in veneration, slaying King Srutayudha (whose divine mace, hurled at Krishna, rebounded and killed Srutayudha himself because Krishna was unarmed), Sudakshina of Kamboja, and shattering entire armies. In the thick of combat, Krishna unyokes their exhausted, arrow-wounded steeds; Arjuna builds an arrowy fortress and pierces the subterranean earth with weapons to create a crystal fountain of water and a lake to bathe and refresh their horses!<br/><br/>
+          • <strong>Satyaki &amp; Bhurisravas:</strong> Satyaki fights through to assist Arjuna and is pinned to the ground by Bhurisravas, who raises his sword to sever Satyaki's head. Guided by Krishna, Arjuna shoots an arrow from afar and severs Bhurisravas's right arm. Bhurisravas sits in Prayopavesha (yogic fasting to death), and Satyaki decapitates him.<br/><br/>
+          • <strong>The Solar Darkness Illusion:</strong> As the sun descends toward the western mountains, Jayadratha remains heavily guarded behind Drona and Karna. With Arjuna's Agni-pravesha vow in imminent danger, Lord Sri Krishna unleashes His supreme Yogic Maya (projecting darkness that shrouds the solar disc like a premature eclipse). Believing the sun had set and Arjuna must now burn himself alive in fire, the Kaurava warriors lay down their guard and shout in wild jubilation; Jayadratha throws back his head, gazing triumphantly up into the darkened sky!<br/><br/>
+          • <strong>The Decapitation &amp; The Bursting Head:</strong> Krishna whispers: <em>"Behold, Phalguna! Jayadratha is gazing up at the sky, heedless! The sun hath not yet set; it is My Yogic darkness! Strike now! But remember: Jayadratha's ascetic father, King Vriddhakshatra, placed a terrible curse: 'Whoever causeth my son's head to fall upon the earth, his own head shall instantly burst into a hundred pieces!' Shoot thy crescent arrow so that Jayadratha's severed head flieth like a bird straight into his meditating father's lap!"</em><br/><br/>
+          Arjuna invokes a divine celestial arrow, slicing Jayadratha's head from his neck; carrying it aloft on a continuous volley of arrows, the head flies several miles to Samantapanchaka, landing directly into the lap of King Vriddhakshatra as he meditated at dusk! Astounded, the old king stands up; the severed head drops from his lap to the earth—and the father's head instantly bursts into a hundred fragments, fulfilling both vows! Krishna withdraws His Maya, and the golden real sun shines brightly in the western sky before setting in rightful glory.
+        `;
+      } else if (qLower.includes('midnight battle') || qLower.includes('ratri-yuddha') || qLower.includes('ghatotkacha') || qLower.includes('vasavi shakti') || qLower.includes('ekaghni') || qLower.includes('alambusha') || qLower.includes('alayudha')) {
+        answer = `
+          <strong>⚡ The Midnight Battle &amp; Ghatotkacha's Supreme Sacrifice (రాత్రి యుద్ధం &amp; వాసవి శక్తి త్యాగం - Volume VI):</strong><br/><br/>
+          • <strong>The First Nocturnal Holocaust:</strong> Blinded by fury and humiliation over Jayadratha's death, Duryodhana refuses to halt combat at sunset, initiating Kurukshetra's first and only <strong>Night Battle (Ratri-Yuddha)</strong>. Tens of thousands of flaming torches, torches affixed to elephants' tusks, and chariot flares ignite the nocturnal gloom, creating a nightmarish, hellish landscape of confusion and slaughter.<br/><br/>
+          • <strong>Ghatotkacha's Ascendancy:</strong> Because Rakshasa powers increase hundredfold in darkness, Bhima's son <strong>Ghatotkacha</strong> rises into the storm clouds, unleashing apocalyptic sorcery: showers of molten rock, iron spikes, multi-headed blazing serpents, and phantom armies. Ghatotkacha slays demonic Kaurava allies King Alambusha and Alayudha, routing Duryodhana's elite divisions.<br/><br/>
+          • <strong>Forced Expenditure of the Vasavi Shakti:</strong> In absolute terror as his entire army flees in hysterical panic, Duryodhana falls weeping at Karna's feet, screaming: <em>"If thou dost not slay this Rakshasa tonight, not one Kuru warrior will survive to see the dawn!"</em> Karna possessed Indra's single-use, infallible celestial dart—<strong>Vasavi Shakti (Ekaghni)</strong>—which he had zealously guarded for years solely to kill Arjuna. Cornered and desperate, Karna hurls the blazing dart: it pierces Ghatotkacha's chest and ascends back into the heavens to Indra.<br/><br/>
+          • <strong>The Mountainous Fall &amp; Krishna's Dance:</strong> Even in his death-throes, the selfless Rakshasa prince performs a final act of devotion: he expands his physical body to the size of a mountain and deliberately crashes downward upon the Kaurava army, crushing an entire Akshauhini (thousands of soldiers, chariots, and war elephants) under his massive corpse!<br/><br/>
+          While the Pandavas weep bitterly for their beloved nephew, Lord Sri Krishna roars with transcendental joy, embraces Arjuna, and dances upon the chariot deck! When a shocked Arjuna asks how He can celebrate such a tragedy, Krishna reveals the divine secret: <em>"Rejoice, O Partha! Ghatotkacha hath laid down his life to save thine! Vasavi Shakti was forged for thy annihilation; neither thy armor, nor Gandiva, nor celestial astras could have saved thee from it! Now that Karna is stripped of Indra's dart, he is already slain!"</em>
+        `;
+      } else if (qLower.includes('ashwatthama hatah') || qLower.includes('drona-badha') || qLower.includes('kunjara') || (qLower.includes('drona') && (qLower.includes('fall') || qLower.includes('slain') || qLower.includes('deceit') || qLower.includes('chariot touched ground') || qLower.includes('four fingers')))) {
+        answer = `
+          <strong>🐘 Ashwatthama Hatah Kunjara &amp; The Fall of Drona (ద్రోణవధ పర్వము / Drona-badha Parva - Volume VI):</strong><br/><br/>
+          • <strong>The 15th Morning Carnage:</strong> Acharya Drona fights with apocalyptic fury on the 15th morning, unleashing the universe-destroying <strong>Brahmashira weapon</strong> and incinerating tens of thousands of ordinary troops. Seven celestial Rishis (Agastya, Bhrigu, Angiras, and Kasyapa) appear in the sky, rebuking Drona: <em>"Thou art a Brahmana versed in the sacred Vedas, fighting unrighteously; thy time on earth is completed; lay down thy weapons!"</em><br/><br/>
+          • <strong>Krishna's Stratagem:</strong> Lord Krishna explains to the Pandavas that while Drona holds his bow, the combined gods and Asuras cannot defeat him; he will lay down his arms only if he hears that his beloved son Ashwatthaman is slain. Bhima slays a colossal royal war-elephant belonging to King Indravarman of Malava named <strong>Ashwatthaman</strong>, and roars: <em>"Ashwatthaman is slain!"</em><br/><br/>
+          • <strong>The Sinking Chariot:</strong> Knowing his son's divine immortality, Drona refuses to believe Bhima and turns to King Yudhishthira, whose lips had never spoken an untruth in his entire life. Krishna urges Yudhishthira: <em>"If Drona fighteth for half a day more, thy entire army will be reduced to ashes; speak a righteous untruth to preserve cosmic Dharma!"</em> Yudhishthira proclaims: <em>"Ashwatthama hatah... (loudly) iti kunjaraḥ (whispered inaudibly as Krishna blows His conch Panchajanya)"</em>.<br/><br/>
+          At that tragic instant, King Yudhishthira's royal chariot, which had floated <strong>four fingers' breadth above the mortal earth</strong> his entire life due to his immaculate truthfulness, dropped down with a thud and touched the dusty ground!<br/><br/>
+          • <strong>Drona's Yogic Samadhi &amp; Decapitation:</strong> Broken-hearted by his son's reported death, Drona drops his bow and weapons, sits in the lotus posture upon the terrace of his chariot, and enters deep yogic Samadhi, projecting his effulgent soul into the realm of Brahman (visible only to Vyasa, Sanjaya, and five sages). Dhrishtadyumna leaps onto the chariot, draws his sword, and severs Drona's head from his lifeless body, fulfilling his destiny as born from King Drupada's sacrificial fire for Drona's destruction.
+        `;
+      } else if (qLower.includes('narayana astra') || qLower.includes('narayanastra') || qLower.includes('saranagati') || qLower.includes('absolute surrender') || (qLower.includes('ashwatthaman') && qLower.includes('weapon'))) {
+        answer = `
+          <strong>🕉️ The Narayana Astra &amp; The Principle of Absolute Surrender (నారాయణాస్త్ర ప్రయోగ పర్వము - Volume VI):</strong><br/><br/>
+          • <strong>Ashwatthaman's Cataclysmic Vengeance:</strong> Learning of his father's death and the dishonorable severing of his head, Ashwatthaman is consumed by volcanic fury. Performing holy ablutions, he invokes the supreme, universe-destroying <strong>Narayana Astra</strong>, gifted to Drona by Lord Narayana Himself. The sky turns pitch-black, torn by shrieking gales, thunderbolts, and millions of blazing iron discs, fiery arrows, and meteor showers that incinerate everyone bearing arms or offering resistance.<br/><br/>
+          • <strong>Krishna's Command of Total Saranagati:</strong> As the entire Pandava host faces instantaneous incineration, Lord Sri Krishna reveals the weapon's cosmic law: <em>"Speedily lay down all weapons! Dismount from all chariots, horses, and elephants! Cast out every aggressive thought from your hearts and prostrate yourselves upon the bare earth! Against the Narayana weapon, any weapon raised only multiplies its fury a thousandfold; only absolute, defenseless surrender (Saranagati) and total ego-less humility can quench it!"</em><br/><br/>
+          • <strong>Bhima's Fierce Defiance:</strong> The entire Pandava host disarms and prostrates upon the dust, causing the flaming missiles to pass harmlessly overhead. Only Bhima stubbornly defies the order, roaring like a lion and whirling his mace. Instantly, the entire cosmic inferno of the Narayana Astra converges solely upon Bhima's chariot! Krishna and Arjuna sprint into the flames, bodily drag Bhima down from his car, wrench the mace from his hands, and force him to kneel before the weapon. With no weapon or hostility left to target, the celestial fire dissipates peacefully into the ether!<br/><br/>
+          • <strong>The Spiritual Insight &amp; Nara-Narayana Revelation:</strong> The Narayana Astra embodies the profound philosophical core of Saranagati: against the Supreme Divine Will, mortal pride and physical resistance bring inevitable ruin; only total self-surrender dissolves divine wrath. Maharshi Vyasa then appears and reveals to the grieving Ashwatthaman that Krishna and Arjuna are none other than the eternal twin incarnations <strong>Nara and Narayana</strong>, concluding the momentous Volume VI (Drona Parva).
+        `;
+      } else if (qLower.includes('bhagadatta') || qLower.includes('supratika') || qLower.includes('vaishnavastra') || qLower.includes('samsaptaka')) {
+        answer = `
+          <strong>🐘 Samsaptakas, Bhagadatta &amp; The Vaishnava Astra Garland (సంశప్తకవధ పర్వము - Volume VI):</strong><br/><br/>
+          • <strong>The Samsaptaka Death-Vow:</strong> Susarman, King of Trigarta, and his brothers take solemn oaths before the sacred sacrificial fire as <strong>Samsaptakas</strong> (warriors bound by vow to either slay Arjuna or die on the field), successfully luring Arjuna to the southern battlefield on the 12th day.<br/><br/>
+          • <strong>Bhagadatta &amp; the War-Elephant Supratika:</strong> Aged King Bhagadatta of Pragjyotisha (son of Narakasura) charges on his legendary elephant <strong>Supratika</strong>, wreaking havoc in the Pandava lines. Bhima performs the daring feat of <em>Anjalikabhedha</em>, slipping directly under the charging elephant's belly and striking its vital vitals.<br/><br/>
+          • <strong>The Vaishnava Astra Transformed:</strong> When Arjuna confronts Bhagadatta, the aged king, infuriated, invokes the supreme, unerring <strong>Vaishnavastra</strong>, charging his elephant hook (Ankusha) with celestial energy and hurling it straight at Arjuna's chest! The weapon would have destroyed Arjuna instantly.<br/><br/>
+          Lord Sri Krishna suddenly stands up on the chariot and receives the apocalyptic missile directly upon His own chest! Instantly, the terrifying celestial weapon transforms into a fragrant, blooming <strong>Vaijayanti flower garland</strong> resting upon Krishna's neck! When Arjuna asks why Krishna intervened, Krishna smiles and reveals: <em>"This weapon belonged to My Vaishnava energy, gifted by Me to Earth (Bhumi) for her son Narakasura, and passed to Bhagadatta. None in the universe could withstand it except Myself!"</em> Arjuna then pierces Supratika between the temples and slays Bhagadatta.
+        `;
+      } else if (qLower.includes('bhagavad gita') || qLower.includes('gita') || qLower.includes('visada') || qLower.includes('karmanye') || qLower.includes('sthitaprajna') || qLower.includes('purushottama') || qLower.includes('sarva-dharman') || qLower.includes('nashto mohah')) {
         answer = `
           <strong>🪷 Srimad Bhagavad Gita — The Celestial Song (భగవద్గీతా పర్వము / Bhagavat-Gita Parva - Volume V):</strong><br/><br/>
           Delivered by Lord Sri Krishna to Arjuna on the holy field of Kurukshetra across 18 chapters and 700 verses, the Bhagavad Gita resolves Arjuna's moral collapse and reveals the highest truths of Sanatana Dharma:<br/><br/>
@@ -1504,8 +1580,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, IV, and V (Adi, Sabha, Vana, Virata, Udyoga, and Bhishma Parvas).<br/><br/>
-          You can explore all 5 Upa-Parvas of Volume V (Bhishma Parva &amp; Srimad Bhagavad Gita: Jamvu-Khanda, Bhumi Parva, 18 Chapters of Bhagavad Gita, Yudhishthira's Blessings, 10 Days' War, Bed of Arrows) or switch to Volumes I, II, III, and IV in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, IV, V, and VI (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, and Drona Parvas).<br/><br/>
+          You can explore all 8 Upa-Parvas of Volume VI (Drona Parva: Dronabhisheka, Samsaptakabadha &amp; Vaishnavastra, Chakravyuha &amp; Abhimanyu's Martyrdom, Pratigya Parva &amp; Kailasa Journey, Jayadratha Vadha &amp; Solar Illusion, Ratri-Yuddha &amp; Ghatotkacha's Sacrifice of Vasavi Shakti, Drona-badha &amp; Ashwatthama Hatah Kunjara, and Narayana-astra Prayoga) or switch to Volumes I–V in the reader above!
         `;
       }
 
@@ -1525,7 +1601,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('bhishma');
+    selectReaderParva('drona');
   });
 })();
 </script>
