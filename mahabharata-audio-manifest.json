@@ -1,0 +1,62 @@
+{
+  "_comment": "DivyaMangalam Mahabharata Audio Manifest — Maps section numbers to audio file metadata. Audio hosted on Google Drive / Internet Archive.",
+  "_instructions": "Replace GOOGLE_DRIVE_FOLDER_ID with your actual shared folder IDs after uploading.",
+  "_total_files": 2192,
+  "_total_size_gb": 6.56,
+  "volumes": {
+    "vol1": {
+      "title": "Volume 1: Adi to Udyoga Parva (Books 1-5)",
+      "source_zip": "MP3-Mahabharata-Ganguli-Vol-1.zip",
+      "total_tracks": 924,
+      "size_gb": 2.42,
+      "hosting": {
+        "google_drive_folder_id": "REPLACE_WITH_FOLDER_ID",
+        "base_url": "https://drive.google.com/uc?export=download&id="
+      },
+      "books": [
+        { "name": "Adi Parva", "book_number": 1, "first_track": 5, "last_track": 248 },
+        { "name": "Sabha Parva", "book_number": 2, "first_track": 249, "last_track": 331 },
+        { "name": "Vana Parva", "book_number": 3, "first_track": 332, "last_track": 650 },
+        { "name": "Virata Parva", "book_number": 4, "first_track": 651, "last_track": 723 },
+        { "name": "Udyoga Parva", "book_number": 5, "first_track": 724, "last_track": 925 }
+      ]
+    },
+    "vol2": {
+      "title": "Volume 2: Bhishma to Stri Parva (Books 6-11)",
+      "source_zip": "MP3-Mahabharata-Ganguli-Vol-2.zip",
+      "total_tracks": 547,
+      "size_gb": 1.84,
+      "hosting": {
+        "google_drive_folder_id": "REPLACE_WITH_FOLDER_ID",
+        "base_url": "https://drive.google.com/uc?export=download&id="
+      },
+      "books": [
+        { "name": "Bhishma Parva", "book_number": 6, "first_track": 1, "last_track": 126 },
+        { "name": "Drona Parva", "book_number": 7, "first_track": 127, "last_track": 333 },
+        { "name": "Karna Parva", "book_number": 8, "first_track": 334, "last_track": 433 },
+        { "name": "Shalya Parva", "book_number": 9, "first_track": 434, "last_track": 499 },
+        { "name": "Sauptika Parva", "book_number": 10, "first_track": 500, "last_track": 519 },
+        { "name": "Stri Parva", "book_number": 11, "first_track": 520, "last_track": 547 }
+      ]
+    },
+    "vol3": {
+      "title": "Volume 3: Shanti to Swargarohana Parva (Books 12-18)",
+      "source_zip": "MP3-Mahabharata-Ganguli-Vol-3.zip",
+      "total_tracks": 721,
+      "size_gb": 2.31,
+      "hosting": {
+        "google_drive_folder_id": "REPLACE_WITH_FOLDER_ID",
+        "base_url": "https://drive.google.com/uc?export=download&id="
+      },
+      "books": [
+        { "name": "Shanti Parva", "book_number": 12, "first_track": 1, "last_track": 378 },
+        { "name": "Anusasana Parva", "book_number": 13, "first_track": 379, "last_track": 567 },
+        { "name": "Ashvamedha Parva", "book_number": 14, "first_track": 568, "last_track": 661 },
+        { "name": "Ashramavasika Parva", "book_number": 15, "first_track": 662, "last_track": 701 },
+        { "name": "Mausala Parva", "book_number": 16, "first_track": 702, "last_track": 710 },
+        { "name": "Mahaprasthanika Parva", "book_number": 17, "first_track": 711, "last_track": 714 },
+        { "name": "Swargarohanika Parva", "book_number": 18, "first_track": 715, "last_track": 721 }
+      ]
+    }
+  }
+}

@@ -6,6 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Divya Mangalam – Virtual Darshan & Archana</title>
   <meta name="description" content="Experience the divine presence of Divya Mangalam through virtual darshan, palm reading, panchang calendar, and online archana. Offer your prayers from anywhere in the world." />
+  <meta name="keywords" content="divya mangalam, virtual darshan, online archana, hindu temple online, panchang, vedic astrology, palm reading, dosha check, mahabharata" />
+  <meta property="og:title" content="Divya Mangalam – Virtual Darshan, Vedic Astrology & Spiritual Portal" />
+  <meta property="og:description" content="Experience divine darshan, AI palm reading, Vedic Panchang, Dosha check, Shubh Muhurat, Mahabharata & 18 Puranas. Your complete spiritual sanctuary." />
+  <meta property="og:url" content="https://divyamangalam.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_IN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Divya Mangalam – Virtual Darshan & Spiritual Portal" />
+  <meta name="twitter:description" content="Free palm reading, Dosha check, Panchang, Muhurat & complete Mahabharata. Your digital temple." />
+  <link rel="canonical" href="https://divyamangalam.com/" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="sanctuary.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
@@ -33,8 +43,8 @@
       overflow: hidden;
     }
     .tile-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(212,160,23,0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(212,160,23,0.2), 0 0 30px rgba(212,160,23,0.05);
       border-color: var(--gold);
     }
     .tile-card::before {
@@ -100,6 +110,7 @@
     .tile-muhurat:hover { border-left: 4px solid #C2185B; }
     .tile-puran:hover { border-left: 4px solid #E65100; }
     .tile-mahabharata:hover { border-left: 4px solid var(--deep-red); }
+    .tile-dosha:hover { border-left: 4px solid #e74c3c; }
 
     /* Today's Panchang mini card */
     .panchang-mini {
@@ -141,12 +152,13 @@
       <span class="brand-om">🕉️</span>
       <span class="brand-name">Divya Mangalam</span>
     </a>
-    <ul class="nav-links" id="navLinks">
+        <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active" aria-current="page">Home</a></li>
       <li><a href="jyotishyam.html">Jyotishyam</a></li>
       <li><a href="palm-reading.html">Palm Reading</a></li>
       <li><a href="panchang-calendar.html">Panchang</a></li>
       <li><a href="muhurat.html">Muhurat</a></li>
+      <li><a href="dosha-check.html">Dosha Check</a></li>
       <li><a href="mahabharata.html">Mahabharata</a></li>
       <li><a href="puran.html">18 Puranas</a></li>
       <li><a href="gods.html">Deities</a></li>
@@ -218,7 +230,7 @@
 
       <a class="tile-card tile-panchang" href="panchang-calendar.html">
         <span class="tile-icon" aria-hidden="true">📅</span>
-        <span class="tile-badge">NEW</span>
+        <span class="tile-badge" style="background:linear-gradient(135deg,#1565C0,#0D47A1);">POPULAR</span>
         <h3>Panchang Calendar</h3>
         <p>Today's Tithi, Nakshatra, Yoga, Karana, Muhurta — personalized by your birth Rashi and Nakshatra.</p>
         <span class="tile-cta">View Panchang <span aria-hidden="true">→</span></span>
@@ -242,7 +254,7 @@
 
       <a class="tile-card tile-mahabharata" href="mahabharata.html">
         <span class="tile-icon" aria-hidden="true">🏹</span>
-        <span class="tile-badge">NEW</span>
+        <span class="tile-badge" style="background:linear-gradient(135deg,#8B0000,#5c0000);">2046 SECTIONS</span>
         <h3>Srimad Mahabharata</h3>
         <p>18 Maha Parvas &amp; full Adi Parva (19 Upa-Parvas) based on Pratap Chandra Roy's prose translation with Telugu summaries.</p>
         <span class="tile-cta">Read Mahabharata <span aria-hidden="true">→</span></span>
@@ -272,6 +284,7 @@
 
       <a class="tile-card tile-chalisa" href="chalisa.html">
         <span class="tile-icon" aria-hidden="true">📿</span>
+        <span class="tile-badge">FREE</span>
         <h3>Hanuman Chalisa</h3>
         <p>Complete 44 verses with Hindi, transliteration &amp; English meaning. Auto-scroll, 432 Hz healing tones &amp; bell.</p>
         <span class="tile-cta">Recite Chalisa <span aria-hidden="true">→</span></span>
@@ -286,6 +299,7 @@
 
       <a class="tile-card tile-healing" href="healing.html">
         <span class="tile-icon" aria-hidden="true">🎵</span>
+        <span class="tile-badge" style="background:linear-gradient(135deg,#4527A0,#311B92);">POPULAR</span>
         <h3>432 Hz Sound Healing</h3>
         <p>Pure Solfeggio tone generator, 7 chakra selector, meditation timer, and live oscilloscope visualizer.</p>
         <span class="tile-cta">Explore frequencies <span aria-hidden="true">→</span></span>
@@ -293,11 +307,33 @@
 
       <a class="tile-card tile-ai" href="ai-archana.html">
         <span class="tile-icon" aria-hidden="true">🤖</span>
+        <span class="tile-badge" style="background:linear-gradient(135deg,#0D47A1,#1565C0);">AI POWERED</span>
         <h3>AI Pandit</h3>
         <p>Ask a Vedic AI assistant powered by Google Gemini about mantras, rituals, Panchang, and spiritual guidance.</p>
         <span class="tile-cta">Chat with AI <span aria-hidden="true">→</span></span>
       </a>
 
+      <a class="tile-card tile-dosha" href="dosha-check.html">
+        <span class="tile-icon" aria-hidden="true">🔮</span>
+        <span class="tile-badge" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">FREE</span>
+        <h3>Dosha Check</h3>
+        <p>Free Mangal Dosha, Kaal Sarp Dosha, Sade Sati &amp; Pitra Dosha analysis with Vedic remedies.</p>
+        <span class="tile-cta">Check doshas <span aria-hidden="true">→</span></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="journey-section" aria-labelledby="journey-title">
+  <div style="max-width:1100px; margin:0 auto; text-align:center;">
+    <p class="section-label">KEEP EXPLORING</p>
+    <h2 class="section-title" id="journey-title" style="font-size:1.8rem;">Continue Your Spiritual Journey</h2>
+    <div class="journey-grid">
+      <a class="journey-card" href="dosha-check.html"><span class="icon">🔮</span><h4>Dosha Check</h4><p>Free Mangal, Kaal Sarp & more</p></a>
+      <a class="journey-card" href="palm-reading.html"><span class="icon">🖐️</span><h4>Palm Reading</h4><p>AI-powered Vedic palmistry</p></a>
+      <a class="journey-card" href="muhurat.html"><span class="icon">⏳</span><h4>Shubh Muhurat</h4><p>Find auspicious timings</p></a>
+      <a class="journey-card" href="mahabharata.html"><span class="icon">🏹</span><h4>Mahabharata</h4><p>Read the complete epic</p></a>
     </div>
   </div>
 </section>
