@@ -1869,6 +1869,159 @@ const VOLUME_XI_UPAPARVAS = [
 
 /* ===== MAHABHARATA 12-VOLUME MASTER MAPPING =====
    Systematic alignment of Pratap Chandra Roy's 12-Volume Canonical Translation */
+
+/* ===== VOLUME XII: ASWAMEDHA, ASRAMAVASIKA, MAUSALA, MAHAPRASTHANIKA & SWARGAROHANIKA PARVAS =====
+   Translated into English Prose from the Original Sanskrit Text by Pratap Chandra Roy, C.I.E.
+   Vol XII: Aswamedhika Parva (Sec I - XCII), Asramavasika Parva (Sec I - XXXIX),
+   Mausala Parva (Sec I - VIII), Mahaprasthanika Parva (Sec I - III), Swargarohanika Parva (Sec I - V).
+   The Grand Climax and Finale of the 100,000-verse Shatasahasri Samhita.
+*/
+const VOLUME_XII_UPAPARVAS = [
+  {
+    number: 1,
+    parva: "Aswamedhika Parva",
+    nameEn: "Aswamedhika Parva (Part I: Sage Samvarta, Marutta's Gold & The Sacred Anugita)",
+    nameSa: "अश्वमेधिक पर्व (संवर्त-मरुत्त, मरुत्त-स्वर्ण & अनुगीता)",
+    nameTe: "ఆశ్వమేధిక పర్వము (మొదటి భాగం: సంవర్త-మరుత్తుల సంవాదం, హిమాలయ స్వర్ణం & శ్రీకృష్ణానుగీత)",
+    sections: "Aswamedha Sections I - XLIX",
+    versesApprox: 1540,
+    keyCharacters: [
+      "Sri Krishna (శ్రీకృష్ణుడు)",
+      "Arjuna (అర్జునుడు)",
+      "King Yudhishthira (ధర్మరాజు)",
+      "Maharshi Vyasa (వ్యాస భగవానుడు)",
+      "Sage Samvarta (సంవర్త మహర్షి)",
+      "King Marutta (మరుత్త చక్రవర్తి)",
+      "Brihaspati (బృహస్పతి)",
+      "Lord Indra (దేవేంద్రుడు)",
+      "Kasyapa & The Emancipated Sage (కాశ్యపుడు & సిద్ధ బ్రాహ్మణుడు)",
+      "King Alarka (అలర్క మహారాజు)"
+    ],
+    summaryEn: "Following the passing of Grandfather Bhishma, King Yudhishthira is once more plunged into overwhelming desolation over the carnage of kindred. Sage Vyasa consoles him, revealing that kings purify themselves through the Horse Sacrifice (Aswamedha). When Yudhishthira laments that the royal treasury is empty, Vyasa discloses that on the northern peak of Mount Himavat (Munjaban) lies inexhaustible golden treasure left behind from the legendary sacrifice of King Marutta. Vyasa narrates the glorious history of Sage Samvarta (the younger brother of celestial priest Brihaspati), who wandered naked through Varanasi in the guise of a madman. King Marutta secured Samvarta as his officiating priest despite Indra's jealousy, and by placating Lord Shiva on Mount Munjaban, obtained mountains of pure gold. Indra himself, amazed by Samvarta's fiery yogic power, descended to preside over the rites.\n\nBefore returning to Dwaraka, Sri Krishna spends joyous days with Arjuna at Indraprastha. Arjuna confesses that due to the fickleness of his mind, he has forgotten the sublime teachings of the Bhagavad Gita imparted on the Kurukshetra chariot. Krishna gently chides him, explaining that he had spoken the Gita concentrated in high Yoga, but delivers the immortal ANUGITA (అనుగీత). The Anugita reveals the esoteric science of Moksha through the dialogue between Kasyapa and an Emancipated Sage: the nature of Jiva's departure and rebirth, the Five Life-Breaths (Prana, Apana, Samana, Vyana, Udana), the Ten Sacrificing Priests (the organs of sense and action), and the internal sacrificial fire of the Soul. It encompasses the allegory of the Forest of Brahman, King Alarka's discovery that shooting external arrows cannot conquer the mind and senses until he adopts Raja Yoga, King Ambarisha cutting off cupidity, and King Janaka demonstrating that true detachment means possessing the whole universe while claiming nothing as 'mine'.",
+    summaryTe: "భీష్మ పితామహుని పరమపదం అనంతరం ధర్మరాజు బంధువధ జనిత శోకముతో కుంగిపోగా, వ్యాస భగవానుడు ఆయనను ఓదార్చి పాపపరిహారార్థం అశ్వమేధ యాగం చేయమని ఉపదేశిస్తాడు. ఖజానా శూన్యమైందని ధర్మరాజు చింతించగా, హిమవత్పర్వతంలోని ముంజవాన్ శిఖరంపై పురాతన చక్రవర్తి మరుత్తుడు సమర్పించిన అపార స్వర్ణనిధి భద్రంగా ఉన్నదని వ్యాసుడు వెల్లడిస్తాడు. దేవగురువు బృహస్పతి అసూయను ధిక్కరించి, వారణాసిలో పిచ్చివాని వలె దిగంబరంగా తిరుగుతున్న బృహస్పతి తమ్ముడు సంవర్త మహర్షిని ప్రసన్నం చేసుకుని, పరమశివుని అనుగ్రహంతో మరుత్తుడు నిర్వహించిన సువర్ణ యాగాన్ని వ్యాసుడు వివరిస్తాడు.\n\nఇంద్రప్రస్థంలో శ్రీకృష్ణుడు ద్వారకకు బయలుదేరే ముందు అర్జునుడు యుద్ధభూమిలో ఉపదేశించిన గీతాబోధనలను తన చంచల మనస్సు వలన మరచిపోయానని విన్నవించగా, శ్రీకృష్ణుడు 'అనుగీత'ను ప్రబోధిస్తాడు. సిద్ధ బ్రాహ్మణుడు కాశ్యపునకు బోధించిన మోక్షధర్మ రహస్యాలు, పంచప్రాణాలు (ప్రాణ, అపాన, సమాన, వ్యాన, ఉదానాలు), దశ హోతలు, అంతర్గత ఆత్మయజ్ఞం, బ్రహ్మారణ్య రూపకం, అలర్క మహారాజు బాణాలతో ఇంద్రియాలను జయించలేక రాజయోగం ద్వారా మనస్సును గెలవడం, మరియు 'ప్రపంచమంతా నాదే లేదా ఏదీ నాది కాదు' అన్న విదేహ జనకుని నిష్కామ వైరాగ్యాలు ఈ అనుగీతలో అద్భుతంగా ఆవిష్కరించబడ్డాయి.",
+    keyQuoteRoy: "'The mind is the Garhapatya fire, speech is the Ahavaniya, and the soul is the consecrated oblation! Casting off all external objects, the sage who perceives the indwelling Brahman within the body crosses the perilous ocean of rebirth! Freedom from desire is the highest wealth, and contentment is the nectar of the wise.' — Sri Krishna's Anugita to Arjuna (Aswamedha Parva, Sec. XX-XXXIV)",
+    dharmaInsight: "True sovereignty and peace cannot be achieved by running from duties into the forest, nor by outer displays of asceticism; real emancipation is the inward subjugation of desire (Kama) and egoism (Ahankara) through steady Yoga in daily action."
+  },
+  {
+    number: 2,
+    parva: "Aswamedhika Parva",
+    nameEn: "Aswamedhika Parva (Part II: Revival of Parikshit, Arjuna's Horse Trail, Babruvahana & The Golden Mongoose)",
+    nameSa: "अश्वमेधिक पर्व (परीक्षित-पुनरुज्जीवन, अश्व-दिग्विजय, बब्रुवाहन युद्ध & सुवर्ण-नकुल आख्यान)",
+    nameTe: "ఆశ్వమేధిక పర్వము (రెండవ భాగం: పరీక్షిత్తు పునరుజ్జీవనం, అర్జునుని అశ్వమేధ విజయయాత్ర, బభ్రువాహనుడు & బంగారు ముంగిస వృత్తాంతం)",
+    sections: "Aswamedha Sections L - XCII",
+    versesApprox: 1780,
+    keyCharacters: [
+      "Sri Krishna (శ్రీకృష్ణుడు)",
+      "Princess Uttara (ఉత్తర)",
+      "Infant Parikshit (పరీక్షిత్తు)",
+      "Queen Kunti & Subhadra (కుంతి & సుభద్ర)",
+      "King Yudhishthira (ధర్మరాజు)",
+      "Arjuna (అర్జునుడు)",
+      "King Babruvahana (బభ్రువాహనుడు)",
+      "Chitrangada & Ulupi (చిత్రాంగద & ఉలూపి)",
+      "The Golden-Headed Mongoose (సువర్ణ నకులము)",
+      "The Kurukshetra Brahmana Family (కురుక్షేత్ర ఉంఛవృత్తి బ్రాహ్మణుడు)"
+    ],
+    summaryEn: "As the Pandavas return from Mount Himavat laden with Marutta's golden treasures, Princess Uttara gives birth to a stillborn child, scorched in the womb by Ashwatthama's Brahmashira missile. Amid the agonizing wails of Kunti, Draupadi, and Subhadra, Sri Krishna enters the birthing chamber. Invoking His eternal vow of absolute Truth and unbroken Brahmacharya (*'If I have never spoken a falsehood even in jest, let this infant breathe!'*), Krishna touches the child, who instantly blazes with life and is named PARIKSHIT (the tested one).\n\nYudhishthira initiates the grand Aswamedha Yajna. A consecrated black-eared white stallion is released to wander the world, guarded by Arjuna. Arjuna leads the horse across Bharatavarsha: defeating Bhagadatta's son Vajradatta in Pragjyotisha, pardoning the repentant Saindhavas when Queen Duhsala presents her baby grandson, and arriving at Manipura. There, King Babruvahana (Arjuna's son by Chitrangada) receives his father with profound filial humility. Arjuna rebukes him for showing submission rather than warrior valor. A ferocious duel ensues, and Babruvahana slays Arjuna on the battlefield! Chitrangada and Babruvahana weep inconsolably; Naga princess Ulupi produces the celestial Sanjivani gem from the underworld and revives Arjuna, explaining that this temporary death was ordained by the Vasus to absolve Arjuna of the sin of slaying Bhishma from behind Shikhandin.\n\nReturning in triumph to Hastinapura, the Horse Sacrifice is completed with unprecedented opulence and universal charity. As Yudhishthira is lauded, a strange mongoose with half its body of solid gold enters the sacrificial arena, rolls in the dust, and declares in human voice: *'This grand sacrifice of thine is not equal to a single handful of barley flour given by the unchha-vow Brahmana of Kurukshetra!'* The mongoose reveals that during a harrowing famine, a poor Brahmana, his wife, son, and daughter-in-law gave away their four small portions of barley meal (saktu) to a starving guest (Lord Dharma in disguise), starving to death with pure joy. The dust of their hut turned half the mongoose's body into gold, and nowhere on earth had it found a sacrifice so pure as to turn the other half into gold!",
+    summaryTe: "పాండవులు హిమాలయాల నుండి మరుత్తుని సువర్ణ రాశులను తెస్తున్న సమయంలో, అశ్వత్థామ బ్రహ్మశిరోనామకాస్త్ర ప్రభావంతో ఉత్తర గర్భంలోని శిశువు నిర్జీవంగా జన్మిస్తుంది. కుంతి, ద్రౌపది, సుభద్రల హాహాకారాల మధ్య శ్రీకృష్ణుడు ప్రసూతి గృహంలోకి ప్రవేశించి, తన నిత్య సత్యవత్రం మరియు అఖండ బ్రహ్మచర్య శక్తితో (*'నేను ఎన్నడూ అసత్యమాడక, ధర్మమునే ఆచరించినవాడనైతే ఈ శిశువు జీవించుగాక!'*) అని ప్రతిజ్ఞ చేసి ఆ బాలుని సజీవునిగా చేస్తాడు. ఆ బాలుడే 'పరీక్షిత్తు'గా ప్రసిద్ధి చెందుతాడు.\n\nఅనంతరం ధర్మరాజు అశ్వమేధ యాగం ప్రారంభించి శ్యామకర్ణ అశ్వాన్ని విడిచిపెట్టగా, అర్జునుడు దానిని రక్షిస్తూ దిగ్విజయ యాత్ర సాగిస్తాడు. ప్రాగ్జ్యోతిషంలో వజ్రదత్తుని, సైంధవ దేశంలో దుశ్శల మనవడిని రక్షించి, మణిపురానికి చేరుకుంటాడు. అక్కడ చిత్రాంగద కుమారుడైన బభ్రువాహనుడు తండ్రిపై బాణయుద్ధం చేసి అర్జునుని వధిస్తాడు. నాగకన్య ఉలూపి సంజీవని మణిని తెచ్చి అర్జునుని పునరుజ్జీవింపజేసి, శిఖండిని అడ్డంపెట్టుకుని భీష్ముని కూల్చిన పాపానికి వసువులు విధించిన శాపవిమోచనార్థమే ఈ మరణం జరిగిందని వివరిస్తుంది.\n\nహస్తినాపురంలో అశ్వమేధ యాగం అపార దానధర్మాలతో ముగియగా, సగం శరీరం బంగారమైన ఒక ముంగిస అక్కడికి వచ్చి నవ్వి: *'ఓ ధర్మరాజా! ఈ మహాయాగం కురుక్షేత్రంలోని ఒక నిరుపేద బ్రాహ్మణుడు సమర్పించిన దోసెడు సక్తు (పేలాల పిండి) దానానికి ఏమాత్రం సరితూగదు!'* అని చాటుతుంది. కరువు కాలంలో ఆకలితో మరణిస్తూ కూడా తన కుటుంబ భాగాలను అతిథికి అర్పించి ప్రాణాలు విడిచిన ఆ ఉంఛవృత్తి బ్రాహ్మణుని త్యాగనిరతే నిజమైన ధర్మమని ఆ ముంగిస నిరూపిస్తుంది.",
+    keyQuoteRoy: "'A little gift, given with a pure heart, free from arrogance and full of reverence, is superior to a hundred thousand sacrifices accompanied by boundless heaps of gold! The merit of that starving Brahmana's cup of barley flour could not be equalled by all the treasures of Hastinapura!' — The Golden Mongoose (Aswamedha Parva, Sec. XC)",
+    dharmaInsight: "The spiritual worth of an action is measured not by the magnitude of its material cost or outward grandeur, but by the depth of selflessness, purity of motive, and compassionate sacrifice animating the giver."
+  },
+  {
+    number: 3,
+    parva: "Asramavasika Parva",
+    nameEn: "Asramavasika Parva (Retirement of Dhritarashtra, Vidura's Ascension & Vision of Slain Heroes on the Ganga)",
+    nameSa: "आश्रमवासिक पर्व (धृतराष्ट्र-वानप्रस्थ, विदुर-समाधि & गङ्गा-तीरे वीर-दर्शन)",
+    nameTe: "ఆశ్రమవాసిక పర్వము (ధృతరాష్ట్ర-గాంధారీ-కుంతీ వానప్రస్థం, విదురుని జీవసమాధి & గంగానదిపై వీరుల దివ్యదర్శనం)",
+    sections: "Asramavasa Sec. I - XXVIII, Putradarsana Sec. XXIX - XXXVI, Naradagamana Sec. XXXVII - XXXIX",
+    versesApprox: 1506,
+    keyCharacters: [
+      "King Dhritarashtra (ధృతరాష్ట్రుడు)",
+      "Queen Gandhari (గాంధారి)",
+      "Queen Mother Kunti (కుంతీదేవి)",
+      "Mahatma Vidura (విదురుడు)",
+      "Sanjaya (సంజయుడు)",
+      "King Yudhishthira (ధర్మరాజు)",
+      "Bhima, Arjuna, Nakula, Sahadeva & Draupadi",
+      "Maharshi Vyasa (వ్యాసుడు)",
+      "Sage Narada (నారద మహర్షి)"
+    ],
+    summaryEn: "Fifteen years pass peacefully after the great war. Though Yudhishthira treats Dhritarashtra with supreme reverence, Bhima's bitter remarks wound the old blind king. Dhritarashtra and Gandhari decide to retire to the forest for Vanaprastha. Despite Yudhishthira's tearful pleas, Queen Mother Kunti insists on accompanying them to serve the aging monarchs, declaring that her earthly duties are complete having seen her sons victorious. Accompanied by Vidura and Sanjaya, the elders construct a hermitage near the banks of the sacred Ganga under Sage Vyasa's guidance.\n\nOne year later, the Pandavas and Draupadi journey to the forest to visit them. Yudhishthira seeks out Mahatma Vidura, who is practicing extreme tapas, subsisting on air and naked in the forest. When Yudhishthira approaches, Vidura leans against a tree, fixes his spiritual gaze upon the king, and through Yogic transference merges his vital breaths, senses, and soul directly into Yudhishthira (both being emanations of Lord Dharma), his lifeless body remaining motionless against the trunk.\n\nPUTRADARSANA PARVA: Beholding the lingering grief of Gandhari, Kunti, and the widows of Kurukshetra, Maharshi Vyasa offers a celestial boon. Gathering all at twilight on the sacred Ganga, Vyasa chants sacred mantras and calls upon the departed heroes. Out of the swirling waters rise Bhishma, Drona, Karna, Duryodhana, Abhimanyu, Ghatotkacha, Dhrishtadyumna, and hundreds of kings, clothed in celestial garments, resplendent as gods, devoid of hatred, wounds, and jealousy. For one magical night, the living and the dead embrace, converse, and rejoice in transcendent harmony. At dawn, the heroes submerge back into the celestial realms. Many bereaved wives choose to enter the sacred Ganga and ascend alongside their husbands.\n\nNARADAGAMANA PARVA: Two years later, Sage Narada visits Hastinapura bearing sorrowful tidings: while practicing intense austerities, a raging forest fire encircled the hermitage. Dhritarashtra, Gandhari, and Kunti instructed Sanjaya to save himself, sat calmly in Yogic posture facing east, and yielded their bodies to the sacred flames (Agni-pravesha). Sanjaya departed for the Himalayas. Yudhishthira performs solemn funeral rites on the Ganga with profound reverence.",
+    summaryTe: "యుద్ధానంతరం పదిహేనేళ్ళు హస్తినాపురంలో శాంతియుతంగా గడిచిన తర్వాత, భీముని కటువైన మాటలకు చింతించి ధృతరాష్ట్రుడు, గాంధారితో కలిసి వానప్రస్థానికి బయలుదేరాలని నిశ్చయించుకుంటాడు. ధర్మరాజు వేడుకున్నా వినకుండా, కుంతీదేవి కూడా తన కుమారుల విజయం చూసిన తర్వాత రాజ్యభోగాలను త్యజించి అత్తమామలను సేవించేందుకు అరణ్యానికి బయలుదేరుతుంది. విదురుడు, సంజయులతో కలిసి గంగాతీరంలో వ్యాస మహర్షి ఆశ్రమం వద్ద పర్ణశాల నిర్మించుకుంటారు.\n\nఒక సంవత్సరం తర్వాత పాండవులు వారిని దర్శించడానికి అరణ్యానికి వెళతారు. తీవ్ర తపస్సులో ఉన్న విదురుడు ఒక చెట్టుకు ఆనుకుని, ధర్మరాజు వైపు తీక్షణంగా చూస్తూ తన ప్రాణాన్ని, ఇంద్రియ జ్ఞానాన్ని, ఆత్మతేజాన్ని యోగశక్తితో ధర్మరాజులోకి ప్రవేశింపజేసి దేహాన్ని త్యజిస్తాడు (ఇద్దరూ యమధర్మరాజు అంశలే).\n\nపుత్రదర్శన పర్వం: గాంధారీ, కుంతీ మరియు యుద్ధ వీరుల వితంతువుల శోకాన్ని తీర్చడానికి వ్యాస భగవానుడు గంగాతీరంలో తన తపోబలంతో కురుక్షేత్రంలో మరణించిన భీష్మ, ద్రోణ, కర్ణ, దుర్యోధన, అభిమన్యు, ఘటోత్కచాది సమస్త వీరులను జలాల నుండి దివ్యదేహాలతో ప్రత్యక్షం చేస్తాడు. ద్వేషం, అసూయలు లేని దివ్యశరీరాలతో వీరులందరూ ఆ రాత్రంతా బంధువులతో ప్రేమగా గడిపి ఉదయాన స్వర్గానికి చేరుకుంటారు. అనేకమంది స్త్రీలు గంగలో మునిగి తమ భర్తల లోకాలకు చేరుకుంటారు.\n\nనారదాగమన పర్వం: రెండేళ్ళ తర్వాత నారదుడు హస్తినాపురానికి వచ్చి, దావాగ్నిలో ధృతరాష్ట్ర, గాంధారీ, కుంతీలు ముగ్గురూ సమాధిస్థితిలో శరీరాలను అగ్నిదేవునికి సమర్పించారని (అగ్నిప్రవేశం), సంజయుడు హిమాలయాలకు వెళ్ళాడని వార్త తెలియజేస్తాడు. ధర్మరాజు వారికి శాస్త్రోక్తంగా శ్రాద్ధకర్మలు నిర్వహిస్తాడు.",
+    keyQuoteRoy: "'Enmity ceases with death! Look upon these radiant sons of Bharata: Duryodhana and Bhima embrace in divine affection, and Karna shines in the fiery glory of Surya! All anger and malice were but the play of Time; in the eternal realm of Spirit, love alone endures!' — Maharshi Vyasa at the Ganga Vision (Asramavasika Parva, Sec. XXXIII)",
+    dharmaInsight: "Earthly enmities and blood feuds are transient shadows created by circumstance and delusion; the ultimate destiny of life is renunciation (Vanaprastha), purification through detachment, and absorption into the harmonious Supreme."
+  },
+  {
+    number: 4,
+    parva: "Mausala Parva",
+    nameEn: "Mausala Parva (The Iron Bolt, Submergence of Dwaraka & The Passing of Sri Krishna)",
+    nameSa: "मौसल पर्व (ऋषि-शाप, मुसल-उत्पत्ति, यदुवंश-विनाश, द्वारका-निमज्जन & श्रीकृष्ण-निर्याण)",
+    nameTe: "మౌసల పర్వము (సాంబ ముసల శాపం, ప్రభాసతీర్థ యాదవ వినాశం, ద్వారకా సముద్ర నిమజ్జనం & శ్రీకృష్ణ నిర్యాణం)",
+    sections: "Mausala Sections I - VIII",
+    versesApprox: 320,
+    keyCharacters: [
+      "Sri Krishna (శ్రీకృష్ణుడు)",
+      "Lord Balarama (బలరాముడు)",
+      "Samba (సాంబుడు)",
+      "Satyaki & Kritavarman (సాత్యకి & కృతవర్మ)",
+      "Arjuna (అర్జునుడు)",
+      "Maharshi Vyasa (వ్యాసుడు)",
+      "Hunter Jara (జరుడను వేటగాడు)",
+      "Vajra, Grandson of Krishna (వజ్రుడు)"
+    ],
+    summaryEn: "In the thirty-sixth year following the Kurukshetra war (fulfilling Queen Gandhari's dying curse), cosmic portents foreshadow the doom of the Vrishnis. The arrogant young Yadava princes disguise Samba as a pregnant maiden and mockingly ask Sages Viswamitra, Kanva, and Narada: *'What child will this woman bear?'* Enraged, the sages pronounce: *'She will bring forth a fierce iron mace (Musala) that will bring about the total destruction of the Vrishni and Andhaka race!'* Samba gives birth to an iron bolt. King Ugrasena has it pulverized into fine powder and cast into the sea, but an indestructible iron spike remains, which is swallowed by a fish. The iron dust washes onto the shores of Prabhasa and sprouts into dense, razor-sharp Eraka reeds; the fisherman who catches the fish sells the iron spike to the hunter Jara, who fixes it to the tip of his hunting arrow.\n\nPortents terrify Dwaraka: eerie phantoms wander the streets, fierce sea winds howl, and morality collapses. Krishna orders a pilgrimage to Prabhasa. There, intoxicating wine (Maireya) flows freely. Satyaki angrily rebukes Kritavarman for slaughtering the sleeping Pandava sons in Sauptika Parva; Kritavarman sneers back about Bhurisravas's slain arm. In drunken fury, Satyaki slays Kritavarman; the Vrishnis and Bhojas split and attack each other. Plucking the Eraka reeds from the shore, the stalks turn into thunderbolt-hard iron maces in their hands. Father slays son, brother butchers brother, until the entire Yadava race lies exterminated before Krishna's eyes!\n\nKrishna and Babhru locate Balarama sitting beneath a forest tree beside the sea in deep meditation. A colossal white thousand-headed serpent (Adisesha) emerges from Balarama's mouth and glides into the roaring ocean, welcomed by Varuna and the nagas. Knowing the hour of His earthly departure has arrived, Lord Krishna reclines upon the earth in Yogic communion, his left foot resting across his right knee. The hunter Jara, mistaking the gleam of Krishna's sacred foot for a resting deer, shoots his arrow tipped with the fatal iron spike. Seeing Bhagavan, Jara falls weeping in despair; Sri Krishna comforts the hunter with divine mercy and ascends in cosmic effulgence, filling heaven and earth with divine light as He returns to Vaikuntha!\n\nArjuna arrives at Dwaraka, weeps with weeping widows, and leads the surviving women, children, and Krishna's grandson Vajra out of the city. As their caravan clears the gates, the mighty ocean surges forward and swallows the golden city of Dwaraka beneath the waves! In the Punjab, forest marauders (Abhiras) attack the caravan. When Arjuna attempts to string the divine Gandiva, his arms tremble, his arrows are depleted, and his celestial mantras vanish from memory. Despondent, Arjuna seeks out Maharshi Vyasa. Vyasa comforts him: *'O Dhananjaya, all weapons, energy, and splendor exist only for their appointed time! When the cosmic mission of the Avatara is finished, Time (Kala) withdraws them. The Lord has returned; your work on earth is accomplished; prepare for the Great Departure!'*",
+    summaryTe: "కురుక్షేత్ర యుద్ధం ముగిసిన 36వ సంవత్సరంలో గాంధారీ శాపఫలంగా యాదవ వంశంలో వినాశకర ఉత్పాతాలు మొదలవుతాయి. యాదవ యువకులు సాంబునికి స్త్రీ వేషం వేసి, కణ్వ, విశ్వామిత్ర, నారద మహర్షులను పరిహసిస్తూ 'ఈమెకు ఏమి పుట్టును?' అని అడగగా, మహర్షులు ఆగ్రహించి: *'యాదవ వంశ వినాశనానికి కారణమయ్యే ఇనుప రోకలి (ముసలం) పుట్టును!'* అని శపిస్తారు. సాంబుని ఉదరం నుండి ఇనుప రోకలి పుట్టగా, ఉగ్రసేనుడు దానిని పొడి చేయించి సముద్రంలో కలిపిస్తాడు. అరగని ఇనుప ముక్కను ఒక చేప మింగగా, దానిని పట్టిన జరుడనే వేటగాడు ఆ ఇనుప ముక్కను తన బాణానికి కొనగా చేసుకుంటాడు. సముద్రపు ఒడ్డున చేరిన ఇనుప పొడి పదునైన 'ఎరక' తుంగ గడ్డిగా మొలుస్తుంది.\n\nద్వారకలో అశుభ శకునాలు పెరిగిపోగా, యాదవులంతా ప్రభాసతీర్థానికి వెళతారు. అక్కడ మద్యపాన మత్తులో సాత్యకి, కృతవర్మల మధ్య సౌప్తిక రాత్రి దాడి విషయమై తీవ్ర వాగ్వాదం చెలరేగి, సాత్యకి కృతవర్మను వధిస్తాడు. క్షణాల్లో యాదవులందరూ రెండు వర్గాలుగా చీలిపోయి ఎరక తుంగలను పీకి ఒకరినొకరు మోదుకుంటారు. ఆ గడ్డిపోచలు వజ్రాయుధాలై యాదవ వీరులందరినీ సమూలంగా హతమారుస్తాయి.\n\nశ్రీకృష్ణుడు వెళ్ళి చూడగా, బలరాముడు సముద్ర తీరాన యోగసమాధిలో ఉండగా ఆయన నోటి నుండి వేయి పడగల ఆదిశేషుడు బయటకు వచ్చి సముద్రంలో లీనమవుతాడు. శ్రీకృష్ణుడు తన అవతార పరిసమాప్తి సమయం ఆసన్నమైందని గ్రహించి, అడవిలో యోగనిద్రలో కుడి తొడపై ఎడమ పాదం ఉంచి పడుకుంటాడు. జరుడనే వేటగాడు ఆ పాదాన్ని లేడి ముఖంగా భావించి బాణం వేయగా, అది శ్రీకృష్ణుని పాదానికి తగులుతుంది. జరుడు పశ్చాత్తాపంతో రోదించగా, శ్రీకృష్ణుడు అతనిని ఓదార్చి దివ్యజ్యోతి స్వరూపంతో వైకుంఠ ధామానికి ఆరోహణ చేస్తాడు.\n\nఅర్జునుడు ద్వారకకు చేరుకుని మిగిలిన స్త్రీలను, పిల్లలను, శ్రీకృష్ణుని మునిమనుమడు వజ్రుని తీసుకుని బయలుదేరగానే వెనుక ద్వారకానగరం సముద్రంలో మునిగిపోతుంది. దారిలో అభీరులు దాడి చేయగా, గాండీవం బరువై, దివ్యాస్త్రాల మంత్రాలు మరచిపోయి అర్జునుడు నిస్సహాయుడవుతాడు. వ్యాస మహర్షిని కలిసి రోదించగా: *'అర్జునా! కాలమే సర్వశక్తిమంతమైనది! అవతార కార్యం ముగిసింది, భగవానుడు వెళ్ళిపోయాడు, మీ ప్రయాణ సమయం కూడా ఆసన్నమైనది!'* అని వ్యాసుడు ఓదారుస్తాడు.",
+    keyQuoteRoy: "'Time is the root of all things! Time bringeth existence, and Time sweepeth it away! The bow Gandiva, the inexhaustible quivers, and thy celestial weapons served their cosmic purpose while Govinda dwelt on earth. With His ascension, their virtue has departed. Knowing that Kala reigneth supreme, do thou set thy mind on the highest path!' — Maharshi Vyasa to Arjuna (Mausala Parva, Sec. VIII)",
+    dharmaInsight: "Even the mightiest terrestrial dynasties and celestial weapons are subordinate to the inexorable Wheel of Time (Kala-Chakra); when an incarnation fulfills its cosmic purpose, all worldly power dissolves back into the Unmanifest."
+  },
+  {
+    number: 5,
+    parva: "Mahaprasthanika Parva",
+    nameEn: "Mahaprasthanika Parva (The Great Renunciation, The Trail to Mount Meru & The Test of the Faithful Dog)",
+    nameSa: "महाप्रस्थानिक पर्व (पाण्डव-महाप्रस्थान, मेरु-यात्रा, पतन & धर्म-श्वान परीक्षा)",
+    nameTe: "మహాప్రస్థానిక పర్వము (పాండవుల మహాప్రస్థానం, ద్రౌపదీ-సోదరుల పతనం & ధర్మదేవుని శ్వాన పరీక్ష)",
+    sections: "Mahaprasthanika Sections I - III",
+    versesApprox: 120,
+    keyCharacters: [
+      "King Yudhishthira (ధర్మరాజు)",
+      "Bhima (భీముడు)",
+      "Arjuna (అర్జునుడు)",
+      "Nakula & Sahadeva (నకుల-సహదేవులు)",
+      "Queen Draupadi (ద్రౌపది)",
+      "Lord Agni (అగ్నిదేవుడు)",
+      "The Faithful Dog / Lord Dharma (శ్వానరూప ధర్మదేవుడు)",
+      "Lord Indra (దేవేంద్రుడు)"
+    ],
+    summaryEn: "Knowing that Sri Krishna had ascended and the Yadavas had fallen, King Yudhishthira resolves upon the Great Renunciation (Mahaprasthana). He anoints Arjuna's grandson Parikshit as King of Hastinapura and Krishna's grandson Vajra as King of Indraprastha. Yudhishthira, Bhima, Arjuna, Nakula, Sahadeva, and Draupadi cast off their royal jewels, don ascetic bark garments, and renounce the world. Accompanied by a lone, faithful stray dog that attaches itself to them, the pilgrims begin their final journey around the earth.\n\nReaching the shores of the Red Sea, Lord Agni appears and commands Arjuna to return the divine Gandiva bow and inexhaustible quivers given at the burning of the Khandava forest. Arjuna casts the sacred weapons into the ocean, breaking his last link to martial glory. Turning north, the pilgrims cross the snowy peaks of Himavat and proceed across the vast sandy expanse towards Mount Meru.\n\nOne by one, the travelers fall on the trail:\n1. Draupadi falls first. When Bhima asks why the chaste queen fell, Yudhishthira answers: *'Her heart had subtle partiality for Arjuna above her other husbands; she reaps the fruit of that preference.'*\n2. Sahadeva falls next. Yudhishthira explains: *'He harbored intellectual pride, thinking none equaled him in wisdom.'*\n3. Nakula falls. Yudhishthira explains: *'He harbored vanity, believing none on earth matched his physical beauty.'*\n4. Arjuna falls. Yudhishthira explains: *'He boasted he could consume all foes in a single day, but failed to perform it, and belittled other archers.'*\n5. Bhima falls. Bhima cries out: *'Look upon me, your faithful brother! Why do I fall?'* Yudhishthira answers: *'Thou didst boast of thy strength and ate voraciously without caring for the hunger of others.'*\n\nYudhishthira continues walking alone, unswerving, accompanied solely by the devoted dog. Suddenly, Indra descends in a blazing celestial chariot: *'Ascend, O King, in this mortal body to eternal heaven!'* Yudhishthira replies: *'My brothers and Draupadi have fallen; without them, I desire not heaven!'* Indra assures him they have already reached heaven in divine bodies. Yudhishthira then requests that the faithful dog enter the chariot. Indra refuses: *'Dogs have no place in heaven; abandon the beast!'* Yudhishthira stands firm: *'To abandon a devoted creature that seeks shelter is a heinous sin! I renounce heaven itself rather than abandon this faithful soul!'* Instantly, the dog transforms into LORD DHARMA, radiant with divine luster: *'O son, twice before have I tested thee—at the enchanted lake (Yaksha Prasna) and now for a helpless dog! There is none equal to thee in righteousness!'* Yudhishthira ascends bodily to heaven with Indra and Dharma.",
+    summaryTe: "శ్రీకృష్ణ నిర్యాణం, ద్వారకా నిమజ్జనం విన్న ధర్మరాజు మహాప్రస్థానానికి సిద్ధపడతాడు. అర్జునుని మనుమడు పరీక్షిత్తును హస్తినాపురానికి, శ్రీకృష్ణుని మునిమనుమడు వజ్రుని ఇంద్రప్రస్థానికి రాజులుగా పట్టాభిషేకం చేస్తారు. ధర్మరాజు, భీమ, అర్జున, నకుల, సహదేవులు మరియు ద్రౌపది రాజవస్త్రాలను విడిచి నారచీరలు ధరించి సర్వసంగ పరిత్యాగులై బయలుదేరగా, ఒక విశ్వాసపాత్రమైన కుక్క వారిని అనుసరిస్తుంది.\n\nసముద్ర తీరంలో అగ్నిదేవుడు ప్రత్యక్షమై ఖాండవ దహన సమయాన ఇచ్చిన గాండీవ ధనుస్సును, అక్షయ తూణీరాలను తిరిగి ఇవ్వమని కోరగా, అర్జునుడు వాటిని సముద్రంలో నిమజ్జనం చేసి తన చివరి అనుబంధాన్ని తెంచుకుంటాడు. వారు హిమాలయాలను దాటి మేరు పర్వత దిశగా ఉత్తర పథంలో నడుస్తుండగా ఒక్కొక్కరే మార్గమధ్యంలో నేలకొరుగుతారు:\n1. ద్రౌపది పతనమవుతుంది: భర్తలందరిలో అర్జునునిపై ఆమెకు ఉన్న పక్షపాత భావమే కారణమని ధర్మరాజు చెబుతాడు.\n2. సహదేవుడు పతనమవుతాడు: తనకంటే జ్ఞాని లేడన్న పాండిత్య గర్వమే కారణం.\n3. నకులుడు పతనమవుతాడు: తన సౌందర్యానికి సాటిలేరన్న రూప గర్వం కారణం.\n4. అర్జునుడు పతనమవుతాడు: శత్రువులందరినీ ఒక్క రోజే సంహరిస్తానని ప్రతిజ్ఞ చేసి నెరవేర్చలేకపోవడం, ఇతరులను తక్కువగా చూడడం కారణం.\n5. భీముడు పతనమవుతాడు: తన బలాన్ని పొగుడుకోవడం, ఇతరుల ఆకలిని పట్టించుకోకుండా విపరీతంగా భుజించడం కారణం.\n\nధర్మరాజు వెనుదిరిగి చూడకుండా ఆ కుక్కతో కలిసి ముందుకు సాగుతాడు. అప్పుడు దేవేంద్రుడు దివ్య రథంతో వచ్చి సశరీరంగా స్వర్గానికి రమ్మని ఆహ్వానిస్తాడు. ద్రౌపది, సోదరులు లేని స్వర్గం తనకు వద్దని ధర్మరాజు అనగా, వారు ముందే దివ్యదేహాలతో స్వర్గం చేరారని ఇంద్రుడు చెబుతాడు. అయితే తనను నమ్ముకున్న ఈ కుక్కను కూడా రథంలోకి రానివ్వాలని ధర్మరాజు కోరతాడు. కుక్కలకు స్వర్గంలో ప్రవేశం లేదని ఇంద్రుడు తిరస్కరించగా, *'శరణుజొచ్చిన జీవిని విడిచిపెట్టడం బ్రహ్మహత్యతో సమానం! అలాంటి స్వర్గభోగాలు నాకొద్దు!'* అని ధర్మరాజు నిక్కచ్చిగా చెబుతాడు. వెంటనే ఆ కుక్క సాక్షాత్ యమధర్మరాజుగా మారి: *'కుమారా! యక్షప్రశ్నల వద్ద మరియు ఇక్కడ మూగజీవి రక్షణలో నీ ధర్మనిరతిని నిరూపించావు, నీకు సాటియైనవాడు ముల్లోకాలలో లేడు!'* అని ప్రశంసించగా, ధర్మరాజు సశరీరంగా స్వర్గారోహణ చేస్తాడు.",
+    keyQuoteRoy: "'I do not desire that prosperity which is bought by the abandonment of one that is devoted to me! To cast off a devotee is an unpardonable sin equal to slaying a Brahmana. For the sake of heavenly felicity, I shall never abandon this faithful dog!' — King Yudhishthira to Lord Indra (Mahaprasthanika Parva, Sec. III)",
+    dharmaInsight: "The zenith of Sanatana Dharma is Sarva-bhuta-daya (compassion toward all living beings); heaven won by deserting a devoted creature is no heaven, and loyalty to the helpless outweighs all celestial glory."
+  },
+  {
+    number: 6,
+    parva: "Swargarohanika Parva",
+    nameEn: "Swargarohanika Parva (The Test of Naraka, Celestial Reunion in Swarga & The Eternal Bharata-Savitri)",
+    nameSa: "स्वर्गारोहणिक पर्व (नरक-माया परीक्षा, स्वर्गे दिव्य-मिलन & भारत-सावित्री)",
+    nameTe: "స్వర్గారోహణిక పర్వము (నరకమాయా పరీక్ష, అమరావతిలో దివ్య పునఃసమాగమం & భారత-సావిత్రి ఉపదేశం)",
+    sections: "Swargarohanika Sections I - V",
+    versesApprox: 200,
+    keyCharacters: [
+      "King Yudhishthira (ధర్మరాజు)",
+      "Duryodhana (దుర్యోధనుడు)",
+      "Lord Dharma (యమధర్మరాజు)",
+      "Lord Indra (దేవేంద్రుడు)",
+      "Sri Krishna & Arjuna (శ్రీకృష్ణుడు & నరుడు)",
+      "Karna, Bhishma & Drona (కర్ణుడు, భీష్ముడు, ద్రోణుడు)",
+      "The Pandavas & Draupadi",
+      "Maharshi Krishna-Dwaipayana Vyasa (వేదవ్యాసుడు)"
+    ],
+    summaryEn: "Upon entering heaven, Yudhishthira is stunned to behold Duryodhana seated upon a blazing golden throne, surrounded by gods and glowing with celestial glory. Outraged, Yudhishthira exclaims: *'I desire not heaven with the covetous Duryodhana who ruined our race! Where are my virtuous brothers? Where is the radiant Karna? Where is Draupadi?'* Sage Narada explains that Duryodhana died bravely facing his foes on the battlefield, fulfilling Kshatriya dharma. Insisting on seeing his brothers, Yudhishthira is guided by a messenger of the gods down a dark, foul path strewn with rotting flesh, burning hair, boiling cauldrons, and howling fiends (the horrors of Naraka).\n\nAs Yudhishthira turns away nauseated, agonized voices cry from the darkness: *'O holy son of Dharma, pause! The sweet breeze of thy sacred presence brings balm to our tortured souls!'* Recognizing the voices of Karna, Bhima, Arjuna, Nakula, Sahadeva, and Draupadi, Yudhishthira's sorrow erupts into righteous wrath against the gods: *'Return to thy masters! I shall not return to heaven; I will dwell here in hell, that my presence may soothe my suffering kin!'*\n\nInstantly, the foul darkness vanishes, celestial music sounds, and Indra and Lord Dharma appear smiling. Indra reveals that this was a brief illusion (Maya): because Yudhishthira had uttered an equivocation to Drona (*'Ashwatthama is dead... the elephant'*), he was destined to glimpse hell for a few moments. His brothers and wife never suffered in hell; they abide in eternal celestial glory!\n\nYudhishthira bathes in the celestial river Mandakini (Akashaganga), shedding his mortal body, human sorrow, and mortal pride. Entering the supreme realm of Vaikuntha and Swarga, he beholds the glorious reunion: Sri Krishna reigning in eternal splendor with Arjuna (Nara); Karna shining in the solar orb of Surya; Bhishma radiant among the Vasus; Drona with Brihaspati; Draupadi as Goddess Lakshmi; and Abhimanyu and Ghatotkacha in joyous divinity, free from all enmity!\n\nMaharshi Vyasa concludes the great 100,000-verse epic with the eternal BHARATA-SAVITRI (భారత-సావిత్రి):\n*Urdhvabahur viromy-esha na cha kash-chich-chrinoti mam / Dharmad-arthas-cha kamas-cha sa kim-artham na sevyate*\n*'With uplifted arms I cry aloud unto the world, yet none heareth me! From Dharma alone spring both wealth (Artha) and pleasure (Kama); why then is Dharma not followed? Neither for desire, nor fear, nor avarice, nor even for the sake of life itself, should one ever forsake Dharma! For Dharma is eternal; pleasure and pain are fleeting!'*",
+    summaryTe: "స్వర్గంలోకి అడుగుపెట్టిన ధర్మరాజు, దుర్యోధనుడు సూర్యసమానమైన దివ్య సింహాసనంపై దేవతల నడుమ వెలుగొందడం చూసి దిగ్భ్రాంతి చెందుతాడు. బంధుమిత్రులను నాశనం చేసిన దుర్యోధనుడున్న స్వర్గం తనకు వద్దని, తన ధర్మవర్తనులైన తమ్ములు, కర్ణుడు, ద్రౌపది ఎక్కడున్నారో అక్కడికి తీసుకువెళ్ళమని కోరతాడు. దేవదూత ధర్మరాజును చీకటితో నిండిన, కుళ్ళిన శవాలు, రక్తం, మలమూత్రాలు, సలసల కాగే నూనె బాండాగారాలున్న భయంకరమైన నరక మార్గంలోకి నడిపిస్తాడు.\n\nభరించలేక వెనుదిరుగుతున్న ధర్మరాజుకు చీకటి గుహల నుండి దీన స్వరాలు వినిపిస్తాయి: *'ఓ ధర్మరాజా! నీ పావన శరీరపు చల్లని గాలి మాకు ఉపశమనం కలిగిస్తోంది, కాసేపు ఇక్కడే ఉండు!'* అని కర్ణ, భీమ, అర్జున, నకుల, సహదేవ, ద్రౌపదుల కంఠస్వరాలు రోదిస్తాయి. తీవ్ర ఆవేదన, ఆగ్రహం చెందిన ధర్మరాజు దేవదూతతో: *'నువ్వు వెళ్ళిపో! నా సోదరుల బాధను ఉపశమింపజేసేందుకు నేను ఈ నరకంలోనే ఉండిపోతాను, నాకు స్వర్గం వద్దు!'* అని నిక్కచ్చిగా ప్రకటిస్తాడు.\n\nవెంటనే ఆ నరకమాయ అదృశ్యమై సుగంధ పరిమళాలతో ఇంద్రుడు, యమధర్మరాజు ప్రత్యక్షమవుతారు. ద్రోణుని ఎదుట 'అశ్వత్థామ హతః కుంజరః' అని అర్ధసత్యం పలికినందుకు ధర్మరాజుకు ఈ చిన్న నరక దర్శనం జరిగిందని, పాండవులెవరూ నరకంలో లేరని, ఇదంతా ఒక దివ్య పరీక్షని ఇంద్రుడు స్పష్టం చేస్తాడు.\n\nధర్మరాజు ఆకాశగంగ (మందాకిని)లో స్నానమాచరించి, మానవ దేహాన్ని, శోకాన్ని విడిచి దివ్యదేహాన్ని పొందుతాడు. అక్కడ వైకుంఠంలో నరనారాయణులైన శ్రీకృష్ణార్జునులను, సూర్యతేజస్సుతో వెలిగే కర్ణుని, వసువులతో ఉన్న భీష్ముని, బృహస్పతితో ఉన్న ద్రోణుని, లక్ష్మీస్వరూపమైన ద్రౌపదిని, అభిమన్యు-ఘటోత్కచులను అందరినీ పరమ శాంతి, ప్రేమలతో కూడిన దివ్యరూపాల్లో దర్శించి ఆనందపారవశ్యం చెందుతాడు.\n\nవ్యాస భగవానుడు భారత-సావిత్రి శ్లోకంతో ఈ మహాగ్రంథాన్ని పరిసమాప్తం చేస్తాడు:\n*'ఊర్ధ్వబాహుర్ విరోమ్యేష న చ కశ్చిచ్ఛృణోతి మామ్ | ధర్మాదర్థశ్చ కామశ్చ స కిమర్థం న సేవ్యతే ||'*\n(రెండు చేతులెత్తి ఘోషిస్తున్నాను, ఎవరూ నా మాట వినడం లేదు! ధర్మం వల్లనే అర్థము, కామము లభిస్తాయి; అలాంటి ధర్మాన్ని ఎందుకు ఆచరించరు? ప్రాణం పోయినా, భయమున్నా, ఆశ ఉన్నా ఎన్నడూ ధర్మాన్ని వీడరాదు; ధర్మమే శాశ్వతం, సుఖదుఃఖాలు అశాశ్వతం!)",
+    keyQuoteRoy: "'With uplifted arms I cry aloud, yet none heareth me! From Dharma flow both wealth and pleasure; why then is Dharma not followed? Not for desire, nor fear, nor greed, nor even for life itself should a person ever abandon Dharma! Dharma is eternal; pleasure and pain are transient!' — Maharshi Vyasa's Immortal Bharata-Savitri (Swargarohanika Parva, Sec. V)",
+    dharmaInsight: "Righteousness (Dharma) is the eternal cosmic axle of existence; all temporary triumphs of evil, trials of the righteous, and phantoms of suffering dissolve in the ultimate dawn of divine truth and eternal beatitude."
+  }
+];
+
 const MAHABHARATA_VOLUMES = [
   {
     volNumber: 1,
@@ -1982,13 +2135,13 @@ const MAHABHARATA_VOLUMES = [
   },
   {
     volNumber: 12,
-    titleEn: "Volume XII: Ashvamedhika to Svargarohana Parva & Harivamsa",
-    titleTe: "సంపుటము 12: ఆశ్వమేధిక నుండి స్వర్గారోహణ పర్వము & హరివంశము",
-    parvaId: "ashvamedha_svarga",
-    upaParvasCount: 8,
-    status: "PLANNED",
-    sections: "Ashvamedhika, Ashramavasika, Mausala, Mahaprasthanika, Svargarohana & Harivamsa",
-    description: "Anugita, sacrificial horse, departure of Krishna, submergence of Dvaraka, ascent of Mount Meru, dog test, Vaikuntha reunion."
+    titleEn: "Volume XII: Aswamedha, Asramavasika, Mausala, Mahaprasthanika & Swargarohanika Parvas",
+    titleTe: "సంపుటము 12: ఆశ్వమేధ, ఆశ్రమవాసిక, మౌసల, మహాప్రస్థానిక & స్వర్గారోహణిక పర్వములు (సంపూర్ణం)",
+    parvaId: "vol12",
+    upaParvasCount: 6,
+    status: "COMPLETE",
+    sections: "Aswamedha Sec. I - XCII, Asramavasika Sec. I - XXXIX, Mausala Sec. I - VIII, Mahaprasthanika Sec. I - III, Swargarohanika Sec. I - V",
+    description: "The Grand Finale of the Mahabharata: King Marutta's golden sacrifice & the sacred Anugita, Krishna revives stillborn Parikshit, Arjuna's sacrificial horse expedition & Babruvahana, the Golden Mongoose of Kurukshetra, retirement of the elders & Vidura's samadhi, vision of slain heroes rising radiant on the sacred Ganga, the iron mace of Samba & fratricidal destruction of the Yadavas, passing of Balarama & Krishna, ocean submerges golden Dwaraka, the Great Ascent to Mount Meru, fall of the Pandavas, the test of the faithful Dog, the illusion of Hell, celestial reunion in Swarga, and the eternal Bharata-Savitri."
   }
 ];
 
@@ -2013,6 +2166,8 @@ if (typeof window !== 'undefined') {
   window.VOLUME_X_UPAPARVAS = VOLUME_X_UPAPARVAS;
   window.VOLUME_XI_UPAPARVAS = VOLUME_XI_UPAPARVAS;
   window.ANUSASANA_PARVA_UPAPARVAS = VOLUME_XI_UPAPARVAS;
+  window.VOLUME_XII_UPAPARVAS = VOLUME_XII_UPAPARVAS;
+  window.ASHVAMEDHA_SVARGA_UPAPARVAS = VOLUME_XII_UPAPARVAS;
   window.MAHABHARATA_VOLUMES = MAHABHARATA_VOLUMES;
   window.MAHABHARATA_CHARACTERS = MAHABHARATA_CHARACTERS;
 }
@@ -2038,6 +2193,8 @@ if (typeof module !== 'undefined' && module.exports) {
     VOLUME_X_UPAPARVAS,
     VOLUME_XI_UPAPARVAS,
     ANUSASANA_PARVA_UPAPARVAS: VOLUME_XI_UPAPARVAS,
+    VOLUME_XII_UPAPARVAS,
+    ASHVAMEDHA_SVARGA_UPAPARVAS: VOLUME_XII_UPAPARVAS,
     MAHABHARATA_VOLUMES,
     MAHABHARATA_CHARACTERS
   };

@@ -722,8 +722,11 @@
         <button type="button" class="parva-sel-btn" id="btnParvaVol10" onclick="selectReaderParva('vol10')">
           🌊 Vol X: Shanti III &amp; Anusasana I (నారాయణీయ &amp; దైవ-పురుషకార - 3 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaVol11" onclick="selectReaderParva('vol11')">
+        <button type="button" class="parva-sel-btn" id="btnParvaVol11" onclick="selectReaderParva('vol11')">
           🕉️ Vol XI: Anusasana Parva II (విష్ణు సహస్రనామ &amp; భీష్మ నిర్యాణం - 4 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVol12" onclick="selectReaderParva('vol12')">
+          👑 Vol XII: Aswamedha to Swargarohana (మహాప్రస్థానం &amp; స్వర్గారోహణం - 6 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -788,6 +791,13 @@
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sri Krishna revive the stillborn child of Princess Uttara as Parikshit in Aswamedha Parva?')">🐴 Revival of Parikshit &amp; Aswamedha (పరీక్షిత్తు పునరుజ్జీవనం - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Babruvahana slay Arjuna in Manipura and how did Ulupi revive Arjuna with the Sanjivani gem?')">💎 Babruvahana &amp; Arjuna Duel (బభ్రువాహనుడు &amp; సంజీవని మణి - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the story of the Golden-Headed Mongoose that humbled Yudhishthira\'s Horse Sacrifice?')">🦡 The Golden Mongoose &amp; Saktu Sacrifice (బంగారు ముంగిస - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Maharshi Vyasa grant a divine vision on the Ganga where fallen heroes of Kurukshetra rose in friendship?')">🌊 Vision of Fallen Heroes on the Ganga (గంగానదిపై వీరుల దివ్యదర్శనం - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What was the curse of the iron mace upon Samba and how did the Yadavas destroy each other and Krishna ascend?')">⚡ Samba\'s Iron Mace &amp; Krishna\'s Ascension (సాంబ ముసలం &amp; శ్రీకృష్ణ నిర్యాణం - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened during the Mahaprasthana to Mount Meru, why did each Pandava fall, and what was the Dog test?')">🐕 Mahaprasthana &amp; Test of the Faithful Dog (మహాప్రస్థానం &amp; ధర్మ శ్వాన పరీక్ష - Vol XII)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What was the illusion of Hell experienced by Yudhishthira and what is the eternal Bharata-Savitri in Swargarohanika Parva?')">🌌 Swargarohana &amp; The Eternal Bharata-Savitri (స్వర్గారోహణం &amp; భారత-సావిత్రి - Vol XII)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Yudhishthira wish to renounce the kingdom in grief and what was the debate with his brothers and Draupadi?')">🕊️ Yudhishthira's Grief &amp; Renunciation Debate (ధర్మరాజు వైరాగ్యం &amp; సంవాదం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What are the Pingala Gita and Manki Gita on the annihilation of desire in Mokshadharma Parva?')">🕊️ Pingala Gita &amp; Manki Gita (పింగళ-మాంకి గీతలు &amp; తృష్ణాపహరణం - Vol IX)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What did Tuladhara the grocer teach Ascetic Jajali about Ahimsa being the supreme dharma in daily life?')">⚖️ Tuladhara &amp; Jajali: Ahimsa in Daily Commerce (తులాధారుడు &amp; అహింసా పరమో ధర్మః - Vol IX)</button>
@@ -943,6 +953,7 @@
   const btnParvaVol9 = document.getElementById('btnParvaVol9');
   const btnParvaVol10 = document.getElementById('btnParvaVol10');
   const btnParvaVol11 = document.getElementById('btnParvaVol11');
+  const btnParvaVol12 = document.getElementById('btnParvaVol12');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -997,7 +1008,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7, btnParvaVol8, btnParvaVol9, btnParvaVol10, btnParvaVol11].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7, btnParvaVol8, btnParvaVol9, btnParvaVol10, btnParvaVol11, btnParvaVol12].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -1051,6 +1062,10 @@
       if (btnParvaVol11) btnParvaVol11.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'అనుశాసన పర్వము - భాగం 2 (Anushasana Parva Part II) — 4 ఉపపర్వాలు సంపూర్ణం' : 'Volume XI: Anushasana Parva (Part II - Book of Precepts & Passing of Bhishma) — Complete 4 Upa-Parvas';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ XI: దానధర్మ పాత్రత, స్త్రీ సంరక్షణ, విపులుని యోగరక్షణ, కాల-ఋతువుల ప్రత్యక్ష సాక్ష్యం, అష్టవిధ వివాహాలు, చేపల వలలో చ్యవన మహర్షి & గోమూల్య దానం, కుశిక మహారాజు రథపరీక్ష & విశ్వామిత్ర జనన వరం, వృక్ష-తటాక ప్రతిష్ఠ, కైలాసాన ఉమా-మహేశ్వర సంవాదం, గోదాన-అన్నదాన మహాత్యం, శ్రీ విష్ణు సహస్రనామ స్తోత్ర ప్రబోధం & భీష్మ పితామహుని ఉత్తరాయణ మోక్ష ప్రయాణం.' : 'Volume XI: Dana-Dharma, protection of women, Vipula\'s yogic guardianship of Ruchi from Indra, Eight Forms of Marriage, Sage Chyavana priced as a cow by King Nahusha, King Kusika\'s chariot ordeal & Viswamitra boon, planting trees & tanks, Uma-Maheswara Samvada on Kailasa, sacred Go-Dana, Sri Vishnu Sahasranama Stotram, and Bhishma\'s ascension in Uttarayana.';
+    } else if (parvaKey === 'vol12') {
+      if (btnParvaVol12) btnParvaVol12.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'ఆశ్వమేధిక, ఆశ్రమవాసిక, మౌసల, మహాప్రస్థానిక & స్వర్గారోహణిక పర్వములు (Volume XII) — 6 ఉపపర్వాలు సంపూర్ణం' : 'Volume XII: Aswamedha, Asramavasika, Mausala, Mahaprasthanika & Swargarohanika — Complete 6 Upa-Parvas (Grand Finale)';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ XII: సంవర్త-మరుత్తుల సువర్ణ యాగం & శ్రీకృష్ణానుగీత, పరీక్షిత్తు పునరుజ్జీవనం, బభ్రువాహన యుద్ధం & సంజీవని మణి, బంగారు ముంగిస వృత్తాంతం, విదుర సమాధి, గంగాతీరాన వీరుల దివ్యదర్శనం, ప్రభాసతీర్థంలో యాదవ ప్రళయం, శ్రీకృష్ణ నిర్యాణం, ద్వారకా నిమజ్జనం, మేరు పర్వత మహాప్రస్థానం, ధర్మదేవుని శ్వాన పరీక్ష, నరకమాయ, స్వర్గారోహణంలో దివ్య సమాగమం & వ్యాసుని అమరమైన భారత-సావిత్రి.' : 'Volume XII: King Marutta\'s golden sacrifice & the sacred Anugita, revival of Parikshit, Arjuna slain by Babruvahana & revived by Ulupi, the Golden Mongoose of Kurukshetra, Vidura\'s yogic absorption, celestial vision of Kurukshetra heroes on the Ganga, iron mace & Yadava destruction, passing of Krishna, submergence of Dwaraka, Great Ascent to Meru, test of the faithful dog, the illusion of Hell, heavenly reunion, and the immortal Bharata-Savitri.';
     }
 
     renderUpaParvas();
@@ -1093,6 +1108,7 @@
     if (currentParva === 'vol9') return window.VOLUME_IX_UPAPARVAS || [];
     if (currentParva === 'vol10') return window.VOLUME_X_UPAPARVAS || [];
     if (currentParva === 'vol11') return window.VOLUME_XI_UPAPARVAS || [];
+    if (currentParva === 'vol12') return window.VOLUME_XII_UPAPARVAS || [];
     return [];
   }
 
@@ -1385,7 +1401,64 @@
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('renounce') || qLower.includes('renunciation') || (qLower.includes('grief') && qLower.includes('yudhishthira')) || qLower.includes('shodasa-rajika') || qLower.includes('charvaka') || (qLower.includes('beggar') && qLower.includes('yudhishthira'))) {
+      if (qLower.includes('reviv') || (qLower.includes('parikshit') && (qLower.includes('stillborn') || qLower.includes('womb') || qLower.includes('uttara') || qLower.includes('breath')))) {
+        answer = `
+          <strong>🐴 Revival of Stillborn Parikshit &amp; Aswamedha Yajna (పరీక్షిత్తు పునరుజ్జీవనం &amp; అశ్వమేధ యాగం - Volume XII):</strong><br/><br/>
+          • <strong>The Curse on the Unborn Seed:</strong> In the Aswamedhika Parva, when the Pandavas return from Mount Himavat laden with Marutta's golden treasures, Princess Uttara gives birth to a lifeless, blackened child, scorched in the womb by Ashwatthaman's Brahmashira weapon. Queen Mother Kunti, Subhadra, and Draupadi wail in despair as the last ember of the Pandava line is extinguished.<br/><br/>
+          • <strong>Sri Krishna's Solemn Vow of Absolute Truth:</strong> Lord Krishna enters the lying-in chamber. Water is brought, and Bhagavan declares before the cosmos: <em>"Never have I spoken an untruth, even in jest! Never have I turned back from battle! As Righteousness and Truth dwell eternally in Me, let this dead child breathe and live!"</em> Touching the infant, divine life surges through the child; he cries lustily, skin glowing like molten gold! Krishna names him <strong>Parikshit</strong> (the tested one).<br/><br/>
+          • <strong>The Aswamedha Yajna:</strong> King Yudhishthira initiates the grand Horse Sacrifice. A black-eared white steed is consecrated and let loose to wander the earth, escorted by Arjuna, while Vyasa and the sages conduct the sacred rites in Hastinapura amid boundless charity.
+        `;
+      } else if (qLower.includes('babruvahana') || (qLower.includes('arjuna') && (qLower.includes('slain') || qLower.includes('chitrangada') || qLower.includes('ulupi') || qLower.includes('sanjivani')))) {
+        answer = `
+          <strong>💎 Babruvahana Slaying Arjuna &amp; Ulupi's Sanjivani Gem (బభ్రువాహనుడు &amp; సంజీవని మణి - Volume XII):</strong><br/><br/>
+          • <strong>The Arrival at Manipura:</strong> Following the sacrificial steed, Arjuna reaches the kingdom of Manipura ruled by his son <strong>Babruvahana</strong> (born of Princess Chitrangada). Babruvahana approaches his father with folded hands and profound filial deference. Arjuna, testing him, rebukes him sharply: <em>"A Kshatriya does not welcome his father with cringing meekness! Protect thy kingdom with weapons!"</em><br/><br/>
+          • <strong>The Fatal Arrow Duel:</strong> Goaded by his stepmother, the Naga princess <strong>Ulupi</strong>, Babruvahana takes up his bow and fights with ferocious skill. He shoots a crescent-shaped arrow with blinding force, severing Arjuna's life-breath! Arjuna falls dead on the battlefield.<br/><br/>
+          • <strong>Lamentation &amp; The Sanjivani Gem:</strong> Babruvahana, horrified at having slain his own father, vows to starve to death beside the corpse. Queen Chitrangada wails in despair. Ulupi then produces the celestial <strong>Sanjivani gem</strong> from the subterranean Naga realm and places it upon Arjuna's chest. Arjuna blazes back to life as if waking from sleep! Ulupi reveals that this ordeal was ordained by the Vasus to absolve Arjuna of the karmic sin of slaying Grandfather Bhishma from behind the woman Shikhandin!
+        `;
+      } else if (qLower.includes('mongoose') || qLower.includes('nakula') || qLower.includes('saktu') || (qLower.includes('barley') && qLower.includes('flour'))) {
+        answer = `
+          <strong>🦡 The Golden-Headed Mongoose &amp; The Saktu Sacrifice (బంగారు ముంగిస &amp; సక్తు ప్రస్థ దానం - Volume XII):</strong><br/><br/>
+          • <strong>The Boast of Boundless Charity:</strong> At the conclusion of Yudhishthira's grand Aswamedha Yajna, rivers of milk, mountains of cooked food, and heaps of jewels were distributed to millions. Brahmanas and kings proclaimed: <em>"Never in the three worlds was there a sacrifice equal to this!"</em><br/><br/>
+          • <strong>The Arrival of the Half-Golden Mongoose:</strong> Suddenly, a strange mongoose with blue eyes and half its body made of solid gold entered the sacrificial hall. Rolling in the dust, it laughed in human speech: <em>"Ye kings and sages, do not boast! All this magnificent sacrifice of King Yudhishthira is not equal to a single handful of barley flour given away by a poor Brahmana of Kurukshetra!"</em><br/><br/>
+          • <strong>The Story of the Unccha Brahmana:</strong> The mongoose revealed that during a severe famine, a righteous Brahmana family (husband, wife, son, daughter-in-law) subsisted by gleaning scattered grains. After fasting for days, they prepared four small bowls of barley flour (<em>Saktu</em>). A starving guest arrived. First the father, then the mother, then the son, and finally the daughter-in-law gave their share to feed the guest with joyful devotion, perishing of starvation. The guest was Lord Dharma, who took them bodily to heaven! A few grains of barley water fell on the mongoose outside their hut, turning half its body to gold; rolling in all of Yudhishthira's gold could not turn the other half!
+        `;
+      } else if ((qLower.includes('ganga') && (qLower.includes('vision') || qLower.includes('heroes') || qLower.includes('fallen') || qLower.includes('night'))) || qLower.includes('putradarsana')) {
+        answer = `
+          <strong>🌊 Vision of Kurukshetra Heroes Rising on the Ganga (పుత్రదర్శన పర్వం &amp; గంగానదిపై వీరుల దివ్యదర్శనం - Volume XII):</strong><br/><br/>
+          • <strong>The Forest Hermitage of the Elders:</strong> In the Asramavasika Parva, King Dhritarashtra, Queen Gandhari, and Queen Mother Kunti retire to a hermitage on the sacred Ganga. When the Pandavas visit them, Kunti and Gandhari weep continually for their fallen sons.<br/><br/>
+          • <strong>Vyasa's Celestial Miracle:</strong> Moved by their grief, Maharshi Krishna-Dwaipayana Vyasa leads the living to the banks of the holy Ganga at sunset. Standing in the sacred stream, Vyasa chants ancient Vedic mantras. Suddenly, the waters roar, and out of the river rise the slain warriors of Kurukshetra—Bhishma, Drona, Karna, Duryodhana, Abhimanyu, Ghatotkacha, Dhrishtadyumna, and hundreds of kings—riding on shining celestial cars, clad in radiant silken robes and glowing with divine luster, completely free from wounds, enmity, and anger!<br/><br/>
+          • <strong>The Night of Reconciliation:</strong> For one blissful night, Duryodhana and Bhima embrace; Karna is reunited with Kunti; Abhimanyu smiles with Arjuna and Uttara; the living and the departed converse in ecstatic affection. At daybreak, the heroes submerge back into heaven. Bereaved widows plunge into the sacred Ganga and ascend directly to their husbands' celestial realms!
+        `;
+      } else if (qLower.includes('mace') || qLower.includes('samba') || qLower.includes('iron bolt') || qLower.includes('prabhas') || (qLower.includes('destruction') && qLower.includes('yadava')) || (qLower.includes('krishna') && (qLower.includes('foot') || qLower.includes('arrow') || qLower.includes('jara') || qLower.includes('ascension')))) {
+        answer = `
+          <strong>⚡ Samba's Iron Mace &amp; The Ascension of Sri Krishna (సాంబ ముసల శాపం &amp; శ్రీకృష్ణ నిర్యాణం - Volume XII):</strong><br/><br/>
+          • <strong>The Curse of the Sages:</strong> In the 36th year after the Kurukshetra war, fulfilling Gandhari's curse, young Yadava princes disguise Samba as a pregnant woman and tease Sages Kanva, Viswamitra, and Narada: <em>"What will she bring forth?"</em> The angered sages curse: <em>"She will bear a fierce iron mace (Musala) that will annihilate the Vrishni race!"</em> Samba delivers an iron pestle. Ugrasena grinds it to powder and casts it into the sea, but an indestructible iron spike is swallowed by a fish. The powder washes ashore and grows into razor-sharp <em>Eraka</em> reeds; the fish is caught and its iron spike is sold to hunter <strong>Jara</strong> for his hunting arrow.<br/><br/>
+          • <strong>Fratricidal Slaughter at Prabhasa:</strong> Portents multiply in Dwaraka; the Yadavas travel to Prabhasa. Drinking intoxicating wine (<em>Maireya</em>), Satyaki taunts Kritavarman over the night massacre of the sleeping camp; Kritavarman mocks Satyaki for slaying Bhurisravas. A brawl explodes; Satyaki beheads Kritavarman. Plucking the Eraka reeds, which turn into iron thunderbolts, the Yadavas slaughter one another until the entire race perishes!<br/><br/>
+          • <strong>The Ascension of Balarama &amp; Krishna:</strong> Balarama sits beside the sea in yoga; a colossal thousand-headed white serpent (Adisesha) issues from his mouth and enters the roaring ocean. Lord Krishna reclines in meditation beneath a tree, left foot upon his knee. Hunter Jara, mistaking the gleam of the divine foot for a resting deer, shoots his arrow. Weeping at his deed, Jara falls at Krishna's feet; Krishna comforts him and ascends in supreme radiance to His eternal Vaikuntha abode! Arjuna escorts the surviving women away, and the ocean surges forward, swallowing the golden city of Dwaraka!
+        `;
+      } else if (qLower.includes('mahaprasthan') || qLower.includes('meru') || (qLower.includes('dog') && (qLower.includes('faithful') || qLower.includes('yudhishthira') || qLower.includes('indra')))) {
+        answer = `
+          <strong>🐕 The Great Ascent to Mount Meru &amp; The Faithful Dog (మహాప్రస్థాన పర్వము &amp; ధర్మ శ్వాన పరీక్ష - Volume XII):</strong><br/><br/>
+          • <strong>The Great Departure:</strong> Crowned Parikshit in Hastinapura and Vajra in Indraprastha, the five Pandavas and Draupadi cast off royal robes, don ascetic bark garments, and renounce the world. Accompanied by a lone faithful stray dog, they circumambulate Bharatavarsha and journey north toward Mount Meru.<br/><br/>
+          • <strong>The Falls on the Trail:</strong> One by one, the travelers collapse on the frozen mountain path:<br/>
+            &bull; <em>Draupadi falls:</em> Partiality of heart for Arjuna over her other husbands.<br/>
+            &bull; <em>Sahadeva falls:</em> Intellectual vanity, believing none equaled him in wisdom.<br/>
+            &bull; <em>Nakula falls:</em> Vanity of physical beauty, believing none matched him on earth.<br/>
+            &bull; <em>Arjuna falls:</em> Pride of archery, boasting he could slay all foes in a single day.<br/>
+            &bull; <em>Bhima falls:</em> Pride of physical strength and voracious gluttony without caring for others' hunger.<br/><br/>
+          • <strong>The Test of the Faithful Dog:</strong> Yudhishthira continues walking alone, accompanied solely by the devoted dog. Lord Indra descends in a chariot of light: <em>"Ascend bodily to heaven!"</em> When Indra insists the dirty dog cannot enter heaven, Yudhishthira firmly refuses: <em>"To abandon a devoted soul that seeks shelter is an unpardonable sin! If heaven demands cruelty to a faithful creature, I renounce that heaven!"</em> Instantly, the dog transforms into <strong>Lord Dharma</strong>: <em>"Twice before have I tested thee, O King! In all the worlds, there is none equal to thee in righteousness!"</em> Yudhishthira ascends bodily to Swarga!
+        `;
+      } else if (qLower.includes('swargarohan') || qLower.includes('naraka') || qLower.includes('bharata-savitri') || qLower.includes('bharata savitri') || (qLower.includes('hell') && qLower.includes('illusion'))) {
+        answer = `
+          <strong>🌌 Swargarohana, The Illusion of Hell &amp; Bharata-Savitri (స్వర్గారోహణిక పర్వము &amp; భారత-సావిత్రి - Volume XII):</strong><br/><br/>
+          • <strong>Duryodhana on the Golden Throne:</strong> Entering heaven, Yudhishthira is outraged to see Duryodhana seated upon a blazing throne in radiant glory, while his brothers and Draupadi are nowhere to be seen. Narada explains that Duryodhana died bravely in battle, fulfilling Kshatriya dharma.<br/><br/>
+          • <strong>The Trial of Hell (Naraka):</strong> Demanding to see his brothers, Yudhishthira is guided down a foul, terrifying path of boiling blood, rotting limbs, and vultures. As he turns away, agonized voices cry from the gloom: Karna, Bhima, Arjuna, and Draupadi plead with him to stay, for his holy aura brings relief! Outraged, Yudhishthira dismisses the gods: <em>"Return to thy masters! I shall dwell here in hell to soothe my brethren!"</em><br/><br/>
+          • <strong>The Illusion Dispelled &amp; Celestial Reunion:</strong> The darkness dissolves; Indra reveals that because Yudhishthira spoke an equivocation regarding Ashwatthaman to Drona, he had to glimpse hell for a fleeting moment. Bathing in the celestial Mandakini (Akashaganga), Yudhishthira sheds his mortal body and enters eternal Vaikuntha and Swarga: Sri Krishna shines with Arjuna (Nara); Karna blazes with Surya; Bhishma reigns with the Vasus; Drona with Brihaspati; Draupadi as Goddess Sri; all hatred dissolved into eternal divine love!<br/><br/>
+          • <strong>Maharshi Vyasa's Immortal Bharata-Savitri:</strong><br/>
+            <em>"Urdhvabahur viromy-esha na cha kash-chich-chrinoti mam / Dharmad-arthas-cha kamas-cha sa kim-artham na sevyate!"</em><br/>
+            (With uplifted arms I cry aloud unto the world, yet none heareth me! From Dharma alone spring both wealth and happiness; why then is Dharma not practiced? Not for desire, nor fear, nor greed, nor even for life itself should a person ever abandon Dharma! For Dharma is eternal; pleasure and pain are transient!)
+        `;
+      } else if (qLower.includes('renounce') || qLower.includes('renunciation') || (qLower.includes('grief') && qLower.includes('yudhishthira')) || qLower.includes('shodasa-rajika') || qLower.includes('charvaka') || (qLower.includes('beggar') && qLower.includes('yudhishthira'))) {
         answer = `
           <strong>🕊️ Yudhishthira's Grief, Renunciation Debate &amp; Coronation (రాజధర్మానుశాసన పర్వము / Rajadharmanusasana Parva - Volume VIII):</strong><br/><br/>
           • <strong>The Crisis of Victor's Remorse:</strong> Having completed the water rites for millions of fallen heroes on the sacred Ganga and discovered that Karna was his eldest brother, King Yudhishthira is overwhelmed with desolation: <em>"What kingdom is this, gained by bathing in the blood of our kinsmen, teachers, sons, and friends? Fie on Kshatriya life!"</em> He announces his resolve to renounce sovereignty, adopt ascetic robes, take the begging bowl, and retire into the deep forest.<br/><br/>
@@ -1836,8 +1909,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through XI (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, Stree, Shanti Parva Parts I, II, III, and Anushasana Parva Parts I & II).<br/><br/>
-          You can explore the rich Upa-Parvas of Volumes IX, X, and XI (Mokshadharma Gitas, Sankhya-Yoga, Bhrigu-Bharadwaja cosmology, Tuladhara-Jajali Ahimsa, Sulabha-Janaka debate, Narayaniya Svetadvipa, Vipula's yogic guardianship, Chyavana & Nahusha's sacred cow, Kusika chariot ordeal, and Sri Vishnu Sahasranama Stotram with Bhishma's ascension in Uttarayana) or browse Volumes I–VIII in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is now <strong>100% COMPLETE across all 12 canonical volumes</strong> (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, Stree, Shanti Parts I, II, III, Anushasana Parts I & II, Aswamedha, Asramavasika, Mausala, Mahaprasthanika, and Swargarohanika)!<br/><br/>
+          You can explore the grand climactic Upa-Parvas of Volume XII (King Marutta's golden sacrifice & the sacred Anugita, revival of stillborn Parikshit, Arjuna's sacrificial horse trail & Babruvahana duel, the Golden Mongoose of Kurukshetra, retirement of the elders & Vidura's samadhi, vision of slain heroes rising radiant on the Ganga, the iron mace of Samba & fratricidal fall of the Yadavas, passing of Balarama & Krishna, ocean submerging Dwaraka, the Great Ascent to Mount Meru, fall of the Pandavas, the test of the faithful dog, the illusion of Hell, celestial reunion in Swarga, and the eternal Bharata-Savitri) or browse Volumes I–XI in the reader above!
         `;
       }
 
@@ -1857,7 +1930,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('vol11');
+    selectReaderParva('vol12');
   });
 })();
 </script>
