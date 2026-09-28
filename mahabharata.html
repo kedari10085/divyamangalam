@@ -698,11 +698,14 @@
         <button type="button" class="parva-sel-btn" id="btnParvaVana2" onclick="selectReaderParva('vana2')">
           🏹 Vol III: Vana Parva Part II (12 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaVirata" onclick="selectReaderParva('virata')">
+        <button type="button" class="parva-sel-btn" id="btnParvaVirata" onclick="selectReaderParva('virata')">
           👑 Vol IV: Virata Parva (5 ఉపపర్వాలు)
         </button>
         <button type="button" class="parva-sel-btn" id="btnParvaUdyoga" onclick="selectReaderParva('udyoga')">
           ⚔️ Vol IV: Udyoga Parva (11 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaBhishma" onclick="selectReaderParva('bhishma')">
+          🏹 Vol V: Bhishma Parva &amp; Gita (5 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -767,6 +770,11 @@
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the core message and 18 chapters of Srimad Bhagavad Gita in Bhishma Parva?')">🪷 Srimad Bhagavad Gita (శ్రీమద్భగవద్గీత)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sage Vyasa grant Sanjaya divine celestial vision (Divya-Drishti)?')">👁️ Sanjaya's Celestial Vision (దివ్య దృష్టి)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Sri Krishna charge Bhishma with the chariot wheel breaking His vow?')">☸️ Krishna Charging with Chariot Wheel (చక్రపాణి)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did King Yudhishthira walk barefoot to touch the feet of Bhishma and Drona before battle?')">🦶 Yudhishthira Touching Elders' Feet &amp; Yuyutsu</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Grandfather Bhishma fall on the Bed of Arrows and quench his thirst with the Ganga spring?')">🏹 Bhishma on Bed of Arrows &amp; Ganga Spring (అంపశయ్య)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima slay Kichaka in the dark dance hall to avenge Draupadi?')">👑 Kichaka Slaying (కీచక వధ)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Brihannala defeat the entire Kaurava army and retrieve the cows in Goharana?')">🏹 Brihannala &amp; Sammohana (ఉత్తర గొగ్రహణం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What is Vidura Niti taught to sleepless Dhritarashtra in Prajagara Parva?')">📜 Vidura Niti (విదురనీతి)</button>
@@ -882,6 +890,7 @@
   const btnParvaVana2 = document.getElementById('btnParvaVana2');
   const btnParvaVirata = document.getElementById('btnParvaVirata');
   const btnParvaUdyoga = document.getElementById('btnParvaUdyoga');
+  const btnParvaBhishma = document.getElementById('btnParvaBhishma');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -936,7 +945,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -962,6 +971,10 @@
       if (btnParvaUdyoga) btnParvaUdyoga.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'ఉద్యోగ పర్వము (Udyoga Parva) — 11 ఉపపర్వాలు సంపూర్ణం' : 'Udyoga Parva (Book of Effort & Preparations) — All 11 Upa-Parvas Complete';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ IV: సైన్యోద్యోగం, విదురనీతి, సనత్సుజాతీయ వేదాంతం, శ్రీకృష్ణ శాంతి రాయబారము, సభలో విశ్వరూప దర్శనం, కర్ణ-కృష్ణ-కుంతీ సంవాదం, భీష్ముని రథాతిరథ విభజన, అంబోపాఖ్యానం (శిఖండి వృత్తాంతం).' : 'Volume IV: Military preparations, Vidura Niti, Sanatsujatiya, Sri Krishna\'s Peace Embassy & Cosmic Vishwaroopa, Karna-Kunti dialogue, Bhishma\'s Rathatiratha rating, Amba-Shikhandin history.';
+    } else if (parvaKey === 'bhishma') {
+      if (btnParvaBhishma) btnParvaBhishma.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'భీష్మ పర్వము & శ్రీమద్భగవద్గీత (Bhishma Parva & Gita) — 5 ఉపపర్వాలు సంపూర్ణం' : 'Bhishma Parva & Srimad Bhagavad Gita — All 5 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ V: కురుక్షేత్ర ఉత్పాతాలు, సంజయుని దివ్యదృష్టి, శ్రీమద్భగవద్గీతా ప్రబోధం (18 అధ్యాయాలు), యుధిష్ఠిరుని పాదపూజ, యుయుత్సుని పక్షమార్పిడి, 10 రోజుల మహాయుద్ధం, చక్రపాణిగా శ్రీకృష్ణుడు, భీష్ముని అంపశయ్య, బాణగంగ & కర్ణుని సమాగమం.' : 'Volume V: Kurukshetra portents, Sanjaya\'s Divya-Drishti, Srimad Bhagavad Gita (18 Chapters complete), Yudhishthira touching elders\' feet, Yuyutsu\'s defection, 10 days of ferocious war, Krishna charging with the chariot wheel, Bhishma on the Bed of Arrows, and Ganga water spring.';
     }
 
     renderUpaParvas();
@@ -997,6 +1010,7 @@
     if (currentParva === 'vana2') return window.VANA_PARVA_PART2_UPAPARVAS || [];
     if (currentParva === 'virata') return window.VIRATA_PARVA_UPAPARVAS || [];
     if (currentParva === 'udyoga') return window.UDYOGA_PARVA_UPAPARVAS || [];
+    if (currentParva === 'bhishma') return window.BHISHMA_PARVA_UPAPARVAS || [];
     return [];
   }
 
@@ -1104,7 +1118,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : 'virata'))}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : (v.volNumber === 4 ? 'virata' : (v.volNumber === 5 ? 'bhishma' : 'adi'))))}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1140,6 +1154,7 @@
     else if (parvaKey === 'vana2') { dataset = window.VANA_PARVA_PART2_UPAPARVAS; parvaLabel = 'VANA PARVA PART II (VOL III)'; }
     else if (parvaKey === 'virata') { dataset = window.VIRATA_PARVA_UPAPARVAS; parvaLabel = 'VIRATA PARVA (VOL IV)'; }
     else if (parvaKey === 'udyoga') { dataset = window.UDYOGA_PARVA_UPAPARVAS; parvaLabel = 'UDYOGA PARVA (VOL IV)'; }
+    else if (parvaKey === 'bhishma') { dataset = window.BHISHMA_PARVA_UPAPARVAS; parvaLabel = 'BHISHMA PARVA (VOL V)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1276,13 +1291,58 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III &amp; IV)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III, IV &amp; V)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('kichaka') || qLower.includes('sairindhri') || qLower.includes('sudeshna') || qLower.includes('natyashala')) {
+      if (qLower.includes('bhagavad gita') || qLower.includes('gita') || qLower.includes('visada') || qLower.includes('karmanye') || qLower.includes('sthitaprajna') || qLower.includes('purushottama') || qLower.includes('sarva-dharman') || qLower.includes('nashto mohah')) {
+        answer = `
+          <strong>🪷 Srimad Bhagavad Gita — The Celestial Song (భగవద్గీతా పర్వము / Bhagavat-Gita Parva - Volume V):</strong><br/><br/>
+          Delivered by Lord Sri Krishna to Arjuna on the holy field of Kurukshetra across 18 chapters and 700 verses, the Bhagavad Gita resolves Arjuna's moral collapse and reveals the highest truths of Sanatana Dharma:<br/><br/>
+          • <strong>Arjuna-Visada Yoga (Ch. 1):</strong> Overcome by emotional grief and attachment seeing kin and preceptors, Arjuna drops Gandiva and refuses to fight (<em>Na yotsya iti Govindam</em>).<br/>
+          • <strong>Sankhya Yoga (Ch. 2):</strong> Immortality of the Atman (<em>"The soul is never born, nor doth it ever die; weapons cleave it not, fire burneth it not"</em>) and Nishkama Karma (<em>"Karmanye vadhikaraste ma phaleshu kadachana — Thy right is to work only, never to its fruits"</em>). Signs of the steady-minded sage (<em>Sthitaprajna</em>).<br/>
+          • <strong>Karma &amp; Jnana Yoga (Ch. 3–5):</strong> Action without selfish attachment as cosmic sacrifice (Yajna); King Janaka's ideal of Lokasangraha; the eternal Avatar declaration (<em>"Yada yada hi dharmasya glanir bhavati Bharata... Paritranaya sadhunam"</em>); seeing the Divine equally in all beings (<em>Panditah sama-darsinah</em>).<br/>
+          • <strong>Dhyana &amp; Bhakti Yoga (Ch. 6–12):</strong> Mind control through practice (Abhyasa) and dispassion (Vairagya); the four seekers; the sacred syllable OM; loving surrender where even a leaf, flower, fruit, or water offered with love is accepted (<em>Patram pushpam phalam toyam</em>); the 35 divine virtues of a true devotee.<br/>
+          • <strong>Cosmic Vishwaroopa (Ch. 11):</strong> Krishna grants celestial sight to Arjuna, revealing His apocalyptic Cosmic Form shining like a thousand simultaneous suns, proclaiming: <em>"Kalo'smi loka-kshaya-krit pravriddho — I am Time, the destroyer of the worlds!"</em><br/>
+          • <strong>Purushottama &amp; Moksha-Sanyasa Yoga (Ch. 13–18):</strong> The inverted Ashvattha tree; transcending the three Gunas (Sattva, Rajas, Tamas); the supreme crowning assurance: <em>"Sarva-dharman parityajya mam ekam saranam vraja — Abandon all varieties of religion and surrender unto Me alone; I shall liberate thee from all sins, grieve not!"</em> (18.66). Arjuna's delusion dissolves, and Sanjaya prophesies eternal victory wherever Krishna and Arjuna abide.
+        `;
+      } else if (qLower.includes('divya-drishti') || qLower.includes('sanjaya') || qLower.includes('celestial vision') || qLower.includes('omens') || qLower.includes('eclipses') || qLower.includes('jamvu') || qLower.includes('sudarsana-dwipa') || qLower.includes('karma-bhumi')) {
+        answer = `
+          <strong>👁️ Sanjaya's Celestial Vision &amp; Kurukshetra Omens (జంబూఖండ &amp; భూమి పర్వము - Volume V):</strong><br/><br/>
+          1. <strong>Vyasa's Divine Gift to Sanjaya:</strong> When Maharshi Vyasa offered eyesight to blind King Dhritarashtra, the king refused to witness the fratricidal carnage of his sons. Vyasa then bestowed divine celestial vision (<em>Divya-Drishti</em>) upon Sanjaya: Sanjaya could perceive everything happening anywhere on the battlefield—by day or night, open or secret, spoken words and unspoken inner thoughts—while remaining immortal and untouched by any weapon.<br/><br/>
+          2. <strong>Terrifying Omens of Cataclysm:</strong> Vyasa enumerated cosmic portents signaling universal annihilation: both solar and lunar eclipses occurring within an unnatural 13-day fortnight (<em>Trayodasi</em>); Rahu tormenting Krittika and Rohini constellations; blazing comets; temple deities weeping, sweating, laughing, and bleeding; and showers of flesh and warm blood falling from cloudless skies.<br/><br/>
+          3. <strong>Bharatavarsha as Karma-Bhumi:</strong> Sanjaya described the Earth (<em>Sudarsana-dwipa</em>, circular like a wheel, seen in the moon's reflection as a peepul tree and hare), Mount Meru, the seven sacred mountain ranges, and purifying rivers (Ganga, Yamuna, Saraswati, Godavari, Kaveri, Narmada, Sindhu). Sanjaya declared that of all cosmic regions, Bharatavarsha alone is the <strong>Karma-bhumi</strong> (field of righteous action), where mortal deeds yield spiritual liberation, while other worlds are mere fields of consumption.
+        `;
+      } else if (qLower.includes('chariot wheel') || qLower.includes('chakrapani') || (qLower.includes('krishna') && (qLower.includes('charge') || qLower.includes('leap') || qLower.includes('whip') || qLower.includes('waist') || qLower.includes('broken vow')))) {
+        answer = `
+          <strong>☸️ Sri Krishna Charging with the Chariot Wheel (చక్రపాణిగా శ్రీకృష్ణుడు - Volume V):</strong><br/><br/>
+          Lord Sri Krishna had taken a solemn vow before the war that He would not bear arms or strike a single blow at Kurukshetra, serving solely as Arjuna's charioteer.<br/><br/>
+          On the 3rd and 9th days of battle, Grandfather Bhishma unleashed apocalyptic devastation, moving across the battlefield like a forest fire and incinerating thousands of Pandava warriors. Arjuna, fighting with inner tenderness and hesitation against his beloved grandfather, could not check Bhishma's onslaught.<br/><br/>
+          Witnessing the slaughter of the Pandava army, Lord Krishna's divine fury blazed! Casting aside His whip and reins, the Lord leapt down from the chariot and charged straight toward Bhishma with the speed of lightning, raising His Sudarshana Chakra (and seizing a heavy, broken chariot wheel with hub and spokes spinning in the air), roaring like a thundercloud that shook the earth!<br/><br/>
+          Beholding the Lord charging to slay him, Grandfather Bhishma lowered his bow, smiled with transcendental joy, and bowed his head, crying: <em>"Come, come, O Lord of the Universe! Blessed am I that Thou comest to strike me! Slay me, O Govinda, and liberate my soul forever!"</em><br/><br/>
+          Arjuna instantly leaped from the chariot, sprinted after Krishna, threw both arms around Krishna's waist, and dragged his heels in the dust to halt the Lord. Arjuna pleaded: <em>"Restrain Thy fury, O Kesava! Let not Thy holy vow be broken on my account! I swear by my truth and weapons that I shall fight with all my might and vanquish the Kurus!"</em> Pacified, Krishna returned to the chariot. Krishna showed that to protect Dharma and His devotees, He was willing even to break His own divine vow!
+        `;
+      } else if (qLower.includes('barefoot') || qLower.includes('touching feet') || qLower.includes('yuyutsu') || (qLower.includes('yudhishthira') && (qLower.includes('blessing') || qLower.includes('permission') || qLower.includes('pradakshina')))) {
+        answer = `
+          <strong>🦶 Yudhishthira Touching Elders' Feet &amp; Yuyutsu's Defection (యుధిష్ఠిరాశీర్వాద పర్వము - Volume V):</strong><br/><br/>
+          Moments before the conches sounded the final call to battle, King Yudhishthira performed an act of peerless moral dignity. Removing his armor and laying down his weapons, Yudhishthira walked barefoot across the battlefield into the enemy lines toward Grandfather Bhishma.<br/><br/>
+          The Kauravas mocked, believing the eldest Pandava was terrified and coming to surrender. But Yudhishthira bowed down and touched Bhishma's feet, asking: <em>"O Grandfather, grant us permission to fight and bestow thy blessing!"</em><br/><br/>
+          Bhishma embraced him with tears of joy, saying: <em>"Hadst thou not come, O King, I should have cursed thee to defeat! I am pleased with thy humility. Though my body is bound to the Kauravas by sustenance, my soul and prayers are with thee: Victory shall be thine, for where Dharma is, there is Krishna, and where Krishna is, there is victory!"</em><br/><br/>
+          Yudhishthira similarly touched the feet of Acharya Drona, Kripacharya, and maternal uncle Salya, receiving identical blessings of victory from every elder.<br/><br/>
+          Standing between the armies, Yudhishthira then made an open proclamation: <em>"Whoever chooseth righteousness and wisheth to fight on our side, him we welcome!"</em> Hearing this, <strong>Yuyutsu</strong> (Dhritarashtra's righteous son by a Vaisya wife) stepped out from the Kaurava ranks and defected to the Pandavas. Yudhishthira embraced him warmly, knowing that Yuyutsu would survive to perform the funeral rites of the Kurus and guide the future dynasty.
+        `;
+      } else if (qLower.includes('bed of arrows') || qLower.includes('sharatolpamu') || qLower.includes('arrow bed') || qLower.includes('ganga spring') || qLower.includes('arrow pillow') || qLower.includes('thirst') || (qLower.includes('bhishma') && (qLower.includes('fall') || qLower.includes('shikhandi') || qLower.includes('reconciliation') || qLower.includes('iccha-mrityu')))) {
+        answer = `
+          <strong>🏹 Grandfather Bhishma on the Bed of Arrows (భీష్మవధ పర్వము / అంపశయ్య - Volume V):</strong><br/><br/>
+          • <strong>Fall on the 10th Day:</strong> Following Bhishma's own advice, Arjuna placed Shikhandin (born female as Princess Amba) in front of his chariot. Shikhandin rained arrows upon Bhishma's chest; bound by his vow never to strike a woman or one born female, Bhishma lowered his bow and refused to fight back. Positioned behind Shikhandin, Arjuna covered Bhishma in hundreds of steel-tipped arrows until not two fingers' breadth of his body was free from wounds. Bhishma fell from his chariot at sunset; his body did not touch the earth, remaining suspended in mid-air on a dense <strong>Bed of Arrows (శరతల్పము / Saratolpamu)</strong>.<br/><br/>
+          • <strong>Iccha-Mrityu &amp; Uttarayana:</strong> Blessed by father Santanu with death at will (<em>Iccha-Mrityu</em>), Bhishma resolved to retain his life-breath for 58 days until the sacred northern solstice (<em>Uttarayana</em>).<br/><br/>
+          • <strong>The Arrow Pillow (Vira-Upadhana):</strong> When Bhishma's head hung down painfully, Duryodhana brought soft silk cushions; Bhishma smiled and rebuked him: <em>"Such pillows suit kings in royal bedchambers, not a Kshatriya warrior on the field of honor!"</em> Bhishma asked Arjuna for a hero's pillow; Arjuna shot three arrows downward into the ground, perfectly supporting the grandfather's head.<br/><br/>
+          • <strong>The Ganga Water Spring (Bhogi-Surya Ganga):</strong> Burning with fever and parched with thirst, Bhishma rejected Duryodhana's cold scented water jugs. Bhishma called upon Arjuna, son of his beloved Pandu. Arjuna mounted his chariot, strung Gandiva, invoked the celestial Parjanya weapon, and shot an arrow into the ground near Bhishma's head: instantly, a crystal fountain of pure, icy-cool divine Ganga water gushed forth directly into the son of Ganga's parched mouth, reviving him with celestial delight!<br/><br/>
+          • <strong>Night Reconciliation with Karna:</strong> Late at night, Karna crept alone in secret to the bed of arrows, weeping at Bhishma's feet. Bhishma placed his trembling, uninjured hand on Karna's head, revealing that Sage Narada had disclosed Karna's true birth: <em>"I know thou art Kunti's firstborn son, born of Surya! I harbored no malice toward thee, but sought only to restrain thy hostility against thy brothers. Thy courage, archery, and charity are equal to Phalguna and Krishna! Fight now with all thy valor, for my command is ended."</em> Reconciled and blessed, Karna prepared to enter the war.
+        `;
+      } else if (qLower.includes('kichaka') || qLower.includes('sairindhri') || qLower.includes('sudeshna') || qLower.includes('natyashala')) {
         answer = `
           <strong>👑 The Slaying of Commander Kichaka (కీచకవధ పర్వము / Kichaka-badha Parva - Volume IV):</strong><br/><br/>
           In King Virata's court of Matsya, supreme commander Kichaka (brother of Queen Sudeshna) is consumed by lustful desire for Sairindhri (Queen Draupadi in disguise). Despite Draupadi's warning that five celestial Gandharvas protect her, Kichaka coerces Sudeshna into sending her to his chambers under the guise of fetching wine. When Kichaka tries to assault her, Draupadi escapes into the royal assembly where Kichaka kicks and insults her before King Virata and Kanka (Yudhishthira), who restrains Bhima's blazing rage.<br/><br/>
@@ -1444,8 +1504,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, and IV (Adi, Sabha, Vana, Virata, and Udyoga Parvas).<br/><br/>
-          You can explore all 16 Upa-Parvas of Volume IV (Virata Parva &amp; Udyoga Parva: Kichaka-badha, Goharana war, Vidura Niti, Sanatsujatiya, Krishna's Peace Embassy, Cosmic Vishwaroopa, Karna-Kunti dialogue, Amba-Shikhandin) or switch to Volumes I, II, and III in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, IV, and V (Adi, Sabha, Vana, Virata, Udyoga, and Bhishma Parvas).<br/><br/>
+          You can explore all 5 Upa-Parvas of Volume V (Bhishma Parva &amp; Srimad Bhagavad Gita: Jamvu-Khanda, Bhumi Parva, 18 Chapters of Bhagavad Gita, Yudhishthira's Blessings, 10 Days' War, Bed of Arrows) or switch to Volumes I, II, III, and IV in the reader above!
         `;
       }
 
@@ -1465,7 +1525,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('virata');
+    selectReaderParva('bhishma');
   });
 })();
 </script>
