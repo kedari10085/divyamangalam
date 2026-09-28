@@ -673,10 +673,387 @@ const MAHABHARATA_CHARACTERS = [
   }
 ];
 
+/* ===== SABHA PARVA: COMPLETE 10 UPA-PARVAS (ఉపపర్వాలు) DETAIL =====
+   Based directly on Pratap Chandra Roy's English Translation (Volume II) */
+const SABHA_PARVA_UPAPARVAS = [
+  {
+    number: 1,
+    id: "sabhakriya",
+    nameEn: "Sabhakriya Parva",
+    nameSa: "सभाक्रियापर्व",
+    nameTe: "సభాక్రియా పర్వము",
+    sections: "Sections I - IV",
+    versesApprox: 480,
+    keyCharacters: ["Maya Danava", "Arjuna", "Sri Krishna", "Yudhishthira", "Bhima", "8000 Kinkaras"],
+    summaryEn: "Following the burning of Khandava, the celestial architect Maya Danava, saved by Arjuna, expresses his gratitude. Arjuna refuses any personal reward but requests Maya to do something for Krishna. Sri Krishna instructs Maya to build a palatial assembly hall (Mayasabha) for Yudhishthira combining godly, Asuric, and human architecture. Maya journeys to Mount Mainaka near Lake Vindu and retrieves a celestial club equal to 100,000 maces for Bhima, the Devadatta conch-shell for Arjuna, and glittering crystalline stones. Maya erects a peerless palace covering 5,000 cubits square, guarded by 8,000 aerial Kinkara Rakshasas. The palace features optical-illusion tanks with transparent waters, crystal stairs, and lotus flowers of gold where many monarchs mistake water for land and fall into it. King Yudhishthira feeds 10,000 Brahmanas and inaugurates the hall in glory.",
+    summaryTe: "ఖాండవ దహనంలో అర్జునుని వల్ల ప్రాణరక్షణ పొందిన మయదానవుడు కృతజ్ఞతతో అర్జునుని సేవ చేయగోరుట. కృష్ణుని సూచన మేరకు ధర్మరాజు కోసం దివ్యమైన మయసభను నిర్మించడానికి పూనుకొనుట. బిందు సరోవరము నుండి భీమునికి లక్ష గదల సమానమైన మహా గదను, అర్జునునికి దేవదత్త శంఖాన్ని, దివ్య రత్నాలను తెచ్చుట. 5000 మూరల విస్తీర్ణంలో, 8000 కింకరులు కాపలా కాసేలా, నేల నీరుగా, నీరు నేలగా భ్రమ కలిగించే స్ఫటిక సరోవరాలతో మయసభను 14 నెలలలో నిర్మించుట. ధర్మరాజు పదివేల మంది బ్రాహ్మణులకు అన్నదానము చేసి మయసభలో ప్రవేశించుట.",
+    keyQuoteRoy: "Krishna commanded Maya: 'Let a palatial sabha as thou choosest be built, that persons belonging to the world of men may not be able to imitate it even after examining it with care.'",
+    dharmaInsight: "Gratitude transformed into selfless creative excellence immortalizes the bond between artist and righteous benefactor."
+  },
+  {
+    number: 2,
+    id: "lokapala-sabha",
+    nameEn: "Lokapala Sabhakhayana Parva",
+    nameSa: "लोकपालसभाख्यानपर्व",
+    nameTe: "లోకపాల సభాఖ్యాన పర్వము",
+    sections: "Sections V - XIII",
+    versesApprox: 1120,
+    keyCharacters: ["Devarshi Narada", "King Yudhishthira", "King Pandu", "King Harishchandra"],
+    summaryEn: "The divine sage Narada arrives at Mayasabha and delivers an immortal masterpiece on Rajadharma (the science of righteous statecraft, economic prosperity, public administration, judicial fairness, and vigilance against corruption). Narada then describes the five celestial assembly halls of the cosmos: Indra's Pushkara-malini, Yama's Samani, Varuna's aquatic palace, Kubera's gem-encrusted Vibhishi, and Lord Brahma's self-effulgent Sabha. Narada reveals that King Harishchandra resides in Indra's assembly having performed the Rajasuya sacrifice. He conveys a poignant message from King Pandu in Pitriloka urging Yudhishthira to perform the Rajasuya sacrifice so that Pandu may ascend to Indra's celestial abode.",
+    summaryTe: "నారద మహర్షి మయసభకు విచ్చేసి ధర్మరాజుకు రాజనీతి, వ్యవసాయం, ఆర్థిక వ్యవస్థ, న్యాయపాలన మరియు మంత్రుల గుణగణాలపై విశిష్టమైన 'రాజధర్మ' బోధ చేయుట. ఆపై ఇంద్ర, యమ, వరుణ, కుబేర, బ్రహ్మ లోకాలలోని ఐదు దివ్య సభల వైభవాన్ని వర్ణించుట. రాజసూయ యాగం చేసినందువల్ల హరిశ్చంద్రుడు ఇంద్రసభలో ఉన్నాడని, పితృలోకంలో ఉన్న పాండురాజు ధర్మరాజును రాజసూయం చేయమని కోరినట్లు నారదుడు సందేశమిచ్చుట.",
+    keyQuoteRoy: "Narada said: 'Continuest thou in noble conduct? Never injurest thou religion for the sake of wealth, or both religion and wealth for the sake of pleasure that easily seduces?'",
+    dharmaInsight: "A king's righteousness is tested not in military triumph alone, but in protecting the poor, ensuring honest justice, and keeping the treasury clean."
+  },
+  {
+    number: 3,
+    id: "rajasuyarambha",
+    nameEn: "Rajasuyarambha Parva",
+    nameSa: "राजसूयारम्भपर्व",
+    nameTe: "రాజసూయారంభ పర్వము",
+    sections: "Sections XIV - XIX",
+    versesApprox: 540,
+    keyCharacters: ["Yudhishthira", "Sri Krishna", "King Jarasandha", "King Brihadratha", "Jara (Rakshasi)", "Sage Chandakausika"],
+    summaryEn: "Yudhishthira consults his ministers and summons Sri Krishna from Dvaraka to deliberate on the Rajasuya. Sri Krishna explains that the imperial title can only be claimed if the tyrant King Jarasandha of Magadha is overcome. Jarasandha has conquered Aryavarta and imprisoned 86 monarchs in Girivraja hill-fort, intending to sacrifice 100 kings to Lord Shiva. Krishna narrates Jarasandha's miraculous birth: born as two severed halves to the twin queens of King Brihadratha, joined together by the cannibal Rakshasi Jara, and blessed by Sage Chandakausika. Krishna declares that Jarasandha must be destroyed to liberate the royal prisoners and establish universal righteousness.",
+    summaryTe: "రాజసూయ యాగ సంకల్పంతో ధర్మరాజు శ్రీకృష్ణుని ఆహ్వానించుట. మగధరాజు జరాసంధుడు 86 మంది రాజులను బంధించి రుద్రదేవునికి నరబలి ఇవ్వాలని చూస్తున్నాడని, అతడిని సంహరించకుండా రాజసూయం సాధ్యపడదని కృష్ణుడు వివరించుట. బృహద్రథుని రాణులకు ముక్కలుగా పుట్టిన శిశువును జర అనే రాక్షసి అతికించగా జరాసంధుడైన వృత్తాంతం, చండకౌశికుని వరాల కథను కృష్ణుడు వివరించుట.",
+    keyQuoteRoy: "Krishna said: 'In me is policy, in Bhima is strength, in Arjuna is triumph. So like the three sacrificial fires that accomplish a sacrifice, we shall accomplish the death of the king of Magadha.'",
+    dharmaInsight: "Tyranny that treats sovereign human lives as sacrificial fodder must be uprooted before righteous sovereignty can be consecrated."
+  },
+  {
+    number: 4,
+    id: "jarasandha-badha",
+    nameEn: "Jarasandha-badha Parva",
+    nameSa: "जरासन्धवधपर्व",
+    nameTe: "జరాసంధవధ పర్వము",
+    sections: "Sections XX - XXIV",
+    versesApprox: 490,
+    keyCharacters: ["Sri Krishna", "Bhima", "Arjuna", "King Jarasandha", "Sahadeva (son of Jarasandha)"],
+    summaryEn: "Krishna, Arjuna, and Bhima travel to Girivraja disguised as Snataka Brahmanas. They break through the sacred Chaityaka peak and enter the city by an unconventional path. Jarasandha receives them at midnight according to his sacred vow of hospitality. Krishna reveals their true Kshatriya identities and challenges Jarasandha to single combat. Jarasandha proudly chooses to duel mighty Bhimasena. The wrestling match rages without food or intermission for 14 continuous days and nights. On the 14th night, as Jarasandha tires, Krishna signals Bhima by splitting a straw in twain. Bhima whirls Jarasandha 100 times in the air, breaks his backbone across his knee, and tears his body into two pieces, casting them in opposite directions so they cannot reunite. Krishna liberates the 86 kings, installs Jarasandha's son Sahadeva on the throne of Magadha, and acquires the divine celestial chariot.",
+    summaryTe: "బ్రాహ్మణ వేషాలలో కృష్ణార్జున-భీములు గిరివ్రజ పురము చేరి చైత్యక శిఖరాన్ని ఛేదించుట. అర్ధరాత్రి దర్శనంలో నిజస్వరూపాలు బయటపెట్టి ద్వంద్వయుద్ధానికి ఆహ్వానించుట. జరాసంధుడు భీమునితో మల్లయుద్ధాన్ని ఎంచుకొనుట. 14 రాత్రింబవళ్ళు అవిశ్రాంతంగా జరిగిన మహోగ్ర కుస్తీ యుద్ధం. అలసిపోయిన జరాసంధుని చూసి కృష్ణుడు గడ్డిపోచను చీల్చి సంజ్ఞ చేయగా, భీముడు జరాసంధుని గాల్లో నూరుసార్లు తిప్పి, వెన్నెముక విరిచి నిలువునా రెండుగా చీల్చి సంహరించుట. బందీలుగా ఉన్న 86 మంది రాజులకు విముక్తి కలిగించి, జరాసంధుని కుమారుడైన సహదేవునికి పట్టాభిషేకం చేయుట.",
+    keyQuoteRoy: "Bhima whirled him in the air full hundred times, pressed his knee against Jarasandha's backbone and broke his body in twain.",
+    dharmaInsight: "Evil forces relying on unnatural boons fall when confronted by divine strategy (Krishna) allied with righteous physical valor (Bhima)."
+  },
+  {
+    number: 5,
+    id: "digvijaya",
+    nameEn: "Digvijaya Parva",
+    nameSa: "दिग्विजयपर्व",
+    nameTe: "దిగ్విజయ పర్వము",
+    sections: "Sections XXV - XXXII",
+    versesApprox: 980,
+    keyCharacters: ["Arjuna (North)", "Bhima (East)", "Sahadeva (South)", "Nakula (West)", "Bhagadatta", "Sisupala", "Mainda & Dwivida"],
+    summaryEn: "With Jarasandha dead, the four Pandava brothers set out at the head of mighty hosts to conquer the four quarters of the earth (Digvijaya) and collect imperial tribute. Arjuna leads the Northern campaign, defeating the Kulindas, King Bhagadatta of Pragjyotisha (after an 8-day battle), Kashmir, Kambojas, Rishikas, and reaching Mount Meru and the borders of Uttara Kuru. Bhima conquers the Eastern realms: Panchala, Videha, Sisupala of Chedi (peacefully), Ayodhya, Kasi, Anga, Karna, Pundra, Vanga, and coastal Mlecchas. Sahadeva marches South: subduing Matsya, Avanti, Bhojakata, Kishkindha (where monkey chiefs Mainda and Dwivida honor him), Mahishmati (King Nila), and receiving tribute from Vibhishana of Lanka. Nakula subjugates the Western direction: Rohitaka, Madra (uncle Shalya), and the Arabian sea coast.",
+    summaryTe: "రాజసూయ యాగార్థం నలుగురు పాండవుల చతుర్దిగ్విజయ యాత్ర. ఉత్తర దిక్కున అర్జునుడు ప్రాగ్జ్యోతిషపుర రాజు భగదత్తుని, కాశ్మీర, కాంభోజ, ఉత్తరకురు రాజ్యాలను జయించుట. తూర్పు దిక్కున భీముడు చేదిరాజు శిశుపాలునితో మైత్రి చేసుకుని, అంగ, వంగ, కర్ణ, పుండ్ర, సముద్రతీర మ్లేచ్ఛులను జయించుట. దక్షిణాన సహదేవుడు అవంతి, కిష్కింధలో మైంద-ద్వివిదులను, మాహిష్మతి నీలుని, లంకలోని విభీషణుని వద్దనుండి కప్పములు పొందుట. పశ్చిమాన నకులుడు శల్యుని, మరుభూమిని జయించి అపార ధనరాశులతో ఇంద్రప్రస్థానికి చేరుకొనుట.",
+    keyQuoteRoy: "The brothers brought under their sway the four points of the horizon, returning with immense wealth, gemstones, and herds to King Yudhishthira.",
+    dharmaInsight: "A truly righteous empire is established through chivalry and alliances, honoring ancient friendships while establishing universal order."
+  },
+  {
+    number: 6,
+    id: "rajasuyika",
+    nameEn: "Rajasuyika Parva",
+    nameSa: "राजसूयिकपर्व",
+    nameTe: "రాజసూయిక పర్వము",
+    sections: "Sections XXXIII - XXXV",
+    versesApprox: 320,
+    keyCharacters: ["King Yudhishthira", "Sage Vyasa", "Sage Paila", "Sage Yajnavalkya", "Sage Dhaumya", "Bhishma", "Duryodhana"],
+    summaryEn: "With mountains of gold, silver, horses, and jewels brought by the four brothers, Yudhishthira formally initiates the Rajasuya sacrifice. Sages Vyasa, Paila, Yajnavalkya, and Dhaumya officiate the complex Vedic altars. Invitations are dispatched throughout Bharatavarsha; all kings, including Dhritarashtra, Bhishma, Drona, Duryodhana, and Karna, assemble at Indraprastha. Duryodhana is appointed overseer of royal tributes and gifts. The sacrifice proceeds with unrivaled majesty, endless feasts, and sacred chanting.",
+    summaryTe: "దిగ్విజయ యాత్రల ద్వారా సమకూరిన అపార ధనరాశులతో వేదవ్యాస, యాజ్ఞవల్క్య, ధౌమ్యాది మహర్షుల ఆధ్వర్యంలో ధర్మరాజు రాజసూయ యాగమును శాస్త్రోక్తంగా ప్రారంభించుట. ధృతరాష్ట్ర, భీష్మ, ద్రోణ, దుర్యోధనాదులందరూ విచ్చేయుట. దుర్యోధనునికి బహుమతులు, కప్పములు స్వీకరించే బాధ్యతను అప్పగించుట. దేవతలు, మునులు, సమస్త రాజులతో ఇంద్రప్రస్థం ఇంద్రలోకంలా వెలుగొందుట.",
+    keyQuoteRoy: "The voice of the gratified Brahmanas uttering 'What an auspicious day is this!' became so loud that it seemed to reach heaven itself.",
+    dharmaInsight: "Generosity and selfless distribution of prosperity to the spiritual, intellectual, and working populace form the crowning glory of righteous leadership."
+  },
+  {
+    number: 7,
+    id: "arghyaharana",
+    nameEn: "Arghyaharana Parva",
+    nameSa: "अर्घ्याहरणपर्व",
+    nameTe: "అర్ఘ్యాహరణ పర్వము",
+    sections: "Sections XXXVI - XXXIX",
+    versesApprox: 380,
+    keyCharacters: ["King Yudhishthira", "Grandfather Bhishma", "Sri Krishna", "Sahadeva", "King Sisupala"],
+    summaryEn: "On the supreme day of the sacrifice, the question of conferring the foremost offering of worship (Agrapuja / First Arghya) arises. Yudhishthira asks Grandfather Bhishma who among the thousands of kings and sages is most deserving. Bhishma proclaims unequivocally that Lord Sri Krishna, the eternal origin of all worlds, the protector of Dharma, and the Supreme Soul, alone merits the first honor. Sahadeva reverently offers the Arghya to Krishna amidst joyous showers of celestial flowers. However, King Sisupala of Chedi seethes with jealousy and insults Bhishma and Krishna.",
+    summaryTe: "యాగ ముగింపులో సభలో ప్రథమ పూజ (అగ్రపూజ / మొదటి అర్ఘ్యము) ఎవరికి ఇవ్వాలనే ప్రశ్న ఉత్పన్నమగుట. భీష్మ పితామహుడు సమస్త లోకాలకు కారణభూతుడు, సృష్టిస్థితిలయకారకుడైన శ్రీకృష్ణ పరమాత్ముడే అగ్రపూజార్హుడని చాటుట. సహదేవుడు భక్తితో శ్రీకృష్ణునికి అగ్రపూజ సమర్పించుట. సమస్త సభ హర్షధ్వానాలు చేయగా చేదిరాజైన శిశుపాలుడు ఓర్వలేక అసూయతో రగిలిపోవుట.",
+    keyQuoteRoy: "Bhishma said: 'Krishna is the origin of the universe and that in which the universe is to dissolve. For Krishna is the unvanquished creator of all things, mobile and immobile.'",
+    dharmaInsight: "Recognizing divinity and honoring virtue above mortal titles is the hallmark of true spiritual discernment."
+  },
+  {
+    number: 8,
+    id: "sisupala-badha",
+    nameEn: "Sisupala-badha Parva",
+    nameSa: "शिशुपालवधपर्व",
+    nameTe: "శిశుపాలవధ పర్వము",
+    sections: "Sections XL - XLV",
+    versesApprox: 440,
+    keyCharacters: ["King Sisupala", "Sri Krishna", "Grandfather Bhishma", "Sudarshana Chakra", "King Yudhishthira"],
+    summaryEn: "Sisupala unleashes a torrential stream of abusive insults against Sri Krishna and Grandfather Bhishma. Bhishma narrates how Sisupala was born with three eyes and four arms, and how Krishna promised Sisupala's mother to pardon one hundred verbal offenses. As Sisupala continues his reckless insults, surpassing the 100th offense, Lord Krishna proclaims his transgressions before the assembly. Krishna summons the radiant Sudarshana Chakra, which severs Sisupala's head in an instant. A dazzling spiritual effulgence rises from Sisupala's body, bows to Krishna, and enters Krishna's divine feet. The sacrifice concludes with the sacred Avabhritha bath, confirming Yudhishthira as Emperor (Samrat).",
+    summaryTe: "శిశుపాలుడు శ్రీకృష్ణుని, భీష్ముని తీవ్రంగా దూషింపసాగెను. నూరు తప్పుల వరకు క్షమిస్తానని శిశుపాలుని తల్లికి ఇచ్చిన మాటను కృష్ణుడు గుర్తుచేయుట. శిశుపాలుడు నూరవ తప్పు దాటి దూషించగా, శ్రీకృష్ణుడు సుదర్శన చక్రాన్ని ప్రయోగించి శిశుపాలుని శిరస్సును ఖండించుట. శిశుపాలుని దేహం నుండి ఒక దివ్య తేజస్సు వచ్చి శ్రీకృష్ణుని పాదాలలో ఐక్యమగుట. దిగ్విజయంగా రాజసూయ యాగం ముగిసి ధర్మరాజు చక్రవర్తియగుట.",
+    keyQuoteRoy: "The discus of Krishna severed the head of Sisupala. A dazzling light issued from the body of the king of Chedi and entered the body of Vasudeva.",
+    dharmaInsight: "Patience and forbearance (Kshama) have righteous boundaries; when arrogance crosses all measure, divine justice strikes with absolute certainty."
+  },
+  {
+    number: 9,
+    id: "dyuta",
+    nameEn: "Dyuta Parva",
+    nameSa: "द्यूतपर्व",
+    nameTe: "ద్యూత పర్వము",
+    sections: "Sections XLVI - LXXIII",
+    versesApprox: 1820,
+    keyCharacters: ["Duryodhana", "Sakuni", "Dhritarashtra", "Yudhishthira", "Duhsasana", "Queen Draupadi", "Sri Krishna", "Bhima", "Karna", "Vidura", "Vikarna"],
+    summaryEn: "Walking through Mayasabha, Duryodhana is humiliated by optical illusions: mistaking crystal for water he draws up his garments, and mistaking water for land he falls into a lotus pool, hearing laughter from the Pandavas and Draupadi. Burning with vengeful envy, Duryodhana conspires with his uncle Sakuni, who devises the loaded dice game. Dhritarashtra ignores Vidura's warnings and builds a dice hall in Hastinapura, sending Vidura to summon Yudhishthira. Bound by Kshatriya code, Yudhishthira accepts. Sakuni plays with enchanted loaded dice. Yudhishthira progressively loses his wealth, horses, elephants, kingdoms, his brothers Nakula, Sahadeva, Arjuna, and Bhima, himself, and finally Queen Draupadi. Duhsasana drags Draupadi by her hair into the assembly. Vikarna and Vidura protest the wager's illegality, but Karna incites Duhsasana to strip the Pandavas and Draupadi. Draupadi raises her hands in absolute surrender to Sri Krishna (*'Govinda! Dwarakavasin!'*). Lord Krishna miraculously manifests an endless cascade of celestial robes, exhausting Duhsasana amidst mountains of cloth. Bhima takes terrifying oaths: to drink Duhsasana's chest blood and shatter Duryodhana's thighs. Horrific omens shake the city; Dhritarashtra panics and grants Draupadi three boons; she asks only for the freedom of her husbands.",
+    summaryTe: "మయసభలో నేల అనుకుని నీటిలో పడి అవమానభారంతో కుమిలిపోయిన దుర్యోధనుడు శకునితో కలిసి జూదపు కుట్ర పన్నుట. ధృతరాష్ట్రుని ఆజ్ఞతో విదురుడు పిలువగా, క్షత్రియ ధర్మం ప్రకారం జూదానికి వచ్చిన ధర్మరాజు. శకుని మాయాపాచికలతో ధర్మరాజు తన ధనము, రాజ్యము, సోదరులను, తనను, చివరకు ద్రౌపదిని కూడా ఒడ్డి ఓడిపోవుట. దుశ్శాసనుడు ద్రౌపదిని జుట్టుపట్టి సభలోకి ఈడ్చుకురాగా, వికర్ణ-విదురులు ధర్మాధర్మాలను ప్రశ్నించినా కర్ణ-దుర్యోధనులు అడ్డుపడుట. దుశ్శాసనుడు ద్రౌపది చీరను లాగుతుండగా, ఆమె శ్రీకృష్ణునికి సంపూర్ణ శరణాగతి చేయగా, భగవానుడు అక్షయవస్త్రాలను ప్రసాదించి ఆమె మానాన్ని కాపాడుట. దుశ్శాసనుని రక్తం తాగుతానని, దుర్యోధనుని తొడలు విరగ్గొడతానని భీముని భయంకర శపథాలు. అశుభ శకునాలకు భయపడి ధృతరాష్ట్రుడు ద్రౌపదికి వరాలిచ్చి పాండవులను విడిపించుట.",
+    keyQuoteRoy: "Draupadi cried: 'O Govinda! O Lord of Dwaraka! O Krishna, protect me who am sinking in the Kaurava ocean!' And garments of various colours appeared in endless abundance.",
+    dharmaInsight: "Unconditional surrender (Saranagati) to the Divine invokes miraculous cosmic protection even when earthly protectors are rendered powerless by compromised codes."
+  },
+  {
+    number: 10,
+    id: "anudyuta",
+    nameEn: "Anudyuta Parva",
+    nameSa: "अनुद्यूतपर्व",
+    nameTe: "అనుద్యూత పర్వము",
+    sections: "Sections LXXIV - LXXXI",
+    versesApprox: 420,
+    keyCharacters: ["Duryodhana", "Karna", "Sakuni", "Dhritarashtra", "Yudhishthira", "Gandhari", "Queen Draupadi", "Bhima"],
+    summaryEn: "Terrified by the Pandavas' release and Bhima's vows, Duryodhana, Karna, and Sakuni corner King Dhritarashtra, arguing that the Pandavas will return with armies to exterminate them. They persuade Dhritarashtra to summon Yudhishthira for one final, decisive round of dice (Anudyuta). The stake: the vanquished party must dress in deer-skins and endure twelve years in the deep forest, followed by a thirteenth year in complete disguise (Agyatavasa); if discovered in the thirteenth year, another twelve years of exile must be repeated. Yudhishthira, adhering strictly to his vow never to decline a challenge, plays again. Sakuni wins by deception. Dressed in ascetic garments, the five Pandavas and Queen Draupadi cast off their royal ornaments, cover their faces, and march out of Hastinapura into the wilderness, accompanied by weeping citizens.",
+    summaryTe: "పాండవుల ప్రతికారాగ్నికి భయపడిన దుర్యోధనాదులు ధృతరాష్ట్రుని ఒప్పించి మళ్ళీ పాండవులను 'అనుద్యూతము'నకు పిలుచుట. ఓడినవారు 12 ఏళ్ళు అరణ్యవాసము, 1 ఏడు అజ్ఞాతవాసము చేయవలెనని, అజ్ఞాతవాసంలో కనిపిస్తే మళ్ళీ 12 ఏళ్ళు అడవులకు వెళ్ళాలనే నిబంధన. ధర్మరాజు మళ్ళీ శకుని చేతిలో ఓడిపోవుట. నారచీరలు ధరించి ద్రౌపది, కుంతీ ఆశీస్సులతో పాండవులు అరణ్యవాసానికి బయలుదేరగా హస్తినాపుర ప్రజలు కన్నీరుమున్నీరగుట.",
+    keyQuoteRoy: "The sons of Pritha, accompanied by Draupadi, having cast off their royal robes and dressed in deer-skins, set out sorrowfully for the forest.",
+    dharmaInsight: "Blind attachment of a parent to an evil child corrupts reason and inevitably drags an entire civilization into cataclysmic ruin."
+  }
+];
+
+/* ===== VANA PARVA (PART I): 7 UPA-PARVAS DETAIL =====
+   Based directly on Pratap Chandra Roy's English Translation (Volume II) */
+const VANA_PARVA_PART1_UPAPARVAS = [
+  {
+    number: 1,
+    id: "aranyaka",
+    nameEn: "Aranyaka Parva",
+    nameSa: "आरण्यकपर्व",
+    nameTe: "ఆరణ్యక పర్వము",
+    sections: "Sections I - X",
+    versesApprox: 680,
+    keyCharacters: ["Yudhishthira", "Sage Shaunaka", "Surya Deva (Sun God)", "Draupadi", "Vidura", "Dhritarashtra"],
+    summaryEn: "The Pandavas enter the Kamyaka forest followed by thousands of grieving citizens of Hastinapura. Yudhishthira consoles and gently sends them back. Sage Shaunaka instructs Yudhishthira on overcoming grief and the spiritual futility of material desire. Distressed at his inability to feed the accompanying Brahmanas and ascetics, Yudhishthira worships Surya Deva with 108 sacred names. Pleased with his devotion, Surya bestows the divine **Akshaya Patra** (inexhaustible copper vessel) which yields inexhaustible nourishment daily until Draupadi finishes her meal. Back in Hastinapura, Vidura advises Dhritarashtra to recall the Pandavas; Dhritarashtra insults Vidura, who leaves and joins the Pandavas in the forest.",
+    summaryTe: "పాండవులు కామ్యక వనమునకు వెళ్ళుట. ప్రజలను అనునయించి వెనక్కి పంపుట. శౌనక మహర్షి ధర్మరాజుకు శోకనివారణ, వైరాగ్య తత్త్వాలను బోధించుట. తన వెంట వచ్చిన బ్రాహ్మణులకు అన్నదానము చేయలేకపోతున్నానని చింతించిన ధర్మరాజు సూర్యుని 108 నామాలతో స్తుతించగా, సూర్య భగవానుడు ద్రౌపది భోజనం ముగించేవరకు అపరిమితమైన ఆహారాన్ని ఇచ్చే 'అక్షయపాత్ర'ను ప్రసాదించుట. హస్తినలో ధృతరాష్ట్రుని తిరస్కారానికి గురైన విదురుడు పాండవుల వద్దకు చేరుకొనుట.",
+    keyQuoteRoy: "Surya said: 'Accept this copper vessel given by me. Whatever food of fruits, roots, and vegetables is cooked in it shall be inexhaustible until Panchali eateth!'",
+    dharmaInsight: "Unwavering faith and dedication to feeding the hungry in times of acute personal adversity invoke cosmic abundance."
+  },
+  {
+    number: 2,
+    id: "kirmirabadha",
+    nameEn: "Kirmirabadha Parva",
+    nameSa: "किर्मीरवधपर्व",
+    nameTe: "కిర్మీరవధ పర్వము",
+    sections: "Section XI",
+    versesApprox: 120,
+    keyCharacters: ["Bhima", "Kirmira (demon)", "Yudhishthira", "Dhaumya"],
+    summaryEn: "Entering the deep recesses of the Kamyaka forest at midnight, the Pandavas are blocked by the monstrous cannibal Rakshasa Kirmira (brother of Bakasura and close comrade of Hidimba). Blazing with red eyes and uprooting trees, Kirmira seeks vengeance for his brother's slaughter. Bhima uproots an enormous tree; the two engage in an earth-shaking duel of rocks, trees, and wrestling. Bhima twists Kirmira's neck, breaks his spine across his knee, and purges the Kamyaka forest of danger, assuring peace for all hermits and ascetics.",
+    summaryTe: "కామ్యక వన మార్గంలో బకాసురుని తమ్ముడైన కిర్మీరుడనే భయంకర రాక్షసుడు పాండవులకు ఎదురై ప్రతీకారం తీర్చుకోబోవుట. భీమసేనుడు చెట్లతో, రాళ్లతో వాడితో భీకరంగా పోరాడి, వాడి మెడను విరిచి సంహరించి కామ్యక వనాన్ని రాక్షస భయం నుండి విముక్తం చేయుట.",
+    keyQuoteRoy: "Bhima seized Kirmira by the waist and hurled him to the ground, breaking his neck as a lion breaks the neck of an elephant.",
+    dharmaInsight: "Physical valor consecrated to protecting the defenseless purifies dark forests and opens safe pathways for spiritual seekers."
+  },
+  {
+    number: 3,
+    id: "arjunabhigamana",
+    nameEn: "Arjunabhigamana Parva",
+    nameSa: "अर्जुनाभिगमनपर्व",
+    nameTe: "అర్జునాభిగమన పర్వము",
+    sections: "Sections XII - XXXVII",
+    versesApprox: 1450,
+    keyCharacters: ["Sri Krishna", "Queen Draupadi", "Yudhishthira", "Bhima", "Sage Vyasa", "Arjuna"],
+    summaryEn: "Hearing of the Pandavas' exile, Lord Sri Krishna arrives with the Vrishnis and Bhojas. Krishna laments that had he not been engaged in defending Dvaraka from King Salwa's flying celestial city Saubha, he would have prevented the dice match at any cost. Draupadi weeps bitterly before Krishna, demanding justice for her public humiliation; Krishna consoles her with the solemn vow that the Kaurava queens will weep even as she wept. Draupadi and Bhima urge Yudhishthira to wage immediate war, arguing that Kshama (forgiveness) without wrath is weakness. Yudhishthira delivers his sublime discourse on the absolute superiority of forgiveness. Sage Vyasa arrives and imparts the esoteric yogic mantra **Pratismriti** to Yudhishthira, advising that Arjuna must undertake ascetic penance to acquire divine celestial weapons from Lord Shiva and Indra.",
+    summaryTe: "శ్రీకృష్ణుడు పాండవులను దర్శించుట. సౌభ విమానంలో దాడి చేసిన సాల్వరాజుతో ద్వారకలో యుద్ధంలో ఉన్నందున జూదాన్ని ఆపలేకపోయానని కృష్ణుడు వివరించుట. ద్రౌపది కన్నీటితో తన అవమానాన్ని వివరించగా, కృష్ణుడు 'కౌరవ స్త్రీలు కూడా నీలాగే కన్నీరు కార్చుతారు, అధర్మం నశిస్తుంది' అని అభయమిచ్చుట. ద్రౌపది, భీములు యుద్ధం చేద్దామని ఒత్తిడి చేయగా, ధర్మరాజు 'క్షమ' యొక్క మహోన్నత శక్తిని వివరించుట. వ్యాస మహర్షి వచ్చి 'ప్రతిస్మృతి' అను దివ్య విద్యను ధర్మరాజుకు ఉపదేశించి, అర్జునుని దివ్యాస్త్రాల సాధనకై హిమాలయాలకు పంపమని ఆదేశించుట.",
+    keyQuoteRoy: "Krishna said unto Draupadi: 'Weep not, O Krishna! The earth shall drink the blood of Duryodhana and Karna. The skies may fall, the snowy mountains split, but my word shall never be in vain!'",
+    dharmaInsight: "Righteous forgiveness preserves spiritual integrity, yet divine destiny ensures that unrepented cruelty meets inexorable retribution."
+  },
+  {
+    number: 4,
+    id: "kairata",
+    nameEn: "Kairata Parva",
+    nameSa: "कैरातपर्व",
+    nameTe: "కైరాత పర్వము (కిరాతార్జునీయము)",
+    sections: "Sections XXXVIII - XLI",
+    versesApprox: 410,
+    keyCharacters: ["Arjuna", "Lord Shiva (as Kirata / Hunter)", "Goddess Parvati", "Mukasura (demon boar)", "Pashupatastra"],
+    summaryEn: "Equipped with the Pratismriti mantra, Arjuna journeys north past the Himalayas to Mount Indrakeela. He enters severe ascetic tapasya, standing on one foot with upraised arms amidst raging fires. The demon Muka attacks in the form of a wild boar. Both Arjuna and a tribal hunter (Kirata) shoot arrows simultaneously, piercing the boar. A fierce dispute erupts over the prize. Arjuna unleashes his celestial shafts, swords, and trees, but the Kirata effortlessly absorbs them all. They wrestle violently; Arjuna is crushed unconscious. Awakening, Arjuna constructs an earthen Shiva Linga, worships it with forest blossoms, and is stunned to see the garland appear around the Kirata's neck! Lord Shiva and Goddess Parvati reveal their supreme cosmic form. Delighted by Arjuna's incomparable martial courage and devotion, Lord Shiva grants him the supreme **Pashupatastra**—the ultimate celestial weapon capable of dissolving creation.",
+    summaryTe: "ఇంద్రకీలాద్రిపై అర్జునుని ఘోర తపస్సు. పంది రూపంలో వచ్చిన మూకాసురునిపై అర్జునుడు, కిరాతుని రూపంలో ఉన్న పరమశివుడు ఒకేసారి బాణాలు వేయుట. ఆ వేట పక్షిపై వివాదం రేగి ఇద్దరి మధ్య మహోగ్ర ద్వంద్వయుద్ధం జరుగుట. అర్జునుని బాణాలు, ఖడ్గం, చెట్లు ఏవీ కిరాతునికి హాని చేయలేకపోవుట. చివరకు అర్జునుడు మట్టితో శివలింగాన్ని చేసి పూజించగా, ఆ పూలమాల కిరాతుని మెడలో కనిపించుట! పరమేశ్వరుడు పార్వతీ సమేతంగా నిజరూప దర్శనమిచ్చి, అర్జునుని శౌర్యానికి మెచ్చి లోకసంహారకమైన 'పాశుపతాస్త్రము'ను ప్రసాదించుట.",
+    keyQuoteRoy: "Mahadeva said: 'O Phalguna, I am pleased with thee! There is no Kshatriya equal to thee in courage. Behold me, O wielder of Gandiva, and receive from me the irresistible weapon Pashupata!'",
+    dharmaInsight: "Humility and supreme surrender to God transform bitter earthly defeat into the attainment of invulnerable divine grace."
+  },
+  {
+    number: 5,
+    id: "indralokagamana",
+    nameEn: "Indralokagamana Parva",
+    nameSa: "इन्द्रलोकागमनपर्व",
+    nameTe: "ఇంద్రలోకాగమన పర్వము",
+    sections: "Sections XLII - LI",
+    versesApprox: 580,
+    keyCharacters: ["Arjuna", "King Indra", "Matali", "Gandharva Chitrasena", "Urvasi (Apsara)"],
+    summaryEn: "Following the boon of Lord Shiva, the Lokapalas (Varuna, Yama, Kubera) bestow their divine weapons upon Arjuna. Matali arrives with Indra's celestial chariot and conveys Arjuna to heaven (Amaravati). Arjuna is joyfully received by his father Indra, shares half of Indra's throne, and masters the weapons of heaven. Indra arranges for the Gandharva Chitrasena to teach Arjuna music, song, and dance. The celestial courtesan Urvasi falls madly in love with Arjuna and visits him at night. Arjuna bows before her, declaring that as the ancestral mother of the Puru dynasty, she deserves only his filial worship. Infuriated by his chastity, Urvasi curses him to lose his manhood and live as a eunuch dancer for a year. Indra consoles Arjuna, turning the curse into a blessing for his 13th incognito year (as Brihannala in Virata's court).",
+    summaryTe: "వరుణ, యమ, కుబేరులు అర్జునునికి తమ అస్త్రాలను ఇచ్చుట. మాతలి ఇంద్రుని రథంతో వచ్చి అర్జునుని అమరావతికి తోడ్కొని వెళ్ళుట. ఇంద్రుని సింహాసనాన్ని పంచుకుని, దివ్యాస్త్రాలను, చిత్రసేనుని వద్ద సంగీత-నృత్య విద్యలను నేర్చుకొనుట. ఊర్వశి మోహించి రాగా, ఆమెను తన వంశమాతగా పూజించిన అర్జునుని నైతిక నిష్ఠ. తిరస్కారానికి ఆగ్రహించిన ఊర్వశి ఒక సంవత్సరం నపుంసకుడవు కమ్మని శపించగా, ఇంద్రుడు ఆ శాపాన్ని అజ్ఞాతవాసంలో బృహన్నలగా మారడానికి వరంగా మార్చుట.",
+    keyQuoteRoy: "Arjuna said: 'O blessed beauty, as Kunti and Madri are to me, so art thou! Thou art the mother of our race, and I bow my head to thy feet.'",
+    dharmaInsight: "Chaste moral restraint in the face of seduction is the supreme ornament of a hero; what seems a curse becomes a divine instrument of preservation."
+  },
+  {
+    number: 6,
+    id: "nalopakhyana",
+    nameEn: "Nalopakhyana Parva",
+    nameSa: "नलोपाख्यानपर्व",
+    nameTe: "నలోపాఖ్యాన పర్వము (నల-దమయంతి కథ)",
+    sections: "Sections LII - LXXIX",
+    versesApprox: 1840,
+    keyCharacters: ["Sage Brihadaswa", "King Nala", "Princess Damayanti", "Kali Purusha", "Pushkara", "Karkotaka (Naga)", "King Rituparna"],
+    summaryEn: "Observing Yudhishthira's overwhelming sorrow over the loss of his kingdom, Sage Brihadaswa narrates the sublime story of King Nala of Nishadha and Princess Damayanti of Vidarbha. The golden swan messenger; Damayanti choosing Nala at her Swayamvara despite the presence of gods Indra, Agni, Varuna, and Yama; Kali entering Nala out of spite; Nala losing his kingdom to brother Pushkara in a loaded game of dice; exile into the wilderness; the tragic parting in the forest; Damayanti's heroic chastity; Nala bitten by serpent Karkotaka and transformed into the dwarf charioteer Bahuka; learning the secret mathematics of dice (Akshahridaya) from King Rituparna; the second mock-swayamvara; reunion of Nala and Damayanti; Nala challenging Pushkara to a rematch, winning back his empire, and restoring righteousness.",
+    summaryTe: "ధర్మరాజు శోకాన్ని పోగొట్టడానికి బృహదశ్వుడు వినిపించిన అమరమైన 'నల-దమయంతుల కథ'. హంస రాయబారము, దేవతల సమక్షంలో దమయంతి నలుని వరించుట, కలిపురుషుని ప్రవేశము, పాచికల జూదంలో పుష్కరుని చేతిలో నలుడు రాజ్యం కోల్పోవుట, అరణ్యవాసంలో దమయంతిని విడిచి వెళ్ళుట, కర్కోటకుడను పాము కాటుతో బాహుకుడను సారథిగా మారి ఋతుపర్ణుని వద్ద అక్షహృదయ విద్యను నేర్చుకొనుట, చివరకు దమయంతితో పునఃసమాగమము మరియు జూదంలో రాజ్యాన్ని తిరిగి గెలుచుకొనుట.",
+    keyQuoteRoy: "Brihadaswa said: 'O Yudhishthira, grief hath overtaken even gods and heroes. King Nala lost his realm by dice, suffered calamity, and yet regained his throne by virtue. Grieve not, O king!'",
+    dharmaInsight: "Virtue tested by catastrophic misfortune shines with greater glory; fidelity, perseverance, and knowledge ultimately conquer all trials."
+  },
+  {
+    number: 7,
+    id: "tirtha-yatra",
+    nameEn: "Tirtha-Yatra Parva",
+    nameSa: "तीर्थयात्रापर्व",
+    nameTe: "తీర్థయాత్రా పర్వము",
+    sections: "Sections LXXX - CXIII",
+    versesApprox: 2450,
+    keyCharacters: ["Sage Lomasha", "King Yudhishthira", "Bhima", "Sage Agastya", "Sage Rishyasringa", "King Sibi", "Draupadi"],
+    summaryEn: "Sage Lomasha arrives bearing greetings from Arjuna in heaven and guides the remaining Pandavas on an extensive holy pilgrimage across Bharatavarsha. Visiting sacred rivers, hermits, and tirthas (Naimisharanya, Prayaga, Ganga, Yamuna, Gokarna, Prabhasa), Lomasha narrates legendary Puranic episodes: Sage Agastya drinking the entire ocean to reveal the subterranean Kalakeya demons and subduing the rising Vindhya mountain; the penance of Bhagiratha bringing Ganga to earth; the birth of Sage Rishyasringa; and the unmatched compassion of King Sibi, who offered equal weight of his own flesh to save a dove from an eagle (Indra and Agni tested).",
+    summaryTe: "ఇంద్రలోకం నుండి లోమశ మహర్షి వచ్చి అర్జునుని క్షేమసమాచారం తెలిపి పాండవులను సమస్త భారత తీర్థయాత్రలకు తోడ్కొని వెళ్ళుట. నైమిశారణ్యం, ప్రయాగ, గంగాతీరం మొదలైన తీర్థాల దర్శనం. అగస్త్యుడు సముద్రాన్ని ఆపోశనం పట్టి కాలకేయులను బహిర్గతం చేసిన కథ, వింధ్య పర్వతాన్ని అణచివేసిన వృత్తాంతం, భగీరథుడు గంగను తెచ్చిన గాథ, మరియు పావురాన్ని కాపాడటానికి తన శరీర మాంసాన్ని కోసి తులారాశిలో వేసిన శిబి చక్రవర్తి త్యాగనిరతిని వివరించుట.",
+    keyQuoteRoy: "Lomasha said: 'He who visits holy tirthas with senses controlled and mind cleansed of malice, reapeth the merit of a thousand horse-sacrifices.'",
+    dharmaInsight: "Sacred pilgrimage purifies the soul of bitterness, harmonizing the mortal mind with cosmic dharma through communion with holy places."
+  }
+];
+
+/* ===== MAHABHARATA 12-VOLUME MASTER MAPPING =====
+   Systematic alignment of Pratap Chandra Roy's 12-Volume Canonical Translation */
+const MAHABHARATA_VOLUMES = [
+  {
+    volNumber: 1,
+    titleEn: "Volume I: Adi Parva (Book of the Beginning)",
+    titleTe: "సంపుటము 1: ఆది పర్వము",
+    parvaId: "adi",
+    upaParvasCount: 19,
+    status: "COMPLETE",
+    sections: "Sections I - CCXXXVI",
+    description: "Cosmic origins, snake sacrifice, Kuru ancestry, training, Lac House, Bakasura, Draupadi Swayamvara, Khandava forest."
+  },
+  {
+    volNumber: 2,
+    titleEn: "Volume II: Sabha Parva & Vana Parva (Part I)",
+    titleTe: "సంపుటము 2: సభా పర్వము & వన పర్వము (భాగం 1)",
+    parvaId: "sabha_vana1",
+    upaParvasCount: 17,
+    status: "COMPLETE",
+    sections: "Sabha Sections I - LXXXI; Vana Sections I - CXIII",
+    description: "Mayasabha, Jarasandha slaying, Digvijaya, Rajasuya, Sisupala, Dice Game, Disrobing of Draupadi, Akshaya Patra, Pashupatastra, Nala-Damayanti."
+  },
+  {
+    volNumber: 3,
+    titleEn: "Volume III: Vana Parva (Part II)",
+    titleTe: "సంపుటము 3: వన పర్వము (భాగం 2)",
+    parvaId: "vana2",
+    upaParvasCount: 14,
+    status: "PLANNED",
+    sections: "Sections CXIV - CCCXV",
+    description: "Yaksha Prashna, Savitri & Satyavan, Markandeya Samasya, Duryodhana's capture by Gandharvas, Jayadratha's humiliation."
+  },
+  {
+    volNumber: 4,
+    titleEn: "Volume IV: Virata Parva & Udyoga Parva",
+    titleTe: "సంపుటము 4: విరాట పర్వము & ఉద్యోగ పర్వము",
+    parvaId: "virata_udyoga",
+    upaParvasCount: 17,
+    status: "PLANNED",
+    sections: "Virata Sections I - LXXII; Udyoga Sections I - CXCVI",
+    description: "Agyatavasa, Keechaka Vadha, Gograhana, Vidura Niti, Sanatsujatiya, Krishna's Peace Embassy (రాయబారం), Vishwaroopa."
+  },
+  {
+    volNumber: 5,
+    titleEn: "Volume V: Bhishma Parva",
+    titleTe: "సంపుటము 5: భీష్మ పర్వము",
+    parvaId: "bhishma",
+    upaParvasCount: 5,
+    status: "PLANNED",
+    sections: "Sections I - CXVII",
+    description: "Srimad Bhagavad Gita, 10 days of ferocious war, fall of Bhishma on the bed of arrows (శరతల్పము)."
+  },
+  {
+    volNumber: 6,
+    titleEn: "Volume VI: Drona Parva",
+    titleTe: "సంపుటము 6: ద్రోణ పర్వము",
+    parvaId: "drona",
+    upaParvasCount: 8,
+    status: "PLANNED",
+    sections: "Sections I - CLXX",
+    description: "Chakravyuha, martyrdom of Abhimanyu, Jayadratha Vadha, night battle, Ghatotkacha sacrifice, fall of Dronacharya."
+  },
+  {
+    volNumber: 7,
+    titleEn: "Volume VII: Karna Parva & Shalya Parva",
+    titleTe: "సంపుటము 7: కర్ణ పర్వము & శల్య పర్వము",
+    parvaId: "karna_shalya",
+    upaParvasCount: 5,
+    status: "PLANNED",
+    sections: "Karna Sections I - LXIX; Shalya Sections I - LIX",
+    description: "Duhsasana's blood drunk, Karna vs Arjuna duel, Shalya slain, Dvaipayana lake, Bhima vs Duryodhana mace duel."
+  },
+  {
+    volNumber: 8,
+    titleEn: "Volume VIII: Sauptika Parva & Stree Parva",
+    titleTe: "సంపుటము 8: సౌప్తిక పర్వము & స్త్రీ పర్వము",
+    parvaId: "sauptika_stree",
+    upaParvasCount: 8,
+    status: "PLANNED",
+    sections: "Sauptika Sections I - XVIII; Stree Sections I - XXVII",
+    description: "Nocturnal raid, Upapandavas slain, Brahmashira, Gandhari's lament, Gandhari's curse to Krishna, Karna's secret."
+  },
+  {
+    volNumber: 9,
+    titleEn: "Volume IX: Shanti Parva (Part I - Rajadharma)",
+    titleTe: "సంపుటము 9: శాంతి పర్వము (రాజధర్మము)",
+    parvaId: "shanti1",
+    upaParvasCount: 1,
+    status: "PLANNED",
+    sections: "Sections I - CXXVIII",
+    description: "Yudhishthira's grief, Bhishma's supreme discourse on governance, justice, leadership, and statecraft from arrow bed."
+  },
+  {
+    volNumber: 10,
+    titleEn: "Volume X: Shanti Parva (Part II - Mokshadharma)",
+    titleTe: "సంపుటము 10: శాంతి పర్వము (మోక్షధర్మము)",
+    parvaId: "shanti2",
+    upaParvasCount: 2,
+    status: "PLANNED",
+    sections: "Sections CXXIX - CCCLIII",
+    description: "Apaddharma, Mokshadharma, Samkhya, Yoga, Sulabha-Janaka dialogue, cosmic liberation."
+  },
+  {
+    volNumber: 11,
+    titleEn: "Volume XI: Anushasana Parva",
+    titleTe: "సంపుటము 11: అనుశాసన పర్వము",
+    parvaId: "anushasana",
+    upaParvasCount: 2,
+    status: "PLANNED",
+    sections: "Sections I - CLIV",
+    description: "Sri Vishnu Sahasranama Stotram, Shiva Sahasranama, Dana Dharma, passing of Grandfather Bhishma (ఉత్తరాయణ పుణ్యకాలం)."
+  },
+  {
+    volNumber: 12,
+    titleEn: "Volume XII: Ashvamedhika to Svargarohana Parva",
+    titleTe: "సంపుటము 12: ఆశ్వమేధిక నుండి స్వర్గారోహణ పర్వము",
+    parvaId: "ashvamedha_svarga",
+    upaParvasCount: 8,
+    status: "PLANNED",
+    sections: "Ashvamedhika, Ashramavasika, Mausala, Mahaprasthanika, Svargarohana & Harivamsa",
+    description: "Anugita, sacrificial horse, departure of Krishna, submergence of Dvaraka, ascent of Mount Meru, dog test, Vaikuntha reunion."
+  }
+];
+
 // Export to window
 if (typeof window !== 'undefined') {
   window.MAHABHARATA_METADATA = MAHABHARATA_METADATA;
   window.MAHABHARATA_PARVAS = MAHABHARATA_PARVAS;
   window.ADI_PARVA_UPAPARVAS = ADI_PARVA_UPAPARVAS;
+  window.SABHA_PARVA_UPAPARVAS = SABHA_PARVA_UPAPARVAS;
+  window.VANA_PARVA_PART1_UPAPARVAS = VANA_PARVA_PART1_UPAPARVAS;
+  window.MAHABHARATA_VOLUMES = MAHABHARATA_VOLUMES;
   window.MAHABHARATA_CHARACTERS = MAHABHARATA_CHARACTERS;
 }
+

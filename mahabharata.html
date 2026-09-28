@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Srimad Mahabharata (శ్రీమన్మహాభారతము) — The Great Epic of Vyasa | Divya Mangalam</title>
-  <meta name="description" content="Explore Srimad Mahabharata by Krishna-Dwaipayana Vyasa with all 18 Parvas and complete Adi Parva (19 Upa-Parvas) based on Pratap Chandra Roy's unabridged English prose translation with Telugu summaries." />
+  <meta name="description" content="Explore Srimad Mahabharata by Krishna-Dwaipayana Vyasa with all 18 Parvas, 12 Volumes, and complete Upa-Parvas (Adi Parva, Sabha Parva, Vana Parva Part I) based on Pratap Chandra Roy's unabridged English prose translation with Telugu summaries." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏹</text></svg>" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
@@ -45,7 +45,7 @@
       letter-spacing: 0.05em;
     }
     .mb-hero p {
-      max-width: 780px;
+      max-width: 820px;
       margin: 0 auto 1.5rem;
       color: var(--text-mid);
       font-size: 1.05rem;
@@ -101,9 +101,9 @@
     .view-tab {
       background: var(--white);
       border: 1.5px solid rgba(212,160,23,0.35);
-      padding: 0.75rem 1.6rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--text-dark);
       cursor: pointer;
@@ -123,6 +123,41 @@
       color: var(--white);
       border-color: transparent;
       box-shadow: 0 6px 18px rgba(139,0,0,0.25);
+    }
+
+    /* Parva Selector Bar */
+    .parva-selector-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 1.2rem 0 2rem;
+    }
+    .parva-sel-btn {
+      background: var(--white);
+      border: 1.5px solid rgba(212,160,23,0.35);
+      padding: 0.65rem 1.3rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .parva-sel-btn:hover {
+      border-color: var(--gold);
+      background: rgba(212,160,23,0.1);
+      transform: translateY(-2px);
+    }
+    .parva-sel-btn.active {
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(139,0,0,0.22);
     }
 
     /* Controls Bar */
@@ -303,6 +338,43 @@
       color: var(--white);
       border-color: transparent;
       box-shadow: 0 4px 14px rgba(139,0,0,0.25);
+    }
+
+    /* Volume Catalog Cards */
+    .vol-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 16px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vol-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(212,160,23,0.15);
+      border-color: var(--gold);
+    }
+    .vol-status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .vol-active {
+      background: rgba(46, 125, 50, 0.15);
+      color: #2E7D32;
+      border: 1px solid rgba(46, 125, 50, 0.3);
+    }
+    .vol-planned {
+      background: rgba(212,160,23,0.15);
+      color: var(--deep-red);
+      border: 1px solid rgba(212,160,23,0.3);
     }
 
     /* Modal Reader Overlay */
@@ -548,8 +620,8 @@
   <div class="sanskrit-title">Srimad Mahabharata — The Great Epic of Krishna-Dwaipayana Vyasa</div>
   <p>
     The supreme encyclopedia of Dharma, statecraft, cosmology, and spiritual liberation.
-    Translated into unabridged English prose by <strong>Pratap Chandra Roy, C.I.E.</strong>,
-    featuring all <strong>18 Maha Parvas</strong> and the complete <strong>Adi Parva (19 Upa-Parvas)</strong> with Telugu summaries.
+    Translated into unabridged English prose by <strong>Pratap Chandra Roy, C.I.E.</strong> (Calcutta),
+    progressively covering all <strong>12 Canonical Volumes &amp; 18 Maha Parvas</strong> with chapter-by-chapter English prose &amp; Telugu commentaries.
   </p>
 
   <!-- Canonical Shloka -->
@@ -570,11 +642,14 @@
 
 <!-- ===== VIEW SELECTOR TABS ===== -->
 <div class="view-tabs-container" role="tablist">
-  <button class="view-tab active" id="tabAdi" role="tab" aria-selected="true" onclick="switchView('adi')">
-    <span>📜</span> Adi Parva Reader (ఆది పర్వం - 19 ఉపపర్వాలు)
+  <button class="view-tab active" id="tabReader" role="tab" aria-selected="true" onclick="switchView('reader')">
+    <span>📜</span> Parva &amp; Upa-Parva Reader (పర్వం &amp; ఉపపర్వాలు)
   </button>
   <button class="view-tab" id="tab18" role="tab" aria-selected="false" onclick="switchView('18')">
     <span>🏛️</span> All 18 Parvas (అష్టాదశ పర్వాలు)
+  </button>
+  <button class="view-tab" id="tabVols" role="tab" aria-selected="false" onclick="switchView('vols')">
+    <span>📚</span> 12 Volumes Catalog (ద్వాదశ సంపుటాలు)
   </button>
   <button class="view-tab" id="tabChars" role="tab" aria-selected="false" onclick="switchView('chars')">
     <span>👑</span> Epic Characters (పాత్రల పరిచయం)
@@ -588,7 +663,7 @@
 <div class="controls-bar" id="controlsBar">
   <div class="search-box">
     <span class="icon">🔍</span>
-    <input type="text" id="mbSearch" placeholder="Search by event, weapon, character (e.g. Gandiva, Bakasura, Garuda, Swayamvara)..." aria-label="Search Mahabharata" />
+    <input type="text" id="mbSearch" placeholder="Search by event, weapon, character (e.g. Mayasabha, Jarasandha, Pashupatastra, Nala)..." aria-label="Search Mahabharata" />
   </div>
   <div class="lang-toggle-wrap">
     <button class="lang-opt active" id="langTe" onclick="setLanguage('te')">తెలుగు (Telugu)</button>
@@ -599,16 +674,32 @@
 <!-- ===== MAIN CONTENT CONTAINER ===== -->
 <main class="content-container">
 
-  <!-- VIEW 1: ADI PARVA 19 UPA-PARVAS -->
-  <section id="viewAdi">
+  <!-- VIEW 1: DYNAMIC UPA-PARVAS READER -->
+  <section id="viewReader">
     <div style="margin-bottom: 1.5rem; text-align: center;">
-      <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">ఆది పర్వము (Adi Parva) — 19 Upa-Parvas Complete</h2>
-      <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">
-        Based directly on Pratap Chandra Roy's English prose translation (Calcutta) &amp; Telugu commentary.
+      <h2 id="readerParvaHeading" style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">
+        సభా పర్వము (Sabha Parva) — Complete 10 Upa-Parvas
+      </h2>
+      <p id="readerParvaSub" style="color:var(--text-mid); font-size:0.95rem; margin:0 0 1rem;">
+        Based directly on Pratap Chandra Roy's English prose translation (Volume II) &amp; Telugu commentary.
       </p>
+
+      <!-- Parva Selector Pills -->
+      <div class="parva-selector-bar" role="group" aria-label="Select Parva">
+        <button type="button" class="parva-sel-btn" id="btnParvaAdi" onclick="selectReaderParva('adi')">
+          📜 Vol I: Adi Parva (19 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaSabha" onclick="selectReaderParva('sabha')">
+          🏛️ Vol II: Sabha Parva (10 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn" id="btnParvaVana" onclick="selectReaderParva('vana1')">
+          🌲 Vol II: Vana Parva Part I (7 ఉపపర్వాలు)
+        </button>
+      </div>
     </div>
-    <div class="cards-grid" id="adiParvaGrid">
-      <!-- Injected via JavaScript from ADI_PARVA_UPAPARVAS -->
+
+    <div class="cards-grid" id="upaParvasGrid">
+      <!-- Injected via JavaScript based on selected Parva -->
     </div>
   </section>
 
@@ -625,7 +716,20 @@
     </div>
   </section>
 
-  <!-- VIEW 3: CHARACTERS ROSTER -->
+  <!-- VIEW 3: 12 VOLUMES MASTER CATALOG -->
+  <section id="viewVolumes" style="display:none;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">ద్వాదశ సంపుటాల ప్రణాళిక (The 12-Volume Translation Archive)</h2>
+      <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">
+        Unabridged English Prose Translation by Pratap Chandra Roy, C.I.E. — Tracking complete coverage of all 12 Volumes.
+      </p>
+    </div>
+    <div class="cards-grid" id="volumesGrid">
+      <!-- Injected via JavaScript from MAHABHARATA_VOLUMES -->
+    </div>
+  </section>
+
+  <!-- VIEW 4: CHARACTERS ROSTER -->
   <section id="viewChars" style="display:none;">
     <div style="margin-bottom: 1.5rem; text-align: center;">
       <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">Legendary Characters of the Mahabharata</h2>
@@ -638,28 +742,30 @@
     </div>
   </section>
 
-  <!-- VIEW 4: ASK THE MAHABHARATA (AI ASSISTANT) -->
+  <!-- VIEW 5: ASK THE MAHABHARATA (AI ASSISTANT) -->
   <section id="viewAi" style="display:none;">
     <div class="ai-box">
       <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:0 0 0.4rem; font-size:1.4rem;">
         🏹 Mahabharata Wisdom Assistant (మహాభారత జ్ఞాన దీపిక)
       </h3>
       <p style="color:var(--text-mid); font-size:0.92rem; margin:0;">
-        Ask any question regarding the episodes, characters, ethical dilemmas, or weapons in the Mahabharata.
+        Ask any question regarding the episodes, characters, ethical dilemmas, or weapons across the 12 Volumes.
       </p>
 
       <div class="ai-input-row">
-        <input type="text" id="aiQueryInput" placeholder="e.g., How did Arjuna acquire the Gandiva bow?" aria-label="Ask Mahabharata question" />
+        <input type="text" id="aiQueryInput" placeholder="e.g., How was Jarasandha slain, or how did Arjuna get the Pashupatastra?" aria-label="Ask Mahabharata question" />
         <button type="button" id="btnAskQuery">Ask</button>
       </div>
 
       <div class="ai-quick-questions">
-        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Arjuna get the Gandiva bow?')">🏹 How Arjuna got Gandiva</button>
-        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Bhishma take his fierce vow of celibacy?')">🛡️ Bhishma's Terrible Vow</button>
-        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did King Janamejaya perform the Snake Sacrifice?')">🐍 Janamejaya's Snake Sacrifice</button>
-        <button class="ai-quick-btn" onclick="askQuickQuestion('How did the Pandavas escape the House of Lac?')">🔥 Escape from Lac House</button>
-        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened at Draupadi Swayamvara?')">🐟 Draupadi's Swayamvara</button>
-        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the famous quotation about the Mahabharata completeness?')">📜 Completeness Dictum</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima slay King Jarasandha?')">⚔️ Slaying of Jarasandha</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened during the disrobing of Draupadi in Dyuta Parva?')">👗 Disrobing of Draupadi</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Arjuna get the Pashupatastra from Lord Shiva?')">🏹 Shiva &amp; Pashupatastra</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Yudhishthira receive the Akshaya Patra from Surya?')">☀️ The Akshaya Patra</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the story of King Nala and Damayanti?')">🦢 Nala &amp; Damayanti Story</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why was Arjuna cursed by celestial nymph Urvasi?')">💃 Urvasi's Curse to Arjuna</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Arjuna get the Gandiva bow?')">🔥 The Gandiva Bow</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Bhishma take his fierce vow of celibacy?')">🛡️ Bhishma's Vow</button>
       </div>
 
       <div class="ai-answer-area" id="aiAnswerArea"></div>
@@ -695,7 +801,7 @@
     <div>
       <h4 style="color:var(--white); margin-bottom:0.8rem; font-size:1rem;">Scriptures &amp; Epics</h4>
       <ul style="line-height:2;">
-        <li><a href="mahabharata.html" style="color:var(--gold);">🏹 Srimad Mahabharata (18 Parvas)</a></li>
+        <li><a href="mahabharata.html" style="color:var(--gold);">🏹 Srimad Mahabharata (12 Volumes)</a></li>
         <li><a href="puran.html" style="color:rgba(255,255,255,0.7);">📜 18 Maha Puranas</a></li>
         <li><a href="shlokas.html" style="color:rgba(255,255,255,0.7);">🕉️ Sacred Shlokas &amp; Mantras</a></li>
         <li><a href="chalisa.html" style="color:rgba(255,255,255,0.7);">🪔 Divine Chalisas</a></li>
@@ -721,22 +827,35 @@
 <script src="mahabharata-data.js"></script>
 <script>
 (function() {
-  let currentView = 'adi';
+  let currentView = 'reader';
+  let currentParva = 'sabha'; // 'adi', 'sabha', 'vana1'
   let currentLang = 'te'; // 'te' (Telugu) or 'en' (English)
   let searchQuery = '';
 
   // DOM Elements
-  const tabAdi = document.getElementById('tabAdi');
+  const tabReader = document.getElementById('tabReader');
   const tab18 = document.getElementById('tab18');
+  const tabVols = document.getElementById('tabVols');
   const tabChars = document.getElementById('tabChars');
   const tabAi = document.getElementById('tabAi');
-  const viewAdi = document.getElementById('viewAdi');
+
+  const viewReader = document.getElementById('viewReader');
   const view18 = document.getElementById('view18');
+  const viewVolumes = document.getElementById('viewVolumes');
   const viewChars = document.getElementById('viewChars');
   const viewAi = document.getElementById('viewAi');
-  const adiParvaGrid = document.getElementById('adiParvaGrid');
+
+  const readerParvaHeading = document.getElementById('readerParvaHeading');
+  const readerParvaSub = document.getElementById('readerParvaSub');
+  const upaParvasGrid = document.getElementById('upaParvasGrid');
   const allParvasGrid = document.getElementById('allParvasGrid');
+  const volumesGrid = document.getElementById('volumesGrid');
   const charactersGrid = document.getElementById('charactersGrid');
+
+  const btnParvaAdi = document.getElementById('btnParvaAdi');
+  const btnParvaSabha = document.getElementById('btnParvaSabha');
+  const btnParvaVana = document.getElementById('btnParvaVana');
+
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
   const langEn = document.getElementById('langEn');
@@ -757,19 +876,24 @@
   // Switch View function
   window.switchView = function(view) {
     currentView = view;
-    [tabAdi, tab18, tabChars, tabAi].forEach(t => t.classList.remove('active'));
-    [viewAdi, view18, viewChars, viewAi].forEach(v => v.style.display = 'none');
+    [tabReader, tab18, tabVols, tabChars, tabAi].forEach(t => t.classList.remove('active'));
+    [viewReader, view18, viewVolumes, viewChars, viewAi].forEach(v => v.style.display = 'none');
 
-    if (view === 'adi') {
-      tabAdi.classList.add('active');
-      viewAdi.style.display = 'block';
+    if (view === 'reader') {
+      tabReader.classList.add('active');
+      viewReader.style.display = 'block';
       controlsBar.style.display = 'flex';
-      renderAdiParva();
+      renderUpaParvas();
     } else if (view === '18') {
       tab18.classList.add('active');
       view18.style.display = 'block';
       controlsBar.style.display = 'flex';
       renderAllParvas();
+    } else if (view === 'vols') {
+      tabVols.classList.add('active');
+      viewVolumes.style.display = 'block';
+      controlsBar.style.display = 'none';
+      renderVolumes();
     } else if (view === 'chars') {
       tabChars.classList.add('active');
       viewChars.style.display = 'block';
@@ -782,6 +906,28 @@
     }
   };
 
+  // Select Parva in Reader
+  window.selectReaderParva = function(parvaKey) {
+    currentParva = parvaKey;
+    [btnParvaAdi, btnParvaSabha, btnParvaVana].forEach(b => b.classList.remove('active'));
+
+    if (parvaKey === 'adi') {
+      btnParvaAdi.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'ఆది పర్వము (Adi Parva) — 19 ఉపపర్వాలు సంపూర్ణం' : 'Adi Parva (Book of the Beginning) — All 19 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ I: వ్యాస భగవానుని భారతావతరణం, కురువంశ చరిత్ర, ఖాండవ వన దహనము.' : 'Volume I: Cosmic origins, Kuru generation, Lac House, Draupadi Swayamvara, Gandiva bow.';
+    } else if (parvaKey === 'sabha') {
+      btnParvaSabha.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'సభా పర్వము (Sabha Parva) — 10 ఉపపర్వాలు సంపూర్ణం' : 'Sabha Parva (Book of the Assembly Hall) — All 10 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ II: మయసభ, జరాసంధ వధ, రాజసూయ యాగము, శిశుపాల వధ, పాచికల జూదము, ద్రౌపదీ వస్త్రాపహరణము.' : 'Volume II: Mayasabha palace, Jarasandha slaying, Digvijaya, Rajasuya sacrifice, loaded dice game, Draupadi disrobing.';
+    } else if (parvaKey === 'vana1') {
+      btnParvaVana.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'వన పర్వము - భాగం 1 (Vana Parva Part I) — 7 ఉపపర్వాలు' : 'Vana Parva (Part I) — 7 Major Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ II: అక్షయపాత్ర, కిర్మీరవధ, కిరాతార్జునీయ పాశుపతాస్త్ర సాధన, ఇంద్రలోక ప్రవేశము, నల-దమయంతి కథ, తీర్థయాత్రలు.' : 'Volume II: Akshaya Patra, Kirata duel for Pashupatastra, Indra\'s heaven, Urvasi curse, Nala-Damayanti epic, holy pilgrimages.';
+    }
+
+    renderUpaParvas();
+  };
+
   // Language switcher
   window.setLanguage = function(lang) {
     currentLang = lang;
@@ -792,41 +938,50 @@
       langEn.classList.add('active');
       langTe.classList.remove('active');
     }
-    if (currentView === 'adi') renderAdiParva();
-    else if (currentView === '18') renderAllParvas();
+    selectReaderParva(currentParva);
+    if (currentView === '18') renderAllParvas();
+    if (currentView === 'vols') renderVolumes();
   };
 
   // Search input listener
   searchInput.addEventListener('input', function(e) {
     searchQuery = e.target.value.toLowerCase().trim();
-    if (currentView === 'adi') renderAdiParva();
+    if (currentView === 'reader') renderUpaParvas();
     else if (currentView === '18') renderAllParvas();
   });
 
-  // Render Adi Parva 19 Upa-Parvas
-  function renderAdiParva() {
-    if (!window.ADI_PARVA_UPAPARVAS) return;
-    const items = window.ADI_PARVA_UPAPARVAS.filter(item => {
+  // Get active dataset
+  function getActiveDataset() {
+    if (currentParva === 'adi') return window.ADI_PARVA_UPAPARVAS || [];
+    if (currentParva === 'sabha') return window.SABHA_PARVA_UPAPARVAS || [];
+    if (currentParva === 'vana1') return window.VANA_PARVA_PART1_UPAPARVAS || [];
+    return [];
+  }
+
+  // Render Upa-Parvas
+  function renderUpaParvas() {
+    const dataset = getActiveDataset();
+    const items = dataset.filter(item => {
       if (!searchQuery) return true;
       const haystack = (item.nameEn + ' ' + item.nameTe + ' ' + item.nameSa + ' ' + item.summaryEn + ' ' + item.summaryTe + ' ' + item.keyCharacters.join(' ')).toLowerCase();
       return haystack.includes(searchQuery);
     });
 
     if (items.length === 0) {
-      adiParvaGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-mid);">No matching Upa-Parvas found for "' + searchQuery + '".</div>';
+      upaParvasGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-mid);">No matching Upa-Parvas found for "' + searchQuery + '".</div>';
       return;
     }
 
-    adiParvaGrid.innerHTML = items.map(item => {
+    upaParvasGrid.innerHTML = items.map(item => {
       const title = currentLang === 'te' ? item.nameTe : item.nameEn;
       const sub = currentLang === 'te' ? item.nameEn + ' (' + item.nameSa + ')' : item.nameTe + ' (' + item.nameSa + ')';
       const summary = currentLang === 'te' ? item.summaryTe : item.summaryEn;
       const charBadges = item.keyCharacters.slice(0, 4).map(c => '<span class="char-chip">' + c + '</span>').join('');
 
       return `
-        <article class="mb-card" onclick="openUpaParvaModal(${item.number})">
+        <article class="mb-card" onclick="openUpaParvaModal('${currentParva}', ${item.number})">
           <div class="card-header-row">
-            <span class="num-badge">ఉపపర్వం ${item.number} / 19</span>
+            <span class="num-badge">ఉపపర్వం ${item.number} / ${dataset.length}</span>
             <span class="section-pill">${item.sections}</span>
           </div>
           <h3>${title}</h3>
@@ -837,7 +992,7 @@
             " ${item.keyQuoteRoy} "
           </div>
           <button type="button" class="btn-read-full">
-            <span>📖</span> Read Full Upa-Parva Narrative
+            <span>📖</span> Read Full Narrative &amp; Telugu Summary
           </button>
         </article>
       `;
@@ -888,6 +1043,38 @@
     }).join('');
   }
 
+  // Render 12 Volumes Master Catalog
+  function renderVolumes() {
+    if (!window.MAHABHARATA_VOLUMES) return;
+    volumesGrid.innerHTML = window.MAHABHARATA_VOLUMES.map(v => {
+      const isComplete = v.status === 'COMPLETE';
+      const badgeClass = isComplete ? 'vol-active' : 'vol-planned';
+      const badgeText = isComplete ? '✅ ACTIVE & INTEGRATED' : '⏳ PLANNED & UPCOMING';
+      const title = currentLang === 'te' ? v.titleTe : v.titleEn;
+
+      return `
+        <div class="vol-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+            <span class="vol-status-badge ${badgeClass}">${badgeText}</span>
+            <span style="font-size:0.75rem; font-weight:700; color:var(--deep-red);">${v.sections}</span>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:1.25rem; margin:0 0 0.4rem; color:var(--text-dark);">${title}</h3>
+          <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
+          <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
+          ${isComplete ? `
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : 'sabha'}')">
+              <span>📖</span> Open in Reader
+            </button>
+          ` : `
+            <button type="button" class="btn-read-full" style="opacity:0.6; cursor:not-allowed;" disabled>
+              <span>⏳</span> Pending Text Drop
+            </button>
+          `}
+        </div>
+      `;
+    }).join('');
+  }
+
   // Render Characters
   function renderCharacters() {
     if (!window.MAHABHARATA_CHARACTERS) return;
@@ -902,11 +1089,17 @@
   }
 
   // Open Upa-Parva Modal
-  window.openUpaParvaModal = function(num) {
-    const item = window.ADI_PARVA_UPAPARVAS.find(u => u.number === num);
+  window.openUpaParvaModal = function(parvaKey, num) {
+    let dataset = [];
+    let parvaLabel = '';
+    if (parvaKey === 'adi') { dataset = window.ADI_PARVA_UPAPARVAS; parvaLabel = 'ADI PARVA (VOL I)'; }
+    else if (parvaKey === 'sabha') { dataset = window.SABHA_PARVA_UPAPARVAS; parvaLabel = 'SABHA PARVA (VOL II)'; }
+    else if (parvaKey === 'vana1') { dataset = window.VANA_PARVA_PART1_UPAPARVAS; parvaLabel = 'VANA PARVA PART I (VOL II)'; }
+
+    const item = dataset.find(u => u.number === num);
     if (!item) return;
 
-    modalPill.textContent = 'ADI PARVA • UPA-PARVA ' + item.number + ' OF 19 (' + item.sections + ')';
+    modalPill.textContent = `${parvaLabel} • UPA-PARVA ${item.number} OF ${dataset.length} (${item.sections})`;
     modalTitle.textContent = item.nameTe + ' — ' + item.nameEn;
     modalSub.textContent = item.nameSa;
 
@@ -1038,61 +1231,68 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I &amp; II)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('gandiva') || qLower.includes('bow') || qLower.includes('khandava')) {
+      if (qLower.includes('jarasandha') || qLower.includes('magadha') || qLower.includes('jara')) {
         answer = `
-          <strong>🏹 The Acquisition of the Gandiva Bow (ఖాండవదాహ పర్వము / Khandava-daha Parva):</strong><br/><br/>
-          In the 19th Upa-Parva of Adi Parva, Agni Deva (the god of fire), suffering indigestion from consuming King Swetaki's uninterrupted hundred-year ghee sacrifice, approached Sri Krishna and Arjuna disguised as a Brahmin. He requested their aid to consume the Khandava forest.<br/><br/>
-          To equip them against King Indra and the clouds, Agni invoked <strong>Varuna Deva</strong> (the god of the oceans). Varuna presented Arjuna with the celestial <strong>Gandiva Bow</strong> (originally forged by Lord Brahma, held by Prajapati, Indra, and Soma), two inexhaustible quivers (<em>Akshaya Tunira</em>), and the divine chariot bearing the Kapidhwaja (monkey banner). To Sri Krishna, Varuna gave the invincible <strong>Sudarshana Chakra</strong> and the Kaumodaki mace.<br/><br/>
-          With the Gandiva bow, Arjuna built an impenetrable canopy of arrows across the sky that shielded the raging fire from Indra's torrential downpours.
+          <strong>⚔️ Slaying of King Jarasandha (జరాసంధవధ పర్వము / Jarasandha-badha Parva):</strong><br/><br/>
+          King Jarasandha of Magadha had imprisoned 86 kings in Girivraja, intending to offer 100 monarchs as human sacrifice to Lord Shiva. Sri Krishna, Arjuna, and Bhima infiltrated Girivraja in the disguise of Snataka Brahmanas.<br/><br/>
+          Krishna challenged Jarasandha, who selected mighty Bhima for an unyielding single-combat wrestling match. The titans fought without food or intermission for 14 continuous days and nights.<br/><br/>
+          On the 14th night, when Jarasandha was fatigued, Sri Krishna signaled Bhima by taking a slender straw and splitting it in two. Bhima lifted Jarasandha, whirled him 100 times in the air, pressed his knee against his spine, and broke his body into two pieces, hurling them in opposite directions so they could not rejoin. The 86 captive kings were liberated and joined Yudhishthira's Rajasuya.
         `;
-      } else if (qLower.includes('bhishma') || qLower.includes('vow') || qLower.includes('celibacy') || qLower.includes('terrible')) {
+      } else if (qLower.includes('draupadi') || qLower.includes('disrob') || qLower.includes('vastra') || qLower.includes('duhsasana')) {
+        answer = `
+          <strong>👗 Disrobing of Queen Draupadi (ద్యూత పర్వము / Dyuta Parva):</strong><br/><br/>
+          In the loaded dice match orchestrated by Sakuni, Yudhishthira staked and lost his wealth, kingdoms, brothers, himself, and finally Queen Draupadi. Duhsasana dragged Draupadi by her hair into the assembly of elders.<br/><br/>
+          When Karna commanded Duhsasana to strip the Pandavas and Draupadi of their robes, and all earthly champions sat immobilized by fear or compromised codes, Draupadi abandoned reliance on human strength, raised both hands to the sky, and surrendered unconditionally to the Supreme Lord:<br/>
+          <em>"Govinda! Dwarakavasin! Krishna! O refuge of the distressed, save me!"</em><br/><br/>
+          Lord Sri Krishna manifested an endless, miraculous cascade of celestial robes in every radiant hue. Duhsasana pulled until his arms failed and he collapsed unconscious amidst mountains of cloth, leaving Draupadi fully adorned and inviolable.
+        `;
+      } else if (qLower.includes('pashupata') || qLower.includes('kairata') || qLower.includes('kirata') || qLower.includes('indrakeela')) {
+        answer = `
+          <strong>🏹 Attainment of the Pashupatastra (కైరాత పర్వము / Kairata Parva):</strong><br/><br/>
+          Equipped with the <em>Pratismriti</em> mantra from Sage Vyasa, Arjuna ascended Mount Indrakeela in the Himalayas, undertaking rigorous penance standing on one foot.<br/><br/>
+          When demon Muka attacked in the form of a wild boar, both Arjuna and an uncouth tribal hunter (Kirata) shot the beast simultaneously. A ferocious duel erupted over the kill; Arjuna's arrows and weapons were absorbed by the hunter. In desperation, Arjuna fashioned an earthen Shiva Linga and offered forest flowers, only to see the garland rest atop the hunter's head.<br/><br/>
+          Lord Shiva and Goddess Parvati revealed their supreme form, praising Arjuna's valor and bestowing the cosmic <strong>Pashupatastra</strong>—the weapon that dissolves universes.
+        `;
+      } else if (qLower.includes('akshaya') || qLower.includes('patra') || qLower.includes('surya') || qLower.includes('vessel')) {
+        answer = `
+          <strong>☀️ The Divine Akshaya Patra (ఆరణ్యక పర్వము / Aranyaka Parva):</strong><br/><br/>
+          Exiled to the Kamyaka forest, Yudhishthira was deeply distressed that he lacked resources to feed the thousands of Brahmanas and rishis who followed the Pandavas.<br/><br/>
+          Priest Dhaumya instructed Yudhishthira to worship Surya Deva (the Sun God) with his 108 sacred names. Graced by Yudhishthira's purity, Lord Surya appeared and bestowed a copper vessel called the <strong>Akshaya Patra</strong>.<br/><br/>
+          The divine vessel supplied an inexhaustible quantity of four kinds of food daily until Queen Draupadi finished her meal, sustaining the entire retinue through their twelve years of wilderness exile.
+        `;
+      } else if (qLower.includes('nala') || qLower.includes('damayanti') || qLower.includes('swan')) {
+        answer = `
+          <strong>🦢 The Epic of King Nala and Princess Damayanti (నలోపాఖ్యాన పర్వము / Nalopakhyana):</strong><br/><br/>
+          To alleviate Yudhishthira's despondency over losing his realm through dice, Sage Brihadaswa narrated the ancient tale of King Nala of Nishadha and Princess Damayanti.<br/><br/>
+          United through a golden swan messenger, Damayanti chose mortal Nala at her Swayamvara over the gods Indra, Agni, Varuna, and Yama. Jealous Kali Purusha afflicted Nala, causing him to lose his throne to his brother Pushkara in a game of dice. Enduring heartbreaking separation, Nala was transformed by serpent Karkotaka into the dwarf charioteer Bahuka, mastered the secret of dice (<em>Akshahridaya</em>) from King Rituparna, reunited with Damayanti, defeated Pushkara in a rematch, and regained his empire.
+        `;
+      } else if (qLower.includes('urvasi') || qLower.includes('curse') || qLower.includes('brihannala')) {
+        answer = `
+          <strong>💃 Urvasi's Curse to Arjuna (ఇంద్రలోకాగమన పర్వము / Indralokagamana Parva):</strong><br/><br/>
+          While Arjuna resided in heaven (Amaravati) learning celestial weapons from Indra and music from Chitrasena, the apsara Urvasi was overwhelmed by his beauty and proposed romance at night.<br/><br/>
+          Arjuna reverently declined, declaring that since Urvasi was the ancestral mother of the Puru dynasty (through King Pururavas), he viewed her only as a mother equal to Kunti. Enraged by rejection, Urvasi cursed Arjuna to lose his masculinity and live as a eunuch dancer for a year. Indra consoled Arjuna, praising his self-control and decreeing that the curse would serve as an disguise during his 13th incognito year in King Virata's court as Brihannala.
+        `;
+      } else if (qLower.includes('gandiva') || qLower.includes('khandava')) {
+        answer = `
+          <strong>🔥 The Acquisition of the Gandiva Bow (ఖాండవదాహ పర్వము / Khandava-daha Parva):</strong><br/><br/>
+          In Adi Parva, Agni Deva suffered indigestion from consuming King Swetaki's hundred-year ghee sacrifice and sought to burn Khandava forest. Varuna Deva bestowed upon Arjuna the celestial <strong>Gandiva Bow</strong>, inexhaustible quivers (<em>Akshaya Tunira</em>), and the Kapidhwaja chariot, while conferring the <strong>Sudarshana Chakra</strong> on Sri Krishna.
+        `;
+      } else if (qLower.includes('bhishma') || qLower.includes('vow') || qLower.includes('celibacy')) {
         answer = `
           <strong>🛡️ Bhishma's Terrible Vow (అంశావతరణ పర్వము / Amsavatarana Parva):</strong><br/><br/>
-          Devavrata (the eighth son of King Santanu and Goddess Ganga) observed that his aged father had fallen deeply in love with Satyavati, the fragrant daughter of the fisherman chieftain (Dasa-raja). However, the chief refused to give his daughter in marriage unless Santanu guaranteed that Satyavati's future sons would inherit the throne of Hastinapura.<br/><br/>
-          Seeing his father languishing in sorrow, Devavrata personally went to the fisherman chief and renounced his birthright to the kingdom. When the chief raised the objection that Devavrata's future children might later dispute the throne, Devavrata took an awe-inspiring, irrevocable oath before all celestials and men:<br/>
-          <em>"I shall renounce the kingdom and remain a lifelong Brahmacharin! Even if the sun loses his brilliance or the earth her stability, I shall never break my pledge!"</em><br/><br/>
-          Upon this declaration, celestial flowers rained from the heavens, and the gods cried out: <strong>"Bhishma! Bhishma!" ("The Terrible! The Resolute!")</strong>. His father Santanu rewarded him with the boon of <em>Iccha Mrityu</em> (voluntary death at his chosen moment).
-        `;
-      } else if (qLower.includes('snake') || qLower.includes('janamejaya') || qLower.includes('sarpa') || qLower.includes('astika')) {
-        answer = `
-          <strong>🐍 The Snake Sacrifice &amp; Sage Astika (ఆస్తిక పర్వము / Astika Parva):</strong><br/><br/>
-          King Parikshit (grandson of Arjuna) was cursed by the ascetic youth Sringi to die within seven days by the bite of the serpent king Takshaka for having placed a dead serpent on the neck of meditating Sage Shamika. Despite supreme precautions, Takshaka entered a fruit and bit Parikshit to death.<br/><br/>
-          Overcome with grief and fury, Parikshit's son, <strong>King Janamejaya</strong>, inaugurated the colossal <em>Sarpa Satra</em> (Snake Sacrifice) at Kurukshetra. The officiating priests chanted powerful mantras that pulled millions of serpents involuntarily out of the sky into the blazing sacrificial pit.<br/><br/>
-          When Takshaka sought refuge around Indra's throne, the priests chanted: <em>"Fall, O Takshaka, together with Indra!"</em> At that climactic juncture, the young, luminous sage <strong>Astika</strong> (son of Sage Jaratkaru and Manasa Devi) arrived at the sacrificial arena. Astika enchanted Janamejaya with exquisite Vedic panegyrics and demanded as his boon the cessation of the sacrifice. Honoring truth, Janamejaya halted the sacrifice, saving Takshaka and preserving the serpent race.
-        `;
-      } else if (qLower.includes('lac') || qLower.includes('house') || qLower.includes('jatugriha') || qLower.includes('purochana')) {
-        answer = `
-          <strong>🔥 Escape from the House of Lac (జాతుగృహదాహ పర్వము / Jatugriha-daha Parva):</strong><br/><br/>
-          Envious of Yudhishthira's coronation as crown prince, Duryodhana and Sakuni convinced King Dhritarashtra to send the Pandavas and Kunti to the town of Varanavata. Royal minister Purochana constructed a palace built entirely of highly flammable materials: lac, hemp, ghee, resin, and dry timber.<br/><br/>
-          Before their departure, the wise <strong>Vidura</strong> delivered a cryptic warning to Yudhishthira in the secret <em>Mleccha</em> dialect: <em>"The weapon not made of steel can destroy a forest; he who understands subterranean safety escapes fire."</em> Vidura then secretly dispatched an expert miner who dug a subterranean tunnel leading from inside the palace into the safety of the adjacent jungle.<br/><br/>
-          When Purochana prepared to set fire to the palace at midnight, Bhima preemptively ignited the palace and guided his mother and brothers through the subterranean passage, leaving Duryodhana believing the Pandavas were incinerated.
-        `;
-      } else if (qLower.includes('swayamvara') || qLower.includes('draupadi') || qLower.includes('fish') || qLower.includes('target')) {
-        answer = `
-          <strong>🐟 Draupadi's Swayamvara (స్వయంవర పర్వము / Swayamvara Parva):</strong><br/><br/>
-          King Drupada of Panchala held a grand Swayamvara for Princess Draupadi in Kampilya. The challenge required lifting an immensely stiff celestial bow and shooting five arrows through a revolving aerial wheel to strike the eye of a golden target.<br/><br/>
-          Mighty Kshatriya kings, including Duryodhana, Shalya, and Sisupala, could not even bend the monstrous bow. Amidst the tension, <strong>Arjuna</strong>, disguised in the simple deerskin garb of a young Brahmin, walked out from the ascetic enclosure.<br/><br/>
-          Paying obeisance to Lord Shiva and Krishna, Arjuna effortlessly strung the bow in an instant, notched five arrows, and shot down the golden target through the water reflection! Draupadi joyfully garlanded Arjuna. When the indignant Kshatriyas attacked in wrath, Bhima uprooted a massive tree while Arjuna unleashed impenetrable volleys of arrows, vanquishing all challengers.
-        `;
-      } else if (qLower.includes('dictum') || qLower.includes('complete') || qLower.includes('everything') || qLower.includes('yadihasti')) {
-        answer = `
-          <strong>📜 The Canonical Dictum of the Mahabharata:</strong><br/><br/>
-          <em>"यदिहास्ति तदन्यत्र यन्नेहास्ति न तत्क्वचित्॥"</em><br/>
-          <em>("Yadihasti tadanyatra yannehasti na tatkvachit ||")</em><br/><br/>
-          <strong>Meaning:</strong> <em>"Whatever is found here concerning Dharma (righteousness), Artha (wealth), Kama (desire), and Moksha (spiritual liberation) is found elsewhere; but whatever is not found here is found nowhere else on earth!"</em><br/><br/>
-          The Mahabharata consists of 100,000 verses across 18 Parvas, representing the pinnacle of world literature and Sanatana Dharma.
+          To ensure his father Santanu's marriage to Satyavati, Devavrata renounced the throne and took the immortal oath of lifelong celibacy before the celestials, earning the name <strong>Bhishma</strong> and the boon of <em>Iccha Mrityu</em>.
         `;
       } else {
         answer = `
           <strong>🏹 Mahabharata Insight on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., comprises 18 Parvas and 100 Upa-Parvas. It addresses the eternal triumph of Dharma over Adharma: <em>"Yato dharmastato jayah"</em> (Where there is righteousness, there is victory).<br/><br/>
-          Adi Parva establishes the cosmic genealogy, the churn of the ocean, the birth of the Pandavas and Kauravas, the Lac house escape, Draupadi's swayamvara, the founding of Indraprastha, and the burning of Khandava. Feel free to explore the interactive Upa-Parva cards above or ask specific questions about characters like Bhishma, Arjuna, Krishna, Karna, or Draupadi!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., encompasses 18 Parvas across 12 Volumes. Volumes I and II cover the complete Adi Parva, Sabha Parva, and Vana Parva (Part I).<br/><br/>
+          Feel free to select between <strong>Adi Parva</strong>, <strong>Sabha Parva</strong>, and <strong>Vana Parva Part I</strong> in the reader above or ask about Mayasabha, Rajasuya, Jarasandha, Draupadi, Pashupatastra, or Nala-Damayanti!
         `;
       }
 
@@ -1112,7 +1312,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    renderAdiParva();
+    selectReaderParva('sabha');
   });
 })();
 </script>
