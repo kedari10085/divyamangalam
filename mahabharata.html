@@ -695,8 +695,14 @@
         <button type="button" class="parva-sel-btn" id="btnParvaVana" onclick="selectReaderParva('vana1')">
           🌲 Vol II: Vana Parva Part I (7 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaVana2" onclick="selectReaderParva('vana2')">
+        <button type="button" class="parva-sel-btn" id="btnParvaVana2" onclick="selectReaderParva('vana2')">
           🏹 Vol III: Vana Parva Part II (12 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVirata" onclick="selectReaderParva('virata')">
+          👑 Vol IV: Virata Parva (5 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn" id="btnParvaUdyoga" onclick="selectReaderParva('udyoga')">
+          ⚔️ Vol IV: Udyoga Parva (11 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -756,11 +762,19 @@
       </p>
 
       <div class="ai-input-row">
-        <input type="text" id="aiQueryInput" placeholder="e.g., What were the Yaksha Prashnas, or why did Karna give his armor?" aria-label="Ask Mahabharata question" />
+        <input type="text" id="aiQueryInput" placeholder="e.g., What was Vidura Niti, or how did Brihannala defeat the Kauravas?" aria-label="Ask Mahabharata question" />
         <button type="button" id="btnAskQuery">Ask</button>
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima slay Kichaka in the dark dance hall to avenge Draupadi?')">👑 Kichaka Slaying (కీచక వధ)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Brihannala defeat the entire Kaurava army and retrieve the cows in Goharana?')">🏹 Brihannala &amp; Sammohana (ఉత్తర గొగ్రహణం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is Vidura Niti taught to sleepless Dhritarashtra in Prajagara Parva?')">📜 Vidura Niti (విదురనీతి)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Sri Krishna reveal His Cosmic Vishwaroopa in the Hastinapura court?')">🌌 Krishna Peace Embassy &amp; Vishwaroopa (రాయబారము)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What did Karna tell Sri Krishna and Queen Kunti about his loyalty to Duryodhana?')">🤝 Karna-Kunti-Krishna Dialogue (కర్ణ వివాదము)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the story of Princess Amba, Parashurama duel, and her rebirth as Shikhandin?')">🔥 Amba &amp; Shikhandin (అంబోపాఖ్యానం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What did Sage Sanatsujata teach Dhritarashtra about death being Pramada?')">🧘 Sanatsujatiya (సనత్సుజాతీయము)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Bhishma rate Karna as an Ardharatha in Rathatiratha Parva?')">🛡️ Bhishma Rates Karna as Ardharatha</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What were the famous questions and answers in Yaksha Prashna?')">❓ Yaksha Prashna (యక్ష ప్రశ్నలు)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima meet Lord Hanuman on Mount Gandhamadana?')">🐒 Bhima &amp; Hanuman (హనుమద్భీమ సమాగమం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Karna donate his Kavacha and Kundala to Indra?')">🛡️ Karna's Armor &amp; Earrings (కవచ-కుండల దానం)</button>
@@ -866,6 +880,8 @@
   const btnParvaSabha = document.getElementById('btnParvaSabha');
   const btnParvaVana = document.getElementById('btnParvaVana');
   const btnParvaVana2 = document.getElementById('btnParvaVana2');
+  const btnParvaVirata = document.getElementById('btnParvaVirata');
+  const btnParvaUdyoga = document.getElementById('btnParvaUdyoga');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -920,7 +936,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -938,6 +954,14 @@
       if (btnParvaVana2) btnParvaVana2.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'వన పర్వము - ఉత్తర భాగం (Vana Parva Part II) — 12 ఉపపర్వాలు సంపూర్ణం' : 'Vana Parva (Part II - Last Part) — All 12 Upa-Parvas Complete';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ III: హనుమద్భీమ సమాగమం, నివాతకవచ వధ, అజగర నహుష సంవాదం, మార్కండేయ సమస్య, సావిత్రి-సత్యవాన్, కర్ణుని కవచ-కుండల దానం, అమరమైన యక్షప్రశ్నలు.' : 'Volume III: Bhima meets Hanuman, Nivata-Kavachas, Nahusha serpent, Markandeya discourses, Savitri-Satyavan, Karna\'s armor donation, immortal Yaksha Prashna.';
+    } else if (parvaKey === 'virata') {
+      if (btnParvaVirata) btnParvaVirata.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'విరాట పర్వము (Virata Parva) — 5 ఉపపర్వాలు సంపూర్ణం' : 'Virata Parva (Book of Virata & Incognito Year) — All 5 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ IV: అజ్ఞాతవాస వేషధారణ, శమీ వృక్షముపై ఆయుధాలు, కీచక వధ, ఉత్తర గొగ్రహణంలో బృహన్నల సమ్మోహనాస్త్ర ప్రయోగం, అభిమన్యు-ఉత్తరల వివాహము.' : 'Volume IV: Incognito disguises in Matsya, weapons in Sami tree, slaying of Kichaka, Brihannala routs Kauravas with Sammohana astra, wedding of Abhimanyu and Uttara.';
+    } else if (parvaKey === 'udyoga') {
+      if (btnParvaUdyoga) btnParvaUdyoga.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'ఉద్యోగ పర్వము (Udyoga Parva) — 11 ఉపపర్వాలు సంపూర్ణం' : 'Udyoga Parva (Book of Effort & Preparations) — All 11 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ IV: సైన్యోద్యోగం, విదురనీతి, సనత్సుజాతీయ వేదాంతం, శ్రీకృష్ణ శాంతి రాయబారము, సభలో విశ్వరూప దర్శనం, కర్ణ-కృష్ణ-కుంతీ సంవాదం, భీష్ముని రథాతిరథ విభజన, అంబోపాఖ్యానం (శిఖండి వృత్తాంతం).' : 'Volume IV: Military preparations, Vidura Niti, Sanatsujatiya, Sri Krishna\'s Peace Embassy & Cosmic Vishwaroopa, Karna-Kunti dialogue, Bhishma\'s Rathatiratha rating, Amba-Shikhandin history.';
     }
 
     renderUpaParvas();
@@ -971,6 +995,8 @@
     if (currentParva === 'sabha') return window.SABHA_PARVA_UPAPARVAS || [];
     if (currentParva === 'vana1') return window.VANA_PARVA_PART1_UPAPARVAS || [];
     if (currentParva === 'vana2') return window.VANA_PARVA_PART2_UPAPARVAS || [];
+    if (currentParva === 'virata') return window.VIRATA_PARVA_UPAPARVAS || [];
+    if (currentParva === 'udyoga') return window.UDYOGA_PARVA_UPAPARVAS || [];
     return [];
   }
 
@@ -1078,7 +1104,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : 'vana2')}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : (v.volNumber === 3 ? 'vana2' : 'virata'))}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1112,6 +1138,8 @@
     else if (parvaKey === 'sabha') { dataset = window.SABHA_PARVA_UPAPARVAS; parvaLabel = 'SABHA PARVA (VOL II)'; }
     else if (parvaKey === 'vana1') { dataset = window.VANA_PARVA_PART1_UPAPARVAS; parvaLabel = 'VANA PARVA PART I (VOL II)'; }
     else if (parvaKey === 'vana2') { dataset = window.VANA_PARVA_PART2_UPAPARVAS; parvaLabel = 'VANA PARVA PART II (VOL III)'; }
+    else if (parvaKey === 'virata') { dataset = window.VIRATA_PARVA_UPAPARVAS; parvaLabel = 'VIRATA PARVA (VOL IV)'; }
+    else if (parvaKey === 'udyoga') { dataset = window.UDYOGA_PARVA_UPAPARVAS; parvaLabel = 'UDYOGA PARVA (VOL IV)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1248,13 +1276,71 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II &amp; III)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II, III &amp; IV)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('yaksha') || qLower.includes('prashna') || qLower.includes('crane') || qLower.includes('lake') || qLower.includes('wonder')) {
+      if (qLower.includes('kichaka') || qLower.includes('sairindhri') || qLower.includes('sudeshna') || qLower.includes('natyashala')) {
+        answer = `
+          <strong>👑 The Slaying of Commander Kichaka (కీచకవధ పర్వము / Kichaka-badha Parva - Volume IV):</strong><br/><br/>
+          In King Virata's court of Matsya, supreme commander Kichaka (brother of Queen Sudeshna) is consumed by lustful desire for Sairindhri (Queen Draupadi in disguise). Despite Draupadi's warning that five celestial Gandharvas protect her, Kichaka coerces Sudeshna into sending her to his chambers under the guise of fetching wine. When Kichaka tries to assault her, Draupadi escapes into the royal assembly where Kichaka kicks and insults her before King Virata and Kanka (Yudhishthira), who restrains Bhima's blazing rage.<br/><br/>
+          That midnight, weeping bitterly, Draupadi goes to Bhima in the royal kitchen. Bhima vows vengeance and arranges a secret rendezvous in the dark dance hall (<em>Natyashala</em>). When Kichaka arrives expecting Sairindhri, Bhima leaps upon him like an enraged lion. In an earth-shaking duel without weapons, Bhima snaps Kichaka's joints, breaks his neck, and crushes his limbs, head, and feet directly into his torso, rolling him into a grotesque, shapeless ball of flesh! When 105 Upakichakas tie Draupadi to Kichaka's pyre to burn her alive, Bhima uproots a colossal tree and slays all 105 brothers single-handedly!
+        `;
+      } else if (qLower.includes('brihannala') || qLower.includes('goharana') || qLower.includes('sammohana') || qLower.includes('sami tree') || (qLower.includes('uttara') && (qLower.includes('cow') || qLower.includes('doll') || qLower.includes('chariot')))) {
+        answer = `
+          <strong>🏹 Brihannala &amp; the Goharana War (గోహరణ పర్వము / Goharana Parva - Volume IV):</strong><br/><br/>
+          Learning of Kichaka's death, King Susarman of Trigarta attacks Matsya from the South, capturing King Virata. Bhima and Yudhishthira defeat Susarman and rescue Virata. Simultaneously, the grand Kaurava army—led by Bhishma, Drona, Karna, Kripa, Ashwatthaman, and Duryodhana—invades from the North, looting sixty thousand cattle (<em>Uttara Goharana</em>).<br/><br/>
+          Young Prince Uttara boasts that he would scatter the Kauravas if he had a charioteer; Brihannala (Arjuna in disguise) agrees to drive him. Beholding the oceanic Kaurava host, Prince Uttara leaps from his car in panic and runs away; Brihannala catches him by his hair and takes him to the cemetery Sami tree. Arjuna retrieves his celestial <strong>Gandiva bow</strong>, reveals his identity, and mounts the chariot.<br/><br/>
+          In an immortal solo triumph, Arjuna blows the Devadatta conch, disables Karna, beats back Drona and Kripa, and unleashes the sleep-inducing <strong>Sammohana weapon</strong>, rendering the entire Kaurava army unconscious! Prince Uttara strips their colorful silks and turbans for his sister Princess Uttara's dolls, and the cattle are restored in triumph.
+        `;
+      } else if (qLower.includes('vidura niti') || qLower.includes('prajagara') || qLower.includes('sleepless') || qLower.includes('pandita') || qLower.includes('murkha')) {
+        answer = `
+          <strong>📜 Mahatma Vidura's Immortal Niti (ప్రజాగర పర్వము / Prajagara Parva - Volume IV):</strong><br/><br/>
+          Tormented by insomnia, dread, and guilt after hearing Sanjaya's report from the Pandavas, King Dhritarashtra summons Mahatma Vidura at midnight, crying: <em>"My limbs are burning, counsel my tormented mind!"</em><br/><br/>
+          Vidura delivers the peerless 8-chapter discourse known across millennia as <strong>Vidura Niti</strong>:<br/>
+          • <strong>The Wise Man (Pandita):</strong> One whose noble aims are never diverted by anger, joy, pride, or sorrow; who speaks with restraint; and who honors righteousness above gain.<br/>
+          • <strong>The Fool (Murkha):</strong> One who enters without invitation, talks without being asked, trusts the untrustworthy, and loves those who hate him.<br/>
+          • <strong>The Three Gates to Hell:</strong> Lust, Anger, and Greed (కామ, క్రోధ, లోభాలు) destroy the soul and must be shunned.<br/>
+          • <strong>The Power of Forgiveness:</strong> <em>"Forgiveness is the highest virtue; benevolence is the best ally; contentment is supreme peace; and non-violence is the purest Dharma."</em><br/>
+          Vidura boldly warns the blind king that shielding Duryodhana's greed will plunge the entire Kuru dynasty into catastrophic extermination.
+        `;
+      } else if (qLower.includes('vishwaroopa') || qLower.includes('peace embassy') || qLower.includes('rayabaram') || qLower.includes('bhagavat yana') || qLower.includes('needle') || qLower.includes('five villages') || qLower.includes('chain')) {
+        answer = `
+          <strong>🌌 Sri Krishna's Peace Embassy &amp; Cosmic Vishwaroopa (భగవద్యాన పర్వము / Bhagavat Yana Parva - Volume IV):</strong><br/><br/>
+          To exhaust every possible chance for peace, Lord Sri Krishna personally travels to Hastinapura as ambassador (<em>Krishna Rayabaram</em>). Rejecting Duryodhana's luxurious palaces and feasts, Krishna stays at the humble home of Mahatma Vidura and visits Queen Kunti.<br/><br/>
+          Addressing the imperial assembly, Krishna asks for peace and demands only <strong>five villages</strong> for the Pandavas. Duryodhana arrogantly declares: <em>"I will not part with even as much land as can be pierced by the sharp point of a needle (సూదిమొన మోపినంత నేల కూడా ఇవ్వను)!"</em> Duryodhana, Sakuni, and Duhsasana conspire to arrest and chain Krishna.<br/><br/>
+          Krishna laughs a cosmic, universe-shaking laugh and manifests His boundless <strong>Vishwaroopa</strong> in the royal court: Brahma appears on His chest, Rudra on His forehead, blazing fires from His mouth, the Adityas and Lokapalas on His arms, and the Pandavas shining in His aura! The earth trembles and assembled kings close their eyes in terror. Krishna grants fleeting sight to Dhritarashtra to witness the divine form before departing, proclaiming that war is now inevitable.
+        `;
+      } else if (qLower.includes('karna-vivada') || (qLower.includes('karna') && (qLower.includes('kunti') || qLower.includes('secret') || qLower.includes('boon') || qLower.includes('four brothers')))) {
+        answer = `
+          <strong>🤝 Karna-Krishna &amp; Karna-Kunti Dialogues (కర్ణ వివాద పర్వము / Karna-Vivada Parva - Volume IV):</strong><br/><br/>
+          1. <strong>Krishna to Karna:</strong> Taking Karna onto His chariot, Krishna reveals that Karna is the firstborn son of Kunti (Kaunteya) and Surya. Krishna offers him the imperial crown of Bharatavarsha with Yudhishthira holding his umbrella and Draupadi as his queen. Karna weeps in gratitude but refuses: Duryodhana stood by him when the world humiliated him; to desert his friend now for a crown would be foul ungratefulness. He asks Krishna to keep his birth secret so Yudhishthira does not abandon the throne.<br/><br/>
+          2. <strong>Kunti to Karna:</strong> Queen Kunti meets Karna on the banks of the Ganga at noon, pleading with him to join his brothers. Karna gently reminds her of her cruelty in abandoning him as a helpless newborn in the river. Yet out of filial love, Karna grants her a historic boon: <em>"I shall not slay Yudhishthira, Bhima, Nakula, or Sahadeva. Only between Arjuna and myself will there be a duel to the death. Thus, whether I perish or Arjuna perisheth, thou shalt still have five living sons!"</em>
+        `;
+      } else if (qLower.includes('amba') || qLower.includes('shikhandi') || qLower.includes('salwa') || (qLower.includes('parashurama') && qLower.includes('bhishma'))) {
+        answer = `
+          <strong>🔥 Princess Amba, Parashurama Duel &amp; Shikhandin (అంబోపాఖ్యాన పర్వము / Amba-upakhyana Parva - Volume IV):</strong><br/><br/>
+          Bhishma explains why he has vowed never to shoot an arrow at Shikhandin: Bhishma abducted Princess Amba of Kasi along with her sisters for Vichitravirya. When Amba revealed her love for King Salwa, Bhishma released her; but Salwa rejected her as another's captive. Amba demanded Bhishma marry her; bound by celibacy, Bhishma refused.<br/><br/>
+          Amba appealed to Bhagavan Parashurama (Bhishma's martial Guru). When Bhishma refused Parashurama's order, an epic 23-day duel erupted between master and disciple at Kurukshetra, halted only when celestials intervened to stop Bhishma's apocalyptic Praswapa weapon.<br/><br/>
+          Amba performed 12 years of severe forest penance. Lord Shiva appeared and granted the boon that in her next life she would cause Bhishma's death. She entered the fire and was reborn as King Drupada's daughter, becoming the male warrior <strong>Shikhandin</strong> via a Yaksha's grace. Bhishma vows: <em>"Because Shikhandin was born a woman, I shall never raise my weapons against him!"</em>
+        `;
+      } else if (qLower.includes('sanat-sujata') || qLower.includes('sanatsujat') || qLower.includes('pramada')) {
+        answer = `
+          <strong>🧘 Sage Sanatsujata on Immortality (సనత్సుజాత పర్వము / Sanat-Sujata Parva - Volume IV):</strong><br/><br/>
+          Sleepless King Dhritarashtra asks Mahatma Vidura to explain the eternal Brahman. Vidura invokes the mind-born son of Brahma, the eternal youth Sage Sanatsujata, who delivers the foundational Vedantic classic <strong>Sanatsujatiya</strong> (commented upon by Adi Shankaracharya).<br/><br/>
+          Sanatsujata's seminal teaching is: <em>"Pramadam vai mrityum aham bravimi"</em> — <strong>"Spiritual heedlessness (delusion and forgetfulness of the Self) is true death!"</strong><br/>
+          He explains that death is not a physical end, but the soul's entanglement in desire, ego, and ignorance. By practicing the 12 great virtues, observing Brahmacharya, and meditating on the changeless Atman within the heart, one transcends mortality and attains eternal oneness with Brahman.
+        `;
+      } else if (qLower.includes('ardharatha') || qLower.includes('rathatiratha') || qLower.includes('rating') || qLower.includes('half-car')) {
+        answer = `
+          <strong>🛡️ Bhishma's Classification of Warriors (రథాతిరథ సంఖ్యాన పర్వము - Volume IV):</strong><br/><br/>
+          Before the war, Duryodhana asks Bhishma to classify the commanders of both hosts into Rathas, Atirathas, and Maharathas.<br/><br/>
+          While praising Arjuna, Satyaki, Drona, and Ashwatthaman with glowing words, Bhishma classifies <strong>Karna as an Ardharatha (half-car warrior)</strong>. Bhishma cites Karna's boastfulness, his loss of natural divine armor and earrings, and his past retreats against Gandharva Chitrasena and Brihannala.<br/><br/>
+          Enraged and humiliated to his soul, Karna curses Bhishma for sowing dissension and takes a solemn vow: <em>"I shall not string my bow nor enter Kurukshetra as long as Grandfather Bhishma remains alive and in command!"</em> This fateful vow sidelines Karna for the first ten crucial days of the war.
+        `;
+      } else if (qLower.includes('yaksha') || qLower.includes('prashna') || qLower.includes('crane') || qLower.includes('lake') || qLower.includes('wonder')) {
         answer = `
           <strong>❓ The Immortal Yaksha Prashna (ఆరణ్య పర్వము / Aranya Parva - Volume III):</strong><br/><br/>
           In the Dvaitavana wilderness, Nakula, Sahadeva, Arjuna, and Bhima drink from a crystal lake without answering the guardian crane's questions and drop lifeless. King Yudhishthira arrives, beholds his fallen brothers, and humbly accepts the test of the crane, who transforms into a colossal Yaksha (Lord Dharma in disguise).<br/><br/>
@@ -1358,8 +1444,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, and III (Adi Parva, Sabha Parva, and both parts of Vana Parva).<br/><br/>
-          You can explore the 12 Upa-Parvas of Volume III (Yaksha Prashna, Bhima &amp; Hanuman, Savitri-Satyavan, Karna's Kavacha-Kundala, Durvasa's feast, Nahusha serpent, Nivata-Kavachas, Ghosha-Yatra) or switch to Volumes I and II in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, III, and IV (Adi, Sabha, Vana, Virata, and Udyoga Parvas).<br/><br/>
+          You can explore all 16 Upa-Parvas of Volume IV (Virata Parva &amp; Udyoga Parva: Kichaka-badha, Goharana war, Vidura Niti, Sanatsujatiya, Krishna's Peace Embassy, Cosmic Vishwaroopa, Karna-Kunti dialogue, Amba-Shikhandin) or switch to Volumes I, II, and III in the reader above!
         `;
       }
 
@@ -1379,7 +1465,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('vana2');
+    selectReaderParva('virata');
   });
 })();
 </script>

@@ -1094,6 +1094,240 @@ const VANA_PARVA_PART2_UPAPARVAS = [
   }
 ];
 
+/* ===== VOLUME IV: VIRATA PARVA — 5 UPA-PARVAS DETAIL =====
+   Based directly on Pratap Chandra Roy's English Translation (Sections I - LXXII) */
+const VIRATA_PARVA_UPAPARVAS = [
+  {
+    number: 1,
+    id: "pandava-pravesha",
+    nameEn: "Pandava-Pravesha Parva",
+    nameSa: "पाण्डवप्रवेशपर्व",
+    nameTe: "పాండవ ప్రవేశ పర్వము (అజ్ఞాతవాస ప్రవేశం & వేషధారణ)",
+    sections: "Sections I - XII",
+    versesApprox: 345,
+    keyCharacters: ["King Yudhishthira (Kanka)", "Bhima (Vallabha)", "Arjuna (Brihannala)", "Nakula (Granthika)", "Sahadeva (Tantripala)", "Queen Draupadi (Sairindhri)", "King Virata", "Queen Sudeshna", "Sage Dhaumya"],
+    summaryEn: "As the 12-year forest exile concludes, the Pandavas prepare for their treacherous 13th year incognito (Ajnata-vasa) where discovery would sentence them to another 12 years of exile. Sage Dhaumya instructs them on the subtle etiquette and dangers of living as royal servants in a monarch's court. Approaching King Virata's capital in Matsya, they wrap their celestial bows and weapons in animal skins to resemble a decomposed corpse and conceal them high in the branches of a thorny Sami tree inside a cremation ground to keep people away. Yudhishthira offers a magnificent hymn of devotion to Goddess Durga, who blesses them with impenetrable secrecy. The Pandavas enter Virata's service one by one under humble disguises: Yudhishthira presents himself as Kanka, an expert Brahmana dice-player and courtier; Bhima enters as Vallabha, a master chef and wrestler; Arjuna assumes the cursed form of Brihannala, a eunuch instructor of dance and singing to Princess Uttara; Sahadeva becomes Tantripala, a skilled herdsman of cows; Nakula becomes Granthika, a master tamer and healer of horses; and Queen Draupadi, weeping with dignity, enters as Sairindhri (Malini), a noble hairdresser and maidservant to Queen Sudeshna.",
+    summaryTe: "పాండవులు తమ 12 ఏళ్ళ అరణ్యవాసాన్ని ముగించి, ఎవరూ గుర్తుపట్టకూడని క్లిష్టమైన 13వ ఏట అజ్ఞాతవాసమును ప్రారంభించుట. ధౌమ్య మహర్షి రాజుల కొలువులలో సేవకులుగా మెలగవలసిన సూక్ష్మ నడవడికలను ఉపదేశించుట. మత్స్యదేశ రాజధానిని సమీపించి, శ్మశానవాటికలోని ముళ్ళ జమ్మి చెట్టు (శమీ వృక్షము) పై తమ గాండీవాది దివ్యాస్త్రాలను శవమువలె బట్టలలో చుట్టి దాచిపెట్టుట. యుధిష్ఠిరుడు దుర్గాదేవిని స్తుతించగా అమ్మవారు వారి రహస్య రక్షణకు వరమిచ్చుట. అనంతరం విరాటరాజు కొలువులో ఒక్కొక్కరుగా ప్రవేశించుట: కంకభట్టుగా ధర్మరాజు (పాచికల నిపుణుడు), వలలుడిగా భీముడు (మహావంటగాడు & మల్లయోధుడు), బృహన్నలగా అర్జునుడు (ఉత్తరా రాజకుమారికి నాట్య సంగీత గురువు), తంత్రపాలుడిగా సహదేవుడు (గోరక్షకుడు), దామగ్రంథిగా నకులుడు (అశ్వశిక్షకుడు), మరియు సుధేష్ణా దేవి అంతఃపురంలో సైరంధ్రి మాలినిగా ద్రౌపది ప్రవేశించుట.",
+    keyQuoteRoy: "Vyasa said: 'Even in extreme adversity, the wise preserve their patience. Clad in humble weeds like fires hidden under ashes, the heroic sons of Pandu entered the city of Virata without being detected by any.'",
+    dharmaInsight: "True spiritual nobility shines in the crucible of humility; when circumstances demand subservience, enduring hardship with unshakeable inner dignity is the hallmark of true character."
+  },
+  {
+    number: 2,
+    id: "samaya-palana",
+    nameEn: "Samaya-palana Parva",
+    nameSa: "समयपालनपर्व",
+    nameTe: "సమయపాలన పర్వము (నియమ పాలన & జీమూత వధ)",
+    sections: "Section XIII",
+    versesApprox: 120,
+    keyCharacters: ["King Virata", "Bhima (Vallabha)", "Jimuta (champion wrestler)", "King Yudhishthira"],
+    summaryEn: "For ten harmonious months, the Pandavas live unsuspected in Virata's palace, meticulously observing their solemn covenant (Samaya-palana). During the grand autumn festival of Lord Brahma, renowned wrestlers and martial champions from across continents arrive to demonstrate feats of prowess. A ferocious, gigantic champion wrestler named Jimuta challenges the entire assembly, striking terror into Virata's champions. Anxious for his realm's honor, King Virata commands his master cook Vallabha (Bhima) to enter the ring. Bhima steps forward, roars like a lion, and clashes with Jimuta. In an earth-shaking display of ancient wrestling, Bhima locks Jimuta, lifts him spinning above his head a hundred times, and violently smashes him against the arena floor, shattering his ribs and bones. King Virata showers Vallabha with immense riches and royal favors, while Yudhishthira and his brothers rejoice in quiet satisfaction.",
+    summaryTe: "మత్స్య రాజధానిలో పది నెలలపాటు పాండవులు ఎటువంటి అనుమానము రాకుండా తమ సమయ నియమాలను అత్యంత నిష్ఠతో పాటించుట. బ్రహ్మోత్సవాలలో దేశదేశాల మల్లయోధులు రాగా, అజేయుడైన జీమూతుడు సమస్త వీరులను సవాలు చేస్తూ గర్జించుట. మత్స్యదేశ గౌరవార్థం విరాటరాజు తన వంటవాడైన వలలుని (భీమసేనుని) రంగంలోకి దింపుట. భీముడు సింహంలా గర్జించి జీమూతునితో భీకరంగా పోరాడి, ఆకాశంలోకి నూరుమార్లు గిరగిరా తిప్పి నేలకేసి కొట్టి సంహరించుట. విరాటరాజు ఆనందంతో వలలునికి అపార ధనధాన్యాలను, బహుమతులను ప్రసాదించుట.",
+    keyQuoteRoy: "Virata said: 'Well done, O cook! Thou hast upheld the honor of Matsya! Like unto Valadeva himself in strength, ask of me whatever thou desirest!' And Bhima smiled, receiving the king's bounty with folded hands.",
+    dharmaInsight: "Duty requires that strength be summoned only in rightful defense of honor; maintaining self-discipline and preserving vows (Samaya) brings divine blessings."
+  },
+  {
+    number: 3,
+    id: "kichaka-badha",
+    nameEn: "Kichaka-badha Parva",
+    nameSa: "कीचकवधपर्व",
+    nameTe: "కీచకవధ పర్వము (ద్రౌపదీ పరాభవము & నాట్యశాలలో కీచక సంహారం)",
+    sections: "Sections XIV - XXV",
+    versesApprox: 760,
+    keyCharacters: ["Kichaka (Commander)", "Queen Draupadi (Sairindhri)", "Queen Sudeshna", "Bhima (Vallabha)", "King Yudhishthira (Kanka)", "Upakichakas"],
+    summaryEn: "King Virata's brother-in-law and supreme army commander, the mighty Kichaka, sees Sairindhri (Draupadi) and is consumed by lustful infatuation. Draupadi warns him that five ferocious Gandharvas protect her and that touching her will bring instantaneous death. Overcome by arrogance, Kichaka coerces his sister Queen Sudeshna into sending Sairindhri to his apartments under the pretext of fetching vintage wine. When Kichaka tries to embrace her, Draupadi breaks free and runs weeping into the royal court. In full view of King Virata and Kanka (Yudhishthira), Kichaka pursues her, kicks her to the ground, and hurls filthy abuse. Bhima's eyes blaze with fire and his teeth gnash, but Yudhishthira restrains him with subtle glances to protect their incognito covenant. That midnight, Draupadi enters the palace kitchen where Bhima is asleep, bathes him in her tears, and laments the daily humiliations suffered by the daughter of Drupada. Bhima consoles her and plans retribution: Draupadi is instructed to lure Kichaka to a midnight rendezvous in the secluded dance hall (Natyashala). When Kichaka arrives in perfumed robes whispering sweet words to the darkness, Bhima leaps from the couch like a pouncing tiger. An earth-shaking duel ensues without weapons. Bhima crushes Kichaka's throat, snaps his spine, and rolls his hands, feet, head, and limbs into his torso, reducing the commander into a horrific, shapeless ball of flesh. When 105 brothers of Kichaka (Upakichakas) tie Draupadi to Kichaka's funeral pyre to burn her alive, Bhima uproots an eighty-cubit tree and single-handedly slaughters all 105 of them, terrifying the entire city of Matsya.",
+    summaryTe: "విరాటరాజు బావమరిది, అజేయ సేనాని అయిన కీచకుడు సైరంధ్రిని చూసి కామవశుడగుట. తనకు ఐదుగురు గంధర్వ పతులున్నారని, తాకితే మరణం తప్పదని ద్రౌపది హెచ్చరించినా లెక్కచేయక సుధేష్ణ సహాయంతో మద్యము తెమ్మనే నెపంతో రప్పించుట. కీచకుడు చేయి వేయగా ద్రౌపది విదిలించుకుని నిండు సభకు పరుగెత్తుకురాగా, కీచకుడు ఆమెను తన్ని అవమానించుట. భీముడు ఆగ్రహోదగ్రుడైనా కంకభట్టు (ధర్మరాజు) సైగలతో శాంతింపజేయుట. ఆ రాత్రి వంటశాలలో నిద్రిస్తున్న భీముని వద్దకు ద్రౌపది వచ్చి కన్నీటితో తన గోడు వెళ్లబోసుకొనుట. భీముడు కీచకుని సంహరించడానికి పన్నాగం పన్నుట. చీకటి నాట్యశాలలో ఏకాంత భేటీకి సైరంధ్రి రమ్మన్నట్లు కీచకుని భ్రమించి పిలిపించుట. శృంగారభావంతో వచ్చిన కీచకునిపై భీముడు సింహంలా విరుచుకుపడి, ఎటువంటి ఆయుధాలు లేకుండా చేతులతోనే నొక్కి, ఎముకలు విరిచి మాంసపు ముద్దగా మార్చి సంహరించుట. ద్రౌపదిని చితిపై సతీసహగమనం చేయించబోయిన 105 మంది ఉపకీచకులను కూడా భీముడు ఒక మహావృక్షంతో కొట్టి యమపురికి పంపుట.",
+    keyQuoteRoy: "Bhima squeezed Kichaka's body between his arms and rolled him like a ball of clay, so that not a single limb was visible! Bhima cried: 'Thus shall perish all villains who covet the wives of other men under the shelter of royal power!'",
+    dharmaInsight: "Arrogance born of political power and predatory lust invites terrifying, gruesome retribution; righteous retribution strikes down tyrants even when cloaked in the shadows."
+  },
+  {
+    number: 4,
+    id: "goharana",
+    nameEn: "Goharana Parva",
+    nameSa: "गोहरणपर्व",
+    nameTe: "గోహరణ పర్వము (దక్షిణ & ఉత్తర గొగ్రహణం, బృహన్నల శౌర్యం & సమ్మోహనాస్త్రం)",
+    sections: "Sections XXVI - LXIX",
+    versesApprox: 1850,
+    keyCharacters: ["Arjuna (Brihannala)", "Prince Uttara", "King Virata", "Susarman (Trigarta)", "Bhima", "Yudhishthira", "Duryodhana", "Bhishma", "Drona", "Karna", "Kripa", "Ashwatthaman"],
+    summaryEn: "Following Kichaka's death, Duryodhana's spies report that Matsya has been weakened. King Susarman of Trigarta, eager for revenge against Matsya, proposes seizing Virata's vast herds of cattle from the south (Dakshina Goharana). King Virata marches out with his armies to confront the Trigartas. Susarman overpowers and captures Virata; but Yudhishthira, Bhima, Nakula, and Sahadeva rush forward. Bhima uproots a colossal Sal tree, smashes the Trigarta host, rescues King Virata, and captures Susarman, whom Yudhishthira graciously releases after humiliating him. Simultaneously, the grand Kaurava army—led by Bhishma, Drona, Karna, Kripa, Ashwatthaman, and Duryodhana—invades Matsya from the north (Uttara Goharana), carrying away sixty thousand cows. In the deserted palace, young Prince Uttara boasts that had he a skilled charioteer, he would single-handedly scatter the Kauravas. Sairindhri reveals that Brihannala was once the charioteer of Arjuna. Brihannala takes the reins; but upon reaching the front and beholding the oceanic Kaurava army bristling with celestial banners, Prince Uttara leaps from his chariot and flees in terror. Brihannala chases him, drags him back by his hair, reassures him, and drives the chariot to the cremation ground Sami tree. There Arjuna retrieves the divine Gandiva bow, reveals his true identity to Uttara, and strings the weapon with a thunderous twang. In an unmatched solo triumph, Arjuna blows the Devadatta conch, single-handedly outmaneuvers Drona, Kripa, and Ashwatthaman, cuts Karna's armor and forces him to retreat, defeats Duryodhana, and unleashes the sleep-inducing Sammohana weapon, putting the entire Kaurava army to sleep. Uttara strips their celestial garments to make dresses for Princess Uttara's dolls. Arjuna returns the cattle, conceals his identity before returning, and enters the capital with modest secrecy.",
+    summaryTe: "కీచకుని మరణాన్ని తెలుసుకున్న కౌరవులు, త్రిగర్తరాజు సుశర్మతో కలిసి విరాటుని గోవులను అపహరించాలని పథకం వేయుట. దక్షిణ గొగ్రహణంలో సుశర్మ విరాటరాజును బంధించగా, ధర్మరాజాదులు వెళ్ళి భీముని సహాయంతో సుశర్మను ఓడించి విరాటుని ప్రాణాలు కాపాడుట. అదే సమయంలో ఉత్తర గొగ్రహణంలో భీష్మ, ద్రోణ, కర్ణ, కృప, అశ్వత్థామ, దుర్యోధనులతో కూడిన మహాసేన ఉత్తర దిశనుండి అరవై వేల ఆవులను అపహరించుట. అంతఃపురంలో యువరాజు ఉత్తరకుమారుడు మంచి సారథి ఉంటే కౌరవులను తరిమికొడతానని ప్రగల్భాలు పలుకగా, సైరంధ్రి బృహన్నల సారథ్య నైపుణ్యాన్ని చెప్పుట. బృహన్నల రథం నడపగా, కౌరవ సైన్య సాగరాన్ని చూసి భయపడి రథం దిగి పారిపోతున్న ఉత్తరుని జుట్టు పట్టుకుని వెనక్కి తెచ్చుట. శమీ వృక్షం నుండి గాండీవ ధనుస్సును దించి తన నిజస్వరూపాన్ని వెల్లడించుట. ఒంటరిగా కౌరవ సైన్యంపై విరుచుకుపడి కర్ణ, ద్రోణ, కృప, అశ్వత్థామ, దుర్యోధనులను ఎదుర్కొని, సమ్మోహనాస్త్రముతో సమస్త సేనను నిద్రపుచ్చి, ఉత్తర బొమ్మల కోసం వారి పట్టువస్త్రాలను సేకరించి, గోవులను విజయవంతంగా విడిపించిన బృహన్నల మహోన్నత శౌర్యగాథ.",
+    keyQuoteRoy: "Arjuna said to Uttara: 'Fear not, O prince! Stand firm on thy chariot! Even if Yama, Indra, Varuna, and Kubera come against us, with Gandiva in my hands and these inexhaustible quivers, not a blade of grass can be touched in Matsya!'",
+    dharmaInsight: "True mastery needs no boastful proclamations; when tested against overwhelming odds, a single warrior anchored in truth, skill, and righteousness can overcome millions."
+  },
+  {
+    number: 5,
+    id: "vaivahika",
+    nameEn: "Vaivahika Parva",
+    nameSa: "वैवाहिकपर्व",
+    nameTe: "వైవాహిక పర్వము (పాండవ నిజరూప ప్రకటన & అభిమన్యు-ఉత్తరల కళ్యాణము)",
+    sections: "Sections LXX - LXXII",
+    versesApprox: 175,
+    keyCharacters: ["King Virata", "King Yudhishthira", "Arjuna", "Prince Abhimanyu", "Princess Uttara", "Sri Krishna", "King Drupada", "Balarama"],
+    summaryEn: "On the fourth day after the battle, the 13-year period of exile and incognito concludes. The Pandavas perform their morning ablutions, don pure white garments, adorn themselves with imperial jewels, and seat themselves upon the regal thrones in King Virata's council hall. King Virata enters and is outraged to see his humble dice-player Kanka sitting on the throne; Sahadeva smiles and reveals that Kanka is none other than Emperor Yudhishthira, Vallabha is Bhima, Brihannala is Arjuna, and Sairindhri is Queen Draupadi! Awestruck and mortified, King Virata touches their feet, begs forgiveness for past subservience, offers his entire kingdom and treasury, and offers Princess Uttara in marriage to Arjuna. Arjuna noble mind declines for himself, explaining that as Brihannala he instructed Uttara in song and dance, loving her as a daughter; marrying her would tarnish the sacred purity of the teacher-student bond. Instead, Arjuna accepts Uttara as daughter-in-law for his heroic son Abhimanyu. The glorious wedding is solemnized at Upaplavya with supreme pomp. Lord Sri Krishna, Balarama, King Drupada, and emperors from all Bharatavarsha gather, forming the grand alliance that will champion Dharma on Kurukshetra.",
+    summaryTe: "అజ్ఞాతవాస నియమిత కాలం పరిపూర్ణం కాగా, పాండవులు తెల్లటి దివ్యవస్త్రాలు ధరించి విరాటుని రాజసింహాసనాలపై అధిష్టించుట. కంకభట్టు సింహాసనంపై ఉండడం చూసి కోపించిన విరాటునికి సహదేవుడు అసలు రహస్యం వెల్లడించుట. వీరే మహాపరాక్రమవంతులైన పాండవులని, సైరంధ్రి సాక్షాత్తు ద్రౌపది అని తెలుసుకున్న విరాటరాజు ఆశ్చర్యంతో వారి పాదాలపై పడి క్షమించమని వేడుకొనుట. తన సర్వస్వమును సమర్పించి ఉత్తరను అర్జునునికిచ్చి వివాహం చేయబోగా, ఆమెకు తాను నాట్యగురువుగా తండ్రి స్థానంలో ఉన్నానని, కావున తన పుత్రుడైన అభిమన్యునికి కోడలిగా స్వీకరిస్తానని అర్జునుడు నిష్కళంక ధర్మాన్ని పాటించుట. ఉపప్లావ్య నగరంలో శ్రీకృష్ణ, బలరామ, ద్రుపద మహారాజుల సమక్షంలో అభిమన్యు-ఉత్తరల అద్భుత వైవాహిక మహోత్సవము.",
+    keyQuoteRoy: "Arjuna said: 'O king, living in thy inner apartments I had the charge of thy daughter. She ever reposed trust in me as in a father. Therefore, let my son Abhimanyu, nephew of Krishna, accept her hand in sacred marriage!'",
+    dharmaInsight: "Uncompromising moral rectitude in relations of trust (Guru-Shishya) preserves absolute honor; an alliance founded on virtue becomes an invincible bastion of Dharma."
+  }
+];
+
+/* ===== VOLUME IV: UDYOGA PARVA — 11 UPA-PARVAS DETAIL =====
+   Based directly on Pratap Chandra Roy's English Translation (Sections I - CXCIX) */
+const UDYOGA_PARVA_UPAPARVAS = [
+  {
+    number: 1,
+    id: "sainyodyoga",
+    nameEn: "Sainyodyoga Parva",
+    nameSa: "सैन्योद्योगपर्व",
+    nameTe: "సైన్యోద్యోగ పర్వము (శ్రీకృష్ణుని వద్దకు అర్జున-దుర్యోధనులు & నారాయణీ సేన)",
+    sections: "Sections I - XXI",
+    versesApprox: 680,
+    keyCharacters: ["Sri Krishna", "Arjuna", "Duryodhana", "King Drupada", "Balarama", "King Salya"],
+    summaryEn: "Following the wedding at Upaplavya, Sri Krishna advises sending an emissary to Dhritarashtra to seek peaceful restoration while preparing for war. Both Duryodhana and Arjuna travel to Dvaraka to secure Krishna's allegiance. Duryodhana arrives first and arrogantly sits upon an ornate throne at the head of the sleeping Lord; Arjuna arrives second and humbly stands with folded hands at Krishna's feet. Upon waking, Krishna's eyes fall first upon Arjuna. Because Duryodhana arrived first but Arjuna was seen first, Krishna grants Arjuna the first choice between two options: His million-strong Narayani Sena consisting of undefeated celestial cowherd-warriors, or Himself alone, unarmed and promising not to strike a single blow. Arjuna without a moment's hesitation chooses the unarmed Lord Sri Krishna to be his charioteer. Duryodhana joyously claims the massive Narayani army, gloating over Arjuna's apparent folly. Balarama decides to remain neutral, refusing to fight either disciple. Meanwhile, King Salya of Madra marches with an enormous army to join the Pandavas; Duryodhana sets up magnificent royal pavilions along Salya's march, deceiving Salya into believing Yudhishthira is hosting him. When Salya pledges a boon in gratitude, Duryodhana reveals himself and demands Salya's army. Salya consents, but secretly visits Yudhishthira and promises that when chosen as Karna's charioteer, he will demoralize and deflate Karna's spirit on the battlefield.",
+    summaryTe: "ఉపప్లావ్యంలో వివాహానంతరం కురుక్షేత్ర రణసన్నాహాలు ప్రారంభమగుట. శ్రీకృష్ణుని సైనిక సహాయం కోరి అర్జునుడు, దుర్యోధనుడు ఏకకాలంలో ద్వారకకు చేరుకొనుట. నిద్రిస్తున్న కృష్ణుని శిరోభాగంలో గర్వంతో కూర్చున్న దుర్యోధనుడు, పాదాల చెంత వినయంతో నిలిచిన అర్జునుడు. మేల్కొన్న శ్రీకృష్ణుడు మొదట అర్జునుని చూసి, ఒకవైపు ఆయుధం పట్టని తాను, మరోవైపు 10 లక్షల అజేయ 'నారాయణీ సేన' ఉండగా ఎంచుకోమనుట. అర్జునుడు ఏమాత్రం సందేహించకుండా భగవానుడైన శ్రీకృష్ణునే సారథిగా కోరుకోగా, దుర్యోధనుడు నారాయణీ సేనను దక్కించుకుని ఆనందించుట. బలరాముడు తటస్థంగా ఉండుటకు నిశ్చయించుకొనుట. శల్యునికి కపట ఆతిథ్యమిచ్చి దుర్యోధనుడు తన పక్షాన చేర్చుకోగా, శల్యుడు యుద్ధంలో కర్ణుని తేజస్సును తగ్గించడానికి ధర్మరాజుకు రహస్య వాగ్దానమిచ్చుట.",
+    keyQuoteRoy: "Arjuna said to Krishna: 'Thou alone art sufficient for me, O Slayer of Madhu! Even without weapons, be Thou my guide and charioteer in this righteous war!'",
+    dharmaInsight: "Material strength and numbers are meaningless without divine guidance; he who chooses God chooses ultimate victory, while he who chooses worldly force embraces destruction."
+  },
+  {
+    number: 2,
+    id: "sanjaya-yana",
+    nameEn: "Sanjaya Yana Parva",
+    nameSa: "सञ्जययानपर्व",
+    nameTe: "సంజయయాన పర్వము (ధృతరాష్ట్రుని రాయబారం & ధర్మరాజు ఐదు ఊళ్ళ ప్రతిపాదన)",
+    sections: "Sections XXII - XXXII",
+    versesApprox: 540,
+    keyCharacters: ["Sanjaya", "King Dhritarashtra", "King Yudhishthira", "Sri Krishna", "Arjuna"],
+    summaryEn: "King Dhritarashtra dispatches his trusted charioteer and minister Sanjaya on an embassy to Upaplavya. Sanjaya delivers the blind king's deceptive appeal: praising Yudhishthira's virtue, Sanjaya subtly urges that even mendicancy and death in the forest are preferable for a righteous man to the terrible sin of slaughtering one's kinsmen. Yudhishthira gives a profound, measured reply: righteousness includes royal duty (*Kshatradharma*) to protect the realm and resist evil. To avoid the cataclysmic slaughter of millions, Yudhishthira makes the legendary magnanimous offer: 'Give us but five villages—Kusasthala, Vrikasthala, Asandi, Varnavata, and any fifth—one for each brother, and we shall renounce all claim to the imperial throne and dwell in peace. But if Duryodhana refuses even this, the twang of Gandiva and the roar of Bhima's mace will settle the debt on Kurukshetra.'",
+    summaryTe: "ధృతరాష్ట్రుడు సంజయుని ఉపప్లావ్యానికి రాయబారిగా పంపుట. బంధువులను చంపుకోవడం కంటే అడవులలో భిక్షమెత్తుకుని జీవించడమైనా ఉత్తమమని ధర్మరాజుకు కపట శాంతి బోధ చేయుట. ధర్మరాజు క్షాత్రధర్మ విధులను, న్యాయాన్ని వివరిస్తూ, రక్తపాతం నివారించడానికి ఐదుగురు సోదరులకు కేవలం ఐదు గ్రామాలు (కుశస్థల, వృకస్థల, అసంది, వారణావత మొదలైనవి) ఇస్తే చాలని, లేనిచో కురుక్షేత్రంలో గాండీవం మాట్లాడక తప్పదని నిష్కర్షగా హెచ్చరిక పంపుట.",
+    keyQuoteRoy: "Yudhishthira said: 'O Sanjaya, tell the blind king and his foolish son: Give us but five villages, and we shall sheath our swords. But if pride shutteth your ears, then the soil of Kurukshetra shall drink the blood of the Kurus!'",
+    dharmaInsight: "Magnanimity must never be mistaken for cowardice; offering extreme compromise to avoid bloodshed is the highest virtue, but surrendering to tyranny is an unpardonable sin."
+  },
+  {
+    number: 3,
+    id: "prajagara",
+    nameEn: "Prajagara Parva (Vidura Niti)",
+    nameSa: "प्रजागरपर्व (विदुरनीति)",
+    nameTe: "ప్రజాగర పర్వము (విదురనీతి - ధర్మ, న్యాయ, సదాచార బోధ)",
+    sections: "Sections XXXIII - XL",
+    versesApprox: 590,
+    keyCharacters: ["Mahatma Vidura", "King Dhritarashtra"],
+    summaryEn: "Upon Sanjaya's return from Upaplavya, King Dhritarashtra is consumed by unbearable insomnia, panic, and dread. In the dead of night, he summons Mahatma Vidura, the embodiment of Dharma born of Sage Vyasa. Dhritarashtra laments that his heart is on fire and begs for counsel to soothe his torment. Vidura delivers the world-renowned ethical and political masterpiece known as **Vidura Niti** (8 adhyayas). Vidura systematically classifies the qualities of a true Pandit (wise man) versus a Murkha (fool); expounds the eight virtues that elevate human character (wisdom, nobility, self-control, sacred learning, valor, measured speech, charity, and gratitude); analyzes the roots of statecraft; warns that unrighteous wealth gathered through injustice dissolves like unbaked clay pots in water; and fiercely reprimands Dhritarashtra for his blind infatuation with Duryodhana, predicting the total annihilation of the Kuru race unless justice is restored to the Pandavas.",
+    summaryTe: "సంజయుని మాటలు విని భయంతో, ఆందోళనతో రాత్రివేళ నిద్రపట్టక ధృతరాష్ట్రుడు విదురుని పిలిపించుట. విదురుడు చేసిన జగత్ప్రసిద్ధ ధర్మబోధయే 'విదురనీతి'. పండితుడు మరియు మూర్ఖుని లక్షణాలు, మానవ శీలమును తీర్చిదిద్దే ఎనిమిది సద్గుణాలు, రాజనీతి రహస్యాలు, మరియు క్షమాగుణం యొక్క గొప్పతనాన్ని విపులంగా వివరించుట. అన్యాయార్జిత సంపద పచ్చికుండలో నీటివలె కరిగిపోతుందని, దుర్యోధనుని అధర్మాన్ని చూస్తూ ఊరుకుంటే కురువంశం సమూలంగా నశిస్తుందని నిష్కళంక సత్యవాక్కులతో హెచ్చరించుట.",
+    keyQuoteRoy: "Vidura said: 'These two never suffer from distress: he who is contented with what he hath, and he who is master of his passions. But lust, anger, and greed are the three gates to hell that destroy the soul.'",
+    dharmaInsight: "Uncompromising truth spoken to power is the highest loyalty; clinging to unjust familial attachments in defiance of Dharma is the surest road to self-destruction."
+  },
+  {
+    number: 4,
+    id: "sanat-sujata",
+    nameEn: "Sanat-Sujata Parva (Sanatsujatiya)",
+    nameSa: "सनत्सुजातपर्व (सनत्सुजातीयम्)",
+    nameTe: "సనత్సుజాత పర్వము (సనత్సుజాతీయ వేదాంత బోధ)",
+    sections: "Sections XLI - XLVI",
+    versesApprox: 380,
+    keyCharacters: ["Sage Sanatsujata", "King Dhritarashtra", "Mahatma Vidura"],
+    summaryEn: "Still sleepless and seeking ultimate metaphysical knowledge of the immortal soul beyond earthly demise, Dhritarashtra begs Vidura to instruct him on Brahman. Vidura, conscious that as the son of a Sudra woman he should not formalize esoteric Vedic initiation, invokes through intense meditation the eternal youth Sage Sanatsujata (the mind-born son of Brahma). Sanatsujata manifests in blazing yogic splendor. In the celebrated treatise **Sanatsujatiya** (one of the foundational Prasthanatrayi commentaries of Adi Shankaracharya), Sanatsujata declares that death (*Mrityu*) is nothing other than *Pramada* (spiritual heedlessness, delusion, and forgetfulness of the Self). He explains the nature of Brahman, the illusion of duality, the 12 vices that destroy wisdom, the 12 great vows that secure liberation, the practice of Brahmacharya, and how the immortal Self dwelling within the lotus of the heart is unaffected by the storms of earthly birth and death.",
+    summaryTe: "మరణానంతర ఆత్మ తత్త్వాన్ని తెలుసుకోవాలన్న ధృతరాష్ట్రుని కోరిక మేరకు విదురుడు బ్రహ్మ మానసపుత్రుడైన సనత్సుజాత మహర్షిని ధ్యానంలో రప్పించుట. ఆది శంకరాచార్యుల భాష్యముతో అమరత్వము పొందిన 'సనత్సుజాతీయ' వేదాంత దర్శనం. 'ప్రమాదం వై మృత్యురహం బ్రవీమి'—ఆధ్యాత్మిక అజాగ్రత్తయే మరణమని, ఆత్మజ్ఞానమును పొందిన వివేకి మరణాన్ని జయిస్తాడని, హృదయకమలంలో వెలిగే పరమాత్మను తెలుసుకోవడమే శాశ్వత మోక్షమని సనత్సుజాతుడు బోధించుట.",
+    keyQuoteRoy: "Sanatsujata said: 'There is no death other than delusion (Pramada)! Men, overcome by desire, fall into the pit of worldly attachment; but those who conquer ignorance attain the immutable Brahman and are free from all fear.'",
+    dharmaInsight: "Spiritual ignorance is the only true death; when the mind transcends worldly desires and perceives the eternal Self, mortal terror dissolves into boundless peace."
+  },
+  {
+    number: 5,
+    id: "yana-sandhi",
+    nameEn: "Yana Sandhi Parva",
+    nameSa: "यानसन्धिपर्व",
+    nameTe: "యాన సంధి పర్వము (హస్తినాపుర సభలో సంజయుని రాయబార ఫలితం)",
+    sections: "Sections XLVII - LXXI",
+    versesApprox: 840,
+    keyCharacters: ["Sanjaya", "King Dhritarashtra", "Duryodhana", "Bhishma", "Drona", "Maharshi Vyasa"],
+    summaryEn: "The imperial court convenes in Hastinapura to hear Sanjaya's official report. Sanjaya openly tells the assembly that the Pandava warriors are invincible and that Lord Krishna drives Arjuna's chariot. Bhishma and Drona passionately plead with Dhritarashtra to yield Yudhishthira's rightful half-share or grant the five villages, warning that neither celestials nor Asuras can withstand the arrows of Arjuna when guided by Janardana. Duryodhana becomes violently agitated, mocks his elders as partisan cowards, and boasts that his 11 Akshauhinis and Karna's archery will crush the Pandavas like insects. Maharshi Vyasa appears and warns Dhritarashtra that when destruction approaches, the intellect of fools becomes totally inverted (*Vinashakale Viparitabuddhi*). Despite all warnings, Duryodhana refuses peace.",
+    summaryTe: "హస్తినాపుర సభలో సంజయుడు పాండవుల సైనిక బలాన్ని, శ్రీకృష్ణార్జునుల నర-నారాయణ తత్త్వాన్ని వివరించుట. భీష్మ, ద్రోణులు దుర్యోధనుని తీవ్రంగా మందలిస్తూ పాండవులకు న్యాయమైన వాటా ఇచ్చి శాంతిని నెలకొల్పమని కోరుట. దుర్యోధనుడు పెద్దలను అవమానిస్తూ కర్ణుని శౌర్యంతో పాండవులను మట్టికరిపిస్తానని ప్రగల్భాలు పలుకుట. 'వినాశకాలే విపరీతబుద్ధిః' అన్నట్లు నాశనకాలం సమీపించినప్పుడు బుద్ధి వక్రమార్గం పడుతుందని వ్యాసుడు ధృతరాష్ట్రునికి హెచ్చరిక చేయుట.",
+    keyQuoteRoy: "Drona said: 'Hearken, O king! Where Nara and Narayana are, there victory is certain! Do not plunge thy race into destruction through the madness of thy son!'",
+    dharmaInsight: "When pride blinds a tyrant, wisdom and counsel from the most venerable elders sound like hostility; destiny marches through the willful obstinacy of fools."
+  },
+  {
+    number: 6,
+    id: "bhagavat-yana",
+    nameEn: "Bhagavat Yana Parva",
+    nameSa: "भगवद्यानपर्व",
+    nameTe: "భగవద్యాన పర్వము (శ్రీకృష్ణ రాయబారము & సభలో విశ్వరూప ప్రదర్శన)",
+    sections: "Sections LXXII - CXXXIX",
+    versesApprox: 2450,
+    keyCharacters: ["Lord Sri Krishna", "King Dhritarashtra", "Duryodhana", "Mahatma Vidura", "Queen Kunti", "Bhishma", "Drona", "Sage Kanva", "Sage Galava", "Sage Jamadagnya"],
+    summaryEn: "To make one final divine effort to avert the catastrophic slaughter of humanity, Lord Sri Krishna personally departs for Hastinapura as ambassador of peace (*Krishna Rayabaram*). Bypassing Duryodhana's lavish golden palaces and sumptuous banquets, Krishna proceeds directly to the humble dwelling of Mahatma Vidura, where He joyfully eats simple food offered with pure love. Krishna visits his paternal aunt Queen Kunti, who sends a stirring call to Kshatriya valor to her sons through the heroic parable of Vidula. The following day, accompanied by Vidura, Krishna enters the imperial assembly of the Kurus. Krishna delivers a sublime speech on Dharma, harmony, and mercy, requesting only five villages for the Pandavas. Sages Kanva, Narada, and Jamadagnya advise Duryodhana with parables of Matali, Galava, and Yayati. Duryodhana obstinately proclaims his famous boast: 'I will not part with even as much land as can be pierced by the sharp point of a needle (సూదిమొన మోపినంత నేల కూడా ఇవ్వను)!' Duryodhana, Sakuni, and Duhsasana then hatch a sinister plot to seize and bind Krishna in iron chains. Sensing their conspiracy, the Lord bursts into cosmic laughter. In the midst of the royal court, Krishna manifests His terrifying, boundless **Vishwaroopa** (Cosmic Form): blazing fires issue from His mouth, Brahma sits upon His chest, Rudras and Adityas upon His brow, gods on His arms, and the Pandavas and celestials within His luminous aura. Dhritarashtra is granted divine sight for a fleeting moment to behold the cosmic splendour before begging Krishna to withdraw it. Having exhausted every avenue of peace, Krishna exits the assembly, declaring war inevitable.",
+    summaryTe: "లోకకల్యాణార్థం యుద్ధాన్ని నివారించడానికి భగవాన్ శ్రీకృష్ణుడు స్వయంగా హస్తినకు శాంతి రాయబారిగా వెళ్ళుట. దుర్యోధనుని రాజభోగాలను తిరస్కరించి, విదురుని ఇంట భక్తితో సమర్పించిన ఆతిథ్యాన్ని స్వీకరించుట. కుంతీదేవిని పరామర్శించగా, ఆమె విదులోపాఖ్యానం ద్వారా పుత్రులలో క్షాత్రతేజాన్ని రగిలించమని సందేశమిచ్చుట. రాజసభలో కృష్ణుని అమృతతుల్య శాంతి ప్రసంగం. దుర్యోధనుడు 'సూది మొన మోపినంత నేల కూడా పాండవులకు ఇవ్వను' అని అహంకరించి, శ్రీకృష్ణుని సంకెళ్ళతో బంధించడానికి కుట్ర చేయుట. పరమాత్మ దివ్యహాసం చేస్తూ నిండు కొలువులో తన అద్భుత 'విశ్వరూపం'ను ప్రదర్శించుట. దేవతలు, అగ్ని, సూర్య-రుద్రులు, సమస్త బ్రహ్మాండాలు ఆయన దేహంలో దర్శనమిచ్చుట. ధృతరాష్ట్రునికి క్షణకాలం దివ్యచక్షువులు ప్రసాదించి విశ్వరూపం చూపించి, శాంతి ప్రయత్నం ముగిసిందని చాటి హస్తినను వీడుట.",
+    keyQuoteRoy: "Krishna laughed, and as He laughed, His body flashed like a million suns! Brahma appeared on His breast, Rudra on His brow, Agni issued from His mouth, and all the kings shut their eyes in terror! The Lord said: 'Duryodhana, didst thou think to bind Me? Behold, all creation abideth within Me!'",
+    dharmaInsight: "God exhausts every avenue of mercy and peace before executing divine retribution; attempting to enslave or destroy the Truth only reveals mortal insignificance before the Infinite."
+  },
+  {
+    number: 7,
+    id: "karna-vivada",
+    nameEn: "Karna-Vivada Parva",
+    nameSa: "कर्णविवादपर्व",
+    nameTe: "కర్ణ వివాద పర్వము (కృష్ణ-కర్ణ సంవాదం & కుంతీ దేవికి కర్ణుని అభయదానము)",
+    sections: "Sections CXL - CXLVI",
+    versesApprox: 420,
+    keyCharacters: ["Lord Sri Krishna", "Danaveera Karna", "Queen Kunti"],
+    summaryEn: "Before departing Hastinapura, Sri Krishna takes Karna onto His chariot and drives outside the city. Krishna reveals the long-guarded cosmic secret: Karna is the eldest born son of Kunti (Kaunteya) and Surya Deva. Krishna entreats Karna to join his rightful brothers: Yudhishthira will wash his feet, Bhima and Arjuna will attend him, Draupadi will be his queen, and he will be crowned Emperor of all Bharatavarsha. Weeping with emotion, Karna replies with noble integrity: Duryodhana stood by him when he was scorned as a charioteer's son; Duryodhana invested his kingdom and life in Karna's friendship; to desert Duryodhana now on the brink of battle for the sake of an empire would be the foulest treason and ungratefulness. Karna asks Krishna to keep his birth secret, knowing that Yudhishthira would renounce the throne if he knew Karna was his elder brother. Following Krishna, Queen Kunti approaches Karna at noon while he prays on the banks of the Ganga. Surya Deva commands Karna from the heavens to obey his mother. Karna gently reproaches Kunti for abandoning him as a newborn to the river waves, depriving him of Kshatriya honor. Nevertheless, Karna cannot turn away his mother empty-handed: he grants Kunti a historic boon that he will not strike down Yudhishthira, Bhima, Nakula, or Sahadeva; only between himself and Arjuna will there be a battle to the death, ensuring that Kunti will still have five sons alive after the war.",
+    summaryTe: "హస్తినను వీడే ముందు శ్రీకృష్ణుడు కర్ణుని తన రథంపైకి రప్పించి, అతడు కుంతీ ప్రథమ పుత్రుడని, సూర్యదేవుని అంశతో జన్మించిన కౌంతేయుడని వెల్లడించుట. పాండవుల వద్దకు వస్తే సార్వభౌమునిగా పట్టాభిషేకం చేస్తారని ప్రలోభపెట్టినా, సమాజం అవమానించినప్పుడు ఆదరించిన దుర్యోధనునికి ద్రోహం చేయలేనని కర్ణుడు నిష్కల్మషమైన కృతజ్ఞతతో నిరాకరించుట. అనంతరం గంగాతీరాన కుంతీదేవి కర్ణుని వద్దకు రాగా, పసిబిడ్డగా తనను విసర్జించిన తల్లికి నమస్కరిస్తూ, అర్జునుని మినహా మిగిలిన నలుగురు పాండవులను చంపనని, యుద్ధం తర్వాత కూడా నీకు ఐదుగురు కొడుకులు మిగిలే ఉంటారని అభయదానమిచ్చుట.",
+    keyQuoteRoy: "Karna said: 'I know that where Krishna is, there is righteousness, and where righteousness is, there is victory. Yet for all the wealth of heaven and earth, I shall never abandon Duryodhana who trusted me in my darkest hour!'",
+    dharmaInsight: "Unwavering loyalty and gratitude to a benefactor can elevate a tragic hero to sublime moral majesty, even when destiny compels him to fight on an unrighteous side."
+  },
+  {
+    number: 8,
+    id: "saina-niryana",
+    nameEn: "Saina-Niryana Parva",
+    nameSa: "सैन्यनिर्याणपर्व",
+    nameTe: "సైన్యనిర్యాణ పర్వము (కురుక్షేత్ర రణరంగ ప్రయాణము & సేనాధిపత్యం)",
+    sections: "Sections CXLVII - CLIX",
+    versesApprox: 520,
+    keyCharacters: ["King Yudhishthira", "Sri Krishna", "Dhrishtadyumna", "Bhishma", "Duryodhana", "Balarama", "Rukmi"],
+    summaryEn: "Both camps finalize their mobilization and march to the sacred battlefield of Kurukshetra. King Yudhishthira organizes the 7 Pandava Akshauhinis and appoints Prince Dhrishtadyumna (born from Drupada's sacrificial altar specifically to slay Drona) as supreme commander-in-chief, with seven divisional generals including Drupada, Virata, Satyaki, Shikhandin, and Bhima. Duryodhana gathers his 11 Akshauhinis and formally installs Grandfather Bhishma as supreme commander-in-chief with Vedic coronation rituals and thunderous conches. Balarama visits the Pandavas and declares his grief over the impending fratricidal slaughter; unwilling to fight for either side, he departs on an extended pilgrimage along the Saraswati river. King Rukmi of Vidarbha arrives boastfully offering to single-handedly win the war for either side; both Arjuna and Krishna reject his arrogance, leaving Rukmi excluded from the great war.",
+    summaryTe: "కురుక్షేత్ర పుణ్యభూమికి ఇరుపక్షాల సేనలు తరలివెళ్ళుట. పాండవుల 7 అక్షౌహిణుల సైన్యానికి ద్రుపద పుత్రుడైన దృష్టద్యుమ్నుడు సర్వసేనాధిపతిగా నియామకమగుట. కౌరవుల 11 అక్షౌహిణుల సైన్యానికి పితామహుడు భీష్ముడు సర్వసేనాధిపతిగా అభిషిక్తుడగుట. బంధువుల రక్తపాతాన్ని చూడలేక బలరాముడు సరస్వతీ తీర్థయాత్రలకు వెళ్ళుట. గర్వంతో వచ్చిన రుక్మిని కృష్ణార్జునులు ఇద్దరూ తిరస్కరించి యుద్ధం నుండి దూరం చేయుట.",
+    keyQuoteRoy: "Bhishma said to Duryodhana: 'I shall fight for thee with all my skill and slay ten thousand warriors daily; but the sons of Pandu I will not slay, for they are dear to me as my own life.'",
+    dharmaInsight: "Arrogance and empty boasting have no place in a conflict of cosmic destiny; true commanders accept duty with solemn restraint and ethical boundaries."
+  },
+  {
+    number: 9,
+    id: "uluka-dutagamana",
+    nameEn: "Uluka Dutagamana Parva",
+    nameSa: "उलूकदूतगमनपर्व",
+    nameTe: "ఉలూక దూతగమన పర్వము (శకుని కుమారుని దూషణ రాయబారం & పాండవుల ప్రతిస్పందన)",
+    sections: "Sections CLX - CLXIV",
+    versesApprox: 290,
+    keyCharacters: ["Uluka (son of Sakuni)", "Duryodhana", "King Yudhishthira", "Bhima", "Arjuna", "Sri Krishna"],
+    summaryEn: "On the eve of battle, Duryodhana sends Uluka (the insolent son of Sakuni) to the Pandava camp on Kurukshetra. Uluka delivers a stinging, taunting message: he mocks Yudhishthira as a hypocrite masquerading as pious; mocks Bhima as a helpless cook boasting of broken oaths; and taunts Arjuna that his Gandiva bow and Brihannala disguises will be pulverized. The Pandava warriors listen with icy composure. Bhima roars with thunderous rage, reiterating his vows to tear open Duhsasana's chest and drink his warm blood, and smash Duryodhana's thighs on the battlefield. Arjuna serenely instructs Uluka to convey to Duryodhana: 'Words break no bones; tomorrow at dawn, let the arrows of Gandiva answer thy insolence.'",
+    summaryTe: "యుద్ధానికి ముందు శకుని కుమారుడైన ఉలూకుని దుర్యోధనుడు పాండవుల వద్దకు దూతగా పంపి, కించపరిచే మాటలతో అవమానింపజేయుట. ధర్మరాజును పిరికివాడని, భీముని వంటవాడని, అర్జునుని గాండీవం వ్యర్థమని ఎగతాళి చేయుట. భీముడు క్రోధోన్మత్తుడై దుశ్శాసనుని రక్తం తాగుతానని, దుర్యోధనుని తొడలు విరగ్గొడతానని ప్రళయగర్జన చేయుట. రేపటి సూర్యోదయాన గాండీవమే సమాధానం చెబుతుందని అర్జునుడు ప్రశాంత గంభీరంగా సందేశం పంపుట.",
+    keyQuoteRoy: "Arjuna said: 'O Uluka, tell Duryodhana that boasting is the weapon of cowards. The sun will rise tomorrow, and Gandiva shall make him eat his words!'",
+    dharmaInsight: "Vulgar provocations betray inner desperation and panic; the righteous remain composed and let decisive action on the battlefield deliver justice."
+  },
+  {
+    number: 10,
+    id: "rathatiratha-sankhyana",
+    nameEn: "Rathatiratha Sankhyana Parva",
+    nameSa: "रथातिरथसंख्यानपर्व",
+    nameTe: "రథాతిరథ సంఖ్యాన పర్వము (యోధుల వర్గీకరణ & కర్ణుని పట్ల భీష్ముని తీర్పు)",
+    sections: "Sections CLXV - CLXXIII",
+    versesApprox: 460,
+    keyCharacters: ["Bhishma", "Duryodhana", "Danaveera Karna", "Drona"],
+    summaryEn: "Duryodhana asks Commander-in-Chief Bhishma to classify and evaluate the heroes of both armies into Rathas (car-warriors capable of fighting thousands), Atirathas (superior warriors fighting multiple Rathas), and Maharathas (supreme commanders capable of vanquishing an entire army). Bhishma rates Drona, Kripa, Ashwatthaman, Dhrishtadyumna, Satyaki, and Arjuna with flawless objectivity. However, when evaluating Karna, Bhishma bluntly degrades him as an **Ardharatha** (half-car warrior), citing Karna's arrogance, Surya's missing armor, and his humiliating retreats before Gandharva Chitrasena and Brihannala. Deeply mortified and enraged, Karna storms out of the war council, swearing a solemn vow never to pick up his bow or step onto Kurukshetra as long as Grandfather Bhishma lives and leads the army.",
+    summaryTe: "యుద్ధానికి ముందు భీష్ముడు ఇరుపక్షాల యోధులను రథికులు, అతిరథులు, మరియు మహారథులుగా వర్గీకరించుట. అర్జునుడు, సాత్యకి, ద్రోణుడు, అశ్వత్థామల శౌర్యాన్ని నిష్పాక్షికంగా ప్రశంసించిన భీష్ముడు, కర్ణుని అహంకారాన్ని, కవచకుండలాలు లేకపోవడాన్ని ఎత్తిచూపుతూ అతడిని 'అర్ధరథుడు'గా తేల్చుట. తీవ్ర అవమానంతో రగిలిపోయిన కర్ణుడు, భీష్ముడు సేనాధిపతిగా ఉన్నంతవరకు తాను యుద్ధంలో అడుగుపెట్టనని ప్రతిజ్ఞ చేసి నిష్క్రమించుట.",
+    keyQuoteRoy: "Bhishma said: 'Karna is boastful and without judgment; he hath lost his natural armor and earrings; in my sight he is only an Ardharatha!' Karna roared: 'O wicked grandfather, thou sowest dissension! I shall not fight while thou livest!'",
+    dharmaInsight: "Ego and internal discord paralyze even the mightiest armies from within; insulting a comrade-in-arms deprives a cause of vital strength at the fateful hour."
+  },
+  {
+    number: 11,
+    id: "amba-upakhyana",
+    nameEn: "Amba-upakhyana Parva",
+    nameSa: "अम्बोपाख्यानपर्व",
+    nameTe: "అంబోపాఖ్యాన పర్వము (అంబ తపస్సు, పరశురామ-భీష్మ సంగ్రామం & శిఖండి అవతరణ)",
+    sections: "Sections CLXXIV - CXCIX",
+    versesApprox: 1120,
+    keyCharacters: ["Princess Amba", "Bhishma", "Bhagavan Parashurama", "King Salwa", "Lord Shiva", "Shikhandin", "King Drupada"],
+    summaryEn: "Duryodhana asks Bhishma why he has vowed never to shoot an arrow at Prince Shikhandin, the son of King Drupada. Bhishma narrates the epic tragedy of Princess Amba: As the eldest princess of Kasi, Amba was abducted along with her sisters Ambika and Ambalika by Bhishma for his brother Vichitravirya. When Amba revealed she had already pledged her heart to King Salwa, Bhishma honorably sent her to Salwa; but Salwa refused to accept a woman abducted by another warrior. Returning to Bhishma, Amba demanded he marry her; bound by his vow of lifelong celibacy, Bhishma refused. Rejected and ruined, Amba sought refuge with Bhagavan Parashurama, Bhishma's martial preceptor. Parashurama commanded Bhishma to marry her; upon Bhishma's refusal, an earth-shattering 23-day duel erupted between master and disciple at Kurukshetra. When Bhishma was about to unleash the apocalyptic Praswapa astra, the celestials and Rishis intervened to end the duel in a draw. Amba then retired to the forest of Vatsa, performing unimaginable tapasya for twelve years, surviving on fallen leaves and standing on one toe in freezing waters. Lord Shiva appeared and granted her the boon that in her next birth she would become a male warrior and cause the downfall of Bhishma. Amba immolated herself on a blazing funeral pyre and was reborn as King Drupada's daughter, subsequently transforming into the male warrior **Shikhandin** through the grace of Yaksha Sthunakarna. Bhishma concludes: 'Shikhandin is female by birth; I have taken a sacred vow never to raise weapons against a woman or one born female!'",
+    summaryTe: "ద్రుపదుని కుమారుడైన శిఖండిపై తాను బాణం ఎందుకు ప్రయోగించనని భీష్ముడు వివరించిన విషాద గాథ. కాశీరాజ పుత్రికలైన అంబ, అంబిక, అంబాలికలను భీష్ముడు స్వయంవరంలో గెలుచుకురాగా, అంబ సాల్వుని ప్రేమించానని చెప్పడంతో భీష్ముడు ఆమెను పంపుట. సాల్వుడు తిరస్కరించగా, భీష్ముడు బ్రహ్మచర్య వ్రతం వల్ల ఆమెను వివాహం చేసుకోలేనని చెప్పుట. అంబ పరశురాముని ఆశ్రయించగా, గురుశిష్యులైన పరశురామ-భీష్ముల మధ్య 23 రోజుల భీకర సంగ్రామం జరిగి చివరకు దేవతల జోక్యంతో ఆగుట. అంబ ఘోర తపస్సు చేయగా శివుడు ప్రత్యక్షమై వచ్చే జన్మలో భీష్ముని పతనానికి కారణమౌతావని వరమిచ్చుట. అగ్నిప్రవేశం చేసి ద్రుపదుని ఇంట శిఖండిగా జన్మించి, స్థూణాకర్ణుడనే యక్షుని వల్ల పురుషుడిగా మారి 'శిఖండి'గా అవతరించిన వృత్తాంతం. స్త్రీగా జన్మించిన శిఖండిపై తాను శస్త్రం ఎత్తబోనని భీష్ముడు చాటుట.",
+    keyQuoteRoy: "Bhishma said: 'Shikhandin was born female as Amba, and through penance became male. I have vowed never to strike a woman, or one who was once a woman. Destiny hath chosen Shikhandin to bring about my fall!'",
+    dharmaInsight: "A wrong committed against an innocent soul invokes an inexorable cosmic debt; even the most invincible vow of righteous heroes must yield to the ultimate justice of karma."
+  }
+];
+
 /* ===== MAHABHARATA 12-VOLUME MASTER MAPPING =====
    Systematic alignment of Pratap Chandra Roy's 12-Volume Canonical Translation */
 const MAHABHARATA_VOLUMES = [
@@ -1132,10 +1366,10 @@ const MAHABHARATA_VOLUMES = [
     titleEn: "Volume IV: Virata Parva & Udyoga Parva",
     titleTe: "సంపుటము 4: విరాట పర్వము & ఉద్యోగ పర్వము",
     parvaId: "virata_udyoga",
-    upaParvasCount: 17,
-    status: "PLANNED",
-    sections: "Virata Sections I - LXXII; Udyoga Sections I - CXCVI",
-    description: "Agyatavasa, Keechaka Vadha, Gograhana, Vidura Niti, Sanatsujatiya, Krishna's Peace Embassy (రాయబారం), Vishwaroopa."
+    upaParvasCount: 16,
+    status: "COMPLETE",
+    sections: "Virata Sections I - LXXII; Udyoga Sections I - CXCIX",
+    description: "Ajnata-vasa in Matsya, Kichaka-badha, Goharana war & Sammohana weapon, Abhimanyu-Uttara wedding, Sainyodyoga, Vidura Niti, Sanatsujatiya, Krishna's Peace Embassy (రాయబారం), Cosmic Vishwaroopa in court, Karna-Kunti dialogue, Bhishma's Rathatiratha rating, Amba-Shikhandin history."
   },
   {
     volNumber: 5,
@@ -1227,6 +1461,8 @@ if (typeof window !== 'undefined') {
   window.SABHA_PARVA_UPAPARVAS = SABHA_PARVA_UPAPARVAS;
   window.VANA_PARVA_PART1_UPAPARVAS = VANA_PARVA_PART1_UPAPARVAS;
   window.VANA_PARVA_PART2_UPAPARVAS = VANA_PARVA_PART2_UPAPARVAS;
+  window.VIRATA_PARVA_UPAPARVAS = VIRATA_PARVA_UPAPARVAS;
+  window.UDYOGA_PARVA_UPAPARVAS = UDYOGA_PARVA_UPAPARVAS;
   window.MAHABHARATA_VOLUMES = MAHABHARATA_VOLUMES;
   window.MAHABHARATA_CHARACTERS = MAHABHARATA_CHARACTERS;
 }
