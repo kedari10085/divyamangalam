@@ -1780,23 +1780,23 @@ const MAHABHARATA_VOLUMES = [
   },
   {
     volNumber: 9,
-    titleEn: "Volume IX: Shanti Parva (Part II - Mokshadharma)",
-    titleTe: "సంపుటము 9: శాంతి పర్వము (మోక్షధర్మము)",
-    parvaId: "shanti2",
-    upaParvasCount: 2,
+    titleEn: "Volume IX: Shanti Parva (Part II - Mokshadharma Part I)",
+    titleTe: "సంపుటము 9: శాంతి పర్వము (మోక్షధర్మము - ప్రథమ భాగం)",
+    parvaId: "vol9",
+    upaParvasCount: 1,
     status: "PLANNED",
-    sections: "Sections CLXXIV - CCCLXV",
-    description: "Apaddharma, Mokshadharma, Samkhya, Yoga, Sulabha-Janaka dialogue, cosmic liberation."
+    sections: "Sections CLXXIV - CCCI",
+    description: "First half of Mokshadharma: Bhrigu-Bharadwaja dialogue on cosmos & varnas, Syumarasmi-Kapila on Ahimsa vs animal sacrifice, King Janaka & Panchasikha, Yati Gita, Harita Gita, Vritta Gita, Manki Gita, and Sage Parasara's discourses."
   },
   {
     volNumber: 10,
-    titleEn: "Volume X: Anushasana Parva (Part I)",
-    titleTe: "సంపుటము 10: అనుశాసన పర్వము (భాగం 1)",
-    parvaId: "anushasana1",
-    upaParvasCount: 1,
+    titleEn: "Volume X: Shanti Parva (Part III) & Anushasana Parva (Part I)",
+    titleTe: "సంపుటము 10: శాంతి పర్వము (ఉత్తర భాగం) & అనుశాసన పర్వము (భాగం 1)",
+    parvaId: "vol10",
+    upaParvasCount: 2,
     status: "PLANNED",
-    sections: "Sections I - CVI",
-    description: "Dana Dharma, duties of life stages, sacred dialogues on righteous conduct."
+    sections: "Santi Sections CCCII - CCCLXV; Anusasana Sections I - CVI",
+    description: "Mokshadharma conclusion (Sankhya & Yoga, Vasishtha-Karala, Yajnavalkya-Janaka, Sulabha-Janaka, Suka's ascension, Narayaniya) and Anushasana Parva Part I (Dana Dharma, sacred vows, and virtue)."
   },
   {
     volNumber: 11,
