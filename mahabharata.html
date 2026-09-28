@@ -689,11 +689,14 @@
         <button type="button" class="parva-sel-btn" id="btnParvaAdi" onclick="selectReaderParva('adi')">
           📜 Vol I: Adi Parva (19 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaSabha" onclick="selectReaderParva('sabha')">
+        <button type="button" class="parva-sel-btn" id="btnParvaSabha" onclick="selectReaderParva('sabha')">
           🏛️ Vol II: Sabha Parva (10 ఉపపర్వాలు)
         </button>
         <button type="button" class="parva-sel-btn" id="btnParvaVana" onclick="selectReaderParva('vana1')">
           🌲 Vol II: Vana Parva Part I (7 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVana2" onclick="selectReaderParva('vana2')">
+          🏹 Vol III: Vana Parva Part II (12 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -753,11 +756,18 @@
       </p>
 
       <div class="ai-input-row">
-        <input type="text" id="aiQueryInput" placeholder="e.g., How was Jarasandha slain, or how did Arjuna get the Pashupatastra?" aria-label="Ask Mahabharata question" />
+        <input type="text" id="aiQueryInput" placeholder="e.g., What were the Yaksha Prashnas, or why did Karna give his armor?" aria-label="Ask Mahabharata question" />
         <button type="button" id="btnAskQuery">Ask</button>
       </div>
 
       <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What were the famous questions and answers in Yaksha Prashna?')">❓ Yaksha Prashna (యక్ష ప్రశ్నలు)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima meet Lord Hanuman on Mount Gandhamadana?')">🐒 Bhima &amp; Hanuman (హనుమద్భీమ సమాగమం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Karna donate his Kavacha and Kundala to Indra?')">🛡️ Karna's Armor &amp; Earrings (కవచ-కుండల దానం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Savitri rescue Satyavan from the God of Death Yama?')">👰 Savitri &amp; Satyavan (యమునితో సావిత్రి)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sri Krishna and a single spinach leaf satisfy Sage Durvasa?')">🍃 Krishna &amp; Single Leaf (దూర్వాస భోజనం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What did Yudhishthira say about who is a Brahmana to the Nahusha serpent?')">🐍 Nahusha Python &amp; Brahmana Dharma</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Yudhishthira order the rescue of Duryodhana from Chitrasena the Gandharva?')">👑 Ghosha-Yatra &amp; 105 brothers</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Bhima slay King Jarasandha?')">⚔️ Slaying of Jarasandha</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What happened during the disrobing of Draupadi in Dyuta Parva?')">👗 Disrobing of Draupadi</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How did Arjuna get the Pashupatastra from Lord Shiva?')">🏹 Shiva &amp; Pashupatastra</button>
@@ -828,7 +838,7 @@
 <script>
 (function() {
   let currentView = 'reader';
-  let currentParva = 'sabha'; // 'adi', 'sabha', 'vana1'
+  let currentParva = 'vana2'; // 'adi', 'sabha', 'vana1', 'vana2'
   let currentLang = 'te'; // 'te' (Telugu) or 'en' (English)
   let searchQuery = '';
 
@@ -855,6 +865,7 @@
   const btnParvaAdi = document.getElementById('btnParvaAdi');
   const btnParvaSabha = document.getElementById('btnParvaSabha');
   const btnParvaVana = document.getElementById('btnParvaVana');
+  const btnParvaVana2 = document.getElementById('btnParvaVana2');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -909,20 +920,24 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana].forEach(b => b.classList.remove('active'));
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
-      btnParvaAdi.classList.add('active');
+      if (btnParvaAdi) btnParvaAdi.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'ఆది పర్వము (Adi Parva) — 19 ఉపపర్వాలు సంపూర్ణం' : 'Adi Parva (Book of the Beginning) — All 19 Upa-Parvas';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ I: వ్యాస భగవానుని భారతావతరణం, కురువంశ చరిత్ర, ఖాండవ వన దహనము.' : 'Volume I: Cosmic origins, Kuru generation, Lac House, Draupadi Swayamvara, Gandiva bow.';
     } else if (parvaKey === 'sabha') {
-      btnParvaSabha.classList.add('active');
+      if (btnParvaSabha) btnParvaSabha.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'సభా పర్వము (Sabha Parva) — 10 ఉపపర్వాలు సంపూర్ణం' : 'Sabha Parva (Book of the Assembly Hall) — All 10 Upa-Parvas';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ II: మయసభ, జరాసంధ వధ, రాజసూయ యాగము, శిశుపాల వధ, పాచికల జూదము, ద్రౌపదీ వస్త్రాపహరణము.' : 'Volume II: Mayasabha palace, Jarasandha slaying, Digvijaya, Rajasuya sacrifice, loaded dice game, Draupadi disrobing.';
     } else if (parvaKey === 'vana1') {
-      btnParvaVana.classList.add('active');
+      if (btnParvaVana) btnParvaVana.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'వన పర్వము - భాగం 1 (Vana Parva Part I) — 7 ఉపపర్వాలు' : 'Vana Parva (Part I) — 7 Major Upa-Parvas';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ II: అక్షయపాత్ర, కిర్మీరవధ, కిరాతార్జునీయ పాశుపతాస్త్ర సాధన, ఇంద్రలోక ప్రవేశము, నల-దమయంతి కథ, తీర్థయాత్రలు.' : 'Volume II: Akshaya Patra, Kirata duel for Pashupatastra, Indra\'s heaven, Urvasi curse, Nala-Damayanti epic, holy pilgrimages.';
+    } else if (parvaKey === 'vana2') {
+      if (btnParvaVana2) btnParvaVana2.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'వన పర్వము - ఉత్తర భాగం (Vana Parva Part II) — 12 ఉపపర్వాలు సంపూర్ణం' : 'Vana Parva (Part II - Last Part) — All 12 Upa-Parvas Complete';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ III: హనుమద్భీమ సమాగమం, నివాతకవచ వధ, అజగర నహుష సంవాదం, మార్కండేయ సమస్య, సావిత్రి-సత్యవాన్, కర్ణుని కవచ-కుండల దానం, అమరమైన యక్షప్రశ్నలు.' : 'Volume III: Bhima meets Hanuman, Nivata-Kavachas, Nahusha serpent, Markandeya discourses, Savitri-Satyavan, Karna\'s armor donation, immortal Yaksha Prashna.';
     }
 
     renderUpaParvas();
@@ -955,6 +970,7 @@
     if (currentParva === 'adi') return window.ADI_PARVA_UPAPARVAS || [];
     if (currentParva === 'sabha') return window.SABHA_PARVA_UPAPARVAS || [];
     if (currentParva === 'vana1') return window.VANA_PARVA_PART1_UPAPARVAS || [];
+    if (currentParva === 'vana2') return window.VANA_PARVA_PART2_UPAPARVAS || [];
     return [];
   }
 
@@ -1062,7 +1078,7 @@
           <div style="font-size:0.85rem; color:var(--saffron); font-weight:700; margin-bottom:0.6rem;">${v.upaParvasCount} Upa-Parvas</div>
           <p style="font-size:0.9rem; color:var(--text-mid); line-height:1.55; margin:0 0 1rem; flex:1;">${v.description}</p>
           ${isComplete ? `
-            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : 'sabha'}')">
+            <button type="button" class="btn-read-full" onclick="switchView('reader'); selectReaderParva('${v.volNumber === 1 ? 'adi' : (v.volNumber === 2 ? 'sabha' : 'vana2')}')">
               <span>📖</span> Open in Reader
             </button>
           ` : `
@@ -1095,6 +1111,7 @@
     if (parvaKey === 'adi') { dataset = window.ADI_PARVA_UPAPARVAS; parvaLabel = 'ADI PARVA (VOL I)'; }
     else if (parvaKey === 'sabha') { dataset = window.SABHA_PARVA_UPAPARVAS; parvaLabel = 'SABHA PARVA (VOL II)'; }
     else if (parvaKey === 'vana1') { dataset = window.VANA_PARVA_PART1_UPAPARVAS; parvaLabel = 'VANA PARVA PART I (VOL II)'; }
+    else if (parvaKey === 'vana2') { dataset = window.VANA_PARVA_PART2_UPAPARVAS; parvaLabel = 'VANA PARVA PART II (VOL III)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1231,68 +1248,118 @@
     if (!query) return;
 
     aiAnswerArea.style.display = 'block';
-    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I &amp; II)...</span>';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation (Volumes I, II &amp; III)...</span>';
 
     setTimeout(() => {
       const qLower = query.toLowerCase();
       let answer = '';
 
-      if (qLower.includes('jarasandha') || qLower.includes('magadha') || qLower.includes('jara')) {
+      if (qLower.includes('yaksha') || qLower.includes('prashna') || qLower.includes('crane') || qLower.includes('lake') || qLower.includes('wonder')) {
         answer = `
-          <strong>⚔️ Slaying of King Jarasandha (జరాసంధవధ పర్వము / Jarasandha-badha Parva):</strong><br/><br/>
-          King Jarasandha of Magadha had imprisoned 86 kings in Girivraja, intending to offer 100 monarchs as human sacrifice to Lord Shiva. Sri Krishna, Arjuna, and Bhima infiltrated Girivraja in the disguise of Snataka Brahmanas.<br/><br/>
-          Krishna challenged Jarasandha, who selected mighty Bhima for an unyielding single-combat wrestling match. The titans fought without food or intermission for 14 continuous days and nights.<br/><br/>
-          On the 14th night, when Jarasandha was fatigued, Sri Krishna signaled Bhima by taking a slender straw and splitting it in two. Bhima lifted Jarasandha, whirled him 100 times in the air, pressed his knee against his spine, and broke his body into two pieces, hurling them in opposite directions so they could not rejoin. The 86 captive kings were liberated and joined Yudhishthira's Rajasuya.
+          <strong>❓ The Immortal Yaksha Prashna (ఆరణ్య పర్వము / Aranya Parva - Volume III):</strong><br/><br/>
+          In the Dvaitavana wilderness, Nakula, Sahadeva, Arjuna, and Bhima drink from a crystal lake without answering the guardian crane's questions and drop lifeless. King Yudhishthira arrives, beholds his fallen brothers, and humbly accepts the test of the crane, who transforms into a colossal Yaksha (Lord Dharma in disguise).<br/><br/>
+          Over 100 profound ethical, spiritual, and philosophical questions are posed and answered:<br/>
+          • <em>"What is swifter than the wind?"</em> — <strong>The Mind.</strong><br/>
+          • <em>"What is more numerous than blades of grass?"</em> — <strong>The Thoughts of mortals.</strong><br/>
+          • <em>"Who is the friend of a traveler?"</em> — <strong>A Caravan of companions.</strong><br/>
+          • <em>"What is the highest Dharma?"</em> — <strong>Ahimsa (universal non-violence and compassion).</strong><br/>
+          • <em>"What is the greatest wonder in the world (కిమాశ్చర్యం)?"</em> — <strong>Day after day, countless beings depart to the realm of Yama; yet those who remain believe they will live forever!</strong><br/><br/>
+          Offered the life of just one brother, Yudhishthira chooses <strong>Nakula</strong> so that each mother (Kunti and Madri) has one living son. Overjoyed by this absolute impartiality, Lord Dharma revives all four brothers and blesses their 13th incognito year.
+        `;
+      } else if (qLower.includes('hanuman') || qLower.includes('saugandhika') || qLower.includes('tail') || qLower.includes('monkey')) {
+        answer = `
+          <strong>🐒 Bhima Meets Lord Hanuman (తీర్థయాత్రా పర్వము / Tirtha-Yatra Parva - Volume III):</strong><br/><br/>
+          While dwelling near Badari on Mount Gandhamadana, a celestial thousand-petaled lotus (<em>Saugandhika</em>) of divine fragrance is carried by the northeast wind to Draupadi. Enchanted, Draupadi asks Bhima to procure more.<br/><br/>
+          Bhima charges up the mountain like a rogue elephant, uprooting trees, and encounters an aged, sickly monkey lying across the narrow path. Bhima arrogantly orders the monkey to clear the way. The monkey requests Bhima simply to lift his tail aside. Bhima strains with his mace and both arms using his full strength of 16,000 elephants, but cannot budge the tail even a hair's breadth!<br/><br/>
+          Humbled, Bhima realizes he is facing Lord Hanuman (his spiritual elder brother, both sons of Vayu). Hanuman embraces Bhima, reveals his colossal Vishwaroopa form that once leapt across the ocean to Lanka, and promises to sit upon the crest of Arjuna's battle flag (<em>Kapidhwaja</em>) during the Kurukshetra war to shatter enemy hearts with his roar!
+        `;
+      } else if (qLower.includes('karna') || qLower.includes('kavacha') || qLower.includes('kundala') || qLower.includes('vasavi') || qLower.includes('earring')) {
+        answer = `
+          <strong>🛡️ Karna's Supreme Sacrifice of Kavacha &amp; Kundala (కుండలహరణ పర్వము / Kundala-harana Parva - Volume III):</strong><br/><br/>
+          Karna was born with natural golden armor (<em>Kavacha</em>) and earrings (<em>Kundala</em>) that made him utterly invulnerable to mortal and divine weapons. Surya Deva appeared in Karna's dream, warning that Indra would disguise himself as a Brahmana to beg for them.<br/><br/>
+          Karna refused to violate his sacred vow of never refusing a begging Brahmana. At noon while Karna was praying in the Ganga, Indra arrived as an ascetic asking for alms. Karna took a sharp blade, carved the armor directly from his flesh and cut off his earrings with blood streaming down his chest, handing them to Indra with folded hands.<br/><br/>
+          Awestruck by this peerless act of charity (<em>Danaveera</em>), Indra gave Karna the infallible celestial dart <strong>Vasavi Shakti</strong>, with the condition that it could be hurled only once against a single enemy before returning to heaven.
+        `;
+      } else if (qLower.includes('savitri') || qLower.includes('satyavan') || qLower.includes('dyumatsena') || qLower.includes('asvapati')) {
+        answer = `
+          <strong>👰 Savitri &amp; Satyavan Outwitting Yama (పతివ్రతా మాహాత్మ్య పర్వము / Pativrata-Mahatmya Parva - Volume III):</strong><br/><br/>
+          Princess Savitri chooses exiled Prince Satyavan knowing he was fated to die in one year. On the destined day in the forest, Satyavan dies in her lap. Lord Yama arrives in person to draw out Satyavan's soul.<br/><br/>
+          Savitri fearlessly follows Yama into the netherworld, captivating the God of Death with five philosophical discourses on Dharma, friendship, and truth. Yama grants her four successive boons: restoration of sight for her blind father-in-law Dyumatsena, restoration of his lost kingdom, 100 sons for her father Asvapati, and 100 sons for herself.<br/><br/>
+          Savitri then points out that her 100 sons cannot be born without Satyavan being alive! Acknowledging her immaculate virtue and brilliance, Yama restores Satyavan to life with 400 years of prosperity.
+        `;
+      } else if (qLower.includes('durvasa') || qLower.includes('spinach') || qLower.includes('leaf') || qLower.includes('shaka')) {
+        answer = `
+          <strong>🍃 Sri Krishna &amp; the Single Spinach Leaf (ద్రౌపదీహరణ పర్వము / Draupadi-harana Parva - Volume III):</strong><br/><br/>
+          Prompted by Duryodhana, Sage Durvasa arrives at the Pandava hermitage with 10,000 disciples just after Draupadi had concluded her meal and washed the Akshaya Patra. In terror of Durvasa's curse, Draupadi prays desperately to Sri Krishna.<br/><br/>
+          Lord Krishna appears instantly, discovers a solitary remnant leaf of spinach (<em>shaka</em>) clinging to the pot rim, and eats it, saying: <em>"May this satisfy the Supreme Soul who pervadeth all sacrifices!"</em> Instantly, Durvasa and all 10,000 disciples bathing in the river feel overwhelmingly full to their throats and flee in embarrassment, saving the Pandavas.
+        `;
+      } else if (qLower.includes('nahusha') || qLower.includes('ajagara') || qLower.includes('python') || qLower.includes('brahmana')) {
+        answer = `
+          <strong>🐍 Nahusha Python &amp; Definition of a Brahmana (అజగర పర్వము / Ajagara Parva - Volume III):</strong><br/><br/>
+          Bhima is constricted by a gigantic supernatural python, revealed to be their ancestor King Nahusha, cursed by Sage Agastya for his arrogance. Nahusha tests Yudhishthira: <em>"Who is a Brahmana?"</em><br/><br/>
+          Yudhishthira replies: <em>"Truthfulness, charity, forgiveness, good conduct, gentleness, austerity, and mercy—he in whom these virtues are seen is a Brahmana. If these signs are found in a Sudra, he is a Brahmana; if they are absent in a Brahmana, he is no Brahmana. Conduct alone, not birth, defines spiritual nobility!"</em> Enlightened, Nahusha is freed from the serpent body and ascends to heaven.
+        `;
+      } else if (qLower.includes('chitrasena') || qLower.includes('ghosha') || qLower.includes('105') || qLower.includes('panchadhikam')) {
+        answer = `
+          <strong>👑 Ghosha-Yatra &amp; The 105 Brothers Declaration (ఘోషయాత్రా పర్వము / Ghosha-Yatra Parva - Volume III):</strong><br/><br/>
+          Duryodhana and Karna lead an army to Lake Dvaitavana under the pretext of cattle inspection to mock the exiled Pandavas. Gandharva King Chitrasena defeats the Kaurava army, smashes Karna's chariot, and captures Duryodhana in chains.<br/><br/>
+          When Kauravas beg Yudhishthira for help, Bhima rejoices, but Yudhishthira rebukes him with the immortal principle: <em>"In family disputes we are five against a hundred; but against an outside foe, we are one hundred and five (వయం పంచాధికం శతమ్)!"</em> Bhima and Arjuna defeat the Gandharvas and liberate Duryodhana, leaving Duryodhana paralyzed with shame.
+        `;
+      } else if (qLower.includes('nivata') || qLower.includes('hiranyapura')) {
+        answer = `
+          <strong>🏹 Destruction of Nivata-Kavachas &amp; Hiranyapura (నివాతకవచ యుద్ధ పర్వము - Volume III):</strong><br/><br/>
+          Arjuna returns from Amaravati in Indra's chariot steered by Matali. He narrates how as Guru-dakshina to Indra, he annihilated 30 million <strong>Nivata-Kavachas</strong> (demons whose armor was impenetrable) dwelling in oceanic subterranean strongholds, and brought crashing down <strong>Hiranyapura</strong>, the flying golden fortress of the Kalakeyas and Paulomas, using the Raudra and Vajra celestial weapons.
+        `;
+      } else if (qLower.includes('markandeya') || qLower.includes('vatapatra') || qLower.includes('dharmavyadha')) {
+        answer = `
+          <strong>📜 Markandeya Samasya &amp; Dharmavyadha (మార్కండేయ సమస్య పర్వము - Volume III):</strong><br/><br/>
+          Sage Markandeya narrates the Matsya Avatar saving Manu, his vision of child Krishna lying on a banyan leaf (<em>Vatapatrasayi</em>) containing all creation in his belly during Mahapralaya, the prophecies of Kali Yuga and Kalki Avatar, and the teachings of <strong>Dharmavyadha</strong> (the righteous butcher of Mithila) who taught Sage Kausika that devoted care of elderly parents and honest labor surpass empty ascetic arrogance.
+        `;
+      } else if (qLower.includes('jarasandha') || qLower.includes('magadha')) {
+        answer = `
+          <strong>⚔️ Slaying of King Jarasandha (జరాసంధవధ పర్వము / Jarasandha-badha Parva - Volume II):</strong><br/><br/>
+          Krishna, Arjuna, and Bhima infiltrated Girivraja as Snataka Brahmanas. Bhima and Jarasandha wrestled for 14 continuous days. Krishna signaled Bhima by splitting a straw in twain; Bhima whirled Jarasandha 100 times, snapped his spine across his knee, and tore his body in two, throwing the halves in opposite directions.
         `;
       } else if (qLower.includes('draupadi') || qLower.includes('disrob') || qLower.includes('vastra') || qLower.includes('duhsasana')) {
         answer = `
-          <strong>👗 Disrobing of Queen Draupadi (ద్యూత పర్వము / Dyuta Parva):</strong><br/><br/>
-          In the loaded dice match orchestrated by Sakuni, Yudhishthira staked and lost his wealth, kingdoms, brothers, himself, and finally Queen Draupadi. Duhsasana dragged Draupadi by her hair into the assembly of elders.<br/><br/>
-          When Karna commanded Duhsasana to strip the Pandavas and Draupadi of their robes, and all earthly champions sat immobilized by fear or compromised codes, Draupadi abandoned reliance on human strength, raised both hands to the sky, and surrendered unconditionally to the Supreme Lord:<br/>
-          <em>"Govinda! Dwarakavasin! Krishna! O refuge of the distressed, save me!"</em><br/><br/>
-          Lord Sri Krishna manifested an endless, miraculous cascade of celestial robes in every radiant hue. Duhsasana pulled until his arms failed and he collapsed unconscious amidst mountains of cloth, leaving Draupadi fully adorned and inviolable.
+          <strong>👗 Disrobing of Queen Draupadi (ద్యూత పర్వము / Dyuta Parva - Volume II):</strong><br/><br/>
+          In the loaded dice game, Duhsasana dragged Draupadi into the assembly and attempted to strip her. Draupadi surrendered completely to Lord Sri Krishna (*"Govinda! Dwarakavasin!"*). Krishna manifested an infinite cascade of celestial garments, exhausting Duhsasana and protecting her honor.
         `;
-      } else if (qLower.includes('pashupata') || qLower.includes('kairata') || qLower.includes('kirata') || qLower.includes('indrakeela')) {
+      } else if (qLower.includes('pashupata') || qLower.includes('kairata') || qLower.includes('indrakeela')) {
         answer = `
-          <strong>🏹 Attainment of the Pashupatastra (కైరాత పర్వము / Kairata Parva):</strong><br/><br/>
-          Equipped with the <em>Pratismriti</em> mantra from Sage Vyasa, Arjuna ascended Mount Indrakeela in the Himalayas, undertaking rigorous penance standing on one foot.<br/><br/>
-          When demon Muka attacked in the form of a wild boar, both Arjuna and an uncouth tribal hunter (Kirata) shot the beast simultaneously. A ferocious duel erupted over the kill; Arjuna's arrows and weapons were absorbed by the hunter. In desperation, Arjuna fashioned an earthen Shiva Linga and offered forest flowers, only to see the garland rest atop the hunter's head.<br/><br/>
-          Lord Shiva and Goddess Parvati revealed their supreme form, praising Arjuna's valor and bestowing the cosmic <strong>Pashupatastra</strong>—the weapon that dissolves universes.
+          <strong>🏹 Attainment of the Pashupatastra (కైరాత పర్వము / Kairata Parva - Volume II):</strong><br/><br/>
+          Arjuna performed severe penance on Mount Indrakeela. Lord Shiva appeared as a Kirata hunter. Following an intense duel, Arjuna worshipped an earthen Shiva Linga and saw the flowers appear on the hunter. Shiva and Parvati revealed their divine form and gifted Arjuna the universe-dissolving <strong>Pashupatastra</strong>.
         `;
-      } else if (qLower.includes('akshaya') || qLower.includes('patra') || qLower.includes('surya') || qLower.includes('vessel')) {
+      } else if (qLower.includes('akshaya') || qLower.includes('patra') || qLower.includes('surya')) {
         answer = `
-          <strong>☀️ The Divine Akshaya Patra (ఆరణ్యక పర్వము / Aranyaka Parva):</strong><br/><br/>
-          Exiled to the Kamyaka forest, Yudhishthira was deeply distressed that he lacked resources to feed the thousands of Brahmanas and rishis who followed the Pandavas.<br/><br/>
-          Priest Dhaumya instructed Yudhishthira to worship Surya Deva (the Sun God) with his 108 sacred names. Graced by Yudhishthira's purity, Lord Surya appeared and bestowed a copper vessel called the <strong>Akshaya Patra</strong>.<br/><br/>
-          The divine vessel supplied an inexhaustible quantity of four kinds of food daily until Queen Draupadi finished her meal, sustaining the entire retinue through their twelve years of wilderness exile.
+          <strong>☀️ The Divine Akshaya Patra (ఆరణ్యక పర్వము / Aranyaka Parva - Volume II):</strong><br/><br/>
+          Yudhishthira prayed to Surya Deva with 108 names. Surya bestowed the copper Akshaya Patra, which supplied inexhaustible food daily until Queen Draupadi finished her meal, sustaining the entire Pandava retinue throughout their exile.
         `;
       } else if (qLower.includes('nala') || qLower.includes('damayanti') || qLower.includes('swan')) {
         answer = `
-          <strong>🦢 The Epic of King Nala and Princess Damayanti (నలోపాఖ్యాన పర్వము / Nalopakhyana):</strong><br/><br/>
-          To alleviate Yudhishthira's despondency over losing his realm through dice, Sage Brihadaswa narrated the ancient tale of King Nala of Nishadha and Princess Damayanti.<br/><br/>
-          United through a golden swan messenger, Damayanti chose mortal Nala at her Swayamvara over the gods Indra, Agni, Varuna, and Yama. Jealous Kali Purusha afflicted Nala, causing him to lose his throne to his brother Pushkara in a game of dice. Enduring heartbreaking separation, Nala was transformed by serpent Karkotaka into the dwarf charioteer Bahuka, mastered the secret of dice (<em>Akshahridaya</em>) from King Rituparna, reunited with Damayanti, defeated Pushkara in a rematch, and regained his empire.
+          <strong>🦢 The Epic of King Nala and Princess Damayanti (నలోపాఖ్యాన పర్వము - Volume II):</strong><br/><br/>
+          Sage Brihadaswa narrated the tale of King Nala and Damayanti. Nala lost his kingdom to brother Pushkara in a game of dice, underwent separation and hardship, transformed into Bahuka, mastered the secret mathematics of dice (<em>Akshahridaya</em>) from King Rituparna, reunited with Damayanti, and won his empire back.
         `;
       } else if (qLower.includes('urvasi') || qLower.includes('curse') || qLower.includes('brihannala')) {
         answer = `
-          <strong>💃 Urvasi's Curse to Arjuna (ఇంద్రలోకాగమన పర్వము / Indralokagamana Parva):</strong><br/><br/>
-          While Arjuna resided in heaven (Amaravati) learning celestial weapons from Indra and music from Chitrasena, the apsara Urvasi was overwhelmed by his beauty and proposed romance at night.<br/><br/>
-          Arjuna reverently declined, declaring that since Urvasi was the ancestral mother of the Puru dynasty (through King Pururavas), he viewed her only as a mother equal to Kunti. Enraged by rejection, Urvasi cursed Arjuna to lose his masculinity and live as a eunuch dancer for a year. Indra consoled Arjuna, praising his self-control and decreeing that the curse would serve as an disguise during his 13th incognito year in King Virata's court as Brihannala.
+          <strong>💃 Urvasi's Curse to Arjuna (ఇంద్రలోకాగమన పర్వము - Volume II):</strong><br/><br/>
+          Arjuna refused Urvasi's advances in Amaravati, revering her as the ancestral mother of the Puru dynasty. Urvasi cursed him to live as a eunuch dancer for a year, which Indra transformed into a blessing for Arjuna's 13th incognito year as Brihannala in Virata's court.
         `;
       } else if (qLower.includes('gandiva') || qLower.includes('khandava')) {
         answer = `
-          <strong>🔥 The Acquisition of the Gandiva Bow (ఖాండవదాహ పర్వము / Khandava-daha Parva):</strong><br/><br/>
-          In Adi Parva, Agni Deva suffered indigestion from consuming King Swetaki's hundred-year ghee sacrifice and sought to burn Khandava forest. Varuna Deva bestowed upon Arjuna the celestial <strong>Gandiva Bow</strong>, inexhaustible quivers (<em>Akshaya Tunira</em>), and the Kapidhwaja chariot, while conferring the <strong>Sudarshana Chakra</strong> on Sri Krishna.
+          <strong>🔥 The Acquisition of the Gandiva Bow (ఖాండవదాహ పర్వము - Volume I):</strong><br/><br/>
+          During the burning of Khandava forest, Varuna Deva bestowed upon Arjuna the divine <strong>Gandiva Bow</strong>, two inexhaustible quivers, and the Kapidhwaja chariot, while conferring the <strong>Sudarshana Chakra</strong> on Sri Krishna.
         `;
-      } else if (qLower.includes('bhishma') || qLower.includes('vow') || qLower.includes('celibacy')) {
+      } else if (qLower.includes('bhishma') || qLower.includes('celibacy')) {
         answer = `
-          <strong>🛡️ Bhishma's Terrible Vow (అంశావతరణ పర్వము / Amsavatarana Parva):</strong><br/><br/>
-          To ensure his father Santanu's marriage to Satyavati, Devavrata renounced the throne and took the immortal oath of lifelong celibacy before the celestials, earning the name <strong>Bhishma</strong> and the boon of <em>Iccha Mrityu</em>.
+          <strong>🛡️ Bhishma's Terrible Vow (అంశావతరణ పర్వము - Volume I):</strong><br/><br/>
+          Devavrata renounced the throne and took an immortal vow of lifelong celibacy to enable his father Santanu to marry Satyavati, earning the name <strong>Bhishma</strong> and the boon of choosing the time of his own death (<em>Iccha Mrityu</em>).
         `;
       } else {
         answer = `
-          <strong>🏹 Mahabharata Insight on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., encompasses 18 Parvas across 12 Volumes. Volumes I and II cover the complete Adi Parva, Sabha Parva, and Vana Parva (Part I).<br/><br/>
-          Feel free to select between <strong>Adi Parva</strong>, <strong>Sabha Parva</strong>, and <strong>Vana Parva Part I</strong> in the reader above or ask about Mayasabha, Rajasuya, Jarasandha, Draupadi, Pashupatastra, or Nala-Damayanti!
+          <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I, II, and III (Adi Parva, Sabha Parva, and both parts of Vana Parva).<br/><br/>
+          You can explore the 12 Upa-Parvas of Volume III (Yaksha Prashna, Bhima &amp; Hanuman, Savitri-Satyavan, Karna's Kavacha-Kundala, Durvasa's feast, Nahusha serpent, Nivata-Kavachas, Ghosha-Yatra) or switch to Volumes I and II in the reader above!
         `;
       }
 
@@ -1312,7 +1379,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('sabha');
+    selectReaderParva('vana2');
   });
 })();
 </script>
