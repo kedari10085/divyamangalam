@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Srimad Mahabharata (శ్రీమన్మహాభారతము) — The Great Epic of Vyasa | Divya Mangalam</title>
+  <meta name="description" content="Explore Srimad Mahabharata by Krishna-Dwaipayana Vyasa with all 18 Parvas and complete Adi Parva (19 Upa-Parvas) based on Pratap Chandra Roy's unabridged English prose translation with Telugu summaries." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏹</text></svg>" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+  <style>
+    /* ===== Mahabharata Page Custom Styling ===== */
+    .mb-hero {
+      background: linear-gradient(135deg, rgba(139,0,0,0.12) 0%, rgba(212,160,23,0.2) 50%, rgba(255,111,0,0.14) 100%);
+      padding: 4.5rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+    }
+    .mb-hero .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      padding: 5px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(139,0,0,0.2);
+    }
+    .mb-hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
+      color: var(--text-dark);
+      margin: 0 0 0.4rem;
+    }
+    .mb-hero .sanskrit-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--deep-red);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    .mb-hero p {
+      max-width: 780px;
+      margin: 0 auto 1.5rem;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    /* Shloka Mnemonic Card */
+    .mnemonic-box {
+      max-width: 860px;
+      margin: 1.5rem auto 0;
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.35);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 25px rgba(212,160,23,0.1);
+      font-size: 0.98rem;
+      text-align: center;
+    }
+    .mnemonic-box strong { color: var(--deep-red); }
+    .mnemonic-shloka {
+      font-size: 1.25rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--deep-red);
+      margin: 0.5rem 0;
+      line-height: 1.8;
+      font-weight: 700;
+    }
+    .mnemonic-translit {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      font-style: italic;
+      margin-bottom: 0.6rem;
+    }
+    .mnemonic-meaning {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: rgba(255,243,224,0.6);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+    }
+
+    /* View Switcher Tabs */
+    .view-tabs-container {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .view-tab {
+      background: var(--white);
+      border: 1.5px solid rgba(212,160,23,0.35);
+      padding: 0.75rem 1.6rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .view-tab:hover {
+      border-color: var(--gold);
+      background: rgba(212,160,23,0.08);
+      transform: translateY(-2px);
+    }
+    .view-tab.active {
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(139,0,0,0.25);
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      max-width: 1200px;
+      margin: 2rem auto 1.5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      border: 1.5px solid rgba(212,160,23,0.4);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      outline: none;
+      background: var(--white);
+      transition: all 0.25s;
+    }
+    .search-box input:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 4px rgba(255,111,0,0.15);
+    }
+    .search-box .icon {
+      position: absolute;
+      left: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
+      font-size: 1.1rem;
+    }
+
+    .lang-toggle-wrap {
+      display: flex;
+      background: rgba(212,160,23,0.18);
+      padding: 4px;
+      border-radius: 50px;
+    }
+    .lang-opt {
+      border: none;
+      background: transparent;
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-opt.active {
+      background: var(--white);
+      color: var(--deep-red);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Grid Layouts */
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* Upa-Parva Card */
+    .mb-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 18px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .mb-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 35px rgba(212,160,23,0.2);
+      border-color: var(--gold);
+    }
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .num-badge {
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+    }
+    .section-pill {
+      font-size: 0.72rem;
+      background: rgba(212,160,23,0.15);
+      color: var(--deep-red);
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+    .mb-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      margin: 0 0 0.2rem;
+      color: var(--text-dark);
+    }
+    .mb-card .sub-title {
+      font-size: 1rem;
+      color: var(--deep-red);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .character-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .char-chip {
+      font-size: 0.75rem;
+      background: var(--light-bg);
+      border: 1px solid rgba(212,160,23,0.25);
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: var(--text-mid);
+    }
+    .card-excerpt {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+    .roy-quote-preview {
+      background: rgba(255,248,235,0.8);
+      border-left: 3px solid var(--gold);
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+    }
+    .btn-read-full {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(255,111,0,0.08), rgba(212,160,23,0.15));
+      border: 1.5px solid rgba(212,160,23,0.4);
+      color: var(--deep-red);
+      padding: 0.7rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .mb-card:hover .btn-read-full {
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(139,0,0,0.25);
+    }
+
+    /* Modal Reader Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44,26,14,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.active { display: flex; animation: modalFadeIn 0.3s ease; }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-dialog {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.4);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 880px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      position: relative;
+    }
+    .modal-header {
+      background: linear-gradient(135deg, rgba(255,248,235,0.95), rgba(254,240,214,0.85));
+      padding: 1.8rem 2rem 1.4rem;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: rgba(212,160,23,0.2);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover {
+      background: var(--deep-red);
+      color: var(--white);
+    }
+    .modal-body {
+      padding: 2rem;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    .modal-quote-box {
+      background: rgba(255,248,235,0.9);
+      border-left: 4px solid var(--deep-red);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+    .modal-quote-box strong {
+      display: block;
+      color: var(--deep-red);
+      font-style: normal;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .modal-dharma-box {
+      background: linear-gradient(135deg, rgba(255,111,0,0.08), rgba(212,160,23,0.12));
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(212,160,23,0.25);
+    }
+    .btn-action {
+      background: var(--light-bg);
+      border: 1px solid rgba(212,160,23,0.4);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--deep-red);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: var(--deep-red);
+      color: var(--white);
+      border-color: var(--deep-red);
+    }
+
+    /* Characters Grid */
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .char-card {
+      background: var(--white);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease;
+    }
+    .char-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .char-icon { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .char-card h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin: 0 0 0.3rem; color: var(--text-dark); }
+    .char-role { font-size: 0.85rem; color: var(--deep-red); font-weight: 700; margin-bottom: 0.8rem; }
+    .char-quote { font-size: 0.88rem; font-style: italic; color: var(--text-mid); line-height: 1.5; border-left: 2px solid var(--gold); padding-left: 0.8rem; }
+
+    /* AI Question Box */
+    .ai-box {
+      background: var(--white);
+      border: 1.5px solid rgba(212,160,23,0.35);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      box-shadow: 0 6px 25px rgba(212,160,23,0.08);
+    }
+    .ai-input-row {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .ai-input-row input {
+      flex: 1;
+      padding: 0.85rem 1.2rem;
+      border: 1.5px solid rgba(212,160,23,0.4);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .ai-input-row button {
+      background: linear-gradient(135deg, var(--deep-red), var(--saffron));
+      color: var(--white);
+      border: none;
+      padding: 0 1.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ai-input-row button:hover { opacity: 0.9; transform: translateY(-2px); }
+    .ai-quick-questions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ai-quick-btn {
+      background: var(--light-bg);
+      border: 1px solid rgba(212,160,23,0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      transition: all 0.2s;
+    }
+    .ai-quick-btn:hover { background: rgba(212,160,23,0.2); color: var(--deep-red); }
+    .ai-answer-area {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(255,248,235,0.85);
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .ai-answer-area.active { display: block; animation: modalFadeIn 0.3s ease; }
+
+    @media (max-width: 768px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .mnemonic-box { padding: 1.2rem; }
+      .mnemonic-shloka { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body class="sanctuary-home">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-om">🕉️</span>
+      <span class="brand-name">Divya Mangalam</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jyotishyam.html">Jyotishyam</a></li>
+      <li><a href="palm-reading.html">Palm Reading</a></li>
+      <li><a href="panchang-calendar.html">Panchang</a></li>
+      <li><a href="muhurat.html">Muhurat</a></li>
+      <li><a href="mahabharata.html" class="active" aria-current="page">Mahabharata</a></li>
+      <li><a href="puran.html">18 Puranas</a></li>
+      <li><a href="gods.html">Deities</a></li>
+      <li><a href="live-archana.html">Archana</a></li>
+      <li><a href="chalisa.html">Chalisa</a></li>
+      <li><a href="shlokas.html">Shlokas</a></li>
+      <li><a href="healing.html">432 Hz</a></li>
+      <li><a href="ai-archana.html">AI Pandit</a></li>
+    </ul>
+    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<header class="mb-hero" id="main-content">
+  <div class="badge">🏹 ఇతిహాస రత్నము • THE 100,000-VERSE EPIC OF VYASA</div>
+  <h1>శ్రీమన్మహాభారతమ్</h1>
+  <div class="sanskrit-title">Srimad Mahabharata — The Great Epic of Krishna-Dwaipayana Vyasa</div>
+  <p>
+    The supreme encyclopedia of Dharma, statecraft, cosmology, and spiritual liberation.
+    Translated into unabridged English prose by <strong>Pratap Chandra Roy, C.I.E.</strong>,
+    featuring all <strong>18 Maha Parvas</strong> and the complete <strong>Adi Parva (19 Upa-Parvas)</strong> with Telugu summaries.
+  </p>
+
+  <!-- Canonical Shloka -->
+  <div class="mnemonic-box">
+    <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--deep-red); font-weight:700;">Opening Invocation to Nara-Narayana</div>
+    <div class="mnemonic-shloka">
+      नारायणं नमस्कृत्य नरं चैव नरोत्तमम्।<br/>
+      देवीं सरस्वतीं व्यासं ततो जयमुदीरयेत्॥
+    </div>
+    <div class="mnemonic-translit">
+      Nārāyaṇaṁ namaskṛtya naraṁ caiva narottamam | Devīṁ sarasvatīṁ vyāsaṁ tato jayamudīrayet ||
+    </div>
+    <div class="mnemonic-meaning">
+      <strong>తెలుగు భావము:</strong> నారాయణునికి, నరోత్తముడైన అర్జునునికి (నరునికి), విద్యాధిదేవతయైన సరస్వతీ దేవికి, మరియు వ్యాస భగవానునికి ప్రణమిల్లి 'జయ'మను ఈ మహాభారత పవిత్ర ఇతిహాసమును ఉచ్చరించవలెను!
+    </div>
+  </div>
+</header>
+
+<!-- ===== VIEW SELECTOR TABS ===== -->
+<div class="view-tabs-container" role="tablist">
+  <button class="view-tab active" id="tabAdi" role="tab" aria-selected="true" onclick="switchView('adi')">
+    <span>📜</span> Adi Parva Reader (ఆది పర్వం - 19 ఉపపర్వాలు)
+  </button>
+  <button class="view-tab" id="tab18" role="tab" aria-selected="false" onclick="switchView('18')">
+    <span>🏛️</span> All 18 Parvas (అష్టాదశ పర్వాలు)
+  </button>
+  <button class="view-tab" id="tabChars" role="tab" aria-selected="false" onclick="switchView('chars')">
+    <span>👑</span> Epic Characters (పాత్రల పరిచయం)
+  </button>
+  <button class="view-tab" id="tabAi" role="tab" aria-selected="false" onclick="switchView('ai')">
+    <span>💡</span> Ask the Mahabharata (జ్ఞాన దీపిక)
+  </button>
+</div>
+
+<!-- ===== CONTROLS BAR (SEARCH & LANGUAGE) ===== -->
+<div class="controls-bar" id="controlsBar">
+  <div class="search-box">
+    <span class="icon">🔍</span>
+    <input type="text" id="mbSearch" placeholder="Search by event, weapon, character (e.g. Gandiva, Bakasura, Garuda, Swayamvara)..." aria-label="Search Mahabharata" />
+  </div>
+  <div class="lang-toggle-wrap">
+    <button class="lang-opt active" id="langTe" onclick="setLanguage('te')">తెలుగు (Telugu)</button>
+    <button class="lang-opt" id="langEn" onclick="setLanguage('en')">English</button>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT CONTAINER ===== -->
+<main class="content-container">
+
+  <!-- VIEW 1: ADI PARVA 19 UPA-PARVAS -->
+  <section id="viewAdi">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">ఆది పర్వము (Adi Parva) — 19 Upa-Parvas Complete</h2>
+      <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">
+        Based directly on Pratap Chandra Roy's English prose translation (Calcutta) &amp; Telugu commentary.
+      </p>
+    </div>
+    <div class="cards-grid" id="adiParvaGrid">
+      <!-- Injected via JavaScript from ADI_PARVA_UPAPARVAS -->
+    </div>
+  </section>
+
+  <!-- VIEW 2: ALL 18 PARVAS -->
+  <section id="view18" style="display:none;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">The 18 Maha Parvas (అష్టాదశ పర్వాలు) &amp; Harivamsa</h2>
+      <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">
+        The complete 100,000-verse architecture of the Shatasahasri Samhita.
+      </p>
+    </div>
+    <div class="cards-grid" id="allParvasGrid">
+      <!-- Injected via JavaScript from MAHABHARATA_PARVAS -->
+    </div>
+  </section>
+
+  <!-- VIEW 3: CHARACTERS ROSTER -->
+  <section id="viewChars" style="display:none;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <h2 style="font-family:'Playfair Display',serif; color:var(--text-dark); margin:0 0 0.3rem;">Legendary Characters of the Mahabharata</h2>
+      <p style="color:var(--text-mid); font-size:0.95rem; margin:0;">
+        Avatars, warriors, philosophers, and royalty who shaped the epic destiny of Bharatavarsha.
+      </p>
+    </div>
+    <div class="char-grid" id="charactersGrid">
+      <!-- Injected via JavaScript from MAHABHARATA_CHARACTERS -->
+    </div>
+  </section>
+
+  <!-- VIEW 4: ASK THE MAHABHARATA (AI ASSISTANT) -->
+  <section id="viewAi" style="display:none;">
+    <div class="ai-box">
+      <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin:0 0 0.4rem; font-size:1.4rem;">
+        🏹 Mahabharata Wisdom Assistant (మహాభారత జ్ఞాన దీపిక)
+      </h3>
+      <p style="color:var(--text-mid); font-size:0.92rem; margin:0;">
+        Ask any question regarding the episodes, characters, ethical dilemmas, or weapons in the Mahabharata.
+      </p>
+
+      <div class="ai-input-row">
+        <input type="text" id="aiQueryInput" placeholder="e.g., How did Arjuna acquire the Gandiva bow?" aria-label="Ask Mahabharata question" />
+        <button type="button" id="btnAskQuery">Ask</button>
+      </div>
+
+      <div class="ai-quick-questions">
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Arjuna get the Gandiva bow?')">🏹 How Arjuna got Gandiva</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Bhishma take his fierce vow of celibacy?')">🛡️ Bhishma's Terrible Vow</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why did King Janamejaya perform the Snake Sacrifice?')">🐍 Janamejaya's Snake Sacrifice</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did the Pandavas escape the House of Lac?')">🔥 Escape from Lac House</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What happened at Draupadi Swayamvara?')">🐟 Draupadi's Swayamvara</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the famous quotation about the Mahabharata completeness?')">📜 Completeness Dictum</button>
+      </div>
+
+      <div class="ai-answer-area" id="aiAnswerArea"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== MODAL READING DRAWER ===== -->
+<div class="modal-overlay" id="readModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+      <div id="modalPill" class="num-badge" style="display:inline-block; margin-bottom:0.4rem;"></div>
+      <h2 id="modalTitle" style="font-family:'Playfair Display',serif; margin:0 0 0.2rem; color:var(--text-dark);"></h2>
+      <div id="modalSub" style="color:var(--deep-red); font-weight:700; font-size:1.05rem;"></div>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:var(--text-dark); color:rgba(255,255,255,0.8); padding:3.5rem 1.5rem 2rem; margin-top:auto; font-size:0.9rem;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:2rem; margin-bottom:2.5rem;">
+    <div>
+      <div style="font-size:1.4rem; font-weight:700; color:var(--gold); margin-bottom:0.8rem; font-family:'Playfair Display',serif;">🕉️ Divya Mangalam</div>
+      <p style="line-height:1.6; color:rgba(255,255,255,0.65);">
+        Preserving and illuminating the sacred scriptures, Vedic astrology, and timeless epics of Sanatana Dharma.
+      </p>
+    </div>
+    <div>
+      <h4 style="color:var(--white); margin-bottom:0.8rem; font-size:1rem;">Scriptures &amp; Epics</h4>
+      <ul style="line-height:2;">
+        <li><a href="mahabharata.html" style="color:var(--gold);">🏹 Srimad Mahabharata (18 Parvas)</a></li>
+        <li><a href="puran.html" style="color:rgba(255,255,255,0.7);">📜 18 Maha Puranas</a></li>
+        <li><a href="shlokas.html" style="color:rgba(255,255,255,0.7);">🕉️ Sacred Shlokas &amp; Mantras</a></li>
+        <li><a href="chalisa.html" style="color:rgba(255,255,255,0.7);">🪔 Divine Chalisas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--white); margin-bottom:0.8rem; font-size:1rem;">Astrology &amp; Muhurat</h4>
+      <ul style="line-height:2;">
+        <li><a href="panchang-calendar.html" style="color:rgba(255,255,255,0.7);">📅 Vedic Panchang Calendar</a></li>
+        <li><a href="muhurat.html" style="color:rgba(255,255,255,0.7);">⏳ Shubh Muhurat &amp; Compatibility</a></li>
+        <li><a href="jyotishyam.html" style="color:rgba(255,255,255,0.7);">🔭 Vedanga Jyotisha (Lagadha)</a></li>
+        <li><a href="palm-reading.html" style="color:rgba(255,255,255,0.7);">🖐️ Hasta Samudrika Shastra</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="text-align:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:1.5rem; color:rgba(255,255,255,0.5); font-size:0.82rem;">
+    &copy; 2026 Divya Mangalam. Dedicated to Sanatana Dharma. Unabridged English Prose by Pratap Chandra Roy, C.I.E.
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="main.js"></script>
+<script src="mahabharata-data.js"></script>
+<script>
+(function() {
+  let currentView = 'adi';
+  let currentLang = 'te'; // 'te' (Telugu) or 'en' (English)
+  let searchQuery = '';
+
+  // DOM Elements
+  const tabAdi = document.getElementById('tabAdi');
+  const tab18 = document.getElementById('tab18');
+  const tabChars = document.getElementById('tabChars');
+  const tabAi = document.getElementById('tabAi');
+  const viewAdi = document.getElementById('viewAdi');
+  const view18 = document.getElementById('view18');
+  const viewChars = document.getElementById('viewChars');
+  const viewAi = document.getElementById('viewAi');
+  const adiParvaGrid = document.getElementById('adiParvaGrid');
+  const allParvasGrid = document.getElementById('allParvasGrid');
+  const charactersGrid = document.getElementById('charactersGrid');
+  const searchInput = document.getElementById('mbSearch');
+  const langTe = document.getElementById('langTe');
+  const langEn = document.getElementById('langEn');
+  const controlsBar = document.getElementById('controlsBar');
+
+  // Modal elements
+  const readModal = document.getElementById('readModal');
+  const modalPill = document.getElementById('modalPill');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalSub = document.getElementById('modalSub');
+  const modalBody = document.getElementById('modalBody');
+
+  // AI Elements
+  const aiQueryInput = document.getElementById('aiQueryInput');
+  const btnAskQuery = document.getElementById('btnAskQuery');
+  const aiAnswerArea = document.getElementById('aiAnswerArea');
+
+  // Switch View function
+  window.switchView = function(view) {
+    currentView = view;
+    [tabAdi, tab18, tabChars, tabAi].forEach(t => t.classList.remove('active'));
+    [viewAdi, view18, viewChars, viewAi].forEach(v => v.style.display = 'none');
+
+    if (view === 'adi') {
+      tabAdi.classList.add('active');
+      viewAdi.style.display = 'block';
+      controlsBar.style.display = 'flex';
+      renderAdiParva();
+    } else if (view === '18') {
+      tab18.classList.add('active');
+      view18.style.display = 'block';
+      controlsBar.style.display = 'flex';
+      renderAllParvas();
+    } else if (view === 'chars') {
+      tabChars.classList.add('active');
+      viewChars.style.display = 'block';
+      controlsBar.style.display = 'none';
+      renderCharacters();
+    } else if (view === 'ai') {
+      tabAi.classList.add('active');
+      viewAi.style.display = 'block';
+      controlsBar.style.display = 'none';
+    }
+  };
+
+  // Language switcher
+  window.setLanguage = function(lang) {
+    currentLang = lang;
+    if (lang === 'te') {
+      langTe.classList.add('active');
+      langEn.classList.remove('active');
+    } else {
+      langEn.classList.add('active');
+      langTe.classList.remove('active');
+    }
+    if (currentView === 'adi') renderAdiParva();
+    else if (currentView === '18') renderAllParvas();
+  };
+
+  // Search input listener
+  searchInput.addEventListener('input', function(e) {
+    searchQuery = e.target.value.toLowerCase().trim();
+    if (currentView === 'adi') renderAdiParva();
+    else if (currentView === '18') renderAllParvas();
+  });
+
+  // Render Adi Parva 19 Upa-Parvas
+  function renderAdiParva() {
+    if (!window.ADI_PARVA_UPAPARVAS) return;
+    const items = window.ADI_PARVA_UPAPARVAS.filter(item => {
+      if (!searchQuery) return true;
+      const haystack = (item.nameEn + ' ' + item.nameTe + ' ' + item.nameSa + ' ' + item.summaryEn + ' ' + item.summaryTe + ' ' + item.keyCharacters.join(' ')).toLowerCase();
+      return haystack.includes(searchQuery);
+    });
+
+    if (items.length === 0) {
+      adiParvaGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-mid);">No matching Upa-Parvas found for "' + searchQuery + '".</div>';
+      return;
+    }
+
+    adiParvaGrid.innerHTML = items.map(item => {
+      const title = currentLang === 'te' ? item.nameTe : item.nameEn;
+      const sub = currentLang === 'te' ? item.nameEn + ' (' + item.nameSa + ')' : item.nameTe + ' (' + item.nameSa + ')';
+      const summary = currentLang === 'te' ? item.summaryTe : item.summaryEn;
+      const charBadges = item.keyCharacters.slice(0, 4).map(c => '<span class="char-chip">' + c + '</span>').join('');
+
+      return `
+        <article class="mb-card" onclick="openUpaParvaModal(${item.number})">
+          <div class="card-header-row">
+            <span class="num-badge">ఉపపర్వం ${item.number} / 19</span>
+            <span class="section-pill">${item.sections}</span>
+          </div>
+          <h3>${title}</h3>
+          <div class="sub-title">${sub}</div>
+          <div class="character-chips">${charBadges}</div>
+          <div class="card-excerpt">${summary.length > 200 ? summary.substring(0, 195) + '...' : summary}</div>
+          <div class="roy-quote-preview">
+            " ${item.keyQuoteRoy} "
+          </div>
+          <button type="button" class="btn-read-full">
+            <span>📖</span> Read Full Upa-Parva Narrative
+          </button>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // Render All 18 Parvas
+  function renderAllParvas() {
+    if (!window.MAHABHARATA_PARVAS) return;
+    const items = window.MAHABHARATA_PARVAS.filter(p => {
+      if (!searchQuery) return true;
+      const haystack = (p.nameEn + ' ' + p.nameTe + ' ' + p.nameSa + ' ' + p.summaryEn + ' ' + p.summaryTe + ' ' + p.keyThemes.join(' ')).toLowerCase();
+      return haystack.includes(searchQuery);
+    });
+
+    if (items.length === 0) {
+      allParvasGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-mid);">No matching Parvas found.</div>';
+      return;
+    }
+
+    allParvasGrid.innerHTML = items.map(p => {
+      const title = currentLang === 'te' ? p.nameTe : p.nameEn;
+      const sub = currentLang === 'te' ? p.nameEn + ' (' + p.nameSa + ')' : p.nameTe + ' (' + p.nameSa + ')';
+      const summary = currentLang === 'te' ? p.summaryTe : p.summaryEn;
+      const themeChips = p.keyThemes.slice(0, 4).map(t => '<span class="char-chip">' + t + '</span>').join('');
+
+      return `
+        <article class="mb-card" onclick="openParvaModal(${p.number})">
+          <div class="card-header-row">
+            <span class="num-badge">పర్వము ${p.number}</span>
+            <span class="section-pill">${p.shlokasCount.toLocaleString()} Shlokas</span>
+          </div>
+          <h3>${title}</h3>
+          <div class="sub-title">${sub}</div>
+          <div style="font-size:0.82rem; color:var(--text-mid); margin-bottom:0.6rem;">
+            <strong>${p.adhyayasCount}</strong> Adhyayas (అధ్యాయాలు) &bull; <strong>${p.upaParvasCount}</strong> Upa-Parvas
+          </div>
+          <div class="character-chips">${themeChips}</div>
+          <div class="card-excerpt">${summary}</div>
+          <div class="roy-quote-preview">
+            " ${p.quote} "
+          </div>
+          <button type="button" class="btn-read-full">
+            <span>📜</span> View Parva Overview &amp; Themes
+          </button>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // Render Characters
+  function renderCharacters() {
+    if (!window.MAHABHARATA_CHARACTERS) return;
+    charactersGrid.innerHTML = window.MAHABHARATA_CHARACTERS.map(c => `
+      <div class="char-card">
+        <div class="char-icon">${c.icon}</div>
+        <h4>${c.nameEn}</h4>
+        <div class="char-role">${c.role}</div>
+        <div class="char-quote">"${c.quote}"</div>
+      </div>
+    `).join('');
+  }
+
+  // Open Upa-Parva Modal
+  window.openUpaParvaModal = function(num) {
+    const item = window.ADI_PARVA_UPAPARVAS.find(u => u.number === num);
+    if (!item) return;
+
+    modalPill.textContent = 'ADI PARVA • UPA-PARVA ' + item.number + ' OF 19 (' + item.sections + ')';
+    modalTitle.textContent = item.nameTe + ' — ' + item.nameEn;
+    modalSub.textContent = item.nameSa;
+
+    modalBody.innerHTML = `
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="color:var(--deep-red); margin:0 0 0.5rem; font-size:1.15rem;">తెలుగు సారాంశము (Telugu Synopsis):</h4>
+        <p style="line-height:1.8; color:var(--text-dark);">${item.summaryTe}</p>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="color:var(--deep-red); margin:0 0 0.5rem; font-size:1.15rem;">English Prose Narrative (Translation by Pratap Chandra Roy):</h4>
+        <p style="line-height:1.8; color:var(--text-dark);">${item.summaryEn}</p>
+      </div>
+
+      <div class="modal-quote-box">
+        <strong>From Pratap Chandra Roy's English Translation:</strong>
+        "${item.keyQuoteRoy}"
+      </div>
+
+      <div class="modal-dharma-box">
+        <strong style="color:var(--deep-red); display:block; margin-bottom:0.3rem;">✨ ధర్మ సూక్ష్మము (Dharma Insight):</strong>
+        ${item.dharmaInsight}
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <strong style="font-size:0.88rem; color:var(--text-mid); display:block; margin-bottom:0.4rem;">ముఖ్య పాత్రలు (Key Characters):</strong>
+        <div class="character-chips">
+          ${item.keyCharacters.map(c => '<span class="char-chip" style="font-size:0.85rem; padding:4px 10px;">' + c + '</span>').join('')}
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-action" onclick="speakText('${item.summaryTe.replace(/'/g, "\\'")}')">🔊 Listen (Telugu Audio)</button>
+        <button class="btn-action" onclick="copyModalContent()">📋 Copy Summary</button>
+      </div>
+    `;
+
+    readModal.classList.add('active');
+  };
+
+  // Open Parva Modal
+  window.openParvaModal = function(num) {
+    const p = window.MAHABHARATA_PARVAS.find(item => item.number === num);
+    if (!p) return;
+
+    modalPill.textContent = 'MAHABHARATA • PARVA ' + p.number + ' OF 18';
+    modalTitle.textContent = p.nameTe + ' — ' + p.nameEn;
+    modalSub.textContent = p.nameSa + ' (' + p.subtitleEn + ')';
+
+    modalBody.innerHTML = `
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="color:var(--deep-red); margin:0 0 0.5rem; font-size:1.15rem;">పర్వ విశేషాలు (Parva Metrics):</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:1rem;">
+          <span class="char-chip"><strong>అధ్యాయాలు:</strong> ${p.adhyayasCount}</span>
+          <span class="char-chip"><strong>ఉపపర్వాలు:</strong> ${p.upaParvasCount}</span>
+          <span class="char-chip"><strong>శ్లోకాలు:</strong> ${p.shlokasCount.toLocaleString()}</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="color:var(--deep-red); margin:0 0 0.5rem; font-size:1.15rem;">తెలుగు వివరణ (Telugu Summary):</h4>
+        <p style="line-height:1.8; color:var(--text-dark);">${p.summaryTe}</p>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <h4 style="color:var(--deep-red); margin:0 0 0.5rem; font-size:1.15rem;">English Overview:</h4>
+        <p style="line-height:1.8; color:var(--text-dark);">${p.summaryEn}</p>
+      </div>
+
+      <div class="modal-quote-box">
+        <strong>Canonical Maxim:</strong>
+        "${p.quote}"
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <strong style="font-size:0.88rem; color:var(--text-mid); display:block; margin-bottom:0.4rem;">ప్రధాన ఘట్టాలు (Key Themes):</strong>
+        <div class="character-chips">
+          ${p.keyThemes.map(t => '<span class="char-chip" style="font-size:0.85rem; padding:4px 10px;">' + t + '</span>').join('')}
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-action" onclick="speakText('${p.summaryTe.replace(/'/g, "\\'")}')">🔊 Listen (Telugu Audio)</button>
+        <button class="btn-action" onclick="copyModalContent()">📋 Copy Summary</button>
+      </div>
+    `;
+
+    readModal.classList.add('active');
+  };
+
+  // Close modal
+  window.closeModal = function() {
+    readModal.classList.remove('active');
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  };
+
+  // Close modal on escape or background click
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+  readModal.addEventListener('click', function(e) {
+    if (e.target === readModal) closeModal();
+  });
+
+  // Speech synthesis
+  window.speakText = function(txt) {
+    if (!('speechSynthesis' in window)) {
+      alert("Speech synthesis is not supported on this browser.");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = 'te-IN';
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  };
+
+  // Copy modal content
+  window.copyModalContent = function() {
+    const text = modalTitle.textContent + "\n\n" + modalBody.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Summary copied to clipboard!");
+    });
+  };
+
+  // AI Knowledge Assistant
+  function handleAiQuery() {
+    const query = aiQueryInput.value.trim();
+    if (!query) return;
+
+    aiAnswerArea.style.display = 'block';
+    aiAnswerArea.innerHTML = '<span style="color:var(--text-mid);">🔍 Consulting Sage Vyasa &amp; Pratap Chandra Roy\'s translation...</span>';
+
+    setTimeout(() => {
+      const qLower = query.toLowerCase();
+      let answer = '';
+
+      if (qLower.includes('gandiva') || qLower.includes('bow') || qLower.includes('khandava')) {
+        answer = `
+          <strong>🏹 The Acquisition of the Gandiva Bow (ఖాండవదాహ పర్వము / Khandava-daha Parva):</strong><br/><br/>
+          In the 19th Upa-Parva of Adi Parva, Agni Deva (the god of fire), suffering indigestion from consuming King Swetaki's uninterrupted hundred-year ghee sacrifice, approached Sri Krishna and Arjuna disguised as a Brahmin. He requested their aid to consume the Khandava forest.<br/><br/>
+          To equip them against King Indra and the clouds, Agni invoked <strong>Varuna Deva</strong> (the god of the oceans). Varuna presented Arjuna with the celestial <strong>Gandiva Bow</strong> (originally forged by Lord Brahma, held by Prajapati, Indra, and Soma), two inexhaustible quivers (<em>Akshaya Tunira</em>), and the divine chariot bearing the Kapidhwaja (monkey banner). To Sri Krishna, Varuna gave the invincible <strong>Sudarshana Chakra</strong> and the Kaumodaki mace.<br/><br/>
+          With the Gandiva bow, Arjuna built an impenetrable canopy of arrows across the sky that shielded the raging fire from Indra's torrential downpours.
+        `;
+      } else if (qLower.includes('bhishma') || qLower.includes('vow') || qLower.includes('celibacy') || qLower.includes('terrible')) {
+        answer = `
+          <strong>🛡️ Bhishma's Terrible Vow (అంశావతరణ పర్వము / Amsavatarana Parva):</strong><br/><br/>
+          Devavrata (the eighth son of King Santanu and Goddess Ganga) observed that his aged father had fallen deeply in love with Satyavati, the fragrant daughter of the fisherman chieftain (Dasa-raja). However, the chief refused to give his daughter in marriage unless Santanu guaranteed that Satyavati's future sons would inherit the throne of Hastinapura.<br/><br/>
+          Seeing his father languishing in sorrow, Devavrata personally went to the fisherman chief and renounced his birthright to the kingdom. When the chief raised the objection that Devavrata's future children might later dispute the throne, Devavrata took an awe-inspiring, irrevocable oath before all celestials and men:<br/>
+          <em>"I shall renounce the kingdom and remain a lifelong Brahmacharin! Even if the sun loses his brilliance or the earth her stability, I shall never break my pledge!"</em><br/><br/>
+          Upon this declaration, celestial flowers rained from the heavens, and the gods cried out: <strong>"Bhishma! Bhishma!" ("The Terrible! The Resolute!")</strong>. His father Santanu rewarded him with the boon of <em>Iccha Mrityu</em> (voluntary death at his chosen moment).
+        `;
+      } else if (qLower.includes('snake') || qLower.includes('janamejaya') || qLower.includes('sarpa') || qLower.includes('astika')) {
+        answer = `
+          <strong>🐍 The Snake Sacrifice &amp; Sage Astika (ఆస్తిక పర్వము / Astika Parva):</strong><br/><br/>
+          King Parikshit (grandson of Arjuna) was cursed by the ascetic youth Sringi to die within seven days by the bite of the serpent king Takshaka for having placed a dead serpent on the neck of meditating Sage Shamika. Despite supreme precautions, Takshaka entered a fruit and bit Parikshit to death.<br/><br/>
+          Overcome with grief and fury, Parikshit's son, <strong>King Janamejaya</strong>, inaugurated the colossal <em>Sarpa Satra</em> (Snake Sacrifice) at Kurukshetra. The officiating priests chanted powerful mantras that pulled millions of serpents involuntarily out of the sky into the blazing sacrificial pit.<br/><br/>
+          When Takshaka sought refuge around Indra's throne, the priests chanted: <em>"Fall, O Takshaka, together with Indra!"</em> At that climactic juncture, the young, luminous sage <strong>Astika</strong> (son of Sage Jaratkaru and Manasa Devi) arrived at the sacrificial arena. Astika enchanted Janamejaya with exquisite Vedic panegyrics and demanded as his boon the cessation of the sacrifice. Honoring truth, Janamejaya halted the sacrifice, saving Takshaka and preserving the serpent race.
+        `;
+      } else if (qLower.includes('lac') || qLower.includes('house') || qLower.includes('jatugriha') || qLower.includes('purochana')) {
+        answer = `
+          <strong>🔥 Escape from the House of Lac (జాతుగృహదాహ పర్వము / Jatugriha-daha Parva):</strong><br/><br/>
+          Envious of Yudhishthira's coronation as crown prince, Duryodhana and Sakuni convinced King Dhritarashtra to send the Pandavas and Kunti to the town of Varanavata. Royal minister Purochana constructed a palace built entirely of highly flammable materials: lac, hemp, ghee, resin, and dry timber.<br/><br/>
+          Before their departure, the wise <strong>Vidura</strong> delivered a cryptic warning to Yudhishthira in the secret <em>Mleccha</em> dialect: <em>"The weapon not made of steel can destroy a forest; he who understands subterranean safety escapes fire."</em> Vidura then secretly dispatched an expert miner who dug a subterranean tunnel leading from inside the palace into the safety of the adjacent jungle.<br/><br/>
+          When Purochana prepared to set fire to the palace at midnight, Bhima preemptively ignited the palace and guided his mother and brothers through the subterranean passage, leaving Duryodhana believing the Pandavas were incinerated.
+        `;
+      } else if (qLower.includes('swayamvara') || qLower.includes('draupadi') || qLower.includes('fish') || qLower.includes('target')) {
+        answer = `
+          <strong>🐟 Draupadi's Swayamvara (స్వయంవర పర్వము / Swayamvara Parva):</strong><br/><br/>
+          King Drupada of Panchala held a grand Swayamvara for Princess Draupadi in Kampilya. The challenge required lifting an immensely stiff celestial bow and shooting five arrows through a revolving aerial wheel to strike the eye of a golden target.<br/><br/>
+          Mighty Kshatriya kings, including Duryodhana, Shalya, and Sisupala, could not even bend the monstrous bow. Amidst the tension, <strong>Arjuna</strong>, disguised in the simple deerskin garb of a young Brahmin, walked out from the ascetic enclosure.<br/><br/>
+          Paying obeisance to Lord Shiva and Krishna, Arjuna effortlessly strung the bow in an instant, notched five arrows, and shot down the golden target through the water reflection! Draupadi joyfully garlanded Arjuna. When the indignant Kshatriyas attacked in wrath, Bhima uprooted a massive tree while Arjuna unleashed impenetrable volleys of arrows, vanquishing all challengers.
+        `;
+      } else if (qLower.includes('dictum') || qLower.includes('complete') || qLower.includes('everything') || qLower.includes('yadihasti')) {
+        answer = `
+          <strong>📜 The Canonical Dictum of the Mahabharata:</strong><br/><br/>
+          <em>"यदिहास्ति तदन्यत्र यन्नेहास्ति न तत्क्वचित्॥"</em><br/>
+          <em>("Yadihasti tadanyatra yannehasti na tatkvachit ||")</em><br/><br/>
+          <strong>Meaning:</strong> <em>"Whatever is found here concerning Dharma (righteousness), Artha (wealth), Kama (desire), and Moksha (spiritual liberation) is found elsewhere; but whatever is not found here is found nowhere else on earth!"</em><br/><br/>
+          The Mahabharata consists of 100,000 verses across 18 Parvas, representing the pinnacle of world literature and Sanatana Dharma.
+        `;
+      } else {
+        answer = `
+          <strong>🏹 Mahabharata Insight on "${query}":</strong><br/><br/>
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., comprises 18 Parvas and 100 Upa-Parvas. It addresses the eternal triumph of Dharma over Adharma: <em>"Yato dharmastato jayah"</em> (Where there is righteousness, there is victory).<br/><br/>
+          Adi Parva establishes the cosmic genealogy, the churn of the ocean, the birth of the Pandavas and Kauravas, the Lac house escape, Draupadi's swayamvara, the founding of Indraprastha, and the burning of Khandava. Feel free to explore the interactive Upa-Parva cards above or ask specific questions about characters like Bhishma, Arjuna, Krishna, Karna, or Draupadi!
+        `;
+      }
+
+      aiAnswerArea.innerHTML = answer;
+    }, 350);
+  }
+
+  btnAskQuery.addEventListener('click', handleAiQuery);
+  aiQueryInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleAiQuery();
+  });
+
+  window.askQuickQuestion = function(q) {
+    aiQueryInput.value = q;
+    handleAiQuery();
+  };
+
+  // Initial load
+  document.addEventListener('DOMContentLoaded', function() {
+    renderAdiParva();
+  });
+})();
+</script>
+</body>
+</html>
