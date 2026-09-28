@@ -713,8 +713,17 @@
         <button type="button" class="parva-sel-btn" id="btnParvaVol7" onclick="selectReaderParva('vol7')">
           🏹 Vol VII: Karna, Salya, Sauptika &amp; Stree (9 ఉపపర్వాలు)
         </button>
-        <button type="button" class="parva-sel-btn active" id="btnParvaVol8" onclick="selectReaderParva('vol8')">
+        <button type="button" class="parva-sel-btn" id="btnParvaVol8" onclick="selectReaderParva('vol8')">
           🕊️ Vol VIII: Shanti Parva I (రాజధర్మ &amp; ఆపద్ధర్మ - 2 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn" id="btnParvaVol9" onclick="selectReaderParva('vol9')">
+          🧘 Vol IX: Shanti Parva II (మోక్షధర్మ ప్రథమ భాగం - 4 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn" id="btnParvaVol10" onclick="selectReaderParva('vol10')">
+          🌊 Vol X: Shanti III &amp; Anusasana I (నారాయణీయ &amp; దైవ-పురుషకార - 3 ఉపపర్వాలు)
+        </button>
+        <button type="button" class="parva-sel-btn active" id="btnParvaVol11" onclick="selectReaderParva('vol11')">
+          🕉️ Vol XI: Anusasana Parva II (విష్ణు సహస్రనామ &amp; భీష్మ నిర్యాణం - 4 ఉపపర్వాలు)
         </button>
       </div>
     </div>
@@ -780,6 +789,14 @@
 
       <div class="ai-quick-questions">
         <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Yudhishthira wish to renounce the kingdom in grief and what was the debate with his brothers and Draupadi?')">🕊️ Yudhishthira's Grief &amp; Renunciation Debate (ధర్మరాజు వైరాగ్యం &amp; సంవాదం)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What are the Pingala Gita and Manki Gita on the annihilation of desire in Mokshadharma Parva?')">🕊️ Pingala Gita &amp; Manki Gita (పింగళ-మాంకి గీతలు &amp; తృష్ణాపహరణం - Vol IX)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What did Tuladhara the grocer teach Ascetic Jajali about Ahimsa being the supreme dharma in daily life?')">⚖️ Tuladhara &amp; Jajali: Ahimsa in Daily Commerce (తులాధారుడు &amp; అహింసా పరమో ధర్మః - Vol IX)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What was the debate between Yogini Sulabha and King Janaka on gender, ego, and royal detachment?')">🧘 Sulabha vs King Janaka: Gender &amp; Detachment (సులభా యోగిని &amp; జనక వాదన - Vol X)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the revelation of Narayaniya Parva, Svetadvipa the White Island, and Ekanti Bhakti?')">🌊 Narayaniya Parva: Svetadvipa &amp; Ekanti Bhakti (నారాయణీయ పర్వము &amp; శ్వేతద్వీపం - Vol X)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did disciple Vipula use Yoga to protect Ruchi from Lord Indra and what did the Seasons witness?')">👁️ Vipula Protecting Ruchi from Indra (విపులుని యోగరక్షణ &amp; కాల-ఋతువుల సాక్ష్యం - Vol XI)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('Why was Sage Chyavana priced at the value of a single sacred cow by King Nahusha in fisherman net?')">🐄 Sage Chyavana &amp; The Value of a Cow (చేపల వలలో చ్యవనుడు &amp; గోమహిమ - Vol XI)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('How did Sage Chyavana test King Kusika with the battle chariot and grant the boon for Viswamitra birth?')">🏹 Kusika Chariot Ordeal &amp; Viswamitra Boon (కుశిక రథపరీక్ష &amp; విశ్వామిత్ర జననం - Vol XI)</button>
+        <button class="ai-quick-btn" onclick="askQuickQuestion('What is the origin of Sri Vishnu Sahasranama Stotram and how did Grandfather Bhishma ascend in Uttarayana?')">🕉️ Sri Vishnu Sahasranama &amp; Bhishma Ascension (విష్ణు సహస్రనామం &amp; భీష్మ నిర్యాణం - Vol XI)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('What is the origin of kingship and the supreme doctrine of Danda-Niti according to Bhishma?')">👑 Danda-Niti &amp; Origin of Kingship (దండనీతి, పృథు చక్రవర్తి &amp; రాజా కాలస్య కారణమ్)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('How should a king collect taxes according to the doctrines of the bee, calf, and mother tiger?')">🐝 Taxation Doctrine: Bee &amp; Mother Tiger (తేనెటీగ &amp; పులి పిల్లల పన్నుల విధానం)</button>
         <button class="ai-quick-btn" onclick="askQuickQuestion('Why did Sage Viswamitra eat dog meat from a Chandala during the 12-year famine in Apaddharma Parva?')">🐕 Sage Viswamitra &amp; Dog Meat in 12-Year Famine (విశ్వామిత్రుని శునక మాంస భక్షణ)</button>
@@ -923,6 +940,9 @@
   const btnParvaDrona = document.getElementById('btnParvaDrona');
   const btnParvaVol7 = document.getElementById('btnParvaVol7');
   const btnParvaVol8 = document.getElementById('btnParvaVol8');
+  const btnParvaVol9 = document.getElementById('btnParvaVol9');
+  const btnParvaVol10 = document.getElementById('btnParvaVol10');
+  const btnParvaVol11 = document.getElementById('btnParvaVol11');
 
   const searchInput = document.getElementById('mbSearch');
   const langTe = document.getElementById('langTe');
@@ -977,7 +997,7 @@
   // Select Parva in Reader
   window.selectReaderParva = function(parvaKey) {
     currentParva = parvaKey;
-    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7, btnParvaVol8].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnParvaAdi, btnParvaSabha, btnParvaVana, btnParvaVana2, btnParvaVirata, btnParvaUdyoga, btnParvaBhishma, btnParvaDrona, btnParvaVol7, btnParvaVol8, btnParvaVol9, btnParvaVol10, btnParvaVol11].forEach(b => { if (b) b.classList.remove('active'); });
 
     if (parvaKey === 'adi') {
       if (btnParvaAdi) btnParvaAdi.classList.add('active');
@@ -1019,6 +1039,18 @@
       if (btnParvaVol8) btnParvaVol8.classList.add('active');
       readerParvaHeading.textContent = currentLang === 'te' ? 'శాంతి పర్వము - భాగం 1 (Shanti Parva Part I) — 2 ఉపపర్వాలు సంపూర్ణం' : 'Volume VIII: Shanti Parva (Part I - Rajadharma & Apaddharma) — Complete 2 Upa-Parvas';
       readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ VIII: యుద్ధానంతర శోకం, సంసార వైరాగ్యం, చార్వాక వధ, పట్టాభిషేకం, అంపశయ్యపై భీష్మ దర్శనం, రాజధర్మ సర్వస్వం (దండనీతి, పన్నులు, విదేశాంగ విధానం) & ఆపద్ధర్మం (విశ్వామిత్ర శునక మాంస భక్షణ, ఎలుక-పిల్లి మైత్రి, రాజధర్మ కొంగ కథ).' : 'Volume VIII: Post-war grief, renunciation debate, Charvaka slain, coronation, visiting Bhishma on bed of arrows, Rajadharma (kingship, Danda, justice, Mandala theory), and Apaddharma (emergency ethics, Viswamitra, mouse-cat alliance, and Rajadharman crane).';
+    } else if (parvaKey === 'vol9') {
+      if (btnParvaVol9) btnParvaVol9.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'శాంతి పర్వము - భాగం 2 (Shanti Parva Part II: Mokshadharma I) — 4 ఉపపర్వాలు సంపూర్ణం' : 'Volume IX: Shanti Parva (Part II - Mokshadharma Part I) — Complete 4 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ IX: శోక నివారణ, పింగళ-మాంకి గీతలు, ప్రహ్లాద అజగర వ్రతం, విదేహ జనకుని వైరాగ్యం, భృగు-భరద్వాజ సృష్టి క్రమం & వర్ణోత్పత్తి, పంచశిఖ సాంఖ్య దర్శనం, కాలచక్రం & వృత్ర గీత, వ్యాస-శుక సంవాదం, విశ్వ మహాప్రళయం, తులాధార-జాజలి అహింసా తత్వం & యోగసాధనా రహస్యం.' : 'Volume IX: Conquest of grief, Pingala & Manki Gitas, Prahlada\'s python vow, Janaka\'s detachment, Bhrigu-Bharadwaja cosmology & equality of varnas, Panchasikha\'s Sankhya, Wheel of Time & Vritra Gita, Vyasa-Suka Samvada & Mahapralaya, Tuladhara-Jajali on Ahimsa, and the complete Science of Yoga.';
+    } else if (parvaKey === 'vol10') {
+      if (btnParvaVol10) btnParvaVol10.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'శాంతి పర్వము III & అనుశాసన పర్వము I (Volume X) — 3 ఉపపర్వాలు సంపూర్ణం' : 'Volume X: Shanti Parva (Part III) & Anushasana Parva (Part I) — Complete 3 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ X: సాంఖ్య-యోగ సమన్వయం, సులభా-జనక మహారాజు వాదన, యాజ్ఞవల్క్య శుక్ల యజుర్వేద విద్య, నారాయణీయ పర్వము (శ్వేతద్వీప దర్శనం, చతుర్వ్యూహం, ఏకాంతి భక్తి, హయగ్రీవావతారం & ఉంఛవృత్తి), అనుశాసన ప్రథమ భాగం (గౌతమి సర్ప ప్రబోధం, దైవ-పురుషకార విచారణ, సుదర్శన-ఓఘవతీ అతిథి వ్రతం).' : 'Volume X: Sankhya-Yoga harmony, Sulabha-Janaka debate, Sage Yajnavalkya\'s Shukla Yajurveda, Narayaniya Parva (Svetadvipa, Chatur-Vyuha, Ekanti devotion, Hayagriva, and Unccha vow), and Anusasana Part I (Gautami\'s serpent discourse, Destiny vs Exertion, Sudarsana-Oghavati hospitality).';
+    } else if (parvaKey === 'vol11') {
+      if (btnParvaVol11) btnParvaVol11.classList.add('active');
+      readerParvaHeading.textContent = currentLang === 'te' ? 'అనుశాసన పర్వము - భాగం 2 (Anushasana Parva Part II) — 4 ఉపపర్వాలు సంపూర్ణం' : 'Volume XI: Anushasana Parva (Part II - Book of Precepts & Passing of Bhishma) — Complete 4 Upa-Parvas';
+      readerParvaSub.textContent = currentLang === 'te' ? 'వాల్యూమ్ XI: దానధర్మ పాత్రత, స్త్రీ సంరక్షణ, విపులుని యోగరక్షణ, కాల-ఋతువుల ప్రత్యక్ష సాక్ష్యం, అష్టవిధ వివాహాలు, చేపల వలలో చ్యవన మహర్షి & గోమూల్య దానం, కుశిక మహారాజు రథపరీక్ష & విశ్వామిత్ర జనన వరం, వృక్ష-తటాక ప్రతిష్ఠ, కైలాసాన ఉమా-మహేశ్వర సంవాదం, గోదాన-అన్నదాన మహాత్యం, శ్రీ విష్ణు సహస్రనామ స్తోత్ర ప్రబోధం & భీష్మ పితామహుని ఉత్తరాయణ మోక్ష ప్రయాణం.' : 'Volume XI: Dana-Dharma, protection of women, Vipula\'s yogic guardianship of Ruchi from Indra, Eight Forms of Marriage, Sage Chyavana priced as a cow by King Nahusha, King Kusika\'s chariot ordeal & Viswamitra boon, planting trees & tanks, Uma-Maheswara Samvada on Kailasa, sacred Go-Dana, Sri Vishnu Sahasranama Stotram, and Bhishma\'s ascension in Uttarayana.';
     }
 
     renderUpaParvas();
@@ -1058,6 +1090,9 @@
     if (currentParva === 'drona') return window.DRONA_PARVA_UPAPARVAS || [];
     if (currentParva === 'vol7') return window.VOLUME_VII_UPAPARVAS || [];
     if (currentParva === 'vol8') return window.VOLUME_VIII_UPAPARVAS || [];
+    if (currentParva === 'vol9') return window.VOLUME_IX_UPAPARVAS || [];
+    if (currentParva === 'vol10') return window.VOLUME_X_UPAPARVAS || [];
+    if (currentParva === 'vol11') return window.VOLUME_XI_UPAPARVAS || [];
     return [];
   }
 
@@ -1205,6 +1240,9 @@
     else if (parvaKey === 'drona') { dataset = window.DRONA_PARVA_UPAPARVAS; parvaLabel = 'DRONA PARVA (VOL VI)'; }
     else if (parvaKey === 'vol7') { dataset = window.VOLUME_VII_UPAPARVAS; parvaLabel = 'VOLUME VII (KARNA, SALYA, SAUPTIKA, STREE)'; }
     else if (parvaKey === 'vol8') { dataset = window.VOLUME_VIII_UPAPARVAS; parvaLabel = 'VOLUME VIII (SHANTI PARVA PART I)'; }
+    else if (parvaKey === 'vol9') { dataset = window.VOLUME_IX_UPAPARVAS; parvaLabel = 'VOLUME IX (SHANTI PARVA PART II - MOKSHADHARMA I)'; }
+    else if (parvaKey === 'vol10') { dataset = window.VOLUME_X_UPAPARVAS; parvaLabel = 'VOLUME X (SHANTI PARVA PART III & ANUSASANA I)'; }
+    else if (parvaKey === 'vol11') { dataset = window.VOLUME_XI_UPAPARVAS; parvaLabel = 'VOLUME XI (ANUSASANA PARVA PART II - PRECEPTS & BHISHMA NIRVANA)'; }
 
     const item = dataset.find(u => u.number === num);
     if (!item) return;
@@ -1358,6 +1396,62 @@
             &bull; <strong>Queen Draupadi:</strong> Speaks with razor-sharp eloquence: <em>"Forgiveness without chastisement (Danda) destroys a realm! A monarch who abandons his kingdom leaves subjects prey to the anarchy of fish (Matsya-nyaya). Thy duty is to rule with justice, not weep in forest hermitages!"</em><br/><br/>
           • <strong>The Shodasa-rajika Discourse:</strong> Sages Krishna-Dwaipayana Vyasa and Narada narrate the ancient history of the <strong>Sixteen Illustrious Kings (Shodasa-rajika)</strong>—Marutta, Suhotra, Paurava, Sibi, Rama Dasarathi, Bhagiratha, Mandhatri, and others—who performed imperial sacrifices, conquered the earth, yet all departed this life, demonstrating that mortality is the universal law of existence.<br/><br/>
           • <strong>Entry into Hastinapura &amp; Slaying of Charvaka:</strong> Pacified by Sri Krishna, Yudhishthira enters Hastinapura in a grand golden car. A demon named <strong>Charvaka</strong> (a secret friend of Duryodhana disguised as a mendicant Brahmana) steps forth and reviles the king before the assembly: <em>"Fie on thee, destroyer of thy race!"</em> The genuine learned Brahmanas, blazing with yogic fire, utter the sacred sound <strong>"HUM!"</strong>, instantly reducing the demonic impostor to ashes! Yudhishthira is anointed Emperor with divine Vedic hymns.
+        `;
+      } else if (qLower.includes('pingala') || qLower.includes('manki') || (qLower.includes('annihilation') && qLower.includes('desire')) || (qLower.includes('bullocks') && qLower.includes('camel')) || qLower.includes('trishna')) {
+        answer = `
+          <strong>🕊️ The Pingala Gita &amp; Manki Gita: Conquering Desire (పింగళ-మాంకి గీతలు &amp; తృష్ణాపహరణం - Volume IX):</strong><br/><br/>
+          • <strong>The Disillusionment of Courtesan Pingala:</strong> In the Mokshadharma Parva, Grandfather Bhishma reveals how Pingala, a renowned courtesan of Videha (Mithila), waited eagerly through the night for a wealthy paramour. When the third watch arrived without anyone appearing, a blazing lightning bolt of spiritual awakening shattered her delusions: <em>"Alas! How foolish am I, spending my life yearning for mortal men who are foul vessels of disease and death, while the Eternal Lord of the Universe (Paramatman) dwells in my own heart!"</em> Renouncing all hope for gold and earthly lovers, she achieved supreme liberation: <em>"Freedom from hope and craving is the highest felicity (ఆశా హి పరమం దుఃఖం నైరాశ్యం పరమం సుఖమ్); having driven off desire, Pingala sleeps in divine peace!"</em><br/><br/>
+          • <strong>The Manki Gita &amp; Severance of Worldly Hope:</strong> Sage Manki endured perpetual poverty despite tireless toil. Purchasing two young bullocks with his last meager coins, he yoked them for field work. A resting camel took fright, bolted wildly, and dragged the tethered bullocks to their agonizing death. Witnessing this complete ruin, Manki burst into enlightened laughter: <em>"If wealth is not ordained by cosmic destiny, no human cunning can secure it! O Desire, I have severed thy very roots! Renouncing all thirst, Manki attains indestructible Brahman!"</em>
+        `;
+      } else if (qLower.includes('tuladhara') || qLower.includes('jajali') || (qLower.includes('grocer') && qLower.includes('ahimsa')) || (qLower.includes('nest') && qLower.includes('hair'))) {
+        answer = `
+          <strong>⚖️ Tuladhara &amp; Jajali: Ahimsa in Daily Commerce (తులాధారుడు &amp; అహింసా పరమో ధర్మః - Volume IX):</strong><br/><br/>
+          • <strong>The Pride of Ascetic Jajali:</strong> Sage Jajali performed terrifying austerities in the wilderness, standing motionless as a wooden pillar for years until a pair of wild birds built a nest in his matted hair and raised their chicks. When the birds flew away, Jajali slapped his arms in boastful pride: <em>"There is none on earth equal to me in holiness!"</em> A celestial voice humbled him: <em>"Thou art not equal to Tuladhara, a simple shopkeeper of Varanasi!"</em><br/><br/>
+          • <strong>The Grocer of Varanasi:</strong> Jajali traveled to the crowded market of Varanasi and found Tuladhara selling spices, roots, and oils. Tuladhara addressed the ascetic by name and revealed the profound essence of living spirituality: <em>"O Jajali, true Dharma is not standing stiff like a stone post, but universal benevolence towards all living beings (సర్వభూత హితే రతిః)! I buy and sell without false weights, without adulteration, and without exploiting anyone. Harmlessness (Ahimsa) in daily life is the highest religion!"</em><br/><br/>
+          • <strong>The Supreme Ethic:</strong> Tuladhara exposed the violence hidden in customary plowing, animal servitude, and ceremonial slaughter, convincing Jajali that overflowing tenderness for all living things surpasses all sensational ascetic feats.
+        `;
+      } else if (qLower.includes('sulabha') || (qLower.includes('janaka') && (qLower.includes('gender') || qLower.includes('debate') || qLower.includes('recluse')))) {
+        answer = `
+          <strong>🧘 Yogini Sulabha vs King Janaka: Gender, Ego &amp; Royal Detachment (సులభా యోగిని &amp; జనక మహారాజు వాదన - Volume X):</strong><br/><br/>
+          • <strong>The Arrival of the Renunciant Yogini:</strong> Yogini Sulabha, a solitary wandering mendicant of peerless yogic mastery from the Pradhana royal clan, enters the opulent court of King Dharmadhvaja Janaka of Mithila to test his celebrated claim of being a 'Rajarshi' (liberated while ruling an empire).<br/><br/>
+          • <strong>Janaka's Boastful Defense:</strong> Receiving Sulabha, Janaka haughtily declares: <em>"Though I wear a golden crown, sit on a jeweled throne, and command vast armies, I am completely detached and emancipated! Outward renunciation is for the weak; inner non-attachment is true liberation!"</em><br/><br/>
+          • <strong>Sulabha's Yogic Penetration:</strong> Using subtle yogic consciousness, Sulabha enters Janaka's mind and intellectually deconstructs his stance with razor-sharp logic: <em>"If thou art truly liberated, O King, why dost thou take offense at my entry? True consciousness has no gender—it is neither male nor female! A monarch surrounded by royal bodyguards and defending his sovereignty is bound by subtle threads of fear, pride, and defensiveness. True renunciation cannot boast of itself!"</em> Janaka bowed in reverent silence before her transcendent wisdom.
+        `;
+      } else if (qLower.includes('narayaniya') || qLower.includes('svetadvipa') || qLower.includes('white island') || qLower.includes('ekanti') || qLower.includes('hayagriva') || qLower.includes('unccha')) {
+        answer = `
+          <strong>🌊 Narayaniya Parva: Svetadvipa, Chatur-Vyuha &amp; Ekanti Bhakti (నారాయణీయ పర్వము &amp; శ్వేతద్వీపం - Volume X):</strong><br/><br/>
+          • <strong>The Journey of Sage Narada:</strong> The celestial rishi Narada visits Nara and Narayana at Badarikashrama and is directed to the mystical <strong>Svetadvipa</strong> (the White Island) situated in the Ocean of Milk (Kshirasagara), north of Mount Meru. There dwell radiant devotees of dazzling white light who eat no physical food, possess no worldly attachments, and worship the Lord through single-minded, uninterrupted devotion (<em>Ekanti-Dharma</em>).<br/><br/>
+          • <strong>The Fourfold Vyuha of Narayana:</strong> Bhagavan Narayana grants Narada a divine cosmic vision, expounding His four emanations: <strong>Vasudeva</strong> (the Supreme Unmanifest Spirit), <strong>Samkarsana</strong> (the living Jiva), <strong>Pradyumna</strong> (the Cosmic Mind), and <strong>Aniruddha</strong> (the Lord of Creation/Ego).<br/><br/>
+          • <strong>Hayagriva Avatara &amp; Unccha Vow:</strong> The text details how Lord Hayagriva (the horse-headed incarnation) plunged into the abyssal ocean depths to slay the demons Madhu and Kaitabha, retrieving the sacred Vedas. It concludes with the Naga Padmanabha expounding the sacred <em>Unccha-vrata</em> (subsisting solely on solitary grains left behind in harvested fields).
+        `;
+      } else if (qLower.includes('vipula') || qLower.includes('ruchi') || (qLower.includes('devasarman') && qLower.includes('indra')) || (qLower.includes('seasons') && qLower.includes('witness'))) {
+        answer = `
+          <strong>👁️ Vipula's Yogic Guardianship of Ruchi from Indra (విపులుని యోగరక్షణ, రుచి &amp; కాల-ఋతువుల సాక్ష్యం - Volume XI):</strong><br/><br/>
+          • <strong>The Peril of Indra's Seduction:</strong> Sage Devasarman, departing to perform a sacrifice, entrusts his incomparably beautiful wife <strong>Ruchi</strong> to his devoted disciple <strong>Vipula</strong> of Bhrigu's race. The sage warns that Lord Indra assumes infinite disguises (wind, handsome prince, wandering beggar, bird) to seduce chaste women.<br/><br/>
+          • <strong>The Masterstroke of Yoga:</strong> Recognizing that stone walls cannot exclude the king of gods, Vipula sits before Ruchi and uses Yogic power to project his subtle consciousness into her body. He freezes her limbs, eyes, and vocal cords without any physical contact.<br/><br/>
+          • <strong>Indra's Humiliation:</strong> Indra arrives in dazzling celestial glory, murmuring sweet amorous words. Ruchi is unable to move; her lips, governed by Vipula, utter the chaste Sanskrit question: <em>"Why hast thou come hither?"</em> Indra, looking with his thousand divine eyes, beholds the fiery ascetic seated within her subtle frame and flees in sheer terror of the sage's curse!<br/><br/>
+          • <strong>Day, Night &amp; The Six Seasons:</strong> Later, Vipula witnesses a quarreling couple and six dice-players swearing oaths by his name. His preceptor reveals that they were <strong>Day and Night</strong> and the <strong>Six Seasons</strong> personified, demonstrating that no human action is ever hidden from the vigilant eyes of the cosmos!
+        `;
+      } else if (qLower.includes('nahusha') || (qLower.includes('chyavana') && (qLower.includes('fish') || qLower.includes('cow') || qLower.includes('net') || qLower.includes('price')))) {
+        answer = `
+          <strong>🐄 Sage Chyavana &amp; The Price of a Cow (చేపల వలలో చ్యవన మహర్షి, నహుషుడు &amp; గోమహిమ - Volume XI):</strong><br/><br/>
+          • <strong>Chyavana in the Fisherman's Net:</strong> Sage Chyavana observed the twelve-year <em>Udavasa</em> water-vow at the confluence of Ganga and Yamuna (Prayaga). Fishermen hauled up their massive nets and found the moss-covered sage enmeshed alongside dying fish. Overflowing with compassion, Chyavana insisted: <em>"Either let me die with these fish, or sell me along with them!"</em><br/><br/>
+          • <strong>King Nahusha's Valuation:</strong> King Nahusha arrived with his court and offered a thousand gold coins, a crore, and half his empire; Chyavana rejected every sum, stating that a Brahmana cannot be purchased with gold.<br/><br/>
+          • <strong>The Cow as Cosmic Currency:</strong> A cow-born forest rishi advised Nahusha: <em>"A sacred cow alone equals a Brahmana in spiritual luster!"</em> Nahusha presented a cow to the fishermen. Chyavana revealed the sublime spiritual magnetism of cows (<em>Go-Mahatmya</em>)—living fires, mothers of nourishment, and bridges to heaven—and blessed the fishermen and the fish, who instantly ascended to celestial realms in radiant aerial cars!
+        `;
+      } else if (qLower.includes('kusika') || (qLower.includes('viswamitra') && (qLower.includes('chariot') || qLower.includes('boon') || qLower.includes('brahmanahood')))) {
+        answer = `
+          <strong>🏹 King Kusika's Chariot Ordeal &amp; Viswamitra's Birth (కుశిక మహారాజు రథపరీక్ష &amp; విశ్వామిత్ర జనన వరం - Volume XI):</strong><br/><br/>
+          • <strong>Chyavana's Fiery Ordeal:</strong> Foreseeing future strife between Bhrigus and Kshatriyas, Sage Chyavana visited King Kusika to test the lineage. The sage slept continuously for 21 days without shifting, vanished into thin air, and set fire to magnificent royal banquets.<br/><br/>
+          • <strong>Yoked to the Battle Chariot:</strong> Chyavana ordered King Kusika and his Queen to yoke themselves to his battle chariot like horses. As they dragged him through the city, the sage whipped them with a needle-sharp diamond goad until they bled like blossoming kinsuka trees, while throwing the royal treasury to the poor. The royal couple bore 50 days of starvation and pain with unwavering devotion and serene joy.<br/><br/>
+          • <strong>The Supreme Boon:</strong> Enchanted by their sublime fortitude, Chyavana healed their wounds with nectarous touch, restored their youth, revealed celestial golden palaces, and granted the eternal boon: Kusika's grandson <strong>Viswamitra</strong> would transcend his Kshatriya birth and attain the peerless status of a Brahmarshi!
+        `;
+      } else if (qLower.includes('sahasranama') || qLower.includes('vishnu sahasra') || (qLower.includes('bhishma') && (qLower.includes('uttarayana') || qLower.includes('passing') || qLower.includes('ascension') || qLower.includes('nirvana')))) {
+        answer = `
+          <strong>🕉️ Sri Vishnu Sahasranama Stotram &amp; Passing of Bhishma (విష్ణు సహస్రనామ ప్రబోధం &amp; భీష్మ పితామహుని నిర్యాణం - Volume XI):</strong><br/><br/>
+          • <strong>The Six Ultimate Questions:</strong> King Yudhishthira asked Bhishma on his bed of arrows: <em>"Who is the one Lord in the universe? What is the supreme refuge? Praising whom does man attain blessedness? What is the highest of all dharmas? By reciting what is a soul freed from the cycle of rebirth?"</em><br/><br/>
+          • <strong>The Thousand Names of Narayana:</strong> Filled with ecstatic devotion, Bhishma chanted the immortal <strong>Sri Vishnu Sahasranama Stotram</strong> (<em>Vishvam Vishnur Vashatkaro...</em>), declaring that chanting the thousand divine names of Bhagavan Vishnu with pure devotion is the supreme, infallible dharma that destroys all sorrows, fears, and sins.<br/><br/>
+          • <strong>The Ascension of Bhishma:</strong> When the sacred hour of <strong>Uttarayana</strong> arrived, Sri Krishna, the Pandavas, Kunti, and sages gathered at Kurukshetra. Bhishma recited his final heartfelt <em>Krishna-Stuti</em>. Activating his boon of <em>Iccha-Mrityu</em> (death at will), he directed his life-breaths through the crown of his head (Brahmarandhra). His soul soared like a blazing golden meteor into the celestial realms of the Vasus as celestial flowers rained from heaven! Goddess Ganga rose weeping from the waters, and Sri Krishna comforted her, proclaiming Bhishma's immortal glory throughout the cosmos!
         `;
       } else if (qLower.includes('danda') || qLower.includes('origin of king') || qLower.includes('prithu') || qLower.includes('raja kalasya') || qLower.includes('matsya-nyaya') || (qLower.includes('bed of arrows') && qLower.includes('bhishma')) || (qLower.includes('saratalpa') && qLower.includes('bhishma'))) {
         answer = `
@@ -1742,8 +1836,8 @@
       } else {
         answer = `
           <strong>🏹 Mahabharata Wisdom on "${query}":</strong><br/><br/>
-          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through VIII (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, Stree, and Shanti Parva Part I).<br/><br/>
-          You can explore both comprehensive Upa-Parvas of Volume VIII (Rajadharmanusasana Parva: Danda-Niti, origin of kingship, bee taxation doctrine, and Shodasa-rajika; and Apaddharmanusasana Parva: Viswamitra's dog-meat, Palita the mouse and Lomasa the cat, Ocean and the Reed, and Rajadharman the Crane) or switch to Volumes I–VII in the reader above!
+          The Mahabharata of Krishna-Dwaipayana Vyasa, translated into English prose by Pratap Chandra Roy, C.I.E., is integrated across Volumes I through XI (Adi, Sabha, Vana, Virata, Udyoga, Bhishma, Drona, Karna, Salya, Sauptika, Stree, Shanti Parva Parts I, II, III, and Anushasana Parva Parts I & II).<br/><br/>
+          You can explore the rich Upa-Parvas of Volumes IX, X, and XI (Mokshadharma Gitas, Sankhya-Yoga, Bhrigu-Bharadwaja cosmology, Tuladhara-Jajali Ahimsa, Sulabha-Janaka debate, Narayaniya Svetadvipa, Vipula's yogic guardianship, Chyavana & Nahusha's sacred cow, Kusika chariot ordeal, and Sri Vishnu Sahasranama Stotram with Bhishma's ascension in Uttarayana) or browse Volumes I–VIII in the reader above!
         `;
       }
 
@@ -1763,7 +1857,7 @@
 
   // Initial load
   document.addEventListener('DOMContentLoaded', function() {
-    selectReaderParva('vol8');
+    selectReaderParva('vol11');
   });
 })();
 </script>
