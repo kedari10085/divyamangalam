@@ -1388,10 +1388,123 @@
       transform: rotate(180deg);
     }
 
-    @media (max-width: 600px) {
-      .example-card { flex-direction: column; text-align: center; }
-      .trust-strip { gap: 0.6rem; font-size: 0.8rem; }
+    /* ===== Palm Reading Educational Guide & Treatise ===== */
+    .palm-guide-section {
+      padding: 4.5rem 1.5rem;
+      background: radial-gradient(circle at 50% 10%, rgba(212,160,23,0.08) 0%, rgba(10,5,25,0.95) 70%, #070614 100%);
+      border-top: 1px solid rgba(212,160,23,0.25);
     }
+    .palm-guide-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .palm-guide-inner h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .palm-guide-sub {
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .palm-article-card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(212,160,23,0.2);
+      border-radius: 18px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.98rem;
+    }
+    .palm-article-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--gold);
+      font-size: 1.45rem;
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+      padding-bottom: 0.5rem;
+    }
+    .palm-article-card p {
+      margin-bottom: 1.2rem;
+    }
+    .shastra-quote-box {
+      background: rgba(0,0,0,0.4);
+      border-left: 4px solid var(--saffron);
+      border-radius: 0 12px 12px 0;
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #FFF2D6;
+    }
+    .shastra-quote-box .author {
+      display: block;
+      font-style: normal;
+      font-size: 0.82rem;
+      color: var(--gold);
+      margin-top: 0.5rem;
+      font-weight: 700;
+    }
+    .palm-table-responsive {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      border: 1px solid rgba(212,160,23,0.25);
+    }
+    .palm-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    .palm-table th {
+      background: rgba(212,160,23,0.2);
+      color: var(--gold);
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+    }
+    .palm-table td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .palm-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    .journey-links-dark {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+    .journey-link-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 14px;
+      padding: 1.25rem;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s;
+    }
+    .journey-link-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      background: rgba(212,160,23,0.1);
+      box-shadow: 0 8px 24px rgba(212,160,23,0.15);
+    }
+    .journey-link-card .icon { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
+    .journey-link-card h4 { margin: 0 0 0.2rem; font-size: 1.05rem; color: var(--gold); font-family: 'Playfair Display', serif; }
+    .journey-link-card p { margin: 0; font-size: 0.82rem; color: rgba(255,255,255,0.7); }
   </style>
 </head>
 <body>
@@ -2141,45 +2254,261 @@
   </div>
 </div>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== HASTA SAMUDRIKA SHASTRA EDUCATIONAL TREATISE ===== -->
+<article class="palm-guide-section" id="palmGuideArticle">
+  <div class="palm-guide-inner">
+    <p style="text-align:center; color:var(--saffron); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Classical Vedic Shastra &bull; शास्त्रीय प्रमाणम्</p>
+    <h2>हस्त सामुद्रिक शास्त्र — The Ancient Vedic Science of Hand Analysis</h2>
+    <p class="palm-guide-sub">
+      A comprehensive scholarly treatise exploring the scriptural origins, neuro-dermatoglyphic foundations, the four cardinal lines (Rekhas), planetary mounts (Parvatas), and sacred micro-signs in Sanatana Dharma.
+    </p>
+
+    <!-- Section 1: Classical Origins -->
+    <div class="palm-article-card">
+      <h3>📜 1. Classical Foundations in Purana &amp; Samhita Literature</h3>
+      <p>
+        <strong>Hasta Samudrika Shastra</strong> (हस्त सामुद्रिक शास्त्र) is an integral component of the <em>Samudrika Vidya</em> — the comprehensive Vedic science of physical characteristics and bodily markings. Originating from prehistoric rishi traditions, the principal textual treatises are preserved in the <strong>Garuda Purana</strong> (Pretakalpa and Achara Khandas), the <strong>Bhavishya Purana</strong>, the <strong>Skanda Purana</strong>, and the monumental 6th-century astronomical compendium <strong>Brihat Samhita</strong> authored by Sage Varahamihira.
+      </p>
+      <div class="shastra-quote-box">
+        "हस्ते रेखाः समुद्भूताः शुभाशुभफलप्रदाः । पूर्वकर्मार्जितं सर्वं सूचयन्ति कलेवरे ॥"
+        <span class="author">— गरुड पुराण (Garuda Purana, Achara Khanda)</span>
+      </div>
+      <p>
+        According to the classical sages, the palm is not a static fortune-telling tablet; rather, it represents a dynamic neuro-biological interface. Modern embryology recognizes that the palmar dermal ridges and primary flexure creases form between the 10th and 13th weeks of intrauterine gestation — simultaneously with the development of the cerebral cortex. The Vedic rishis understood this profound mind-hand nexus millennia ago, describing the palm as an externalized cerebral cortex that records both prenatal karmic impressions (<em>Samskaras</em>) and ongoing mental modifications (<em>Chitta Vritti</em>).
+      </p>
+    </div>
+
+    <!-- Section 2: Prarabdha vs Kriyaman Karma -->
+    <div class="palm-article-card">
+      <h3>⚖️ 2. The Philosophy of Karma: Passive Hand vs. Active Hand</h3>
+      <p>
+        A frequent dilemma in hand reading is determining which palm should be examined. Classical texts establish a clear philosophical demarcation based on the doctrine of Karma:
+      </p>
+      <ul style="margin-left:1.5rem; line-height:1.9;">
+        <li>
+          <strong>The Passive Hand (Innate Potential &amp; Prarabdha Karma):</strong> For right-hand dominant individuals, the left hand represents the blueprint of birth — inherited genetic tendencies, latent talents, subconscious emotional patterns, and the karmic package allotted for this lifetime (<em>Prarabdha</em>).
+        </li>
+        <li>
+          <strong>The Active Hand (Exercised Will &amp; Kriyaman Karma):</strong> The dominant hand (typically the right hand) reflects conscious decisions, spiritual disciplines (<em>Sadhana</em>), moral choices, career achievements, and newly generated actions (<em>Kriyaman</em> and <em>Agami Karma</em>).
+        </li>
+      </ul>
+      <p>
+        When a reader compares both palms, discrepancies between the left and right hand reveal how effectively an individual has transcended negative predispositions or capitalized on hidden virtues through righteous self-effort (<em>Purushartha</em>).
+      </p>
+    </div>
+
+    <!-- Section 3: The Four Cardinal Lines -->
+    <div class="palm-article-card">
+      <h3>🖐️ 3. The Four Cardinal Rekhas (Primary Energy Channels)</h3>
+      <p>
+        The human palm is traversed by major channels of pranic energy. In Samudrika literature, these are classified into four supreme indicators:
+      </p>
+      
+      <div class="palm-table-responsive">
+        <table class="palm-table">
+          <thead>
+            <tr>
+              <th>Classical Sanskrit Name</th>
+              <th>Common Western Term</th>
+              <th>Origin &amp; Course</th>
+              <th>Psychological &amp; Karmic Significance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>आयुर् रेखा (Ayur Rekha)</strong></td>
+              <td>Life Line</td>
+              <td>Encurls the base of the thumb (Mount of Venus) starting beneath Jupiter.</td>
+              <td>Measures constitutional stamina, vitality (<em>Ojas</em>), physical recuperative power, lifestyle shifts, and home environment. A deep, unbroken line indicates robust physical resilience.</td>
+            </tr>
+            <tr>
+              <td><strong>मस्तक रेखा / मातृ रेखा (Mastaka / Matri Rekha)</strong></td>
+              <td>Head Line</td>
+              <td>Traverses horizontally across the palm from Jupiter toward the Mount of Mars/Moon.</td>
+              <td>Signifies intellectual velocity, mental concentration, decision-making style, and psychological equilibrium. A straight line indicates pragmatic rationality; a curving line denotes creative and intuitive imagination.</td>
+            </tr>
+            <tr>
+              <td><strong>हृदय रेखा / पितृ रेखा (Hridaya / Pitri Rekha)</strong></td>
+              <td>Heart Line</td>
+              <td>Originates under the Mount of Mercury or Saturn, curving across the upper mounts.</td>
+              <td>Reflects emotional temperament, relationship ethics, empathy, cardiovascular vitality, and capacity for unconditioned devotion (<em>Bhakti</em>). Forks ending on Jupiter signify noble, altruistic love.</td>
+            </tr>
+            <tr>
+              <td><strong>भाग्य रेखा / कर्म रेखा (Bhagya / Karma Rekha)</strong></td>
+              <td>Fate / Destiny Line</td>
+              <td>Ascends vertically from the wrist or Moon mount toward the Mount of Saturn.</td>
+              <td>Traces professional focus, vocation, societal recognition, and external life support. The presence of a clear Karma line indicates a strong sense of purpose; its absence indicates self-determined flexibility.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 4: The Seven Planetary Mounts -->
+    <div class="palm-article-card">
+      <h3>🪐 4. The Seven Graha Parvatas (Planetary Mounts)</h3>
+      <p>
+        Underneath the fingers and on the palm margins lie the muscular pads known as <em>Graha Parvatas</em> (Planetary Mounts). In Vedic micro-astrology, these mounts act as cellular antennae attuned to cosmic gravitational and subtle energetic frequencies:
+      </p>
+      <div class="palm-table-responsive">
+        <table class="palm-table">
+          <thead>
+            <tr>
+              <th>Mount &amp; Deity</th>
+              <th>Anatomical Location</th>
+              <th>Sattvic (Balanced) Traits</th>
+              <th>Remedial Guidance if Afflicted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>गुरु पर्वत (Jupiter)</strong></td>
+              <td>Base of Index Finger (Tarjani)</td>
+              <td>Dharmic leadership, wisdom, teaching capacity, self-respect, spiritual dignity.</td>
+              <td>Study sacred scriptures; chant Brihaspati Mantra; respect teachers and mentors.</td>
+            </tr>
+            <tr>
+              <td><strong>शनि पर्वत (Saturn)</strong></td>
+              <td>Base of Middle Finger (Madhyama)</td>
+              <td>Discipline, perseverance, philosophical depth, research acumen, patient sobriety.</td>
+              <td>Practice selfless service (Seva); observe Saturday discipline; chant Shani Gayatri.</td>
+            </tr>
+            <tr>
+              <td><strong>सूर्य पर्वत (Sun / Apollo)</strong></td>
+              <td>Base of Ring Finger (Anamika)</td>
+              <td>Creative brilliance, executive fame, artistic vitality, magnanimity, vitality.</td>
+              <td>Perform Surya Namaskar at dawn; recite Aditya Hridaya Stotram; cultivate truthfulness.</td>
+            </tr>
+            <tr>
+              <td><strong>बुध पर्वत (Mercury)</strong></td>
+              <td>Base of Little Finger (Kanishtha)</td>
+              <td>Commercial insight, eloquence, mathematical wit, diplomatic communication.</td>
+              <td>Maintain ethical speech; feed green fodder to sacred cows; recite Budha Stotram.</td>
+            </tr>
+            <tr>
+              <td><strong>शुक्र पर्वत (Venus)</strong></td>
+              <td>Base of Thumb (Angustha)</td>
+              <td>Aesthetic sensibility, romantic warmth, generative vitality, passion for elegance.</td>
+              <td>Practice sensory moderation; cultivate cleanliness; honor creative arts and motherhood.</td>
+            </tr>
+            <tr>
+              <td><strong>चन्द्र पर्वत (Moon)</strong></td>
+              <td>Lower palm opposite the thumb</td>
+              <td>Subconscious intuition, poetic vision, love for natural bodies of water, travel.</td>
+              <td>Drink water from silver vessels; practice meditation; respect mothers and maternal elders.</td>
+            </tr>
+            <tr>
+              <td><strong>मङ्गल पर्वत (Mars - Upper &amp; Lower)</strong></td>
+              <td>Between thumb/index &amp; between Mercury/Moon</td>
+              <td>Inner moral courage, physical bravery, self-restraint, athletic vitality.</td>
+              <td>Recite Hanuman Chalisa; engage in physical exercise; avoid impulsive anger.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 5: Sacred Auspicious Signs -->
+    <div class="palm-article-card">
+      <h3>🔱 5. Rare Auspicious Markings (Lakshanas) in Shastra</h3>
+      <p>
+        The classical text <em>Samudrika Tilaka</em> details rare glyphs and configurations formed by fine interlacing lines. When clearly articulated, these symbols confirm elevated karmic merit:
+      </p>
+      <ul style="margin-left:1.5rem; line-height:1.9;">
+        <li><strong>मत्स्य चिह्न (Fish Sign):</strong> Formed near the base of the Fate Line or Mount of Ketu. Indicates spiritual liberation, unexpected wealth, scholarly wisdom, and philanthropic benevolence.</li>
+        <li><strong>त्रिशूल (Trident Mark):</strong> Found at the terminus of the Heart Line on Mount Jupiter or Saturn. Confirms divine grace, leadership, supreme ethical integrity, and protective shielding against adversity.</li>
+        <li><strong>पद्म चिह्न (Lotus Mark):</strong> Highly auspicious sign associated with Goddess Lakshmi. Grants inner serenity, fame without vanity, and pure moral character.</li>
+        <li><strong>यव चिह्न (Barley Seed on Thumb):</strong> An eye-shaped island at the thumb’s first interphalangeal joint. Symbolizes abundant nourishment, financial security, and intuitive prescience.</li>
+        <li><strong>चामर / छत्र (Royal Umbrella / Fan):</strong> Indicates authority in governance, public honor, and universal respect in society.</li>
+      </ul>
+    </div>
+
+    <!-- Section 6: Ethical & Remedial Guidance -->
+    <div class="palm-article-card">
+      <h3>🛡️ 6. Ethical Approach &amp; Dynamic Transformation</h3>
+      <p>
+        Vedic palmistry emphatically rejects fatalism. In the Sanatana worldview, destiny is never written in stone; the lines of the palm are alive and constantly reorganize over cycles of 6 to 18 months in response to changed thought patterns, dietary purity, spiritual practices, and conscious lifestyle choices.
+      </p>
+      <p>
+        Rather than cultivating apprehension over cross markings or broken lines, one should treat palmar indications as diagnostic signposts. Through righteous action (<em>Dharma</em>), daily meditation (<em>Dhyana</em>), and charitable generosity (<em>Dana</em>), unfavorable planetary configurations are systematically dissolved and harmonious energies are awakened.
+      </p>
+    </div>
+
+    <!-- Cross Journey Links -->
+    <div style="text-align:center; margin-top:3rem;">
+      <h3 style="color:var(--gold); font-family:'Playfair Display',serif; font-size:1.6rem; margin-bottom:0.5rem;">Continue Your Astrological Exploration</h3>
+      <p style="color:rgba(255,255,255,0.7); font-size:0.92rem; margin-bottom:1.5rem;">Dive deeper into classical Vedic sciences and sacred astronomical calculations.</p>
+      <div class="journey-links-dark">
+        <a href="panchang-calendar.html" class="journey-link-card">
+          <span class="icon">📅</span>
+          <h4>Vedic Panchang</h4>
+          <p>Tithi, Nakshatra, Yoga, Karana &amp; Rahu Kaal</p>
+        </a>
+        <a href="dosha-check.html" class="journey-link-card">
+          <span class="icon">🔮</span>
+          <h4>Dosha Checker</h4>
+          <p>Mangal, Kaal Sarp, Sade Sati &amp; Pitra analysis</p>
+        </a>
+        <a href="muhurat.html" class="journey-link-card">
+          <span class="icon">⏳</span>
+          <h4>Shubh Muhurat</h4>
+          <p>Auspicious wedding &amp; Griha Pravesh timings</p>
+        </a>
+        <a href="articles.html" class="journey-link-card">
+          <span class="icon">📖</span>
+          <h4>Articles Hub</h4>
+          <p>Scholarly research on Vedic astronomical shastras</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ===== STANDARDIZED FOOTER ===== -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="brand-om">🕉️</div>
       <h3>Divya Mangalam</h3>
-      <p>A sacred digital space where devotion meets technology.</p>
+      <p>A sacred digital sanctuary preserving authentic Vedic scriptures, classical Hasta Samudrika Shastra, astronomical calendar calculations, and devotional literature.</p>
     </div>
     <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h4>Astrology &amp; Tools</h4>
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="jyotishyam.html">Vedanga Jyotisha</a></li>
         <li><a href="palm-reading.html">Palm Reading</a></li>
-        <li><a href="panchang-calendar.html">Panchang</a></li>
+        <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
         <li><a href="muhurat.html">Shubh Muhurat</a></li>
         <li><a href="dosha-check.html">Dosha Check</a></li>
-        <li><a href="puran.html">18 Maha Puranas</a></li>
-        <li><a href="gods.html">Choose Deity</a></li>
-        <li><a href="live-archana.html">Live Archana</a></li>
-        <li><a href="chalisa.html">Hanuman Chalisa</a></li>
-        <li><a href="shlokas.html">Shlokas</a></li>
-        <li><a href="healing.html">432 Hz Healing</a></li>
-        <li><a href="ai-archana.html">AI Pandit</a></li>
+        <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Devotional Rituals</h4>
+      <h4>Scriptures &amp; Articles</h4>
       <ul>
-        <li><a href="live-archana.html">Live Archana</a></li>
-        <li><a href="chalisa.html">Hanuman Chalisa</a></li>
-        <li><a href="shlokas.html">Sacred Shlokas</a></li>
-        <li><a href="healing.html">432 Hz Healing</a></li>
-        <li><a href="gods.html">All Deities</a></li>
+        <li><a href="articles.html">Vedic Articles Hub</a></li>
+        <li><a href="article-hasta-samudrika.html">Hasta Samudrika Guide</a></li>
+        <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
+        <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
+        <li><a href="mahabharata.html">Complete Mahabharata</a></li>
+        <li><a href="puran.html">18 Maha Puranas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Trust &amp; Governance</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion.</p>
-    <p><span class="om-footer">🕉️</span> Om Shanti Shanti Shanti</p>
+    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion for spiritual seekers worldwide.</p>
+    <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
   </div>
 </footer>
 

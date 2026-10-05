@@ -283,10 +283,110 @@
         min-height: auto;
       }
       .day-cell.empty { display: none; }
-      .date-num { margin-right: 1rem; min-width: 30px; }
-      .moon-icon { position: static; margin-left: 0.5rem; }
-      .detail-grid { grid-template-columns: 1fr; }
+    /* Educational Guide Section */
+    .panchang-guide {
+      margin-top: 4rem;
+      background: var(--white);
+      border: 1px solid var(--calendar-border);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     }
+    .panchang-guide h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      color: var(--deep-red);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .panchang-guide-sub {
+      text-align: center;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .guide-card-block {
+      background: #FFFDF9;
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      color: var(--text-dark);
+      font-size: 0.98rem;
+    }
+    .guide-card-block h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--deep-red);
+      font-size: 1.4rem;
+      margin: 0 0 1rem;
+      border-bottom: 1px solid rgba(212,160,23,0.25);
+      padding-bottom: 0.4rem;
+    }
+    .guide-table-wrap {
+      overflow-x: auto;
+      margin: 1.2rem 0;
+    }
+    .guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .guide-table th {
+      background: rgba(212,160,23,0.15);
+      color: var(--deep-red);
+      padding: 0.8rem;
+      border: 1px solid rgba(212,160,23,0.3);
+      text-align: left;
+    }
+    .guide-table td {
+      padding: 0.8rem;
+      border: 1px solid rgba(212,160,23,0.2);
+    }
+    .shastra-quote {
+      background: rgba(255,248,235,0.8);
+      border-left: 4px solid var(--saffron);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.4rem;
+      margin: 1.2rem 0;
+      font-style: italic;
+      color: var(--deep-red);
+    }
+    .shastra-quote .ref {
+      display: block;
+      font-style: normal;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin-top: 0.4rem;
+      font-weight: 700;
+    }
+    .journey-grid-light {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .journey-card-light {
+      background: var(--light-bg);
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 14px;
+      padding: 1.4rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: all 0.3s;
+    }
+    .journey-card-light:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 8px 24px rgba(212,160,23,0.15);
+      background: white;
+    }
+    .journey-card-light .icon { font-size: 2rem; margin-bottom: 0.4rem; display: block; }
+    .journey-card-light h4 { margin: 0 0 0.25rem; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--deep-red); }
+    .journey-card-light p { margin: 0; font-size: 0.84rem; color: var(--text-mid); }
   </style>
 </head>
 <body>
@@ -400,26 +500,206 @@
         <button id="applyFilterBtn">Apply Filter</button>
       </div>
     </div>
+    <!-- ===== PANCHANGA SHASTRA EDUCATIONAL TREATISE ===== -->
+    <article class="panchang-guide" id="panchangTreatise">
+      <p style="text-align:center; color:var(--saffron); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">Classical Astronomical Shastra &bull; कालविधानम्</p>
+      <h2>पञ्चाङ्ग शास्त्र — The Science of the Five Limbs of Vedic Time</h2>
+      <p class="panchang-guide-sub">
+        An exhaustive scholarly exposition on the astronomical coordinates, mathematical foundations, and metaphysical principles governing the traditional Hindu calendar (Panchanga).
+      </p>
+
+      <!-- Section 1: Classical Foundations -->
+      <div class="guide-card-block">
+        <h3>📜 1. Classical Origins: Vedanga Jyotisha &amp; Surya Siddhanta</h3>
+        <p>
+          The term <strong>Panchanga</strong> (पञ्चाङ्ग) derives from two Sanskrit roots: <em>Pancha</em> (five) and <em>Anga</em> (limbs). In the hierarchy of sacred Vedic sciences, Astronomy and Timekeeping hold an exalted position as <strong>Vedanga Jyotisha</strong> (वेदाङ्ग ज्योतिष), codified in antiquity by Sage Lagadha (c. 1400–1200 BCE). Sage Lagadha proclaimed:
+        </p>
+        <div class="shastra-quote">
+          "यथा शिखा मयूराणां नागानां मणयो यथा । तद्वद् वेदाङ्गशास्त्राणां गणितं मूर्धनि स्थितम् ॥"
+          <span class="ref">— वेदाङ्ग ज्योतिष (Vedanga Jyotisha 4)</span>
+        </div>
+        <p>
+          <em>"Just as the crest crowns the peacock and the jewel shines upon the hood of the serpent, even so does the mathematical science of astronomical timing sit at the highest crown of all Vedic sciences."</em>
+        </p>
+        <p>
+          Unlike purely solar civil calendars (such as the modern Gregorian calendar) or purely lunar calendars, the Vedic Panchanga is an intricate <strong>luni-solar astronomical ephemeris</strong>. It calculates the simultaneous real-time orbital positions of both the Sun (<em>Surya</em>) and the Moon (<em>Chandra</em>) against the fixed sidereal zodiac (<em>Nirayana Rashi Chakra</em>), taking into account the precession of the equinoxes through the classical <em>Chitrapaksha / Lahiri Ayanamsa</em>.
+        </p>
+      </div>
+
+      <!-- Section 2: The Five Inherent Limbs -->
+      <div class="guide-card-block">
+        <h3>🪐 2. The Five Fundamental Limbs (Pancha Angas)</h3>
+        <p>
+          Every civil day in the Vedic tradition is characterized by five distinct astronomical parameters, each corresponding to a fundamental element of nature (Pancha Mahabhutas) and exercising a precise psychological influence upon human consciousness:
+        </p>
+
+        <div class="guide-table-wrap">
+          <table class="guide-table">
+            <thead>
+              <tr>
+                <th>Limb (Anga)</th>
+                <th>Element (Bhuta)</th>
+                <th>Astronomical Computation</th>
+                <th>Subtle &amp; Practical Influence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. तिथि (Tithi)</strong><br>Lunar Day</td>
+                <td>Jala (Water)</td>
+                <td>Each 12° angular longitudinal separation between the Moon and the Sun: <code>(Moon Longitude - Sun Longitude) / 12°</code>.</td>
+                <td>Governs emotional fluidity, psychological receptivity, hormonal rhythms, prosperity, and relational harmony.</td>
+              </tr>
+              <tr>
+                <td><strong>2. वार (Vara)</strong><br>Solar Weekday</td>
+                <td>Agni (Fire)</td>
+                <td>Determined by the planetary ruler of the first <em>Hora</em> (planetary hour) commencing at local astronomical sunrise.</td>
+                <td>Determines physical vitality, constitutional stamina, vitality (<em>Ayush</em>), executive willpower, and dynamic drive.</td>
+              </tr>
+              <tr>
+                <td><strong>3. नक्षत्र (Nakshatra)</strong><br>Lunar Mansion</td>
+                <td>Vayu (Air)</td>
+                <td>The Moon’s sidereal position within the 27 stellar arcs of 13°20' each, commencing at 0° Mesha (Aries).</td>
+                <td>Governs mental temperament, karmic direction, instinctive inclinations, and the success of undertakings.</td>
+              </tr>
+              <tr>
+                <td><strong>4. योग (Yoga)</strong><br>Luni-Solar Conjunction</td>
+                <td>Akasha (Ether)</td>
+                <td>The mathematical sum of the Sun’s and Moon’s sidereal longitudes divided by 13°20': <code>(Sun + Moon) / 13°20'</code>.</td>
+                <td>Governs spiritual coherence, purification of vices, mental equilibrium, and social harmony across 27 distinct yogas.</td>
+              </tr>
+              <tr>
+                <td><strong>5. करण (Karana)</strong><br>Half Lunar Day</td>
+                <td>Prithvi (Earth)</td>
+                <td>One-half of a Tithi (spanning 6° of angular displacement between the Moon and Sun). There are 60 Karanas in a lunar month.</td>
+                <td>Governs material execution, tangible achievements, physical dexterity, and the completion of practical deeds.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 3: Inauspicious & Auspicious Kala Windows -->
+      <div class="guide-card-block">
+        <h3>⏳ 3. Daily Muhurtas, Rahu Kaal &amp; Kala Partition Rules</h3>
+        <p>
+          Classical masters such as Daivajna Rama (author of <em>Muhurta Chintamani</em>) and Sage Narasimha (author of <em>Kalaprakasika</em>) established precise diurnal calculations based on the rising and setting of the sun:
+        </p>
+        <ul style="margin-left:1.5rem; line-height:1.9;">
+          <li>
+            <strong>Rahu Kaal (राहु काल / రాహు కాలం):</strong> A diurnal period equal to 1/8th of daytime (approximately 90 minutes) governed by the shadowy node Rahu. Classical authorities recommend avoiding the initiation of new commercial ventures, marriage ceremonies, journeys, or medical treatments during Rahu Kaal. However, devotional sadhana and prayers during this time bear potent neutralizing merit.
+          </li>
+          <li>
+            <strong>Yamagandam (యమగండం):</strong> A 90-minute diurnal window governed by Yama (associated with Ketu). Undertakings commenced during Yamagandam often encounter unexpected friction or delayed fruition.
+          </li>
+          <li>
+            <strong>Gulika Kalam (గుళిక కాలం):</strong> The diurnal window governed by Gulika (son of Saturn / Mandi). Favorable for enduring activities like constructing retaining walls or deep contemplation, but avoided for joyous celebration.
+          </li>
+          <li>
+            <strong>Abhijit Muhurta (अभिजीत मुहूर्त):</strong> The 8th muhurta of daytime (spanning approximately 24 minutes before to 24 minutes after astronomical midday). Blessed by Lord Vishnu, Abhijit Muhurta possesses the classical capability to neutralize myriad minor blemishes and is universally auspicious for urgent deeds.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Section 4: Personalized Compatibility -->
+      <div class="guide-card-block">
+        <h3>⭐ 4. Personalized Alignment: Tarabalam &amp; Chandrabalam</h3>
+        <p>
+          A day that is universally auspicious may still be favorable or unfavorable for a specific individual based on their natal chart (<em>Janma Kundali</em>). The Panchanga system reconciles this through two daily metrics:
+        </p>
+        <p>
+          <strong>Tarabalam (Navatara System):</strong> The 27 nakshatras are counted in sequence starting from the individual’s birth star (<em>Janma Nakshatra</em>) up to the current day’s transit nakshatra. The remainder when divided by 9 yields the active Tara:
+        </p>
+        <ol style="margin-left:1.5rem; line-height:1.8;">
+          <li><strong>Janma (1st Tara):</strong> Identity, caution advised regarding physical strain.</li>
+          <li><strong>Sampat (2nd Tara):</strong> Wealth, material prosperity, favorable for investments.</li>
+          <li><strong>Vipat (3rd Tara):</strong> Obstacles and distress, avoid risky initiatives.</li>
+          <li><strong>Kshema (4th Tara):</strong> Well-being, security, auspicious for travel and celebrations.</li>
+          <li><strong>Pratyari (5th Tara):</strong> Adversity, caution in diplomatic dealings.</li>
+          <li><strong>Sadhaka (6th Tara):</strong> Accomplishment, fruition of ambitious projects.</li>
+          <li><strong>Vadha / Naidhana (7th Tara):</strong> Danger, strictly avoid critical beginnings.</li>
+          <li><strong>Mitra (8th Tara):</strong> Friendly companionship, joyous gatherings.</li>
+          <li><strong>Parama Mitra (9th Tara):</strong> Supreme friend, exceptional fortune and success.</li>
+        </ol>
+        <p style="margin-top:1rem;">
+          <strong>Chandrabalam:</strong> Measures the transit position of the Moon relative to the native’s natal Moon sign (<em>Chandra Rasi</em>). When the transit Moon resides in houses 6, 8, or 12 from the natal Moon (Ashtama Chandra), one is advised to avoid heavy disputes and practice reflective meditation.
+        </p>
+      </div>
+
+      <!-- Related Journey Links -->
+      <div style="text-align:center; margin-top:2.5rem;">
+        <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); font-size:1.5rem; margin-bottom:0.5rem;">Continue Your Astrological Journey</h3>
+        <p style="color:var(--text-mid); font-size:0.92rem; margin-bottom:1.5rem;">Cross-reference daily cosmic timings with our comprehensive suite of Vedic analytical tools.</p>
+        <div class="journey-grid-light">
+          <a href="muhurat.html" class="journey-card-light">
+            <span class="icon">⏳</span>
+            <h4>Shubh Muhurat</h4>
+            <p>10-factor Dasa Koota &amp; auspicious ceremony dates</p>
+          </a>
+          <a href="dosha-check.html" class="journey-card-light">
+            <span class="icon">🔮</span>
+            <h4>Dosha Checker</h4>
+            <p>Mangal Dosha, Kaal Sarp &amp; Sade Sati calculator</p>
+          </a>
+          <a href="palm-reading.html" class="journey-card-light">
+            <span class="icon">🖐️</span>
+            <h4>Palm Reading</h4>
+            <p>Classical Hasta Samudrika Shastra AI analyzer</p>
+          </a>
+          <a href="articles.html" class="journey-card-light">
+            <span class="icon">📖</span>
+            <h4>Articles Hub</h4>
+            <p>Read peerless research articles on Vedic sciences</p>
+          </a>
+        </div>
+      </div>
+    </article>
   </main>
 
+  <!-- ===== STANDARDIZED FOOTER ===== -->
   <footer class="footer">
-    <div class="footer-inner" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding: 2rem; max-width: 1200px; margin: 0 auto;">
+    <div class="footer-inner" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:2rem; padding:3rem 1.5rem; max-width:1200px; margin:0 auto;">
       <div class="footer-col">
-        <h3>Divya Mangalam</h3>
-        <p>Your digital sanctuary for Vedic wisdom, prayers, and spiritual growth.</p>
+        <div style="font-size:2rem; margin-bottom:0.4rem;">🕉️</div>
+        <h3 style="color:var(--deep-red); margin-bottom:0.8rem; font-family:'Playfair Display',serif;">Divya Mangalam</h3>
+        <p style="font-size:0.88rem; line-height:1.6; color:var(--text-dark);">A sacred digital sanctuary dedicated to preserving classical Vedic astronomy, authentic scriptural texts, and providing open-access Hindu calendar tools for seekers worldwide.</p>
       </div>
       <div class="footer-col">
-        <h3>Quick Links</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="panchang-calendar.html">Panchang</a></li>
-          <li><a href="gods.html">Deities</a></li>
+        <h4 style="color:var(--deep-red); margin-bottom:0.8rem; font-size:1.05rem;">Astrology &amp; Timings</h4>
+        <ul style="list-style:none; padding:0; line-height:2; font-size:0.88rem;">
+          <li><a href="index.html" style="color:var(--text-dark); text-decoration:none;">Home</a></li>
+          <li><a href="jyotishyam.html" style="color:var(--text-dark); text-decoration:none;">Vedanga Jyotisha</a></li>
+          <li><a href="panchang-calendar.html" style="color:var(--text-dark); text-decoration:none;">Panchang Calendar</a></li>
+          <li><a href="muhurat.html" style="color:var(--text-dark); text-decoration:none;">Shubh Muhurat</a></li>
+          <li><a href="dosha-check.html" style="color:var(--text-dark); text-decoration:none;">Dosha Check</a></li>
+          <li><a href="palm-reading.html" style="color:var(--text-dark); text-decoration:none;">Palm Reading</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>Puja Timings</h3>
-        <p>Morning: 6:00 AM - 12:00 PM<br>Evening: 4:00 PM - 9:00 PM</p>
+        <h4 style="color:var(--deep-red); margin-bottom:0.8rem; font-size:1.05rem;">Articles &amp; Epics</h4>
+        <ul style="list-style:none; padding:0; line-height:2; font-size:0.88rem;">
+          <li><a href="articles.html" style="color:var(--text-dark); text-decoration:none;">Vedic Articles Hub</a></li>
+          <li><a href="article-panchanga-shastra.html" style="color:var(--text-dark); text-decoration:none;">Science of Panchanga</a></li>
+          <li><a href="article-mangal-dosha-guide.html" style="color:var(--text-dark); text-decoration:none;">Mangal Dosha Treatise</a></li>
+          <li><a href="article-hasta-samudrika.html" style="color:var(--text-dark); text-decoration:none;">Hasta Samudrika Shastra</a></li>
+          <li><a href="mahabharata.html" style="color:var(--text-dark); text-decoration:none;">Complete Mahabharata</a></li>
+          <li><a href="puran.html" style="color:var(--text-dark); text-decoration:none;">18 Maha Puranas</a></li>
+        </ul>
       </div>
+      <div class="footer-col">
+        <h4 style="color:var(--deep-red); margin-bottom:0.8rem; font-size:1.05rem;">Trust &amp; Governance</h4>
+        <ul style="list-style:none; padding:0; line-height:2; font-size:0.88rem;">
+          <li><a href="about.html" style="color:var(--text-dark); text-decoration:none;">About Us</a></li>
+          <li><a href="contact.html" style="color:var(--text-dark); text-decoration:none;">Contact Us</a></li>
+          <li><a href="privacy.html" style="color:var(--text-dark); text-decoration:none;">Privacy Policy</a></li>
+          <li><a href="terms.html" style="color:var(--text-dark); text-decoration:none;">Terms of Service</a></li>
+          <li><a href="disclaimer.html" style="color:var(--text-dark); text-decoration:none;">Astrological Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; padding:1.2rem 1.5rem; background:rgba(0,0,0,0.03); border-top:1px solid rgba(212,160,23,0.2); font-size:0.85rem; color:var(--text-mid);">
+      <p style="margin:0 0 0.3rem;">© 2026 Divya Mangalam. Crafted with 🙏 devotion for spiritual seekers worldwide.</p>
+      <p style="margin:0;">🕉️ ॐ द्यौः शान्तिरन्तरिक्षं शान्तिः पृथिवी शान्तिरापः शान्तिरोषधयः शान्तिः ॥</p>
     </div>
   </footer>
 

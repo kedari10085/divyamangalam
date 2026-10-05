@@ -1,8 +1,11 @@
 # DivyaMangalam robots.txt
 # Strict Anti-AI-Scraper & Web Crawler Directives
 
-# 1. Allow standard ethical search engines for SEO discovery
+# 1. Allow standard ethical search engines for SEO discovery & AdSense
 User-agent: Googlebot
+Allow: /
+
+User-agent: Mediapartners-Google
 Allow: /
 
 User-agent: Bingbot
