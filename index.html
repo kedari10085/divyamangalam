@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="referrer" content="no-referrer" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Divya Mangalam – Virtual Darshan & Archana</title>
@@ -20,6 +20,37 @@
   <link rel="stylesheet" href="sanctuary.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "Divya Mangalam",
+        "url": "https://divyamangalam.com/",
+        "description": "Sacred digital sanctuary for Vedic astronomy, palm reading, Panchang calendar, Dosha check, complete Mahabharata, 18 Puranas, and devotional tools.",
+        "inLanguage": ["en", "hi", "te", "sa"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://divyamangalam.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "name": "Divya Mangalam",
+        "url": "https://divyamangalam.com/",
+        "logo": "https://divyamangalam.com/lotus-sanctuary.svg",
+        "sameAs": [],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contact@divyamangalam.com",
+          "contactType": "customer service"
+        }
+      }
+    ]
+  }
+  </script>
   <style>
     /* ===== Feature Tiles ===== */
     .feature-section { padding: 4rem 1.5rem; }
@@ -35,23 +66,23 @@
       display: flex; flex-direction: column;
       padding: 2rem 1.5rem 1.5rem;
       border-radius: 16px;
-      background: var(--white);
-      border: 1px solid rgba(212,160,23,0.2);
+      background: #1A1A2E;
+      border: 1px solid rgba(212,160,23,0.15);
       text-decoration: none;
       color: var(--text-dark);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       overflow: hidden;
     }
     .tile-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 16px 48px rgba(212,160,23,0.2), 0 0 30px rgba(212,160,23,0.05);
+      box-shadow: 0 16px 48px rgba(212,160,23,0.12), 0 0 30px rgba(212,160,23,0.06);
       border-color: var(--gold);
     }
     .tile-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0;
       height: 4px;
-      background: var(--gold);
+      background: linear-gradient(90deg, var(--gold), var(--saffron));
       border-radius: 16px 16px 0 0;
       opacity: 0;
       transition: opacity 0.25s;
@@ -115,16 +146,16 @@
     /* Today's Panchang mini card */
     .panchang-mini {
       max-width: 1200px; margin: 0 auto 2rem;
-      background: linear-gradient(135deg, rgba(255,111,0,0.08), rgba(212,160,23,0.12));
-      border: 1px solid rgba(212,160,23,0.25);
+      background: linear-gradient(135deg, rgba(255,111,0,0.06), rgba(212,160,23,0.08));
+      border: 1px solid rgba(212,160,23,0.2);
       border-radius: 16px; padding: 1.25rem 1.5rem;
       display: flex; gap: 1.5rem; flex-wrap: wrap;
       align-items: center; justify-content: center;
       font-size: 0.88rem; color: var(--text-dark);
     }
-    .panchang-mini strong { color: var(--deep-red); }
+    .panchang-mini strong { color: var(--gold); }
     .panchang-mini .pm-item { display: flex; align-items: center; gap: 0.35rem; }
-    .panchang-mini .pm-divider { width: 1px; height: 24px; background: rgba(212,160,23,0.3); }
+    .panchang-mini .pm-divider { width: 1px; height: 24px; background: rgba(212,160,23,0.2); }
 
     /* Responsive */
     @media (max-width: 1024px) {
