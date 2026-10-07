@@ -64,13 +64,19 @@
     <h2 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin-bottom:1rem; font-size:1.6rem;">1. Introduction</h2>
     <p>Welcome to <strong>Divya Mangalam</strong> (accessible at <a href="https://divyamangalam.com" style="color:var(--saffron); font-weight:700;">divyamangalam.com</a>). Your privacy and peace of mind are of the utmost importance to us. This Privacy Policy documents the types of personal information collected, recorded, and utilized by Divya Mangalam, as well as the choices available to you regarding your data.</p>
 
-    <h2 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin: 2.2rem 0 1rem; font-size:1.6rem;">2. Information We Collect</h2>
-    <p>When you interact with our digital platform, you may provide information in the following contexts:</p>
+    <h2 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin: 2.2rem 0 1rem; font-size:1.6rem;">2. Information We Collect &amp; Processing Architecture</h2>
+    <p>When you interact with our digital platform, data is handled strictly according to the following architectural tiers:</p>
     <ul style="list-style:disc; margin-left:1.5rem; margin-top:0.5rem;">
-      <li><strong>Devotional Inputs:</strong> When using the Live Archana form or personalized prayer modules, you may optionally provide your name, Gotra, birth star (Nakshatra), Rashi, and prayer intention. This information is processed ephemerally within your active browser session to personalize your ritual display. We do not sell, rent, or trade devotee prayer data to third parties.</li>
-      <li><strong>Astrological & Biometric Inputs:</strong> When using the Vedic Palm Reader, your hand photo is processed locally inside your web browser using HTML5 Canvas client-side logic. <strong>Your palm image is never uploaded to, stored on, or transmitted to any server.</strong></li>
-      <li><strong>Contact Information:</strong> If you reach out via our contact form or direct email, we collect your name, email address, and message contents solely to address your inquiry.</li>
+      <li><strong>Client-Side Planetary &amp; Astrological Calculations:</strong> All astronomical ephemeris equations, planetary positions (Lahiri Ayanamsa), Panchang computations, and Dosha checks run locally inside your browser memory via client-side JavaScript. Your birth date, time, and coordinates are never transmitted to or logged on any external server.</li>
+      <li><strong>Biometric Palm Analysis:</strong> When using the Vedic Palm Reader, palm outline extraction and mount measurements run 100% locally in your browser using HTML5 Canvas. <strong>Your palm image is never uploaded to, stored on, or transmitted to any server.</strong></li>
+      <li><strong>AI Pandit &amp; Anthropic Claude Inquiries:</strong> When you submit a question to the AI Pandit, the text query is securely transmitted to our backend endpoint (<code>/api/pandit</code>). Our system retrieves relevant canonical passages from the Shastric corpus and queries the Anthropic Messages API (Claude) to draft and verify responses against exact source verses. Inquiries are processed ephemerally in transit and are not sold or brokered. Under Anthropic's commercial API terms, data sent via API is not used to train generative models.</li>
+      <li><strong>Devotional Inputs:</strong> Devotional prayer forms process names and Gotra ephemerally in browser session memory. We do not sell or rent devotee prayer data.</li>
+      <li><strong>Waitlist &amp; Contact Information:</strong> If you join our Early Access waitlist or reach out via our contact channels, we collect your name and email address solely to grant platform access and provide requested correspondence.</li>
     </ul>
+
+    <p style="margin-top:1rem; background:rgba(212,160,23,0.08); border-left:3px solid var(--gold); padding:10px 14px; border-radius:4px; font-size:0.92rem;">
+      <strong>Notice on Astrological &amp; AI Scope:</strong> For important information regarding the non-deterministic, educational, and philosophical scope of our calculations and AI synthesis, please see our dedicated <a href="disclaimer.html" style="color:var(--saffron); font-weight:700;">Astrological &amp; AI Disclaimer</a> and our <a href="how-we-verify.html" style="color:var(--saffron); font-weight:700;">Verification Standards</a>.
+    </p>
 
     <h2 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin: 2.2rem 0 1rem; font-size:1.6rem;">3. Google AdSense & Third-Party Advertising</h2>
     <p>We partner with <strong>Google AdSense</strong> to display advertisements across Divya Mangalam to support high-performance server hosting and sustain free access to our library of 2,046 Mahabharata chapters, 18 Mahapuranas, and interactive Vedic tools:</p>
@@ -90,7 +96,7 @@
       <li>Your last-read chapter index across the 12 Mahabharata volumes.</li>
       <li>Your selected font size preferences for reading classical scriptures.</li>
       <li>Audio volume preferences and temple bell toggle states.</li>
-      <li>Optional user-provided API keys for personal AI Pandit consultations (keys remain strictly inside your browser and are never transmitted to our servers).</li>
+      <li>Local offline waitlist submission caches.</li>
     </ul>
 
     <h2 style="font-family:'Playfair Display',serif; color:var(--deep-red); margin: 2.2rem 0 1rem; font-size:1.6rem;">6. GDPR Devotee Data Protection Rights (EU Users)</h2>

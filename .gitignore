@@ -1,3 +1,6 @@
 node_modules/
 *.exe
 1000*.jpg
+.env
+.env.local
+data/waitlist.json

@@ -4,17 +4,17 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Archana – Divya Mangalam</title>
-  <meta name="description" content="Ask the AI pandit anything — personalised archana, muhurta, mantras and blessings powered by Google Gemini." />
-  <meta name="keywords" content="ai pandit, ai archana, online pandit, vedic ai, hindu rituals ai, personalized archana" />
-  <meta property="og:title" content="AI Archana – Divya Mangalam" />
-  <meta property="og:description" content="Ask the AI pandit anything — personalised archana, muhurta, mantras and blessings powered by Google Gemini." />
+  <title>AI Pandit – Divya Mangalam | Shastric Guidance with Claude</title>
+  <meta name="description" content="Ask the AI pandit anything — personalized archana, muhurta, mantras and spiritual guidance powered by Claude and verified against classical Sanskrit texts." />
+  <meta name="keywords" content="ai pandit, ai archana, online pandit, vedic ai, built with claude, shastric verification, hindu rituals ai, personalized archana" />
+  <meta property="og:title" content="AI Pandit – Divya Mangalam | Shastric Guidance with Claude" />
+  <meta property="og:description" content="Vedic spiritual guidance powered by Claude and strictly verified against canonical Sanskrit treatises." />
   <meta property="og:url" content="https://divyamangalam.com/ai-archana.html" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI Archana – Divya Mangalam" />
-  <meta name="twitter:description" content="Ask the AI pandit anything — personalised archana, muhurta, mantras and blessings powered by Google Gemini." />
+  <meta name="twitter:title" content="AI Pandit – Divya Mangalam" />
+  <meta name="twitter:description" content="Ask the AI pandit anything — personalized archana, muhurta, mantras and blessings verified against classical sources." />
   <link rel="canonical" href="https://divyamangalam.com/ai-archana.html" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
@@ -24,7 +24,7 @@
     /* ===== Hero ===== */
     .ai-hero {
       background: radial-gradient(ellipse at 50% 30%, #0d001a 0%, #04040e 70%);
-      padding: 4rem 1.5rem; text-align: center; color: var(--white);
+      padding: 4rem 1.5rem 3rem; text-align: center; color: var(--white);
       position: relative; overflow: hidden;
     }
     .ai-hero::before {
@@ -39,46 +39,77 @@
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       position: relative; z-index:1;
     }
-    .ai-hero p { opacity:0.8; position:relative; z-index:1; max-width:600px; margin: 0 auto; }
+    .ai-hero p { opacity:0.8; position:relative; z-index:1; max-width:640px; margin: 0 auto; line-height:1.6; }
     .ai-badge {
       display:inline-flex; align-items:center; gap:6px;
-      background: rgba(138,43,226,0.15); border: 1px solid rgba(138,43,226,0.3);
-      border-radius:50px; padding:6px 16px; font-size:0.82rem; color:#c084fc;
+      background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.35);
+      border-radius:50px; padding:6px 16px; font-size:0.82rem; color:#d8b4fe;
       position:relative; z-index:1; margin-bottom:1rem;
     }
-    .ai-dot { width:8px; height:8px; border-radius:50%; background:#c084fc; animation: blink 1.5s infinite; }
+    .ai-dot { width:8px; height:8px; border-radius:50%; background:#27C93F; animation: blink 1.5s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    /* ===== API Key Setup Card ===== */
-    .key-card {
-      max-width: 700px; margin: 2rem auto; background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(138,43,226,0.25); border-radius: 20px;
-      padding: 2rem; color: var(--white);
+    /* ===== Verified Badge & Citations ===== */
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(39, 201, 63, 0.15);
+      border: 1px solid rgba(39, 201, 63, 0.4);
+      color: #27C93F;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
     }
-    .key-card h3 { font-family:'Playfair Display',serif; color:var(--gold); margin-bottom:0.5rem; }
-    .key-input-row { display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap; }
-    .key-input {
-      flex:1; padding:0.75rem 1rem; border-radius:10px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(138,43,226,0.3);
-      color: var(--white); font-family:'Lato',sans-serif; font-size:0.9rem;
-      outline:none; min-width:200px;
+    .citations-wrap {
+      margin-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 10px;
     }
-    .key-input:focus { border-color:#c084fc; }
-    .key-input::placeholder { color:rgba(255,255,255,0.3); }
-    .key-save-btn {
-      padding:0.75rem 1.5rem; border-radius:10px; border:none;
-      background: linear-gradient(135deg, #4c1d95, #7c3aed);
-      color:var(--white); font-family:'Lato',sans-serif; font-weight:700;
-      cursor:pointer; transition:var(--transition); white-space:nowrap;
+    .citations-toggle {
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      font-family: inherit;
     }
-    .key-save-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(124,58,237,0.4); }
-    .key-status {
-      margin-top:0.75rem; font-size:0.85rem; display:flex; align-items:center; gap:6px;
+    .citations-toggle:hover {
+      text-decoration: underline;
     }
-    .key-status.ok { color:#4ade80; }
-    .key-status.no { color:#f87171; }
-    .key-help { font-size:0.8rem; opacity:0.6; margin-top:0.5rem; }
-    .key-help a { color:#c084fc; }
+    .citations-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .citations-list.hidden {
+      display: none;
+    }
+    .citation-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+    }
+    .citation-source {
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .citation-quote {
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+    }
 
     /* ===== Chat Layout ===== */
     .ai-layout {
@@ -242,24 +273,10 @@
 
 <!-- Hero -->
 <div class="ai-hero">
-  <div class="ai-badge"><div class="ai-dot"></div> Powered by Google Gemini AI</div>
+  <div class="ai-badge"><div class="ai-dot"></div> Built with Claude • Shastric Verification</div>
   <h1>🤖 AI Pandit</h1>
-  <h1 style="font-size:clamp(1.2rem,3vw,1.8rem); margin-top:-1rem;">Your Personal Vedic Assistant</h1>
-  <p>Ask anything in plain language — the AI Pandit will plan your full archana, find the best muhurta, recite mantras, and guide your entire pooja.</p>
-</div>
-
-<!-- API Key Setup -->
-<div style="max-width:900px; margin:0 auto; padding:0 1.5rem;">
-  <div class="key-card" id="keyCard">
-    <h3>🔑 Connect Your Gemini API Key</h3>
-    <p style="opacity:0.7; font-size:0.9rem; margin-bottom:0.5rem;">Your key is stored only in your browser — never sent to any server or GitHub. Get a free key at <a href="https://aistudio.google.com" target="_blank" style="color:#c084fc;">aistudio.google.com</a> (the key starts with <strong>AIza</strong>).</p>
-    <div class="key-input-row">
-      <input type="password" class="key-input" id="apiKeyInput" placeholder="Paste your Gemini API key here (starts with AIza...)" />
-      <button class="key-save-btn" onclick="saveKey()">💾 Save Key</button>
-    </div>
-    <div class="key-status no" id="keyStatus">⚠️ No key saved — AI features disabled</div>
-    <div class="key-help">Your key is saved in your browser's localStorage. Clear browser data to remove it. <a href="https://aistudio.google.com/app/apikey" target="_blank">Get free key →</a></div>
-  </div>
+  <h1 style="font-size:clamp(1.2rem,3vw,1.8rem); margin-top:-1rem;">Source-Grounded Vedic Guidance</h1>
+  <p>Ask anything about rituals, mantras, or scriptural wisdom. Responses are generated via Claude, grounded in canonical Vedic texts, and verified with exact substring matching.</p>
 </div>
 
 <!-- Main AI Layout -->
@@ -272,9 +289,9 @@
         <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4c1d95,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🕉️</div>
         <div>
           <h3>AI Pandit — Divya Mangalam</h3>
-          <div style="font-size:0.75rem;opacity:0.5;">Vedic Knowledge · Archana Planning · Muhurta · Mantras</div>
+          <div style="font-size:0.75rem;opacity:0.5;">Vedic Knowledge · Shastric Citations · Muhurta · Mantras</div>
         </div>
-        <div class="ai-dot" style="margin-left:auto;" id="aiStatusDot" title="AI Status"></div>
+        <div class="ai-dot" style="margin-left:auto;" id="aiStatusDot" title="AI Verification Active"></div>
       </div>
 
       <div class="chat-body" id="chatBody">
@@ -282,16 +299,15 @@
         <div class="msg">
           <div class="msg-avatar">🕉️</div>
           <div class="msg-bubble">
-            <div class="msg-gold">🙏 Om Namah Shivaya! Welcome, devotee.</div>
+            <div class="msg-gold">🙏 Om Namah Shivaya! Welcome, seeker.</div>
             <br/>
-            I am your AI Pandit, trained in Vedic tradition — I can help you with:
+            I am your AI Pandit, built with Claude and grounded in classical Sanatana Dharma treatises. I can assist you with:
             <br/><br/>
-            🪔 <strong>Archana planning</strong> — full ritual sequence for any deity<br/>
-            📅 <strong>Muhurta selection</strong> — best date and time for your pooja<br/>
-            📿 <strong>Mantras & shlokas</strong> — accurate Sanskrit with meaning<br/>
-            🌟 <strong>Personalized guidance</strong> — based on your name, nakshatra, wish<br/>
-            🏛️ <strong>Temple & festival</strong> — tradition and significance<br/><br/>
-            <em>Please save your Gemini API key above, then ask me anything in plain language.</em>
+            🪔 <strong>Archana planning</strong> — authentic ritual sequences for any deity<br/>
+            📅 <strong>Muhurta &amp; Panchang</strong> — auspicious timing grounded in Surya Siddhanta<br/>
+            📿 <strong>Mantras &amp; Shlokas</strong> — verses cited directly from the Puranas &amp; Gita<br/>
+            🌟 <strong>Spiritual reflection</strong> — uplifting philosophical guidance without fatalism<br/><br/>
+            <em>Ask any question below to begin your consultation.</em>
             <div class="action-btns">
               <button class="msg-action-btn" onclick="sendSuggestion('Plan a Ganesha archana for me this week')">🐘 Ganesha Archana</button>
               <button class="msg-action-btn" onclick="sendSuggestion('What is the best day this week for Lakshmi pooja?')">📅 Best Muhurta</button>
@@ -325,43 +341,41 @@
   <!-- Sidebar -->
   <div class="ai-sidebar">
 
-    <!-- Active Agents -->
+    <!-- Verification Engine Status -->
     <div class="sidebar-card">
-      <h4>⚡ Active AI Agents</h4>
+      <h4>⚡ Verification Pipeline</h4>
       <div class="agent-item">
         <div class="agent-dot active"></div>
         <div>
-          <div class="agent-name">🎯 Orchestrator</div>
-          <div class="agent-desc">Routes your request to specialists</div>
+          <div class="agent-name">📚 Shastric Corpus</div>
+          <div class="agent-desc">Mahabharata, Puranas &amp; Shlokas</div>
         </div>
       </div>
       <div class="agent-item">
         <div class="agent-dot active"></div>
         <div>
-          <div class="agent-name">🪔 Archana Agent</div>
-          <div class="agent-desc">Complete ritual sequences</div>
+          <div class="agent-name">🤖 Claude Drafter</div>
+          <div class="agent-desc">Structured XML &amp; Citation drafting</div>
         </div>
       </div>
       <div class="agent-item">
         <div class="agent-dot active"></div>
         <div>
-          <div class="agent-name">📅 Panchang Agent</div>
-          <div class="agent-desc">Muhurta & auspicious timing</div>
+          <div class="agent-name">⚖️ Claude Verifier</div>
+          <div class="agent-desc">Multi-call citation cross-audit</div>
         </div>
       </div>
       <div class="agent-item">
         <div class="agent-dot active"></div>
         <div>
-          <div class="agent-name">📿 Mantra Agent</div>
-          <div class="agent-desc">Sanskrit text & meaning</div>
+          <div class="agent-name">🔍 Substring Guard</div>
+          <div class="agent-desc">Exact quote verification</div>
         </div>
       </div>
-      <div class="agent-item">
-        <div class="agent-dot active"></div>
-        <div>
-          <div class="agent-name">🌟 Blessing Agent</div>
-          <div class="agent-desc">Personalized prasad & blessings</div>
-        </div>
+      <div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
+        <a href="how-we-verify.html" style="color:var(--gold); font-size:0.78rem; text-decoration:none; font-weight:600;">
+          How we verify answers →
+        </a>
       </div>
     </div>
 
@@ -438,106 +452,45 @@
 <script src="panchang.js"></script>
 <script>
 /* =============================================
-   GEMINI AI MULTI-AGENT SYSTEM
+   CLAUDE AI PANDIT & SHASHTRIC VERIFICATION PIPELINE
+   Calls server-side /api/pandit endpoint
    ============================================= */
 
-const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
+/* ---- Call Serverless Pandit API ---- */
+async function callPandit(userMessage) {
+  const res = await fetch('/api/pandit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question: userMessage })
+  });
 
-/* ---- System Prompts for each Agent ---- */
-const SYSTEM_PROMPTS = {
-
-  orchestrator: `You are the Divya Mangalam AI Pandit — a deeply knowledgeable, respectful and warm Vedic assistant.
-You help Hindu devotees with:
-1. Complete archana (pooja) sequences for any deity
-2. Panchang-based muhurta — best days and times for worship
-3. Accurate Sanskrit mantras with transliteration and English meaning
-4. Personalized blessings based on name, gotra, nakshatra
-5. Explanations of Hindu traditions, festivals, and sacred texts
-6. Guidance on rituals like Ekadashi, Navratri, Shivaratri etc.
-
-STYLE RULES:
-- Always begin with a respectful salutation (Om Namah Shivaya, Jai Shri Ram, etc.)
-- Use Sanskrit terms naturally with English explanations
-- When giving mantras, always provide: Sanskrit, Roman transliteration, and English meaning
-- For archana sequences, format as numbered steps
-- End responses with an appropriate blessing
-- Use 🕉️ 🙏 🪔 📿 ✨ emojis naturally
-- Be warm, humble and deeply devotional in tone
-- Keep responses focused and practical
-- When recommending a pooja page, say: "Visit pooja.html?god=GODNAME for the full visual archana"
-
-PANCHANG CONTEXT for today:`,
-
-  archana: `You are the Archana Specialist Agent. You know the complete Agamic and Vedic archana procedures for ALL major Hindu deities.
-For any deity archana request, provide:
-1. Sankalpa mantra (with space for name/gotra)
-2. Dhyana shloka
-3. Avahana
-4. Shodashopachara (16 offerings) with mantras
-5. Ashtottara (108 names) — at least 12 key names
-6. Mangala Aarti mantra
-7. Visarjana mantra
-Always include Sanskrit + Roman transliteration + meaning for key mantras.`,
-
-  panchang: `You are the Panchang and Muhurta Specialist. Given a date and deity, recommend:
-1. Today's tithi, nakshatra, yoga, vara
-2. Rahukaal (time to avoid)
-3. Best time for this deity's archana
-4. Next 3 auspicious dates
-5. Any special festivals upcoming
-Always explain WHY a time is auspicious in simple terms.`,
-
-  mantra: `You are the Mantra and Sacred Text Specialist. For any mantra or shloka request:
-1. Give the complete Sanskrit text in Devanagari
-2. Roman transliteration (IAST where possible)
-3. Word-by-word meaning
-4. Full translation
-5. Significance and benefits of chanting
-6. Recommended frequency (108 times, daily, etc.)`,
-
-  blessing: `You are the Blessing and Prasad Agent. After a devotee completes an archana:
-1. Give a personalized blessing based on their deity and wish
-2. Quote an appropriate Sanskrit shloka about the deity's grace
-3. Suggest the next steps in their spiritual practice
-4. Offer a simple affirmation in Sanskrit + English
-Make it heartfelt and uplifting.`,
-};
-
-/* ---- Conversation history ---- */
-let conversationHistory = [];
-let apiKey = localStorage.getItem('divyamangalam_gemini_key') || '';
-
-/* ---- Key Management ---- */
-function saveKey() {
-  const val = document.getElementById('apiKeyInput').value.trim();
-  if (!val) { updateKeyStatus(false, 'Please enter your API key'); return; }
-  localStorage.setItem('divyamangalam_gemini_key', val);
-  apiKey = val;
-  document.getElementById('apiKeyInput').value = '••••••••••••••••••••••••••••••••••••••';
-  updateKeyStatus(true);
-}
-
-function updateKeyStatus(ok, msg) {
-  const el = document.getElementById('keyStatus');
-  if (ok) {
-    el.className = 'key-status ok';
-    el.textContent = '✅ API key saved! AI Pandit is ready.';
-    document.getElementById('aiStatusDot').style.background = '#4ade80';
-    document.getElementById('aiStatusDot').style.boxShadow = '0 0 6px #4ade80';
-  } else {
-    el.className = 'key-status no';
-    el.textContent = msg || '⚠️ No key saved — AI features disabled';
+  if (!res.ok) {
+    if (res.status === 429) {
+      return {
+        answer: '⏳ Rate limit reached (maximum 10 queries per minute). Please wait a moment before sending another inquiry.',
+        citations: [],
+        verified: false
+      };
+    }
+    const errData = await res.json().catch(() => ({}));
+    return {
+      answer: errData.error || `Error (${res.status}): Unable to process inquiry.`,
+      citations: [],
+      verified: false
+    };
   }
+
+  return await res.json();
 }
 
-// Check on load
-if (apiKey && apiKey.startsWith('AIza')) {
-  updateKeyStatus(true);
-  document.getElementById('apiKeyInput').value = '••••••••••••••••••••••••••••••••••••••';
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 /* ---- Today's Panchang in Sidebar ---- */
 function renderPanchangSidebar() {
+  if (typeof PANCHANG === 'undefined') return;
   const p = PANCHANG.getPanchang(new Date());
   document.getElementById('panchangQuick').innerHTML = `
     <div>📆 <strong style="color:var(--gold)">${p.dayName}</strong> · ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
@@ -548,76 +501,6 @@ function renderPanchangSidebar() {
     <div style="color:#4ade80;">✨ Abhijit: ${p.abhijit.start}–${p.abhijit.end}</div>
     <div style="margin-top:4px;">🛕 Deity: ${p.dayDeity}</div>
   `;
-  return p; // return for use in prompt
-}
-
-/* ---- Build AI prompt with panchang context ---- */
-function buildSystemPrompt() {
-  const p = PANCHANG.getPanchang(new Date());
-  return SYSTEM_PROMPTS.orchestrator + `
-Today: ${p.dayName}, ${new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
-Tithi: ${p.tithi.name} (${p.tithi.paksha})
-Nakshatra: ${p.nakshatra.name} Pada ${p.nakshatra.pada}
-Yoga: ${p.yoga}${p.isBadYoga?' (unfavorable yoga — mention this)':''}
-Karana: ${p.karana}
-Rahukaal: ${p.rahukaal.start} to ${p.rahukaal.end} (IST) — warn users not to start important rituals in this window
-Abhijit Muhurta: ${p.abhijit.start} to ${p.abhijit.end} (IST) — the most auspicious time today
-Moon Rasi: ${p.rasi}
-Today's presiding deity: ${p.dayDeity}`;
-}
-
-/* ---- Call Gemini API ---- */
-async function callGemini(userMessage) {
-  if (!apiKey) {
-    return '⚠️ Please save your Gemini API key first (the box at the top of this page). Get a free key at [aistudio.google.com](https://aistudio.google.com).';
-  }
-
-  const systemPrompt = buildSystemPrompt();
-  // Build messages array
-  const messages = [
-    ...conversationHistory,
-    { role: 'user', parts: [{ text: userMessage }] }
-  ];
-
-  const body = {
-    system_instruction: { parts: [{ text: systemPrompt }] },
-    contents: messages,
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 1500,
-      topP: 0.9,
-    },
-    safetySettings: [
-      { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
-      { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
-    ],
-  };
-
-  const res = await fetch(`${GEMINI_API_BASE}?key=${apiKey}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const err = await res.json();
-    const msg = err?.error?.message || 'Unknown error';
-    if (msg.includes('API_KEY_INVALID') || msg.includes('invalid')) {
-      return '❌ Your API key appears to be invalid. Please visit [aistudio.google.com](https://aistudio.google.com) to get a valid key that starts with "AIza".';
-    }
-    return `❌ Gemini API error: ${msg}`;
-  }
-
-  const data = await res.json();
-  const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not generate a response. Please try again.';
-
-  // Update conversation history
-  conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
-  conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
-  // Keep last 10 exchanges
-  if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
-
-  return reply;
 }
 
 /* ---- Chat UI ---- */
@@ -626,31 +509,74 @@ function appendMessage(role, text) {
   const div = document.createElement('div');
   div.className = `msg ${role === 'user' ? 'user' : ''}`;
 
-  // Parse action buttons from response
-  let actionBtns = '';
-  let gods = GODS ? GODS.filter(g => text.toLowerCase().includes(g.name.toLowerCase().split(' ').pop())) : [];
-  if (gods.length > 0) {
-    actionBtns = `<div class="action-btns">${gods.slice(0,3).map(g =>
-      `<button class="msg-action-btn" onclick="window.location.href='pooja.html?god=${g.id}'">${g.emoji} ${g.name} Pooja</button>`
-    ).join('')}</div>`;
-  }
-  if (text.toLowerCase().includes('visual archana') || text.toLowerCase().includes('visual pooja')) {
-    const god = gods[0] || GODS[0];
-    actionBtns += `<button class="msg-action-btn" onclick="window.location.href='visual-pooja.html?god=${god.id}'">🎬 Open Visual Pooja</button>`;
-  }
-  if (text.toLowerCase().includes('hanuman chalisa')) {
-    actionBtns += `<button class="msg-action-btn" onclick="window.location.href='chalisa.html'">📿 Open Chalisa</button>`;
-  }
-
-  // Format text: bold **text**, italic _text_, line breaks
-  let formatted = text
+  let formatted = escapeHtml(text)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/\n/g, '<br/>');
 
   div.innerHTML = `
     <div class="msg-avatar">${role === 'user' ? '👤' : '🕉️'}</div>
-    <div class="msg-bubble">${formatted}${actionBtns ? '<div class="action-btns">' + actionBtns + '</div>' : ''}</div>`;
+    <div class="msg-bubble">${formatted}</div>`;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function appendPanditResponse(data) {
+  const body = document.getElementById('chatBody');
+  const div = document.createElement('div');
+  div.className = 'msg';
+
+  let text = data.answer || 'I could not find a source for this in the classical texts.';
+  let formatted = escapeHtml(text)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br/>');
+
+  let verifiedHtml = data.verified ? `
+    <div class="verified-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      Verified against sources
+    </div>` : '';
+
+  let citationsHtml = '';
+  if (data.citations && data.citations.length > 0) {
+    const citationItems = data.citations.map(c => `
+      <div class="citation-card">
+        <div class="citation-source">📜 ${escapeHtml(c.source || 'Canonical Treatise')}${c.chapter ? ' — ' + escapeHtml(c.chapter) : ''}</div>
+        ${c.quote ? `<div class="citation-quote">“${escapeHtml(c.quote)}”</div>` : ''}
+      </div>
+    `).join('');
+
+    const citId = 'cit_' + Math.random().toString(36).substr(2, 9);
+    citationsHtml = `
+      <div class="citations-wrap">
+        <button class="citations-toggle" type="button" onclick="document.getElementById('${citId}').classList.toggle('hidden')">
+          <span>📚</span> Verified Citations (${data.citations.length}) ▾
+        </button>
+        <div class="citations-list" id="${citId}">
+          ${citationItems}
+        </div>
+      </div>
+    `;
+  }
+
+  let actionBtns = '';
+  let gods = (typeof GODS !== 'undefined' && GODS) ? GODS.filter(g => text.toLowerCase().includes(g.name.toLowerCase().split(' ').pop())) : [];
+  if (gods.length > 0) {
+    actionBtns = `<div class="action-btns">${gods.slice(0,3).map(g =>
+      `<button class="msg-action-btn" onclick="window.location.href='pooja.html?god=${g.id}'">${g.emoji} ${g.name} Pooja</button>`
+    ).join('')}</div>`;
+  }
+
+  div.innerHTML = `
+    <div class="msg-avatar">🕉️</div>
+    <div class="msg-bubble">
+      ${verifiedHtml}
+      <div>${formatted}</div>
+      ${citationsHtml}
+      ${actionBtns ? '<div class="action-btns">' + actionBtns + '</div>' : ''}
+    </div>`;
+
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
 }
@@ -663,7 +589,7 @@ function showTyping() {
     <div class="msg-avatar">🕉️</div>
     <div class="msg-bubble">
       <div class="typing-dots"><span></span><span></span><span></span></div>
-      <span style="font-size:0.78rem;opacity:0.5;margin-left:4px;">AI Pandit is thinking…</span>
+      <span style="font-size:0.78rem;opacity:0.5;margin-left:4px;">Claude is retrieving shastras &amp; verifying citations…</span>
     </div>`;
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
@@ -679,18 +605,23 @@ async function sendMessage() {
   const text = input.value.trim();
   if (!text) return;
 
+  if (text.length > 500) {
+    alert('Please keep your question under 500 characters.');
+    return;
+  }
+
   appendMessage('user', text);
   input.value = ''; input.style.height = 'auto';
   document.getElementById('sendBtn').disabled = true;
   showTyping();
 
   try {
-    const reply = await callGemini(text);
+    const data = await callPandit(text);
     removeTyping();
-    appendMessage('ai', reply);
+    appendPanditResponse(data);
   } catch (e) {
     removeTyping();
-    appendMessage('ai', `❌ Connection error: ${e.message}. Please check your internet and API key.`);
+    appendMessage('ai', `❌ Connection error: ${e.message}. Please check your connection.`);
   }
 
   document.getElementById('sendBtn').disabled = false;
@@ -712,10 +643,13 @@ function autoResize(el) {
 }
 
 function clearChat() {
-  conversationHistory = [];
   const body = document.getElementById('chatBody');
   body.innerHTML = '';
-  appendMessage('ai', '🙏 Chat cleared. How can I assist you on your devotional journey today?');
+  appendPanditResponse({
+    answer: '🙏 Chat cleared. How can I assist you on your spiritual journey today?',
+    citations: [],
+    verified: false
+  });
 }
 
 /* ---- Init ---- */
