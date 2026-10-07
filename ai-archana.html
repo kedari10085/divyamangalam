@@ -4,76 +4,631 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Pandit – Divya Mangalam | Shastric Guidance with Claude</title>
-  <meta name="description" content="Ask the AI pandit anything — personalized archana, muhurta, mantras and spiritual guidance powered by Claude and verified against classical Sanskrit texts." />
-  <meta name="keywords" content="ai pandit, ai archana, online pandit, vedic ai, built with claude, shastric verification, hindu rituals ai, personalized archana" />
-  <meta property="og:title" content="AI Pandit – Divya Mangalam | Shastric Guidance with Claude" />
-  <meta property="og:description" content="Vedic spiritual guidance powered by Claude and strictly verified against canonical Sanskrit treatises." />
+  
+  <title>AI Pandit & Divya Archana Sanctuary • Divya Mangalam</title>
+  <meta name="description" content="Personalized Vedic archana rituals, canonical scriptural wisdom, auspicious muhurta, and mantra guidance — powered by Claude and strictly verified against classical Sanskrit texts." />
+  <meta name="keywords" content="AI Pandit, AI Archana, Vedic rituals, Shastric verification, Hindu pooja guide, built with Claude, mantra japa, muhurta calculator, digital archana sanctuary" />
+  <meta name="author" content="Kedarisai Abhishek" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Pandit & Divya Archana Sanctuary • Divya Mangalam" />
+  <meta property="og:description" content="Experience authentic Vedic guidance, interactive step-by-step puja companions, 432Hz ambient meditation, and shastric citations verified by Claude." />
   <meta property="og:url" content="https://divyamangalam.com/ai-archana.html" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI Pandit – Divya Mangalam" />
-  <meta name="twitter:description" content="Ask the AI pandit anything — personalized archana, muhurta, mantras and blessings verified against classical sources." />
+  <meta name="twitter:description" content="Personalized Vedic archana, mantras, and shastric wisdom verified by Claude." />
+
   <link rel="canonical" href="https://divyamangalam.com/ai-archana.html" />
-  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
   <style>
-    body { background: #04040e; }
+    /* ==========================================================================
+       AI PANDIT & SACRED ARCHANA SANCTUARY – STYLES
+       ========================================================================== */
+    :root {
+      --sanctuary-bg: #060714;
+      --sanctuary-card: rgba(18, 20, 38, 0.75);
+      --sanctuary-card-hover: rgba(28, 32, 60, 0.9);
+      --sanctuary-border: rgba(229, 184, 105, 0.22);
+      --sanctuary-gold: #E5B869;
+      --sanctuary-gold-glow: rgba(229, 184, 105, 0.35);
+      --sanctuary-saffron: #FF7A29;
+      --sanctuary-purple: #7C5CFC;
+      --sanctuary-green: #27C93F;
+      --sanctuary-red: #8B0000;
+    }
 
-    /* ===== Hero ===== */
-    .ai-hero {
-      background: radial-gradient(ellipse at 50% 30%, #0d001a 0%, #04040e 70%);
-      padding: 4rem 1.5rem 3rem; text-align: center; color: var(--white);
-      position: relative; overflow: hidden;
+    body {
+      background: var(--sanctuary-bg);
+      color: #E2E4ED;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
-    .ai-hero::before {
-      content:''; position:absolute; inset:0;
-      background-image: radial-gradient(rgba(138,43,226,0.08) 1px, transparent 1px);
-      background-size: 45px 45px;
-    }
-    .ai-hero h1 {
-      font-family:'Playfair Display',serif;
-      font-size: clamp(2rem,5vw,3.5rem);
-      background: linear-gradient(135deg, #fff 0%, #D4A017 50%, #8a2be2 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      position: relative; z-index:1;
-    }
-    .ai-hero p { opacity:0.8; position:relative; z-index:1; max-width:640px; margin: 0 auto; line-height:1.6; }
-    .ai-badge {
-      display:inline-flex; align-items:center; gap:6px;
-      background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.35);
-      border-radius:50px; padding:6px 16px; font-size:0.82rem; color:#d8b4fe;
-      position:relative; z-index:1; margin-bottom:1rem;
-    }
-    .ai-dot { width:8px; height:8px; border-radius:50%; background:#27C93F; animation: blink 1.5s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    /* ===== Verified Badge & Citations ===== */
-    .verified-badge {
+    /* Background Motion Canvas */
+    #sacredCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    /* Content Wrapper */
+    .sanctuary-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Hero Sanctuary ===== */
+    .pandit-hero {
+      padding: 4.5rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      background: radial-gradient(ellipse 70% 50% at 50% 15%, rgba(124, 92, 252, 0.12), rgba(255, 122, 41, 0.05) 50%, transparent 80%);
+    }
+
+    .sacred-badge-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(39, 201, 63, 0.15);
-      border: 1px solid rgba(39, 201, 63, 0.4);
-      color: #27C93F;
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-bottom: 8px;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(124, 92, 252, 0.12);
+      border: 1px solid rgba(124, 92, 252, 0.35);
+      color: #D8B4FE;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 20px rgba(124, 92, 252, 0.15);
     }
+    .sacred-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #27C93F;
+      box-shadow: 0 0 10px #27C93F;
+      animation: sacredBlink 2s infinite ease-in-out;
+    }
+    @keyframes sacredBlink {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.5; }
+    }
+
+    .pandit-hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      margin: 0 0 0.8rem;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF3DC 40%, var(--sanctuary-gold) 75%, var(--sanctuary-saffron) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 30px rgba(229, 184, 105, 0.2);
+    }
+
+    .pandit-hero-shloka {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--sanctuary-gold);
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      margin: 0 auto 1rem;
+      max-width: 760px;
+      opacity: 0.95;
+      letter-spacing: 0.02em;
+    }
+
+    .pandit-hero-desc {
+      color: #A6ACCD;
+      font-size: 0.96rem;
+      line-height: 1.65;
+      max-width: 680px;
+      margin: 0 auto 1.8rem;
+    }
+
+    /* Ambient Audio & Ritual Controls Bar */
+    .ambient-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 auto 2.5rem;
+    }
+
+    .ambient-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(18, 20, 38, 0.75);
+      border: 1px solid var(--sanctuary-border);
+      color: #E2E4ED;
+      backdrop-filter: blur(10px);
+    }
+    .ambient-btn:hover {
+      background: rgba(28, 32, 60, 0.9);
+      border-color: var(--sanctuary-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .ambient-btn.active {
+      background: linear-gradient(135deg, rgba(229, 184, 105, 0.25), rgba(255, 122, 41, 0.2));
+      border-color: var(--sanctuary-gold);
+      color: var(--sanctuary-gold);
+      box-shadow: 0 0 15px var(--sanctuary-gold-glow);
+    }
+    .sound-waves-anim {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      height: 12px;
+    }
+    .sound-wave-bar {
+      width: 2px;
+      height: 100%;
+      background: var(--sanctuary-gold);
+      border-radius: 1px;
+      animation: waveDance 1.2s infinite ease-in-out;
+    }
+    .sound-wave-bar:nth-child(2) { animation-delay: 0.2s; height: 70%; }
+    .sound-wave-bar:nth-child(3) { animation-delay: 0.4s; height: 90%; }
+    @keyframes waveDance {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+
+    /* ===== Ishta Devata Selector Carousel ===== */
+    .deity-strip-container {
+      max-width: 1240px;
+      margin: 0 auto 2.2rem;
+      padding: 0 1.5rem;
+    }
+    .deity-strip-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+    .deity-strip-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--sanctuary-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .deity-strip-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(229,184,105,0.3) transparent;
+    }
+    .deity-strip-scroll::-webkit-scrollbar { height: 4px; }
+    .deity-strip-scroll::-webkit-scrollbar-thumb { background: rgba(229,184,105,0.3); border-radius: 4px; }
+
+    .deity-pill {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      background: var(--sanctuary-card);
+      border: 1px solid rgba(229, 184, 105, 0.18);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      color: #E2E4ED;
+      backdrop-filter: blur(8px);
+      user-select: none;
+    }
+    .deity-pill:hover {
+      background: var(--sanctuary-card-hover);
+      border-color: var(--sanctuary-gold);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .deity-pill.active {
+      background: linear-gradient(135deg, rgba(229, 184, 105, 0.2), rgba(124, 92, 252, 0.2));
+      border-color: var(--sanctuary-gold);
+      box-shadow: 0 0 20px rgba(229, 184, 105, 0.3), inset 0 0 15px rgba(229, 184, 105, 0.1);
+    }
+    .deity-pill .deity-avatar {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .deity-pill .deity-info {
+      text-align: left;
+    }
+    .deity-pill .deity-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #FFF;
+      line-height: 1.2;
+    }
+    .deity-pill.active .deity-name {
+      color: var(--sanctuary-gold);
+    }
+    .deity-pill .deity-sub {
+      font-size: 0.72rem;
+      color: #8C93B0;
+      margin-top: 2px;
+    }
+
+    /* ===== Mobile Segmented Navigation Tabs ===== */
+    .mobile-tab-bar {
+      display: none;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      padding: 4px;
+      background: rgba(18, 20, 38, 0.85);
+      border: 1px solid var(--sanctuary-border);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+    }
+    .mobile-tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      color: #9AA1C2;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .mobile-tab-btn.active {
+      background: var(--sanctuary-gold);
+      color: #060714;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(229, 184, 105, 0.4);
+    }
+    @media (max-width: 960px) {
+      .mobile-tab-bar { display: flex; }
+    }
+
+    /* ===== 3-Column Sanctuary Layout ===== */
+    .sanctuary-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 280px 1fr 340px;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1100px) {
+      .sanctuary-grid {
+        grid-template-columns: 260px 1fr;
+      }
+      .sanctuary-col-right {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .sanctuary-grid {
+        display: block;
+      }
+      .sanctuary-col-left, .sanctuary-col-right {
+        display: none;
+      }
+      .sanctuary-col-left.tab-active,
+      .sanctuary-col-mid.tab-active,
+      .sanctuary-col-right.tab-active {
+        display: block;
+      }
+    }
+
+    /* Sanctuary Cards General */
+    .sanctuary-card {
+      background: var(--sanctuary-card);
+      border: 1px solid var(--sanctuary-border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(14px);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sanctuary-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229,184,105,0.4), transparent);
+    }
+    .sanctuary-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #FFF;
+      margin: 0 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Active Deity Showcase Card (Left Column) */
+    .active-deity-card {
+      text-align: center;
+      padding: 24px 18px;
+      background: linear-gradient(165deg, rgba(26, 30, 56, 0.8), rgba(16, 18, 34, 0.95));
+      border: 1px solid rgba(229, 184, 105, 0.35);
+    }
+    .deity-circle-frame {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: radial-gradient(circle, rgba(229,184,105,0.25) 0%, rgba(124,92,252,0.15) 70%);
+      border: 2px solid var(--sanctuary-gold);
+      box-shadow: 0 0 25px var(--sanctuary-gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      position: relative;
+      animation: frameBreathe 4s infinite ease-in-out;
+    }
+    @keyframes frameBreathe {
+      0%, 100% { box-shadow: 0 0 20px rgba(229,184,105,0.3); }
+      50% { box-shadow: 0 0 35px rgba(229,184,105,0.6), 0 0 15px rgba(255,122,41,0.4); }
+    }
+    .active-deity-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: #FFF;
+      margin: 0 0 4px;
+    }
+    .active-deity-sanskrit {
+      color: var(--sanctuary-gold);
+      font-size: 0.88rem;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .active-deity-mantra {
+      background: rgba(0,0,0,0.35);
+      border: 1px dashed rgba(229,184,105,0.3);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      color: #E2E4ED;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .quick-start-pooja-btn {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--sanctuary-saffron), #C0392B);
+      color: #FFF;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(255,122,41,0.3);
+    }
+    .quick-start-pooja-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,122,41,0.5);
+    }
+
+    /* Panchang Quick Widget */
+    .panchang-limb-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
+    }
+    .panchang-limb-row:last-child { border-bottom: none; }
+    .panchang-limb-label { color: #8C93B0; }
+    .panchang-limb-val { font-weight: 600; color: #FFF; text-align: right; }
+
+    /* ===== Center Column: Conversational Sanctuary ===== */
+    .chat-window {
+      background: var(--sanctuary-card);
+      border: 1px solid var(--sanctuary-border);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 680px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, rgba(26, 12, 50, 0.95), rgba(10, 11, 26, 0.95));
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.18);
+    }
+    .chat-header-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7C5CFC, #FF7A29);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 15px rgba(124, 92, 252, 0.4);
+      flex-shrink: 0;
+    }
+    .chat-header-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #FFF;
+      margin: 0 0 2px;
+    }
+    .chat-header-info p {
+      font-size: 0.74rem;
+      color: #8C93B0;
+      margin: 0;
+    }
+
+    /* Ritual Mode Selector Pills */
+    .mode-pills-bar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(10, 11, 26, 0.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mode-pills-bar::-webkit-scrollbar { display: none; }
+    .mode-pill-btn {
+      flex: 0 0 auto;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #A6ACCD;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .mode-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFF;
+      border-color: var(--sanctuary-gold);
+    }
+    .mode-pill-btn.active {
+      background: linear-gradient(135deg, rgba(229,184,105,0.2), rgba(255,122,41,0.2));
+      border-color: var(--sanctuary-gold);
+      color: var(--sanctuary-gold);
+      font-weight: 700;
+    }
+
+    /* Chat Messages Stream */
+    .chat-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      scroll-behavior: smooth;
+    }
+    .chat-body::-webkit-scrollbar { width: 5px; }
+    .chat-body::-webkit-scrollbar-track { background: transparent; }
+    .chat-body::-webkit-scrollbar-thumb { background: rgba(229,184,105,0.25); border-radius: 4px; }
+
+    .msg {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      max-width: 90%;
+      animation: fadeInMsg 0.3s ease-out;
+    }
+    @keyframes fadeInMsg {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg.user {
+      flex-direction: row-reverse;
+      align-self: flex-end;
+    }
+    .msg-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .msg.user .msg-avatar {
+      background: linear-gradient(135deg, #7C5CFC, #5C24D6);
+      border-color: rgba(124, 92, 252, 0.4);
+    }
+    .msg-bubble {
+      background: rgba(22, 25, 48, 0.85);
+      border: 1px solid rgba(229, 184, 105, 0.18);
+      border-radius: 18px 18px 18px 4px;
+      padding: 1.1rem 1.3rem;
+      color: #E2E4ED;
+      font-size: 0.92rem;
+      line-height: 1.75;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .msg.user .msg-bubble {
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.7), rgba(124, 58, 237, 0.5));
+      border-radius: 18px 18px 4px 18px;
+      border-color: rgba(124, 92, 252, 0.4);
+      color: #FFF;
+    }
+
+    /* Shloka Verse Display Box */
+    .shloka-verse {
+      background: rgba(229, 184, 105, 0.08);
+      border-left: 3px solid var(--sanctuary-gold);
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: #FFF3DC;
+      line-height: 1.8;
+    }
+
+    /* Illuminated Shastra Scroll Citations */
     .citations-wrap {
-      margin-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(229, 184, 105, 0.15);
     }
     .citations-toggle {
       background: none;
       border: none;
-      color: var(--gold);
-      font-size: 0.8rem;
-      font-weight: 600;
+      color: var(--sanctuary-gold);
+      font-size: 0.82rem;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -87,573 +642,1517 @@
     .citations-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-top: 8px;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .citations-list.hidden {
-      display: none;
+    .citations-list.hidden { display: none; }
+
+    .shastra-scroll-card {
+      background: linear-gradient(135deg, rgba(22, 24, 40, 0.9), rgba(10, 11, 24, 0.95));
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      position: relative;
     }
-    .citation-card {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(212, 160, 23, 0.2);
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 0.82rem;
+    .shastra-scroll-card::after {
+      content: '📜';
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 1.1rem;
+      opacity: 0.3;
     }
-    .citation-source {
+    .shastra-source-badge {
+      font-size: 0.74rem;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--sanctuary-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: 4px;
     }
-    .citation-quote {
+    .shastra-quote-text {
       font-style: italic;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.5;
+      color: #E2E4ED;
+      font-size: 0.85rem;
+      line-height: 1.6;
     }
+    .shastra-copy-btn {
+      margin-top: 6px;
+      background: transparent;
+      border: none;
+      color: #8C93B0;
+      font-size: 0.72rem;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .shastra-copy-btn:hover { color: var(--sanctuary-gold); }
 
-    /* ===== Chat Layout ===== */
-    .ai-layout {
-      max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem;
-      display: grid; grid-template-columns: 1fr 280px; gap: 2rem;
+    /* Typing Indicator */
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    @media(max-width:800px){ .ai-layout{grid-template-columns:1fr;} }
-
-    /* ===== Chat Window ===== */
-    .chat-window {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px; overflow: hidden; display:flex; flex-direction:column;
-      min-height: 500px; max-height: 600px;
-    }
-    .chat-header {
-      background: linear-gradient(135deg, #1a0040, #0d001a);
-      padding: 1rem 1.5rem; display:flex; align-items:center; gap:0.75rem;
-      color:var(--white); border-bottom:1px solid rgba(255,255,255,0.06);
-    }
-    .chat-header h3 { font-family:'Playfair Display',serif; font-size:1rem; }
-    .chat-body {
-      flex:1; overflow-y:auto; padding:1.5rem; display:flex;
-      flex-direction:column; gap:1rem;
-    }
-    .chat-body::-webkit-scrollbar { width:4px; }
-    .chat-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:2px; }
-
-    /* Message bubbles */
-    .msg { display:flex; gap:0.75rem; align-items:flex-start; max-width:85%; }
-    .msg.user { flex-direction:row-reverse; align-self:flex-end; }
-    .msg-avatar {
-      width:36px; height:36px; border-radius:50%; flex-shrink:0;
-      display:flex; align-items:center; justify-content:center; font-size:1.1rem;
-      background: rgba(255,255,255,0.08);
-    }
-    .msg.user .msg-avatar { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
-    .msg-bubble {
-      background: rgba(255,255,255,0.06); border-radius: 14px 14px 14px 4px;
-      padding: 0.85rem 1.1rem; color: rgba(255,255,255,0.9);
-      font-size: 0.9rem; line-height: 1.7;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .msg.user .msg-bubble {
-      background: linear-gradient(135deg, rgba(76,29,149,0.6), rgba(124,58,237,0.4));
-      border-radius: 14px 14px 4px 14px; border-color: rgba(124,58,237,0.3);
-    }
-    .msg-bubble .msg-gold { color:var(--gold); font-family:'Playfair Display',serif; }
-    .msg-bubble .msg-mantra { font-style:italic; color:#c084fc; font-size:0.85rem; }
-    .msg-bubble .action-btns { display:flex; gap:0.5rem; margin-top:0.75rem; flex-wrap:wrap; }
-    .msg-bubble .msg-action-btn {
-      padding:5px 12px; border-radius:50px; border:1px solid rgba(212,160,23,0.4);
-      background:rgba(212,160,23,0.1); color:var(--gold); font-size:0.78rem;
-      cursor:pointer; font-family:'Lato',sans-serif; transition:var(--transition);
-    }
-    .msg-bubble .msg-action-btn:hover { background:rgba(212,160,23,0.25); }
-
-    /* Typing indicator */
-    .typing-indicator { display:flex; align-items:center; gap:0.75rem; }
     .typing-dots span {
-      width:7px; height:7px; border-radius:50%; background:#c084fc;
-      display:inline-block; animation:typing-dot 1.4s infinite;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sanctuary-gold);
+      display: inline-block;
+      animation: typingPulse 1.4s infinite ease-in-out;
     }
-    .typing-dots span:nth-child(2){animation-delay:.2s}
-    .typing-dots span:nth-child(3){animation-delay:.4s}
-    @keyframes typing-dot { 0%,80%,100%{transform:scale(1);opacity:0.4} 40%{transform:scale(1.3);opacity:1} }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingPulse {
+      0%, 80%, 100% { transform: scale(1); opacity: 0.3; }
+      40% { transform: scale(1.4); opacity: 1; }
+    }
 
-    /* Chat Input */
+    /* Chat Input Area */
     .chat-input-wrap {
-      border-top: 1px solid rgba(255,255,255,0.06); padding: 1rem 1.5rem;
-      display:flex; gap:0.75rem; align-items:flex-end; background:rgba(0,0,0,0.2);
+      border-top: 1px solid rgba(229, 184, 105, 0.18);
+      padding: 1rem 1.5rem;
+      background: rgba(10, 11, 26, 0.8);
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
     }
     .chat-textarea {
-      flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
-      border-radius:12px; color:var(--white); padding:0.75rem 1rem;
-      font-family:'Lato',sans-serif; font-size:0.9rem; resize:none; outline:none;
-      max-height:120px; min-height:44px; line-height:1.5;
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(229, 184, 105, 0.25);
+      border-radius: 14px;
+      color: #FFF;
+      padding: 0.85rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.94rem;
+      resize: none;
+      outline: none;
+      min-height: 48px;
+      max-height: 130px;
+      line-height: 1.5;
+      transition: border-color 0.2s ease;
     }
-    .chat-textarea:focus { border-color:#7c3aed; }
-    .chat-textarea::placeholder { color:rgba(255,255,255,0.3); }
+    .chat-textarea:focus {
+      border-color: var(--sanctuary-gold);
+      box-shadow: 0 0 15px rgba(229, 184, 105, 0.15);
+    }
+    .chat-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
     .send-btn {
-      padding:0.75rem 1.2rem; border-radius:12px; border:none;
-      background: linear-gradient(135deg, #4c1d95, #7c3aed);
-      color:var(--white); cursor:pointer; font-size:1.1rem;
-      transition:var(--transition); flex-shrink:0;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--sanctuary-saffron), var(--sanctuary-gold));
+      color: #060714;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(255, 122, 41, 0.3);
     }
-    .send-btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(124,58,237,0.4); }
-    .send-btn:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+    .send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 122, 41, 0.5);
+    }
+    .send-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-    /* ===== Suggested Prompts ===== */
-    .suggestions { margin-top:1rem; display:flex; flex-wrap:wrap; gap:0.5rem; }
+    /* Dynamic Prompt Suggestions */
+    .suggestions-container {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
     .suggestion-chip {
-      background:rgba(138,43,226,0.1); border:1px solid rgba(138,43,226,0.3);
-      border-radius:50px; padding:6px 14px; font-size:0.8rem; color:#c084fc;
-      cursor:pointer; transition:var(--transition); font-family:'Lato',sans-serif;
+      background: rgba(229, 184, 105, 0.08);
+      border: 1px solid rgba(229, 184, 105, 0.25);
+      border-radius: 50px;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      color: #E2E4ED;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
     }
-    .suggestion-chip:hover { background:rgba(138,43,226,0.25); color:var(--white); }
+    .suggestion-chip:hover {
+      background: rgba(229, 184, 105, 0.2);
+      border-color: var(--sanctuary-gold);
+      color: #FFF;
+      transform: translateY(-1px);
+    }
 
-    /* ===== Sidebar ===== */
-    .ai-sidebar { color:var(--white); }
-    .sidebar-card {
-      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
-      border-radius:16px; padding:1.2rem; margin-bottom:1.2rem;
+    /* ===== Right Column: Interactive Pooja Companion ===== */
+    .companion-progress-wrap {
+      margin-bottom: 16px;
     }
-    .sidebar-card h4 {
-      font-family:'Playfair Display',serif; font-size:1rem; color:var(--gold);
-      margin-bottom:0.75rem; display:flex; align-items:center; gap:6px;
+    .companion-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 6px;
     }
-    .agent-item {
-      display:flex; align-items:center; gap:0.6rem;
-      padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05);
-      font-size:0.82rem;
+    .companion-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--sanctuary-gold), var(--sanctuary-saffron));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
     }
-    .agent-item:last-child { border:none; }
-    .agent-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-    .agent-dot.active { background:#4ade80; box-shadow:0 0 6px #4ade80; }
-    .agent-name { color:rgba(255,255,255,0.8); }
-    .agent-desc { color:rgba(255,255,255,0.4); font-size:0.75rem; }
 
-    /* Quick actions */
-    .quick-action {
-      display:block; width:100%; text-align:left;
-      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
-      border-radius:10px; padding:0.6rem 0.9rem; margin-bottom:0.5rem;
-      color:rgba(255,255,255,0.8); font-size:0.82rem; cursor:pointer;
-      font-family:'Lato',sans-serif; transition:var(--transition);
+    .pooja-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 4px;
     }
-    .quick-action:hover { background:rgba(212,160,23,0.1); border-color:rgba(212,160,23,0.3); color:var(--gold); }
+    .pooja-steps-list::-webkit-scrollbar { width: 4px; }
+    .pooja-steps-list::-webkit-scrollbar-thumb { background: rgba(229,184,105,0.25); border-radius: 4px; }
+
+    .pooja-step-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 10px 14px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .pooja-step-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(229, 184, 105, 0.3);
+    }
+    .pooja-step-item.completed {
+      background: rgba(39, 201, 63, 0.08);
+      border-color: rgba(39, 201, 63, 0.35);
+    }
+    .pooja-step-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-check-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(229, 184, 105, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .pooja-step-item.completed .step-check-circle {
+      background: var(--sanctuary-green);
+      border-color: var(--sanctuary-green);
+      color: #000;
+      font-weight: 800;
+    }
+    .pooja-step-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #E2E4ED;
+      flex: 1;
+    }
+    .pooja-step-duration {
+      font-size: 0.72rem;
+      color: #8C93B0;
+    }
+    .pooja-step-detail {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: #A6ACCD;
+      line-height: 1.5;
+      display: none;
+    }
+    .pooja-step-item.expanded .pooja-step-detail {
+      display: block;
+    }
+    .step-mantra-text {
+      color: var(--sanctuary-gold);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    /* ===== Vedic Sankalpa Generator Modal ===== */
+    .sankalpa-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 4, 10, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .sankalpa-modal-overlay.open { display: flex; }
+    .sankalpa-modal-box {
+      background: #0E1022;
+      border: 1px solid var(--sanctuary-gold);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(229,184,105,0.25);
+      border-radius: 24px;
+      max-width: 650px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .sankalpa-modal-close {
+      position: absolute;
+      top: 18px; right: 20px;
+      background: none;
+      border: none;
+      color: #8C93B0;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .sankalpa-modal-close:hover { color: #FFF; }
+
+    .sankalpa-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) {
+      .sankalpa-form-grid { grid-template-columns: 1fr; }
+    }
+    .sankalpa-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--sanctuary-gold);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sankalpa-input, .sankalpa-select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #FFF;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .sankalpa-input:focus, .sankalpa-select:focus {
+      border-color: var(--sanctuary-gold);
+    }
+    .sankalpa-output-box {
+      background: rgba(229, 184, 105, 0.06);
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.96rem;
+      line-height: 1.85;
+      color: #FFF3DC;
+      display: none;
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
 </head>
-<body>
-<div id="page-loader"><div class="om">🕉️</div></div>
+<body class="sanctuary-body">
 
-<nav class="navbar" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-om">🕉️</span>
-      <span class="brand-name">Divya Mangalam</span>
-    </a>
-            <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="jyotishyam.html">Jyotishyam</a></li>
-      <li><a href="palm-reading.html">Palm Reading</a></li>
-      <li><a href="panchang-calendar.html">Panchang</a></li>
-      <li><a href="muhurat.html">Muhurat</a></li>
-      <li><a href="dosha-check.html">Dosha Check</a></li>
-      <li><a href="mahabharata.html">Mahabharata</a></li>
-      <li><a href="puran.html">18 Puranas</a></li>
-      <li><a href="gods.html">Deities</a></li>
-      <li><a href="live-archana.html">Archana</a></li>
-      <li><a href="chalisa.html">Chalisa</a></li>
-      <li><a href="shlokas.html">Shlokas</a></li>
-      <li><a href="healing.html">432 Hz</a></li>
-      <li><a href="ai-archana.html" class="active" aria-current="page">AI Pandit</a></li>
-    </ul>
-    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+  <!-- Interactive Celestial Particle Canvas -->
+  <canvas id="sacredCanvas"></canvas>
 
-<!-- Hero -->
-<div class="ai-hero">
-  <div class="ai-badge"><div class="ai-dot"></div> Built with Claude • Shastric Verification</div>
-  <h1>🤖 AI Pandit</h1>
-  <h1 style="font-size:clamp(1.2rem,3vw,1.8rem); margin-top:-1rem;">Source-Grounded Vedic Guidance</h1>
-  <p>Ask anything about rituals, mantras, or scriptural wisdom. Responses are generated via Claude, grounded in canonical Vedic texts, and verified with exact substring matching.</p>
-</div>
+  <div class="sanctuary-wrap">
 
-<!-- Main AI Layout -->
-<div class="ai-layout">
+    <!-- Page Loader -->
+    <div id="page-loader"><div class="om">🕉️</div></div>
 
-  <!-- Chat -->
-  <div>
-    <div class="chat-window">
-      <div class="chat-header">
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4c1d95,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🕉️</div>
-        <div>
-          <h3>AI Pandit — Divya Mangalam</h3>
-          <div style="font-size:0.75rem;opacity:0.5;">Vedic Knowledge · Shastric Citations · Muhurta · Mantras</div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+          <span class="brand-om">🕉️</span>
+          <span class="brand-name">Divya Mangalam</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="jyotishyam.html">Jyotishyam</a></li>
+          <li><a href="palm-reading.html">Palm Reading</a></li>
+          <li><a href="panchang-calendar.html">Panchang</a></li>
+          <li><a href="muhurat.html">Muhurat</a></li>
+          <li><a href="dosha-check.html">Dosha Check</a></li>
+          <li><a href="mahabharata.html">Mahabharata</a></li>
+          <li><a href="puran.html">18 Puranas</a></li>
+          <li><a href="gods.html">Deities</a></li>
+          <li><a href="live-archana.html">Archana</a></li>
+          <li><a href="chalisa.html">Chalisa</a></li>
+          <li><a href="shlokas.html">Shlokas</a></li>
+          <li><a href="healing.html">432 Hz</a></li>
+          <li><a href="ai-archana.html" class="active" aria-current="page">AI Pandit</a></li>
+        </ul>
+        <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ===== Hero Sanctuary ===== -->
+    <header class="pandit-hero" role="banner">
+      <div class="sacred-badge-pill">
+        <span class="sacred-pulse-dot"></span> Built with Claude • Shastric Verification Engine
+      </div>
+      
+      <h1 class="pandit-hero-title">
+        AI Pandit &amp; Sacred Archana Sanctuary
+      </h1>
+
+      <p class="pandit-hero-shloka">
+        ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥
+      </p>
+
+      <p class="pandit-hero-desc">
+        Experience authentic Vedic worship: personalized step-by-step puja sequences, canonical mantra guidance, and auspicious timing — grounded directly in the Mahabharata and 18 Maha Puranas.
+      </p>
+
+      <!-- Ambient Audio & Sacred Tools Bar -->
+      <div class="ambient-controls-bar">
+        <button type="button" class="ambient-btn" id="btn432Hz" onclick="toggle432HzSound()">
+          <span>🕉️</span> 432 Hz Om Drone: <strong id="status432Hz">Off</strong>
+          <span class="sound-waves-anim" id="waves432Hz" style="display:none;">
+            <span class="sound-wave-bar"></span>
+            <span class="sound-wave-bar"></span>
+            <span class="sound-wave-bar"></span>
+          </span>
+        </button>
+
+        <button type="button" class="ambient-btn" onclick="playTempleBell()">
+          <span>🔔</span> Ring Temple Bell
+        </button>
+
+        <button type="button" class="ambient-btn" onclick="openSankalpaModal()">
+          <span>📜</span> Generate Vedic Sankalpa
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Ishta Devata Selector Carousel ===== -->
+    <section class="deity-strip-container" aria-label="Ishta Devata Selector">
+      <div class="deity-strip-header">
+        <div class="deity-strip-label">
+          <span>✨</span> Select Ishta Devata (इष्ट देवता)
         </div>
-        <div class="ai-dot" style="margin-left:auto;" id="aiStatusDot" title="AI Verification Active"></div>
+        <div style="font-size:0.75rem; color:#8C93B0;">
+          Sets ritual sequence &amp; scriptural alignment
+        </div>
       </div>
 
-      <div class="chat-body" id="chatBody">
-        <!-- Welcome message -->
-        <div class="msg">
-          <div class="msg-avatar">🕉️</div>
-          <div class="msg-bubble">
-            <div class="msg-gold">🙏 Om Namah Shivaya! Welcome, seeker.</div>
-            <br/>
-            I am your AI Pandit, built with Claude and grounded in classical Sanatana Dharma treatises. I can assist you with:
-            <br/><br/>
-            🪔 <strong>Archana planning</strong> — authentic ritual sequences for any deity<br/>
-            📅 <strong>Muhurta &amp; Panchang</strong> — auspicious timing grounded in Surya Siddhanta<br/>
-            📿 <strong>Mantras &amp; Shlokas</strong> — verses cited directly from the Puranas &amp; Gita<br/>
-            🌟 <strong>Spiritual reflection</strong> — uplifting philosophical guidance without fatalism<br/><br/>
-            <em>Ask any question below to begin your consultation.</em>
-            <div class="action-btns">
-              <button class="msg-action-btn" onclick="sendSuggestion('Plan a Ganesha archana for me this week')">🐘 Ganesha Archana</button>
-              <button class="msg-action-btn" onclick="sendSuggestion('What is the best day this week for Lakshmi pooja?')">📅 Best Muhurta</button>
-              <button class="msg-action-btn" onclick="sendSuggestion('Give me the Maha Mrityunjaya mantra with meaning')">📿 Mantras</button>
-            </div>
+      <div class="deity-strip-scroll" id="deityStrip">
+        <!-- Rendered dynamically from GODS database -->
+      </div>
+    </section>
+
+    <!-- ===== Mobile View Tabs Switcher ===== -->
+    <div class="mobile-tab-bar" role="tablist">
+      <button type="button" class="mobile-tab-btn active" onclick="switchMobileTab('chat', this)">
+        <span>💬</span> AI Pandit
+      </button>
+      <button type="button" class="mobile-tab-btn" onclick="switchMobileTab('companion', this)">
+        <span>🪔</span> Pooja Steps
+      </button>
+      <button type="button" class="mobile-tab-btn" onclick="switchMobileTab('panchang', this)">
+        <span>📅</span> Panchang
+      </button>
+    </div>
+
+    <!-- ===== 3-Column Sanctuary Grid ===== -->
+    <main class="sanctuary-grid" id="main-content">
+
+      <!-- LEFT COLUMN: Active Deity Card + Panchang + Status -->
+      <aside class="sanctuary-col-left" id="colLeft" aria-label="Spiritual Profile & Panchang">
+        
+        <!-- Active Deity Spotlight Card -->
+        <div class="sanctuary-card active-deity-card">
+          <div class="deity-circle-frame" id="activeDeityFrame">🐘</div>
+          <h2 class="active-deity-title" id="activeDeityName">Lord Ganesha</h2>
+          <div class="active-deity-sanskrit" id="activeDeitySanskrit">श्री गणेशाय नमः</div>
+          <div class="active-deity-mantra" id="activeDeityMantra">
+            “Om Gam Ganapataye Namaha”
+          </div>
+          <button type="button" class="quick-start-pooja-btn" onclick="askPanditAboutDeity()">
+            <span>🪔</span> Request Deity Archana
+          </button>
+        </div>
+
+        <!-- Today's Panchang Card -->
+        <div class="sanctuary-card">
+          <h3 class="sanctuary-card-title">
+            <span>📅</span> Today's Panchang
+          </h3>
+          <div id="panchangLimbRows">
+            <!-- Rendered by panchang.js -->
           </div>
         </div>
-      </div>
 
-      <div class="chat-input-wrap">
-        <textarea class="chat-textarea" id="chatInput" rows="1"
-          placeholder="Ask anything… e.g. 'Plan a Shiva archana for my father's health this Monday'"
-          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-        <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+        <!-- Verification Pipeline Status -->
+        <div class="sanctuary-card">
+          <h3 class="sanctuary-card-title">
+            <span>🛡️</span> Verification Engine
+          </h3>
+          <div class="panchang-limb-row">
+            <span class="panchang-limb-label">Corpus Index</span>
+            <span class="panchang-limb-val" style="color:var(--sanctuary-gold);">2,046 Sections</span>
+          </div>
+          <div class="panchang-limb-row">
+            <span class="panchang-limb-label">Claude Drafter</span>
+            <span class="panchang-limb-val" style="color:#27C93F;">● Active</span>
+          </div>
+          <div class="panchang-limb-row">
+            <span class="panchang-limb-label">Claude Verifier</span>
+            <span class="panchang-limb-val" style="color:#27C93F;">● Multi-Pass</span>
+          </div>
+          <div class="panchang-limb-row">
+            <span class="panchang-limb-label">Exact Substring</span>
+            <span class="panchang-limb-val" style="color:var(--sanctuary-gold);">Deterministic</span>
+          </div>
+          <div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06); text-align:center;">
+            <a href="how-we-verify.html" style="color:var(--sanctuary-gold); font-size:0.78rem; text-decoration:none; font-weight:600;">
+              How we verify answers →
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- CENTER COLUMN: Sacred Conversational Sanctuary -->
+      <section class="sanctuary-col-mid tab-active" id="colMid" aria-label="AI Pandit Conversation">
+        
+        <div class="chat-window">
+          
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-header-avatar" id="chatHeaderAvatar">🕉️</div>
+            <div class="chat-header-info">
+              <h3 id="chatHeaderTitle">AI Pandit — Divya Mangalam</h3>
+              <p id="chatHeaderSub">Grounded in Shastras • Verified against Classical Treatises</p>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:8px;">
+              <button type="button" class="ambient-btn" onclick="clearChat()" style="padding:5px 12px; font-size:0.75rem;" title="Clear Conversation">
+                🗑️ Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- Ritual Query Mode Selector Pills -->
+          <div class="mode-pills-bar">
+            <button type="button" class="mode-pill-btn active" onclick="setQueryMode('archana', this)">
+              <span>🪔</span> Archana Vidhi
+            </button>
+            <button type="button" class="mode-pill-btn" onclick="setQueryMode('muhurta', this)">
+              <span>📅</span> Shubh Muhurta
+            </button>
+            <button type="button" class="mode-pill-btn" onclick="setQueryMode('mantra', this)">
+              <span>📿</span> Mantra Japa
+            </button>
+            <button type="button" class="mode-pill-btn" onclick="setQueryMode('shastra', this)">
+              <span>📜</span> Shastra Samvaad
+            </button>
+            <button type="button" class="mode-pill-btn" onclick="setQueryMode('dosha', this)">
+              <span>⚖️</span> Dosha Shanti
+            </button>
+          </div>
+
+          <!-- Chat Messages Body -->
+          <div class="chat-body" id="chatBody">
+            <!-- Initial Welcome Message -->
+            <div class="msg">
+              <div class="msg-avatar">🕉️</div>
+              <div class="msg-bubble">
+                <div style="font-family:'Playfair Display',serif; color:var(--sanctuary-gold); font-size:1.1rem; margin-bottom:6px;">
+                  🙏 Om Namah Shivaya! Welcome, Devotee.
+                </div>
+                <p style="margin:0 0 10px;">
+                  I am your AI Pandit, built with Claude and grounded in classical Sanatana Dharma treatises. How may I guide your worship today?
+                </p>
+                <ul style="margin:0 0 12px; padding-left:20px; line-height:1.7; font-size:0.88rem;">
+                  <li><strong>🪔 Step-by-Step Archana</strong> — personalized 10-step rituals with mantras</li>
+                  <li><strong>📅 Auspicious Muhurta</strong> — timing verified via Surya Siddhanta</li>
+                  <li><strong>📿 Canonical Mantras</strong> — cited directly from the Puranas &amp; Gita</li>
+                  <li><strong>📜 Scriptural Reflection</strong> — philosophical wisdom without dread or fatalism</li>
+                </ul>
+                <div style="font-size:0.8rem; color:var(--sanctuary-gold); font-style:italic;">
+                  ✨ Select your Ishta Devata above or choose a question below to begin.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Controls -->
+          <div class="chat-input-wrap">
+            <textarea class="chat-textarea" id="chatInput" rows="1"
+              placeholder="Ask anything… e.g. 'Plan a complete Shiva archana for health and peace'"
+              onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+            <button type="button" class="send-btn" id="sendBtn" onclick="sendMessage()" aria-label="Send Inquiry">
+              ➤
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Context Suggestions -->
+        <div class="suggestions-container" id="suggestionsBox">
+          <!-- Populated dynamically based on active deity and mode -->
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: Interactive Step-by-Step Pooja Companion -->
+      <aside class="sanctuary-col-right" id="colRight" aria-label="Live Pooja Companion Checklist">
+        
+        <div class="sanctuary-card">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <h3 class="sanctuary-card-title" style="margin:0;">
+              <span>🪔</span> Pooja Companion
+            </h3>
+            <span id="companionStepCount" style="font-size:0.78rem; font-weight:700; color:var(--sanctuary-gold);">
+              0 / 10 Done
+            </span>
+          </div>
+
+          <div class="companion-progress-wrap">
+            <div class="companion-progress-bar">
+              <div class="companion-progress-fill" id="companionProgressFill"></div>
+            </div>
+          </div>
+
+          <p style="font-size:0.8rem; color:#8C93B0; margin:0 0 14px; line-height:1.5;">
+            Follow the 10 Agamic steps below during your puja. Tap any step to view its mantra or mark it complete.
+          </p>
+
+          <div class="pooja-steps-list" id="poojaStepsList">
+            <!-- Dynamically populated from gods-data.js for active deity -->
+          </div>
+
+          <button type="button" class="ambient-btn" onclick="resetPoojaSteps()" style="width:100%; margin-top:14px; justify-content:center; font-size:0.78rem;">
+            🔄 Reset Ritual Steps
+          </button>
+        </div>
+
+        <!-- Sacred Devotional Tip -->
+        <div class="sanctuary-card" style="background:rgba(229,184,105,0.06); border-color:rgba(229,184,105,0.25);">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--sanctuary-gold); text-transform:uppercase; margin-bottom:6px;">
+            💡 Devotional Guidance
+          </div>
+          <p style="font-size:0.84rem; color:#E2E4ED; line-height:1.6; margin:0;">
+            “Bhakti (pure devotion) and right intention transcend elaborate rituals. Even a single leaf (patram), flower (pushpam), fruit (phalam), or drop of water (toyam) offered with a pure heart is pleasing to the Divine.” — <em>Bhagavad Gita 9.26</em>
+          </p>
+        </div>
+
+      </aside>
+
+    </main>
+
+    <!-- ===== Vedic Sankalpa Generator Modal ===== -->
+    <div class="sankalpa-modal-overlay" id="sankalpaModal" role="dialog" aria-modal="true" aria-labelledby="sankalpaModalTitle">
+      <div class="sankalpa-modal-box">
+        <button type="button" class="sankalpa-modal-close" onclick="closeSankalpaModal()" aria-label="Close Modal">&times;</button>
+        
+        <div style="text-align:center; margin-bottom:1.2rem;">
+          <div style="font-size:2.5rem; margin-bottom:6px;">📜</div>
+          <h3 id="sankalpaModalTitle" style="font-family:'Playfair Display',serif; font-size:1.6rem; color:#FFF; margin:0 0 4px;">
+            Vedic Sankalpa Generator
+          </h3>
+          <p style="color:#8C93B0; font-size:0.85rem; margin:0;">
+            A classical Sanskrit declaration of sacred intent formulated according to today's cosmic coordinates.
+          </p>
+        </div>
+
+        <form onsubmit="generateSankalpa(event)">
+          <div class="sankalpa-form-grid">
+            <div class="sankalpa-field">
+              <label for="skName">Devotee Name (नाम)</label>
+              <input type="text" id="skName" class="sankalpa-input" placeholder="e.g. Abhishek" required />
+            </div>
+
+            <div class="sankalpa-field">
+              <label for="skGotra">Gotra (गोत्र)</label>
+              <input type="text" id="skGotra" class="sankalpa-input" placeholder="e.g. Kashyapa / Shiva" value="Kashyapa" />
+            </div>
+
+            <div class="sankalpa-field">
+              <label for="skNakshatra">Janma Nakshatra (नक्षत्र)</label>
+              <select id="skNakshatra" class="sankalpa-select">
+                <option value="Ashwini">Ashwini (अश्विनी)</option>
+                <option value="Bharani">Bharani (भरणी)</option>
+                <option value="Krittika">Krittika (कृत्तिका)</option>
+                <option value="Rohini">Rohini (रोहिणी)</option>
+                <option value="Mrigashira">Mrigashira (मृगशिरा)</option>
+                <option value="Ardra">Ardra (आर्द्रा)</option>
+                <option value="Punarvasu">Punarvasu (पुनर्वसु)</option>
+                <option value="Pushya">Pushya (पुष्य)</option>
+                <option value="Ashlesha">Ashlesha (आश्लेषा)</option>
+                <option value="Magha">Magha (मघा)</option>
+                <option value="Purva Phalguni">Purva Phalguni (पूर्वा फाल्गुनी)</option>
+                <option value="Uttara Phalguni">Uttara Phalguni (उत्तरा फाल्गुनी)</option>
+                <option value="Hasta">Hasta (हस्त)</option>
+                <option value="Chitra">Chitra (चित्रा)</option>
+                <option value="Swati">Swati (स्वाती)</option>
+                <option value="Vishakha">Vishakha (विशाखा)</option>
+                <option value="Anuradha">Anuradha (अनुराधा)</option>
+                <option value="Jyeshtha">Jyeshtha (ज्येष्ठा)</option>
+                <option value="Mula">Mula (मूल)</option>
+                <option value="Purva Ashadha">Purva Ashadha (पूर्वाषाढ़ा)</option>
+                <option value="Uttara Ashadha">Uttara Ashadha (उत्तराषाढ़ा)</option>
+                <option value="Shravana">Shravana (श्रवण)</option>
+                <option value="Dhanishta">Dhanishta (धनिष्ठा)</option>
+                <option value="Shatabhisha">Shatabhisha (शतभिषा)</option>
+                <option value="Purva Bhadrapada">Purva Bhadrapada (पूर्वभाद्रपदा)</option>
+                <option value="Uttara Bhadrapada">Uttara Bhadrapada (उत्तरभाद्रपदा)</option>
+                <option value="Revati">Revati (रेवती)</option>
+              </select>
+            </div>
+
+            <div class="sankalpa-field">
+              <label for="skWish">Prayer Wish / Kamana (कामना)</label>
+              <select id="skWish" class="sankalpa-select">
+                <option value="Sarva Karya Siddhi">Sarva Karya Siddhi (Success in all undertakings)</option>
+                <option value="Arogya & Deerghayushya">Arogya & Deerghayushya (Good health & longevity)</option>
+                <option value="Shanti & Parivara Saukhya">Shanti & Parivara Saukhya (Family peace & harmony)</option>
+                <option value="Vidya & Gnana Prapti">Vidya & Gnana Prapti (Wisdom & academic growth)</option>
+                <option value="Moksha & Spiritual Elevation">Moksha & Spiritual Elevation (Inner liberation)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="quick-start-pooja-btn" style="padding:12px; font-size:0.92rem;">
+            <span>✨</span> Generate Classical Vedic Sankalpa
+          </button>
+        </form>
+
+        <div class="sankalpa-output-box" id="sankalpaOutput">
+          <div style="font-weight:700; color:var(--sanctuary-gold); margin-bottom:8px;">
+            🕉️ Sanskrit Vedic Sankalpa (वैदिक संकल्प मन्त्र):
+          </div>
+          <div id="sankalpaSanskrit" style="margin-bottom:12px;"></div>
+          <div style="font-size:0.82rem; color:#A6ACCD; font-style:italic;" id="sankalpaEnglish"></div>
+          
+          <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+            <button type="button" class="ambient-btn" onclick="copySankalpa()" style="padding:6px 14px; font-size:0.78rem;">
+              📋 Copy Sankalpa
+            </button>
+            <button type="button" class="ambient-btn active" onclick="sendSankalpaToPandit()" style="padding:6px 14px; font-size:0.78rem;">
+              💬 Ask AI Pandit to Guide this Sankalpa →
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- Suggested prompts -->
-    <div class="suggestions">
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🐘 Ganesha archana for new business</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🔱 Shiva pooja for health</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🪷 Lakshmi archana this Friday</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">📅 Best muhurta this week</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">📿 Gayatri mantra meaning</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🙏 Hanuman Chalisa significance</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🌙 What is my nakshatra good for?</span>
-      <span class="suggestion-chip" onclick="sendSuggestion(this.textContent)">🕉️ Explain Panchang for today</span>
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="ai-sidebar">
-
-    <!-- Verification Engine Status -->
-    <div class="sidebar-card">
-      <h4>⚡ Verification Pipeline</h4>
-      <div class="agent-item">
-        <div class="agent-dot active"></div>
-        <div>
-          <div class="agent-name">📚 Shastric Corpus</div>
-          <div class="agent-desc">Mahabharata, Puranas &amp; Shlokas</div>
+    <!-- Standardized Site Footer -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="brand-om">🕉️</div>
+          <h3>Divya Mangalam</h3>
+          <p>A sacred digital sanctuary dedicated to preserving classical Vedic astronomy, authentic scriptural texts, and providing open-access Hindu calendar tools for seekers worldwide.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Astrology &amp; Tools</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jyotishyam.html">Vedanga Jyotisha</a></li>
+            <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
+            <li><a href="muhurat.html">Shubh Muhurat</a></li>
+            <li><a href="dosha-check.html">Dosha Checker</a></li>
+            <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
+            <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Articles &amp; Scriptures</h4>
+          <ul>
+            <li><a href="articles.html">Vedic Articles Hub</a></li>
+            <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
+            <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
+            <li><a href="article-kaal-sarp-dosha.html">Kaal Sarp Yoga</a></li>
+            <li><a href="mahabharata.html">Complete Mahabharata</a></li>
+            <li><a href="puran.html">18 Maha Puranas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Trust &amp; Governance</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="disclaimer.html">Astrological &amp; AI Disclaimer</a></li>
+          </ul>
         </div>
       </div>
-      <div class="agent-item">
-        <div class="agent-dot active"></div>
-        <div>
-          <div class="agent-name">🤖 Claude Drafter</div>
-          <div class="agent-desc">Structured XML &amp; Citation drafting</div>
-        </div>
+      <div class="footer-bottom">
+        <p>© 2026 Divya Mangalam. Founded by Kedarisai Abhishek. Crafted for seekers worldwide.</p>
+        <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
       </div>
-      <div class="agent-item">
-        <div class="agent-dot active"></div>
-        <div>
-          <div class="agent-name">⚖️ Claude Verifier</div>
-          <div class="agent-desc">Multi-call citation cross-audit</div>
-        </div>
-      </div>
-      <div class="agent-item">
-        <div class="agent-dot active"></div>
-        <div>
-          <div class="agent-name">🔍 Substring Guard</div>
-          <div class="agent-desc">Exact quote verification</div>
-        </div>
-      </div>
-      <div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06);">
-        <a href="how-we-verify.html" style="color:var(--gold); font-size:0.78rem; text-decoration:none; font-weight:600;">
-          How we verify answers →
-        </a>
-      </div>
-    </div>
+    </footer>
 
-    <!-- Today's Panchang Quick -->
-    <div class="sidebar-card" id="todayPanchangSidebar">
-      <h4>📅 Today's Panchang</h4>
-      <div id="panchangQuick" style="font-size:0.82rem;line-height:2;opacity:0.8;"></div>
-    </div>
+  </div> <!-- /sanctuary-wrap -->
 
-    <!-- Quick Actions -->
-    <div class="sidebar-card">
-      <h4>⚡ Quick Actions</h4>
-      <button class="quick-action" onclick="sendSuggestion('Give me a complete Ganesha archana sequence with all mantras')">🐘 Full Ganesha Archana</button>
-      <button class="quick-action" onclick="sendSuggestion('What should I do on Ekadashi?')">🌙 Ekadashi Guidance</button>
-      <button class="quick-action" onclick="sendSuggestion('Give me the Vishnu Sahasranama introduction')">🪷 Vishnu Sahasranama</button>
-      <button class="quick-action" onclick="sendSuggestion('What are the 9 forms of Durga (Navadurga)?')">⚔️ Navadurga</button>
-      <button class="quick-action" onclick="sendSuggestion('Explain the significance of Hanuman Chalisa')">🙏 Hanuman Chalisa</button>
-      <button class="quick-action" onclick="clearChat()">🗑️ Clear Chat</button>
-    </div>
+  <!-- Scripts -->
+  <script src="main.js"></script>
+  <script src="gods-data.js"></script>
+  <script src="panchang.js"></script>
 
-  </div>
-</div>
+  <script>
+  /* ==========================================================================
+     DIVYA MANGALAM — AI PANDIT DYNAMIC ENGINE & SACRED MOTION SYSTEM
+     ========================================================================== */
 
-<!-- ===== STANDARDIZED FOOTER ===== -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="brand-om">🕉️</div>
-      <h3>Divya Mangalam</h3>
-      <p>A sacred digital sanctuary dedicated to preserving classical Vedic astronomy, authentic scriptural texts, and providing open-access Hindu calendar tools for seekers worldwide.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Astrology &amp; Tools</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jyotishyam.html">Vedanga Jyotisha</a></li>
-        <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
-        <li><a href="muhurat.html">Shubh Muhurat</a></li>
-        <li><a href="dosha-check.html">Dosha Checker</a></li>
-        <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
-        <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Articles &amp; Scriptures</h4>
-      <ul>
-        <li><a href="articles.html">Vedic Articles Hub</a></li>
-        <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
-        <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
-        <li><a href="article-kaal-sarp-dosha.html">Kaal Sarp Yoga</a></li>
-        <li><a href="mahabharata.html">Complete Mahabharata</a></li>
-        <li><a href="puran.html">18 Maha Puranas</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Trust &amp; Governance</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion for spiritual seekers worldwide.</p>
-    <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
-  </div>
-</footer>
+  // State Management
+  let currentDeityId = 'ganesha';
+  let currentQueryMode = 'archana';
+  let audioCtx = null;
+  let droneOsc1 = null;
+  let droneOsc2 = null;
+  let droneGain = null;
+  let is432HzPlaying = false;
+  let completedSteps = new Set();
 
-<script src="main.js"></script>
-<script src="gods-data.js"></script>
-<script src="panchang.js"></script>
-<script>
-/* =============================================
-   CLAUDE AI PANDIT & SHASHTRIC VERIFICATION PIPELINE
-   Calls server-side /api/pandit endpoint
-   ============================================= */
+  /* ==========================================================================
+     1. SACRED MOTION CANVAS (Floating Jyoti Particles & Subtle Sri Yantra)
+     ========================================================================== */
+  const canvas = document.getElementById('sacredCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let mandalaAngle = 0;
+  let animFrameId = null;
 
-/* ---- Call Serverless Pandit API ---- */
-async function callPandit(userMessage) {
-  const res = await fetch('/api/pandit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question: userMessage })
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class JyotiParticle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = canvas.height + Math.random() * 50;
+      this.size = Math.random() * 2.8 + 1.2;
+      this.speedY = Math.random() * 0.7 + 0.3;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.alpha = Math.random() * 0.7 + 0.2;
+      this.maxAlpha = this.alpha;
+      this.hue = Math.random() > 0.3 ? 42 : 24; // Gold or Saffron
+      this.oscillation = Math.random() * Math.PI * 2;
+    }
+    update() {
+      this.y -= this.speedY;
+      this.oscillation += 0.02;
+      this.x += Math.sin(this.oscillation) * 0.6;
+      if (this.y < -20) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${this.hue}, 85%, 65%, ${this.alpha})`;
+      ctx.shadowBlur = this.size * 5;
+      ctx.shadowColor = `hsla(${this.hue}, 90%, 60%, 0.8)`;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // Populate 36 gentle motes
+  for (let i = 0; i < 36; i++) {
+    const p = new JyotiParticle();
+    p.y = Math.random() * canvas.height;
+    particles.push(p);
+  }
+
+  function drawSacredMandala(centerX, centerY, radius) {
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(mandalaAngle);
+    ctx.strokeStyle = 'rgba(229, 184, 105, 0.04)';
+    ctx.lineWidth = 1;
+
+    // Concentric sacred circles
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, radius * 0.65, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 12 Petals
+    const petals = 12;
+    for (let i = 0; i < petals; i++) {
+      const angle = (i * Math.PI * 2) / petals;
+      ctx.save();
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(radius * 0.35, radius * 0.35, 0, radius);
+      ctx.quadraticCurveTo(-radius * 0.35, radius * 0.35, 0, 0);
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function renderSacredCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Subtle breathing mandala in top center
+    mandalaAngle += 0.0006;
+    const mandalaRadius = Math.min(canvas.width, canvas.height) * 0.45;
+    drawSacredMandala(canvas.width / 2, canvas.height * 0.28, mandalaRadius);
+
+    // Render ascending Jyoti particles
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    if (!document.hidden) {
+      animFrameId = requestAnimationFrame(renderSacredCanvas);
+    }
+  }
+  renderSacredCanvas();
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && !animFrameId) {
+      renderSacredCanvas();
+    }
   });
 
-  if (!res.ok) {
-    if (res.status === 429) {
+  /* ==========================================================================
+     2. NATIVE SACRED AUDIO (432 Hz OM DRONE & TEMPLE GHANTA CHIME)
+     ========================================================================== */
+  function initAudioContext() {
+    if (!audioCtx) {
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioCtxClass();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function toggle432HzSound() {
+    initAudioContext();
+    const btn = document.getElementById('btn432Hz');
+    const statusTxt = document.getElementById('status432Hz');
+    const wavesAnim = document.getElementById('waves432Hz');
+
+    if (!is432HzPlaying) {
+      // Start 432 Hz Drone (Fundamental 432Hz + warm 216Hz octave below + gentle overtone)
+      const now = audioCtx.currentTime;
+
+      droneGain = audioCtx.createGain();
+      droneGain.gain.setValueAtTime(0.001, now);
+      droneGain.gain.exponentialRampToValueAtTime(0.08, now + 2); // Soft volume
+
+      // Lowpass filter for smooth warmth
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(650, now);
+
+      droneOsc1 = audioCtx.createOscillator();
+      droneOsc1.type = 'sine';
+      droneOsc1.frequency.setValueAtTime(432, now); // Sacred 432Hz
+
+      droneOsc2 = audioCtx.createOscillator();
+      droneOsc2.type = 'sine';
+      droneOsc2.frequency.setValueAtTime(216, now); // Sub-harmonic 216Hz
+
+      droneOsc1.connect(filter);
+      droneOsc2.connect(filter);
+      filter.connect(droneGain);
+      droneGain.connect(audioCtx.destination);
+
+      droneOsc1.start();
+      droneOsc2.start();
+
+      is432HzPlaying = true;
+      btn.classList.add('active');
+      statusTxt.textContent = 'Active (432 Hz)';
+      wavesAnim.style.display = 'inline-flex';
+    } else {
+      // Fade out smoothly
+      const now = audioCtx.currentTime;
+      if (droneGain) {
+        droneGain.gain.setValueAtTime(droneGain.gain.value, now);
+        droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+        setTimeout(() => {
+          if (droneOsc1) { droneOsc1.stop(); droneOsc1.disconnect(); }
+          if (droneOsc2) { droneOsc2.stop(); droneOsc2.disconnect(); }
+        }, 1300);
+      }
+      is432HzPlaying = false;
+      btn.classList.remove('active');
+      statusTxt.textContent = 'Off';
+      wavesAnim.style.display = 'none';
+    }
+  }
+
+  // Realistic Temple Brass Bell Synthesis
+  function playTempleBell() {
+    try {
+      initAudioContext();
+      const now = audioCtx.currentTime;
+
+      // Primary bronze bell frequencies: 680Hz, 1020Hz, 1540Hz
+      const bellFreqs = [680, 1024, 1536, 2048];
+      const masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.2, now);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.2);
+      masterGain.connect(audioCtx.destination);
+
+      bellFreqs.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const oscGain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+
+        const decay = 2.5 / (idx + 1);
+        oscGain.gain.setValueAtTime(1 / (idx + 1.2), now);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+
+        osc.connect(oscGain);
+        oscGain.connect(masterGain);
+
+        osc.start(now);
+        osc.stop(now + 3.3);
+      });
+    } catch (e) {
+      console.warn('Audio Bell notice:', e);
+    }
+  }
+
+  /* ==========================================================================
+     3. ISHTA DEVATA STRIP & COMPANION INTEGRATION
+     ========================================================================== */
+  function renderDeityStrip() {
+    const container = document.getElementById('deityStrip');
+    if (!container || typeof GODS === 'undefined') return;
+
+    container.innerHTML = GODS.map(g => `
+      <div class="deity-pill ${g.id === currentDeityId ? 'active' : ''}" onclick="selectDeity('${g.id}')">
+        <span class="deity-avatar">${g.emoji}</span>
+        <div class="deity-info">
+          <div class="deity-name">${g.name.replace('Lord ', '').replace('Goddess ', '')}</div>
+          <div class="deity-sub">${g.sanskrit.split(' ')[0] || ''}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function selectDeity(deityId) {
+    currentDeityId = deityId;
+    renderDeityStrip();
+    const g = GODS.find(item => item.id === deityId) || GODS[0];
+
+    // Update Left Spotlight Card
+    document.getElementById('activeDeityFrame').textContent = g.emoji;
+    document.getElementById('activeDeityName').textContent = g.name;
+    document.getElementById('activeDeitySanskrit').textContent = g.sanskrit;
+    document.getElementById('activeDeityMantra').textContent = `“${g.primaryMantra}”`;
+
+    // Update Header Avatar
+    document.getElementById('chatHeaderAvatar').textContent = g.emoji;
+    document.getElementById('chatHeaderTitle').textContent = `AI Pandit — ${g.name} Archana`;
+
+    // Populate Companion Steps
+    renderPoojaCompanionSteps(g);
+
+    // Refresh context prompt chips
+    renderPromptChips();
+
+    // Gentle bell chime on selection
+    playTempleBell();
+  }
+
+  function askPanditAboutDeity() {
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+    const prompt = `Please guide me through an authentic ${g.name} archana sequence today, including the sankalpa and auspicious timings.`;
+    document.getElementById('chatInput').value = prompt;
+    sendMessage();
+  }
+
+  /* ==========================================================================
+     4. INTERACTIVE STEP-BY-STEP POOJA COMPANION
+     ========================================================================== */
+  function renderPoojaCompanionSteps(deity) {
+    const listEl = document.getElementById('poojaStepsList');
+    if (!listEl) return;
+    const steps = deity.archanaSequence || [];
+
+    listEl.innerHTML = steps.map((s, idx) => {
+      const isDone = completedSteps.has(idx);
+      return `
+        <div class="pooja-step-item ${isDone ? 'completed' : ''}" id="stepItem_${idx}" onclick="togglePoojaStep(${idx})">
+          <div class="pooja-step-top">
+            <div class="step-check-circle">${isDone ? '✓' : ''}</div>
+            <div class="pooja-step-title">${idx + 1}. ${s.icon} ${s.name}</div>
+            <div class="pooja-step-duration">${s.duration}s ▾</div>
+          </div>
+          <div class="pooja-step-detail">
+            <div class="step-mantra-text">🕉️ ${s.mantra}</div>
+            <div>${s.meaning}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    updateCompanionProgress(steps.length);
+  }
+
+  function togglePoojaStep(stepIdx) {
+    const item = document.getElementById(`stepItem_${stepIdx}`);
+    if (!item) return;
+
+    if (completedSteps.has(stepIdx)) {
+      completedSteps.delete(stepIdx);
+      item.classList.remove('completed');
+      item.querySelector('.step-check-circle').textContent = '';
+    } else {
+      completedSteps.add(stepIdx);
+      item.classList.add('completed');
+      item.querySelector('.step-check-circle').textContent = '✓';
+      playTempleBell(); // Ring bell on step completion
+    }
+
+    // Toggle detail expansion
+    item.classList.toggle('expanded');
+
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+    updateCompanionProgress(g.archanaSequence ? g.archanaSequence.length : 10);
+  }
+
+  function updateCompanionProgress(totalSteps) {
+    const count = completedSteps.size;
+    const countEl = document.getElementById('companionStepCount');
+    const fillEl = document.getElementById('companionProgressFill');
+
+    if (countEl) countEl.textContent = `${count} / ${totalSteps} Done`;
+    if (fillEl) {
+      const pct = Math.min(100, Math.round((count / totalSteps) * 100));
+      fillEl.style.width = `${pct}%`;
+    }
+  }
+
+  function resetPoojaSteps() {
+    completedSteps.clear();
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+    renderPoojaCompanionSteps(g);
+  }
+
+  /* ==========================================================================
+     5. RITUAL QUERY MODES & CONTEXTUAL PROMPT CHIPS
+     ========================================================================== */
+  function setQueryMode(mode, btnEl) {
+    currentQueryMode = mode;
+    document.querySelectorAll('.mode-pill-btn').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    const input = document.getElementById('chatInput');
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+
+    const placeholders = {
+      'archana': `Ask about full step-by-step ${g.name} puja rituals, offerings, and sequence…`,
+      'muhurta': `Ask for the most auspicious time today or this week for ${g.name} worship…`,
+      'mantra': `Ask for sacred ${g.name} mantras, pronunciation, and shastric meaning…`,
+      'shastra': `Ask philosophical questions grounded in the Gita, Mahabharata & Puranas…`,
+      'dosha': `Ask about planetary pacifications, Sade Sati or Mangal remedies without fear…`
+    };
+
+    if (input) input.placeholder = placeholders[mode] || input.placeholder;
+    renderPromptChips();
+  }
+
+  function renderPromptChips() {
+    const box = document.getElementById('suggestionsBox');
+    if (!box) return;
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+
+    const promptMap = {
+      'archana': [
+        `🪔 Complete ${g.name} archana sequence`,
+        `🌸 What are the best offerings for ${g.name}?`,
+        `🙏 How to take a Vedic sankalpa for ${g.name}?`,
+        `🍮 Significance of prasad in ${g.name} puja`
+      ],
+      'muhurta': [
+        `📅 Best muhurta today for ${g.name} puja`,
+        `⚠️ What is today's Rahukaal to avoid?`,
+        `✨ Is Abhijit muhurta favorable today?`,
+        `🌙 Best Tithi for ${g.name} worship`
+      ],
+      'mantra': [
+        `📿 Complete ${g.name} Gayatri mantra with meaning`,
+        `🙏 ${g.name} 108 Ashtottara names overview`,
+        `🧘 How many japa rounds of ${g.primaryMantra}?`,
+        `✨ Sanskrit Dhyana shloka for meditation`
+      ],
+      'shastra': [
+        `📜 What do the Puranas say about ${g.name}?`,
+        `📖 Gita verse on karma and devotion`,
+        `🕉️ Significance of Purushartha over fate`,
+        `🏛️ Ancient temple traditions of ${g.name}`
+      ],
+      'dosha': [
+        `🪐 Vedic remedies for Sade Sati phase`,
+        `🔥 Kuja Dosha pacification via Hanuman Chalisa`,
+        `🌿 Spiritual lifestyle remedies for Rahu-Ketu`,
+        `💎 Classical gemstone & fasting traditions`
+      ]
+    };
+
+    const chips = promptMap[currentQueryMode] || promptMap['archana'];
+    box.innerHTML = chips.map(c => `
+      <span class="suggestion-chip" onclick="sendSuggestion('${c.replace(/^[^a-zA-Z0-9]+/, '').trim()}')">
+        ${c}
+      </span>
+    `).join('');
+  }
+
+  function sendSuggestion(text) {
+    document.getElementById('chatInput').value = text;
+    sendMessage();
+  }
+
+  /* ==========================================================================
+     6. CHAT INTERACTION & BACKEND (/api/pandit)
+     ========================================================================== */
+  async function callPanditAPI(questionText) {
+    const res = await fetch('/api/pandit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: questionText })
+    });
+
+    if (!res.ok) {
+      if (res.status === 429) {
+        return {
+          answer: '⏳ Rate limit reached (maximum 10 queries per minute). Please pause a moment before your next sacred inquiry.',
+          citations: [],
+          verified: false
+        };
+      }
+      const errData = await res.json().catch(() => ({}));
       return {
-        answer: '⏳ Rate limit reached (maximum 10 queries per minute). Please wait a moment before sending another inquiry.',
+        answer: errData.error || `Inquiry could not be processed (Status: ${res.status}).`,
         citations: [],
         verified: false
       };
     }
-    const errData = await res.json().catch(() => ({}));
-    return {
-      answer: errData.error || `Error (${res.status}): Unable to process inquiry.`,
-      citations: [],
-      verified: false
-    };
+
+    return await res.json();
   }
 
-  return await res.json();
-}
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+  function appendUserMessage(text) {
+    const body = document.getElementById('chatBody');
+    const div = document.createElement('div');
+    div.className = 'msg user';
+    div.innerHTML = `
+      <div class="msg-avatar">👤</div>
+      <div class="msg-bubble">${escapeHtml(text)}</div>
+    `;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
 
-/* ---- Today's Panchang in Sidebar ---- */
-function renderPanchangSidebar() {
-  if (typeof PANCHANG === 'undefined') return;
-  const p = PANCHANG.getPanchang(new Date());
-  document.getElementById('panchangQuick').innerHTML = `
-    <div>📆 <strong style="color:var(--gold)">${p.dayName}</strong> · ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
-    <div>🌙 Tithi: <strong>${p.tithi.name}</strong> (${p.tithi.pakshaShort})</div>
-    <div>⭐ Nakshatra: <strong>${p.nakshatra.name}</strong></div>
-    <div>🔯 Yoga: <strong>${p.yoga}</strong>${p.isBadYoga?' ⚠️':''}</div>
-    <div style="color:#f87171;">⚠️ Rahukaal: ${p.rahukaal.start}–${p.rahukaal.end}</div>
-    <div style="color:#4ade80;">✨ Abhijit: ${p.abhijit.start}–${p.abhijit.end}</div>
-    <div style="margin-top:4px;">🛕 Deity: ${p.dayDeity}</div>
-  `;
-}
+  function appendPanditResponse(data) {
+    const body = document.getElementById('chatBody');
+    const div = document.createElement('div');
+    div.className = 'msg';
 
-/* ---- Chat UI ---- */
-function appendMessage(role, text) {
-  const body = document.getElementById('chatBody');
-  const div = document.createElement('div');
-  div.className = `msg ${role === 'user' ? 'user' : ''}`;
+    let text = data.answer || 'I could not find a source for this in the classical texts.';
 
-  let formatted = escapeHtml(text)
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n/g, '<br/>');
+    // Format Devanagari Sanskrit verses in illuminated boxes
+    let formatted = escapeHtml(text)
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/(?:^|\n)([\u0900-\u097F\s।॥]{15,})(?:\n|$)/g, '<div class="shloka-verse">$1</div>')
+      .replace(/\n/g, '<br/>');
 
-  div.innerHTML = `
-    <div class="msg-avatar">${role === 'user' ? '👤' : '🕉️'}</div>
-    <div class="msg-bubble">${formatted}</div>`;
-  body.appendChild(div);
-  body.scrollTop = body.scrollHeight;
-}
+    // Authenticity badge
+    let verifiedHtml = data.verified ? `
+      <div class="sacred-badge-pill" style="margin-bottom:8px; padding:3px 10px; font-size:0.75rem; background:rgba(39,201,63,0.15); border-color:rgba(39,201,63,0.4); color:#27C93F;">
+        <span class="sacred-pulse-dot" style="background:#27C93F; box-shadow:0 0 8px #27C93F;"></span>
+        ✔ Verified against sources
+      </div>` : '';
 
-function appendPanditResponse(data) {
-  const body = document.getElementById('chatBody');
-  const div = document.createElement('div');
-  div.className = 'msg';
-
-  let text = data.answer || 'I could not find a source for this in the classical texts.';
-  let formatted = escapeHtml(text)
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n/g, '<br/>');
-
-  let verifiedHtml = data.verified ? `
-    <div class="verified-badge">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      Verified against sources
-    </div>` : '';
-
-  let citationsHtml = '';
-  if (data.citations && data.citations.length > 0) {
-    const citationItems = data.citations.map(c => `
-      <div class="citation-card">
-        <div class="citation-source">📜 ${escapeHtml(c.source || 'Canonical Treatise')}${c.chapter ? ' — ' + escapeHtml(c.chapter) : ''}</div>
-        ${c.quote ? `<div class="citation-quote">“${escapeHtml(c.quote)}”</div>` : ''}
-      </div>
-    `).join('');
-
-    const citId = 'cit_' + Math.random().toString(36).substr(2, 9);
-    citationsHtml = `
-      <div class="citations-wrap">
-        <button class="citations-toggle" type="button" onclick="document.getElementById('${citId}').classList.toggle('hidden')">
-          <span>📚</span> Verified Citations (${data.citations.length}) ▾
-        </button>
-        <div class="citations-list" id="${citId}">
-          ${citationItems}
+    // Illuminated Shastra Scroll Citations
+    let citationsHtml = '';
+    if (data.citations && data.citations.length > 0) {
+      const citationItems = data.citations.map((c, i) => `
+        <div class="shastra-scroll-card">
+          <div class="shastra-source-badge">📜 ${escapeHtml(c.source || 'Canonical Treatise')}${c.chapter ? ' — ' + escapeHtml(c.chapter) : ''}</div>
+          ${c.quote ? `<div class="shastra-quote-text">“${escapeHtml(c.quote)}”</div>` : ''}
+          <button type="button" class="shastra-copy-btn" onclick="copyText('${escapeHtml(c.quote || '')}')">
+            📋 Copy Shloka
+          </button>
         </div>
+      `).join('');
+
+      const citId = 'cit_' + Math.random().toString(36).substr(2, 9);
+      citationsHtml = `
+        <div class="citations-wrap">
+          <button class="citations-toggle" type="button" onclick="document.getElementById('${citId}').classList.toggle('hidden')">
+            <span>📚</span> Shastric Citations (${data.citations.length}) ▾
+          </button>
+          <div class="citations-list" id="${citId}">
+            ${citationItems}
+          </div>
+        </div>
+      `;
+    }
+
+    div.innerHTML = `
+      <div class="msg-avatar">🕉️</div>
+      <div class="msg-bubble">
+        ${verifiedHtml}
+        <div>${formatted}</div>
+        ${citationsHtml}
+      </div>
+    `;
+
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function showTypingIndicator() {
+    const body = document.getElementById('chatBody');
+    const div = document.createElement('div');
+    div.className = 'msg typing-indicator';
+    div.id = 'typingIndicator';
+    div.innerHTML = `
+      <div class="msg-avatar">🕉️</div>
+      <div class="msg-bubble" style="display:flex; align-items:center; gap:8px;">
+        <div class="typing-dots"><span></span><span></span><span></span></div>
+        <span style="font-size:0.8rem; color:#8C93B0;">Retrieving Shastras &amp; verifying citations…</span>
+      </div>
+    `;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const el = document.getElementById('typingIndicator');
+    if (el) el.remove();
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    if (text.length > 500) {
+      alert('Please keep your question under 500 characters.');
+      return;
+    }
+
+    appendUserMessage(text);
+    input.value = '';
+    input.style.height = 'auto';
+    document.getElementById('sendBtn').disabled = true;
+    showTypingIndicator();
+
+    try {
+      const data = await callPanditAPI(text);
+      removeTypingIndicator();
+      appendPanditResponse(data);
+    } catch (e) {
+      removeTypingIndicator();
+      appendPanditResponse({
+        answer: `❌ Connection error: ${e.message}. Please check your connection.`,
+        citations: [],
+        verified: false
+      });
+    }
+
+    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('chatInput').focus();
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  }
+
+  function clearChat() {
+    const body = document.getElementById('chatBody');
+    body.innerHTML = '';
+    appendPanditResponse({
+      answer: '🙏 Sanctuary cleared. May divine light illuminate your path. How can I assist you today?',
+      citations: [],
+      verified: false
+    });
+  }
+
+  function copyText(txt) {
+    if (!txt) return;
+    navigator.clipboard.writeText(txt).then(() => {
+      alert('Shloka copied to clipboard.');
+    });
+  }
+
+  /* ==========================================================================
+     7. VEDIC SANKALPA GENERATOR LOGIC
+     ========================================================================== */
+  function openSankalpaModal() {
+    document.getElementById('sankalpaModal').classList.add('open');
+  }
+  function closeSankalpaModal() {
+    document.getElementById('sankalpaModal').classList.remove('open');
+  }
+
+  function generateSankalpa(e) {
+    e.preventDefault();
+    const name = document.getElementById('skName').value.trim();
+    const gotra = document.getElementById('skGotra').value.trim() || 'Kashyapa';
+    const nakshatra = document.getElementById('skNakshatra').value;
+    const wish = document.getElementById('skWish').value;
+    const g = GODS.find(item => item.id === currentDeityId) || GODS[0];
+
+    // Read live Panchang parameters
+    let p = { tithi: { name: 'Shukla Ekadashi' }, dayName: 'Wednesday' };
+    if (typeof PANCHANG !== 'undefined') {
+      p = PANCHANG.getPanchang(new Date());
+    }
+
+    const sanskritSankalpa = `ॐ विष्णुर्विष्णुर्विष्णुः श्रीमद्भगवतो महापुरुषस्य विष्णोराज्ञया प्रवर्तमानस्य अद्य ब्रह्मणो द्वितीये परार्धे श्वेतवाराहकल्पे वैवस्वतमन्वन्तरे जम्बूद्वीपे भारतवर्षे भरतखण्डे अस्मिन वर्तमाने ${p.tithi.name} तिथौ ${p.dayName} वासरे ${nakshatra} नक्षत्रे ${gotra} गोत्रोत्पन्नस्य ${name} नामधेयस्य मम आत्मनः श्रुति-स्मृति-पुराणोक्त फलप्राप्त्यर्थं ${wish} सिद्ध्यर्थं श्री ${g.name} प्रीत्यर्थं यथामिलितोपचारैः अर्चनमहं करिष्ये ॥`;
+
+    const englishSankalpa = `Om. In the cosmic cycle of Lord Vishnu, on this auspicious ${p.tithi.name}, ${p.dayName}, under the constellation of ${nakshatra}, I, ${name}, born into the ${gotra} lineage, undertake this sacred archana for the grace of ${g.name}, seeking divine fulfillment of ${wish} in alignment with Dharma.`;
+
+    document.getElementById('sankalpaSanskrit').textContent = sanskritSankalpa;
+    document.getElementById('sankalpaEnglish').textContent = englishSankalpa;
+    document.getElementById('sankalpaOutput').style.display = 'block';
+
+    playTempleBell();
+  }
+
+  function copySankalpa() {
+    const text = document.getElementById('sankalpaSanskrit').textContent;
+    copyText(text);
+  }
+
+  function sendSankalpaToPandit() {
+    const text = document.getElementById('sankalpaSanskrit').textContent;
+    closeSankalpaModal();
+    const prompt = `Here is my Vedic Sankalpa: "${text}". Please bless this resolve and guide my archana ritual sequence accordingly.`;
+    document.getElementById('chatInput').value = prompt;
+    sendMessage();
+  }
+
+  /* ==========================================================================
+     8. TODAY'S PANCHANG QUICK IN LEFT PANEL
+     ========================================================================== */
+  function renderTodayPanchang() {
+    const container = document.getElementById('panchangLimbRows');
+    if (!container || typeof PANCHANG === 'undefined') return;
+
+    const p = PANCHANG.getPanchang(new Date());
+    container.innerHTML = `
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Vara (वार)</span>
+        <span class="panchang-limb-val" style="color:var(--sanctuary-gold);">${p.dayName}</span>
+      </div>
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Tithi (तिथि)</span>
+        <span class="panchang-limb-val">${p.tithi.name} (${p.tithi.pakshaShort})</span>
+      </div>
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Nakshatra (नक्षत्र)</span>
+        <span class="panchang-limb-val">${p.nakshatra.name}</span>
+      </div>
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Yoga (योग)</span>
+        <span class="panchang-limb-val">${p.yoga}</span>
+      </div>
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Rahukaal</span>
+        <span class="panchang-limb-val" style="color:#f87171;">${p.rahukaal.start}–${p.rahukaal.end}</span>
+      </div>
+      <div class="panchang-limb-row">
+        <span class="panchang-limb-label">Abhijit</span>
+        <span class="panchang-limb-val" style="color:#4ade80;">${p.abhijit.start}–${p.abhijit.end}</span>
       </div>
     `;
   }
 
-  let actionBtns = '';
-  let gods = (typeof GODS !== 'undefined' && GODS) ? GODS.filter(g => text.toLowerCase().includes(g.name.toLowerCase().split(' ').pop())) : [];
-  if (gods.length > 0) {
-    actionBtns = `<div class="action-btns">${gods.slice(0,3).map(g =>
-      `<button class="msg-action-btn" onclick="window.location.href='pooja.html?god=${g.id}'">${g.emoji} ${g.name} Pooja</button>`
-    ).join('')}</div>`;
+  /* ==========================================================================
+     9. MOBILE VIEW TAB SWITCHING
+     ========================================================================== */
+  function switchMobileTab(tabName, btnEl) {
+    document.querySelectorAll('.mobile-tab-btn').forEach(b => b.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    const colLeft = document.getElementById('colLeft');
+    const colMid = document.getElementById('colMid');
+    const colRight = document.getElementById('colRight');
+
+    colLeft.classList.remove('tab-active');
+    colMid.classList.remove('tab-active');
+    colRight.classList.remove('tab-active');
+
+    if (tabName === 'chat') {
+      colMid.classList.add('tab-active');
+    } else if (tabName === 'companion') {
+      colRight.classList.add('tab-active');
+    } else if (tabName === 'panchang') {
+      colLeft.classList.add('tab-active');
+    }
   }
 
-  div.innerHTML = `
-    <div class="msg-avatar">🕉️</div>
-    <div class="msg-bubble">
-      ${verifiedHtml}
-      <div>${formatted}</div>
-      ${citationsHtml}
-      ${actionBtns ? '<div class="action-btns">' + actionBtns + '</div>' : ''}
-    </div>`;
-
-  body.appendChild(div);
-  body.scrollTop = body.scrollHeight;
-}
-
-function showTyping() {
-  const body = document.getElementById('chatBody');
-  const div = document.createElement('div');
-  div.className = 'msg typing-indicator'; div.id = 'typingIndicator';
-  div.innerHTML = `
-    <div class="msg-avatar">🕉️</div>
-    <div class="msg-bubble">
-      <div class="typing-dots"><span></span><span></span><span></span></div>
-      <span style="font-size:0.78rem;opacity:0.5;margin-left:4px;">Claude is retrieving shastras &amp; verifying citations…</span>
-    </div>`;
-  body.appendChild(div);
-  body.scrollTop = body.scrollHeight;
-}
-
-function removeTyping() {
-  const el = document.getElementById('typingIndicator');
-  if (el) el.remove();
-}
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-  if (text.length > 500) {
-    alert('Please keep your question under 500 characters.');
-    return;
-  }
-
-  appendMessage('user', text);
-  input.value = ''; input.style.height = 'auto';
-  document.getElementById('sendBtn').disabled = true;
-  showTyping();
-
-  try {
-    const data = await callPandit(text);
-    removeTyping();
-    appendPanditResponse(data);
-  } catch (e) {
-    removeTyping();
-    appendMessage('ai', `❌ Connection error: ${e.message}. Please check your connection.`);
-  }
-
-  document.getElementById('sendBtn').disabled = false;
-  document.getElementById('chatInput').focus();
-}
-
-function sendSuggestion(text) {
-  document.getElementById('chatInput').value = text;
-  sendMessage();
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
-function clearChat() {
-  const body = document.getElementById('chatBody');
-  body.innerHTML = '';
-  appendPanditResponse({
-    answer: '🙏 Chat cleared. How can I assist you on your spiritual journey today?',
-    citations: [],
-    verified: false
+  /* ==========================================================================
+     INITIALIZATION ON LOAD
+     ========================================================================== */
+  window.addEventListener('DOMContentLoaded', () => {
+    renderDeityStrip();
+    selectDeity('ganesha');
+    renderTodayPanchang();
   });
-}
+  </script>
 
-/* ---- Init ---- */
-renderPanchangSidebar();
-</script>
 </body>
 </html>
