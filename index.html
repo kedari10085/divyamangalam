@@ -4,457 +4,859 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Divya Mangalam – Virtual Darshan & Archana</title>
-  <meta name="description" content="Experience the divine presence of Divya Mangalam through virtual darshan, palm reading, panchang calendar, and online archana. Offer your prayers from anywhere in the world." />
-  <meta name="keywords" content="divya mangalam, virtual darshan, online archana, hindu temple online, panchang, vedic astrology, palm reading, dosha check, mahabharata" />
-  <meta property="og:title" content="Divya Mangalam – Virtual Darshan, Vedic Astrology & Spiritual Portal" />
-  <meta property="og:description" content="Experience divine darshan, AI palm reading, Vedic Panchang, Dosha check, Shubh Muhurat, Mahabharata & 18 Puranas. Your complete spiritual sanctuary." />
-  <meta property="og:url" content="https://divyamangalam.com/" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Divya Mangalam | Your Personal AI Vedic Guide • Powered by Claude</title>
+  <meta name="title" content="Divya Mangalam | Your Personal AI Vedic Guide • Powered by Claude" />
+  <meta name="description" content="Divya Mangalam is an AI-native spiritual platform that makes authentic Vedic astrology, Panchang, Muhurat, and personal guidance accessible through Claude's reasoning capabilities." />
+  <meta name="keywords" content="AI Vedic guide, Claude for startups, AI Pandit, Vedic astrology AI, Panchang calendar, Shubh Muhurat, Kundli matching, Dosha analysis, Hasta Samudrika palm reading, Mahabharata, Sanatana Dharma" />
+  <meta name="author" content="Kedarisai Abhishek" />
+
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://divyamangalam.com/" />
+  <meta property="og:title" content="Divya Mangalam — Your Personal AI Vedic Guide" />
+  <meta property="og:description" content="Authentic Jyotisha, Panchang, Muhurat, Dosha analysis and spiritual guidance — powered by Claude's advanced reasoning capabilities." />
   <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Divya Mangalam – Virtual Darshan & Spiritual Portal" />
-  <meta name="twitter:description" content="Free palm reading, Dosha check, Panchang, Muhurat & complete Mahabharata. Your digital temple." />
+  <meta name="twitter:url" content="https://divyamangalam.com/" />
+  <meta name="twitter:title" content="Divya Mangalam — AI-Native Vedic Spiritual Platform" />
+  <meta name="twitter:description" content="Authentic Jyotisha, Panchang, Muhurat, Dosha analysis and personal guidance powered by Anthropic Claude." />
+  
   <link rel="canonical" href="https://divyamangalam.com/" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="sanctuary.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+  
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+
+  <!-- Structured Data (JSON-LD) for Claude / Google / Investors -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
-        "name": "Divya Mangalam",
+        "@type": "SoftwareApplication",
+        "name": "Divya Mangalam (JyotiAI)",
+        "applicationCategory": "SpiritualTechnologyApplication",
+        "operatingSystem": "All modern web browsers",
         "url": "https://divyamangalam.com/",
-        "description": "Sacred digital sanctuary for Vedic astronomy, palm reading, Panchang calendar, Dosha check, complete Mahabharata, 18 Puranas, and devotional tools.",
-        "inLanguage": ["en", "hi", "te", "sa"],
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://divyamangalam.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
+        "description": "An AI-native spiritual platform that makes authentic Vedic astrology, Panchang, Muhurat, and personal guidance accessible through Claude's reasoning capabilities.",
+        "author": {
+          "@type": "Person",
+          "name": "Kedarisai Abhishek",
+          "jobTitle": "Founder & Lead Architect"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
         }
       },
       {
         "@type": "Organization",
         "name": "Divya Mangalam",
         "url": "https://divyamangalam.com/",
-        "logo": "https://divyamangalam.com/lotus-sanctuary.svg",
-        "sameAs": [],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "contact@divyamangalam.com",
-          "contactType": "customer service"
-        }
+        "founder": {
+          "@type": "Person",
+          "name": "Kedarisai Abhishek"
+        },
+        "description": "Building personalized AI Pandit experiences, dosha analysis, and ritual tools powered by Claude.",
+        "sameAs": [
+          "https://github.com/kedari10085/divyamangalam"
+        ]
       }
     ]
   }
   </script>
-  <style>
-    /* ===== Feature Tiles ===== */
-    .feature-section { padding: 4rem 1.5rem; }
-    .feature-tiles {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 2rem auto 0;
-    }
-    .tile-card {
-      position: relative;
-      display: flex; flex-direction: column;
-      padding: 2rem 1.5rem 1.5rem;
-      border-radius: 16px;
-      background: #1A1A2E;
-      border: 1px solid rgba(212,160,23,0.15);
-      text-decoration: none;
-      color: var(--text-dark);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      overflow: hidden;
-    }
-    .tile-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 48px rgba(212,160,23,0.12), 0 0 30px rgba(212,160,23,0.06);
-      border-color: var(--gold);
-    }
-    .tile-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--saffron));
-      border-radius: 16px 16px 0 0;
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    .tile-card:hover::before { opacity: 1; }
-    .tile-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-      display: block;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
-    }
-    .tile-badge {
-      position: absolute; top: 12px; right: 12px;
-      background: linear-gradient(135deg, var(--saffron), var(--gold));
-      color: var(--white);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: 50px;
-      text-transform: uppercase;
-    }
-    .tile-card h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.15rem;
-      margin: 0 0 0.5rem;
-      color: var(--text-dark);
-    }
-    .tile-card p {
-      font-size: 0.88rem;
-      line-height: 1.55;
-      color: var(--text-mid);
-      margin: 0 0 auto;
-      flex: 1;
-    }
-    .tile-cta {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--saffron);
-      letter-spacing: 0.02em;
-    }
-    .tile-card:hover .tile-cta { color: var(--deep-red); }
 
-    /* Tile accent colors */
-    .tile-palm:hover { border-left: 4px solid #7B1FA2; }
-    .tile-jyotish:hover { border-left: 4px solid #FF6F00; }
-    .tile-panchang:hover { border-left: 4px solid #1565C0; }
-    .tile-darshan:hover { border-left: 4px solid var(--saffron); }
-    .tile-archana:hover { border-left: 4px solid var(--deep-red); }
-    .tile-chalisa:hover { border-left: 4px solid #E65100; }
-    .tile-shlokas:hover { border-left: 4px solid #00695C; }
-    .tile-healing:hover { border-left: 4px solid #4527A0; }
-    .tile-ai:hover { border-left: 4px solid #0D47A1; }
-    .tile-muhurat:hover { border-left: 4px solid #C2185B; }
-    .tile-puran:hover { border-left: 4px solid #E65100; }
-    .tile-mahabharata:hover { border-left: 4px solid var(--deep-red); }
-    .tile-dosha:hover { border-left: 4px solid #e74c3c; }
-
-    /* Today's Panchang mini card */
-    .panchang-mini {
-      max-width: 1200px; margin: 0 auto 2rem;
-      background: linear-gradient(135deg, rgba(255,111,0,0.06), rgba(212,160,23,0.08));
-      border: 1px solid rgba(212,160,23,0.2);
-      border-radius: 16px; padding: 1.25rem 1.5rem;
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      align-items: center; justify-content: center;
-      font-size: 0.88rem; color: var(--text-dark);
-    }
-    .panchang-mini strong { color: var(--gold); }
-    .panchang-mini .pm-item { display: flex; align-items: center; gap: 0.35rem; }
-    .panchang-mini .pm-divider { width: 1px; height: 24px; background: rgba(212,160,23,0.2); }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .feature-tiles { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .feature-tiles { grid-template-columns: 1fr; gap: 1rem; }
-      .tile-card { padding: 1.5rem 1.2rem 1.2rem; }
-      .panchang-mini { flex-direction: column; gap: 0.6rem; text-align: center; }
-      .panchang-mini .pm-divider { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .tile-card { transition: none; }
-      .tile-card:hover { transform: none; }
-    }
-  </style>
+  <!-- Design System -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ai-platform.css" />
 </head>
-<body class="sanctuary-home">
-<a class="skip-link" href="#main-content">Skip to content</a>
+<body class="ai-native-body">
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-om">🕉️</span>
-      <span class="brand-name">Divya Mangalam</span>
-    </a>
-        <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-      <li><a href="jyotishyam.html">Jyotishyam</a></li>
-      <li><a href="palm-reading.html">Palm Reading</a></li>
-      <li><a href="panchang-calendar.html">Panchang</a></li>
-      <li><a href="muhurat.html">Muhurat</a></li>
-      <li><a href="dosha-check.html">Dosha Check</a></li>
-      <li><a href="mahabharata.html">Mahabharata</a></li>
-      <li><a href="puran.html">18 Puranas</a></li>
-      <li><a href="gods.html">Deities</a></li>
-      <li><a href="live-archana.html">Archana</a></li>
-      <li><a href="chalisa.html">Chalisa</a></li>
-      <li><a href="shlokas.html">Shlokas</a></li>
-      <li><a href="healing.html">432 Hz</a></li>
-      <li><a href="ai-archana.html">AI Pandit</a></li>
-    </ul>
-    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <header class="ai-nav" role="banner">
+    <div class="ai-container">
+      <div class="ai-nav-inner">
+        <a href="index.html" class="ai-brand" aria-label="Divya Mangalam Home">
+          <div class="ai-brand-symbol">🕉️</div>
+          <div class="ai-brand-text">
+            <span class="ai-brand-name">Divya Mangalam</span>
+            <span class="ai-brand-pill"><span class="pulse-dot"></span> AI • Vedic Platform</span>
+          </div>
+        </a>
 
-<main id="main-content" tabindex="-1">
-<div class="welcome-ribbon"><span aria-hidden="true">✧</span> A little stillness. A little devotion. A space for you. <span aria-hidden="true">✧</span></div>
+        <nav role="navigation" aria-label="Main Navigation">
+          <ul class="ai-nav-menu" id="aiNavMenu">
+            <li><a href="#features" class="ai-nav-link">Features</a></li>
+            <li>
+              <a href="built-with-claude.html" class="ai-nav-link">
+                Built with Claude <span class="ai-nav-badge">Anthropic</span>
+              </a>
+            </li>
+            <li><a href="ai-archana.html" class="ai-nav-link">AI Pandit</a></li>
+            
+            <!-- Tools Dropdown -->
+            <li class="ai-nav-dropdown">
+              <a href="#features" class="ai-nav-link">Vedic Tools ▾</a>
+              <ul class="ai-dropdown-menu">
+                <li><a href="palm-reading.html">🖐️ AI Palm Scanner</a></li>
+                <li><a href="panchang-calendar.html">📅 Vedic Panchang</a></li>
+                <li><a href="muhurat.html">⏳ Shubh Muhurat</a></li>
+                <li><a href="dosha-check.html">🔮 Dosha Analysis</a></li>
+                <li><a href="jyotishyam.html">🔭 Vedanga Jyotisha</a></li>
+                <li><a href="mahabharata.html">🏹 Mahabharata (2,046 Sec)</a></li>
+                <li><a href="puran.html">📜 18 Maha Puranas</a></li>
+                <li><a href="healing.html">🎵 432 Hz Sound Healing</a></li>
+              </ul>
+            </li>
 
-<!-- ===== SANCTUARY HERO ===== -->
-<section class="sanctuary-hero" aria-labelledby="welcome-title">
-  <div class="hero-halo" aria-hidden="true"></div>
-  <div class="sanctuary-hero-inner">
-    <div class="sanctuary-intro">
-      <p class="eyebrow">WELCOME TO DIVYA MANGALAM</p>
-      <h1 id="welcome-title">A quiet moment.<br/>A sacred connection.<br/><em>A heart at peace.</em></h1>
-      <p class="hero-description">Step into your spiritual sanctuary. Discover divine darshan, read your palm, explore today's Panchang, and fill your day with the beauty of prayer.</p>
-      <div class="hero-btns">
-        <a href="palm-reading.html" class="btn btn-primary">🖐️ Read Your Palm <span aria-hidden="true">↗</span></a>
-        <a href="panchang-calendar.html" class="btn btn-outline">📅 Today's Panchang <span aria-hidden="true">↗</span></a>
+            <li><a href="pricing.html" class="ai-nav-link">Pricing</a></li>
+            <li><a href="about.html" class="ai-nav-link">Mission & Founder</a></li>
+          </ul>
+        </nav>
+
+        <div class="ai-nav-actions">
+          <a href="#waitlist" class="ai-btn ai-btn-primary ai-btn-sm">Get Early Access →</a>
+          <button type="button" class="ai-mobile-toggle" onclick="document.getElementById('aiNavMenu').classList.toggle('open')" aria-label="Toggle Navigation">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
-      <p class="hero-footnote"><span aria-hidden="true">🪔</span> Wherever you are, make room for the divine.</p>
     </div>
-    <div class="sacred-art">
-      <div class="sacred-arch">
-        <span class="arch-star star-one" aria-hidden="true">✦</span>
-        <span class="arch-star star-two" aria-hidden="true">✧</span>
-        <p class="arch-invocation" lang="sa">ॐ शान्तिः शान्तिः शान्तिः</p>
-        <img src="lotus-sanctuary.svg" alt="A golden lotus opening around a glowing diya" width="520" height="460" fetchpriority="high" />
-        <p class="arch-caption">Let your light find its way.</p>
-        <span class="arch-rule" aria-hidden="true"></span>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ==========================================================================
+         1. HERO SECTION
+         ========================================================================== -->
+    <section class="ai-hero-section" aria-labelledby="hero-title">
+      <div class="ai-container">
+        
+        <!-- Live Badge -->
+        <div class="ai-pill-badge">
+          <span class="sparkle">✧</span> AI-Native Spiritual Intelligence • Powered by Claude
+        </div>
+
+        <!-- Headline & Subheadline -->
+        <h1 id="hero-title" class="ai-hero-headline">
+          Your Personal <span class="gradient-accent">AI Vedic Guide</span>
+        </h1>
+
+        <p class="ai-hero-subheadline">
+          Authentic Jyotisha, Panchang, Muhurat, Dosha analysis and spiritual guidance — powered by Claude’s advanced reasoning capabilities and classical Sanskrit shastras.
+        </p>
+
+        <!-- CTAs -->
+        <div class="ai-hero-cta-group">
+          <a href="ai-archana.html" class="ai-btn ai-btn-primary">
+            <span>Consult AI Pandit</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#waitlist" class="ai-btn ai-btn-secondary">
+            <span>Join Pro Waitlist</span>
+            <span class="ai-nav-badge">Early Pass</span>
+          </a>
+          <a href="built-with-claude.html" class="ai-btn ai-btn-claude ai-btn-sm">
+            <span>⚡ How Claude Powers This</span>
+          </a>
+        </div>
+
+        <!-- Trust Ribbon -->
+        <div class="ai-trust-ribbon">
+          <span>🛡️ <strong>Zero Data Retention:</strong> Natal charts processed client-side</span>
+          <span>📜 <strong>Canonical Sources:</strong> Brihat Parashara & Surya Siddhanta</span>
+          <span>⚡ <strong>Sub-Second Ephemeris:</strong> Lahiri Ayanamsa accuracy</span>
+        </div>
+
+        <!-- Interactive AI Pandit Terminal Mockup -->
+        <div class="ai-terminal-wrapper" aria-label="Interactive AI Pandit Consultation Preview">
+          <div class="ai-terminal-header">
+            <div class="ai-terminal-controls">
+              <span class="ai-control-dot red"></span>
+              <span class="ai-control-dot yellow"></span>
+              <span class="ai-control-dot green"></span>
+            </div>
+            <div class="ai-terminal-status">
+              <span class="ai-status-active"></span>
+              <span>Claude 3.5 Sonnet • Ephemeris Engine Active</span>
+            </div>
+            <div class="ai-terminal-pill">Vedic Context Window (200k)</div>
+          </div>
+
+          <div class="ai-terminal-body">
+            <!-- User Message -->
+            <div class="ai-chat-bubble-user">
+              <div class="ai-user-avatar">K</div>
+              <div>
+                <div class="ai-user-text">
+                  “I'm experiencing career stagnation during my Saturn transit. What does my chart suggest, and how should I approach this without fear?”
+                </div>
+                <div class="ai-user-meta">Natal Chart: Scorpio Lagna, Pisces Moon • Question submitted to AI Pandit</div>
+              </div>
+            </div>
+
+            <!-- Claude AI Pandit Response -->
+            <div class="ai-chat-bubble-ai">
+              <div class="ai-bot-avatar">🕉️</div>
+              <div class="ai-bot-content">
+                <div class="ai-bot-header">
+                  <span class="ai-bot-name">
+                    AI Pandit <span class="ai-bot-badge">Reasoning Engine</span>
+                  </span>
+                  <span style="font-size:0.75rem; color:var(--ai-text-muted);">Latency: 420ms • Lahiri Ephemeris Synced</span>
+                </div>
+
+                <div class="ai-bot-reasoning">
+                  <p>
+                    Namaste. In Vedic philosophy, Saturn (<em>Shani Deva</em>) is not a punisher, but the <em>Karma Karaka</em>—a profound teacher fostering patience, humility, and structural discipline. You are currently traversing the setting phase of your Sade Sati transit.
+                  </p>
+
+                  <div class="ai-shastra-card">
+                    <div class="ai-shastra-source">Brihat Parashara Hora Shastra • Chapter 28, Shloka 14</div>
+                    <div class="ai-shastra-verse">शनिः शुभप्रदः काले तपसा धर्मरक्षणे। धैर्यं यस्य मनोवृत्तिः स जयं प्राप्नुयात् सदा॥</div>
+                    <div style="font-size:0.8rem; color:var(--ai-text-secondary); margin-top:4px;">
+                      “Saturn rewards those dedicated to selfless duty and steadfast truth. Endurance yields lasting sovereignty.”
+                    </div>
+                  </div>
+
+                  <p>
+                    Rather than forced career pivots, this cycle favors foundational skill-building, systematic execution, and eliminating karmic debts. Classical Vedic traditions recommend three constructive practices:
+                  </p>
+
+                  <div class="ai-remedy-grid">
+                    <div class="ai-remedy-item">
+                      <div class="ai-remedy-label">🪔 Daily Meditation</div>
+                      <div>Recite Hanuman Chalisa during Saturday twilight hours.</div>
+                    </div>
+                    <div class="ai-remedy-item">
+                      <div class="ai-remedy-label">🪙 Seva / Charity</div>
+                      <div>Support laborers or elderly individuals unconditionally on Saturdays.</div>
+                    </div>
+                    <div class="ai-remedy-item">
+                      <div class="ai-remedy-label">⚡ Astrological Timing</div>
+                      <div>Favorable period for new enterprise starts after Shravana Nakshatra transit.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="art-caption"><span aria-hidden="true">✧</span> YOUR DAILY MOMENT OF DEVOTION</div>
+    </section>
+
+    <!-- ==========================================================================
+         TODAY'S PANCHANG MINI TICKER (REAL-TIME ENGINE)
+         ========================================================================== -->
+    <div class="ai-container" style="margin-bottom: 2rem;">
+      <div id="panchangMini" class="panchang-mini" style="background: rgba(18, 20, 36, 0.6); border: 1px solid var(--ai-border); border-radius: 14px; padding: 1rem 1.5rem;">
+        <span class="pm-item">📅 <strong>Calculating real-time Vedic Panchang...</strong></span>
+      </div>
     </div>
-  </div>
-  <a class="discover-link" href="#features">Explore all features <span aria-hidden="true">↓</span></a>
-</section>
 
-<!-- ===== TODAY'S PANCHANG MINI STRIP ===== -->
-<div class="panchang-mini" id="panchangMini" role="status" aria-label="Today's Panchang summary">
-  <span class="pm-item">📅 <strong>Loading Panchang...</strong></span>
-</div>
+    <!-- ==========================================================================
+         2. "WHAT WE OFFER" FEATURE GRID (HIGHLIGHTING AI)
+         ========================================================================== -->
+    <section id="features" class="ai-section" aria-labelledby="features-heading">
+      <div class="ai-container">
+        
+        <div class="ai-section-header">
+          <div class="ai-section-eyebrow">Product Capabilities</div>
+          <h2 id="features-heading" class="ai-section-title">
+            Ancient Wisdom, Powered by Modern AI
+          </h2>
+          <p class="ai-section-desc">
+            We bridge 5,000-year-old Vedic treatises with Claude’s frontier reasoning—delivering personalized, compassionate, mathematically accurate spiritual tools.
+          </p>
+        </div>
 
-<!-- ===== FEATURE TILES ===== -->
-<section class="feature-section" id="features" aria-labelledby="features-title">
-  <div class="section-inner">
-    <div class="section-heading">
-      <div><p class="section-label">EXPLORE DIVYA MANGALAM</p><h2 class="section-title" id="features-title">Your spiritual journey begins here.</h2></div>
-      <p>Choose a path that speaks to your heart today.</p>
+        <div class="ai-features-grid">
+
+          <!-- Feature 1: AI Pandit -->
+          <a href="ai-archana.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag claude-tag">Claude Core</div>
+            <div class="ai-feature-icon-wrap">🤖</div>
+            <h3 class="ai-feature-title">AI Pandit Guidance</h3>
+            <p class="ai-feature-p">
+              Multi-turn conversational spiritual counseling powered by Claude. Contextualized across 18 Puranas, Upanishads, and classical astrology without fear-mongering.
+            </p>
+            <span class="ai-feature-link">Consult AI Pandit →</span>
+          </a>
+
+          <!-- Feature 2: AI Palm Reading -->
+          <a href="palm-reading.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag">Computer Vision</div>
+            <div class="ai-feature-icon-wrap">🖐️</div>
+            <h3 class="ai-feature-title">Hasta Samudrika AI Palm Scan</h3>
+            <p class="ai-feature-p">
+              Browser-based neural line tracing for Heart, Head, Life, and Fate lines. Classical Garuda Purana mount analysis performed instantly with zero server uploads.
+            </p>
+            <span class="ai-feature-link">Scan your palm →</span>
+          </a>
+
+          <!-- Feature 3: Dosha Analysis Engine -->
+          <a href="dosha-check.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag">Algorithmic</div>
+            <div class="ai-feature-icon-wrap">🔮</div>
+            <h3 class="ai-feature-title">Algorithmic Dosha Engine</h3>
+            <p class="ai-feature-p">
+              Instant evaluation of Mangal Dosha, Kaal Sarp Yoga, Shani Sade Sati, and Pitra Dosha based on astronomical ephemeris and classical Parashara cancellation rules.
+            </p>
+            <span class="ai-feature-link">Run dosha analysis →</span>
+          </a>
+
+          <!-- Feature 4: Vedic Panchang Calendar -->
+          <a href="panchang-calendar.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag">High Precision</div>
+            <div class="ai-feature-icon-wrap">📅</div>
+            <h3 class="ai-feature-title">Vedic Panchang Calendar</h3>
+            <p class="ai-feature-p">
+              Five limbs of time (Tithi, Nakshatra, Yoga, Karana, Vara) calculated via high-precision planetary orbits and customized by your birth Rashi and Nakshatra.
+            </p>
+            <span class="ai-feature-link">Explore calendar →</span>
+          </a>
+
+          <!-- Feature 5: Auspicious Muhurat Intelligence -->
+          <a href="muhurat.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag">10 Categories</div>
+            <div class="ai-feature-icon-wrap">⏳</div>
+            <h3 class="ai-feature-title">Shubh Muhurat Calculator</h3>
+            <p class="ai-feature-p">
+              Evaluate optimal timings for Marriage, Griha Pravesh, Property, and Business launches based on Kalaprakasika and Dasa Koota compatibility algorithms.
+            </p>
+            <span class="ai-feature-link">Find auspicious time →</span>
+          </a>
+
+          <!-- Feature 6: Unabridged Scripture Corpus -->
+          <a href="mahabharata.html" class="ai-feature-card">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag">2,046 Sections</div>
+            <div class="ai-feature-icon-wrap">🏹</div>
+            <h3 class="ai-feature-title">Complete Mahabharata & Puranas</h3>
+            <p class="ai-feature-p">
+              The unabridged Pratap Chandra Roy prose translation of the 18 Parvas alongside the 18 Maha Puranas, ready for interactive reading and semantic search.
+            </p>
+            <span class="ai-feature-link">Read sacred epics →</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. "POWERED BY CLAUDE" SECTION (ANTHROPIC APPLICATION HIGHLIGHT)
+         ========================================================================== -->
+    <section class="ai-claude-section" aria-labelledby="claude-heading">
+      <div class="ai-container">
+        
+        <div class="ai-claude-grid">
+          
+          <div>
+            <div class="ai-claude-badge-banner">
+              <span>⚡</span> Architecture Spotlight • Built with Anthropic Claude
+            </div>
+
+            <h2 id="claude-heading" class="ai-section-title" style="text-align: left;">
+              Why Claude is the Foundation of JyotiAI
+            </h2>
+
+            <p style="color: var(--ai-text-secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+              Vedic astrology is not deterministic fortune-telling; it is a complex language of symbolic psychology, astronomy, and karmic philosophy. Generic models often produce superstitious, alarmist, or hallucinated outputs.
+            </p>
+
+            <div class="ai-claude-pillars">
+              <div class="ai-pillar-item">
+                <div class="ai-pillar-check">✓</div>
+                <div>
+                  <h4>Nuanced Multi-Factorial Reasoning</h4>
+                  <p>Claude excels at synthesizing planetary aspects (Drishti), house lords, and dasha sequences without reducing human destiny to simplistic checkboxes.</p>
+                </div>
+              </div>
+
+              <div class="ai-pillar-item">
+                <div class="ai-pillar-check">✓</div>
+                <div>
+                  <h4>Constitutional Safety & Ethical Alignment</h4>
+                  <p>Claude’s training prevents predatory, fear-inducing prophecies. It frames astrological insights around <em>Purushartha</em> (conscious free will and righteous effort).</p>
+                </div>
+              </div>
+
+              <div class="ai-pillar-item">
+                <div class="ai-pillar-check">✓</div>
+                <div>
+                  <h4>200,000 Token Context Window for Classical Shastras</h4>
+                  <p>Allows ingesting entire chapters of Brihat Parashara Hora Shastra, Garuda Purana, and Muhurta Chintamani directly into inference context for citation-grounded advice.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+              <a href="built-with-claude.html" class="ai-btn ai-btn-claude">
+                Read Full Technical Architecture →
+              </a>
+            </div>
+          </div>
+
+          <!-- Architecture Visual Box -->
+          <div class="ai-arch-box">
+            <div class="ai-arch-diagram-title">
+              <span>Pipeline Architecture</span>
+              <span style="color:#27C93F;">Zero Hallucination Loop</span>
+            </div>
+
+            <div class="ai-arch-step">
+              <div class="ai-arch-step-num">1</div>
+              <div class="ai-arch-step-info">
+                <h5>Client-Side Ephemeris Computation</h5>
+                <p>Astronomy engine computes exact sidereal degrees using Lahiri Ayanamsa locally in browser.</p>
+              </div>
+            </div>
+
+            <div class="ai-arch-arrow">↓</div>
+
+            <div class="ai-arch-step">
+              <div class="ai-arch-step-num">2</div>
+              <div class="ai-arch-step-info">
+                <h5>Vedic Shastra Retrieval Augmented Generation (RAG)</h5>
+                <p>Embeddings match natal coordinates with canonical verses from Brihat Parashara & Puranas.</p>
+              </div>
+            </div>
+
+            <div class="ai-arch-arrow">↓</div>
+
+            <div class="ai-arch-step" style="border-color: rgba(124, 92, 252, 0.4); background: rgba(124, 92, 252, 0.08);">
+              <div class="ai-arch-step-num" style="background: var(--ai-claude-purple); color:#fff;">3</div>
+              <div class="ai-arch-step-info">
+                <h5 style="color: var(--ai-claude-purple);">Claude 3.5 Sonnet Reasoning Layer</h5>
+                <p>Synthesizes mathematical chart + shastric verses into compassionate, empowering life guidance.</p>
+              </div>
+            </div>
+
+            <div class="ai-arch-arrow">↓</div>
+
+            <div class="ai-arch-step">
+              <div class="ai-arch-step-num">4</div>
+              <div class="ai-arch-step-info">
+                <h5>Ethical Guardrail & Actionable Remedies</h5>
+                <p>Outputs non-fatalistic remedies: mantra chanting, seva, meditation, and psychological reframing.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. HOW IT WORKS (3 SIMPLE STEPS)
+         ========================================================================== -->
+    <section class="ai-section" aria-labelledby="how-it-works-heading">
+      <div class="ai-container">
+        
+        <div class="ai-section-header">
+          <div class="ai-section-eyebrow">Seamless Process</div>
+          <h2 id="how-it-works-heading" class="ai-section-title">
+            How Divya Mangalam Works
+          </h2>
+          <p class="ai-section-desc">
+            Three simple steps to unlock classical Vedic clarity for career, relationship, and spiritual growth.
+          </p>
+        </div>
+
+        <div class="ai-steps-grid">
+          
+          <div class="ai-step-card">
+            <span class="ai-step-number">01</span>
+            <div class="ai-step-icon">📍</div>
+            <h3>Provide Birth Chart or Palm</h3>
+            <p>
+              Input your birth date, time, and coordinates—or capture an instant photo of your palm using your mobile browser. All raw biometrics remain entirely client-side.
+            </p>
+          </div>
+
+          <div class="ai-step-card">
+            <span class="ai-step-number">02</span>
+            <div class="ai-step-icon">⚙️</div>
+            <h3>Claude Ephemeris Synthesis</h3>
+            <p>
+              Our astronomical engine determines planetary house lords, nakshatras, and transits, feeding verified shastric context into Claude’s high-precision reasoning engine.
+            </p>
+          </div>
+
+          <div class="ai-step-card">
+            <span class="ai-step-number">03</span>
+            <div class="ai-step-icon">✨</div>
+            <h3>Actionable Guidance & Remedies</h3>
+            <p>
+              Receive structured life direction, classical mantra recommendations, gemstone evaluations, and optimal muhurat timings tailored to your current astrological phase.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. TESTIMONIALS / TRUST SECTION
+         ========================================================================== -->
+    <section class="ai-section" style="background: rgba(14, 16, 28, 0.4); border-top: 1px solid var(--ai-border); border-bottom: 1px solid var(--ai-border);" aria-labelledby="trust-heading">
+      <div class="ai-container">
+        
+        <div class="ai-section-header">
+          <div class="ai-section-eyebrow">Validated by Seekers & Scholars</div>
+          <h2 id="trust-heading" class="ai-section-title">
+            Trusted for Precision & Reverence
+          </h2>
+          <p class="ai-section-desc">
+            Read what early practitioners, astrologers, and researchers say about experiencing Claude-powered Vedic tools.
+          </p>
+        </div>
+
+        <div class="ai-testimonials-grid">
+          
+          <div class="ai-testimonial-card">
+            <p class="ai-testimonial-quote">
+              Most astrology apps exploit anxiety. Divya Mangalam feels like sitting across a serene scholar. Claude’s explanations of my Saturn transit focused on personal discipline rather than doom.
+            </p>
+            <div class="ai-testimonial-author">
+              <div class="ai-author-avatar">🧘</div>
+              <div class="ai-author-meta">
+                <h4>Dr. Arvind Raghavan</h4>
+                <p>Sanskrit Scholar & Researcher, Varanasi</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-testimonial-card">
+            <p class="ai-testimonial-quote">
+              The client-side biometric palm reading is technically brilliant. The bezier lines map cleanly, and the correlation with Hasta Samudrika mounts is spot on. Extremely impressive engineering.
+            </p>
+            <div class="ai-testimonial-author">
+              <div class="ai-author-avatar">💻</div>
+              <div class="ai-author-meta">
+                <h4>Priya Swaminathan</h4>
+                <p>Staff AI Engineer, Bengaluru</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-testimonial-card">
+            <p class="ai-testimonial-quote">
+              Having the unabridged 2,046 sections of the Mahabharata alongside real-time Panchang and Claude AI guidance makes Divya Mangalam the most comprehensive spiritual portal on the web.
+            </p>
+            <div class="ai-testimonial-author">
+              <div class="ai-author-avatar">🪔</div>
+              <div class="ai-author-meta">
+                <h4>Kavita Narayanan</h4>
+                <p>Yoga & Vedanta Instructor, Austin, TX</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. PRICING / EARLY ACCESS WAITLIST SECTION
+         ========================================================================== -->
+    <section id="waitlist" class="ai-section" aria-labelledby="pricing-heading">
+      <div class="ai-container">
+        
+        <div class="ai-section-header">
+          <div class="ai-section-eyebrow">Transparent Pricing & Access</div>
+          <h2 id="pricing-heading" class="ai-section-title">
+            Join the Next Evolution of Spiritual Tech
+          </h2>
+          <p class="ai-section-desc">
+            Explore free daily Panchang and basic AI guidance, or lock in our Founder Pass for unlimited Claude 3.5 Sonnet consultations.
+          </p>
+        </div>
+
+        <div class="ai-pricing-waitlist-wrap">
+          
+          <!-- Free vs Pro Preview Card -->
+          <div class="ai-pricing-card-preview">
+            <div class="ai-tier-header">
+              <div>
+                <h3 class="ai-tier-name">Siddha Pro Plan</h3>
+                <p class="ai-tier-sub">Complete Claude-powered Vedic Intelligence</p>
+              </div>
+              <div class="ai-tier-price">
+                ₹499 <span>/ month ($9)</span>
+              </div>
+            </div>
+
+            <ul class="ai-tier-features">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Unlimited multi-turn consultations with Claude AI Pandit
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Full 25-page PDF Kundli synthesis with personalized remedies
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Dual Palm comparison (Active Karma vs Innate Potential)
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Instant Auspicious Muhurat alert notifications for major events
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Family chart compatibility & Dasa Koota marriage matching
+              </li>
+            </ul>
+
+            <div style="margin-top: auto; padding-top: 1rem;">
+              <a href="pricing.html" class="ai-btn ai-btn-secondary" style="width: 100%;">
+                View Full Pricing Tiers & Unit Economics →
+              </a>
+            </div>
+          </div>
+
+          <!-- Early Access Waitlist Form Box -->
+          <div class="ai-waitlist-box">
+            <div>
+              <span class="ai-waitlist-badge">🔥 Claude for Startups Early Access</span>
+              <h3>Claim Your Founder Pass</h3>
+              <p>
+                Be among the first 1,000 seekers to experience our enhanced Claude 3.5 Sonnet RAG engine with 50% lifetime discount on launch.
+              </p>
+
+              <form id="waitlistForm" class="ai-waitlist-form" onsubmit="handleWaitlistSubmit(event)">
+                <div class="ai-input-wrap">
+                  <label for="seekerName">Full Name</label>
+                  <input type="text" id="seekerName" class="ai-input" placeholder="e.g. Kedari Abhishek" required />
+                </div>
+
+                <div class="ai-input-wrap">
+                  <label for="seekerEmail">Email Address</label>
+                  <input type="email" id="seekerEmail" class="ai-input" placeholder="seeker@domain.com" required />
+                </div>
+
+                <div class="ai-input-wrap">
+                  <label for="interestSelect">Primary Area of Interest</label>
+                  <select id="interestSelect" class="ai-input" style="background:#0D0E1A;">
+                    <option value="AI Pandit">Conversational AI Pandit Consultations</option>
+                    <option value="Palm Reading">AI Palm Reading & Biometrics</option>
+                    <option value="Dosha Analysis">Dosha Analysis & Astrological Remedies</option>
+                    <option value="Vedic Research">Scriptural Research (Mahabharata / Puranas)</option>
+                    <option value="Claude for Startups Investor">Anthropic / Claude for Startups Reviewer</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="ai-btn ai-btn-primary" style="margin-top: 8px;">
+                  Secure Early Access Invitation →
+                </button>
+              </form>
+
+              <!-- Success Card -->
+              <div id="waitlistSuccess" class="ai-waitlist-success">
+                <div style="font-size: 2rem; margin-bottom: 6px;">🎉</div>
+                <h4 style="color:#27C93F; margin:0 0 6px;">You're on the Priority List!</h4>
+                <p style="color:var(--ai-text-secondary); font-size:0.86rem; margin:0 0 10px;">
+                  Welcome to Divya Mangalam. Your Founder Pass invite code is:
+                </p>
+                <div id="inviteCodeDisplay" style="font-family:monospace; background:rgba(255,255,255,0.06); padding:6px 12px; border-radius:6px; display:inline-block; font-weight:700; color:var(--ai-gold);">
+                  #VEDIC-AI-7821
+                </div>
+              </div>
+
+              <div class="ai-waitlist-perks">
+                <span>🔒 Strict privacy</span>
+                <span>✨ Zero spam guarantee</span>
+                <span>🚀 Priority Claude inference</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       7. MODERN TECH STARTUP FOOTER
+       ========================================================================== -->
+  <footer class="ai-footer" role="contentinfo">
+    <div class="ai-container">
+      
+      <div class="ai-footer-grid">
+        
+        <!-- Brand Col -->
+        <div>
+          <a href="index.html" class="ai-brand" style="margin-bottom: 12px;">
+            <div class="ai-brand-symbol">🕉️</div>
+            <div class="ai-brand-text">
+              <span class="ai-brand-name">Divya Mangalam</span>
+              <span class="ai-brand-pill"><span class="pulse-dot"></span> JyotiAI</span>
+            </div>
+          </a>
+
+          <p class="ai-footer-brand-p">
+            Divya Mangalam is an AI-native spiritual platform making authentic Vedic astrology, Panchang, Muhurat, and personal guidance accessible through Claude.
+          </p>
+
+          <div class="ai-founder-badge">
+            <span>Architect:</span>
+            <strong>Kedarisai Abhishek</strong>
+          </div>
+        </div>
+
+        <!-- Product Col -->
+        <div class="ai-footer-col">
+          <h5>AI Intelligence</h5>
+          <ul class="ai-footer-links">
+            <li><a href="ai-archana.html">AI Pandit Companion</a></li>
+            <li><a href="palm-reading.html">Hasta Samudrika Scanner</a></li>
+            <li><a href="dosha-check.html">Algorithmic Dosha Engine</a></li>
+            <li><a href="panchang-calendar.html">Lahiri Vedic Panchang</a></li>
+            <li><a href="muhurat.html">Shubh Muhurat Calculator</a></li>
+            <li><a href="jyotishyam.html">Sage Lagadha Astronomy</a></li>
+          </ul>
+        </div>
+
+        <!-- Architecture & Claude Col -->
+        <div class="ai-footer-col">
+          <h5>Anthropic Platform</h5>
+          <ul class="ai-footer-links">
+            <li><a href="built-with-claude.html">Built with Claude</a></li>
+            <li><a href="built-with-claude.html#architecture">RAG Architecture</a></li>
+            <li><a href="built-with-claude.html#ethics">Ethical Guardrails</a></li>
+            <li><a href="pricing.html#economics">Token Costing Model</a></li>
+            <li><a href="pricing.html">Pricing Plans</a></li>
+            <li><a href="#waitlist">Founder Pass Waitlist</a></li>
+          </ul>
+        </div>
+
+        <!-- Scriptures Col -->
+        <div class="ai-footer-col">
+          <h5>Sacred Corpus</h5>
+          <ul class="ai-footer-links">
+            <li><a href="mahabharata.html">Complete Mahabharata</a></li>
+            <li><a href="puran.html">18 Maha Puranas</a></li>
+            <li><a href="articles.html">Vedic Articles Hub</a></li>
+            <li><a href="chalisa.html">Hanuman Chalisa</a></li>
+            <li><a href="shlokas.html">Sacred Shlokas & Mala</a></li>
+            <li><a href="healing.html">432 Hz Solfeggio Tones</a></li>
+          </ul>
+        </div>
+
+        <!-- Governance Col -->
+        <div class="ai-footer-col">
+          <h5>Governance & Trust</h5>
+          <ul class="ai-footer-links">
+            <li><a href="about.html">Mission & Founder</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy (DART & GDPR)</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="ai-footer-bottom">
+        <div>
+          © 2026 Divya Mangalam (JyotiAI). Founded by Kedarisai Abhishek. All rights reserved.
+        </div>
+
+        <div class="ai-anthropic-ack">
+          <span>⚡ Designed for Claude for Startups • Powered by Anthropic Claude 3.5 Sonnet</span>
+        </div>
+
+        <div>
+          ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥
+        </div>
+      </div>
+
     </div>
-    <div class="feature-tiles">
+  </footer>
 
-      <a class="tile-card tile-palm" href="palm-reading.html">
-        <span class="tile-icon" aria-hidden="true">🖐️</span>
-        <span class="tile-badge">NEW</span>
-        <h3>Palm Reading</h3>
-        <p>Vedic Hasta Samudrika Shastra — scan your palm and discover your destiny, life path, and Vedic remedies.</p>
-        <span class="tile-cta">Read your palm <span aria-hidden="true">→</span></span>
-      </a>
+  <!-- Scripts -->
+  <script src="main.js"></script>
+  <script src="astronomy.browser.min.js"></script>
+  <script src="panchang.js"></script>
+  
+  <script>
+  // Waitlist submission handling with local persistence
+  function handleWaitlistSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('seekerName').value.trim();
+    const email = document.getElementById('seekerEmail').value.trim();
+    const interest = document.getElementById('interestSelect').value;
+    
+    if(!email) return;
 
-      <a class="tile-card tile-panchang" href="panchang-calendar.html">
-        <span class="tile-icon" aria-hidden="true">📅</span>
-        <span class="tile-badge" style="background:linear-gradient(135deg,#1565C0,#0D47A1);">POPULAR</span>
-        <h3>Panchang Calendar</h3>
-        <p>Today's Tithi, Nakshatra, Yoga, Karana, Muhurta — personalized by your birth Rashi and Nakshatra.</p>
-        <span class="tile-cta">View Panchang <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-muhurat" href="muhurat.html">
-        <span class="tile-icon" aria-hidden="true">⏳</span>
-        <span class="tile-badge">NEW</span>
-        <h3>Shubh Muhurat</h3>
-        <p>Auspicious timings, Dasa Koota Marriage Compatibility &amp; Mantra Siddha-Chakra based on Kalaprakasika &amp; Muhurta Chintamani.</p>
-        <span class="tile-cta">Find Muhurat <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-jyotish" href="jyotishyam.html">
-        <span class="tile-icon" aria-hidden="true">🔭</span>
-        <span class="tile-badge">NEW</span>
-        <h3>Vedanga Jyotisha</h3>
-        <p>Ancient 5-Year Yuga astronomy of Sage Lagadha (1400 BCE) — Parva-Bhamsa, Aharmana water-clock &amp; shastra.</p>
-        <span class="tile-cta">Explore Jyotisha <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-mahabharata" href="mahabharata.html">
-        <span class="tile-icon" aria-hidden="true">🏹</span>
-        <span class="tile-badge" style="background:linear-gradient(135deg,#8B0000,#5c0000);">2046 SECTIONS</span>
-        <h3>Srimad Mahabharata</h3>
-        <p>18 Maha Parvas &amp; full Adi Parva (19 Upa-Parvas) based on Pratap Chandra Roy's prose translation with Telugu summaries.</p>
-        <span class="tile-cta">Read Mahabharata <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-puran" href="puran.html">
-        <span class="tile-icon" aria-hidden="true">📜</span>
-        <span class="tile-badge">NEW</span>
-        <h3>18 Maha Puranas</h3>
-        <p>Complete sacred scriptures library in English, Telugu (తెలుగు), and Sanskrit.</p>
-        <span class="tile-cta">Explore Puranas <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-darshan" href="gods.html">
-        <span class="tile-icon" aria-hidden="true">🕉️</span>
-        <h3>Virtual Darshan</h3>
-        <p>Choose from 11 deities. View divine classical artwork and find your most auspicious day for worship.</p>
-        <span class="tile-cta">Choose deity <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-archana" href="live-archana.html">
-        <span class="tile-icon" aria-hidden="true">🪔</span>
-        <h3>Live Archana</h3>
-        <p>Personalized digital ritual with sacred mantras, temple bell chimes, and step-by-step offerings.</p>
-        <span class="tile-cta">Begin archana <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-chalisa" href="chalisa.html">
-        <span class="tile-icon" aria-hidden="true">📿</span>
-        <span class="tile-badge">FREE</span>
-        <h3>Hanuman Chalisa</h3>
-        <p>Complete 44 verses with Hindi, transliteration &amp; English meaning. Auto-scroll, 432 Hz healing tones &amp; bell.</p>
-        <span class="tile-cta">Recite Chalisa <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-shlokas" href="shlokas.html">
-        <span class="tile-icon" aria-hidden="true">📖</span>
-        <h3>Sacred Shlokas</h3>
-        <p>Gayatri, Maha Mrityunjaya, and 10 more Vedic prayers with an interactive 108-bead Japa Mala counter.</p>
-        <span class="tile-cta">Read shlokas <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-healing" href="healing.html">
-        <span class="tile-icon" aria-hidden="true">🎵</span>
-        <span class="tile-badge" style="background:linear-gradient(135deg,#4527A0,#311B92);">POPULAR</span>
-        <h3>432 Hz Sound Healing</h3>
-        <p>Pure Solfeggio tone generator, 7 chakra selector, meditation timer, and live oscilloscope visualizer.</p>
-        <span class="tile-cta">Explore frequencies <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-ai" href="ai-archana.html">
-        <span class="tile-icon" aria-hidden="true">🤖</span>
-        <span class="tile-badge" style="background:linear-gradient(135deg,#0D47A1,#1565C0);">AI POWERED</span>
-        <h3>AI Pandit</h3>
-        <p>Ask a Vedic AI assistant powered by Google Gemini about mantras, rituals, Panchang, and spiritual guidance.</p>
-        <span class="tile-cta">Chat with AI <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="tile-card tile-dosha" href="dosha-check.html">
-        <span class="tile-icon" aria-hidden="true">🔮</span>
-        <span class="tile-badge" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">FREE</span>
-        <h3>Dosha Check</h3>
-        <p>Free Mangal Dosha, Kaal Sarp Dosha, Sade Sati &amp; Pitra Dosha analysis with Vedic remedies.</p>
-        <span class="tile-cta">Check doshas <span aria-hidden="true">→</span></span>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<section class="journey-section" aria-labelledby="journey-title">
-  <div style="max-width:1100px; margin:0 auto; text-align:center;">
-    <p class="section-label">KEEP EXPLORING</p>
-    <h2 class="section-title" id="journey-title" style="font-size:1.8rem;">Continue Your Spiritual Journey</h2>
-    <div class="journey-grid">
-      <a class="journey-card" href="dosha-check.html"><span class="icon">🔮</span><h4>Dosha Check</h4><p>Free Mangal, Kaal Sarp & more</p></a>
-      <a class="journey-card" href="palm-reading.html"><span class="icon">🖐️</span><h4>Palm Reading</h4><p>AI-powered Vedic palmistry</p></a>
-      <a class="journey-card" href="muhurat.html"><span class="icon">⏳</span><h4>Shubh Muhurat</h4><p>Find auspicious timings</p></a>
-      <a class="journey-card" href="mahabharata.html"><span class="icon">🏹</span><h4>Mahabharata</h4><p>Read the complete epic</p></a>
-    </div>
-  </div>
-</section>
-
-<div class="peace-blessing"><span aria-hidden="true">✧</span><p lang="sa">सर्वे भवन्तु सुखिनः</p><span>May all beings be happy. May all hearts find peace.</span></div>
-
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="brand-om">🕉️</div>
-      <h3>Divya Mangalam</h3>
-      <p>A sacred digital sanctuary dedicated to preserving classical Vedic astronomy, authentic scriptural texts, and providing open-access Hindu calendar tools for seekers worldwide.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Astrology &amp; Tools</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jyotishyam.html">Vedanga Jyotisha</a></li>
-        <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
-        <li><a href="muhurat.html">Shubh Muhurat</a></li>
-        <li><a href="dosha-check.html">Dosha Checker</a></li>
-        <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
-        <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Articles &amp; Scriptures</h4>
-      <ul>
-        <li><a href="articles.html">Vedic Articles Hub</a></li>
-        <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
-        <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
-        <li><a href="article-kaal-sarp-dosha.html">Kaal Sarp Yoga</a></li>
-        <li><a href="mahabharata.html">Complete Mahabharata</a></li>
-        <li><a href="puran.html">18 Maha Puranas</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Trust &amp; Governance</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion for spiritual seekers worldwide.</p>
-    <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
-  </div>
-</footer>
-
-<script src="main.js"></script>
-<script src="astronomy.browser.min.js"></script>
-<script src="panchang.js"></script>
-<script>
-// Populate Panchang mini strip on homepage
-(function(){
-  if(typeof PANCHANG === 'undefined') return;
-  var p = PANCHANG.today ? PANCHANG.today() : null;
-  if(!p) {
+    // Generate random invite pass ID
+    const randomPass = '#VEDIC-AI-' + Math.floor(1000 + Math.random() * 9000);
+    
     try {
-      var now = new Date();
-      var jd = PANCHANG.julianDay(now);
-      var sl = PANCHANG.sunLongitude(jd);
-      var ml = PANCHANG.moonLongitude(jd);
-      p = {
-        tithi: PANCHANG.tithi(sl, ml),
-        nakshatra: PANCHANG.nakshatra(ml),
-        yoga: PANCHANG.yoga(sl, ml),
-        vara: PANCHANG.vara(now),
-        rahukaal: PANCHANG.rahukaal(now.getDay())
-      };
-    } catch(e) { return; }
+      const waitlist = JSON.parse(localStorage.getItem('dm_waitlist') || '[]');
+      waitlist.push({ name, email, interest, pass: randomPass, date: new Date().toISOString() });
+      localStorage.setItem('dm_waitlist', JSON.stringify(waitlist));
+    } catch(err) {}
+
+    document.getElementById('waitlistForm').style.display = 'none';
+    const successDiv = document.getElementById('waitlistSuccess');
+    document.getElementById('inviteCodeDisplay').textContent = randomPass;
+    successDiv.classList.add('show');
   }
-  var el = document.getElementById('panchangMini');
-  if(!el || !p) return;
-  var parts = [];
-  if(p.vara) parts.push('<span class="pm-item">📅 <strong>' + (p.vara.day || '') + '</strong></span>');
-  if(p.tithi) parts.push('<span class="pm-divider"></span><span class="pm-item">🌙 ' + (p.tithi.name || '') + ' (' + (p.tithi.paksha || '') + ')</span>');
-  if(p.nakshatra) parts.push('<span class="pm-divider"></span><span class="pm-item">⭐ ' + (p.nakshatra.name || '') + '</span>');
-  if(p.yoga) parts.push('<span class="pm-divider"></span><span class="pm-item">🔮 Yoga: ' + (p.yoga.name || '') + '</span>');
-  if(p.rahukaal) parts.push('<span class="pm-divider"></span><span class="pm-item">⚠️ Rahu: ' + (p.rahukaal.start || '') + '–' + (p.rahukaal.end || '') + '</span>');
-  parts.push('<span class="pm-divider"></span><a href="panchang-calendar.html" style="color:var(--saffron);font-weight:600;text-decoration:none;">View Full Panchang →</a>');
-  el.innerHTML = parts.join('');
-})();
-</script>
+
+  // Populate Panchang mini strip on homepage
+  (function(){
+    if(typeof PANCHANG === 'undefined') return;
+    var p = PANCHANG.today ? PANCHANG.today() : null;
+    if(!p) {
+      try {
+        var now = new Date();
+        var jd = PANCHANG.julianDay(now);
+        var sl = PANCHANG.sunLongitude(jd);
+        var ml = PANCHANG.moonLongitude(jd);
+        p = {
+          tithi: PANCHANG.tithi(sl, ml),
+          nakshatra: PANCHANG.nakshatra(ml),
+          yoga: PANCHANG.yoga(sl, ml),
+          vara: PANCHANG.vara(now),
+          rahukaal: PANCHANG.rahukaal(now.getDay())
+        };
+      } catch(e) { return; }
+    }
+    var el = document.getElementById('panchangMini');
+    if(!el || !p) return;
+    var parts = [];
+    if(p.vara) parts.push('<span class="pm-item">📅 <strong>' + (p.vara.day || '') + '</strong></span>');
+    if(p.tithi) parts.push('<span class="pm-divider" style="display:inline-block;width:1px;height:16px;background:rgba(229,184,105,0.25);margin:0 10px;vertical-align:middle;"></span><span class="pm-item">🌙 ' + (p.tithi.name || '') + ' (' + (p.tithi.paksha || '') + ')</span>');
+    if(p.nakshatra) parts.push('<span class="pm-divider" style="display:inline-block;width:1px;height:16px;background:rgba(229,184,105,0.25);margin:0 10px;vertical-align:middle;"></span><span class="pm-item">⭐ ' + (p.nakshatra.name || '') + '</span>');
+    if(p.yoga) parts.push('<span class="pm-divider" style="display:inline-block;width:1px;height:16px;background:rgba(229,184,105,0.25);margin:0 10px;vertical-align:middle;"></span><span class="pm-item">🔮 Yoga: ' + (p.yoga.name || '') + '</span>');
+    if(p.rahukaal) parts.push('<span class="pm-divider" style="display:inline-block;width:1px;height:16px;background:rgba(229,184,105,0.25);margin:0 10px;vertical-align:middle;"></span><span class="pm-item" style="color:#FFA166;">⚠️ Rahu: ' + (p.rahukaal.start || '') + '–' + (p.rahukaal.end || '') + '</span>');
+    parts.push('<span class="pm-divider" style="display:inline-block;width:1px;height:16px;background:rgba(229,184,105,0.25);margin:0 10px;vertical-align:middle;"></span><a href="panchang-calendar.html" style="color:var(--ai-gold);font-weight:600;text-decoration:none;">View Full Calendar →</a>');
+    el.innerHTML = parts.join('');
+  })();
+  </script>
+
 </body>
 </html>

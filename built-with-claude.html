@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Built with Claude | Technical Architecture & Alignment • Divya Mangalam</title>
+  <meta name="description" content="Detailed technical whitepaper explaining how Divya Mangalam leverages Anthropic Claude 3.5 Sonnet for authentic Vedic astrology, shastric reasoning, and ethical spiritual guidance." />
+  <meta name="keywords" content="Built with Claude, Claude for Startups, Anthropic Claude 3.5 Sonnet, AI Pandit architecture, Vedic RAG, Prompt Caching, constitutional AI" />
+  <meta name="author" content="Kedarisai Abhishek" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Built with Claude — Technical Architecture of JyotiAI" />
+  <meta property="og:description" content="How Claude 3.5 Sonnet powers authentic Vedic reasoning, Shastric context retrieval, and ethical spiritual guidance." />
+  <meta property="og:url" content="https://divyamangalam.com/built-with-claude.html" />
+  <meta property="og:type" content="article" />
+
+  <link rel="canonical" href="https://divyamangalam.com/built-with-claude.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ai-platform.css" />
+  
+  <style>
+    .claude-hero-wrap {
+      padding: 5rem 0 3.5rem;
+      text-align: center;
+      background: radial-gradient(ellipse 60% 40% at 50% 10%, rgba(124, 92, 252, 0.12), transparent 70%);
+    }
+    .claude-paper-section {
+      padding: 3rem 0;
+    }
+    .claude-code-block {
+      background: #0B0D18;
+      border: 1px solid rgba(124, 92, 252, 0.25);
+      border-radius: var(--ai-radius-md);
+      padding: 24px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.86rem;
+      color: #E2E4ED;
+      line-height: 1.65;
+      overflow-x: auto;
+      margin: 1.5rem 0 2rem;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .claude-code-block .keyword { color: #FF7A29; font-weight: 600; }
+    .claude-code-block .tag { color: var(--ai-claude-purple); }
+    .claude-code-block .string { color: #27C93F; }
+    .claude-code-block .comment { color: #6B728E; font-style: italic; }
+    
+    .claude-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 2rem 0;
+    }
+    @media (max-width: 800px) {
+      .claude-card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="ai-native-body">
+
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <header class="ai-nav" role="banner">
+    <div class="ai-container">
+      <div class="ai-nav-inner">
+        <a href="index.html" class="ai-brand" aria-label="Divya Mangalam Home">
+          <div class="ai-brand-symbol">🕉️</div>
+          <div class="ai-brand-text">
+            <span class="ai-brand-name">Divya Mangalam</span>
+            <span class="ai-brand-pill"><span class="pulse-dot"></span> JyotiAI</span>
+          </div>
+        </a>
+
+        <nav role="navigation" aria-label="Main Navigation">
+          <ul class="ai-nav-menu" id="aiNavMenu">
+            <li><a href="index.html" class="ai-nav-link">Home</a></li>
+            <li><a href="built-with-claude.html" class="ai-nav-link active">Built with Claude</a></li>
+            <li><a href="ai-archana.html" class="ai-nav-link">AI Pandit</a></li>
+            <li><a href="pricing.html" class="ai-nav-link">Pricing</a></li>
+            <li><a href="about.html" class="ai-nav-link">Mission & Founder</a></li>
+          </ul>
+        </nav>
+
+        <div class="ai-nav-actions">
+          <a href="index.html#waitlist" class="ai-btn ai-btn-primary ai-btn-sm">Claim Founder Pass →</a>
+          <button type="button" class="ai-mobile-toggle" onclick="document.getElementById('aiNavMenu').classList.toggle('open')" aria-label="Toggle Navigation">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Hero -->
+    <div class="claude-hero-wrap">
+      <div class="ai-container">
+        <div class="ai-claude-badge-banner">
+          <span>⚡</span> Claude for Startups Technical Application Document
+        </div>
+        
+        <h1 class="ai-hero-headline" style="font-size: clamp(2.4rem, 4.5vw, 3.8rem);">
+          How Divya Mangalam Builds on <span class="gradient-accent" style="background: linear-gradient(135deg, #FFF, var(--ai-claude-purple), var(--ai-gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Anthropic Claude</span>
+        </h1>
+
+        <p class="ai-hero-subheadline" style="max-width: 820px;">
+          An inside look at our AI-native spiritual architecture: combining mathematical planetary ephemeris, 200k-token Sanskrit context retrieval, and Claude 3.5 Sonnet’s nuanced reasoning to redefine ethical Vedic guidance.
+        </p>
+
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="#architecture" class="ai-btn ai-btn-claude ai-btn-sm">View System Architecture ↓</a>
+          <a href="#prompting" class="ai-btn ai-btn-secondary ai-btn-sm">Prompt Engineering Pipeline ↓</a>
+          <a href="#economics" class="ai-btn ai-btn-secondary ai-btn-sm">Token Economics & Caching ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-container-narrow claude-paper-section">
+      
+      <!-- Section 1: Executive Thesis -->
+      <section>
+        <div class="ai-section-eyebrow">01. The Problem & Thesis</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          The Need for Claude in Sacred Vedic Systems
+        </h2>
+        
+        <p style="color:var(--ai-text-secondary); font-size:1.05rem; line-height:1.8;">
+          Across South Asia and global diaspora communities, over 1 billion people consult Vedic astrology (<em>Jyotisha Shastra</em>) and Panchang calendars for major life transitions—careers, marriages, relocations, and spiritual timing. However, the existing digital landscape suffers from two major failures:
+        </p>
+
+        <div class="claude-card-grid">
+          <div style="background:rgba(18,20,36,0.6); border:1px solid rgba(255,122,41,0.25); border-radius:14px; padding:22px;">
+            <h4 style="color:var(--ai-saffron-light); margin:0 0 8px; font-size:1.1rem;">1. Predatory Determinism</h4>
+            <p style="color:var(--ai-text-secondary); font-size:0.9rem; line-height:1.6; margin:0;">
+              Traditional commercial apps exploit fear—promoting expensive, unverified gems or rituals by warning users of "deadly doshas" and inescapable misery.
+            </p>
+          </div>
+
+          <div style="background:rgba(18,20,36,0.6); border:1px solid rgba(157,123,255,0.25); border-radius:14px; padding:22px;">
+            <h4 style="color:var(--ai-claude-purple); margin:0 0 8px; font-size:1.1rem;">2. Shallow AI Hallucinations</h4>
+            <p style="color:var(--ai-text-secondary); font-size:0.9rem; line-height:1.6; margin:0;">
+              Standard LLMs lack astronomical ephemeris ground truth. They confuse tropical vs sidereal zodiacs and produce generic horoscope platitudes without canonical Sanskrit citations.
+            </p>
+          </div>
+        </div>
+
+        <p style="color:var(--ai-text-secondary); font-size:1.05rem; line-height:1.8;">
+          <strong>Divya Mangalam solves this.</strong> By pairing a client-side astronomical calculation engine (Lahiri Ayanamsa / Surya Siddhanta) with <strong>Claude 3.5 Sonnet</strong>, we ensure every answer is anchored in exact mathematics and canonical treatises, while Claude provides compassionate, empowering philosophical synthesis.
+        </p>
+      </section>
+
+      <hr style="border:0; height:1px; background:var(--ai-border); margin:3.5rem 0;" />
+
+      <!-- Section 2: Architecture & Diagram -->
+      <section id="architecture">
+        <div class="ai-section-eyebrow">02. Technical Architecture</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          Four-Layer Hybrid Architecture
+        </h2>
+        
+        <p style="color:var(--ai-text-secondary); font-size:1.02rem; line-height:1.75;">
+          Our platform does not ask the LLM to guess astronomical math. We separate arithmetic computation from symbolic reasoning:
+        </p>
+
+        <div style="background:rgba(15,17,30,0.95); border:1px solid var(--ai-border); border-radius:18px; padding:28px; margin:2rem 0;">
+          <h4 style="color:var(--ai-gold); font-size:1.1rem; margin:0 0 16px;">System Data Flow</h4>
+          
+          <ol style="color:var(--ai-text-secondary); line-height:1.8; padding-left:20px; font-size:0.95rem;">
+            <li><strong style="color:#fff;">Layer 1 — Client-Side Ephemeris (Browser):</strong> High-precision Keplerian orbital equations compute exact planetary longitudes, Lagna (Ascendant), Bhavas, and Vargas with zero server tracking.</li>
+            <li><strong style="color:#fff;">Layer 2 — Shastric Context Vector Engine:</strong> Canonical Sanskrit verses from <em>Brihat Parashara Hora Shastra</em>, <em>Kalaprakasika</em>, and <em>Muhurta Chintamani</em> are fetched corresponding to the active planetary placements.</li>
+            <li><strong style="color:#fff;">Layer 3 — Anthropic Claude 3.5 Sonnet Reasoning Layer:</strong> Claude receives the verified mathematical chart in structured XML along with Shastric excerpts, executing multi-turn synthesis.</li>
+            <li><strong style="color:#fff;">Layer 4 — Ethical Alignment Filter:</strong> Outputs are validated to confirm constructive framing, actionable lifestyle practices (meditation, mantra, seva), and strict non-alarmism.</li>
+          </ol>
+        </div>
+      </section>
+
+      <hr style="border:0; height:1px; background:var(--ai-border); margin:3.5rem 0;" />
+
+      <!-- Section 3: Prompt Engineering -->
+      <section id="prompting">
+        <div class="ai-section-eyebrow">03. Prompt Engineering Pipeline</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          How Claude Synthesizes Sanskrit & Mathematics
+        </h2>
+
+        <p style="color:var(--ai-text-secondary); font-size:1.02rem; line-height:1.75;">
+          Below is a redacted representation of our production system prompt architecture leveraging Claude’s XML parsing superiority:
+        </p>
+
+        <div class="claude-code-block">
+<span class="comment">&lt;!-- Anthropic Claude 3.5 Sonnet System Prompt Architecture --&gt;</span>
+<span class="tag">&lt;system_prompt&gt;</span>
+You are the Divya Mangalam AI Pandit, an erudite, compassionate Vedic scholar grounded in classical Sanatana Dharma shastras.
+
+<span class="keyword">CORE ETHICAL MANDATES (Constitutional Principles):</span>
+1. <span class="string">Purushartha Empowerment:</span> You must NEVER claim destiny is rigid or fatalistic. Always affirm that free will (Kriyamana Karma) and spiritual discipline transcend planetary inclinations.
+2. <span class="string">Zero Fear-Mongering:</span> Do not describe doshas (Mangal, Kaal Sarp, Sade Sati) as curses. Reframe them as developmental catalysts for virtue, patience, and maturity.
+3. <span class="string">Shastric Grounding:</span> Quote authentic Sanskrit verses from Brihat Parashara Hora Shastra or relevant Upanishads when providing remedies.
+
+<span class="keyword">INPUT STRUCTURE:</span>
+<span class="tag">&lt;natal_coordinates&gt;</span>
+  Lagna: Scorpio (14°22' Anuradha)
+  Moon: Pisces (22°18' Revati)
+  Mars: Aries (08°12' Ashwini) — Own Sign (Swakshetra)
+  Saturn: Pisces (Transit 12th house — Sade Sati Setting Phase)
+<span class="tag">&lt;/natal_coordinates&gt;</span>
+
+<span class="tag">&lt;canonical_rules&gt;</span>
+  Parashara Chapter 28: Cancellation of Kuja Dosha if Mars is in Aries.
+  Saturn transit in 12th: Saturn Beej Mantra, Gayatri Japa, and Saturday charity.
+<span class="tag">&lt;/canonical_rules&gt;</span>
+
+<span class="keyword">RESPONSE FORMAT:</span>
+Synthesize the reading into: (1) Philosophical Orientation, (2) Shastric Shloka & Context, (3) Practical Remedies (Japa, Seva, Meditative practices).
+<span class="tag">&lt;/system_prompt&gt;</span>
+        </div>
+      </section>
+
+      <hr style="border:0; height:1px; background:var(--ai-border); margin:3.5rem 0;" />
+
+      <!-- Section 4: Unit Economics & Prompt Caching -->
+      <section id="economics">
+        <div class="ai-section-eyebrow">04. Unit Economics & Prompt Caching</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          Leveraging Claude’s Prompt Caching for 90% Savings
+        </h2>
+
+        <p style="color:var(--ai-text-secondary); font-size:1.02rem; line-height:1.75;">
+          A key requirement for scaling spiritual technology is maintaining healthy SaaS unit economics. In classical Vedic astrology, our foundational ruleset (system prompt + Parashara indices) is ~45,000 tokens of reference material.
+        </p>
+
+        <div style="background:rgba(22,25,48,0.7); border:1px solid rgba(229,184,105,0.25); border-radius:16px; padding:24px; margin:1.5rem 0;">
+          <h4 style="color:var(--ai-gold); margin:0 0 12px; font-size:1.15rem;">Claude 3.5 Sonnet Prompt Caching Economics</h4>
+          
+          <ul style="color:var(--ai-text-secondary); line-height:1.8; padding-left:20px; font-size:0.92rem; margin:0;">
+            <li><strong>Base 45k Token System Context:</strong> Without caching, cost would be $0.135 per single user turn.</li>
+            <li><strong>With Claude Ephemeral Cache ($0.075/MTok read):</strong> Cost drops to <strong style="color:#27C93F;">$0.0033 per user query</strong>.</li>
+            <li><strong>Monthly Cost per Pro User (50 queries):</strong> ~$0.25 - $0.40 total API compute cost.</li>
+            <li><strong>Retail Subscription:</strong> ₹499/month ($9.00/month) → <strong style="color:var(--ai-gold);">Gross Margin > 94%</strong>.</li>
+          </ul>
+        </div>
+
+        <p style="color:var(--ai-text-secondary); font-size:1.02rem; line-height:1.75;">
+          This economic efficiency allows Divya Mangalam to offer a generous permanent Free tier for daily Panchang, scripture reading, and basic AI consultations while sustaining strong venture-scale SaaS margins on Pro subscriptions.
+        </p>
+      </section>
+
+      <hr style="border:0; height:1px; background:var(--ai-border); margin:3.5rem 0;" />
+
+      <!-- Section 5: Claude for Startups Application Goals -->
+      <section>
+        <div class="ai-section-eyebrow">05. Claude for Startups Program Milestones</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          Why Anthropic Support Accelerates Divya Mangalam
+        </h2>
+
+        <p style="color:var(--ai-text-secondary); font-size:1.02rem; line-height:1.75;">
+          Through the Claude for Startups credits and technical mentorship, our roadmap will achieve three immediate technical milestones:
+        </p>
+
+        <div class="claude-card-grid">
+          <div style="background:rgba(18,20,36,0.7); border:1px solid var(--ai-border); border-radius:14px; padding:22px;">
+            <div style="font-size:1.8rem; margin-bottom:8px;">📚</div>
+            <h4 style="color:#fff; margin:0 0 8px;">1. Full Shastric Vector Ingestion</h4>
+            <p style="color:var(--ai-text-secondary); font-size:0.88rem; line-height:1.6; margin:0;">
+              Vectorizing all 100,000 verses of the Mahabharata and 18 Maha Puranas into a high-speed embedding pipeline queried directly by Claude.
+            </p>
+          </div>
+
+          <div style="background:rgba(18,20,36,0.7); border:1px solid var(--ai-border); border-radius:14px; padding:22px;">
+            <div style="font-size:1.8rem; margin-bottom:8px;">🎙️</div>
+            <h4 style="color:#fff; margin:0 0 8px;">2. Multilingual Voice Pandit</h4>
+            <p style="color:var(--ai-text-secondary); font-size:0.88rem; line-height:1.6; margin:0;">
+              Deploying real-time speech-to-speech AI Pandit guidance in Hindi, Telugu, Sanskrit, and English using Claude’s high-fidelity linguistic depth.
+            </p>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:3rem;">
+          <a href="index.html#waitlist" class="ai-btn ai-btn-primary">
+            Join the Founder Pass Waitlist →
+          </a>
+          <a href="pricing.html" class="ai-btn ai-btn-secondary" style="margin-left:12px;">
+            View Subscription Pricing
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="ai-footer" role="contentinfo">
+    <div class="ai-container">
+      <div class="ai-footer-bottom">
+        <div>© 2026 Divya Mangalam (JyotiAI). Founded by Kedarisai Abhishek.</div>
+        <div class="ai-anthropic-ack"><span>⚡ Built with Anthropic Claude 3.5 Sonnet</span></div>
+        <div><a href="index.html" style="color:var(--ai-gold); text-decoration:none;">Return to Homepage →</a></div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

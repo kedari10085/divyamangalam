@@ -25,10 +25,10 @@ User-agent: ChatGPT-User
 Disallow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
 
 User-agent: CCBot
 Disallow: /

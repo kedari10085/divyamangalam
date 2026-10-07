@@ -4,220 +4,270 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us – Divya Mangalam</title>
-  <meta name="description" content="Discover Divya Mangalam – a dedicated Vedic knowledge portal, digital scripture library, and spiritual sanctuary preserving ancient Hindu wisdom for the world." />
-  <meta name="keywords" content="about divya mangalam, vedic portal, hindu scripture library, mahabharata online, 18 puranas, vedanga jyotisha, spiritual mission" />
-  <meta property="og:title" content="About Us – Divya Mangalam" />
-  <meta property="og:description" content="Learn about Divya Mangalam's mission to preserve and share classical Vedic scriptures, ancient epics, and traditional sciences." />
+  
+  <title>About & Founder | Divya Mangalam — Kedarisai Abhishek</title>
+  <meta name="description" content="Meet the founder Kedarisai Abhishek and discover Divya Mangalam's mission to make authentic Vedic astrology, Panchang, Muhurat, and personal guidance accessible through Claude." />
+  <meta name="keywords" content="Kedarisai Abhishek, Divya Mangalam founder, JyotiAI, AI Vedic platform, Claude for startups, Sanatana Dharma AI, spiritual tech startup" />
+  <meta name="author" content="Kedarisai Abhishek" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="About Divya Mangalam — Founder Kedarisai Abhishek" />
+  <meta property="og:description" content="Building an AI-native spiritual platform that makes authentic Vedic wisdom accessible through Claude's reasoning capabilities." />
   <meta property="og:url" content="https://divyamangalam.com/about.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_IN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About Us – Divya Mangalam" />
-  <meta name="twitter:description" content="Discover Divya Mangalam's mission to preserve and share classical Vedic scriptures and traditional sciences." />
+  <meta property="og:type" content="profile" />
+
   <link rel="canonical" href="https://divyamangalam.com/about.html" />
-  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕉️</text></svg>" />
+
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6486100564395126" crossorigin="anonymous"></script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ai-platform.css" />
+
+  <style>
+    .about-hero {
+      padding: 5.5rem 0 3.5rem;
+      text-align: center;
+      background: radial-gradient(ellipse 60% 40% at 50% 10%, rgba(229, 184, 105, 0.08), transparent 70%);
+    }
+    .founder-card {
+      background: var(--ai-bg-card);
+      border: 1px solid var(--ai-border);
+      border-radius: var(--ai-radius-xl);
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 36px;
+      align-items: center;
+      box-shadow: var(--ai-shadow-card);
+      margin: 3rem 0;
+    }
+    .founder-avatar-wrap {
+      width: 220px;
+      height: 220px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255, 122, 41, 0.2), rgba(124, 92, 252, 0.25));
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      margin: 0 auto;
+    }
+    @media (max-width: 820px) {
+      .founder-card { grid-template-columns: 1fr; text-align: center; padding: 28px; }
+      .founder-avatar-wrap { width: 160px; height: 160px; font-size: 3.5rem; }
+    }
+  </style>
 </head>
-<body>
+<body class="ai-native-body">
 
-<div id="page-loader"><div class="om">🕉️</div></div>
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <header class="ai-nav" role="banner">
+    <div class="ai-container">
+      <div class="ai-nav-inner">
+        <a href="index.html" class="ai-brand" aria-label="Divya Mangalam Home">
+          <div class="ai-brand-symbol">🕉️</div>
+          <div class="ai-brand-text">
+            <span class="ai-brand-name">Divya Mangalam</span>
+            <span class="ai-brand-pill"><span class="pulse-dot"></span> JyotiAI</span>
+          </div>
+        </a>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar" aria-label="Main navigation">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-om">🕉️</span>
-      <span class="brand-name">Divya Mangalam</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="jyotishyam.html">Jyotishyam</a></li>
-      <li><a href="palm-reading.html">Palm Reading</a></li>
-      <li><a href="panchang-calendar.html">Panchang</a></li>
-      <li><a href="muhurat.html">Muhurat</a></li>
-      <li><a href="dosha-check.html">Dosha Check</a></li>
-      <li><a href="mahabharata.html">Mahabharata</a></li>
-      <li><a href="puran.html">18 Puranas</a></li>
-      <li><a href="gods.html">Deities</a></li>
-      <li><a href="live-archana.html">Archana</a></li>
-      <li><a href="chalisa.html">Chalisa</a></li>
-      <li><a href="shlokas.html">Shlokas</a></li>
-      <li><a href="healing.html">432 Hz</a></li>
-      <li><a href="ai-archana.html">AI Pandit</a></li>
-    </ul>
-    <button type="button" class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+        <nav role="navigation" aria-label="Main Navigation">
+          <ul class="ai-nav-menu" id="aiNavMenu">
+            <li><a href="index.html" class="ai-nav-link">Home</a></li>
+            <li><a href="built-with-claude.html" class="ai-nav-link">Built with Claude</a></li>
+            <li><a href="ai-archana.html" class="ai-nav-link">AI Pandit</a></li>
+            <li><a href="pricing.html" class="ai-nav-link">Pricing</a></li>
+            <li><a href="about.html" class="ai-nav-link active">Mission & Founder</a></li>
+          </ul>
+        </nav>
 
-<!-- Page Hero -->
-<div class="page-hero">
-  <p class="section-label" style="color:var(--gold);">Our Mission & Heritage</p>
-  <h1>About Divya Mangalam</h1>
-  <p>A sacred digital sanctuary uniting classical Vedic scholarship, timeless epics, and modern browser astronomy.</p>
-</div>
+        <div class="ai-nav-actions">
+          <a href="index.html#waitlist" class="ai-btn ai-btn-primary ai-btn-sm">Claim Founder Pass →</a>
+          <button type="button" class="ai-mobile-toggle" onclick="document.getElementById('aiNavMenu').classList.toggle('open')" aria-label="Toggle Navigation">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<!-- Mission Section 1 -->
-<section style="background:var(--cream); padding:4.5rem 1.5rem;">
-  <div class="section-inner" style="max-width:1150px; margin:auto;">
-    <div class="about-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
-      <div>
-        <p class="section-label" style="color:var(--saffron); font-weight:700; letter-spacing:2px;">WHO WE ARE</p>
-        <h2 class="section-title" style="font-size:2.4rem; color:var(--deep-red); margin:0.5rem 0 1.5rem; line-height:1.25;">Preserving Sanatana Dharma for the Digital Era</h2>
-        <p style="color:var(--text-mid); font-size:1.05rem; line-height:1.85; margin-bottom:1.2rem;">
-          <strong>Divya Mangalam</strong> was established as an open-access Vedic knowledge initiative with a singular mission: to make the profound wisdom of Sanatana Dharma accessible, readable, and mathematically verifiable for seekers, scholars, and devotees across the globe.
-        </p>
-        <p style="color:var(--text-mid); font-size:1.02rem; line-height:1.85; margin-bottom:1.2rem;">
-          Too often, sacred Indian texts exist either behind paywalls, in fragmented scans, or buried in inaccessible archives. We have painstakingly curated, digitized, and structured complete primary sources—including the unabridged 2,046 sections of Pratap Chandra Roy's English prose translation of the <em>Srimad Mahabharata</em> across all 18 Parvas, the 18 Maha Puranas, and the astronomical treatise of Sage Lagadha's <em>Vedanga Jyotisha</em>.
-        </p>
-        <p style="color:var(--text-mid); font-size:1.02rem; line-height:1.85;">
-          Alongside sacred literature, Divya Mangalam develops high-fidelity, client-side astronomical calculators for Vedic Panchang, Shubh Muhurta, and classical Dosha analysis (Mangal, Kaal Sarp, Sade Sati, Pitra) running entirely in the browser with zero server data tracking.
+  <main id="main-content">
+
+    <!-- Hero -->
+    <div class="about-hero">
+      <div class="ai-container">
+        <div class="ai-pill-badge">
+          <span>✨</span> Mission & Heritage
+        </div>
+
+        <h1 class="ai-hero-headline" style="font-size: clamp(2.4rem, 4.5vw, 4rem);">
+          Reimagining Vedic Wisdom with <span class="gradient-accent">Frontier AI</span>
+        </h1>
+
+        <p class="ai-hero-subheadline" style="max-width: 820px;">
+          “Divya Mangalam is an AI-native spiritual platform that makes authentic Vedic astrology, Panchang, Muhurat, and personal guidance accessible through Claude. We are building personalized AI Pandit experiences, dosha analysis, and ritual tools powered by Claude’s reasoning capabilities.”
         </p>
       </div>
+    </div>
 
-      <div style="background:var(--white); border-radius:24px; padding:2.5rem; border:1px solid rgba(212,160,23,0.3); box-shadow:0 12px 40px var(--shadow);">
-        <h3 style="font-family:'Playfair Display',serif; color:var(--deep-red); font-size:1.4rem; margin-bottom:1.5rem; text-align:center;">Our Core Pillars</h3>
-        
-        <div style="display:flex; gap:1.2rem; margin-bottom:1.5rem; align-items:flex-start;">
-          <div style="font-size:2rem; background:rgba(255,111,0,0.1); width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">📖</div>
+    <div class="ai-container-narrow" style="padding-bottom: 5rem;">
+
+      <!-- Founder Spotlight Section -->
+      <section aria-labelledby="founder-title">
+        <div class="ai-section-eyebrow">The Vision & Leadership</div>
+        <h2 id="founder-title" style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1rem;">
+          Founder Profile: Kedarisai Abhishek
+        </h2>
+
+        <div class="founder-card">
+          <div class="founder-avatar-wrap">
+            <span>🧘</span>
+            <span style="font-size:0.75rem; font-weight:700; color:var(--ai-gold); margin-top:8px; letter-spacing:0.1em; text-transform:uppercase;">Architect</span>
+          </div>
+
           <div>
-            <h4 style="color:var(--deep-red); margin-bottom:0.3rem; font-size:1.05rem;">Unabridged Scripture Preservation</h4>
-            <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin:0;">Complete 12-volume Mahabharata, 18 Mahapuranas with chapter breakdowns, bilingual Telugu & English summaries, and Sanskrit stotras.</p>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+              <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:#fff; margin:0;">Kedarisai Abhishek</h3>
+              <span class="ai-nav-badge" style="background:rgba(255,122,41,0.15); color:var(--ai-saffron-light); border-color:rgba(255,122,41,0.3);">Founder & Lead Engineer</span>
+            </div>
+
+            <p style="color:var(--ai-text-secondary); font-size:0.95rem; line-height:1.7; margin-bottom:14px;">
+              Kedarisai Abhishek is a technologist and spiritual researcher dedicated to uniting classical Indian knowledge systems with state-of-the-art AI. Frustrated by commercial astrology portals that profit from anxiety and superstition, he envisioned a modern platform combining mathematical astronomical ephemeris with the deep reasoning and ethical alignment of <strong>Anthropic Claude</strong>.
+            </p>
+
+            <p style="color:var(--ai-text-secondary); font-size:0.95rem; line-height:1.7; margin-bottom:18px;">
+              Under his architecture, Divya Mangalam has digitized over 2,046 sections of the Mahabharata, indexed the 18 Maha Puranas, implemented client-side astronomical calculators for Panchang and Muhurat, and developed real-time computer vision for Hasta Samudrika palmistry—all while adhering to strict privacy and zero data-brokering standards.
+            </p>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <a href="https://github.com/kedari10085/divyamangalam" target="_blank" rel="noopener noreferrer" class="ai-btn ai-btn-secondary ai-btn-sm">
+                <span>GitHub Repository ↗</span>
+              </a>
+              <a href="built-with-claude.html" class="ai-btn ai-btn-claude ai-btn-sm">
+                <span>View Claude Architecture ↗</span>
+              </a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div style="display:flex; gap:1.2rem; margin-bottom:1.5rem; align-items:flex-start;">
-          <div style="font-size:2rem; background:rgba(212,160,23,0.12); width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">🔭</div>
-          <div>
-            <h4 style="color:var(--deep-red); margin-bottom:0.3rem; font-size:1.05rem;">Mathematical Vedic Astronomy</h4>
-            <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin:0;">Exact Panchanga limb calculation (Tithi, Nakshatra, Yoga, Karana, Vara) based on planetary ephemeris, Lahiri Ayanamsa, and Sage Lagadha's 5-year Yuga geometry.</p>
+      <!-- Why We Exist & Core Values -->
+      <section style="margin-top: 3.5rem;">
+        <div class="ai-section-eyebrow">Our Guiding Philosophy</div>
+        <h2 style="font-family:var(--font-serif); font-size:2.2rem; color:#fff; margin-bottom:1.5rem;">
+          Four Non-Negotiable Pillars
+        </h2>
+
+        <div class="ai-features-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 3rem;">
+          
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon-wrap">📜</div>
+            <h3 class="ai-feature-title" style="font-size:1.25rem;">Canonical Shastric Rigor</h3>
+            <p class="ai-feature-p">
+              We never fabricate remedies. Everything is anchored in classical treatises: <em>Brihat Parashara Hora Shastra</em>, <em>Surya Siddhanta</em>, and <em>Vedanga Jyotisha</em>.
+            </p>
           </div>
-        </div>
 
-        <div style="display:flex; gap:1.2rem; margin-bottom:1.5rem; align-items:flex-start;">
-          <div style="font-size:2rem; background:rgba(46,204,113,0.12); width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">🔒</div>
-          <div>
-            <h4 style="color:var(--deep-red); margin-bottom:0.3rem; font-size:1.05rem;">100% Client-Side Privacy</h4>
-            <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin:0;">Birth data, palm photos, and personal prayer details are processed strictly inside your device's browser memory—never uploaded to external servers.</p>
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon-wrap">⚡</div>
+            <h3 class="ai-feature-title" style="font-size:1.25rem;">Purushartha Over Fatalism</h3>
+            <p class="ai-feature-p">
+              Vedic thought declares that free will (Kriyamana Karma) is supreme. We use Claude to empower conscious human action, never to instill paralysis or dread.
+            </p>
           </div>
-        </div>
 
-        <div style="display:flex; gap:1.2rem; align-items:flex-start;">
-          <div style="font-size:2rem; background:rgba(147,31,51,0.1); width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">🪔</div>
-          <div>
-            <h4 style="color:var(--deep-red); margin-bottom:0.3rem; font-size:1.05rem;">Virtual Devotional Sanctuary</h4>
-            <p style="color:var(--text-mid); font-size:0.9rem; line-height:1.6; margin:0;">Interactive visual pooja, meditative 432 Hz frequency acoustics, and digital archana to support daily spiritual sadhana from anywhere in the world.</p>
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon-wrap">🔒</div>
+            <h3 class="ai-feature-title" style="font-size:1.25rem;">100% Client-Side Privacy</h3>
+            <p class="ai-feature-p">
+              Birth coordinates and biometric palm scans are calculated directly inside your browser memory. We reject third-party data tracking of sacred life moments.
+            </p>
           </div>
+
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon-wrap">📖</div>
+            <h3 class="ai-feature-title" style="font-size:1.25rem;">Permanent Open Access</h3>
+            <p class="ai-feature-p">
+              The sacred 2,046 sections of the Mahabharata, the 18 Maha Puranas, and daily Panchang calculations remain free forever for seekers and scholars globally.
+            </p>
+          </div>
+
         </div>
+      </section>
+
+      <!-- Contact & Team CTA -->
+      <section style="text-align:center; background:rgba(18,20,36,0.6); border:1px solid var(--ai-border); border-radius:18px; padding:36px;">
+        <h3 style="font-family:var(--font-serif); font-size:1.8rem; color:#fff; margin:0 0 10px;">Connect with the Founder</h3>
+        <p style="color:var(--ai-text-secondary); max-width:600px; margin:0 auto 20px; font-size:0.95rem;">
+          Whether you are an Anthropic reviewer, Sanskrit scholar, or venture partner, we invite you to explore our work or reach out directly.
+        </p>
+        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+          <a href="contact.html" class="ai-btn ai-btn-primary ai-btn-sm">Contact Editorial & Founder →</a>
+          <a href="index.html#waitlist" class="ai-btn ai-btn-secondary ai-btn-sm">Claim Early Access Pass</a>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Standardized Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-om">🕉️</div>
+        <h3>Divya Mangalam</h3>
+        <p>An AI-native spiritual platform dedicated to authentic Vedic astronomy, canonical scripture preservation, and Claude-powered personal guidance.</p>
+      </div>
+      <div class="footer-col">
+        <h4>AI &amp; Tools</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="built-with-claude.html">Built with Claude</a></li>
+          <li><a href="pricing.html">Pricing Plans</a></li>
+          <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
+          <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
+          <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
+          <li><a href="dosha-check.html">Dosha Checker</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Scriptures &amp; Articles</h4>
+        <ul>
+          <li><a href="articles.html">Vedic Articles Hub</a></li>
+          <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
+          <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
+          <li><a href="article-kaal-sarp-dosha.html">Kaal Sarp Yoga</a></li>
+          <li><a href="mahabharata.html">Complete Mahabharata</a></li>
+          <li><a href="puran.html">18 Maha Puranas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Trust &amp; Governance</h4>
+        <ul>
+          <li><a href="about.html">About &amp; Founder</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Scholarly & Classical Sources -->
-<section style="background:var(--light-bg); padding:4.5rem 1.5rem;">
-  <div class="section-inner" style="max-width:1100px; margin:auto; text-align:center;">
-    <p class="section-label" style="color:var(--saffron); font-weight:700; letter-spacing:2px;">AUTHENTICITY & SCHOLARSHIP</p>
-    <h2 class="section-title" style="color:var(--deep-red); font-size:2.2rem; margin:0.5rem 0 1.2rem;">Anchored in Revered Classical Treatises</h2>
-    <p style="color:var(--text-mid); font-size:1.05rem; max-width:760px; margin:0 auto 3rem; line-height:1.8;">
-      Our computational algorithms, astrological frameworks, and textual libraries are directly derived from authoritative classical Sanskrit literature:
-    </p>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.5rem; text-align:left;">
-      <div style="background:var(--white); padding:1.8rem; border-radius:16px; border:1px solid rgba(212,160,23,0.25); box-shadow:0 4px 20px var(--shadow);">
-        <h4 style="color:var(--deep-red); font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:0.6rem;">Vedanga Jyotisha</h4>
-        <p style="color:var(--saffron); font-size:0.8rem; font-weight:700; margin-bottom:0.6rem;">SAGE LAGADHA (~1200 BCE)</p>
-        <p style="color:var(--text-mid); font-size:0.88rem; line-height:1.65; margin:0;">The foundational astronomical limb of the Vedas establishing the 5-year Yuga, Ayana (solstitial) turning points, and solar-lunar synchrony.</p>
-      </div>
-
-      <div style="background:var(--white); padding:1.8rem; border-radius:16px; border:1px solid rgba(212,160,23,0.25); box-shadow:0 4px 20px var(--shadow);">
-        <h4 style="color:var(--deep-red); font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:0.6rem;">Brihat Parashara Hora</h4>
-        <p style="color:var(--saffron); font-size:0.8rem; font-weight:700; margin-bottom:0.6rem;">MAHARISHI PARASHARA</p>
-        <p style="color:var(--text-mid); font-size:0.88rem; line-height:1.65; margin:0;">The authoritative manual of Vedic natal astrology, detailing planetary dignities, Bhavas, Kuja (Mangal) Dosha rules, and classical Shanti remedies.</p>
-      </div>
-
-      <div style="background:var(--white); padding:1.8rem; border-radius:16px; border:1px solid rgba(212,160,23,0.25); box-shadow:0 4px 20px var(--shadow);">
-        <h4 style="color:var(--deep-red); font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:0.6rem;">Muhurta Chintamani</h4>
-        <p style="color:var(--saffron); font-size:0.8rem; font-weight:700; margin-bottom:0.6rem;">DAIVAJNA RAMACHANDRA</p>
-        <p style="color:var(--text-mid); font-size:0.88rem; line-height:1.65; margin:0;">The premier handbook on electional astrology, providing specific guidelines for marriage, housewarming, business inaugurations, and Dasa Koota.</p>
-      </div>
-
-      <div style="background:var(--white); padding:1.8rem; border-radius:16px; border:1px solid rgba(212,160,23,0.25); box-shadow:0 4px 20px var(--shadow);">
-        <h4 style="color:var(--deep-red); font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:0.6rem;">Hasta Samudrika Shastra</h4>
-        <p style="color:var(--saffron); font-size:0.8rem; font-weight:700; margin-bottom:0.6rem;">GARUDA & SKANDA PURANAS</p>
-        <p style="color:var(--text-mid); font-size:0.88rem; line-height:1.65; margin:0;">The ancient Vedic dermatoglyphic science interpreting hand contours, primary palm lines, and the seven planetary mounts as karmic maps.</p>
-      </div>
+    <div class="footer-bottom">
+      <p>© 2026 Divya Mangalam. Founded by Kedarisai Abhishek. Crafted for seekers worldwide.</p>
+      <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- Editorial Standards & Non-Profit Spirit -->
-<section style="background:var(--cream); padding:4.5rem 1.5rem;">
-  <div class="section-inner" style="max-width:860px; margin:auto; text-align:center;">
-    <p class="section-label" style="color:var(--saffron); font-weight:700; letter-spacing:2px;">TRANSPARENT GOVERNANCE</p>
-    <h2 class="section-title" style="color:var(--deep-red); font-size:2.2rem; margin:0.5rem 0 1.2rem;">Editorial Integrity & Community Commitment</h2>
-    <p style="color:var(--text-mid); font-size:1.05rem; line-height:1.9; margin-bottom:2rem;">
-      Divya Mangalam is maintained by a dedicated team of cultural enthusiasts, Sanskrit literature students, and web technologists. We do not sell commercial astrological amulets, endorse superstitious remedies, or gatekeep sacred prayers behind paywalls.
-    </p>
-    <div style="display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap;">
-      <a href="articles.html" class="btn btn-primary" style="font-size:0.95rem;">📚 Explore Vedic Articles</a>
-      <a href="contact.html" class="btn btn-outline" style="font-size:0.95rem;">✉️ Contact the Team</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<!-- ===== STANDARDIZED FOOTER ===== -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="brand-om">🕉️</div>
-      <h3>Divya Mangalam</h3>
-      <p>A sacred digital sanctuary dedicated to preserving classical Vedic astronomy, authentic scriptural texts, and providing open-access Hindu calendar tools for seekers worldwide.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Astrology &amp; Tools</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jyotishyam.html">Vedanga Jyotisha</a></li>
-        <li><a href="panchang-calendar.html">Panchang Calendar</a></li>
-        <li><a href="muhurat.html">Shubh Muhurat</a></li>
-        <li><a href="dosha-check.html">Dosha Checker</a></li>
-        <li><a href="palm-reading.html">Vedic Palm Reader</a></li>
-        <li><a href="ai-archana.html">AI Pandit Guidance</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Articles &amp; Scriptures</h4>
-      <ul>
-        <li><a href="articles.html">Vedic Articles Hub</a></li>
-        <li><a href="article-panchanga-shastra.html">Panchanga Shastra</a></li>
-        <li><a href="article-mangal-dosha-guide.html">Mangal Dosha Guide</a></li>
-        <li><a href="article-kaal-sarp-dosha.html">Kaal Sarp Yoga</a></li>
-        <li><a href="mahabharata.html">Complete Mahabharata</a></li>
-        <li><a href="puran.html">18 Maha Puranas</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Trust &amp; Governance</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="disclaimer.html">Astrological Disclaimer</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Divya Mangalam. Crafted with 🙏 devotion for spiritual seekers worldwide.</p>
-    <p><span class="om-footer">🕉️</span> ॐ असतो मा सद्गमय । तमसो मा ज्योतिर्गमय । मृत्योर्मा अमृतं गमय ॥</p>
-  </div>
-</footer>
-
-<script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
