@@ -1374,6 +1374,203 @@ body.ai-native-body {
   gap: 6px;
   color: var(--ai-claude-purple);
 }
+/* ==========================================================================
+   TERMINAL PRESETS & DEMO INTERACTIVITY
+   ========================================================================== */
+.ai-terminal-presets {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--ai-border-subtle);
+  scrollbar-width: none;
+}
+.ai-terminal-presets::-webkit-scrollbar {
+  display: none;
+}
+.ai-preset-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ai-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-sans);
+}
+.ai-preset-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(229, 184, 105, 0.35);
+  transform: translateY(-1px);
+}
+.ai-preset-chip.active {
+  background: linear-gradient(135deg, rgba(124, 92, 252, 0.35), rgba(255, 122, 41, 0.3));
+  border-color: var(--ai-gold);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(229, 184, 105, 0.3);
+}
+
+/* ==========================================================================
+   EXECUTIVE REAL-TIME PANCHANG MINI DASHBOARD
+   ========================================================================== */
+.panchang-mini-bar {
+  background: rgba(14, 16, 30, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(229, 184, 105, 0.25);
+  border-radius: 16px;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow-x: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(229, 184, 105, 0.08);
+}
+.pm-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.pm-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #EF4444;
+  box-shadow: 0 0 8px #EF4444;
+  animation: pulse-dot 1.8s infinite;
+}
+.pm-items-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  font-size: 0.84rem;
+  color: #F1F5F9;
+}
+.pm-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 5px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.pm-chip-alert {
+  background: rgba(255, 122, 41, 0.12);
+  border-color: rgba(255, 122, 41, 0.35);
+  color: #FFA166;
+  font-weight: 600;
+}
+.pm-cta {
+  color: var(--ai-gold);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pm-cta:hover {
+  color: #fff;
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   FEATURE CARD ACCENTS & SPOTLIGHT
+   ========================================================================== */
+.ai-feature-card[data-tool="ai-pandit"] .ai-feature-icon-wrap {
+  background: rgba(124, 92, 252, 0.14);
+  border-color: rgba(124, 92, 252, 0.4);
+  box-shadow: 0 0 16px rgba(124, 92, 252, 0.2);
+}
+.ai-feature-card[data-tool="palm"] .ai-feature-icon-wrap {
+  background: rgba(43, 196, 238, 0.14);
+  border-color: rgba(43, 196, 238, 0.4);
+  box-shadow: 0 0 16px rgba(43, 196, 238, 0.2);
+}
+.ai-feature-card[data-tool="dosha"] .ai-feature-icon-wrap {
+  background: rgba(255, 122, 41, 0.14);
+  border-color: rgba(255, 122, 41, 0.4);
+  box-shadow: 0 0 16px rgba(255, 122, 41, 0.2);
+}
+.ai-feature-card[data-tool="panchang"] .ai-feature-icon-wrap {
+  background: rgba(252, 211, 77, 0.14);
+  border-color: rgba(252, 211, 77, 0.4);
+  box-shadow: 0 0 16px rgba(252, 211, 77, 0.2);
+}
+.ai-feature-card[data-tool="muhurat"] .ai-feature-icon-wrap {
+  background: rgba(110, 231, 183, 0.14);
+  border-color: rgba(110, 231, 183, 0.4);
+  box-shadow: 0 0 16px rgba(110, 231, 183, 0.2);
+}
+.ai-feature-card[data-tool="mahabharata"] .ai-feature-icon-wrap {
+  background: rgba(229, 184, 105, 0.14);
+  border-color: rgba(229, 184, 105, 0.4);
+  box-shadow: 0 0 16px rgba(229, 184, 105, 0.2);
+}
+
+/* Architecture Comparison Table */
+.ai-comparison-card {
+  background: rgba(14, 16, 30, 0.9);
+  border: 1px solid var(--ai-border);
+  border-radius: var(--ai-radius-lg);
+  padding: 24px;
+  margin-top: 2rem;
+  box-shadow: var(--ai-shadow-card);
+}
+.ai-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+.ai-comparison-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.ai-comparison-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+.ai-badge-pass {
+  color: #27C93F;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.ai-badge-fail {
+  color: #F87171;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
 
 /* ==========================================================================
    RESPONSIVE MEDIA QUERIES & MOBILE DRAWER
@@ -1395,6 +1592,15 @@ body.ai-native-body {
   background: #fff;
   border-radius: 2px;
   transition: all 0.2s ease;
+}
+
+@media (max-width: 1100px) {
+  .ai-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ai-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 960px) {
@@ -1429,7 +1635,16 @@ body.ai-native-body {
     margin-top: 8px;
     width: 100%;
   }
+  .ai-claude-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .ai-pricing-waitlist-wrap {
+    grid-template-columns: 1fr;
+  }
 }
+
+@media (max-width: 768px) {
   .ai-features-grid,
   .ai-steps-grid,
   .ai-testimonials-grid {
@@ -1437,13 +1652,14 @@ body.ai-native-body {
   }
   .ai-footer-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 32px;
   }
   .ai-hero-headline {
-    font-size: 2.4rem;
+    font-size: 2.35rem;
+    line-height: 1.18;
   }
   .ai-hero-subheadline {
-    font-size: 1rem;
+    font-size: 1.02rem;
   }
   .ai-hero-cta-group {
     flex-direction: column;
@@ -1454,5 +1670,25 @@ body.ai-native-body {
   }
   .ai-remedy-grid {
     grid-template-columns: 1fr;
+  }
+  .ai-terminal-body {
+    padding: 16px;
+  }
+  .ai-chat-bubble-ai {
+    padding: 16px;
+  }
+  .ai-pill-badge {
+    font-size: 0.76rem;
+    padding: 6px 14px;
+  }
+  .ai-trust-ribbon {
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    border-radius: 16px;
+  }
+  .panchang-mini-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
