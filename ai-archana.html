@@ -2204,6 +2204,20 @@
     renderDeityStrip();
     selectDeity('ganesha');
     renderTodayPanchang();
+
+    // Auto-populate query from discovery search if present
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const q = urlParams.get('q');
+      if (q) {
+        const input = document.getElementById('chatInput');
+        if (input) {
+          input.value = q;
+          autoResize(input);
+          input.focus();
+        }
+      }
+    } catch (e) {}
   });
   </script>
 

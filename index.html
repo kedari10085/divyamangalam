@@ -171,6 +171,26 @@
           </a>
         </div>
 
+        <!-- Outcrowd Discovery Search & Quick Query Deck -->
+        <form class="ai-search-deck" onsubmit="handleGlobalSearch(event)" role="search" aria-label="Search Vedic Intelligence">
+          <span class="ai-search-icon" aria-hidden="true">🔍</span>
+          <input type="text" id="globalSearchInput" class="ai-search-input" placeholder="Search any question, deity, shloka, dosha, or muhurat..." aria-label="Search topics or tools" />
+          <button type="submit" class="ai-search-submit">
+            <span>Explore Wisdom</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="ai-quick-tags-wrap">
+          <span class="ai-quick-tag-label">Trending Now:</span>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Shani Sade Sati transit career')">🪐 Sade Sati</button>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Mangal Kuja Dosha remedies')">🔥 Mangal Dosha</button>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Auspicious Griha Pravesh Muhurat')">🏡 Griha Pravesh</button>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Today Rahu Kaal and Tithi')">📅 Rahu Kaal</button>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Hasta Samudrika Palm lines')">🖐️ Palm Scan</button>
+          <button type="button" class="ai-quick-tag" onclick="quickFillSearch('Complete Mahabharata Parvas')">🏹 Mahabharata</button>
+        </div>
+
         <!-- Trust Ribbon -->
         <div class="ai-trust-ribbon">
           <span>🛡️ <strong>In-Browser Ephemeris:</strong> Planetary positions calculated locally</span>
@@ -275,28 +295,58 @@
         </div>
         <a href="panchang-calendar.html" class="pm-cta">Full Calendar →</a>
       </div>
+
+      <!-- Outcrowd Stats Proof Ribbon -->
+      <div class="ai-stats-ribbon">
+        <div class="ai-stat-item">
+          <div class="ai-stat-number">2,046+</div>
+          <div class="ai-stat-label">Canonical Shastra Sections</div>
+        </div>
+        <div class="ai-stat-item">
+          <div class="ai-stat-number">10+</div>
+          <div class="ai-stat-label">Vedic Computational Tools</div>
+        </div>
+        <div class="ai-stat-item">
+          <div class="ai-stat-number">100%</div>
+          <div class="ai-stat-label">Client-Side Ephemeris Math</div>
+        </div>
+        <div class="ai-stat-item">
+          <div class="ai-stat-number">Dual-Pass</div>
+          <div class="ai-stat-label">Substring Verification Loop</div>
+        </div>
+      </div>
     </div>
 
     <!-- ==========================================================================
-         2. "WHAT WE OFFER" FEATURE GRID (HIGHLIGHTING AI)
+         2. "WHAT WE OFFER" FEATURE GRID (OUTCROWD DISCOVERY LANDSCAPE)
          ========================================================================== -->
     <section id="features" class="ai-section" aria-labelledby="features-heading">
       <div class="ai-container">
         
         <div class="ai-section-header">
-          <div class="ai-section-eyebrow">Product Capabilities</div>
+          <div class="ai-section-eyebrow">Vedic Discovery Engine</div>
           <h2 id="features-heading" class="ai-section-title">
-            Ancient Wisdom, Powered by Modern AI
+            Explore Ancient Wisdom with Frontier AI
           </h2>
           <p class="ai-section-desc">
-            We bridge 5,000-year-old Vedic treatises with Claude’s frontier reasoning—delivering personalized, compassionate, mathematically accurate spiritual tools.
+            Navigate 10 specialized Vedic tools, astronomical calculators, and canonical scriptural readers.
           </p>
         </div>
 
-        <div class="ai-features-grid">
+        <!-- Outcrowd Category Filter Bar -->
+        <div class="ai-category-bar" role="tablist" aria-label="Filter Tools by Category">
+          <button type="button" class="ai-cat-pill active" id="catBtnAll" onclick="filterTools('all')">✦ All Tools (8)</button>
+          <button type="button" class="ai-cat-pill" id="catBtnAi" onclick="filterTools('ai')">🤖 AI & Vision</button>
+          <button type="button" class="ai-cat-pill" id="catBtnPanchang" onclick="filterTools('panchang')">📅 Time & Muhurat</button>
+          <button type="button" class="ai-cat-pill" id="catBtnDosha" onclick="filterTools('dosha')">🔮 Astrological Doshas</button>
+          <button type="button" class="ai-cat-pill" id="catBtnScriptures" onclick="filterTools('scriptures')">📜 Epics & Puranas</button>
+          <button type="button" class="ai-cat-pill" id="catBtnRituals" onclick="filterTools('rituals')">🌺 Rituals & 432Hz</button>
+        </div>
+
+        <div class="ai-features-grid" id="toolsGrid">
 
           <!-- Feature 1: AI Pandit -->
-          <a href="ai-archana.html" class="ai-feature-card" data-tool="ai-pandit">
+          <a href="ai-archana.html" class="ai-feature-card" data-tool="ai-pandit" data-category="ai">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag claude-tag">Claude Core</div>
             <div class="ai-feature-icon-wrap">🤖</div>
@@ -308,7 +358,7 @@
           </a>
 
           <!-- Feature 2: AI Palm Reading -->
-          <a href="palm-reading.html" class="ai-feature-card" data-tool="palm">
+          <a href="palm-reading.html" class="ai-feature-card" data-tool="palm" data-category="ai">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag">Computer Vision</div>
             <div class="ai-feature-icon-wrap">🖐️</div>
@@ -320,7 +370,7 @@
           </a>
 
           <!-- Feature 3: Dosha Analysis Engine -->
-          <a href="dosha-check.html" class="ai-feature-card" data-tool="dosha">
+          <a href="dosha-check.html" class="ai-feature-card" data-tool="dosha" data-category="dosha">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag">Algorithmic</div>
             <div class="ai-feature-icon-wrap">🔮</div>
@@ -332,7 +382,7 @@
           </a>
 
           <!-- Feature 4: Vedic Panchang Calendar -->
-          <a href="panchang-calendar.html" class="ai-feature-card" data-tool="panchang">
+          <a href="panchang-calendar.html" class="ai-feature-card" data-tool="panchang" data-category="panchang">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag">High Precision</div>
             <div class="ai-feature-icon-wrap">📅</div>
@@ -344,7 +394,7 @@
           </a>
 
           <!-- Feature 5: Auspicious Muhurat Intelligence -->
-          <a href="muhurat.html" class="ai-feature-card" data-tool="muhurat">
+          <a href="muhurat.html" class="ai-feature-card" data-tool="muhurat" data-category="panchang">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag">10 Categories</div>
             <div class="ai-feature-icon-wrap">⏳</div>
@@ -356,7 +406,7 @@
           </a>
 
           <!-- Feature 6: Unabridged Scripture Corpus -->
-          <a href="mahabharata.html" class="ai-feature-card" data-tool="mahabharata">
+          <a href="mahabharata.html" class="ai-feature-card" data-tool="mahabharata" data-category="scriptures">
             <div class="ai-card-glow"></div>
             <div class="ai-feature-tag">2,046 Sections</div>
             <div class="ai-feature-icon-wrap">🏹</div>
@@ -367,8 +417,118 @@
             <span class="ai-feature-link">Read sacred epics →</span>
           </a>
 
+          <!-- Feature 7: 432 Hz Sound Healing -->
+          <a href="healing.html" class="ai-feature-card" data-tool="ai-pandit" data-category="rituals">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag" style="background:rgba(244,114,182,0.15); color:#F472B6; border-color:rgba(244,114,182,0.35);">432 Hz Pure Tone</div>
+            <div class="ai-feature-icon-wrap" style="background:rgba(244,114,182,0.14); border-color:rgba(244,114,182,0.4);">🎵</div>
+            <h3 class="ai-feature-title">432 Hz Sound Sanctuary</h3>
+            <p class="ai-feature-p">
+              Pure harmonic frequency synthesizer calibrated to universal natural resonance. 7 Solfeggio chakra frequencies and Vedic bija mantras for deep meditation.
+            </p>
+            <span class="ai-feature-link" style="color:#F472B6;">Listen frequency →</span>
+          </a>
+
+          <!-- Feature 8: Live Archana & Pooja Sanctuary -->
+          <a href="live-archana.html" class="ai-feature-card" data-tool="dosha" data-category="rituals">
+            <div class="ai-card-glow"></div>
+            <div class="ai-feature-tag" style="background:rgba(254,215,170,0.15); color:#FED7AA; border-color:rgba(254,215,170,0.35);">Digital Darshan</div>
+            <div class="ai-feature-icon-wrap" style="background:rgba(255,122,41,0.14); border-color:rgba(255,122,41,0.4);">🌺</div>
+            <h3 class="ai-feature-title">Live Archana & Visual Pooja</h3>
+            <p class="ai-feature-p">
+              Virtual temple darshan with interactive flower offerings, dhupa, deepa, bell sounds, and personalized sankalpa recitation for major Hindu deities.
+            </p>
+            <span class="ai-feature-link">Perform digital puja →</span>
+          </a>
+
         </div>
 
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         OUTCROWD DUAL-JOURNEY ARCHITECTURE (SEEKERS VS SCHOLARS)
+         ========================================================================== -->
+    <section class="ai-section" style="padding-top: 0;" aria-labelledby="journey-heading">
+      <div class="ai-container">
+        <div class="ai-dual-journey">
+          <div style="text-align: center; max-width: 720px; margin: 0 auto 2.5rem;">
+            <div class="ai-section-eyebrow">Personalized Experiences</div>
+            <h2 id="journey-heading" class="ai-section-title" style="font-size: 2.3rem;">
+              Built for Every Spiritual Seeker
+            </h2>
+            <p class="ai-section-desc" style="font-size: 0.96rem;">
+              Whether you need daily astronomical awareness or deep shastric inquiry, Divya Mangalam adapts seamlessly to your spiritual journey.
+            </p>
+          </div>
+
+          <!-- Dual-Journey Tabs -->
+          <div class="ai-journey-tabs" role="tablist">
+            <button type="button" class="ai-journey-tab-btn active" id="tabSeekers" onclick="switchJourneyTab('seekers')">
+              <span>🙏</span> For Daily Seekers (Living in Rhythm)
+            </button>
+            <button type="button" class="ai-journey-tab-btn" id="tabScholars" onclick="switchJourneyTab('scholars')">
+              <span>📜</span> For Vedic Scholars & Researchers
+            </button>
+          </div>
+
+          <!-- Seekers Grid -->
+          <div class="ai-journey-grid" id="journeySeekersGrid">
+            <a href="panchang-calendar.html" class="ai-journey-card">
+              <div class="ai-journey-icon">📅</div>
+              <h4>Morning Panchang & Tithi</h4>
+              <p>Align daily activities with today's Tithi, Nakshatra, and Yoga in your local timezone.</p>
+              <span class="ai-journey-cta">View Panchang →</span>
+            </a>
+            <a href="palm-reading.html" class="ai-journey-card">
+              <div class="ai-journey-icon">🖐️</div>
+              <h4>Instant Palm Line Scan</h4>
+              <p>Analyze your active karma vs innate potential using private in-browser computer vision.</p>
+              <span class="ai-journey-cta">Scan Palm →</span>
+            </a>
+            <a href="muhurat.html" class="ai-journey-card">
+              <div class="ai-journey-icon">⏳</div>
+              <h4>Auspicious Shubh Muhurat</h4>
+              <p>Calculate golden timing windows for weddings, property purchases, and new ventures.</p>
+              <span class="ai-journey-cta">Find Muhurat →</span>
+            </a>
+            <a href="healing.html" class="ai-journey-card">
+              <div class="ai-journey-icon">🎵</div>
+              <h4>432 Hz Twilight Meditation</h4>
+              <p>Rebalance mental chatter with sacred Solfeggio sound therapy aligned with Vedic Chakras.</p>
+              <span class="ai-journey-cta">Listen 432 Hz →</span>
+            </a>
+          </div>
+
+          <!-- Scholars Grid (initially hidden) -->
+          <div class="ai-journey-grid" id="journeyScholarsGrid" style="display: none;">
+            <a href="ai-archana.html" class="ai-journey-card">
+              <div class="ai-journey-icon">🤖</div>
+              <h4>Claude Multi-Turn Consultations</h4>
+              <p>Explore philosophical queries grounded strictly in classical Sanskrit shastras without hallucination.</p>
+              <span class="ai-journey-cta">Consult Pandit →</span>
+            </a>
+            <a href="mahabharata.html" class="ai-journey-card">
+              <div class="ai-journey-icon">🏹</div>
+              <h4>2,046 Mahabharata Sections</h4>
+              <p>Study the unabridged P.C. Roy translation of all 18 Parvas with interactive section navigation.</p>
+              <span class="ai-journey-cta">Read Epic →</span>
+            </a>
+            <a href="puran.html" class="ai-journey-card">
+              <div class="ai-journey-icon">📜</div>
+              <h4>18 Maha Puranas Corpus</h4>
+              <p>Access Vishnu, Shiva, Bhagavata, and Markandeya Puranas with verse-level context.</p>
+              <span class="ai-journey-cta">Explore Puranas →</span>
+            </a>
+            <a href="how-we-verify.html" class="ai-journey-card">
+              <div class="ai-journey-icon">🛡️</div>
+              <h4>Dual-Pass Verification Pipeline</h4>
+              <p>Inspect our deterministic substring audit pipeline preventing superstitious or alarmist claims.</p>
+              <span class="ai-journey-cta">View Pipeline →</span>
+            </a>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -870,6 +1030,120 @@
   <script src="panchang.js"></script>
   
   <script>
+  // ===== OUTCROWD DISCOVERY PLATFORM JAVASCRIPT =====
+
+  // 1. Tool Category Filtering
+  function filterTools(category) {
+    var pills = document.querySelectorAll('.ai-cat-pill');
+    pills.forEach(function(pill) { pill.classList.remove('active'); });
+
+    var activeBtnMap = {
+      'all': 'catBtnAll',
+      'ai': 'catBtnAi',
+      'panchang': 'catBtnPanchang',
+      'dosha': 'catBtnDosha',
+      'scriptures': 'catBtnScriptures',
+      'rituals': 'catBtnRituals'
+    };
+    var targetBtn = document.getElementById(activeBtnMap[category] || 'catBtnAll');
+    if (targetBtn) targetBtn.classList.add('active');
+
+    var cards = document.querySelectorAll('#toolsGrid .ai-feature-card');
+    cards.forEach(function(card) {
+      var cardCat = card.getAttribute('data-category');
+      if (category === 'all' || cardCat === category) {
+        card.style.display = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        requestAnimationFrame(function() {
+          card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        });
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // 2. Dual-Journey Architecture Tabs (Seekers vs Scholars)
+  function switchJourneyTab(tab) {
+    var btnSeekers = document.getElementById('tabSeekers');
+    var btnScholars = document.getElementById('tabScholars');
+    var gridSeekers = document.getElementById('journeySeekersGrid');
+    var gridScholars = document.getElementById('journeyScholarsGrid');
+
+    if (tab === 'seekers') {
+      if (btnSeekers) btnSeekers.classList.add('active');
+      if (btnScholars) btnScholars.classList.remove('active');
+      if (gridSeekers) {
+        gridSeekers.style.display = 'grid';
+        gridSeekers.style.opacity = '0';
+        requestAnimationFrame(function() {
+          gridSeekers.style.transition = 'opacity 0.25s ease';
+          gridSeekers.style.opacity = '1';
+        });
+      }
+      if (gridScholars) gridScholars.style.display = 'none';
+    } else {
+      if (btnSeekers) btnSeekers.classList.remove('active');
+      if (btnScholars) btnScholars.classList.add('active');
+      if (gridSeekers) gridSeekers.style.display = 'none';
+      if (gridScholars) {
+        gridScholars.style.display = 'grid';
+        gridScholars.style.opacity = '0';
+        requestAnimationFrame(function() {
+          gridScholars.style.transition = 'opacity 0.25s ease';
+          gridScholars.style.opacity = '1';
+        });
+      }
+    }
+  }
+
+  // 3. Global Discovery Search & Routing Engine
+  function handleGlobalSearch(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var input = document.getElementById('globalSearchInput');
+    if (!input) return;
+    var raw = input.value.trim();
+    if (!raw) {
+      input.focus();
+      return;
+    }
+    var query = raw.toLowerCase();
+
+    // Intelligent keyword routing to specialized engines
+    if (query.includes('palm') || query.includes('hand') || query.includes('samudrika') || query.includes('hasta')) {
+      window.location.href = 'palm-reading.html';
+    } else if (query.includes('dosha') || query.includes('mangal') || query.includes('kuja') || query.includes('sade sati') || query.includes('shani') || query.includes('kaal sarp') || query.includes('pitra')) {
+      window.location.href = 'dosha-check.html';
+    } else if (query.includes('muhurat') || query.includes('griha pravesh') || query.includes('vivah') || query.includes('marriage') || query.includes('auspicious')) {
+      window.location.href = 'muhurat.html';
+    } else if (query.includes('panchang') || query.includes('tithi') || query.includes('nakshatra') || query.includes('rahu') || query.includes('choghadiya') || query.includes('calendar')) {
+      window.location.href = 'panchang-calendar.html';
+    } else if (query.includes('mahabharata') || query.includes('parva') || query.includes('vyasa') || query.includes('gita')) {
+      window.location.href = 'mahabharata.html';
+    } else if (query.includes('puran') || query.includes('purana')) {
+      window.location.href = 'puran.html';
+    } else if (query.includes('432') || query.includes('healing') || query.includes('solfeggio') || query.includes('frequency') || query.includes('chakra')) {
+      window.location.href = 'healing.html';
+    } else if (query.includes('archana') || query.includes('puja') || query.includes('pooja') || query.includes('darshan') || query.includes('aarti') || query.includes('chalisa')) {
+      window.location.href = 'live-archana.html';
+    } else {
+      // General inquiry sent to conversational AI Pandit
+      window.location.href = 'ai-archana.html?q=' + encodeURIComponent(raw);
+    }
+  }
+
+  // 4. Trending Quick-Tag Fill and Execute
+  function quickFillSearch(topic) {
+    var input = document.getElementById('globalSearchInput');
+    if (input) {
+      input.value = topic;
+      handleGlobalSearch({ preventDefault: function(){} });
+    }
+  }
+
   // Waitlist submission handling sending data to real backend
   async function handleWaitlistSubmit(e) {
     e.preventDefault();
