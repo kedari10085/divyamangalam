@@ -1897,7 +1897,7 @@ body.ai-native-body {
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1150px) {
   .ai-mobile-toggle {
     display: flex;
   }
