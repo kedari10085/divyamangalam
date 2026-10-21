@@ -71,5 +71,11 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+# Static site protection - Block automated PHP vulnerability crawlers
+Disallow: /*.php$
+Disallow: /*.php?*
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /xmlrpc.php
 
 Sitemap: https://divyamangalam.com/sitemap.xml

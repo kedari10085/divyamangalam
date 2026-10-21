@@ -10,16 +10,16 @@
 :root {
   --saffron:   #FF6F00;
   --gold:      #D4A017;
-  --deep-red:  #C0392B;
-  --cream:     #0A0A12;
-  --light-bg:  #12121E;
-  --text-dark: #F0E6D6;
-  --text-mid:  #B8A898;
+  --deep-red:  #8B0000;
+  --cream:     #FAF8F5;
+  --light-bg:  #FFF3E0;
+  --text-dark: #18181B;
+  --text-mid:  #454052;
   --white:     #FFFFFF;
-  --card-bg:   #1A1A2E;
-  --card-border: rgba(212,160,23,0.15);
-  --surface:   #14141F;
-  --shadow:    rgba(0, 0, 0, 0.4);
+  --card-bg:   #FFFFFF;
+  --card-border: rgba(212,160,23,0.25);
+  --surface:   #FAF6EE;
+  --shadow:    rgba(44, 26, 14, 0.08);
   --radius:    12px;
   --transition: 0.3s ease;
 }
@@ -41,8 +41,8 @@ body::before {
   content: '';
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.04) 0%, transparent 70%),
-              radial-gradient(ellipse at 80% 20%, rgba(255,111,0,0.03) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.03) 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,111,0,0.02) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
 }
@@ -73,8 +73,10 @@ ul { list-style: none; }
 /* ==================  NAVBAR  ================== */
 .navbar {
   position: sticky; top: 0; z-index: 1000;
-  background: linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 100%);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 4px 20px rgba(44, 26, 14, 0.05);
   border-bottom: 1px solid rgba(212, 160, 23, 0.25);
 }
 .nav-inner {
@@ -86,11 +88,12 @@ ul { list-style: none; }
 .nav-brand {
   display: flex; align-items: center; gap: 8px; flex-shrink: 0;
 }
-.nav-brand .brand-om { font-size: 1.7rem; color: var(--gold); filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
+.nav-brand .brand-om { font-size: 1.7rem; color: var(--gold); filter: drop-shadow(0 2px 6px rgba(212,160,23,0.3)); }
 .nav-brand .brand-name {
   font-family: 'Playfair Display', serif;
-  color: var(--white);
+  color: #18181B;
   font-size: 1.25rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
   white-space: nowrap;
 }
@@ -103,13 +106,13 @@ ul { list-style: none; }
   padding: 0;
 }
 .nav-links a {
-  color: #F8FAFC;
+  color: #2D2738;
   font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.2px;
   position: relative;
-  padding: 6px 9px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
   white-space: nowrap;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -119,123 +122,120 @@ ul { list-style: none; }
   gap: 4px;
 }
 .nav-links a:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(229, 184, 105, 0.4);
-  box-shadow: 0 0 12px rgba(229, 184, 105, 0.25);
+  color: #18181B;
+  background: rgba(212, 160, 23, 0.1);
+  border-color: rgba(212, 160, 23, 0.35);
   transform: translateY(-1px);
 }
 .nav-links a.active {
-  color: #FFFFFF;
-  background: linear-gradient(135deg, rgba(255, 111, 0, 0.35), rgba(212, 160, 23, 0.4));
-  border: 1px solid #E5B869;
-  box-shadow: 0 0 16px rgba(229, 184, 105, 0.4);
+  color: #18181B;
+  background: rgba(212, 160, 23, 0.16);
+  border: 1px solid #D4A017;
   font-weight: 700;
 }
 
-/* --- Vibrant Individual Tab Color Accents (100% visible on dark theme) --- */
-/* AI Pandit - High-profile Violet Claude Glow */
+/* --- Vibrant Individual Tab Color Accents (Clean Light Theme) --- */
+/* AI Pandit - Violet */
 .nav-links a[href*="ai-archana"] {
-  background: linear-gradient(135deg, rgba(124, 92, 252, 0.25), rgba(157, 123, 255, 0.35));
-  border: 1px solid rgba(157, 123, 255, 0.65);
-  color: #FFFFFF !important;
-  box-shadow: 0 0 14px rgba(157, 123, 255, 0.3);
+  background: rgba(109, 40, 217, 0.08);
+  border: 1px solid rgba(109, 40, 217, 0.28);
+  color: #6D28D9 !important;
   font-weight: 700;
 }
 .nav-links a[href*="ai-archana"]:hover,
 .nav-links a[href*="ai-archana"].active {
-  background: linear-gradient(135deg, #7C5CFC, #9D7BFF);
-  border-color: #DDD6FE;
-  box-shadow: 0 0 24px rgba(157, 123, 255, 0.7);
+  background: #6D28D9;
+  border-color: #6D28D9;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.25);
   color: #FFFFFF !important;
 }
 
-/* Palm Reading - Vibrant Celestial Cyan */
+/* Palm Reading - Cyan / Teal */
 .nav-links a[href*="palm-reading"] {
-  color: #7EE7FC;
+  color: #0E7490;
+  background: rgba(14, 116, 144, 0.08);
+  border: 1px solid rgba(14, 116, 144, 0.28);
 }
 .nav-links a[href*="palm-reading"]:hover {
-  background: rgba(43, 196, 238, 0.18);
-  border-color: rgba(43, 196, 238, 0.55);
-  box-shadow: 0 0 14px rgba(43, 196, 238, 0.35);
+  background: #0E7490;
   color: #FFFFFF;
 }
 
-/* Panchang - Vibrant Golden Amber */
+/* Panchang - Amber / Warm Gold */
 .nav-links a[href*="panchang"] {
-  color: #FCD34D;
+  color: #B45309;
+  background: rgba(180, 83, 9, 0.08);
+  border: 1px solid rgba(180, 83, 9, 0.28);
 }
 .nav-links a[href*="panchang"]:hover {
-  background: rgba(252, 211, 77, 0.18);
-  border-color: rgba(252, 211, 77, 0.55);
-  box-shadow: 0 0 14px rgba(252, 211, 77, 0.35);
+  background: #B45309;
   color: #FFFFFF;
 }
 
-/* Muhurat - Vibrant Auspicious Emerald */
+/* Muhurat - Emerald Green */
 .nav-links a[href*="muhurat"] {
-  color: #6EE7B7;
+  color: #047857;
+  background: rgba(4, 120, 87, 0.08);
+  border: 1px solid rgba(4, 120, 87, 0.28);
 }
 .nav-links a[href*="muhurat"]:hover {
-  background: rgba(110, 231, 183, 0.18);
-  border-color: rgba(110, 231, 183, 0.55);
-  box-shadow: 0 0 14px rgba(110, 231, 183, 0.35);
+  background: #047857;
   color: #FFFFFF;
 }
 
-/* Dosha Check - Vibrant Saffron Coral */
+/* Dosha Check - Deep Rose / Coral */
 .nav-links a[href*="dosha"] {
-  color: #FFA166;
+  color: #BE123C;
+  background: rgba(190, 18, 60, 0.08);
+  border: 1px solid rgba(190, 18, 60, 0.28);
 }
 .nav-links a[href*="dosha"]:hover {
-  background: rgba(255, 122, 41, 0.18);
-  border-color: rgba(255, 122, 41, 0.55);
-  box-shadow: 0 0 14px rgba(255, 122, 41, 0.35);
+  background: #BE123C;
   color: #FFFFFF;
 }
 
-/* 432 Hz - Vibrant Mystical Fuchsia / Magenta */
+/* 432 Hz - Purple */
 .nav-links a[href*="healing"] {
-  color: #F472B6;
+  color: #7C3AED;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.28);
 }
 .nav-links a[href*="healing"]:hover {
-  background: rgba(244, 114, 182, 0.18);
-  border-color: rgba(244, 114, 182, 0.55);
-  box-shadow: 0 0 14px rgba(244, 114, 182, 0.35);
+  background: #7C3AED;
   color: #FFFFFF;
 }
 
-/* Mahabharata & 18 Puranas - Sacred Luminous Gold */
+/* Mahabharata & 18 Puranas - Sacred Gold */
 .nav-links a[href*="mahabharata"],
 .nav-links a[href*="puran"] {
-  color: #FDE047;
+  color: #B8860B;
+  background: rgba(184, 134, 11, 0.08);
+  border: 1px solid rgba(184, 134, 11, 0.28);
 }
 .nav-links a[href*="mahabharata"]:hover,
 .nav-links a[href*="puran"]:hover {
-  background: rgba(253, 224, 71, 0.18);
-  border-color: rgba(253, 224, 71, 0.55);
-  box-shadow: 0 0 14px rgba(253, 224, 71, 0.35);
+  background: #B8860B;
   color: #FFFFFF;
 }
 
-/* Deities, Archana, Chalisa, Shlokas - Warm Peach / Saffron */
+/* Deities, Archana, Chalisa, Shlokas - Warm Saffron */
 .nav-links a[href*="gods"],
 .nav-links a[href*="live-archana"],
 .nav-links a[href*="chalisa"],
 .nav-links a[href*="shlokas"] {
-  color: #FED7AA;
+  color: #C2410C;
+  background: rgba(194, 65, 12, 0.08);
+  border: 1px solid rgba(194, 65, 12, 0.28);
 }
 .nav-links a[href*="gods"]:hover,
 .nav-links a[href*="live-archana"]:hover,
 .nav-links a[href*="chalisa"]:hover,
 .nav-links a[href*="shlokas"]:hover {
-  background: rgba(254, 215, 170, 0.18);
-  border-color: rgba(254, 215, 170, 0.55);
-  box-shadow: 0 0 14px rgba(254, 215, 170, 0.35);
+  background: #C2410C;
   color: #FFFFFF;
 }
 .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: transparent; border: none; padding: 6px; }
-.hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+.hamburger span { width: 24px; height: 2px; background: #18181B; border-radius: 2px; transition: var(--transition); }
 
 /* ==================  HERO  ================== */
 .hero {
@@ -648,11 +648,11 @@ section { padding: 5rem 1.5rem; }
 
 /* ==================  FOOTER  ================== */
 footer {
-  background: #060610;
-  color: rgba(255,255,255,0.75);
+  background: #18181B;
+  color: rgba(255,255,255,0.78);
   padding: 3rem 1.5rem 1.5rem;
   margin-top: auto;
-  border-top: 1px solid rgba(212,160,23,0.15);
+  border-top: 1px solid rgba(212,160,23,0.25);
 }
 .footer-inner {
   max-width: 1150px; margin: auto;
@@ -668,7 +668,7 @@ footer {
   font-size: 1.3rem;
   margin: 0.5rem 0;
 }
-.footer-brand p { font-size: 0.9rem; line-height: 1.7; }
+.footer-brand p { font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.7); }
 .footer-col h4 {
   color: var(--gold);
   font-size: 0.9rem;
@@ -677,11 +677,11 @@ footer {
   margin-bottom: 1rem;
 }
 .footer-col ul { display: flex; flex-direction: column; gap: 0.5rem; }
-.footer-col a { font-size: 0.9rem; transition: color var(--transition); }
+.footer-col a { font-size: 0.9rem; color: rgba(255,255,255,0.75); transition: color var(--transition); }
 .footer-col a:hover { color: var(--gold); }
 .footer-bottom {
   max-width: 1100px; margin: auto;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.12);
   padding-top: 1.5rem;
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 1rem;
@@ -691,8 +691,8 @@ footer {
 
 /* ==================  ABOUT PAGE  ================== */
 .page-hero {
-  background: linear-gradient(160deg, #0D0D1A 0%, #1A1A2E 100%);
-  color: var(--white);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 60%, #F5EFEB 100%);
+  color: #18181B;
   padding: 5rem 1.5rem;
   text-align: center;
   border-bottom: 1px solid rgba(212,160,23,0.2);
@@ -701,8 +701,9 @@ footer {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 0.75rem;
+  color: #18181B;
 }
-.page-hero p { font-size: 1.1rem; opacity: 0.85; }
+.page-hero p { font-size: 1.1rem; color: #454052; }
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -774,10 +775,10 @@ footer {
     top: 64px;
     left: 0;
     right: 0;
-    background: linear-gradient(180deg, #0D0D1A 0%, #1A1A2E 100%);
+    background: #FFFFFF;
     padding: 1.25rem 2rem 2rem;
     gap: 0.5rem;
-    box-shadow: 0 16px 36px rgba(0,0,0,0.6);
+    box-shadow: 0 16px 36px rgba(44, 26, 14, 0.12);
     border-bottom: 2px solid var(--gold);
     max-height: calc(100vh - 64px);
     overflow-y: auto;
@@ -786,7 +787,7 @@ footer {
   .nav-links a {
     font-size: 0.95rem;
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.15);
     display: flex;
     align-items: center;
     width: 100%;
@@ -883,16 +884,16 @@ footer {
 
 /* Glassmorphism card enhancement */
 .glass-card {
-  background: rgba(26,26,46,0.75);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212,160,23,0.15);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid rgba(212, 160, 23, 0.25);
+  box-shadow: 0 8px 32px rgba(44, 26, 14, 0.06);
 }
 .glass-card:hover {
-  background: rgba(26,26,46,0.9);
-  box-shadow: 0 12px 48px rgba(212,160,23,0.1), 0 0 40px rgba(212,160,23,0.06);
-  border-color: rgba(212,160,23,0.35);
+  background: #FFFFFF;
+  box-shadow: 0 14px 44px rgba(212, 160, 23, 0.14), 0 0 30px rgba(212, 160, 23, 0.08);
+  border-color: rgba(212, 160, 23, 0.45);
 }
 
 /* Gradient text for headings */
