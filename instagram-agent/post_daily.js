@@ -18,6 +18,30 @@ const DAILY_POSTS_PATH = path.join(__dirname, '..', 'DAILY_POSTS.md');
 const PREVIEW_HTML_PATH = path.join(__dirname, 'latest_preview.html');
 const LOG_PATH = path.join(__dirname, 'post_log.json');
 
+// Auto-load .env if available
+function loadEnv() {
+  const envPaths = [
+    path.join(__dirname, '..', '.env'),
+    path.join(__dirname, '.env')
+  ];
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      const lines = fs.readFileSync(envPath, 'utf8').split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim();
+          if (!process.env[key]) process.env[key] = val;
+        }
+      }
+    }
+  }
+}
+loadEnv();
+
 const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);
