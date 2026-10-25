@@ -68,7 +68,30 @@ Once committed, you can trigger it anytime via **Actions** → **Daily Instagram
 
 ---
 
-## 5. How to Schedule Custom Posts via Markdown
+## 5. Multiple Post Formats & CLI Commands
+
+You can run any post type from your terminal anytime:
+
+```bash
+# 1. Morning Vedic Deity of the Day & Panchang
+node instagram-agent/post_daily.js --type=deity
+
+# 2. Daily Rashi & Nakshatra Beneficiary Forecast (Chandrabalam)
+node instagram-agent/post_daily.js --type=rashi
+
+# 3. Shubh Muhurat & Timings Guide (Good vs Bad timings)
+node instagram-agent/post_daily.js --type=muhurat
+
+# 4. Vedic Palm Reading Feature Spotlight (Hasta Samudrika Shastra)
+node instagram-agent/post_daily.js --type=palm
+
+# Add --dry-run to preview image and caption without publishing:
+node instagram-agent/post_daily.js --type=rashi --dry-run
+```
+
+---
+
+## 6. How to Schedule Custom Posts via Markdown
 
 To set custom posts for future dates, open [DAILY_POSTS.md](../DAILY_POSTS.md) in this repository and add:
 

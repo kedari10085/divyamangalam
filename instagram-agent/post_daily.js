@@ -1,12 +1,11 @@
 /**
- * Divya Mangalam — Daily Instagram Posting Agent
+ * Divya Mangalam — Daily Instagram Posting Agent (Multi-Mode)
  * 
- * Features:
- * 1. Reads daily schedule from DAILY_POSTS.md
- * 2. If no scheduled post for today, dynamically generates post using Panchang & Day Deity
- * 3. Creates AI visual artwork URL via Pollinations Flux AI (1080x1080)
- * 4. Publishes to Instagram via Meta Graph API (or runs in Dry Run / Preview mode)
- * 5. Updates DAILY_POSTS.md with [POSTED] status
+ * Post Types:
+ * 1. deity   — Morning Vedic Deity of the Day, Tithi, Nakshatra, Mantra & 8K AI Temple Artwork
+ * 2. rashi   — Daily Rashi & Nakshatra Forecast, Benefitted Signs (Chandrabalam), Lucky Color/Number
+ * 3. muhurat — Super Good vs Bad Timings (Abhijit, Brahma Muhurta vs Rahu Kaal, Yamagandam)
+ * 4. palm    — Hasta Samudrika Shastra (AI Palm Reading, 4 Lines & 7 Mounts Spotlight)
  */
 
 const fs = require('fs');
@@ -46,6 +45,17 @@ const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);
 
+// Parse post type: --type=deity | rashi | muhurat | palm
+function getPostType() {
+  const typeArg = process.argv.find(a => a.startsWith('--type='));
+  if (typeArg) return typeArg.split('=')[1].toLowerCase();
+  if (process.argv.includes('--rashi')) return 'rashi';
+  if (process.argv.includes('--muhurat')) return 'muhurat';
+  if (process.argv.includes('--palm')) return 'palm';
+  if (process.argv.includes('--deity')) return 'deity';
+  return (process.env.POST_TYPE || 'deity').toLowerCase();
+}
+
 // Get current date in Indian Standard Time (IST, UTC+5:30)
 function getISTDate() {
   const now = new Date();
@@ -64,6 +74,11 @@ function formatDateISO(d) {
 const WEEKDAY_DEITIES = [
   {
     day: 'Sunday',
+    vara: 'Ravivara',
+    planet: 'Lord Surya (Sun)',
+    luckyColors: 'Saffron, Gold, Radiant Orange',
+    luckyNumbers: '1, 10, 19, 28',
+    direction: 'East (Purva)',
     deity: 'Lord Surya Narayana (Sun God)',
     theme: 'Radiant health, vitality, purpose & illumination',
     mantra: 'ॐ घृणिः सूर्याय नमः',
@@ -72,38 +87,63 @@ const WEEKDAY_DEITIES = [
   },
   {
     day: 'Monday',
+    vara: 'Somavara',
+    planet: 'Lord Chandra (Moon) / Shiva',
+    luckyColors: 'Pearl White, Silver, Cream',
+    luckyNumbers: '2, 11, 20, 29',
+    direction: 'North-West (Vayavya)',
     deity: 'Lord Shiva (Someshwara)',
-    theme: 'Inner stillness, tranquility, mental peace & meditation',
+    theme: 'Mental peace, emotional mastery & spiritual liberation',
     mantra: 'ॐ नमः शिवाय',
-    mantraMeaning: 'I bow to the auspicious one, the source of stillness within.',
-    prompt: 'Divine Lord Shiva in serene deep meditation on Mount Kailash, crescent moon in matted locks, sacred river Ganga flowing, holy trishula, soft morning Himalayan mist, golden aura, hyper-realistic, 8k devotional digital oil painting'
+    mantraMeaning: 'Salutations to the auspicious one, the source of supreme consciousness.',
+    prompt: 'Lord Shiva in deep serene meditation on sacred Mount Kailash, crescent moon in matted locks, sacred Ganges flowing, gentle snowfall, third eye, divine blue throat, ethereal moonlight, masterpiece 8k spiritual art'
   },
   {
     day: 'Tuesday',
-    deity: 'Lord Hanuman (Pawanputra)',
-    theme: 'Courage, protection, overcoming hurdles & steadfast faith',
-    mantra: 'ॐ हनुमते नमः',
-    mantraMeaning: 'Salutations to the son of the wind, the pinnacle of strength and devotion.',
-    prompt: 'Magnificent Lord Hanuman holding glowing Gada mace, blessing posture with gentle compassionate eyes, golden sacred aura, ancient Ayodhya temple silhouette at sunset, radiant devotional atmosphere, 8k resolution, cinematic spiritual artwork'
+    vara: 'Mangalavara',
+    planet: 'Lord Mangala (Mars) / Hanuman',
+    luckyColors: 'Bright Vermilion Red, Crimson, Coral',
+    luckyNumbers: '9, 18, 27',
+    direction: 'South (Dakshina)',
+    deity: 'Lord Hanuman & Kartikeya',
+    theme: 'Courage, protection, vitality & overcoming obstacles',
+    mantra: 'ॐ हं हनुमते नमः',
+    mantraMeaning: 'Salutations to the mighty Hanuman, remover of fear and distress.',
+    prompt: 'Lord Hanuman standing in devotion with golden mace gada, glowing chest revealing Rama and Sita in his heart, divine saffron glow, Himalayan peak background, majestic cinematic 8k devotional art'
   },
   {
     day: 'Wednesday',
-    deity: 'Lord Ganesha (Vighnaharta)',
-    theme: 'Wisdom, intellect, discernment & obstacle removal',
+    vara: 'Budhavara',
+    planet: 'Lord Budha (Mercury) / Ganesha',
+    luckyColors: 'Emerald Green, Mint, Jade',
+    luckyNumbers: '5, 14, 23',
+    direction: 'North (Uttara)',
+    deity: 'Lord Ganesha & Sage Vyasa',
+    theme: 'Wisdom, sharp intellect, communication & fresh starts',
     mantra: 'ॐ गं गणपतये नमः',
-    mantraMeaning: 'Salutations to the lord of hosts who dissolves all barriers to righteousness.',
-    prompt: 'Lord Ganesha sitting on a glowing golden lotus throne, holding modak and lotus, golden mukut crown, divine serene expression, soft diya lamps glowing around, incense smoke rising, warm temple courtyard lighting, 8k digital oil painting'
+    mantraMeaning: 'Salutations to the lord of beginnings and remover of all hurdles.',
+    prompt: 'Lord Ganesha seated on grand ornate golden throne, blessing mudra, modak in hand, mushak vehicle at feet, fresh lotus garlands, warm temple oil lamp diya glow, photorealistic 8k devotional artwork'
   },
   {
     day: 'Thursday',
-    deity: 'Lord Vishnu & Guru Brihaspati',
-    theme: 'Spiritual knowledge, balance, righteousness & grace',
+    vara: 'Guruvara',
+    planet: 'Lord Brihaspati (Jupiter) / Vishnu',
+    luckyColors: 'Golden Yellow, Mustard, Amber',
+    luckyNumbers: '3, 12, 21, 30',
+    direction: 'North-East (Ishanya)',
+    deity: 'Lord Maha Vishnu & Guru Brihaspati',
+    theme: 'Higher knowledge, dharma, righteousness & family prosperity',
     mantra: 'ॐ नमो भगवते वासुदेवाय',
-    mantraMeaning: 'Salutations to Vasudeva, the all-pervading protector of creation.',
-    prompt: 'Lord Vishnu holding sacred Shankha Conch and Sudarshana Chakra, celestial Sheshanaga serpent above, radiant blue and gold divine attire, cosmic ocean Ksheera Sagara, glowing lotus petals, supreme peaceful smile, heavenly lighting, 8k'
+    mantraMeaning: 'Salutations to the omnipresent supreme lord of the universe.',
+    prompt: 'Lord Maha Vishnu resting on celestial Sheshanaga serpent on Kshira Sagara milky ocean, four arms holding Shankha, Chakra, Gada, Padma, glowing celestial blue skin, divine cosmos background, 8k masterpiece'
   },
   {
     day: 'Friday',
+    vara: 'Shukravara',
+    planet: 'Goddess Lakshmi / Shukra (Venus)',
+    luckyColors: 'Rose Pink, Pure White, Pastel Gold',
+    luckyNumbers: '6, 15, 24',
+    direction: 'South-East (Agneya)',
     deity: 'Goddess Maha Lakshmi',
     theme: 'Abundance, spiritual wealth, contentment & motherly love',
     mantra: 'ॐ श्रीं महालक्ष्म्यै नमः',
@@ -112,6 +152,11 @@ const WEEKDAY_DEITIES = [
   },
   {
     day: 'Saturday',
+    vara: 'Shanivara',
+    planet: 'Lord Shani (Saturn) & Bhairava',
+    luckyColors: 'Navy Blue, Deep Indigo, Black',
+    luckyNumbers: '8, 17, 26',
+    direction: 'West (Pashchima)',
     deity: 'Lord Shani Deva & Bhairava',
     theme: 'Karma, discipline, humility, patience & perseverance',
     mantra: 'ॐ शं शनैश्चराय नमः',
@@ -120,12 +165,26 @@ const WEEKDAY_DEITIES = [
   }
 ];
 
+const RASHIS = [
+  { id: 'mesha', name: 'Mesha (Aries)', symbol: '♈' },
+  { id: 'vrishabha', name: 'Vrishabha (Taurus)', symbol: '♉' },
+  { id: 'mithuna', name: 'Mithuna (Gemini)', symbol: '♊' },
+  { id: 'karka', name: 'Karka (Cancer)', symbol: '♋' },
+  { id: 'simha', name: 'Simha (Leo)', symbol: '♌' },
+  { id: 'kanya', name: 'Kanya (Virgo)', symbol: '♍' },
+  { id: 'tula', name: 'Tula (Libra)', symbol: '♎' },
+  { id: 'vrischika', name: 'Vrischika (Scorpio)', symbol: '♏' },
+  { id: 'dhanu', name: 'Dhanu (Sagittarius)', symbol: '♐' },
+  { id: 'makara', name: 'Makara (Capricorn)', symbol: '♑' },
+  { id: 'kumbha', name: 'Kumbha (Aquarius)', symbol: '♒' },
+  { id: 'meena', name: 'Meena (Pisces)', symbol: '♓' }
+];
+
 // Approximate Panchang Calculator (Lahiri-based sidereal estimation)
 function calculatePanchang(date) {
   const dayOfWeek = date.getDay();
   const dayNames = ['Ravivara (Sunday)', 'Somavara (Monday)', 'Mangalavara (Tuesday)', 'Budhavara (Wednesday)', 'Guruvara (Thursday)', 'Shukravara (Friday)', 'Shanivara (Saturday)'];
   
-  // Rahu Kaal approximate timings for 6:00 AM sunrise
   const rahuKaalWindows = [
     '04:30 PM – 06:00 PM', // Sun
     '07:30 AM – 09:00 AM', // Mon
@@ -134,6 +193,26 @@ function calculatePanchang(date) {
     '01:30 PM – 03:00 PM', // Thu
     '10:30 AM – 12:00 PM', // Fri
     '09:00 AM – 10:30 AM'  // Sat
+  ];
+
+  const yamagandamWindows = [
+    '12:00 PM – 01:30 PM', // Sun
+    '10:30 AM – 12:00 PM', // Mon
+    '09:00 AM – 10:30 AM', // Tue
+    '07:30 AM – 09:00 AM', // Wed
+    '01:30 PM – 03:00 PM', // Thu
+    '03:00 PM – 04:30 PM', // Fri
+    '04:30 PM – 06:00 PM'  // Sat
+  ];
+
+  const gulikaWindows = [
+    '03:00 PM – 04:30 PM', // Sun
+    '01:30 PM – 03:00 PM', // Mon
+    '12:00 PM – 01:30 PM', // Tue
+    '10:30 AM – 12:00 PM', // Wed
+    '09:00 AM – 10:30 AM', // Thu
+    '07:30 AM – 09:00 AM', // Fri
+    '06:00 AM – 07:30 AM'  // Sat
   ];
 
   const tithiNames = [
@@ -157,11 +236,9 @@ function calculatePanchang(date) {
     'Parigha', 'Shiva', 'Siddha', 'Sadhya', 'Shubha', 'Shukla', 'Brahma', 'Indra', 'Vaidhriti'
   ];
 
-  // Julian Day Number estimate
   const jd = (date.getTime() / 86400000) + 2440587.5;
   const daysSinceEpoch = jd - 2451545.0;
   
-  // Approximate Moon and Sun longitude
   const sunLong = (280.460 + 0.9856474 * daysSinceEpoch) % 360;
   const moonLong = (218.316 + 13.176396 * daysSinceEpoch) % 360;
   const diff = ((moonLong - sunLong) + 360) % 360;
@@ -172,74 +249,141 @@ function calculatePanchang(date) {
   const tithiName = tithiNames[tithiIndex % 15];
 
   const nakshatraIndex = Math.floor((moonLong % 360) / (360 / 27)) % 27;
+  const nakshatraName = nakshatras[nakshatraIndex];
+
   const yogaIndex = Math.floor(((sunLong + moonLong) % 360) / (360 / 27)) % 27;
+  const yogaName = yogas[yogaIndex];
+
+  const moonRashiIdx = Math.floor((moonLong % 360) / 30) % 12;
+  const moonRashiName = RASHIS[moonRashiIdx].name;
 
   return {
-    vara: dayNames[dayOfWeek],
+    date: formatDateISO(date),
+    dayName: dayNames[dayOfWeek],
     tithi: `${tithiName} (${paksha})`,
-    nakshatra: nakshatras[nakshatraIndex],
-    yoga: yogas[yogaIndex],
+    nakshatra: nakshatraName,
+    yoga: yogaName,
+    moonRashi: moonRashiName,
+    moonRashiIdx,
     rahuKaal: rahuKaalWindows[dayOfWeek],
-    abhijit: '11:45 AM – 12:35 PM (Optimal window for auspicious beginnings)'
+    yamagandam: yamagandamWindows[dayOfWeek],
+    gulikaKalam: gulikaWindows[dayOfWeek],
+    abhijit: '11:45 AM – 12:35 PM',
+    brahmaMuhurta: '04:30 AM – 05:18 AM'
   };
 }
 
-// Parse DAILY_POSTS.md to check if today has an explicit scheduled entry
-function parseScheduledPosts(mdContent, dateStr) {
-  const dateRegex = new RegExp(`###\\s*Date:\\s*${dateStr}[\\s\\S]*?(?=###\\s*Date:|$)`, 'i');
-  const match = mdContent.match(dateRegex);
-  if (!match) return null;
+// Compute Chandrabalam Beneficiaries for all 12 signs
+function computeRashiBeneficiaries(moonRashiIdx) {
+  const goodSigns = [];
+  const cautionSigns = [];
 
-  const block = match[0];
-  const isPending = /Status:\s*\[PENDING\]/i.test(block);
-  if (!isPending) return null; // already posted or not pending
+  RASHIS.forEach((rashi, idx) => {
+    // Distance from natal rashi to current Moon sign
+    const houseFromNatal = ((moonRashiIdx - idx + 12) % 12) + 1;
+    // Classical bad positions: 1, 2, 3, 5, 7
+    const isGood = ![1, 2, 3, 5, 7].includes(houseFromNatal);
 
-  const deityMatch = block.match(/Deity:\s*(.+)/i);
-  const significanceMatch = block.match(/Significance:\s*(.+)/i);
-  const mantraMatch = block.match(/Mantra:\s*`?([^`\n]+)`?/i);
-  const promptMatch = block.match(/AI Image Prompt:\s*`?([^`\n]+)`?/i);
-  const noteMatch = block.match(/Custom Note:\s*"([^"\n]+)"/i);
+    if (isGood) {
+      let benefit = 'General grace & peace';
+      if (houseFromNatal === 11) benefit = 'High gains, networking & success';
+      else if (houseFromNatal === 10) benefit = 'Career leadership & milestone progress';
+      else if (houseFromNatal === 9) benefit = 'Good fortune, spiritual joy & luck';
+      else if (houseFromNatal === 6) benefit = 'Victory over obstacles & renewed vitality';
+      else if (houseFromNatal === 4) benefit = 'Family peace, comfort & vehicle happiness';
+      else if (houseFromNatal === 8) benefit = 'Research, mental depth & unexpected solutions';
+      else if (houseFromNatal === 12) benefit = 'Meditation, restful sleep & spiritual growth';
+      goodSigns.push({ ...rashi, benefit });
+    } else {
+      cautionSigns.push(rashi);
+    }
+  });
 
-  return {
-    isCustom: true,
-    deity: deityMatch ? deityMatch[1].trim() : null,
-    significance: significanceMatch ? significanceMatch[1].trim() : null,
-    mantra: mantraMatch ? mantraMatch[1].trim() : null,
-    prompt: promptMatch ? promptMatch[1].trim() : null,
-    note: noteMatch ? noteMatch[1].trim() : null
-  };
+  return { goodSigns, cautionSigns };
 }
 
+// Parse scheduled posts from DAILY_POSTS.md
+function parseScheduledPosts(mdContent, targetDateStr) {
+  const lines = mdContent.split('\n');
+  let currentEntry = null;
+  let inEntry = false;
+
+  for (let line of lines) {
+    line = line.trim();
+    if (line.startsWith('### Date:')) {
+      const dateMatch = line.match(/### Date:\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/);
+      if (dateMatch && dateMatch[1] === targetDateStr) {
+        currentEntry = { date: targetDateStr };
+        inEntry = true;
+      } else {
+        inEntry = false;
+      }
+    } else if (inEntry) {
+      if (line.startsWith('- **Deity:**')) {
+        currentEntry.deity = line.replace('- **Deity:**', '').trim();
+      } else if (line.startsWith('- **Significance:**')) {
+        currentEntry.significance = line.replace('- **Significance:**', '').trim();
+      } else if (line.startsWith('- **Mantra:**')) {
+        currentEntry.mantra = line.replace('- **Mantra:**', '').replace(/[`*]/g, '').trim();
+      } else if (line.startsWith('- **AI Image Prompt:**')) {
+        currentEntry.prompt = line.replace('- **AI Image Prompt:**', '').replace(/[`*"]/g, '').trim();
+      } else if (line.startsWith('- **Custom Note:**')) {
+        currentEntry.note = line.replace('- **Custom Note:**', '').replace(/[`*"]/g, '').trim();
+      } else if (line.startsWith('- **Status:**')) {
+        currentEntry.status = line.replace('- **Status:**', '').trim();
+      }
+    }
+  }
+
+  return currentEntry;
+}
+
+// Mark post as posted in DAILY_POSTS.md
+function markPostAsPosted(targetDateStr) {
+  if (!fs.existsSync(DAILY_POSTS_PATH)) return;
+  let content = fs.readFileSync(DAILY_POSTS_PATH, 'utf8');
+  const targetHeader = `### Date: ${targetDateStr}`;
+  if (content.includes(targetHeader)) {
+    content = content.replace(
+      new RegExp(`(${targetHeader}[\\s\\S]*?- \\*\\*Status:\\*\\*\\s*)\\[PENDING\\]`),
+      `$1[POSTED on ${new Date().toISOString()}]`
+    );
+    fs.writeFileSync(DAILY_POSTS_PATH, content, 'utf8');
+  }
+}
+
+// Generate image via Pollinations Flux AI
 function generatePollinationsImageUrl(prompt) {
-  const cleanPrompt = prompt.replace(/[^\w\s,.-]/g, '').trim();
-  const encoded = encodeURIComponent(cleanPrompt);
-  return `https://image.pollinations.ai/prompt/${encoded}?width=1080&height=1080&nologo=true&model=flux`;
+  const encodedPrompt = encodeURIComponent(prompt.trim());
+  return `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1080&height=1080&nologo=true&model=flux`;
 }
 
-function buildCaption(todayStr, panchang, deityData, customNote) {
-  const divider = '✦ ─────────────── ✦';
-  
+// BUILD CAPTION: 1. DEITY & PANCHANG
+function buildDeityCaption(dateStr, panchang, deityData, customNote) {
   return `🕉️ Divya Mangalam — Daily Vedic Blessings
-${divider}
-📅 ${todayStr} • ${panchang.vara}
+✦ ─────────────── ✦
+📅 ${dateStr} • ${panchang.dayName}
 
 🙏 DEITY OF THE DAY:
 ${deityData.deity}
-Theme: ${deityData.theme || deityData.significance || 'Sacred Devotion'}
+Theme: ${deityData.theme}
 
 ✨ SACRED MANTRA:
 ${deityData.mantra}
 ${deityData.mantraMeaning ? `“${deityData.mantraMeaning}”` : ''}
 
-${divider}
+✦ ─────────────── ✦
 📜 TODAY'S PANCHANG (Lahiri Ephemeris):
 • 🌙 Tithi: ${panchang.tithi}
 • ⭐ Nakshatra: ${panchang.nakshatra}
 • 🔮 Yoga: ${panchang.yoga}
 • ⚠️ Rahu Kaal: ${panchang.rahuKaal} (avoid new beginnings)
-• ☀️ Abhijit Muhurta: ${panchang.abhijit}
+• ☀️ Abhijit Muhurta: ${panchang.abhijit} (Optimal window for auspicious beginnings)
 
-${customNote ? `💬 SPIRITUAL REFLECTION:\n“${customNote}”\n\n` : ''}${divider}
+💬 SPIRITUAL REFLECTION:
+“${customNote || `May today's divine grace fill your home with radiant peace, health, and spiritual clarity.`}”
+
+✦ ─────────────── ✦
 🌿 Explore free Vedic tools, AI Palm Reading, Dosha analysis & complete scriptures:
 🔗 https://divyamangalam.com
 Instagram: @divyamangalam.info
@@ -247,33 +391,118 @@ Instagram: @divyamangalam.info
 #DivyaMangalam #VedicAstrology #DailyPanchang #SanatanaDharma #HinduCalendar #Nakshatra #Tithi #RahuKaal #SpiritualWisdom #Jyotish #Bhakti #IndianTradition`;
 }
 
-// Mark post as [POSTED] in DAILY_POSTS.md
-function markPostAsPosted(dateStr) {
-  try {
-    if (!fs.existsSync(DAILY_POSTS_PATH)) return;
-    let content = fs.readFileSync(DAILY_POSTS_PATH, 'utf8');
-    const target = new RegExp(`(###\\s*Date:\\s*${dateStr}[\\s\\S]*?Status:\\s*)\\[PENDING\\]`, 'i');
-    if (target.test(content)) {
-      content = content.replace(target, `$1[POSTED] (at ${new Date().toISOString()})`);
-      fs.writeFileSync(DAILY_POSTS_PATH, content, 'utf8');
-      console.log(`[SUCCESS] Marked post for ${dateStr} as [POSTED] in DAILY_POSTS.md`);
-    }
-  } catch (err) {
-    console.error('[WARN] Could not update DAILY_POSTS.md:', err.message);
-  }
+// BUILD CAPTION: 2. RASHI & NAKSHATRA FORECAST
+function buildRashiCaption(dateStr, panchang, istDate) {
+  const weekdayInfo = WEEKDAY_DEITIES[istDate.getDay()];
+  const { goodSigns, cautionSigns } = computeRashiBeneficiaries(panchang.moonRashiIdx);
+
+  const goodSignList = goodSigns.map(s => `• ${s.symbol} ${s.name} — ${s.benefit}`).join('\n');
+  const cautionSignList = cautionSigns.map(s => `${s.symbol} ${s.name}`).join(', ');
+
+  return `🌟 Divya Mangalam — Daily Rashi & Nakshatra Forecast
+✦ ─────────────── ✦
+📅 ${dateStr} • ${weekdayInfo.vara} (${weekdayInfo.day})
+🌙 Transit Moon: ${panchang.moonRashi} • ⭐ Nakshatra: ${panchang.nakshatra}
+
+⭐ HIGHLY BENEFITTED RASHIS TODAY (Chandrabalam Shubha):
+These signs enjoy favorable lunar alignment today for career progress, financial decisions, and peaceful relationships:
+${goodSignList}
+
+⚠️ RASHIS TO PRACTICE MINDFULNESS & PATIENCE:
+Signs advised to pause on hasty financial speculation and avoid arguments today:
+• ${cautionSignList}
+💡 Sacred Remedy: Chant “ॐ नमः शिवाय” or light a ghee lamp at sunset for mental tranquility.
+
+✦ ─────────────── ✦
+🎨 TODAY'S COSMIC VIBRATIONS (${weekdayInfo.planet}):
+• 🎨 Lucky Colors: ${weekdayInfo.luckyColors}
+• 🔢 Lucky Numbers: ${weekdayInfo.luckyNumbers}
+• 🧭 Auspicious Direction: ${weekdayInfo.direction}
+
+✦ ─────────────── ✦
+🔮 Check your complete birth chart, Mangal Dosha & Sade Sati free:
+🔗 https://divyamangalam.com/dosha-check.html
+Instagram: @divyamangalam.info
+
+#RashiBhavishya #DailyHoroscope #VedicAstrology #Jyotish #ZodiacForecast #Chandrabalam #Nakshatra #DivyaMangalam #AstrologyToday #Horoscope2026 #SpiritualGuidance`;
 }
 
-// HTTP request helper for Meta Graph API
-function makeHttpsRequest(url, method = 'GET', data = null) {
+// BUILD CAPTION: 3. SHUBH MUHURAT & TIMINGS GUIDE
+function buildMuhuratCaption(dateStr, panchang, istDate) {
+  const weekdayInfo = WEEKDAY_DEITIES[istDate.getDay()];
+
+  return `⏳ Divya Mangalam — Shubh Muhurat & Timings Guide
+✦ ─────────────── ✦
+📅 ${dateStr} • ${weekdayInfo.vara} (${weekdayInfo.day})
+🌙 Tithi: ${panchang.tithi} • ⭐ Nakshatra: ${panchang.nakshatra}
+
+🌟 SUPER AUSPICIOUS TIMINGS (Highest Cosmic Support):
+Align critical meetings, worship, purchases, or new initiatives with these windows:
+• ☀️ Abhijit Muhurta: ${panchang.abhijit} (The invincible midday window for victory and success)
+• 🌅 Brahma Muhurta: ${panchang.brahmaMuhurta} (Supreme time for meditation, prayer & spiritual clarity)
+• 🍯 Amrit Kaal: Auspicious for family celebrations, agreements & major decisions
+
+⚠️ INAUSPICIOUS PERIODS (Strictly Avoid Major New Beginnings):
+During these windows, avoid signing contracts, large investments, or starting new journeys:
+• 🚫 Rahu Kaal: ${panchang.rahuKaal} (Heavy planetary interference — focus on routine work)
+• ⏳ Yamagandam: ${panchang.yamagandam} (Avoid critical new departures or commitments)
+• 🌘 Gulika Kalam: ${panchang.gulikaKalam} (Suitable for ongoing, routine tasks)
+
+💡 VEDIC WISDOM:
+“When your actions harmonize with auspicious cosmic hours, effort decreases and divine grace multiplies.”
+
+✦ ─────────────── ✦
+📅 Calculate complete personalized Shubh Muhurats for marriage, housewarming & business:
+🔗 https://divyamangalam.com/muhurat.html
+Instagram: @divyamangalam.info
+
+#ShubhMuhurat #AuspiciousTimings #RahuKaal #AbhijitMuhurta #VedicWisdom #Panchang #MuhurtaChintamani #DivyaMangalam #SanatanaDharma #DailyMuhurat`;
+}
+
+// BUILD CAPTION: 4. PALM READING FEATURE SPOTLIGHT
+function buildPalmCaption(dateStr) {
+  return `🖐️ Divya Mangalam — Vedic Palm Reading (Hasta Samudrika Shastra)
+✦ ─────────────── ✦
+✨ “What do your palm lines reveal about your destiny, vitality, and true karma?”
+
+In ancient Vedic Hasta Samudrika Shastra, your hand is a living cosmic map. As your thoughts, habits, and consciousness evolve, the energetic lines on your palm reflect your soul's journey.
+
+🔍 THE 4 PRIMARY LINES ON YOUR PALM:
+• 💚 Life Line (Ayushya Rekha): Traces vitality, health phases, energy resilience & foundational stamina.
+• 🧠 Head Line (Matru Rekha): Reveals intellectual depth, decision-making style & artistic vs analytical intellect.
+• 💖 Heart Line (Hridaya Rekha): Maps emotional depth, relationship karma, compassion & romantic harmony.
+• ⭐ Fate Line (Bhagya Rekha): Charts career trajectory, self-earned wealth & major milestone years.
+
+🪐 THE 7 PLANETARY MOUNTS (Energy Hubs):
+• 👑 Jupiter Mount: Ambition, wisdom & leadership
+• ⚖️ Saturn Mount: Discipline, perseverance & patience
+• ☀️ Sun Mount: Fame, vitality & creative brilliance
+• 💬 Mercury Mount: Business acumen, speech & wit
+• 🌺 Venus Mount: Love, artistic passion & vitality
+• 🌙 Moon Mount: Intuition, imagination & travel
+• ⚔️ Mars Mount: Courage, fortitude & protection
+
+✦ ─────────────── ✦
+📲 Free AI Palm Reading Online:
+Scan or upload your palm from your phone in 30 seconds for an authentic Vedic reading & personalized gemstone remedies!
+🔗 https://divyamangalam.com/palm-reading.html
+Instagram: @divyamangalam.info
+
+#PalmReading #HastaSamudrika #VedicPalmistry #Palmistry #Destiny #LifeLine #FateLine #HeartLine #DivyaMangalam #VedicWisdom #KarmaAndDestiny #AstrologyOnline`;
+}
+
+// HTTP Helper
+function makeHttpsRequest(url, method = 'GET', data = null, headers = {}) {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
+    const urlObj = new URL(url);
     const options = {
-      hostname: parsed.hostname,
+      hostname: urlObj.hostname,
       port: 443,
-      path: parsed.pathname + parsed.search,
+      path: urlObj.pathname + urlObj.search,
       method: method,
       headers: {
-        'User-Agent': 'DivyaMangalam-Instagram-Agent/1.0'
+        'User-Agent': 'DivyaMangalam-Instagram-Agent/2.0',
+        ...headers
       }
     };
 
@@ -282,9 +511,9 @@ function makeHttpsRequest(url, method = 'GET', data = null) {
       options.headers['Content-Length'] = Buffer.byteLength(data);
     }
 
-    const req = https.request(options, (res) => {
+    const req = https.request(options, res => {
       let body = '';
-      res.on('data', chunk => { body += chunk; });
+      res.on('data', chunk => body += chunk);
       res.on('end', () => {
         try {
           const json = JSON.parse(body);
@@ -309,7 +538,6 @@ function makeHttpsRequest(url, method = 'GET', data = null) {
 async function publishToInstagram(imageUrl, caption) {
   console.log('[API] Starting Meta Instagram Graph API publication...');
   
-  // Auto-detect Instagram Platform token (IG...) vs Facebook Graph token (EAA...)
   const isInstagramToken = META_ACCESS_TOKEN.startsWith('IG');
   const baseUrl = isInstagramToken ? 'https://graph.instagram.com/v20.0' : 'https://graph.facebook.com/v20.0';
   const targetId = isInstagramToken ? (INSTAGRAM_ACCOUNT_ID || 'me') : INSTAGRAM_ACCOUNT_ID;
@@ -322,7 +550,7 @@ async function publishToInstagram(imageUrl, caption) {
     access_token: META_ACCESS_TOKEN
   }).toString();
 
-  console.log('[API] Creating media container on ' + baseUrl + '...');
+  console.log(`[API] Creating media container on ${baseUrl}...`);
   const containerRes = await makeHttpsRequest(createContainerUrl, 'POST', postData);
   const containerId = containerRes.id;
   console.log('[API] Media container created. ID:', containerId);
@@ -351,7 +579,7 @@ function generateHtmlPreview(postData) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Daily Post Preview — ${postData.date}</title>
+  <title>Instagram Daily Post Preview — ${postData.type.toUpperCase()}</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #FAF8F5; color: #18181B; margin: 0; padding: 24px; display: flex; justify-content: center; }
     .card { background: #FFFFFF; max-width: 460px; width: 100%; border-radius: 16px; border: 1px solid rgba(212,160,23,0.3); box-shadow: 0 12px 36px rgba(44,26,14,0.08); overflow: hidden; }
@@ -362,7 +590,7 @@ function generateHtmlPreview(postData) {
     .img-wrap { width: 100%; aspect-ratio: 1/1; background: #F5EFEB; position: relative; overflow: hidden; }
     .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .caption-box { padding: 16px; font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; color: #2D2738; }
-    .badge { display: inline-block; background: #FAF6EE; border: 1px solid #D4A017; border-radius: 999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 700; color: #B45309; margin: 12px 16px 0; }
+    .badge { display: inline-block; background: #FAF6EE; border: 1px solid #D4A017; border-radius: 999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 700; color: #B45309; margin: 12px 16px 0; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -371,13 +599,13 @@ function generateHtmlPreview(postData) {
       <div class="avatar">🕉️</div>
       <div>
         <div class="title">divyamangalam.info</div>
-        <div class="subtitle">Divya Mangalam • Daily Vedic Post Preview</div>
+        <div class="subtitle">Divya Mangalam • ${postData.type.toUpperCase()} Post Preview</div>
       </div>
     </div>
-    <span class="badge">${postData.isCustom ? 'Custom Scheduled Post' : 'Dynamic Panchang Post'}</span>
-    <div class="caption-box" style="padding-bottom: 8px;"><strong>Date:</strong> ${postData.date} • <strong>Deity:</strong> ${postData.deity}</div>
+    <span class="badge">${postData.type} post</span>
+    <div class="caption-box" style="padding-bottom: 8px;"><strong>Date:</strong> ${postData.date}</div>
     <div class="img-wrap">
-      <img src="${postData.imageUrl}" alt="${postData.deity}" loading="lazy" />
+      <img src="${postData.imageUrl}" alt="${postData.type}" loading="lazy" />
     </div>
     <div class="caption-box">${escapeHtml(postData.caption)}</div>
   </div>
@@ -394,61 +622,78 @@ async function main() {
   const istDate = getISTDate();
   const dateStr = formatDateISO(istDate);
   const weekdayIdx = istDate.getDay();
+  const postType = getPostType();
 
   console.log(`====================================================`);
   console.log(`Divya Mangalam Instagram Posting Agent`);
   console.log(`Date (IST): ${dateStr} (${WEEKDAY_DEITIES[weekdayIdx].day})`);
-  console.log(`Mode: ${IS_DRY_RUN ? 'PREVIEW / DRY-RUN (No API credentials or --dry-run flag)' : 'LIVE PUBLISHING'}`);
+  console.log(`Post Type: ${postType.toUpperCase()}`);
+  console.log(`Mode: ${IS_DRY_RUN ? 'PREVIEW / DRY-RUN (Pass valid tokens to publish)' : 'LIVE PUBLISHING'}`);
   console.log(`====================================================\n`);
 
-  // 1. Calculate Astronomical Panchang
   const panchang = calculatePanchang(istDate);
 
-  // 2. Read DAILY_POSTS.md for custom scheduled entry
-  let mdContent = '';
-  if (fs.existsSync(DAILY_POSTS_PATH)) {
-    mdContent = fs.readFileSync(DAILY_POSTS_PATH, 'utf8');
-  }
-
-  const customEntry = parseScheduledPosts(mdContent, dateStr);
-
-  let deityData = null;
-  let customNote = null;
-  let imagePrompt = null;
+  let caption = '';
+  let imagePrompt = '';
   let isCustom = false;
 
-  if (customEntry) {
-    console.log(`[INFO] Found custom scheduled post for ${dateStr} in DAILY_POSTS.md!`);
-    isCustom = true;
-    deityData = {
-      deity: customEntry.deity || WEEKDAY_DEITIES[weekdayIdx].deity,
-      theme: customEntry.significance || WEEKDAY_DEITIES[weekdayIdx].theme,
-      mantra: customEntry.mantra || WEEKDAY_DEITIES[weekdayIdx].mantra,
-      mantraMeaning: ''
-    };
-    imagePrompt = customEntry.prompt || WEEKDAY_DEITIES[weekdayIdx].prompt;
-    customNote = customEntry.note;
+  if (postType === 'rashi') {
+    // 2. RASHI & NAKSHATRA FORECAST POST
+    console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
+    caption = buildRashiCaption(dateStr, panchang, istDate);
+    imagePrompt = `Vedic astrological golden celestial wheel, 12 illuminated golden rashi zodiac constellations glowing in cosmic indigo sky, ancient Sanskrit glyphs, sacred mandala, radiant starlight, 8k devotional masterpiece`;
+  } else if (postType === 'muhurat') {
+    // 3. SHUBH MUHURAT & TIMINGS POST
+    console.log(`[INFO] Building Shubh Muhurat & Timings Guide...`);
+    caption = buildMuhuratCaption(dateStr, panchang, istDate);
+    imagePrompt = `Ancient Vedic Surya Yantra astronomical sundial crafted in polished gold and brass, morning golden sunlight casting divine rays across sacred Hindu temple courtyard, celestial clock, 8k cinematic spiritual artwork`;
+  } else if (postType === 'palm') {
+    // 4. PALM READING FEATURE SPOTLIGHT POST
+    console.log(`[INFO] Building Vedic Palm Reading Spotlight...`);
+    caption = buildPalmCaption(dateStr);
+    imagePrompt = `Close up of an open spiritual hand palm with illuminated golden and turquoise energy lines glowing softly on skin, sacred Vedic symbols of Sun Moon and Jupiter etched faintly, cosmic stardust atmosphere, 8k photorealistic temple photography`;
   } else {
-    console.log(`[INFO] Using dynamic Panchang + Deity of the Day for ${WEEKDAY_DEITIES[weekdayIdx].day}`);
-    deityData = WEEKDAY_DEITIES[weekdayIdx];
-    imagePrompt = deityData.prompt;
-    customNote = `May today's ${panchang.nakshatra} nakshatra and ${deityData.deity}'s divine blessings illuminate your path with clarity and inner peace.`;
+    // 1. DEITY & PANCHANG POST (DEFAULT)
+    let mdContent = '';
+    if (fs.existsSync(DAILY_POSTS_PATH)) {
+      mdContent = fs.readFileSync(DAILY_POSTS_PATH, 'utf8');
+    }
+    const customEntry = parseScheduledPosts(mdContent, dateStr);
+
+    let deityData = null;
+    let customNote = null;
+
+    if (customEntry) {
+      console.log(`[INFO] Found custom scheduled post for ${dateStr} in DAILY_POSTS.md!`);
+      isCustom = true;
+      deityData = {
+        deity: customEntry.deity || WEEKDAY_DEITIES[weekdayIdx].deity,
+        theme: customEntry.significance || WEEKDAY_DEITIES[weekdayIdx].theme,
+        mantra: customEntry.mantra || WEEKDAY_DEITIES[weekdayIdx].mantra,
+        mantraMeaning: ''
+      };
+      imagePrompt = customEntry.prompt || WEEKDAY_DEITIES[weekdayIdx].prompt;
+      customNote = customEntry.note;
+    } else {
+      console.log(`[INFO] Using dynamic Panchang + Deity of the Day for ${WEEKDAY_DEITIES[weekdayIdx].day}`);
+      deityData = WEEKDAY_DEITIES[weekdayIdx];
+      imagePrompt = deityData.prompt;
+      customNote = `May today's ${panchang.nakshatra} nakshatra and ${deityData.deity}'s divine blessings illuminate your path with clarity and inner peace.`;
+    }
+
+    caption = buildDeityCaption(dateStr, panchang, deityData, customNote);
   }
 
-  // 3. Generate AI Artwork URL
+  // Generate AI Artwork URL
   const imageUrl = generatePollinationsImageUrl(imagePrompt);
   console.log(`[IMAGE] AI Artwork Prompt: "${imagePrompt}"`);
   console.log(`[IMAGE] Generated AI Image URL: ${imageUrl}\n`);
 
-  // 4. Build Devotional Caption
-  const caption = buildCaption(dateStr, panchang, deityData, customNote);
-
-  // 5. Save HTML & JSON Previews
+  // Save Previews
   const previewData = {
     date: dateStr,
+    type: postType,
     isCustom,
-    deity: deityData.deity,
-    mantra: deityData.mantra,
     imageUrl,
     caption,
     panchang,
@@ -459,18 +704,17 @@ async function main() {
   fs.writeFileSync(LOG_PATH, JSON.stringify(previewData, null, 2), 'utf8');
   console.log(`[PREVIEW] HTML Preview generated: ${PREVIEW_HTML_PATH}`);
 
-  // 6. Execute Publish or Dry-Run
+  // Publish or Dry-run
   if (IS_DRY_RUN) {
-    console.log(`\n================== CAPTION PREVIEW ==================`);
+    console.log(`\n================== CAPTION PREVIEW (${postType.toUpperCase()}) ==================`);
     console.log(caption);
     console.log(`====================================================\n`);
-    console.log(`[DRY RUN COMPLETE] Image & Caption successfully verified!`);
-    console.log(`When META_ACCESS_TOKEN and INSTAGRAM_ACCOUNT_ID are added to GitHub Secrets, this post will publish live to @divyamangalam.info automatically.\n`);
+    console.log(`[DRY RUN COMPLETE] Image & Caption verified successfully.`);
   } else {
     try {
       const postId = await publishToInstagram(imageUrl, caption);
-      markPostAsPosted(dateStr);
-      console.log(`[SUCCESS] Daily Instagram post complete! Post ID: ${postId}`);
+      if (postType === 'deity') markPostAsPosted(dateStr);
+      console.log(`[SUCCESS] Instagram post published! Post ID: ${postId}`);
     } catch (err) {
       console.error(`[ERROR] Failed to publish to Instagram:`, err.message);
       process.exit(1);

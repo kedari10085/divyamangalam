@@ -1,17 +1,32 @@
-name: Daily Instagram Posting Agent
+name: Divya Mangalam Instagram Posting Agent
 
 on:
   schedule:
-    # Runs every morning at 01:30 UTC (07:00 AM IST)
+    # 07:00 AM IST (01:30 UTC) - Morning Deity & Panchang
     - cron: '30 1 * * *'
+    # 12:00 PM IST (06:30 UTC) - Daily Rashi Forecast
+    - cron: '30 6 * * *'
+    # 03:00 PM IST (09:30 UTC) Saturdays - Palm Reading Spotlight
+    - cron: '30 9 * * 6'
   workflow_dispatch:
-    # Allows manual 1-click test run from GitHub Actions tab
+    inputs:
+      post_type:
+        description: 'Choose which post to publish'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - deity
+          - rashi
+          - muhurat
+          - palm
 
 permissions:
   contents: write
 
 jobs:
-  post-daily:
+  publish-instagram:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -24,12 +39,35 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Determine Post Type
+        id: determine-type
+        run: |
+          INPUT_TYPE="${{ inputs.post_type }}"
+          if [ -z "$INPUT_TYPE" ] || [ "$INPUT_TYPE" = "auto" ]; then
+            HOUR=$(date -u +"%H")
+            DOW=$(date -u +"%u")
+            if [ "$HOUR" -ge 1 ] && [ "$HOUR" -lt 5 ]; then
+              POST_TYPE="deity"
+            elif [ "$HOUR" -ge 5 ] && [ "$HOUR" -lt 8 ]; then
+              POST_TYPE="rashi"
+            elif [ "$DOW" -eq 6 ]; then
+              POST_TYPE="palm"
+            else
+              POST_TYPE="muhurat"
+            fi
+          else
+            POST_TYPE="$INPUT_TYPE"
+          fi
+          echo "Selected post type: $POST_TYPE"
+          echo "post_type=$POST_TYPE" >> $GITHUB_OUTPUT
+
       - name: Run Instagram Posting Agent
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          POST_TYPE: ${{ steps.determine-type.outputs.post_type }}
         run: |
-          node instagram-agent/post_daily.js
+          node instagram-agent/post_daily.js --type=$POST_TYPE
 
       - name: Commit post status updates
         run: |
