@@ -70,7 +70,7 @@ Once committed, you can trigger it anytime via **Actions** → **Daily Instagram
 
 ## 5. Multiple Post Formats & CLI Commands
 
-You can run any post type from your terminal anytime:
+You can run any post type or spotlight from your terminal anytime:
 
 ```bash
 # 1. Morning Vedic Deity of the Day & Panchang
@@ -85,8 +85,48 @@ node instagram-agent/post_daily.js --type=muhurat
 # 4. Vedic Palm Reading Feature Spotlight (Hasta Samudrika Shastra)
 node instagram-agent/post_daily.js --type=palm
 
+# 5. 18 Maha Puranas & Sacred Upasanas Feature Spotlight
+node instagram-agent/post_daily.js --type=puran
+
+# 6. Vivah & Griha Pravesh Shubh Muhurats Feature Spotlight
+node instagram-agent/post_daily.js --type=marriage_muhurat
+
+# 7. Automated 3-Day Rotational Spotlight (Palm -> Puran -> Marriage Muhurats)
+node instagram-agent/post_daily.js --type=spotlight
+
 # Add --dry-run to preview image and caption without publishing:
-node instagram-agent/post_daily.js --type=rashi --dry-run
+node instagram-agent/post_daily.js --type=spotlight --dry-run
+```
+
+---
+
+## 6. Daily 5-Slot Peak Browsing Schedule (IST)
+
+The automated system is designed to engage users during peak social media browsing rush hours:
+
+| Slot | Time (IST) | Mode / Content | Goal |
+|---|---|---|---|
+| **Slot 1** | **07:00 AM** | 🌅 Morning Darshan & Daily Panchang | Start the day with sacred blessings & tithi |
+| **Slot 2** | **12:00 PM** | 🌟 Midday Rashi & Nakshatra Forecast | Lunch rush browsing: lucky signs & colors |
+| **Slot 3** | **03:30 PM** | ⏳ Afternoon Shubh Muhurat Guide | Tea break browsing: good vs bad timings |
+| **Slot 4** | **07:30 PM** | 🕉️ Evening Devotional 10s Video Reel | Evening rush: 432 Hz slow-motion Darshan |
+| **Slot 5** | **09:30 PM** | 📲 Bedtime Tool Spotlight (Rotational) | Relaxed evening browsing: Palm / Puran / Muhurat |
+
+---
+
+## 7. Generating 10-Second Divine Video Reels
+
+Generate vertical (1080x1920) 10-second Reels with slow-motion Ken Burns zoom, floating divine particles, Sanskrit mantras, and 432 Hz harmonic audio:
+
+```bash
+python generate_reel_engine.py \
+  --image images/shiva_kailash.jpg \
+  --deity "Lord Shiva" \
+  --mantra "ॐ नमः शिवाय" \
+  --mantra_trans "Om Namah Shivaya" \
+  --sub "Monday Somavara Darshan • Divine Tranquility" \
+  --out images/shiva_darshan.mp4 \
+  --duration 10.0
 ```
 
 ---

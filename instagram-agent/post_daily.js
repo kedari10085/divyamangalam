@@ -45,13 +45,16 @@ const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);
 
-// Parse post type: --type=deity | rashi | muhurat | palm
+// Parse post type: --type=deity | rashi | muhurat | palm | puran | marriage_muhurat | spotlight
 function getPostType() {
   const typeArg = process.argv.find(a => a.startsWith('--type='));
   if (typeArg) return typeArg.split('=')[1].toLowerCase();
   if (process.argv.includes('--rashi')) return 'rashi';
   if (process.argv.includes('--muhurat')) return 'muhurat';
   if (process.argv.includes('--palm')) return 'palm';
+  if (process.argv.includes('--puran')) return 'puran';
+  if (process.argv.includes('--marriage')) return 'marriage_muhurat';
+  if (process.argv.includes('--spotlight')) return 'spotlight';
   if (process.argv.includes('--deity')) return 'deity';
   return (process.env.POST_TYPE || 'deity').toLowerCase();
 }
@@ -83,6 +86,7 @@ const WEEKDAY_DEITIES = [
     theme: 'Radiant health, vitality, purpose & illumination',
     mantra: 'ॐ घृणिः सूर्याय नमः',
     mantraMeaning: 'Salutations to the supreme light that energizes the cosmos.',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_bhagavan.jpg',
     prompt: 'Lord Surya Narayana riding magnificent golden chariot with seven horses across celestial sunrise sky, golden halo radiance, divine lotus flowers, cosmic rays of warmth, spiritual masterpiece, hyperrealistic 8k, devotional temple art, octane render'
   },
   {
@@ -96,6 +100,7 @@ const WEEKDAY_DEITIES = [
     theme: 'Mental peace, emotional mastery & spiritual liberation',
     mantra: 'ॐ नमः शिवाय',
     mantraMeaning: 'Salutations to the auspicious one, the source of supreme consciousness.',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_kailash.jpg',
     prompt: 'Lord Shiva in deep serene meditation on sacred Mount Kailash, crescent moon in matted locks, sacred Ganges flowing, gentle snowfall, third eye, divine blue throat, ethereal moonlight, masterpiece 8k spiritual art'
   },
   {
@@ -491,6 +496,66 @@ Instagram: @divyamangalam.info
 #PalmReading #HastaSamudrika #VedicPalmistry #Palmistry #Destiny #LifeLine #FateLine #HeartLine #DivyaMangalam #VedicWisdom #KarmaAndDestiny #AstrologyOnline`;
 }
 
+// BUILD CAPTION: 5. 18 MAHA PURANAS & SACRED UPASANAS SPOTLIGHT
+function buildPuranCaption(dateStr) {
+  return `📜 Divya Mangalam — 18 Maha Puranas & Sacred Upasanas
+✦ ─────────────── ✦
+✨ “Immerse yourself in the timeless ocean of Vedic wisdom, divine stories, and sacred Upasanas.”
+
+Compiled by Bhagavan Veda Vyasa, the 18 Maha Puranas contain over 400,000 verses revealing cosmic creation, eternal dharma, deep spiritual truths, and practical guidance for life:
+
+🔱 THE THREE CLASSIFICATIONS (TRIMURTI UPASANAS):
+• 🌺 Satvik Puranas (Lord Vishnu Upasana):
+  Vishnu Purana, Bhagavata Purana, Naradiya, Garuda, Padma & Varaha Purana.
+  Focus: Preservation, selfless devotion (Bhakti), righteousness, and eternal peace.
+
+• 🕉️ Tamas/Nivritti Puranas (Lord Shiva Upasana):
+  Shiva Purana, Linga Purana, Skanda, Agni, Matsya & Kurma Purana.
+  Focus: Dissolution of ego, ascetic meditation, temple consecration, and spiritual liberation (Moksha).
+
+• 🔱 Rajas/Srishti Puranas (Lord Brahma / Shakti Upasana):
+  Brahma Purana, Brahmanda, Brahma Vaivarta, Markandeya, Bhavishya & Vamana Purana.
+  Focus: Cosmic architecture, genealogy of sages, Durga Saptashati & sacred rituals.
+
+✦ ─────────────── ✦
+📖 Explore the Sacred Portal:
+Read authentic summaries, chapters, and sacred mantras across the 18 Puranas & complete Mahabharata online:
+🔗 https://divyamangalam.com/puran.html
+🔗 https://divyamangalam.com/mahabharata.html
+Instagram: @divyamangalam.info
+
+#MahaPuranas #VedicWisdom #SanatanaDharma #ShivaPurana #BhagavataPurana #VishnuPurana #SkandaPurana #Upasana #VedaVyasa #DivyaMangalam #SacredTexts #HinduScriptures`;
+}
+
+// BUILD CAPTION: 6. VIVAH & GRIHA PRAVESH SHUBH MUHURAT SPOTLIGHT
+function buildMarriageMuhuratCaption(dateStr) {
+  return `🏰 Divya Mangalam — Vivah & Griha Pravesh Shubh Muhurat Guide
+✦ ─────────────── ✦
+✨ “When your sacred milestones align with divine celestial timings, harmony and prosperity flourish for generations.”
+
+In Vedic Muhurta Shastra, embarking on life's monumental milestones during auspicious windows protects against cosmic friction and activates divine blessings:
+
+💍 VIVAH MUHURAT (Auspicious Marriage Timings):
+• Favorable Nakshatras: Rohini, Mrigashira, Magha, Uttara Phalguni, Hasta, Swati, Anuradha, Mula, Uttara Ashadha, Uttara Bhadrapada, Revati.
+• Favorable Days: Thursday (Guruvara), Friday (Shukravara), Wednesday (Budhavara), Monday (Somavara).
+• Essential Checks: 10-fold Dasa Koota compatibility & cancellation of Mangal Dosha.
+• Periods to Avoid: Chaturmas, Guru/Shukra Tara Asta (combustion), and Bhadra / Vishti karana.
+
+🏡 GRIHA PRAVESH MUHURAT (Sacred Housewarming):
+• Ideal Months: Vaishakha, Jyeshtha, Magha, Phalguna (Uttarayan period preferred).
+• Auspicious Tithis: Dwitiya, Tritiya, Panchami, Saptami, Dashami, Ekadashi, Trayodashi (Shukla Paksha).
+• Sacred Vastu Shanti & Navagraha Puja timings to bring positive pranic energy into your new home.
+
+✦ ─────────────── ✦
+⏳ Free Online Vedic Muhurat & Dosha Calculator:
+Check auspicious marriage dates, housewarming windows, and complete Mangal Dosha analysis instantly:
+🔗 https://divyamangalam.com/muhurat.html
+🔗 https://divyamangalam.com/dosha-check.html
+Instagram: @divyamangalam.info
+
+#VivahMuhurat #GrihaPravesh #ShubhMuhurat #MarriageAstrology #VedicAstrology #Housewarming #VastuShastra #KundliMatching #MangalDosha #DivyaMangalam #AuspiciousTimings`;
+}
+
 // HTTP Helper
 function makeHttpsRequest(url, method = 'GET', data = null, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -636,31 +701,52 @@ async function main() {
   let caption = '';
   let imagePrompt = '';
   let isCustom = false;
+  let deityData = null;
+  let customEntry = null;
 
-  if (postType === 'rashi') {
+  let effectiveType = postType;
+  if (postType === 'spotlight') {
+    // Deterministic 3-day rotation to avoid overwhelming followers
+    // Day 0: Palm Reading, Day 1: 18 Maha Puranas & Upasanas, Day 2: Vivah & Griha Pravesh Muhurats
+    const dayEpoch = Math.floor(istDate.getTime() / 86400000);
+    const spotlightTypes = ['palm', 'puran', 'marriage_muhurat'];
+    effectiveType = spotlightTypes[dayEpoch % spotlightTypes.length];
+    console.log(`[SPOTLIGHT] Rotating spotlight (${(dayEpoch % 3) + 1}/3): Selecting ${effectiveType.toUpperCase()}...`);
+  }
+
+  if (effectiveType === 'rashi') {
     // 2. RASHI & NAKSHATRA FORECAST POST
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
     caption = buildRashiCaption(dateStr, panchang, istDate);
     imagePrompt = `Vedic astrological golden celestial wheel, 12 illuminated golden rashi zodiac constellations glowing in cosmic indigo sky, ancient Sanskrit glyphs, sacred mandala, radiant starlight, 8k devotional masterpiece`;
-  } else if (postType === 'muhurat') {
+  } else if (effectiveType === 'muhurat') {
     // 3. SHUBH MUHURAT & TIMINGS POST
     console.log(`[INFO] Building Shubh Muhurat & Timings Guide...`);
     caption = buildMuhuratCaption(dateStr, panchang, istDate);
     imagePrompt = `Ancient Vedic Surya Yantra astronomical sundial crafted in polished gold and brass, morning golden sunlight casting divine rays across sacred Hindu temple courtyard, celestial clock, 8k cinematic spiritual artwork`;
-  } else if (postType === 'palm') {
+  } else if (effectiveType === 'palm') {
     // 4. PALM READING FEATURE SPOTLIGHT POST
     console.log(`[INFO] Building Vedic Palm Reading Spotlight...`);
     caption = buildPalmCaption(dateStr);
     imagePrompt = `Close up of an open spiritual hand palm with illuminated golden and turquoise energy lines glowing softly on skin, sacred Vedic symbols of Sun Moon and Jupiter etched faintly, cosmic stardust atmosphere, 8k photorealistic temple photography`;
+  } else if (effectiveType === 'puran') {
+    // 5. 18 MAHA PURANAS & SACRED UPASANAS SPOTLIGHT
+    console.log(`[INFO] Building 18 Maha Puranas & Sacred Upasanas Spotlight...`);
+    caption = buildPuranCaption(dateStr);
+    imagePrompt = `Sage Veda Vyasa in peaceful meditation writing sacred Sanskrit verses on ancient palm leaf manuscripts under sacred banyan tree, warm glowing temple oil lamps, divine golden aura, classical 8k devotional oil painting`;
+  } else if (effectiveType === 'marriage_muhurat' || effectiveType === 'marriage') {
+    // 6. VIVAH & GRIHA PRAVESH SHUBH MUHURAT SPOTLIGHT
+    console.log(`[INFO] Building Vivah & Griha Pravesh Shubh Muhurat Spotlight...`);
+    caption = buildMarriageMuhuratCaption(dateStr);
+    imagePrompt = `Sacred Vedic Hindu wedding mandap adorned with fresh golden marigold flowers and silk, holy fire havan kunda with divine flame, traditional brass oil lamps, auspicious atmosphere, 8k spiritual fine art`;
   } else {
     // 1. DEITY & PANCHANG POST (DEFAULT)
     let mdContent = '';
     if (fs.existsSync(DAILY_POSTS_PATH)) {
       mdContent = fs.readFileSync(DAILY_POSTS_PATH, 'utf8');
     }
-    const customEntry = parseScheduledPosts(mdContent, dateStr);
+    customEntry = parseScheduledPosts(mdContent, dateStr);
 
-    let deityData = null;
     let customNote = null;
 
     if (customEntry) {
@@ -670,7 +756,8 @@ async function main() {
         deity: customEntry.deity || WEEKDAY_DEITIES[weekdayIdx].deity,
         theme: customEntry.significance || WEEKDAY_DEITIES[weekdayIdx].theme,
         mantra: customEntry.mantra || WEEKDAY_DEITIES[weekdayIdx].mantra,
-        mantraMeaning: ''
+        mantraMeaning: '',
+        cdnImage: customEntry.imageUrl || WEEKDAY_DEITIES[weekdayIdx].cdnImage
       };
       imagePrompt = customEntry.prompt || WEEKDAY_DEITIES[weekdayIdx].prompt;
       customNote = customEntry.note;
@@ -684,15 +771,21 @@ async function main() {
     caption = buildDeityCaption(dateStr, panchang, deityData, customNote);
   }
 
-  // Generate AI Artwork URL
-  const imageUrl = generatePollinationsImageUrl(imagePrompt);
-  console.log(`[IMAGE] AI Artwork Prompt: "${imagePrompt}"`);
-  console.log(`[IMAGE] Generated AI Image URL: ${imageUrl}\n`);
+  // Generate Image URL (Prioritize Classical Verified Artwork CDN if available)
+  let imageUrl = '';
+  if (effectiveType === 'deity' && deityData && deityData.cdnImage && !customEntry?.prompt) {
+    imageUrl = deityData.cdnImage;
+    console.log(`[IMAGE] Using Classical Verified Artwork CDN: ${imageUrl}\n`);
+  } else {
+    imageUrl = generatePollinationsImageUrl(imagePrompt);
+    console.log(`[IMAGE] AI Artwork Prompt: "${imagePrompt}"`);
+    console.log(`[IMAGE] Generated AI Image URL: ${imageUrl}\n`);
+  }
 
   // Save Previews
   const previewData = {
     date: dateStr,
-    type: postType,
+    type: effectiveType,
     isCustom,
     imageUrl,
     caption,
@@ -706,14 +799,14 @@ async function main() {
 
   // Publish or Dry-run
   if (IS_DRY_RUN) {
-    console.log(`\n================== CAPTION PREVIEW (${postType.toUpperCase()}) ==================`);
+    console.log(`\n================== CAPTION PREVIEW (${effectiveType.toUpperCase()}) ==================`);
     console.log(caption);
     console.log(`====================================================\n`);
     console.log(`[DRY RUN COMPLETE] Image & Caption verified successfully.`);
   } else {
     try {
       const postId = await publishToInstagram(imageUrl, caption);
-      if (postType === 'deity') markPostAsPosted(dateStr);
+      if (effectiveType === 'deity') markPostAsPosted(dateStr);
       console.log(`[SUCCESS] Instagram post published! Post ID: ${postId}`);
     } catch (err) {
       console.error(`[ERROR] Failed to publish to Instagram:`, err.message);
