@@ -285,15 +285,20 @@ function makeHttpsRequest(url, method = 'GET', data = null) {
 async function publishToInstagram(imageUrl, caption) {
   console.log('[API] Starting Meta Instagram Graph API publication...');
   
+  // Auto-detect Instagram Platform token (IG...) vs Facebook Graph token (EAA...)
+  const isInstagramToken = META_ACCESS_TOKEN.startsWith('IG');
+  const baseUrl = isInstagramToken ? 'https://graph.instagram.com/v20.0' : 'https://graph.facebook.com/v20.0';
+  const targetId = isInstagramToken ? (INSTAGRAM_ACCOUNT_ID || 'me') : INSTAGRAM_ACCOUNT_ID;
+
   // 1. Create Media Container
-  const createContainerUrl = `https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media`;
+  const createContainerUrl = `${baseUrl}/${targetId}/media`;
   const postData = new URLSearchParams({
     image_url: imageUrl,
     caption: caption,
     access_token: META_ACCESS_TOKEN
   }).toString();
 
-  console.log('[API] Creating media container...');
+  console.log('[API] Creating media container on ' + baseUrl + '...');
   const containerRes = await makeHttpsRequest(createContainerUrl, 'POST', postData);
   const containerId = containerRes.id;
   console.log('[API] Media container created. ID:', containerId);
@@ -303,7 +308,7 @@ async function publishToInstagram(imageUrl, caption) {
   await new Promise(r => setTimeout(r, 4000));
 
   // 3. Publish Media Container
-  const publishUrl = `https://graph.facebook.com/v19.0/${INSTAGRAM_ACCOUNT_ID}/media_publish`;
+  const publishUrl = `${baseUrl}/${targetId}/media_publish`;
   const publishData = new URLSearchParams({
     creation_id: containerId,
     access_token: META_ACCESS_TOKEN
