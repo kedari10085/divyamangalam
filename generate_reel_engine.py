@@ -164,9 +164,32 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
         draw.text((WIDTH // 2 + 2, 1712), subtitle_text, fill=(0, 0, 0, 220), font=font_sub, anchor="mm")
         draw.text((WIDTH // 2, 1710), subtitle_text, fill=(255, 235, 170, 255), font=font_sub, anchor="mm")
         
-        # Website CTA: Using clean diamond star motif ✦ (No missing emoji tofu boxes!)
-        draw.text((WIDTH // 2 + 1, 1791), "✦ divyamangalam.com", fill=(0, 0, 0, 220), font=font_url, anchor="mm")
-        draw.text((WIDTH // 2, 1790), "✦ divyamangalam.com", fill=(255, 215, 0, 255), font=font_url, anchor="mm")
+        # Website CTA: Pure ASCII text with vector-drawn golden star (Zero font dependency = 100% impossible to produce a square box)
+        url_text = "divyamangalam.com"
+        url_bbox = font_url.getbbox(url_text)
+        url_w = url_bbox[2] - url_bbox[0]
+        star_w = 16
+        gap = 12
+        total_w = star_w + gap + url_w
+        start_x = (WIDTH - total_w) // 2
+        cy = 1790
+        
+        # Draw 4-pointed golden star vector directly on canvas
+        cx = start_x + star_w // 2
+        r1, r2 = 9, 3.5
+        pts = []
+        for i in range(8):
+            angle = i * math.pi / 4 - math.pi / 2
+            r = r1 if i % 2 == 0 else r2
+            pts.append((cx + r * math.cos(angle), cy + r * math.sin(angle)))
+            
+        draw.polygon([(x + 1, y + 1) for x, y in pts], fill=(0, 0, 0, 220))
+        draw.polygon(pts, fill=(255, 215, 0, 255))
+        
+        # Clean ASCII URL
+        text_x = start_x + star_w + gap
+        draw.text((text_x + 1, cy + 1), url_text, fill=(0, 0, 0, 220), font=font_url, anchor="lm")
+        draw.text((text_x, cy), url_text, fill=(255, 215, 0, 255), font=font_url, anchor="lm")
         
         process.stdin.write(canvas.tobytes())
         
