@@ -56,11 +56,11 @@ This guide explains how to connect your Instagram account **[@divyamangalam.info
 
 ## 4. Enabling the GitHub Action (1 Minute)
 
-The GitHub Actions workflow file is stored at `instagram-agent/instagram-daily-workflow.yml`.
+The GitHub Actions workflow file is stored at instagram-agent/instagram-daily-workflow.yml.
 To activate the automatic daily 7:00 AM IST schedule on GitHub:
 1. In your GitHub repo, go to the **Actions** tab.
 2. Click **New workflow** → **set up a workflow yourself**.
-3. Name it `.github/workflows/instagram-daily.yml`.
+3. Name it .github/workflows/instagram-daily.yml.
 4. Copy and paste the contents of [instagram-daily-workflow.yml](instagram-daily-workflow.yml) into the editor.
 5. Click **Commit changes**.
 
