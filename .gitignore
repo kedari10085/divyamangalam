@@ -4,3 +4,6 @@ node_modules/
 .env
 .env.local
 data/waitlist.json
+
+epfo.pdf
+*.ics
