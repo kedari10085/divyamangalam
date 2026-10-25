@@ -42,12 +42,40 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
     
     font_bold = r"C:\Windows\Fonts\segoeuib.ttf"
     font_reg = r"C:\Windows\Fonts\segoeui.ttf"
+    font_indic = r"C:\Windows\Fonts\Nirmala.ttc"
     
-    font_title = ImageFont.truetype(font_bold, 50)
-    font_mantra = ImageFont.truetype(font_bold, 56)
+    font_title = ImageFont.truetype(font_bold, 52)
+    # Use Nirmala Bold (index=1) for pristine Devanagari / Sanskrit mantras
+    try:
+        font_mantra = ImageFont.truetype(font_indic, 66, index=1)
+    except Exception:
+        font_mantra = ImageFont.truetype(font_bold, 56)
+        
     font_trans = ImageFont.truetype(font_reg, 36)
-    font_sub = ImageFont.truetype(font_reg, 38)
+    font_sub = ImageFont.truetype(font_bold, 38)
     font_url = ImageFont.truetype(font_bold, 34)
+    
+    # Pre-render full-bleed atmospheric background (blurred deity artwork)
+    from PIL import ImageFilter
+    scale_h = HEIGHT / base_img.height
+    bg_w = int(base_img.width * scale_h * 1.1)
+    bg_h = int(HEIGHT * 1.1)
+    bg_full = base_img.resize((bg_w, bg_h), Image.Resampling.LANCZOS)
+    bg_crop = bg_full.crop(((bg_w - WIDTH) // 2, (bg_h - HEIGHT) // 2, (bg_w - WIDTH) // 2 + WIDTH, (bg_h - HEIGHT) // 2 + HEIGHT))
+    bg_blurred = bg_crop.filter(ImageFilter.GaussianBlur(radius=28))
+    
+    # Pre-compute top and bottom dark vignettes for crisp text legibility
+    vignette = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    vig_draw = ImageDraw.Draw(vignette)
+    for y in range(HEIGHT):
+        if y < 440:
+            alpha = int(210 * (1.0 - (y / 440) ** 1.3))
+            vig_draw.line([(0, y), (WIDTH, y)], fill=(10, 8, 16, alpha))
+        elif y > 1460:
+            alpha = int(220 * (((y - 1460) / 460) ** 1.3))
+            vig_draw.line([(0, y), (WIDTH, y)], fill=(10, 8, 16, alpha))
+            
+    base_canvas = Image.alpha_composite(bg_blurred, vignette)
     
     # 80 ambient particles
     particles = []
@@ -85,37 +113,28 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
         t = frame_idx / FPS
         progress = frame_idx / TOTAL_FRAMES
         
-        canvas = Image.new("RGBA", (WIDTH, HEIGHT), (16, 12, 22, 255))
+        # Start from pre-computed atmospheric background
+        canvas = base_canvas.copy()
         draw = ImageDraw.Draw(canvas)
-        
-        # Cosmic gradient background
-        for y in range(0, HEIGHT, 4):
-            ratio = y / HEIGHT
-            if ratio < 0.22:
-                r = int(50 + 60 * (ratio / 0.22))
-                g = int(20 + 35 * (ratio / 0.22))
-                b = int(70 + 60 * (ratio / 0.22))
-            elif ratio > 0.78:
-                r = int(110 - 70 * ((ratio - 0.78) / 0.22))
-                g = int(55 - 40 * ((ratio - 0.78) / 0.22))
-                b = int(130 - 80 * ((ratio - 0.78) / 0.22))
-            else:
-                r = 100
-                g = 48
-                b = 115
-            draw.rectangle([(0, y), (WIDTH, y + 4)], fill=(r, g, b, 255))
             
-        # Slow, majestic Ken Burns zoom (1.0 to 1.10 smoothly)
-        zoom = 1.0 + 0.10 * math.sin(progress * math.pi)
-        scaled_w = int(1080 * zoom)
-        scaled_h = int(1080 * zoom)
-        scaled_img = base_img.resize((scaled_w, scaled_h), Image.Resampling.LANCZOS)
+        # Smooth gentle Ken Burns zoom on central artwork (980px to 1030px)
+        # Keeps margins so Trishula, arms, and halo are NEVER cut off
+        zoom = 1.0 + 0.05 * math.sin(progress * math.pi)
+        deity_size = int(980 * zoom)
+        scaled_img = base_img.resize((deity_size, deity_size), Image.Resampling.LANCZOS)
         
-        center_y = 980
-        paste_x = (WIDTH - scaled_w) // 2
-        paste_y = center_y - (scaled_h // 2)
+        center_y = 960
+        paste_x = (WIDTH - deity_size) // 2
+        paste_y = center_y - (deity_size // 2)
         
-        canvas.paste(scaled_img, (paste_x, paste_y), scaled_img)
+        # Draw soft golden border halo around deity card
+        halo_pad = 6
+        draw.rectangle(
+            [paste_x - halo_pad, paste_y - halo_pad, paste_x + deity_size + halo_pad, paste_y + deity_size + halo_pad],
+            outline=(212, 160, 23, 140),
+            width=2
+        )
+        canvas.paste(scaled_img, (paste_x, paste_y))
         
         # Divine floating particles
         for p in particles:
@@ -129,25 +148,25 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
             )
             
         # Header Branding: DIVYA MANGALAM
-        draw.text((WIDTH // 2 + 2, 122), "DIVYA MANGALAM", fill=(0, 0, 0, 220), font=font_title, anchor="mm")
-        draw.text((WIDTH // 2, 120), "DIVYA MANGALAM", fill=(255, 215, 0, 255), font=font_title, anchor="mm")
+        draw.text((WIDTH // 2 + 2, 112), "DIVYA MANGALAM", fill=(0, 0, 0, 220), font=font_title, anchor="mm")
+        draw.text((WIDTH // 2, 110), "DIVYA MANGALAM", fill=(255, 215, 0, 255), font=font_title, anchor="mm")
         
-        # Sanskrit Mantra
-        draw.text((WIDTH // 2 + 2, 222), mantra_text, fill=(0, 0, 0, 220), font=font_mantra, anchor="mm")
-        draw.text((WIDTH // 2, 220), mantra_text, fill=(255, 255, 240, 255), font=font_mantra, anchor="mm")
+        # Sanskrit Mantra (Devanagari rendered with Nirmala font!)
+        draw.text((WIDTH // 2 + 2, 212), mantra_text, fill=(0, 0, 0, 230), font=font_mantra, anchor="mm")
+        draw.text((WIDTH // 2, 210), mantra_text, fill=(255, 255, 240, 255), font=font_mantra, anchor="mm")
         
         # Transliteration
         if mantra_trans:
-            draw.text((WIDTH // 2 + 1, 291), mantra_trans, fill=(0, 0, 0, 180), font=font_trans, anchor="mm")
-            draw.text((WIDTH // 2, 290), mantra_trans, fill=(255, 230, 175, 240), font=font_trans, anchor="mm")
+            draw.text((WIDTH // 2 + 1, 281), mantra_trans, fill=(0, 0, 0, 200), font=font_trans, anchor="mm")
+            draw.text((WIDTH // 2, 280), mantra_trans, fill=(255, 230, 175, 240), font=font_trans, anchor="mm")
             
         # Subtitle
-        draw.text((WIDTH // 2 + 2, 1682), subtitle_text, fill=(0, 0, 0, 200), font=font_sub, anchor="mm")
-        draw.text((WIDTH // 2, 1680), subtitle_text, fill=(255, 235, 170, 255), font=font_sub, anchor="mm")
+        draw.text((WIDTH // 2 + 2, 1712), subtitle_text, fill=(0, 0, 0, 220), font=font_sub, anchor="mm")
+        draw.text((WIDTH // 2, 1710), subtitle_text, fill=(255, 235, 170, 255), font=font_sub, anchor="mm")
         
-        # Website CTA
-        draw.text((WIDTH // 2 + 1, 1771), "✨ divyamangalam.com", fill=(0, 0, 0, 200), font=font_url, anchor="mm")
-        draw.text((WIDTH // 2, 1770), "✨ divyamangalam.com", fill=(255, 215, 0, 255), font=font_url, anchor="mm")
+        # Website CTA: Using clean diamond star motif ✦ (No missing emoji tofu boxes!)
+        draw.text((WIDTH // 2 + 1, 1791), "✦ divyamangalam.com", fill=(0, 0, 0, 220), font=font_url, anchor="mm")
+        draw.text((WIDTH // 2, 1790), "✦ divyamangalam.com", fill=(255, 215, 0, 255), font=font_url, anchor="mm")
         
         process.stdin.write(canvas.tobytes())
         
