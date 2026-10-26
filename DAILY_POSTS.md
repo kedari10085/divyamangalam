@@ -30,7 +30,7 @@
 ## Scheduled Posts (Add Your Upcoming Posts Here)
 
 ### Date: 2026-10-26 (Monday)
-- **Status:** [PENDING]
+- **Status:** [POSTED on 2026-10-26T17:01:19.962Z]
 - **Deity:** Lord Shiva (Somavara Darshan)
 - **Significance:** Monday dedicated to Lord Shiva, the eternal yogi who bestows mental tranquility and dissolves inner turbulence.
 - **Mantra:** `ॐ नमः शिवाय` (Om Namah Shivaya)

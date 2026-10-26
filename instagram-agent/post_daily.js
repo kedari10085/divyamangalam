@@ -773,8 +773,8 @@ async function main() {
 
   // Generate Image URL (Prioritize Classical Verified Artwork CDN if available)
   let imageUrl = '';
-  if (effectiveType === 'deity' && deityData && deityData.cdnImage && !customEntry?.prompt) {
-    imageUrl = deityData.cdnImage;
+  if (effectiveType === 'deity' && deityData && (customEntry?.imageUrl || deityData.cdnImage)) {
+    imageUrl = customEntry?.imageUrl || deityData.cdnImage;
     console.log(`[IMAGE] Using Classical Verified Artwork CDN: ${imageUrl}\n`);
   } else {
     imageUrl = generatePollinationsImageUrl(imagePrompt);
