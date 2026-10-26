@@ -45,10 +45,11 @@ const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);
 
-// Parse post type: --type=deity | rashi | muhurat | palm | puran | marriage_muhurat | spotlight
+// Parse post type: --type=auto | deity | rashi | muhurat | palm | puran | marriage_muhurat | spotlight
 function getPostType() {
+  let requestedType = (process.env.POST_TYPE || 'auto').toLowerCase();
   const typeArg = process.argv.find(a => a.startsWith('--type='));
-  if (typeArg) return typeArg.split('=')[1].toLowerCase();
+  if (typeArg) requestedType = typeArg.split('=')[1].toLowerCase();
   if (process.argv.includes('--rashi')) return 'rashi';
   if (process.argv.includes('--muhurat')) return 'muhurat';
   if (process.argv.includes('--palm')) return 'palm';
@@ -56,7 +57,16 @@ function getPostType() {
   if (process.argv.includes('--marriage')) return 'marriage_muhurat';
   if (process.argv.includes('--spotlight')) return 'spotlight';
   if (process.argv.includes('--deity')) return 'deity';
-  return (process.env.POST_TYPE || 'deity').toLowerCase();
+
+  if (requestedType === 'auto') {
+    const istHour = getISTDate().getHours();
+    if (istHour >= 5 && istHour < 11) return 'deity';     // 07:00 AM Morning Darshan slot
+    if (istHour >= 11 && istHour < 15) return 'rashi';    // 12:00 PM Midday Rashi slot
+    if (istHour >= 15 && istHour < 18) return 'muhurat';  // 03:30 PM Afternoon Muhurat slot
+    if (istHour >= 18 && istHour < 21) return 'deity';    // 07:30 PM Evening Darshan slot
+    return 'spotlight';                                   // 09:30 PM Bedtime Spotlight slot
+  }
+  return requestedType;
 }
 
 // Get current date in Indian Standard Time (IST, UTC+5:30)
