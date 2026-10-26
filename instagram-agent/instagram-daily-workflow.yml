@@ -25,7 +25,10 @@ on:
           - deity
           - rashi
           - muhurat
+          - spotlight
           - palm
+          - puran
+          - marriage_muhurat
 
 permissions:
   contents: write
@@ -59,7 +62,7 @@ jobs:
             elif [ "$HOUR" -ge 12 ] && [ "$HOUR" -lt 15 ]; then
               POST_TYPE="deity"
             else
-              POST_TYPE="palm"
+              POST_TYPE="spotlight"
             fi
           else
             POST_TYPE="$INPUT_TYPE"
