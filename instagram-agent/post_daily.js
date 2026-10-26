@@ -724,6 +724,8 @@ async function main() {
     console.log(`[SPOTLIGHT] Rotating spotlight (${(dayEpoch % 3) + 1}/3): Selecting ${effectiveType.toUpperCase()}...`);
   }
 
+  let imageUrl = '';
+
   if (effectiveType === 'rashi') {
     // 2. RASHI & NAKSHATRA FORECAST POST
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
@@ -738,17 +740,17 @@ async function main() {
     // 4. PALM READING FEATURE SPOTLIGHT POST
     console.log(`[INFO] Building Vedic Palm Reading Spotlight...`);
     caption = buildPalmCaption(dateStr);
-    imagePrompt = `Close up of an open spiritual hand palm with illuminated golden and turquoise energy lines glowing softly on skin, sacred Vedic symbols of Sun Moon and Jupiter etched faintly, cosmic stardust atmosphere, 8k photorealistic temple photography`;
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/demo-palm-print.png';
   } else if (effectiveType === 'puran') {
     // 5. 18 MAHA PURANAS & SACRED UPASANAS SPOTLIGHT
     console.log(`[INFO] Building 18 Maha Puranas & Sacred Upasanas Spotlight...`);
     caption = buildPuranCaption(dateStr);
-    imagePrompt = `Sage Veda Vyasa in peaceful meditation writing sacred Sanskrit verses on ancient palm leaf manuscripts under sacred banyan tree, warm glowing temple oil lamps, divine golden aura, classical 8k devotional oil painting`;
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/puran_darshan.jpg';
   } else if (effectiveType === 'marriage_muhurat' || effectiveType === 'marriage') {
     // 6. VIVAH & GRIHA PRAVESH SHUBH MUHURAT SPOTLIGHT
     console.log(`[INFO] Building Vivah & Griha Pravesh Shubh Muhurat Spotlight...`);
     caption = buildMarriageMuhuratCaption(dateStr);
-    imagePrompt = `Sacred Vedic Hindu wedding mandap adorned with fresh golden marigold flowers and silk, holy fire havan kunda with divine flame, traditional brass oil lamps, auspicious atmosphere, 8k spiritual fine art`;
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/marriage_muhurat.jpg';
   } else {
     // 1. DEITY & PANCHANG POST (DEFAULT)
     let mdContent = '';
@@ -782,14 +784,17 @@ async function main() {
   }
 
   // Generate Image URL (Prioritize Classical Verified Artwork CDN if available)
-  let imageUrl = '';
-  if (effectiveType === 'deity' && deityData && (customEntry?.imageUrl || deityData.cdnImage)) {
-    imageUrl = customEntry?.imageUrl || deityData.cdnImage;
-    console.log(`[IMAGE] Using Classical Verified Artwork CDN: ${imageUrl}\n`);
+  if (!imageUrl) {
+    if (effectiveType === 'deity' && deityData && (customEntry?.imageUrl || deityData.cdnImage)) {
+      imageUrl = customEntry?.imageUrl || deityData.cdnImage;
+      console.log(`[IMAGE] Using Classical Verified Artwork CDN: ${imageUrl}\n`);
+    } else {
+      imageUrl = generatePollinationsImageUrl(imagePrompt);
+      console.log(`[IMAGE] AI Artwork Prompt: "${imagePrompt}"`);
+      console.log(`[IMAGE] Generated AI Image URL: ${imageUrl}\n`);
+    }
   } else {
-    imageUrl = generatePollinationsImageUrl(imagePrompt);
-    console.log(`[IMAGE] AI Artwork Prompt: "${imagePrompt}"`);
-    console.log(`[IMAGE] Generated AI Image URL: ${imageUrl}\n`);
+    console.log(`[IMAGE] Using Classical Verified Feature Artwork CDN: ${imageUrl}\n`);
   }
 
   // Save Previews
