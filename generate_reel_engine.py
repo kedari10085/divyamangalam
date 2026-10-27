@@ -1,8 +1,21 @@
 import os, sys, math, random, argparse
-import wave, struct, subprocess
+import wave, struct, subprocess, asyncio
+
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import imageio_ffmpeg
+
+try:
+    import edge_tts
+    HAS_EDGE_TTS = True
+except ImportError:
+    HAS_EDGE_TTS = False
 
 def create_om_drone(wav_path, duration=10.0, sample_rate=44100):
     n_samples = int(sample_rate * duration)
@@ -24,7 +37,18 @@ def create_om_drone(wav_path, duration=10.0, sample_rate=44100):
             sample = int(val * 16000)
             wav.writeframes(struct.pack('<h', sample))
 
-def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text, output_mp4, duration=10.0):
+async def synthesize_vocal_chant(chant_text, output_mp3):
+    if not HAS_EDGE_TTS:
+        return False
+    try:
+        comm = edge_tts.Communicate(chant_text, 'hi-IN-MadhurNeural', rate='-12%', pitch='-4Hz')
+        await comm.save(output_mp3)
+        return True
+    except Exception as e:
+        print(f"Warning: Edge-TTS vocal chant synthesis failed ({e}), falling back to 432 Hz drone.")
+        return False
+
+def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text, output_mp4, chant_text="", duration=10.0):
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
     
     WIDTH = 1080
@@ -33,10 +57,35 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
     TOTAL_FRAMES = int(FPS * duration)
     
     temp_video = "temp_raw_reel.mp4"
-    temp_audio = "temp_reel_drone.wav"
+    temp_drone = "temp_reel_drone.wav"
+    temp_vocal = "temp_reel_vocal.mp3"
+    temp_audio = "temp_reel_audio_final.wav"
     
-    print(f"Synthesizing {duration}s sacred 432 Hz drone audio...")
-    create_om_drone(temp_audio, duration=duration)
+    # 1. Synthesize 432 Hz Drone
+    print(f"Synthesizing {duration}s sacred 432 Hz harmonic drone...")
+    create_om_drone(temp_drone, duration=duration)
+    
+    # 2. Synthesize Sacred Vocal Chant (e.g. Jai Shree Ram / Om Namah Shivaya)
+    has_vocal = False
+    if chant_text:
+        print(f"Synthesizing sacred vocal chant: \"{chant_text}\"...")
+        has_vocal = asyncio.run(synthesize_vocal_chant(chant_text, temp_vocal))
+        
+    # 3. Mix Drone + Vocal Chant with Temple Reverb
+    if has_vocal and os.path.exists(temp_vocal):
+        print("Mixing 432 Hz drone + vocal chant with sacred temple reverb...")
+        mix_cmd = [
+            ffmpeg_exe, '-y',
+            '-i', temp_drone,
+            '-i', temp_vocal,
+            '-filter_complex', '[0:a]volume=0.35[d];[1:a]volume=1.25,aecho=0.8:0.8:50:0.35[v];[d][v]amix=inputs=2:duration=first[aout]',
+            '-map', '[aout]',
+            '-c:a', 'pcm_s16le',
+            temp_audio
+        ]
+        subprocess.run(mix_cmd, check=True)
+    else:
+        temp_audio = temp_drone
     
     base_img = Image.open(image_path).convert("RGBA")
     
@@ -213,8 +262,10 @@ def render_reel(image_path, deity_name, mantra_text, mantra_trans, subtitle_text
     ]
     subprocess.run(mux_cmd, check=True)
     
-    if os.path.exists(temp_video): os.remove(temp_video)
-    if os.path.exists(temp_audio): os.remove(temp_audio)
+    for f in [temp_video, temp_drone, temp_vocal, temp_audio]:
+        if os.path.exists(f):
+            try: os.remove(f)
+            except Exception: pass
     
     print(f"SUCCESS! Created Reel: {output_mp4} ({os.path.getsize(output_mp4)} bytes)")
 
@@ -225,6 +276,7 @@ if __name__ == "__main__":
     parser.add_argument("--mantra", required=True)
     parser.add_argument("--mantra_trans", default="")
     parser.add_argument("--sub", required=True)
+    parser.add_argument("--chant", default="")
     parser.add_argument("--out", required=True)
     parser.add_argument("--duration", type=float, default=10.0)
     args = parser.parse_args()
@@ -235,6 +287,7 @@ if __name__ == "__main__":
         mantra_text=args.mantra,
         mantra_trans=args.mantra_trans,
         subtitle_text=args.sub,
+        chant_text=args.chant,
         output_mp4=args.out,
         duration=args.duration
     )
