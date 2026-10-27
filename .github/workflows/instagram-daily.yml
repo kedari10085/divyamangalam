@@ -22,6 +22,7 @@ on:
         type: choice
         options:
           - auto
+          - reel
           - deity
           - rashi
           - muhurat
@@ -60,7 +61,7 @@ jobs:
             elif [ "$HOUR" -ge 9 ] && [ "$HOUR" -lt 12 ]; then
               POST_TYPE="muhurat"
             elif [ "$HOUR" -ge 12 ] && [ "$HOUR" -lt 15 ]; then
-              POST_TYPE="deity"
+              POST_TYPE="reel"
             else
               POST_TYPE="spotlight"
             fi
