@@ -21,23 +21,25 @@ if (fs.existsSync(envPath)) {
 
 const token = process.env.META_ACCESS_TOKEN;
 const accountId = process.env.INSTAGRAM_ACCOUNT_ID;
-const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_darshan.mp4';
+const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_darshan.mp4';
 
-const caption = `🕉️ Divya Mangalam — Monday Somavara Devotional Darshan
+const caption = `🕉️ Divya Mangalam — Sacred Darshan • Lord Hanuman (Bajrangbali)
 ✦ ─────────────── ✦
-🔱 Mahadeva • Lord Shiva Meditation on Mount Kailash
+🚩 Jai Bajrangbali • Jai Shree Ram
 
 ✨ SACRED MANTRA:
-ॐ नमः शिवाय
-(Om Namah Shivaya)
-“Salutations to the auspicious one, the supreme stillness within.”
+ॐ हनुमते नमः
+(Om Hanumate Namah)
+“Salutations to Lord Hanuman, the supreme embodiment of courage, selfless devotion, and divine strength.”
+
+🔊 Sacred Sound: 432 Hz Harmonic Resonance + Jai Shree Ram Chanting
 
 ✦ ─────────────── ✦
-🧘 Experience 432 Hz healing vibrations, daily panchang & AI palm reading:
+🌿 Experience free Vedic tools, daily panchang & AI palm reading:
 🔗 https://divyamangalam.com
 Instagram: @divyamangalam.info
 
-#LordShiva #OmNamahShivaya #Somavara #Mahadeva #Kailash #DivyaMangalam #VedicMantras #432Hz #SanatanaDharma #DailyReels #SpiritualReels`;
+#LordHanuman #Bajrangbali #JaiShreeRam #HanumanChalisa #SankatMochan #DivyaMangalam #VedicMantras #432Hz #SanatanaDharma #DailyReels #SpiritualReels`;
 
 function req(url, method = 'GET', data = null) {
   return new Promise((resolve, reject) => {

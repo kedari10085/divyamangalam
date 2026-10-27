@@ -45,11 +45,12 @@ const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);
 
-// Parse post type: --type=auto | deity | rashi | muhurat | palm | puran | marriage_muhurat | spotlight
+// Parse post type: --type=auto | deity | rashi | muhurat | palm | puran | marriage_muhurat | spotlight | reel
 function getPostType() {
   let requestedType = (process.env.POST_TYPE || 'auto').toLowerCase();
   const typeArg = process.argv.find(a => a.startsWith('--type='));
   if (typeArg) requestedType = typeArg.split('=')[1].toLowerCase();
+  if (process.argv.includes('--reel')) return 'reel';
   if (process.argv.includes('--rashi')) return 'rashi';
   if (process.argv.includes('--muhurat')) return 'muhurat';
   if (process.argv.includes('--palm')) return 'palm';
@@ -63,9 +64,19 @@ function getPostType() {
     if (istHour >= 5 && istHour < 11) return 'deity';     // 07:00 AM Morning Darshan slot
     if (istHour >= 11 && istHour < 15) return 'rashi';    // 12:00 PM Midday Rashi slot
     if (istHour >= 15 && istHour < 18) return 'muhurat';  // 03:30 PM Afternoon Muhurat slot
-    if (istHour >= 18 && istHour < 21) return 'deity';    // 07:30 PM Evening Darshan slot
+    if (istHour >= 18 && istHour < 21) return 'reel';     // 07:30 PM Evening Devotional Reel slot
     return 'spotlight';                                   // 09:30 PM Bedtime Spotlight slot
   }
+
+  // Safety safeguard: if Slot 4 triggered with 'deity' between 18:00 and 21:00 IST, route to 'reel'
+  if (requestedType === 'deity' && !process.argv.includes('--force-deity')) {
+    const istHour = getISTDate().getHours();
+    if (istHour >= 18 && istHour < 21) {
+      console.log(`[ROUTING] Evening Slot 4 (18:00–21:00 IST) detected. Upgrading 'deity' to sacred evening 'reel'...`);
+      return 'reel';
+    }
+  }
+
   return requestedType;
 }
 
@@ -93,10 +104,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '1, 10, 19, 28',
     direction: 'East (Purva)',
     deity: 'Lord Surya Narayana (Sun God)',
+    deityTitle: 'Surya Deva Darshan',
     theme: 'Radiant health, vitality, purpose & illumination',
     mantra: 'ॐ घृणिः सूर्याय नमः',
     mantraMeaning: 'Salutations to the supreme light that energizes the cosmos.',
+    soundChant: 'Surya Gayatri / Gayatri Mantra',
     cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_bhagavan.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_darshan.mp4',
     prompt: 'Lord Surya Narayana riding magnificent golden chariot with seven horses across celestial sunrise sky, golden halo radiance, divine lotus flowers, cosmic rays of warmth, spiritual masterpiece, hyperrealistic 8k, devotional temple art, octane render'
   },
   {
@@ -107,10 +121,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '2, 11, 20, 29',
     direction: 'North-West (Vayavya)',
     deity: 'Lord Shiva (Someshwara)',
+    deityTitle: 'Mahadeva Meditation on Mount Kailash',
     theme: 'Mental peace, emotional mastery & spiritual liberation',
     mantra: 'ॐ नमः शिवाय',
     mantraMeaning: 'Salutations to the auspicious one, the source of supreme consciousness.',
+    soundChant: 'Om Namah Shivaya',
     cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_kailash.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_darshan.mp4',
     prompt: 'Lord Shiva in deep serene meditation on sacred Mount Kailash, crescent moon in matted locks, sacred Ganges flowing, gentle snowfall, third eye, divine blue throat, ethereal moonlight, masterpiece 8k spiritual art'
   },
   {
@@ -121,9 +138,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '9, 18, 27',
     direction: 'South (Dakshina)',
     deity: 'Lord Hanuman & Kartikeya',
+    deityTitle: 'Lord Hanuman (Bajrangbali)',
     theme: 'Courage, protection, vitality & overcoming obstacles',
     mantra: 'ॐ हं हनुमते नमः',
     mantraMeaning: 'Salutations to the mighty Hanuman, remover of fear and distress.',
+    soundChant: 'Jai Shree Ram & Jai Bajrangbali',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_ji.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_darshan.mp4',
     prompt: 'Lord Hanuman standing in devotion with golden mace gada, glowing chest revealing Rama and Sita in his heart, divine saffron glow, Himalayan peak background, majestic cinematic 8k devotional art'
   },
   {
@@ -134,9 +155,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '5, 14, 23',
     direction: 'North (Uttara)',
     deity: 'Lord Ganesha & Sage Vyasa',
+    deityTitle: 'Lord Ganesha & Sage Vyasa',
     theme: 'Wisdom, sharp intellect, communication & fresh starts',
     mantra: 'ॐ गं गणपतये नमः',
     mantraMeaning: 'Salutations to the lord of beginnings and remover of all hurdles.',
+    soundChant: 'Om Gam Ganapataye Namah',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_kailash.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/shiva_darshan.mp4',
     prompt: 'Lord Ganesha seated on grand ornate golden throne, blessing mudra, modak in hand, mushak vehicle at feet, fresh lotus garlands, warm temple oil lamp diya glow, photorealistic 8k devotional artwork'
   },
   {
@@ -147,9 +172,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '3, 12, 21, 30',
     direction: 'North-East (Ishanya)',
     deity: 'Lord Maha Vishnu & Guru Brihaspati',
+    deityTitle: 'Lord Maha Vishnu & Guru Brihaspati',
     theme: 'Higher knowledge, dharma, righteousness & family prosperity',
     mantra: 'ॐ नमो भगवते वासुदेवाय',
     mantraMeaning: 'Salutations to the omnipresent supreme lord of the universe.',
+    soundChant: 'Om Namo Bhagavate Vasudevaya',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_bhagavan.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_darshan.mp4',
     prompt: 'Lord Maha Vishnu resting on celestial Sheshanaga serpent on Kshira Sagara milky ocean, four arms holding Shankha, Chakra, Gada, Padma, glowing celestial blue skin, divine cosmos background, 8k masterpiece'
   },
   {
@@ -160,9 +189,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '6, 15, 24',
     direction: 'South-East (Agneya)',
     deity: 'Goddess Maha Lakshmi',
+    deityTitle: 'Goddess Maha Lakshmi',
     theme: 'Abundance, spiritual wealth, contentment & motherly love',
     mantra: 'ॐ श्रीं महालक्ष्म्यै नमः',
     mantraMeaning: 'Salutations to the supreme goddess of light, prosperity, and grace.',
+    soundChant: 'Om Shreem Mahalakshmyai Namah',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_bhagavan.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/surya_darshan.mp4',
     prompt: 'Goddess Lakshmi standing on a pink lotus flower in pristine sacred pond, gold coins showering from her open palm, four hands, regal red and gold silk saree, traditional temple jewelry, radiant warm golden hour glow, ethereal masterpiece, 8k'
   },
   {
@@ -173,9 +206,13 @@ const WEEKDAY_DEITIES = [
     luckyNumbers: '8, 17, 26',
     direction: 'West (Pashchima)',
     deity: 'Lord Shani Deva & Bhairava',
+    deityTitle: 'Lord Shani Deva & Sankat Mochan Hanuman',
     theme: 'Karma, discipline, humility, patience & perseverance',
     mantra: 'ॐ शं शनैश्चराय नमः',
     mantraMeaning: 'Salutations to the slow-moving teacher of patience and righteousness.',
+    soundChant: 'Jai Shree Ram & Om Sham Shanaishcharaya Namah',
+    cdnImage: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_ji.jpg',
+    cdnVideo: 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_darshan.mp4',
     prompt: 'Lord Shani Deva crowned in regal deep sapphire and silver, sitting majestically on raven vahana, bow and arrow, stars and cosmic nebula background, stern yet just divine presence, atmospheric spiritual artwork, 8k'
   }
 ];
@@ -566,6 +603,36 @@ Instagram: @divyamangalam.info
 #VivahMuhurat #GrihaPravesh #ShubhMuhurat #MarriageAstrology #VedicAstrology #Housewarming #VastuShastra #KundliMatching #MangalDosha #DivyaMangalam #AuspiciousTimings`;
 }
 
+// BUILD CAPTION: 7. DEVOTIONAL REEL (10s Slow-Mo with 432 Hz + Sacred Vocal Chant)
+function buildReelCaption(dateStr, panchang, istDate, deityData) {
+  const weekdayInfo = WEEKDAY_DEITIES[istDate.getDay()];
+  const soundName = weekdayInfo.soundChant || 'Jai Shree Ram';
+
+  return `🕉️ Divya Mangalam — Sacred Evening Darshan Reel
+✦ ─────────────── ✦
+🙏 ${deityData.deity} • ${weekdayInfo.vara} (${weekdayInfo.day})
+🚩 ${weekdayInfo.deityTitle || 'Divine Darshan'}
+
+✨ SACRED MANTRA:
+${deityData.mantra}
+${deityData.mantraMeaning ? `“${deityData.mantraMeaning}”` : ''}
+
+🔊 Sacred Sound: 432 Hz Harmonic Healing Drone + ${soundName} Vocal Chant
+“Immerse in pure sacred vibration to release stress, awaken inner strength, and invite peace into your home.”
+
+✦ ─────────────── ✦
+📅 TODAY'S EVENING BLESSINGS:
+• 🌙 Tithi: ${panchang.tithi}
+• ⭐ Nakshatra: ${panchang.nakshatra}
+• 🍯 Transit Moon: ${panchang.moonRashi}
+
+🌿 Experience 432 Hz healing vibrations, daily panchang & free AI palm reading:
+🔗 https://divyamangalam.com
+Instagram: @divyamangalam.info
+
+#${deityData.deity.split(' ')[1] || 'Bhakti'} #DivyaMangalam #VedicMantras #432Hz #DevotionalReel #SanatanaDharma #DailyReels #SpiritualReels #HinduDeities #TempleVibes #SacredSound #JaiShreeRam`;
+}
+
 // HTTP Helper
 function makeHttpsRequest(url, method = 'GET', data = null, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -647,6 +714,70 @@ async function publishToInstagram(imageUrl, caption) {
   return publishRes.id;
 }
 
+// Publish Reel to Instagram Graph API
+async function publishReelToInstagram(videoUrl, caption) {
+  console.log('[API] Starting Meta Instagram Graph API Reel publication...');
+
+  const isInstagramToken = META_ACCESS_TOKEN.startsWith('IG');
+  const baseUrl = isInstagramToken ? 'https://graph.instagram.com/v20.0' : 'https://graph.facebook.com/v20.0';
+  const targetId = isInstagramToken ? (INSTAGRAM_ACCOUNT_ID || 'me') : INSTAGRAM_ACCOUNT_ID;
+
+  // 1. Create Reel Media Container
+  const createContainerUrl = `${baseUrl}/${targetId}/media`;
+  const postData = new URLSearchParams({
+    media_type: 'REELS',
+    video_url: videoUrl,
+    caption: caption,
+    share_to_feed: 'true',
+    access_token: META_ACCESS_TOKEN
+  }).toString();
+
+  console.log(`[API] Creating Reel media container on ${baseUrl}...`);
+  const containerRes = await makeHttpsRequest(createContainerUrl, 'POST', postData);
+  if (!containerRes || !containerRes.id) {
+    throw new Error(`Failed to create Reel container: ${JSON.stringify(containerRes)}`);
+  }
+  const containerId = containerRes.id;
+  console.log('[API] Reel media container created. ID:', containerId);
+
+  // 2. Poll for Reel video processing status (up to 2 minutes)
+  console.log('[API] Waiting for Meta servers to process Reel video (polling every 5s)...');
+  let isFinished = false;
+  for (let i = 0; i < 24; i++) {
+    await new Promise(r => setTimeout(r, 5000));
+    const statusUrl = `${baseUrl}/${containerId}?fields=status_code&access_token=${META_ACCESS_TOKEN}`;
+    const statusRes = await makeHttpsRequest(statusUrl, 'GET');
+    const statusCode = statusRes.status_code || 'UNKNOWN';
+    console.log(`[API Reel Poll ${i + 1}/24] Status: ${statusCode}`);
+    if (statusCode === 'FINISHED') {
+      isFinished = true;
+      break;
+    }
+    if (statusCode === 'ERROR') {
+      throw new Error(`Meta Reel video processing error: ${JSON.stringify(statusRes)}`);
+    }
+  }
+
+  if (!isFinished) {
+    throw new Error('Meta Reel video processing timed out after 120 seconds.');
+  }
+
+  // 3. Publish Reel Container
+  const publishUrl = `${baseUrl}/${targetId}/media_publish`;
+  const publishData = new URLSearchParams({
+    creation_id: containerId,
+    access_token: META_ACCESS_TOKEN
+  }).toString();
+
+  console.log('[API] Publishing Reel container to Instagram...');
+  const publishRes = await makeHttpsRequest(publishUrl, 'POST', publishData);
+  if (!publishRes || !publishRes.id) {
+    throw new Error(`Failed to publish Reel container: ${JSON.stringify(publishRes)}`);
+  }
+  console.log('[SUCCESS] Reel successfully published! Instagram Post ID:', publishRes.id);
+  return publishRes.id;
+}
+
 // Generate beautiful HTML preview of the Instagram card
 function generateHtmlPreview(postData) {
   return `<!DOCTYPE html>
@@ -679,8 +810,11 @@ function generateHtmlPreview(postData) {
     </div>
     <span class="badge">${postData.type} post</span>
     <div class="caption-box" style="padding-bottom: 8px;"><strong>Date:</strong> ${postData.date}</div>
-    <div class="img-wrap">
-      <img src="${postData.imageUrl}" alt="${postData.type}" loading="lazy" />
+    <div class="img-wrap" style="${postData.type === 'reel' ? 'aspect-ratio: 9/16; max-height: 520px;' : ''}">
+      ${postData.type === 'reel' && postData.videoUrl
+        ? `<video src="${postData.videoUrl}" poster="${postData.imageUrl}" controls autoplay loop muted style="width:100%;height:100%;object-fit:cover;"></video>`
+        : `<img src="${postData.imageUrl}" alt="${postData.type}" loading="lazy" />`
+      }
     </div>
     <div class="caption-box">${escapeHtml(postData.caption)}</div>
   </div>
@@ -710,6 +844,7 @@ async function main() {
 
   let caption = '';
   let imagePrompt = '';
+  let videoUrl = '';
   let isCustom = false;
   let deityData = null;
   let customEntry = null;
@@ -726,7 +861,14 @@ async function main() {
 
   let imageUrl = '';
 
-  if (effectiveType === 'rashi') {
+  if (effectiveType === 'reel') {
+    // 7. DEVOTIONAL REEL (10s SLOW-MO + 432 HZ + SACRED VOCAL CHANT)
+    console.log(`[INFO] Building Evening Devotional Darshan Reel (432 Hz + Vocal Chant)...`);
+    deityData = WEEKDAY_DEITIES[weekdayIdx];
+    videoUrl = deityData.cdnVideo || 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_darshan.mp4';
+    imageUrl = deityData.cdnImage || 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/hanuman_ji.jpg';
+    caption = buildReelCaption(dateStr, panchang, istDate, deityData);
+  } else if (effectiveType === 'rashi') {
     // 2. RASHI & NAKSHATRA FORECAST POST
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
     caption = buildRashiCaption(dateStr, panchang, istDate);
@@ -803,6 +945,7 @@ async function main() {
     type: effectiveType,
     isCustom,
     imageUrl,
+    videoUrl,
     caption,
     panchang,
     timestamp: new Date().toISOString()
@@ -816,11 +959,17 @@ async function main() {
   if (IS_DRY_RUN) {
     console.log(`\n================== CAPTION PREVIEW (${effectiveType.toUpperCase()}) ==================`);
     console.log(caption);
+    if (videoUrl) console.log(`[VIDEO URL]: ${videoUrl}`);
     console.log(`====================================================\n`);
-    console.log(`[DRY RUN COMPLETE] Image & Caption verified successfully.`);
+    console.log(`[DRY RUN COMPLETE] ${effectiveType === 'reel' ? 'Devotional Video Reel' : 'Image'} & Caption verified successfully.`);
   } else {
     try {
-      const postId = await publishToInstagram(imageUrl, caption);
+      let postId;
+      if (effectiveType === 'reel') {
+        postId = await publishReelToInstagram(videoUrl, caption);
+      } else {
+        postId = await publishToInstagram(imageUrl, caption);
+      }
       if (effectiveType === 'deity') markPostAsPosted(dateStr);
       console.log(`[SUCCESS] Instagram post published! Post ID: ${postId}`);
     } catch (err) {
