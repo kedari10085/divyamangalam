@@ -598,8 +598,9 @@
         <!-- Base Outer Clock Ring -->
         <circle cx="${cx}" cy="${cy}" r="${rOuter}" fill="url(#vcDialBg)" stroke="#D4A017" stroke-width="2.5" stroke-opacity="0.45"/>
 
-        <!-- Day / Night Track Ring Background -->
-        <circle cx="${cx}" cy="${cy}" r="${(rRingOut + rRingIn) / 2}" fill="none" stroke="url(#vcDaySky)" stroke-width="${rRingOut - rRingIn}"/>
+        <!-- Day / Night Track Ring Background (Distinct Hemispheres) -->
+        <path d="${describeDonutArc(cx, cy, rRingOut, rRingIn, sunsetAngle, sunriseAngle)}" fill="#1E1B4B" fill-opacity="0.08" stroke="none"/>
+        <path d="${describeDonutArc(cx, cy, rRingOut, rRingIn, sunriseAngle, sunsetAngle)}" fill="#FEF3C7" fill-opacity="0.45" stroke="none"/>
 
         <!-- 24-Hour Markers and Graduations -->
         ${ticksSvg}
@@ -615,6 +616,8 @@
         <!-- Sunrise / Sunset Horizon Rays -->
         <line x1="${cx}" y1="${cy}" x2="${(cx + (rRingOut + 4) * Math.sin(sunriseAngle * Math.PI / 180)).toFixed(1)}" y2="${(cy - (rRingOut + 4) * Math.cos(sunriseAngle * Math.PI / 180)).toFixed(1)}" stroke="#EA580C" stroke-width="2.5" stroke-dasharray="4,2"/>
         <line x1="${cx}" y1="${cy}" x2="${(cx + (rRingOut + 4) * Math.sin(sunsetAngle * Math.PI / 180)).toFixed(1)}" y2="${(cy - (rRingOut + 4) * Math.cos(sunsetAngle * Math.PI / 180)).toFixed(1)}" stroke="#C2410C" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <circle cx="${(cx + (rRingOut + 6) * Math.sin(sunriseAngle * Math.PI / 180)).toFixed(1)}" cy="${(cy - (rRingOut + 6) * Math.cos(sunriseAngle * Math.PI / 180)).toFixed(1)}" r="6" fill="#EA580C" stroke="#FFFFFF" stroke-width="1.5"/>
+        <circle cx="${(cx + (rRingOut + 6) * Math.sin(sunsetAngle * Math.PI / 180)).toFixed(1)}" cy="${(cy - (rRingOut + 6) * Math.cos(sunsetAngle * Math.PI / 180)).toFixed(1)}" r="6" fill="#6366F1" stroke="#FFFFFF" stroke-width="1.5"/>
 
         <!-- Real-Time Moving Golden Needle -->
         ${needleSvg}

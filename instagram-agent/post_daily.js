@@ -52,7 +52,9 @@ function getPostType() {
   const typeArg = process.argv.find(a => a.startsWith('--type='));
   if (typeArg) requestedType = typeArg.split('=')[1].toLowerCase();
   if (process.argv.includes('--reel')) return 'reel';
+  if (process.argv.includes('--clock-reel')) return 'clock_reel';
   if (process.argv.includes('--clock')) return 'clock';
+  if (process.argv.includes('--rashi')) return 'rashi';
   if (process.argv.includes('--muhurat')) return 'muhurat';
   if (process.argv.includes('--palm')) return 'palm';
   if (process.argv.includes('--puran')) return 'puran';
@@ -882,6 +884,20 @@ async function main() {
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
     caption = buildRashiCaption(dateStr, panchang, istDate);
     imagePrompt = `Vedic astrological golden celestial wheel, 12 illuminated golden rashi zodiac constellations glowing in cosmic indigo sky, ancient Sanskrit glyphs, sacred mandala, radiant starlight, 8k devotional masterpiece`;
+  } else if (effectiveType === 'clock_reel') {
+    // 3B. 24-HOUR VEDIC CLOCK & SHUBH MUHURAT 10S VERTICAL REEL
+    console.log(`[INFO] Building 24-Hour Sacred Vedic Clock 10s Reel (432 Hz + Voiceover)...`);
+    try {
+      const scriptPath = path.join(__dirname, '..', 'generate_clock_reel.py');
+      const outVideoPath = path.join(__dirname, '..', 'images', 'clock_reel.mp4');
+      execSync(`python "${scriptPath}" --out "${outVideoPath}"`, { stdio: 'inherit' });
+      console.log(`[CLOCK ENGINE] Generated high-res 1080x1920 24-hour clock reel: ${outVideoPath}`);
+    } catch (err) {
+      console.warn(`[WARNING] Failed to generate local clock reel (${err.message}), falling back to CDN asset.`);
+    }
+    videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/clock_reel.mp4';
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/clock_darshan.jpg';
+    caption = buildMuhuratCaption(dateStr, panchang, istDate);
   } else if (effectiveType === 'muhurat' || effectiveType === 'clock') {
     // 3. 24-HOUR VEDIC CLOCK & SHUBH MUHURAT POST
     console.log(`[INFO] Building 24-Hour Sacred Vedic Muhurat Clock Infographic...`);
@@ -978,11 +994,11 @@ async function main() {
     console.log(caption);
     if (videoUrl) console.log(`[VIDEO URL]: ${videoUrl}`);
     console.log(`====================================================\n`);
-    console.log(`[DRY RUN COMPLETE] ${effectiveType === 'reel' ? 'Devotional Video Reel' : 'Image'} & Caption verified successfully.`);
+    console.log(`[DRY RUN COMPLETE] ${(effectiveType === 'reel' || effectiveType === 'clock_reel') ? 'Video Reel' : 'Image'} & Caption verified successfully.`);
   } else {
     try {
       let postId;
-      if (effectiveType === 'reel') {
+      if (effectiveType === 'reel' || effectiveType === 'clock_reel') {
         postId = await publishReelToInstagram(videoUrl, caption);
       } else {
         postId = await publishToInstagram(imageUrl, caption);

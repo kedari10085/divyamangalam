@@ -1,12 +1,13 @@
 """
-Divya Mangalam — 24-Hour Visual Vedic Muhurat Clock Infographic Generator
-Generates high-resolution 1080x1080 Instagram card with circular 24-hour clock dial,
-Rahu Kaal, Yamagandam, Gulika, Abhijit, Brahma Muhurta & Action Guidance.
-Pristine rendering with ZERO tofu/missing glyph boxes.
+Divya Mangalam — 24-Hour Visual Vedic Muhurat Clock Infographic Generator (v2.0)
+High-Aesthetic, Super-Sampled (2160x2160 -> 1080x1080 Lanczos) Celestial Timepiece
+Renders pristine astronomical 24-hour dial, color-coded Shubh & Ashubh windows,
+Day/Night celestial hemispheres, and Action Guidance Matrix.
+Zero tofu/missing glyph boxes.
 """
 
 import os, sys, math, datetime, argparse
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 if hasattr(sys.stdout, 'reconfigure'):
     try:
@@ -25,13 +26,13 @@ WEEKDAYS_VARA = [
 ]
 
 DISHA_SHOOL = [
-    ('Sunday', 'West'),
-    ('Monday', 'East'),
-    ('Tuesday', 'North'),
-    ('Wednesday', 'North'),
-    ('Thursday', 'South'),
-    ('Friday', 'West'),
-    ('Saturday', 'East')
+    ('Sunday', 'West', 'Consume ghee / paan before travel'),
+    ('Monday', 'East', 'Look in mirror or take milk before travel'),
+    ('Tuesday', 'North', 'Consume jaggery before travel'),
+    ('Wednesday', 'North', 'Consume coriander or sesame seeds'),
+    ('Thursday', 'South', 'Consume yellow mustard or curd'),
+    ('Friday', 'West', 'Consume barley or curd'),
+    ('Saturday', 'East', 'Consume ginger or black sesame')
 ]
 
 def get_solar_times(dt, lat=14.4426, lon=79.9865, tz=5.5):
@@ -70,7 +71,6 @@ def format_h(dec_h):
 def calculate_clock_data(target_date):
     day_idx = target_date.weekday()
     # Python weekday(): Monday is 0, Sunday is 6
-    # Convert to Sunday=0 ... Saturday=6
     sun_idx = (day_idx + 1) % 7
     weekday_en, vara_sa, planet_ruler = WEEKDAYS_VARA[sun_idx]
 
@@ -101,7 +101,7 @@ def calculate_clock_data(target_date):
     vijaya_start = sunrise_h + 10 * muh_dur
     vijaya_end = sunrise_h + 11 * muh_dur
 
-    disha_day, disha_dir = DISHA_SHOOL[sun_idx]
+    disha_day, disha_dir, disha_rem = DISHA_SHOOL[sun_idx]
 
     return {
         'date_str': target_date.strftime('%A, %d %B %Y'),
@@ -119,7 +119,8 @@ def calculate_clock_data(target_date):
         'abhijit': (abhijit_start, abhijit_end, f"{format_h(abhijit_start)} – {format_h(abhijit_end)}"),
         'brahma': (brahma_start, brahma_end, f"{format_h(brahma_start)} – {format_h(brahma_end)}"),
         'vijaya': (vijaya_start, vijaya_end, f"{format_h(vijaya_start)} – {format_h(vijaya_end)}"),
-        'disha_shool': disha_dir
+        'disha_shool': disha_dir,
+        'disha_remedy': disha_rem
     }
 
 def draw_vector_star(draw, cx, cy, radius, color):
@@ -133,12 +134,27 @@ def draw_vector_star(draw, cx, cy, radius, color):
     draw.polygon(points, fill=color)
 
 def draw_vector_triangle(draw, cx, cy, size, color):
-    # Warning triangle
     h = size * 0.866
     p1 = (cx, cy - h/2)
     p2 = (cx - size/2, cy + h/2)
     p3 = (cx + size/2, cy + h/2)
     draw.polygon([p1, p2, p3], fill=color)
+
+def draw_sun_icon(draw, cx, cy, radius, color):
+    draw.ellipse([(cx - radius*0.5, cy - radius*0.5), (cx + radius*0.5, cy + radius*0.5)], fill=color)
+    for i in range(8):
+        ang = i * (math.pi / 4)
+        x1 = cx + (radius * 0.65) * math.cos(ang)
+        y1 = cy + (radius * 0.65) * math.sin(ang)
+        x2 = cx + (radius * 0.95) * math.cos(ang)
+        y2 = cy + (radius * 0.95) * math.sin(ang)
+        draw.line([(x1, y1), (x2, y2)], fill=color, width=3)
+
+def draw_moon_icon(draw, cx, cy, radius, color):
+    # Crescent moon
+    draw.ellipse([(cx - radius, cy - radius), (cx + radius, cy + radius)], fill=color)
+    cut_offset = radius * 0.45
+    draw.ellipse([(cx - radius + cut_offset, cy - radius - cut_offset*0.2), (cx + radius + cut_offset, cy + radius - cut_offset*0.2)], fill='#10091E')
 
 def generate_clock_post_image(output_path, target_date=None):
     if target_date is None:
@@ -146,80 +162,98 @@ def generate_clock_post_image(output_path, target_date=None):
 
     data = calculate_clock_data(target_date)
 
-    W, H = 1080, 1080
-    img = Image.new('RGB', (W, H), '#0A0612') # Deep cosmic temple dark background
+    # Render at 2x resolution (2160x2160) for anti-aliasing
+    SCALE = 2
+    W = 1080 * SCALE
+    H = 1080 * SCALE
+
+    img = Image.new('RGB', (W, H), '#080511')
     draw = ImageDraw.Draw(img)
 
-    # Fonts
+    # Fonts (Scaled by 2)
     font_bold = r"C:\Windows\Fonts\segoeuib.ttf"
     font_reg = r"C:\Windows\Fonts\segoeui.ttf"
 
-    try:
-        f_brand = ImageFont.truetype(font_bold, 28)
-        f_title = ImageFont.truetype(font_bold, 38)
-        f_subtitle = ImageFont.truetype(font_bold, 22)
-        f_card_title = ImageFont.truetype(font_bold, 21)
-        f_item_name = ImageFont.truetype(font_bold, 20)
-        f_item_time = ImageFont.truetype(font_bold, 21)
-        f_item_sub = ImageFont.truetype(font_reg, 15)
-        f_hour = ImageFont.truetype(font_bold, 14)
-        f_hub_title = ImageFont.truetype(font_bold, 18)
-        f_hub_sub = ImageFont.truetype(font_bold, 14)
-    except Exception:
-        f_brand = ImageFont.load_default()
-        f_title = f_brand
-        f_subtitle = f_brand
-        f_card_title = f_brand
-        f_item_name = f_brand
-        f_item_time = f_brand
-        f_item_sub = f_brand
-        f_hour = f_brand
-        f_hub_title = f_brand
-        f_hub_sub = f_brand
+    def get_font(path, size):
+        try:
+            return ImageFont.truetype(path, size * SCALE)
+        except Exception:
+            return ImageFont.load_default()
 
-    # 1. Subtle Outer Border
-    draw.rectangle([(20, 20), (W - 20, H - 20)], outline='#D4A017', width=3)
-    draw.rectangle([(26, 26), (W - 26, H - 26)], outline='#665014', width=1)
+    f_brand = get_font(font_bold, 26)
+    f_title = get_font(font_bold, 36)
+    f_subtitle = get_font(font_bold, 21)
+    f_card_title = get_font(font_bold, 21)
+    f_item_name = get_font(font_bold, 19)
+    f_item_time = get_font(font_bold, 20)
+    f_item_sub = get_font(font_reg, 14)
+    f_hour = get_font(font_bold, 13)
+    f_hub_title = get_font(font_bold, 17)
+    f_hub_sub = get_font(font_bold, 13)
+
+    # 1. Subtle Radial Cosmic Glow in Background
+    # Draw soft radial circle in center-left for dial
+    CCX, CCY = 290 * SCALE, 435 * SCALE
+    R_OUT = 195 * SCALE
+    R_RING_OUT = 180 * SCALE
+    R_RING_IN = 108 * SCALE
+    R_HUB = 82 * SCALE
+
+    # Background subtle radial background
+    for r_bg in range(R_OUT + 80 * SCALE, R_OUT, -10):
+        alpha_tint = '#0F0922'
+        draw.ellipse([(CCX - r_bg, CCY - r_bg), (CCX + r_bg, CCY + r_bg)], fill=alpha_tint)
+
+    # Outer Decorative Gold Border
+    draw.rectangle([(20*SCALE, 20*SCALE), (W - 20*SCALE, H - 20*SCALE)], outline='#D4A017', width=3*SCALE)
+    draw.rectangle([(26*SCALE, 26*SCALE), (W - 26*SCALE, H - 26*SCALE)], outline='#5A4210', width=1*SCALE)
 
     # Corner Decorative Vector Stars
-    for cx_s, cy_s in [(40, 40), (W - 40, 40), (40, H - 40), (W - 40, H - 40)]:
-        draw_vector_star(draw, cx_s, cy_s, 10, '#D4A017')
+    for cx_s, cy_s in [(42*SCALE, 42*SCALE), (W - 42*SCALE, 42*SCALE), (42*SCALE, H - 42*SCALE), (W - 42*SCALE, H - 42*SCALE)]:
+        draw_vector_star(draw, cx_s, cy_s, 11*SCALE, '#D4A017')
 
     # 2. Header
-    draw_vector_star(draw, 340, 68, 9, '#FFD700')
-    draw.text((360, 52), "DIVYA MANGALAM", fill='#FFD700', font=f_brand)
-    draw_vector_star(draw, 680, 68, 9, '#FFD700')
+    draw_vector_star(draw, 335*SCALE, 68*SCALE, 9*SCALE, '#FFD700')
+    draw.text((358*SCALE, 53*SCALE), "DIVYA MANGALAM", fill='#FFD700', font=f_brand)
+    draw_vector_star(draw, 685*SCALE, 68*SCALE, 9*SCALE, '#FFD700')
 
     title_text = "TODAY'S 24-HOUR VEDIC CLOCK"
-    draw.text((W//2, 102), title_text, fill='#FFFFFF', font=f_title, anchor='mm')
+    draw.text((W//2, 102*SCALE), title_text, fill='#FFFFFF', font=f_title, anchor='mm')
 
     sub_text = f"{data['date_str']} • {data['vara']} ({data['planet']} Day)"
-    draw.text((W//2, 138), sub_text, fill='#FFB74D', font=f_subtitle, anchor='mm')
+    draw.text((W//2, 138*SCALE), sub_text, fill='#FFB74D', font=f_subtitle, anchor='mm')
 
     # 3. Draw Circular 24-Hour Vedic Clock Dial
-    CCX, CCY = 290, 435
-    R_OUT = 190
-    R_RING_OUT = 175
-    R_RING_IN = 105
-    R_HUB = 80
+    # Outer Bezel
+    draw.ellipse([(CCX - R_OUT, CCY - R_OUT), (CCX + R_OUT, CCY + R_OUT)], fill='#10091E', outline='#D4A017', width=3*SCALE)
+    draw.ellipse([(CCX - R_RING_OUT - 2*SCALE, CCY - R_RING_OUT - 2*SCALE),
+                  (CCX + R_RING_OUT + 2*SCALE, CCY + R_RING_OUT + 2*SCALE)], outline='#6A5220', width=1*SCALE)
 
-    # Draw Dial Base Circle
-    draw.ellipse([(CCX - R_OUT, CCY - R_OUT), (CCX + R_OUT, CCY + R_OUT)], fill='#140D24', outline='#D4A017', width=2)
+    # Day / Night Hemispheres Track Background
+    # Sunrise to Sunset is Day: warm amber track
+    # Sunset to Sunrise is Night: deep navy track
+    sunrise_deg = (data['sunrise_h'] % 24) * 15.0 - 90
+    sunset_deg = (data['sunset_h'] % 24) * 15.0 - 90
+    if sunset_deg < sunrise_deg:
+        sunset_deg += 360
 
-    # Function to draw annular wedge in PIL
+    # Night base fill
+    draw.pieslice([(CCX - R_RING_OUT, CCY - R_RING_OUT), (CCX + R_RING_OUT, CCY + R_RING_OUT)],
+                  start=0, end=360, fill='#16102C')
+    # Day slice fill
+    draw.pieslice([(CCX - R_RING_OUT, CCY - R_RING_OUT), (CCX + R_RING_OUT, CCY + R_RING_OUT)],
+                  start=sunrise_deg, end=sunset_deg, fill='#2B1A0E')
+
+    # Function to draw annular wedge
     def draw_wedge(start_dec_h, end_dec_h, fill_color, border_color):
-        a1 = (start_dec_h % 24) * 15.0
-        a2 = (end_dec_h % 24) * 15.0
-        
-        pil_a1 = a1 - 90
-        pil_a2 = a2 - 90
-        if pil_a2 < pil_a1:
-            pil_a2 += 360
-
+        a1 = (start_dec_h % 24) * 15.0 - 90
+        a2 = (end_dec_h % 24) * 15.0 - 90
+        if a2 < a1:
+            a2 += 360
         draw.pieslice([(CCX - R_RING_OUT, CCY - R_RING_OUT), (CCX + R_RING_OUT, CCY + R_RING_OUT)],
-                      start=pil_a1, end=pil_a2, fill=fill_color, outline=border_color, width=1)
+                      start=a1, end=a2, fill=fill_color, outline=border_color, width=2*SCALE)
 
-    # Draw colored timing slices
+    # Draw color-coded timing wedges
     # 🔴 Rahu Kaal
     draw_wedge(data['rahu'][0], data['rahu'][1], '#DC2626', '#FFA4A4')
     # 🟠 Yamagandam
@@ -233,135 +267,146 @@ def generate_clock_post_image(output_path, target_date=None):
     # 🔵 Vijaya Muhurta
     draw_wedge(data['vijaya'][0], data['vijaya'][1], '#0284C7', '#BAE6FD')
 
-    # Cut out center hole to make it a crisp donut ring
-    draw.ellipse([(CCX - R_RING_IN, CCY - R_RING_IN), (CCX + R_RING_IN, CCY + R_RING_IN)], fill='#140D24', outline='#D4A017', width=1)
+    # Cut out center hole
+    draw.ellipse([(CCX - R_RING_IN, CCY - R_RING_IN), (CCX + R_RING_IN, CCY + R_RING_IN)],
+                 fill='#10091E', outline='#D4A017', width=2*SCALE)
 
     # Draw 24-Hour Tick Marks and Hour Labels
     for h in range(24):
         angle_rad = math.radians(h * 15)
         is_major = (h % 3 == 0)
-        r1 = R_OUT - 2
-        r2 = R_OUT - (12 if is_major else 6)
+        r1 = R_OUT - 2*SCALE
+        r2 = R_OUT - (14*SCALE if is_major else 7*SCALE)
         x1 = CCX + r1 * math.sin(angle_rad)
         y1 = CCY - r1 * math.cos(angle_rad)
         x2 = CCX + r2 * math.sin(angle_rad)
         y2 = CCY - r2 * math.cos(angle_rad)
-        draw.line([(x1, y1), (x2, y2)], fill='#FFD700' if is_major else '#857245', width=2 if is_major else 1)
+        draw.line([(x1, y1), (x2, y2)], fill='#FFD700' if is_major else '#7A6538', width=3*SCALE if is_major else 1*SCALE)
 
         if is_major:
-            tx = CCX + (R_OUT + 14) * math.sin(angle_rad)
-            ty = CCY - (R_OUT + 14) * math.cos(angle_rad)
-            h_lbl = '00h' if h == 0 else ('12h' if h == 12 else (f'{h:02d}h'))
-            draw.text((tx, ty), h_lbl, fill='#E2E8F0', font=f_hour, anchor='mm')
+            tx = CCX + (R_OUT + 15*SCALE) * math.sin(angle_rad)
+            ty = CCY - (R_OUT + 15*SCALE) * math.cos(angle_rad)
+            h_lbl = '00h' if h == 0 else ('12h' if h == 12 else f'{h:02d}h')
+            draw.text((tx, ty), h_lbl, fill='#F1F5F9', font=f_hour, anchor='mm')
 
-    # Draw Sunrise / Sunset Lines
-    for h_val, color in [(data['sunrise_h'], '#FF7A29'), (data['sunset_h'], '#F43F5E')]:
-        rad = math.radians((h_val % 24) * 15)
-        x_edge = CCX + (R_RING_OUT + 6) * math.sin(rad)
-        y_edge = CCY - (R_RING_OUT + 6) * math.cos(rad)
-        draw.line([(CCX, CCY), (x_edge, y_edge)], fill=color, width=2)
+    # Sunrise and Sunset Ray Markers + Icons
+    # Sunrise line
+    rad_rise = math.radians((data['sunrise_h'] % 24) * 15)
+    x_rise = CCX + (R_RING_OUT + 8*SCALE) * math.sin(rad_rise)
+    y_rise = CCY - (R_RING_OUT + 8*SCALE) * math.cos(rad_rise)
+    draw.line([(CCX, CCY), (x_rise, y_rise)], fill='#FF7A29', width=3*SCALE)
+    draw_sun_icon(draw, x_rise, y_rise, 9*SCALE, '#FFB74D')
 
-    # Center Hub Badge
-    draw.ellipse([(CCX - R_HUB, CCY - R_HUB), (CCX + R_HUB, CCY + R_HUB)], fill='#1A102E', outline='#FFD700', width=2)
-    draw.text((CCX, CCY - 26), "24-HOUR", fill='#FFD700', font=f_hub_title, anchor='mm')
-    draw.text((CCX, CCY - 4), "VEDIC CLOCK", fill='#FFFFFF', font=f_hub_title, anchor='mm')
-    
-    # Vector sunrise dot + text
-    draw.ellipse([(CCX - 68, CCY + 16), (CCX - 56, CCY + 28)], fill='#FFB74D')
-    draw.text((CCX - 48, CCY + 13), f"Rise: {data['sunrise_str']}", fill='#FFB74D', font=f_hub_sub)
-    
-    # Vector sunset dot + text
-    draw.ellipse([(CCX - 68, CCY + 34), (CCX - 56, CCY + 46)], fill='#FF8A65')
-    draw.text((CCX - 48, CCY + 31), f"Set:  {data['sunset_str']}", fill='#FF8A65', font=f_hub_sub)
+    # Sunset line
+    rad_set = math.radians((data['sunset_h'] % 24) * 15)
+    x_set = CCX + (R_RING_OUT + 8*SCALE) * math.sin(rad_set)
+    y_set = CCY - (R_RING_OUT + 8*SCALE) * math.cos(rad_set)
+    draw.line([(CCX, CCY), (x_set, y_set)], fill='#F43F5E', width=3*SCALE)
+    draw_moon_icon(draw, x_set, y_set, 8*SCALE, '#CBD5E1')
+
+    # Center Hub Badge (Vedic Astrolabe Medallion)
+    draw.ellipse([(CCX - R_HUB, CCY - R_HUB), (CCX + R_HUB, CCY + R_HUB)], fill='#18102A', outline='#FFD700', width=3*SCALE)
+    draw.ellipse([(CCX - R_HUB + 4*SCALE, CCY - R_HUB + 4*SCALE), (CCX + R_HUB - 4*SCALE, CCY + R_HUB - 4*SCALE)], outline='#6A4F18', width=1*SCALE)
+
+    draw_vector_star(draw, CCX, CCY - 44*SCALE, 6*SCALE, '#FFD700')
+    draw.text((CCX, CCY - 24*SCALE), "24-HOUR", fill='#FFD700', font=f_hub_title, anchor='mm')
+    draw.text((CCX, CCY - 3*SCALE), "VEDIC CLOCK", fill='#FFFFFF', font=f_hub_title, anchor='mm')
+
+    draw.ellipse([(CCX - 66*SCALE, CCY + 18*SCALE), (CCX - 54*SCALE, CCY + 30*SCALE)], fill='#FFB74D')
+    draw.text((CCX - 46*SCALE, CCY + 15*SCALE), f"Rise: {data['sunrise_str']}", fill='#FFB74D', font=f_hub_sub)
+
+    draw.ellipse([(CCX - 66*SCALE, CCY + 36*SCALE), (CCX - 54*SCALE, CCY + 48*SCALE)], fill='#FF8A65')
+    draw.text((CCX - 46*SCALE, CCY + 33*SCALE), f"Set:  {data['sunset_str']}", fill='#FF8A65', font=f_hub_sub)
 
     # 4. Right Side Panels: Good vs Bad Windows Breakdown
-    RX = 540
-    RW = 490
+    RX = 535 * SCALE
+    RW = 495 * SCALE
 
     # Panel 1: SUPER AUSPICIOUS TIMINGS (SHUBHA)
-    draw.rounded_rectangle([(RX, 180), (RX + RW, 380)], radius=14, fill='#0B1F17', outline='#059669', width=2)
-    draw_vector_star(draw, RX + 26, 208, 7, '#34D399')
-    draw.text((RX + 42, 196), "SUPER AUSPICIOUS (SHUBHA)", fill='#34D399', font=f_card_title)
+    draw.rounded_rectangle([(RX, 180*SCALE), (RX + RW, 380*SCALE)], radius=14*SCALE, fill='#0B1F17', outline='#059669', width=2*SCALE)
+    draw_vector_star(draw, RX + 26*SCALE, 208*SCALE, 7*SCALE, '#34D399')
+    draw.text((RX + 44*SCALE, 196*SCALE), "SUPER AUSPICIOUS (SHUBHA)", fill='#34D399', font=f_card_title)
 
     # Item 1: Abhijit Muhurta
-    draw.ellipse([(RX + 20, 238), (RX + 34, 252)], fill='#10B981')
-    draw.text((RX + 44, 234), "Abhijit Muhurta", fill='#FFFFFF', font=f_item_name)
-    draw.text((RX + RW - 18, 234), data['abhijit'][2], fill='#34D399', font=f_item_time, anchor='ra')
-    draw.text((RX + 44, 258), "Best time of day • Supreme for new business, purchases & pacts", fill='#9CA3AF', font=f_item_sub)
+    draw.ellipse([(RX + 20*SCALE, 238*SCALE), (RX + 34*SCALE, 252*SCALE)], fill='#10B981')
+    draw.text((RX + 44*SCALE, 234*SCALE), "Abhijit Muhurta", fill='#FFFFFF', font=f_item_name)
+    draw.text((RX + RW - 18*SCALE, 234*SCALE), data['abhijit'][2], fill='#34D399', font=f_item_time, anchor='ra')
+    draw.text((RX + 44*SCALE, 258*SCALE), "Best time of day • Supreme for new business, purchases & pacts", fill='#9CA3AF', font=f_item_sub)
 
     # Item 2: Brahma Muhurta
-    draw.ellipse([(RX + 20, 286), (RX + 34, 300)], fill='#8B5CF6')
-    draw.text((RX + 44, 282), "Brahma Muhurta", fill='#FFFFFF', font=f_item_name)
-    draw.text((RX + RW - 18, 282), data['brahma'][2], fill='#C4B5FD', font=f_item_time, anchor='ra')
-    draw.text((RX + 44, 306), "Pre-dawn spiritual peak • Meditation, yoga & mental clarity", fill='#9CA3AF', font=f_item_sub)
+    draw.ellipse([(RX + 20*SCALE, 286*SCALE), (RX + 34*SCALE, 300*SCALE)], fill='#8B5CF6')
+    draw.text((RX + 44*SCALE, 282*SCALE), "Brahma Muhurta", fill='#FFFFFF', font=f_item_name)
+    draw.text((RX + RW - 18*SCALE, 282*SCALE), data['brahma'][2], fill='#C4B5FD', font=f_item_time, anchor='ra')
+    draw.text((RX + 44*SCALE, 306*SCALE), "Pre-dawn spiritual peak • Meditation, yoga & mental clarity", fill='#9CA3AF', font=f_item_sub)
 
     # Item 3: Vijaya Muhurta
-    draw.ellipse([(RX + 20, 334), (RX + 34, 348)], fill='#06B6D4')
-    draw.text((RX + 44, 330), "Vijaya Muhurta", fill='#FFFFFF', font=f_item_name)
-    draw.text((RX + RW - 18, 330), data['vijaya'][2], fill='#67E8F9', font=f_item_time, anchor='ra')
-    draw.text((RX + 44, 354), "Triumph in negotiations, competitive deals & critical filings", fill='#9CA3AF', font=f_item_sub)
+    draw.ellipse([(RX + 20*SCALE, 334*SCALE), (RX + 34*SCALE, 348*SCALE)], fill='#06B6D4')
+    draw.text((RX + 44*SCALE, 330*SCALE), "Vijaya Muhurta", fill='#FFFFFF', font=f_item_name)
+    draw.text((RX + RW - 18*SCALE, 330*SCALE), data['vijaya'][2], fill='#67E8F9', font=f_item_time, anchor='ra')
+    draw.text((RX + 44*SCALE, 354*SCALE), "Triumph in negotiations, competitive deals & critical filings", fill='#9CA3AF', font=f_item_sub)
 
     # Panel 2: INAUSPICIOUS PERIODS (AVOID)
-    draw.rounded_rectangle([(RX, 396), (RX + RW, 575)], radius=14, fill='#220C12', outline='#DC2626', width=2)
-    draw_vector_triangle(draw, RX + 26, 208 + 216, 14, '#EF4444')
-    draw.text((RX + 42, 412), "INAUSPICIOUS PERIODS (AVOID)", fill='#F87171', font=f_card_title)
+    draw.rounded_rectangle([(RX, 396*SCALE), (RX + RW, 575*SCALE)], radius=14*SCALE, fill='#220C12', outline='#DC2626', width=2*SCALE)
+    draw_vector_triangle(draw, RX + 26*SCALE, 424*SCALE, 14*SCALE, '#EF4444')
+    draw.text((RX + 44*SCALE, 412*SCALE), "INAUSPICIOUS PERIODS (AVOID)", fill='#F87171', font=f_card_title)
 
     # Item 1: Rahu Kaal
-    draw.ellipse([(RX + 20, 454), (RX + 34, 468)], fill='#EF4444')
-    draw.text((RX + 44, 450), "Rahu Kaal", fill='#FFFFFF', font=f_item_name)
-    draw.text((RX + RW - 18, 450), data['rahu'][2], fill='#F87171', font=f_item_time, anchor='ra')
-    draw.text((RX + 44, 474), "Heavy planetary friction • Strictly avoid major new beginnings", fill='#9CA3AF', font=f_item_sub)
+    draw.ellipse([(RX + 20*SCALE, 454*SCALE), (RX + 34*SCALE, 468*SCALE)], fill='#EF4444')
+    draw.text((RX + 44*SCALE, 450*SCALE), "Rahu Kaal", fill='#FFFFFF', font=f_item_name)
+    draw.text((RX + RW - 18*SCALE, 450*SCALE), data['rahu'][2], fill='#F87171', font=f_item_time, anchor='ra')
+    draw.text((RX + 44*SCALE, 474*SCALE), "Heavy planetary friction • Strictly avoid major new beginnings", fill='#9CA3AF', font=f_item_sub)
 
     # Item 2: Yamagandam
-    draw.ellipse([(RX + 20, 504), (RX + 34, 518)], fill='#F97316')
-    draw.text((RX + 44, 500), "Yamagandam", fill='#FFFFFF', font=f_item_name)
-    draw.text((RX + RW - 18, 500), data['yama'][2], fill='#FB923C', font=f_item_time, anchor='ra')
-    draw.text((RX + 44, 524), "Avoid travel departures, starting contracts & medical surgery", fill='#9CA3AF', font=f_item_sub)
+    draw.ellipse([(RX + 20*SCALE, 504*SCALE), (RX + 34*SCALE, 518*SCALE)], fill='#F97316')
+    draw.text((RX + 44*SCALE, 500*SCALE), "Yamagandam", fill='#FFFFFF', font=f_item_name)
+    draw.text((RX + RW - 18*SCALE, 500*SCALE), data['yama'][2], fill='#FB923C', font=f_item_time, anchor='ra')
+    draw.text((RX + 44*SCALE, 524*SCALE), "Avoid travel departures, starting contracts & medical surgery", fill='#9CA3AF', font=f_item_sub)
 
     # Item 3: Disha Shool
-    draw.ellipse([(RX + 22, 552), (RX + 32, 562)], fill='#FCD34D')
-    draw.text((RX + 44, 548), f"Disha Shool: Avoid traveling towards {data['disha_shool']} today.", fill='#FCD34D', font=f_item_sub)
+    draw.ellipse([(RX + 22*SCALE, 552*SCALE), (RX + 32*SCALE, 562*SCALE)], fill='#FCD34D')
+    draw.text((RX + 44*SCALE, 548*SCALE), f"Disha Shool: Avoid {data['disha_shool']}. ({data['disha_remedy']})", fill='#FCD34D', font=f_item_sub)
 
     # Panel 3: Bottom "TODAY'S ACTION SUITABILITY GUIDE" Strip
-    BY = 675
-    BH = 315
-    draw.rounded_rectangle([(40, BY), (W - 40, BY + BH)], radius=18, fill='#140C22', outline='#D4A017', width=2)
+    BY = 675 * SCALE
+    BH = 315 * SCALE
+    draw.rounded_rectangle([(40*SCALE, BY), (W - 40*SCALE, BY + BH)], radius=18*SCALE, fill='#120B20', outline='#D4A017', width=2*SCALE)
 
-    draw_vector_star(draw, 64, BY + 32, 8, '#FFD700')
-    draw.text((82, BY + 20), "TODAY'S ACTION SUITABILITY GUIDE", fill='#FFD700', font=f_card_title)
-    draw.text((W - 60, BY + 24), "Classical Muhūrta Cintāmaṇi Guidance", fill='#9CA3AF', font=f_item_sub, anchor='ra')
+    draw_vector_star(draw, 64*SCALE, BY + 32*SCALE, 8*SCALE, '#FFD700')
+    draw.text((82*SCALE, BY + 20*SCALE), "TODAY'S ACTION SUITABILITY GUIDE", fill='#FFD700', font=f_card_title)
+    draw.text((W - 60*SCALE, BY + 24*SCALE), "Classical Muhūrta Cintāmaṇi Guidance", fill='#9CA3AF', font=f_item_sub, anchor='ra')
 
     # 4 Action Columns
     actions = [
-        ("Vivah (Marriage)", "Auspicious in Abhijit window", f"Best: {data['abhijit'][2]}", "Avoid Rahu Kaal & Yamagandam", '#34D399', '#10B981'),
-        ("Griha Pravesh", "Auspicious after Rahu Kaal", f"Best: {data['abhijit'][2]}", "Light ghee lamp during dusk", '#34D399', '#10B981'),
-        ("Vehicle & Gold", "Favorable window active", f"Best: {data['abhijit'][2]}", "Good for taking deliveries", '#67E8F9', '#06B6D4'),
+        ("Vivah (Marriage)", "Auspicious in Abhijit", f"Best: {data['abhijit'][2]}", "Avoid Rahu Kaal window", '#34D399', '#10B981'),
+        ("Griha Pravesh", "Auspicious daytime", f"Best: {data['abhijit'][2]}", "Avoid Rahu Kaal entirely", '#34D399', '#10B981'),
+        ("Vehicle & Gold", "Favorable window", f"Best: {data['abhijit'][2]}", "Good for taking deliveries", '#67E8F9', '#06B6D4'),
         ("Business Deals", "Ideal in Abhijit & Vijaya", f"Best: {data['vijaya'][2]}", "Never sign during Rahu Kaal", '#FCD34D', '#EAB308')
     ]
 
-    col_w = (W - 80 - 30) // 4
+    col_w = (W - 80*SCALE - 30*SCALE) // 4
     for i, (act_title, verdict, best_w, advice, v_col, dot_col) in enumerate(actions):
-        bx = 55 + i * (col_w + 10)
-        draw.rounded_rectangle([(bx, BY + 60), (bx + col_w, BY + BH - 25)], radius=10, fill='#1B122E', outline='#4A3766', width=1)
-        
-        # Action dot
-        draw.ellipse([(bx + 12, BY + 78), (bx + 22, BY + 88)], fill=dot_col)
-        draw.text((bx + 28, BY + 74), act_title, fill='#FFFFFF', font=f_item_name)
-        
-        draw.text((bx + 12, BY + 108), "Verdict:", fill='#9CA3AF', font=f_item_sub)
-        draw.text((bx + 12, BY + 128), verdict, fill=v_col, font=f_item_sub)
-        draw.text((bx + 12, BY + 168), best_w, fill='#FFD700', font=f_item_sub)
-        draw.text((bx + 12, BY + 208), advice, fill='#9CA3AF', font=f_item_sub)
+        bx = 55*SCALE + i * (col_w + 10*SCALE)
+        draw.rounded_rectangle([(bx, BY + 60*SCALE), (bx + col_w, BY + BH - 25*SCALE)], radius=10*SCALE, fill='#1B122E', outline='#4A3766', width=1*SCALE)
+
+        draw.ellipse([(bx + 12*SCALE, BY + 78*SCALE), (bx + 22*SCALE, BY + 88*SCALE)], fill=dot_col)
+        draw.text((bx + 28*SCALE, BY + 74*SCALE), act_title, fill='#FFFFFF', font=f_item_name)
+
+        draw.text((bx + 12*SCALE, BY + 108*SCALE), "Verdict:", fill='#9CA3AF', font=f_item_sub)
+        draw.text((bx + 12*SCALE, BY + 128*SCALE), verdict, fill=v_col, font=f_item_sub)
+        draw.text((bx + 12*SCALE, BY + 168*SCALE), best_w, fill='#FFD700', font=f_item_sub)
+        draw.text((bx + 12*SCALE, BY + 208*SCALE), advice, fill='#9CA3AF', font=f_item_sub)
 
     # 5. Branding Footer
-    draw_vector_star(draw, 140, H - 45, 6, '#B8860B')
-    draw.text((W//2, H - 45), "Explore the 10-Year Interactive Clock on https://divyamangalam.com • @divyamangalam.info",
+    draw_vector_star(draw, 140*SCALE, H - 45*SCALE, 6*SCALE, '#B8860B')
+    draw.text((W//2, H - 45*SCALE), "Explore the 10-Year Interactive Clock on https://divyamangalam.com • @divyamangalam.info",
               fill='#B8860B', font=f_item_sub, anchor='mm')
-    draw_vector_star(draw, W - 140, H - 45, 6, '#B8860B')
+    draw_vector_star(draw, W - 140*SCALE, H - 45*SCALE, 6*SCALE, '#B8860B')
 
-    # Save final high-res card
+    # Downsample with Lanczos for pristine anti-aliasing
+    final_img = img.resize((1080, 1080), Image.Resampling.LANCZOS)
+
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
-    img.save(output_path, quality=95)
+    final_img.save(output_path, quality=95)
     print(f"[SUCCESS] 24-Hour Vedic Clock Post Image saved to: {output_path}")
     return output_path
 
