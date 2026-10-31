@@ -52,6 +52,7 @@ function getPostType() {
   const typeArg = process.argv.find(a => a.startsWith('--type='));
   if (typeArg) requestedType = typeArg.split('=')[1].toLowerCase();
   if (process.argv.includes('--reel')) return 'reel';
+  if (process.argv.includes('--routine') || process.argv.includes('--routine-reel')) return 'routine_reel';
   if (process.argv.includes('--clock-reel')) return 'clock_reel';
   if (process.argv.includes('--clock')) return 'clock';
   if (process.argv.includes('--rashi')) return 'rashi';
@@ -884,6 +885,36 @@ async function main() {
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
     caption = buildRashiCaption(dateStr, panchang, istDate);
     imagePrompt = `Vedic astrological golden celestial wheel, 12 illuminated golden rashi zodiac constellations glowing in cosmic indigo sky, ancient Sanskrit glyphs, sacred mandala, radiant starlight, 8k devotional masterpiece`;
+  } else if (effectiveType === 'routine_reel') {
+    // 3C. A DAY IN THE LIFE: VEDIC ROUTINE REEL
+    console.log(`[INFO] Building "A Day in the Life with Vedic Clock" Routine Reel (14s Multi-Scene)...`);
+    try {
+      const scriptPath = path.join(__dirname, '..', 'generate_routine_reel.py');
+      const outVideoPath = path.join(__dirname, '..', 'images', 'routine_reel.mp4');
+      execSync(`python "${scriptPath}" --out "${outVideoPath}"`, { stdio: 'inherit' });
+      console.log(`[ROUTINE ENGINE] Generated high-res 1080x1920 routine reel: ${outVideoPath}`);
+    } catch (err) {
+      console.warn(`[WARNING] Failed to generate local routine reel (${err.message}), falling back to CDN asset.`);
+    }
+    videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/routine_reel.mp4';
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/clock_darshan.jpg';
+    caption = `🌅 A Day in Your Life with the Sacred Vedic Clock
+✦ ─────────────── ✦
+✨ “What should you do — and strictly avoid — at each hour today?”
+
+When your actions align with cosmic rhythms, your effort reduces and spiritual protection multiplies:
+
+• 🌅 04:30 AM – Brahma Muhurta: Wake up, meditate, yoga & Gayatri Japa. Sattva is at its peak.
+• 🚫 09:00 AM – 10:30 AM – Rahu Kaal Alert: Heavy planetary friction. Strictly avoid signing contracts, new beginnings, or financial commitments! Stick to routine tasks.
+• ☀️ 11:45 AM – 12:35 PM – Abhijit Muhurta: The golden window! Optimal for business deals, investments, taking delivery of vehicles & starting key milestones.
+• 🌇 05:48 PM – Godhuli Sandhya: Sunset twilight. Light a ghee lamp at your altar to welcome Goddess Lakshmi.
+
+✦ ─────────────── ✦
+🧭 Discover your personalized 24-Hour Vedic Clock & Daily Muhurats online:
+🔗 https://divyamangalam.com#vedicClockSection
+Instagram: @divyamangalam.info
+
+#VedicClock #DailyRoutine #BrahmaMuhurta #RahuKaal #AbhijitMuhurta #Muhurat #VedicAstrology #SanatanaDharma #SpiritualLife #DivyaMangalam`;
   } else if (effectiveType === 'clock_reel') {
     // 3B. 24-HOUR VEDIC CLOCK & SHUBH MUHURAT 10S VERTICAL REEL
     console.log(`[INFO] Building 24-Hour Sacred Vedic Clock 10s Reel (432 Hz + Voiceover)...`);
@@ -994,11 +1025,11 @@ async function main() {
     console.log(caption);
     if (videoUrl) console.log(`[VIDEO URL]: ${videoUrl}`);
     console.log(`====================================================\n`);
-    console.log(`[DRY RUN COMPLETE] ${(effectiveType === 'reel' || effectiveType === 'clock_reel') ? 'Video Reel' : 'Image'} & Caption verified successfully.`);
+    console.log(`[DRY RUN COMPLETE] ${(effectiveType === 'reel' || effectiveType === 'clock_reel' || effectiveType === 'routine_reel') ? 'Video Reel' : 'Image'} & Caption verified successfully.`);
   } else {
     try {
       let postId;
-      if (effectiveType === 'reel' || effectiveType === 'clock_reel') {
+      if (effectiveType === 'reel' || effectiveType === 'clock_reel' || effectiveType === 'routine_reel') {
         postId = await publishReelToInstagram(videoUrl, caption);
       } else {
         postId = await publishToInstagram(imageUrl, caption);
