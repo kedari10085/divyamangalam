@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { execSync } = require('child_process');
 
 // Configuration
 const DAILY_POSTS_PATH = path.join(__dirname, '..', 'DAILY_POSTS.md');
@@ -51,7 +52,7 @@ function getPostType() {
   const typeArg = process.argv.find(a => a.startsWith('--type='));
   if (typeArg) requestedType = typeArg.split('=')[1].toLowerCase();
   if (process.argv.includes('--reel')) return 'reel';
-  if (process.argv.includes('--rashi')) return 'rashi';
+  if (process.argv.includes('--clock')) return 'clock';
   if (process.argv.includes('--muhurat')) return 'muhurat';
   if (process.argv.includes('--palm')) return 'palm';
   if (process.argv.includes('--puran')) return 'puran';
@@ -479,36 +480,44 @@ Instagram: @divyamangalam.info
 #RashiBhavishya #DailyHoroscope #VedicAstrology #Jyotish #ZodiacForecast #Chandrabalam #Nakshatra #DivyaMangalam #AstrologyToday #Horoscope2026 #SpiritualGuidance`;
 }
 
-// BUILD CAPTION: 3. SHUBH MUHURAT & TIMINGS GUIDE
+// BUILD CAPTION: 3. SHUBH MUHURAT & 24-HOUR VEDIC CLOCK GUIDE
 function buildMuhuratCaption(dateStr, panchang, istDate) {
   const weekdayInfo = WEEKDAY_DEITIES[istDate.getDay()];
 
-  return `⏳ Divya Mangalam — Shubh Muhurat & Timings Guide
+  return `⏰ Divya Mangalam — Today's 24-Hour Sacred Vedic Muhurat Clock
 ✦ ─────────────── ✦
 📅 ${dateStr} • ${weekdayInfo.vara} (${weekdayInfo.day})
 🌙 Tithi: ${panchang.tithi} • ⭐ Nakshatra: ${panchang.nakshatra}
 
-🌟 SUPER AUSPICIOUS TIMINGS (Highest Cosmic Support):
+✨ SUPER AUSPICIOUS TIMINGS (Highest Cosmic Support):
 Align critical meetings, worship, purchases, or new initiatives with these windows:
-• ☀️ Abhijit Muhurta: ${panchang.abhijit} (The invincible midday window for victory and success)
-• 🌅 Brahma Muhurta: ${panchang.brahmaMuhurta} (Supreme time for meditation, prayer & spiritual clarity)
-• 🍯 Amrit Kaal: Auspicious for family celebrations, agreements & major decisions
+• ☀️ Abhijit Muhurta: ${panchang.abhijit} (The invincible midday window — best for any major new beginning)
+• 🌅 Brahma Muhurta: ${panchang.brahmaMuhurta} (Supreme spiritual window for meditation, yoga & mental clarity)
+• 🍯 Amrit Kaal & Vijaya: Highest harmony for milestones, agreements and legal victory
 
 ⚠️ INAUSPICIOUS PERIODS (Strictly Avoid Major New Beginnings):
 During these windows, avoid signing contracts, large investments, or starting new journeys:
-• 🚫 Rahu Kaal: ${panchang.rahuKaal} (Heavy planetary interference — focus on routine work)
-• ⏳ Yamagandam: ${panchang.yamagandam} (Avoid critical new departures or commitments)
+• 🚫 Rahu Kaal: ${panchang.rahuKaal} (Heavy planetary interference — stick to routine work)
+• ⏳ Yamagandam: ${panchang.yamagandam} (Avoid critical new departures, contracts or elective surgery)
 • 🌘 Gulika Kalam: ${panchang.gulikaKalam} (Suitable for ongoing, routine tasks)
+
+✦ ─────────────── ✦
+🎯 TODAY'S ACTION SUITABILITY GUIDE:
+• 💍 Vivah (Marriage): Favorable window during Abhijit (${panchang.abhijit}). Avoid Rahu Kaal.
+• 🏡 Griha Pravesh (Housewarming): Favorable after Rahu Kaal passes; light ghee lamp during dusk.
+• 🚗 Vehicle & Gold Purchase: Auspicious during midday Abhijit window.
+• 💼 Business Deals & Contracts: Ideal during Abhijit & Vijaya. Never sign during Rahu Kaal!
+• ✈️ Travel (Yatra): Avoid departing during Rahu Kaal & Yamagandam.
 
 💡 VEDIC WISDOM:
 “When your actions harmonize with auspicious cosmic hours, effort decreases and divine grace multiplies.”
 
 ✦ ─────────────── ✦
-📅 Calculate complete personalized Shubh Muhurats for marriage, housewarming & business:
-🔗 https://divyamangalam.com/muhurat.html
+📅 Explore our 10-Year Interactive 24-Hour Clock & Muhurat Calculators Online:
+🔗 https://divyamangalam.com#vedicClockSection
 Instagram: @divyamangalam.info
 
-#ShubhMuhurat #AuspiciousTimings #RahuKaal #AbhijitMuhurta #VedicWisdom #Panchang #MuhurtaChintamani #DivyaMangalam #SanatanaDharma #DailyMuhurat`;
+#VedicClock #ShubhMuhurat #AuspiciousTimings #RahuKaal #AbhijitMuhurta #Yamagandam #BrahmaMuhurta #Panchang #MuhurtaChintamani #DivyaMangalam #SanatanaDharma #DailyMuhurat #VedicAstrology`;
 }
 
 // BUILD CAPTION: 4. PALM READING FEATURE SPOTLIGHT
@@ -873,11 +882,19 @@ async function main() {
     console.log(`[INFO] Building Daily Rashi & Nakshatra Beneficiary Forecast...`);
     caption = buildRashiCaption(dateStr, panchang, istDate);
     imagePrompt = `Vedic astrological golden celestial wheel, 12 illuminated golden rashi zodiac constellations glowing in cosmic indigo sky, ancient Sanskrit glyphs, sacred mandala, radiant starlight, 8k devotional masterpiece`;
-  } else if (effectiveType === 'muhurat') {
-    // 3. SHUBH MUHURAT & TIMINGS POST
-    console.log(`[INFO] Building Shubh Muhurat & Timings Guide...`);
+  } else if (effectiveType === 'muhurat' || effectiveType === 'clock') {
+    // 3. 24-HOUR VEDIC CLOCK & SHUBH MUHURAT POST
+    console.log(`[INFO] Building 24-Hour Sacred Vedic Muhurat Clock Infographic...`);
+    try {
+      const scriptPath = path.join(__dirname, '..', 'generate_clock_post.py');
+      const outImagePath = path.join(__dirname, '..', 'images', 'clock_darshan.jpg');
+      execSync(`python "${scriptPath}" --out "${outImagePath}"`, { stdio: 'inherit' });
+      console.log(`[CLOCK ENGINE] Generated high-res 1080x1080 24-hour clock card: ${outImagePath}`);
+    } catch (err) {
+      console.warn(`[WARNING] Failed to generate local clock card (${err.message}), falling back to CDN asset.`);
+    }
+    imageUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/clock_darshan.jpg';
     caption = buildMuhuratCaption(dateStr, panchang, istDate);
-    imagePrompt = `Ancient Vedic Surya Yantra astronomical sundial crafted in polished gold and brass, morning golden sunlight casting divine rays across sacred Hindu temple courtyard, celestial clock, 8k cinematic spiritual artwork`;
   } else if (effectiveType === 'palm') {
     // 4. PALM READING FEATURE SPOTLIGHT POST
     console.log(`[INFO] Building Vedic Palm Reading Spotlight...`);

@@ -74,6 +74,7 @@
   <!-- Design System -->
   <link rel="stylesheet" href="style.css?v=light-20261022" />
   <link rel="stylesheet" href="ai-platform.css?v=light-20261022" />
+  <link rel="stylesheet" href="vedic-clock.css?v=20261031" />
 </head>
 <body class="ai-native-body">
 
@@ -100,6 +101,7 @@
             <li class="ai-nav-dropdown">
               <a href="#features" class="ai-nav-link ai-nav-highlight-cyan">🔮 Sacred Tools ▾</a>
               <ul class="ai-dropdown-menu">
+                <li><a href="index.html#vedicClockSection">⏰ 24h Vedic Clock</a></li>
                 <li><a href="palm-reading.html">🖐️ AI Palm Reading</a></li>
                 <li><a href="panchang-calendar.html">📅 Vedic Panchang</a></li>
                 <li><a href="muhurat.html">⏳ Shubh Muhurat</a></li>
@@ -209,6 +211,116 @@
         <a href="panchang-calendar.html" class="pm-cta">Full Calendar →</a>
       </div>
     </div>
+
+    <!-- ==========================================================================
+         SACRED 24-HOUR VEDIC MUHURAT CLOCK (10-YEAR PRECISION EPHEMERIS)
+         ========================================================================== -->
+    <section id="vedicClockSection" class="ai-section vedic-clock-section" aria-labelledby="vedic-clock-heading">
+      <div class="ai-container">
+        
+        <div class="vc-header">
+          <div class="vc-pill">
+            <span>⏰</span> Authentic Horology • Muhūrta Cintāmaṇi
+          </div>
+          <h2 id="vedic-clock-heading" class="vc-title">
+            The 24-Hour Sacred Vedic Muhurat Clock
+          </h2>
+          <p class="vc-desc">
+            Visual 24-hour wheel of auspicious (Shubh) vs inauspicious (Ashubh) planetary hours. Pinpoint Rahu Kaal, Yamagandam, Gulika, Abhijit &amp; Brahma Muhurta for any date across 10+ years.
+          </p>
+        </div>
+
+        <!-- Controls Deck: 10-Year Date Picker, City, Quick Nav & Filters -->
+        <div class="vc-controls-deck">
+          <div class="vc-date-nav">
+            <button type="button" class="vc-btn-nav" id="vcBtnYesterday" title="Previous Day">◀ Yesterday</button>
+            <button type="button" class="vc-btn-nav active" id="vcBtnToday" title="Jump to Today">● Today</button>
+            <button type="button" class="vc-btn-nav" id="vcBtnTomorrow" title="Next Day">Tomorrow ▶</button>
+          </div>
+
+          <div class="vc-date-input-wrap">
+            <label for="vcDatePicker">📅 Date (10-Yr Range):</label>
+            <input type="date" id="vcDatePicker" class="vc-date-picker" min="2020-01-01" max="2036-12-31" aria-label="Select Date across 10 Years" />
+          </div>
+
+          <div class="vc-city-select-wrap">
+            <label for="vcCitySelect">📍 Location:</label>
+            <select id="vcCitySelect" class="vc-city-select" aria-label="Select City for Accurate Sunrise and Sunset"></select>
+          </div>
+
+          <div class="vc-filter-pills" role="tablist" aria-label="Filter Muhurat Types">
+            <button type="button" class="vc-filter-pill active" data-filter="all">All Timings</button>
+            <button type="button" class="vc-filter-pill" data-filter="shubh">✨ Shubh Only</button>
+            <button type="button" class="vc-filter-pill" data-filter="ashubh">⚠️ Ashubh (Avoid)</button>
+          </div>
+        </div>
+
+        <!-- Two-Column Layout -->
+        <div class="vc-grid-layout">
+          
+          <!-- Left: 24-Hour Circular Dial Card -->
+          <div class="vc-clock-card">
+            <div class="vc-clock-wrapper">
+              <div id="vcClockSvgWrap" style="width:100%; height:100%;"></div>
+              <div id="vcCenterHub" class="vc-center-hub"></div>
+            </div>
+
+            <!-- Legend Strip -->
+            <div class="vc-legend-strip">
+              <div class="vc-legend-item">
+                <span class="vc-legend-color" style="background:#10B981;"></span>
+                <span>Abhijit (Supreme Good)</span>
+              </div>
+              <div class="vc-legend-item">
+                <span class="vc-legend-color" style="background:#8B5CF6;"></span>
+                <span>Brahma (Spiritual)</span>
+              </div>
+              <div class="vc-legend-item">
+                <span class="vc-legend-color" style="background:#EF4444;"></span>
+                <span>Rahu Kaal (Avoid)</span>
+              </div>
+              <div class="vc-legend-item">
+                <span class="vc-legend-color" style="background:#F97316;"></span>
+                <span>Yamagandam (Avoid)</span>
+              </div>
+              <div class="vc-legend-item">
+                <span class="vc-legend-color" style="background:#EAB308;"></span>
+                <span>Gulika (Routine)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Details, Spotlight & Action Matrix -->
+          <div class="vc-details-col">
+            
+            <!-- Spotlight Card -->
+            <div id="vcSpotlightCard" class="vc-spotlight-card spotlight-shubh"></div>
+
+            <!-- "Can I Do It Today?" Action Matrix -->
+            <div class="vc-action-matrix-card">
+              <div class="vc-action-matrix-title">
+                <span>🎯</span> Today's Action Suitability Guide
+              </div>
+              <div class="vc-action-matrix-subtitle">
+                Authentic Vedic recommendations for monumental life events on the selected date:
+              </div>
+              <div class="vc-action-grid" id="vcActionMatrixGrid"></div>
+            </div>
+
+            <!-- Chronological Timeline List -->
+            <div class="vc-timeline-card">
+              <div class="vc-timeline-title">
+                ⏱️ Chronological 24-Hour Breakdown
+              </div>
+              <div class="vc-timeline-list" id="vcTimelineList"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
     <!-- ==========================================================================
          2. "WHAT WE OFFER" FEATURE GRID
@@ -528,6 +640,8 @@
   <script src="main.js"></script>
   <script src="astronomy.browser.min.js"></script>
   <script src="panchang.js"></script>
+  <script src="vedic-clock.js"></script>
+  <script src="vedic-clock-ui.js"></script>
   
   <script>
   // ===== OUTCROWD DISCOVERY PLATFORM JAVASCRIPT =====

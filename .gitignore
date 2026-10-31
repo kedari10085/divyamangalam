@@ -7,3 +7,4 @@ data/waitlist.json
 
 epfo.pdf
 *.ics
+__pycache__/
