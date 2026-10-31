@@ -26,21 +26,19 @@ const caption = `☀️ Divya Mangalam — Sacred Surya Narayana Darshan & 24h C
 ✦ ──────────────────────── ✦
 🚩 Om Suryaya Namah • Om Ghrinih Suryaya Namah
 
-Golden dawn unfolds as Bhagavan Surya Narayana rides His celestial chariot drawn by seven radiant horses. He is the cosmic source of vitality, health, and enlightenment.
+Golden dawn unfolds as Bhagavan Surya Narayana rides His celestial chariot drawn by seven radiant horses. He is the eternal giver of health, vitality, truth, and spiritual illumination.
 
 ✨ TODAY'S SACRED TIMINGS (Sunday, 1 Nov):
-• Abhijit Muhurta: 11:45 AM – 12:35 PM (Most auspicious for starting new ventures)
-• Rahu Kaal: 04:30 PM – 06:00 PM (Inauspicious window, observe tranquility & chant Gayatri)
+• Abhijit Muhurta: 11:45 AM – 12:35 PM (Most auspicious window for starting new endeavors)
+• Rahu Kaal: 04:30 PM – 06:00 PM (Inauspicious period, pause and recite Gayatri Mantra)
 
-🔊 Sacred Sound: 60-Second 432 Hz Solar Harmonic Resonance + Divine Voice Chanting
-🤖 Script crafted with local open-source AI intelligence (Ollama LLaMA-3.2) & Divya Mangalam Engine
-
+🔊 Sacred Sound: Traditional Aditya Hridaya Stotram Chanting & Devotional Guidance
 ✦ ──────────────────────── ✦
-🌿 Explore interactive 24-hour Vedic Clock & AI Kundli / Palmistry:
+🌿 Explore your 24-hour Vedic Clock & Free Kundli / Palmistry:
 🔗 https://divyamangalam.com
 Instagram: @divyamangalam.info
 
-#LordSurya #SuryaNarayana #AdityaHridayaStotra #SundayBlessings #DivyaMangalam #VedicAstrology #Panchang #AbhijitMuhurta #RahuKaal #432Hz #SanatanaDharma #DailyReels #SpiritualReels`;
+#LordSurya #SuryaNarayana #AdityaHridayaStotra #SundayBlessings #SuryaNamaskar #DivyaMangalam #VedicAstrology #Panchang #AbhijitMuhurta #RahuKaal #SanatanaDharma #DailyReels #SpiritualReels`;
 
 function req(url, method = 'GET', data = null) {
   return new Promise((resolve, reject) => {
