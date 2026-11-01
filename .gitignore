@@ -8,3 +8,6 @@ data/waitlist.json
 epfo.pdf
 *.ics
 __pycache__/
+
+audio/*.wav
+audio/*.mp3
