@@ -32,6 +32,14 @@ SHIVA_SHLOKAS = [
     ("ललाटचत्वरज्वलद्धनञ्जयस्फुलिङ्गभा-", "निपीतपञ्चसायकं नमन्निलिम्पनायकम् ।", "सुधामयूखलेखया विराजमानशेखरं", "महाकपालिसम्पदेशिरोजटालमस्तु नः ॥")
 ]
 
+SURYA_SHLOKAS = [
+    ("ततो युद्धपरिश्रान्तं समरे चिन्तया स्थितम् ।", "रावणं चाग्रतो दृष्ट्वा युद्धाय समुपस्थितम् ॥", "दैवतैश्च समागम्य द्रष्टुमभ्यागतो रणम् ।", "उपागम्याब्रवीद्राममगस्त्यो भगवानृषिः ॥"),
+    ("राम राम महाबाहो शृणु गुह्यं सनातनम् ।", "येन सर्वानरीन् वत्स समरे विजयिष्यसि ॥", "आदित्यहृदयं पुण्यं सर्वशत्रुविनाशनम् ।", "जयावहं जपेन्नित्यमक्षयं परमं शिवम् ॥"),
+    ("सर्वमङ्गलमाङ्गल्यं सर्वपापप्रणाशनम् ।", "चिन्ताशोकप्रशमनमायुर्वर्धनमुत्तमम् ॥", "रश्मिमन्तं समुद्यन्तं देवासुरनमस्कृतम् ।", "पूजयस्व विवस्वन्तं भास्करं भुवनेश्वरम् ॥"),
+    ("सर्वदेवात्मको ह्येष तेजस्वी रश्मिभावनः ।", "एष देवासुरगणांल्लोकान् पाति गभस्तिभिः ॥", "एष ब्रह्मा च विष्णुश्च शिवः स्कन्दः प्रजापतिः ।", "महेन्द्रो धनदः कालो यमः सोमो ह्यपां पतिः ॥"),
+    ("नमः पूर्वाय गिरये पश्चिमायाद्रये नमः ।", "ज्योतिर्गणानां पतये दिनाधिपतये नमः ॥", "जयाय जयभद्राय हर्यश्वाय नमो नमः ।", "नमो नमः सहस्रांशो आदित्याय नमो नमः ॥")
+]
+
 def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=None):
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
 
@@ -81,18 +89,41 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
     else:
         base_art = Image.new("RGBA", (1024, 1024), (30, 41, 59, 255))
 
-    # Fonts
-    font_bold = r"C:\Windows\Fonts\segoeuib.ttf"
-    font_reg = r"C:\Windows\Fonts\segoeui.ttf"
-    font_indic = r"C:\Windows\Fonts\Nirmala.ttc"
+    # Robust Cross-Platform Fonts (Windows, Linux / Colab, macOS)
+    def pick_font(candidates, size):
+        for path in candidates:
+            if os.path.exists(path):
+                try:
+                    return ImageFont.truetype(path, size)
+                except Exception:
+                    pass
+        for generic in ["Nirmala.ttc", "mangal.ttf", "arial.ttf", "DejaVuSans.ttf"]:
+            try:
+                return ImageFont.truetype(generic, size)
+            except Exception:
+                pass
+        return ImageFont.load_default()
 
-    try:
-        f_title = ImageFont.truetype(font_bold, 40 if mode=="shorts" else 32)
-        f_sub = ImageFont.truetype(font_bold, 28 if mode=="shorts" else 22)
-        f_shloka = ImageFont.truetype(font_indic, 34 if mode=="shorts" else 26)
-        f_url = ImageFont.truetype(font_bold, 30 if mode=="shorts" else 22)
-    except Exception:
-        f_title = f_sub = f_shloka = f_url = ImageFont.load_default()
+    bold_candidates = [
+        r"C:\Windows\Fonts\segoeuib.ttf",
+        r"C:\Windows\Fonts\arialbd.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf"
+    ]
+    indic_candidates = [
+        r"C:\Windows\Fonts\Nirmala.ttc",
+        r"C:\Windows\Fonts\mangal.ttf",
+        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf",
+        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf",
+        "/usr/share/fonts/truetype/freefont/FreeSerif.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    ]
+
+    f_title = pick_font(bold_candidates, 40 if mode=="shorts" else 32)
+    f_sub = pick_font(bold_candidates, 28 if mode=="shorts" else 22)
+    f_shloka = pick_font(indic_candidates, 34 if mode=="shorts" else 26)
+    f_url = pick_font(bold_candidates, 30 if mode=="shorts" else 22)
 
     print(f"[DANCE ENGINE] Rendering {TOTAL_FRAMES} frames ({duration}s at {FPS}fps, {W}x{H})...")
     video_cmd = [
@@ -181,33 +212,35 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
         art_y = CUR_CY - BASE_SZ // 2
         frame.paste(cropped_art, (art_x, art_y), mask)
 
-        # Golden Glowing Border
+        # Golden / Cosmic Glowing Border
         draw.ellipse([art_x - 6, art_y - 6, art_x + BASE_SZ + 6, art_y + BASE_SZ + 6],
-                     outline='#38BDF8', width=6)
+                     outline=theme_accent, width=6)
         draw.ellipse([art_x - 14, art_y - 14, art_x + BASE_SZ + 14, art_y + BASE_SZ + 14],
-                     outline='#F97316', width=3)
+                     outline=theme_fire, width=3)
 
         # 5. Header Banner
-        draw.rounded_rectangle([60, 50, W - 60, 150], radius=18, fill=(15, 23, 42, 230), outline='#38BDF8', width=2)
-        draw.text((CX, 82), "DIVYA MANGALAM", fill='#38BDF8', font=f_title, anchor='mm')
+        draw.rounded_rectangle([60, 50, W - 60, 150], radius=18, fill=(15, 23, 42, 230), outline=theme_accent, width=2)
+        draw.text((CX, 82), "DIVYA MANGALAM", fill=theme_accent, font=f_title, anchor='mm')
         draw.text((CX, 122), f"✦ {theme_title} ✦", fill='#FDE68A', font=f_sub, anchor='mm')
 
         # 6. Sacred Sanskrit Shloka Synchronized Subtitles (Below Deity)
-        shloka_idx = int(t / 12.0) % len(SHIVA_SHLOKAS)
-        shloka_lines = SHIVA_SHLOKAS[shloka_idx]
+        shloka_list = SHIVA_SHLOKAS if deity == "shiva" else SURYA_SHLOKAS
+        shloka_idx = int(t / 12.0) % len(shloka_list)
+        shloka_lines = shloka_list[shloka_idx]
+        stotram_heading = f"॥ श्री शिव ताण्डव स्तोत्रम् • श्लोक {shloka_idx + 1} ॥" if deity == "shiva" else f"॥ श्री आदित्य हृदय स्तोत्रम् • श्लोक {shloka_idx + 1} ॥"
 
         CARD_Y = CENTER_Y + BASE_SZ // 2 + 55
         CARD_H = 360 if mode == "shorts" else 240
-        draw.rounded_rectangle([60, CARD_Y, W - 60, CARD_Y + CARD_H], radius=22, fill=(15, 23, 42, 240), outline='#F97316', width=2)
+        draw.rounded_rectangle([60, CARD_Y, W - 60, CARD_Y + CARD_H], radius=22, fill=(15, 23, 42, 240), outline=theme_fire, width=2)
 
-        draw.text((CX, CARD_Y + 40), f"॥ श्री शिव ताण्डव स्तोत्रम् • श्लोक {shloka_idx + 1} ॥", fill='#38BDF8', font=f_title, anchor='mm')
+        draw.text((CX, CARD_Y + 40), stotram_heading, fill=theme_accent, font=f_title, anchor='mm')
         draw.text((CX, CARD_Y + 115), shloka_lines[0], fill='#FEF08A', font=f_shloka, anchor='mm')
         draw.text((CX, CARD_Y + 175), shloka_lines[1], fill='#FFFFFF', font=f_shloka, anchor='mm')
         draw.text((CX, CARD_Y + 235), shloka_lines[2], fill='#FEF08A', font=f_shloka, anchor='mm')
         draw.text((CX, CARD_Y + 295), shloka_lines[3], fill='#FFFFFF', font=f_shloka, anchor='mm')
 
         # 7. Permanent Professional Footer CTA
-        draw.text((CX, H - 90), "✦ Sanatana Dharma • Pure Devotional Chanting • divyamangalam.com ✦", fill='#38BDF8', font=f_url, anchor='mm')
+        draw.text((CX, H - 90), "✦ Sanatana Dharma • Pure Devotional Chanting • divyamangalam.com ✦", fill=theme_accent, font=f_url, anchor='mm')
         draw.text((CX, H - 45), "Follow @divyamangalam.info • YouTube: @DivyaMangalam", fill='#E2E8F0', font=f_sub, anchor='mm')
 
         # Push to ffmpeg pipe
