@@ -24,6 +24,27 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+DURGA_SHLOKAS = [
+    ("अयि गिरिनन्दिनि नन्दितमेदिनि विश्वविनोदिनि नन्दसुते", "गिरिवरविन्ध्यशिरोऽधिनिवासिनि विष्णुविलासिनि जिष्णुनुते ।", "भगवति हे शितिकण्ठकुटुम्बिनि भूरिकुटुम्बिनि भूरिकृते", "जय जय हे महिषासुरमर्दिनि रम्यकपर्दिनि शैलसुते ॥ १ ॥"),
+    ("सुरवरवर्षिणि दुर्धरधर्षिणि दुर्मुखमर्षिणि हर्षरते", "त्रिभुवनपोषिणि शङ्करतोषिणि किल्बिषमोषिणि घोषरते ।", "दनुजनिरोषिणि दितिसुतरोषिणि दुर्मदशोषिणि सिन्धुसुते", "जय जय हे महिषासुरमर्दिनि रम्यकपर्दिनि शैलसुते ॥ २ ॥"),
+    ("अयि जगदम्ब मदम्ब कदम्बवनप्रियवासिनि हासरते", "शिखरिशिरोमणितुङ्गहिमालयशृङ्गनिजालयमध्यगते ।", "मधुमधुरे मधुकैटभगञ्जिनि कैटभभञ्जिनि रासरते", "जय जय हे महिषासुरमर्दिनि रम्यकपर्दिनि शैलसुते ॥ ३ ॥"),
+    ("अयि शतखण्डविखण्डितरुण्डवितुण्डितशुण्डगजाधिपते", "रिपुगजगण्डविदारणचण्डपराक्रमशुण्डमृगाधिपते ।", "निजभुजदण्डनिपातितखण्डविपातितमुण्डभटाधिपते", "जय जय हे महिषासुरमर्दिनि रम्यकपर्दिनि शैलसुते ॥ ४ ॥"),
+    ("धनुग्गृहसङ्गरनिर्गदशङ्गपरिश्रुतमौलिधृतोज्ज्वलिते", "निनदति नूपुरमञ्जुमणीगणमण्डितपादपयोरुहते ।", "कमलदलामलकोमलमन्दितपादपयोरुहशोभियुते", "जय जय हे महिषासुरमर्दिनि रम्यकपर्दिनि शैलसुते ॥ ५ ॥")
+]
+
+KRISHNA_SHLOKAS = [
+    ("अधरं मधुरं वदनं मधुरं नयनं मधुरं हसितं मधुरम् ।", "हृदयं मधुरं गमनं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ १ ॥", "वचनं मधुरं चरितं मधुरं वसनं मधुरं वलितं मधुरम् ।", "चलितं मधुरं भ्रमितं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ २ ॥"),
+    ("वेणुर्मधुरो रेणुर्मधुरः पाणिर्मधुरः पादौ मधुरौ ।", "नृत्यं मधुरं सख्यं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ ३ ॥", "गीतं मधुरं पीतं मधुरं भुक्तं मधुरं सुप्तं मधुरम् ।", "रूपं मधुरं तिलकं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ ४ ॥"),
+    ("करणं मधुरं तरणं मधुरं हरणं मधुरं रमणं मधुरम् ।", "वमितं मधुरं शमितं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ ५ ॥", "गुञ्जा मधुरा माला मधुरा यमुना मधुरा वीची मधुरा ।", "सलिलं मधुरं कमलं मधुरं मधुराधिपतेरखिलं मधुरम् ॥ ६ ॥")
+]
+
+HANUMAN_SHLOKAS = [
+    ("जय हनुमान ज्ञान गुन सागर ।", "जय कपीस तिहुँ लोक उजागर ॥", "राम दूत अतुलित बल धामा ।", "अञ्जनि-पुत्र पवनसुत नामा ॥ १ ॥"),
+    ("महाबीर बिक्रम बजरङ्गी ।", "कुमति निवार सुमति के सङ्गी ॥", "कञ्चन बरन बिराज सुबेसा ।", "कानन कुण्डल कुञ्चित केसा ॥ २ ॥"),
+    ("हाथ बज्र औ ध्वजा बिराजै ।", "काँधे मूँज जनेऊ साजै ॥", "सङ्कर सुवन केसरीनन्दन ।", "तेज प्रताप महा जग बन्दन ॥ ३ ॥"),
+    ("बिद्यावान गुनी अति चातुर ।", "राम काज करिबे को आतुर ॥", "प्रभु चरित्र सुनिबे को रसिया ।", "राम लखन सीता मन बसिया ॥ ४ ॥")
+]
+
 SHIVA_SHLOKAS = [
     ("जटाटवीगलज्जलप्रवाहपावितस्थले", "गलेऽवलम्ब्य लम्बितां भुजङ्गतुङ्गमालिकाम् ।", "डमड्डमड्डमड्डमन्निनादवड्डमर्वयं", "चकार चण्डताण्डवं तनोतु नः शिवः शिवम् ॥"),
     ("जटाकटाहसम्भ्रमभ्रमन्निलिम्पनिर्झरी-", "विलोलवीचिवल्लरीविराजमानमूर्धनि ।", "धगद्धगद्धगज्ज्वलल्ललाटपट्टपावके", "किशोरचन्द्रशेखरे रतिः प्रतिक्षणं मम ॥"),
@@ -58,19 +79,76 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
     temp_video = os.path.join(BASE_DIR, "temp_dance_video.mp4")
     temp_music = os.path.join(BASE_DIR, "temp_dance_music.wav")
 
-    # Select Music
-    if deity == "shiva":
-        music_source = os.path.join(BASE_DIR, "audio", "shiva_tandava.mp3")
-        art_path = os.path.join(BASE_DIR, "images", "shiva_kailash.jpg")
-        theme_title = "LORD SHIVA • ANANDA TANDAVA"
-        theme_accent = "#38BDF8"
-        theme_fire = "#F97316"
-    else:
-        music_source = os.path.join(BASE_DIR, "audio", "aditya_hrudayam.mp3")
-        art_path = os.path.join(BASE_DIR, "images", "surya_bhagavan.jpg")
-        theme_title = "BHAGAVAN SURYA • CELESTIAL MOTION"
-        theme_accent = "#FFD700"
-        theme_fire = "#EA580C"
+    # Multi-Deity Sacred Configuration Matrix
+    configs = {
+        "durga": {
+            "music": os.path.join(BASE_DIR, "audio", "aigiri_nandini_dance.mp3"),
+            "fallback_url": "https://archive.org/download/AigiriNandiniStotram/Aigiri%20Nandini.mp3",
+            "art": os.path.join(BASE_DIR, "images", "durga_mata.jpg"),
+            "title": "MAA DURGA • MAHISHASURA MARDINI DANCE",
+            "accent": "#EF4444",
+            "fire": "#F59E0B",
+            "shlokas": DURGA_SHLOKAS,
+            "stotram_title": "॥ श्री महिषासुरमर्दिनी स्तोत्रम् • अयि गिरिनन्दिनि ॥"
+        },
+        "shiva": {
+            "music": os.path.join(BASE_DIR, "audio", "shiva_tandava.mp3"),
+            "fallback_url": "https://archive.org/download/ShivaTandavaStotram_201707/Shiva_Tandava_Stotram.mp3",
+            "art": os.path.join(BASE_DIR, "images", "shiva_kailash.jpg"),
+            "title": "LORD SHIVA • ANANDA TANDAVA",
+            "accent": "#38BDF8",
+            "fire": "#F97316",
+            "shlokas": SHIVA_SHLOKAS,
+            "stotram_title": "॥ श्री शिव ताण्डव स्तोत्रम् ॥"
+        },
+        "krishna": {
+            "music": os.path.join(BASE_DIR, "audio", "aigiri_nandini_dance.mp3"),
+            "fallback_url": "https://archive.org/download/Madhurashtakam/Madhurashtakam.mp3",
+            "art": os.path.join(BASE_DIR, "images", "krishna_ji.jpg"),
+            "title": "LORD KRISHNA • DIVINE RAAS LEELA",
+            "accent": "#60A5FA",
+            "fire": "#FDE047",
+            "shlokas": KRISHNA_SHLOKAS,
+            "stotram_title": "॥ श्री मधुराष्टकम् • अधरं मधुरं ॥"
+        },
+        "surya": {
+            "music": os.path.join(BASE_DIR, "audio", "aditya_hrudayam.mp3"),
+            "fallback_url": "https://archive.org/download/AdityaHridayamMantra/Aditya%20Hrudayam.mp3",
+            "art": os.path.join(BASE_DIR, "images", "surya_bhagavan.jpg"),
+            "title": "BHAGAVAN SURYA • CELESTIAL MOTION",
+            "accent": "#FFD700",
+            "fire": "#EA580C",
+            "shlokas": SURYA_SHLOKAS,
+            "stotram_title": "॥ श्री आदित्य हृदय स्तोत्रम् ॥"
+        },
+        "hanuman": {
+            "music": os.path.join(BASE_DIR, "audio", "shiva_tandava.mp3"),
+            "fallback_url": "https://archive.org/download/ShivaTandavaStotram_201707/Shiva_Tandava_Stotram.mp3",
+            "art": os.path.join(BASE_DIR, "images", "hanuman_ji.jpg"),
+            "title": "LORD HANUMAN • VEER TANDAVA",
+            "accent": "#F97316",
+            "fire": "#DC2626",
+            "shlokas": HANUMAN_SHLOKAS,
+            "stotram_title": "॥ श्री हनुमान चालीसा ॥"
+        }
+    }
+    cfg = configs.get(deity, configs["durga"])
+    music_source = cfg["music"]
+    art_path = cfg["art"]
+    theme_title = cfg["title"]
+    theme_accent = cfg["accent"]
+    theme_fire = cfg["fire"]
+    active_shlokas = cfg["shlokas"]
+    active_stotram_title = cfg["stotram_title"]
+
+    if not os.path.exists(music_source):
+        print(f"[DANCE ENGINE] Downloading sacred music for {deity} from fallback...")
+        import urllib.request
+        os.makedirs(os.path.dirname(music_source), exist_ok=True)
+        try:
+            urllib.request.urlretrieve(cfg["fallback_url"], music_source)
+        except Exception as e:
+            print(f"Warning downloading music: {e}")
 
     # Extract exact duration of pure music (NO VOICEOVER)
     print(f"[DANCE ENGINE] Sourcing {duration}s of pure sacred music from {os.path.basename(music_source)}...")
@@ -224,10 +302,9 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
         draw.text((CX, 122), f"✦ {theme_title} ✦", fill='#FDE68A', font=f_sub, anchor='mm')
 
         # 6. Sacred Sanskrit Shloka Synchronized Subtitles (Below Deity)
-        shloka_list = SHIVA_SHLOKAS if deity == "shiva" else SURYA_SHLOKAS
-        shloka_idx = int(t / 12.0) % len(shloka_list)
-        shloka_lines = shloka_list[shloka_idx]
-        stotram_heading = f"॥ श्री शिव ताण्डव स्तोत्रम् • श्लोक {shloka_idx + 1} ॥" if deity == "shiva" else f"॥ श्री आदित्य हृदय स्तोत्रम् • श्लोक {shloka_idx + 1} ॥"
+        shloka_idx = int(t / 12.0) % len(active_shlokas)
+        shloka_lines = active_shlokas[shloka_idx]
+        stotram_heading = f"{active_stotram_title} • श्लोक {shloka_idx + 1}"
 
         CARD_Y = CENTER_Y + BASE_SZ // 2 + 55
         CARD_H = 360 if mode == "shorts" else 240
@@ -278,7 +355,7 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate Pure Music Dance Video")
-    parser.add_argument('--deity', type=str, default="shiva", choices=["shiva", "surya"])
+    parser.add_argument('--deity', type=str, default="durga", choices=["durga", "shiva", "krishna", "surya", "hanuman"])
     parser.add_argument('--mode', type=str, default="shorts", choices=["shorts", "full"])
     parser.add_argument('--duration', type=float, default=60.0, help="Duration in seconds (e.g. 60.0 for Shorts, 300.0 for 5 mins)")
     parser.add_argument('--out', type=str, default=None)
