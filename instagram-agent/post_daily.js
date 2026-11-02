@@ -692,9 +692,9 @@ function makeHttpsRequest(url, method = 'GET', data = null, headers = {}) {
 async function publishToInstagram(imageUrl, caption) {
   console.log('[API] Starting Meta Instagram Graph API publication...');
   
-  const isInstagramToken = META_ACCESS_TOKEN.startsWith('IG');
+  const isInstagramToken = true;
   const baseUrl = isInstagramToken ? 'https://graph.instagram.com/v20.0' : 'https://graph.facebook.com/v20.0';
-  const targetId = isInstagramToken ? (INSTAGRAM_ACCOUNT_ID || 'me') : INSTAGRAM_ACCOUNT_ID;
+  const targetId = 'me';
 
   // 1. Create Media Container
   const createContainerUrl = `${baseUrl}/${targetId}/media`;
@@ -730,9 +730,9 @@ async function publishToInstagram(imageUrl, caption) {
 async function publishReelToInstagram(videoUrl, caption) {
   console.log('[API] Starting Meta Instagram Graph API Reel publication...');
 
-  const isInstagramToken = META_ACCESS_TOKEN.startsWith('IG');
+  const isInstagramToken = true;
   const baseUrl = isInstagramToken ? 'https://graph.instagram.com/v20.0' : 'https://graph.facebook.com/v20.0';
-  const targetId = isInstagramToken ? (INSTAGRAM_ACCOUNT_ID || 'me') : INSTAGRAM_ACCOUNT_ID;
+  const targetId = 'me';
 
   // 1. Create Reel Media Container
   const createContainerUrl = `${baseUrl}/${targetId}/media`;
