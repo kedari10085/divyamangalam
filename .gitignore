@@ -11,3 +11,7 @@ __pycache__/
 
 audio/*.wav
 audio/*.mp3
+
+client_secret*.json
+yt_token.pickle
+*.pickle

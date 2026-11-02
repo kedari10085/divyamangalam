@@ -1025,17 +1025,16 @@ Instagram: @divyamangalam.info
     console.log(caption);
     if (videoUrl) console.log(`[VIDEO URL]: ${videoUrl}`);
     console.log(`====================================================\n`);
-    console.log(`[DRY RUN COMPLETE] ${(effectiveType === 'reel' || effectiveType === 'clock_reel' || effectiveType === 'routine_reel') ? 'Video Reel' : 'Image'} & Caption verified successfully.`);
+    console.log(`[DRY RUN COMPLETE] 100% Video Reel verified successfully.`);
   } else {
     try {
       let postId;
-      if (effectiveType === 'reel' || effectiveType === 'clock_reel' || effectiveType === 'routine_reel') {
-        postId = await publishReelToInstagram(videoUrl, caption);
-      } else {
-        postId = await publishToInstagram(imageUrl, caption);
-      }
+      // 100% REELS ONLY MODE: Static photos get zero views. Every post is published as a high-retention Video Reel.
+      const targetVideoUrl = videoUrl || (deityData && deityData.cdnVideo) || 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/daily_calendar_reel_today.mp4';
+      console.log(`[REELS ONLY MODE] Publishing as Instagram Reel: ${targetVideoUrl}`);
+      postId = await publishReelToInstagram(targetVideoUrl, caption);
       if (effectiveType === 'deity') markPostAsPosted(dateStr);
-      console.log(`[SUCCESS] Instagram post published! Post ID: ${postId}`);
+      console.log(`[SUCCESS] Instagram Reel published! Reel ID: ${postId}`);
     } catch (err) {
       console.error(`[ERROR] Failed to publish to Instagram:`, err.message);
       process.exit(1);
