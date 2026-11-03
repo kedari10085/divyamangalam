@@ -410,11 +410,11 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         # 3. Main Header
         draw.rounded_rectangle([60, 40, W - 60, 130], radius=16, fill=(15, 23, 42, 240), outline=accent_color, width=2)
         draw.text((CX, 72), "DIVYA MANGALAM", fill=accent_color, font=f_brand, anchor='mm')
-        draw.text((CX, 105), "✦ DAILY VEDIC CALENDAR & PANCHANG ✦", fill='#FDE68A', font=f_sub, anchor='mm')
+        draw.text((CX, 105), "DAILY VEDIC CALENDAR & PANCHANG", fill='#FDE68A', font=f_sub, anchor='mm')
 
         # 4. Date Badge
         draw.rounded_rectangle([100, 150, W - 100, 220], radius=14, fill=(30, 41, 59, 230), outline='#F59E0B', width=2)
-        date_header_str = f"📅 {pdata['date_str']} • {pdata['day_vedic'].upper()} ({pdata['day_en'].upper()})"
+        date_header_str = f"{pdata['date_str']} • {pdata['day_vedic'].upper()} ({pdata['day_en'].upper()})"
         draw.text((CX, 185), date_header_str, fill='#FFFFFF', font=f_title, anchor='mm')
 
         # 5. Deity Avatar & Mantra Banner
@@ -431,14 +431,14 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         grid_h = 175
         draw.rounded_rectangle([60, grid_y, W - 60, grid_y + grid_h], radius=18, fill=(15, 23, 42, 240), outline='#64748B', width=2)
 
-        draw.text((CX - 240, grid_y + 45), "🌙 TITHI", fill='#94A3B8', font=f_small, anchor='mm')
+        draw.text((CX - 240, grid_y + 45), "TITHI", fill='#94A3B8', font=f_small, anchor='mm')
         draw.text((CX - 240, grid_y + 85), pdata['tithi'], fill='#FFFFFF', font=f_sub, anchor='mm')
 
-        draw.text((CX + 240, grid_y + 45), "⭐ NAKSHATRA", fill='#94A3B8', font=f_small, anchor='mm')
+        draw.text((CX + 240, grid_y + 45), "NAKSHATRA", fill='#94A3B8', font=f_small, anchor='mm')
         draw.text((CX + 240, grid_y + 85), pdata['nakshatra'], fill='#FFFFFF', font=f_sub, anchor='mm')
 
-        draw.text((CX - 240, grid_y + 130), f"🔮 YOGA: {pdata['yoga']}", fill='#FDE68A', font=f_text, anchor='mm')
-        draw.text((CX + 240, grid_y + 130), f"🦁 MOON: {pdata['moon_rashi']}", fill='#FDE68A', font=f_text, anchor='mm')
+        draw.text((CX - 240, grid_y + 130), f"YOGA: {pdata['yoga']}", fill='#FDE68A', font=f_text, anchor='mm')
+        draw.text((CX + 240, grid_y + 130), f"MOON: {pdata['moon_rashi']}", fill='#FDE68A', font=f_text, anchor='mm')
 
         # 7. Dynamic Stage Focus Based on Speech Flow
         is_shubh_focus = (16.0 <= t < 42.0)
@@ -452,16 +452,16 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         shubh_border = '#10B981' if is_shubh_focus else '#059669'
         draw.rounded_rectangle([60, shubh_y, W - 60, shubh_y + shubh_h], radius=20, fill=shubh_bg, outline=shubh_border, width=4 if is_shubh_focus else 2)
 
-        draw.text((CX, shubh_y + 40), "✦ SHUBH MUHURAT (AUSPICIOUS TIMINGS) ✦", fill='#34D399', font=f_title, anchor='mm')
+        draw.text((CX, shubh_y + 40), "SHUBH MUHURAT (AUSPICIOUS TIMINGS)", fill='#34D399', font=f_title, anchor='mm')
         draw.text((CX, shubh_y + 75), "Golden windows to start new tasks, investments & sacred prayers", fill='#D1FAE5', font=f_small, anchor='mm')
 
         ab_bg = (16, 185, 129, 60) if is_shubh_focus else (30, 41, 59, 140)
         draw.rounded_rectangle([90, shubh_y + 105, W - 90, shubh_y + 195], radius=14, fill=ab_bg, outline='#F59E0B', width=2)
-        draw.text((CX, shubh_y + 135), f"🌟 ABHIJIT MUHURTA: {pdata['abhijit']}", fill='#FDE68A', font=f_hero, anchor='mm')
+        draw.text((CX, shubh_y + 135), f"ABHIJIT MUHURTA: {pdata['abhijit']}", fill='#FDE68A', font=f_hero, anchor='mm')
         draw.text((CX, shubh_y + 172), "Supreme midday window for major starts, meetings & success", fill='#FFFFFF', font=f_text, anchor='mm')
 
-        draw.text((CX, shubh_y + 235), f"🪔 Brahma Muhurta: {pdata['brahma_muhurta']} (Meditation & Sadhana)", fill='#FFFFFF', font=f_text, anchor='mm')
-        draw.text((CX, shubh_y + 275), "🌸 Amrit Kaal / Godhuli: Evening Auspicious Puja Window", fill='#A7F3D0', font=f_text, anchor='mm')
+        draw.text((CX, shubh_y + 235), f"Brahma Muhurta: {pdata['brahma_muhurta']} (Meditation & Sadhana)", fill='#FFFFFF', font=f_text, anchor='mm')
+        draw.text((CX, shubh_y + 275), "Amrit Kaal: Evening Auspicious Puja Window", fill='#A7F3D0', font=f_text, anchor='mm')
 
         # 🔴 ASHUBH KAAL CARD (Red)
         ashubh_y = 1115
@@ -470,16 +470,16 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         ashubh_border = '#EF4444' if is_ashubh_focus else '#B91C1C'
         draw.rounded_rectangle([60, ashubh_y, W - 60, ashubh_y + ashubh_h], radius=20, fill=ashubh_bg, outline=ashubh_border, width=4 if is_ashubh_focus else 2)
 
-        draw.text((CX, ashubh_y + 40), "⚠️ ASHUBH KAAL (CAUTION TIMINGS) ⚠️", fill='#F87171', font=f_title, anchor='mm')
+        draw.text((CX, ashubh_y + 40), "ASHUBH KAAL (CAUTION TIMINGS)", fill='#F87171', font=f_title, anchor='mm')
         draw.text((CX, ashubh_y + 75), "Avoid starting new financial contracts, journeys or inaugurations", fill='#FEE2E2', font=f_small, anchor='mm')
 
         rahu_bg = (239, 68, 68, 60) if is_ashubh_focus else (30, 41, 59, 140)
         draw.rounded_rectangle([90, ashubh_y + 105, W - 90, ashubh_y + 185], radius=14, fill=rahu_bg, outline='#EF4444', width=2)
-        draw.text((CX, ashubh_y + 133), f"⛔ RAHU KAAL: {pdata['rahu_kaal']}", fill='#FCA5A5', font=f_hero, anchor='mm')
+        draw.text((CX, ashubh_y + 133), f"RAHU KAAL: {pdata['rahu_kaal']}", fill='#FCA5A5', font=f_hero, anchor='mm')
         draw.text((CX, ashubh_y + 165), "Caution: Avoid major material/contractual beginnings", fill='#FFFFFF', font=f_small, anchor='mm')
 
-        draw.text((CX, ashubh_y + 215), f"⏳ Yamagandam: {pdata['yamagandam']}", fill='#FECACA', font=f_text, anchor='mm')
-        draw.text((CX, ashubh_y + 248), f"🛑 Gulika Kalam: {pdata['gulika']}", fill='#E2E8F0', font=f_text, anchor='mm')
+        draw.text((CX, ashubh_y + 215), f"Yamagandam: {pdata['yamagandam']}", fill='#FECACA', font=f_text, anchor='mm')
+        draw.text((CX, ashubh_y + 248), f"Gulika Kalam: {pdata['gulika']}", fill='#E2E8F0', font=f_text, anchor='mm')
 
         # 8. Sacred Remedy & Guidance Box
         rem_y = 1425
@@ -488,14 +488,14 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         rem_border = accent_color if is_remedy_focus else '#3B82F6'
         draw.rounded_rectangle([60, rem_y, W - 60, rem_y + rem_h], radius=20, fill=rem_bg, outline=rem_border, width=3 if is_remedy_focus else 2)
 
-        draw.text((CX, rem_y + 35), f"🌿 {pdata['deity']['remedy_title']}", fill='#93C5FD', font=f_title, anchor='mm')
+        draw.text((CX, rem_y + 35), f"{pdata['deity']['remedy_title']}", fill='#93C5FD', font=f_title, anchor='mm')
         draw.text((CX, rem_y + 80), pdata['deity']['remedy_bullets'][0], fill='#FFFFFF', font=f_text, anchor='mm')
         draw.text((CX, rem_y + 120), pdata['deity']['remedy_bullets'][1], fill='#FFFFFF', font=f_text, anchor='mm')
         draw.text((CX, rem_y + 160), pdata['deity']['remedy_bullets'][2], fill='#FFFFFF', font=f_text, anchor='mm')
-        draw.text((CX, rem_y + 205), f"✨ शुभं भवतु • May {pdata['deity']['deity_name']} Bless Your Day ✨", fill='#FDE68A', font=f_sub, anchor='mm')
+        draw.text((CX, rem_y + 205), f"May {pdata['deity']['deity_name']} Bless Your Day", fill='#FDE68A', font=f_sub, anchor='mm')
 
         # 9. Professional Footer CTA
-        draw.text((CX, H - 120), "✦ Complete Vedic Tools • AI Palm Reading • divyamangalam.com ✦", fill='#38BDF8', font=f_sub, anchor='mm')
+        draw.text((CX, H - 120), "Complete Vedic Tools • AI Palm Reading • divyamangalam.com", fill='#38BDF8', font=f_sub, anchor='mm')
         draw.text((CX, H - 75), "Follow @divyamangalam.info for Daily Panchang & Shubh Muhurat Reels", fill='#CBD5E1', font=f_small, anchor='mm')
 
         proc.stdin.write(frame.tobytes())
