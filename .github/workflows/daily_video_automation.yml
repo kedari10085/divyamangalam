@@ -1,0 +1,84 @@
+name: Divya Mangalam Autonomous Video Engine
+
+on:
+  schedule:
+    # Morning Peak Slot: 07:30 AM IST (02:00 UTC) -> Panchang Reel & Morning Videos
+    - cron: '0 2 * * *'
+    # Evening Peak Slot: 06:00 PM IST (12:30 UTC) -> Cosmic Deity Motion Dance Video
+    - cron: '30 12 * * *'
+
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Choose video execution mode'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - panchang
+          - deity_dance
+          - ramayana_5min
+      deity:
+        description: 'Deity for motion dance (if applicable)'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - shiva
+          - hanuman
+          - krishna
+          - durga
+          - surya
+
+permissions:
+  contents: write
+
+jobs:
+  run-video-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install System Media Tools & Sanskrit Fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-deva fonts-noto-core fonts-noto-color-emoji
+
+      - name: Install Python Video Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -q pillow imageio-ffmpeg google-api-python-client google-auth-oauthlib google-auth yt-dlp
+
+      - name: Execute Autonomous Video Engine & Publisher
+        env:
+          YOUTUBE_TOKEN_BASE64: ${{ secrets.YOUTUBE_TOKEN_BASE64 }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python run_cloud_autonomous_pipeline.py --mode "${{ inputs.mode || 'auto' }}" --deity "${{ inputs.deity || 'auto' }}"
+
+      - name: Commit & Push Video Artifacts and Logs
+        if: always()
+        run: |
+          git config --local user.email "bot@divyamangalam.com"
+          git config --local user.name "DivyaMangalam Cloud Bot"
+          git add images/*.json instagram-agent/post_log.json DAILY_POSTS.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(cloud-engine): record automated video publish status [skip ci]" && git push)
