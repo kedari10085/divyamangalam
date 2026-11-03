@@ -102,7 +102,7 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
             "stotram_title": "॥ श्री शिव ताण्डव स्तोत्रम् ॥"
         },
         "krishna": {
-            "music": os.path.join(BASE_DIR, "audio", "aigiri_nandini_dance.mp3"),
+            "music": os.path.join(BASE_DIR, "audio", "krishna_divine_flute.mp3"),
             "fallback_url": "https://archive.org/download/Madhurashtakam/Madhurashtakam.mp3",
             "art": os.path.join(BASE_DIR, "images", "krishna_ji.jpg"),
             "title": "LORD KRISHNA • DIVINE RAAS LEELA",
@@ -122,7 +122,7 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
             "stotram_title": "॥ श्री आदित्य हृदय स्तोत्रम् ॥"
         },
         "hanuman": {
-            "music": os.path.join(BASE_DIR, "audio", "shiva_tandava.mp3"),
+            "music": os.path.join(BASE_DIR, "audio", "hanuman_tandav_dance.mp3"),
             "fallback_url": "https://archive.org/download/ShivaTandavaStotram_201707/Shiva_Tandava_Stotram.mp3",
             "art": os.path.join(BASE_DIR, "images", "hanuman_ji.jpg"),
             "title": "LORD HANUMAN • VEER TANDAVA",
@@ -150,16 +150,27 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
         except Exception as e:
             print(f"Warning downloading music: {e}")
 
-    # Extract exact duration of pure music (NO VOICEOVER)
-    print(f"[DANCE ENGINE] Sourcing {duration}s of pure sacred music from {os.path.basename(music_source)}...")
-    subprocess.run([
-        ffmpeg_exe, '-y',
-        '-ss', '00:00:00', '-t', str(duration),
-        '-i', music_source,
-        '-af', 'afade=t=out:st=' + str(duration - 2.5) + ':d=2.5',
-        '-c:a', 'pcm_s16le',
-        temp_music
-    ], check=True)
+    # Extract exact duration of pure music (NO VOICEOVER) with synthetic fallback
+    if os.path.exists(music_source):
+        print(f"[DANCE ENGINE] Sourcing {duration}s of pure sacred music from {os.path.basename(music_source)}...")
+        subprocess.run([
+            ffmpeg_exe, '-y',
+            '-ss', '00:00:00', '-t', str(duration),
+            '-i', music_source,
+            '-af', 'afade=t=out:st=' + str(duration - 2.5) + ':d=2.5',
+            '-c:a', 'pcm_s16le',
+            temp_music
+        ], check=True)
+    else:
+        print(f"[DANCE ENGINE] Synthesizing {duration}s sacred ambient drone harmonics...")
+        subprocess.run([
+            ffmpeg_exe, '-y',
+            '-f', 'lavfi', '-i', 'sine=frequency=108:sample_rate=44100',
+            '-t', str(duration),
+            '-af', 'afade=t=out:st=' + str(duration - 2.5) + ':d=2.5',
+            '-c:a', 'pcm_s16le',
+            temp_music
+        ], check=True)
 
     # Load Base Art
     if os.path.exists(art_path):

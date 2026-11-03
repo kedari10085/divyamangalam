@@ -9,8 +9,14 @@ epfo.pdf
 *.ics
 __pycache__/
 
-audio/*.wav
-audio/*.mp3
+audio/*.wav
+audio/*.mp3
+!audio/aigiri_nandini_dance.mp3
+!audio/shiva_tandava.mp3
+!audio/aditya_hrudayam.mp3
+!audio/krishna_divine_flute.mp3
+!audio/hanuman_tandav_dance.mp3
+!audio/ramayan_5min_musical.mp3
 
 client_secret*.json
 yt_token.pickle
