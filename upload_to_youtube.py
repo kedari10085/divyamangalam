@@ -41,8 +41,21 @@ def upload_video(video_path, metadata_path=None):
     print(f"Privacy: {meta.get('privacyStatus', 'public')}")
     print("--------------------------------------------------")
 
+    token_path = os.path.join(os.path.dirname(__file__), "yt_token.pickle")
+    
+    # Restore token from environment variable if in cloud (GitHub Actions / Colab)
+    yt_token_b64 = os.getenv("YOUTUBE_TOKEN_BASE64")
+    if yt_token_b64 and not os.path.exists(token_path):
+        import base64
+        try:
+            with open(token_path, "wb") as f:
+                f.write(base64.b64decode(yt_token_b64))
+            print("🔑 Successfully restored YouTube OAuth credentials from YOUTUBE_TOKEN_BASE64 environment secret!")
+        except Exception as e:
+            print(f"⚠️ Warning: Could not decode YOUTUBE_TOKEN_BASE64: {e}")
+
     client_secrets = os.path.join(os.path.dirname(__file__), "client_secrets.json")
-    if not os.path.exists(client_secrets):
+    if not os.path.exists(token_path) and not os.path.exists(client_secrets):
         print("\n[ONE-TIME YOUTUBE API SETUP INSTRUCTIONS]")
         print("1. Go to Google Cloud Console: https://console.cloud.google.com/")
         print("2. Create a project and enable 'YouTube Data API v3'.")
@@ -63,7 +76,6 @@ def upload_video(video_path, metadata_path=None):
 
         SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
         creds = None
-        token_path = os.path.join(os.path.dirname(__file__), "yt_token.pickle")
         if os.path.exists(token_path):
             with open(token_path, 'rb') as token_file:
                 creds = pickle.load(token_file)
@@ -71,9 +83,12 @@ def upload_video(video_path, metadata_path=None):
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
-            else:
+            elif os.path.exists(client_secrets):
                 flow = InstalledAppFlow.from_client_secrets_file(client_secrets, SCOPES)
                 creds = flow.run_local_server(port=0)
+            else:
+                print("❌ No valid YouTube credentials found to refresh.")
+                return False
             with open(token_path, 'wb') as token_file:
                 pickle.dump(creds, token_file)
 
