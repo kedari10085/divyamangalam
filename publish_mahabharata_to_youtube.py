@@ -12,8 +12,8 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-video_file = os.path.join(BASE_DIR, "images", "mahabharata_part1_adi_parva_1080p.mp4")
-meta_file = os.path.join(BASE_DIR, "images", "mahabharata_part1_adi_parva_1080p_youtube_metadata.json")
+video_file = os.path.join(BASE_DIR, "images", "mahabharata_part1_adi_parva_action_multilang_1080p.mp4")
+meta_file = os.path.join(BASE_DIR, "images", "mahabharata_part1_action_youtube_metadata.json")
 
 if __name__ == '__main__':
     print("==================================================")

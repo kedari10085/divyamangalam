@@ -85,9 +85,21 @@ def run_ramayana_publish():
         except Exception as e:
             print(f"⚠️ Instagram publication error: {e}")
 
+def run_mahabharata_publish():
+    """Publishes the 1080p Multi-Language Humanoid Mahabharata Part 1 to YouTube."""
+    setup_cloud_credentials()
+    print("▶️ Publishing Srimad Mahabharata Part 1 1080p Multi-Language Movie...")
+    yt_script = os.path.join(BASE_DIR, "publish_mahabharata_to_youtube.py")
+    if os.path.exists(yt_script):
+        try:
+            subprocess.run([sys.executable, yt_script], check=True)
+            print("✅ Srimad Mahabharata Part 1 successfully published to YouTube!")
+        except Exception as e:
+            print(f"⚠️ YouTube upload error: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Autonomous Cloud Pipeline")
-    parser.add_argument("--mode", type=str, default="auto", choices=["auto", "panchang", "deity_dance", "ramayana_5min"])
+    parser.add_argument("--mode", type=str, default="auto", choices=["auto", "panchang", "deity_dance", "ramayana_5min", "mahabharata_p1"])
     parser.add_argument("--deity", type=str, default="auto")
     args = parser.parse_args()
 
@@ -98,7 +110,9 @@ def main():
     print(f"Mode:       {args.mode}")
     print("==================================================")
 
-    if args.mode == "ramayana_5min":
+    if args.mode == "mahabharata_p1":
+        run_mahabharata_publish()
+    elif args.mode == "ramayana_5min":
         run_ramayana_publish()
     elif args.mode == "panchang":
         run_panchang_reel()
