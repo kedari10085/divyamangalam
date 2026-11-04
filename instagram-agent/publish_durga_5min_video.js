@@ -20,7 +20,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const token = process.env.META_ACCESS_TOKEN;
-const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/durga_aigiri_nandini_5min_instagram.mp4';
+const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/durga_aigiri_nandini_5min_original_instagram.mp4';
 
 const caption = `🔱 अयि गिरिनन्दिनि (AIGIRI NANDINI) • 5-MINUTE SACRED EPIC 🚩
 ✦ ──────────────────────── ✦

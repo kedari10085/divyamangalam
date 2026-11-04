@@ -12,7 +12,7 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-video_file = os.path.join(BASE_DIR, "images", "durga_aigiri_nandini_5min_epic.mp4")
+video_file = os.path.join(BASE_DIR, "images", "durga_aigiri_nandini_5min_original.mp4")
 meta_file = os.path.join(BASE_DIR, "images", "durga_aigiri_nandini_5min_youtube_metadata.json")
 
 if __name__ == '__main__':
