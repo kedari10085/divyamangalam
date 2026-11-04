@@ -106,13 +106,17 @@ def upload_video(video_path, metadata_path=None):
             }
         }
 
-        media = MediaFileUpload(video_path, chunksize=-1, resumable=True, mimetype='video/mp4')
+        media = MediaFileUpload(video_path, chunksize=1024*1024*4, resumable=True, mimetype='video/mp4')
         request = youtube.videos().insert(part=','.join(body.keys()), body=body, media_body=media)
         print("Uploading to YouTube...")
-        response = request.execute()
+        response = None
+        while response is None:
+            status, response = request.next_chunk()
+            if status:
+                print(f"  Uploading: {int(status.progress() * 100)}% complete...")
         yt_id = response.get('id')
         print(f"SUCCESS! Uploaded to YouTube: https://youtu.be/{yt_id}")
-        return True
+        return yt_id
     except Exception as e:
         print(f"YouTube upload failed: {e}")
         return False
