@@ -292,6 +292,8 @@ const shlokas = [
     transliteration: 'Ayi girinandini nanditamedini\nviśvavinodini nandinute\ngirivara vindhyaśiro\'dhivāsini\nviṣṇu vilāsini jiṣṇunute',
     meaning: 'O daughter of the mountain, who brings joy to the earth, who is the delight of the universe, who is praised by Nandi, who dwells on the great Vindhya mountain, who is the consort of Vishnu, who is praised by the victorious — we bow to you.',
     freq: 528,
+    youtubeId: 'kQSKZW861OU',
+    instagramUrl: 'https://www.instagram.com/reel/DfVI7_eDltu/',
   },
   {
     id: 8, deity: 'Surya',
@@ -383,6 +385,19 @@ function renderShlokas(list) {
           <button class="play-btn play-tone-btn" onclick="playFreq(${s.freq})">🎵 Play ${s.freq}Hz Tone</button>
           <button class="play-btn chant-count-btn" onclick="toggleCounter(${s.id})">📿 Japa Counter</button>
         </div>
+        ${s.youtubeId ? `
+        <div class="cinema-watch-banner" style="margin-top:14px; background:linear-gradient(135deg, rgba(255,107,53,0.12), rgba(218,165,32,0.15)); border:1px solid rgba(255,153,51,0.35); border-radius:10px; padding:12px; text-align:center;">
+          <div style="font-size:0.82rem; color:#ffd700; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">🎬 5-Min Full HD Story Cinema</div>
+          <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+            <a href="https://youtu.be/${s.youtubeId}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#e62117; color:#fff; text-decoration:none; padding:7px 14px; border-radius:20px; font-weight:bold; font-size:0.8rem; box-shadow:0 3px 8px rgba(230,33,23,0.35);">
+              ▶️ YouTube
+            </a>
+            <a href="${s.instagramUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(45deg, #f09433, #dc2743, #bc1888); color:#fff; text-decoration:none; padding:7px 14px; border-radius:20px; font-weight:bold; font-size:0.8rem; box-shadow:0 3px 8px rgba(220,39,67,0.35);">
+              📸 Instagram Reel
+            </a>
+          </div>
+        </div>
+        ` : ''}
         <div class="chant-counter-display" id="counter-${s.id}">
           <span class="count-num" id="count-num-${s.id}">0</span>
           <span class="count-label">of 108 chants</span>
