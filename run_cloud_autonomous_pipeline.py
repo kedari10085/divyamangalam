@@ -52,6 +52,43 @@ def run_deity_dance(deity=None):
     print(f"▶️ Running Deity Dance Video Pipeline: {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
+def run_clock_reel():
+    """Generates and publishes the 24-Hour Sacred Vedic Muhurat Clock Reel & Infographic."""
+    setup_cloud_credentials()
+    print("▶️ Executing 24-Hour Sacred Vedic Muhurat Clock Pipeline...")
+
+    # 1. Generate high-res 1080x1080 clock infographic
+    subprocess.run([sys.executable, os.path.join(BASE_DIR, "generate_clock_post.py")], check=True)
+
+    # 2. Render 1080x1920 vertical clock reel with voiceover & 432 Hz drone
+    subprocess.run([sys.executable, os.path.join(BASE_DIR, "generate_clock_reel.py")], check=True)
+
+    # 3. Publish to YouTube Shorts
+    yt_script = os.path.join(BASE_DIR, "publish_clock_to_youtube.py")
+    if os.path.exists(yt_script):
+        try:
+            subprocess.run([sys.executable, yt_script], check=True)
+            print("✅ 24-Hour Vedic Clock Reel successfully published to YouTube Shorts!")
+        except Exception as e:
+            print(f"⚠️ YouTube upload error: {e}")
+
+    # 4. Commit and push video assets to GitHub for raw URL
+    try:
+        subprocess.run(["git", "add", "images/clock_reel.mp4", "images/clock_darshan.jpg"], cwd=BASE_DIR, check=True)
+        subprocess.run(["git", "commit", "-m", "feat(clock): daily 24h vedic clock reel [skip ci]"], cwd=BASE_DIR)
+        subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, check=True)
+    except Exception as e:
+        print(f"⚠️ Git push error: {e}")
+
+    # 5. Publish to Instagram Reels
+    insta_script = os.path.join(BASE_DIR, "instagram-agent", "publish_clock_reel.js")
+    if os.path.exists(insta_script):
+        try:
+            subprocess.run(["node", insta_script], check=True)
+            print("✅ 24-Hour Vedic Clock Reel successfully published to Instagram!")
+        except Exception as e:
+            print(f"⚠️ Instagram publication error: {e}")
+
 def run_panchang_reel():
     """Executes the daily dynamic Panchang reel pipeline for today's date."""
     setup_cloud_credentials()
@@ -99,7 +136,7 @@ def run_mahabharata_publish():
 
 def main():
     parser = argparse.ArgumentParser(description="Autonomous Cloud Pipeline")
-    parser.add_argument("--mode", type=str, default="auto", choices=["auto", "panchang", "deity_dance", "ramayana_5min", "mahabharata_p1"])
+    parser.add_argument("--mode", type=str, default="auto", choices=["auto", "clock", "panchang", "deity_dance", "ramayana_5min", "mahabharata_p1"])
     parser.add_argument("--deity", type=str, default="auto")
     args = parser.parse_args()
 
@@ -114,6 +151,8 @@ def main():
         run_mahabharata_publish()
     elif args.mode == "ramayana_5min":
         run_ramayana_publish()
+    elif args.mode == "clock":
+        run_clock_reel()
     elif args.mode == "panchang":
         run_panchang_reel()
     elif args.mode == "deity_dance":
@@ -121,7 +160,8 @@ def main():
     else: # auto mode based on IST hour
         hour = ist_now.hour
         if 5 <= hour < 12:
-            print(f"🌅 Morning Slot ({hour}:00 IST): Executing Daily Panchang Reel...")
+            print(f"🌅 Morning Slot ({hour}:00 IST): Executing 24-Hour Vedic Clock & Daily Panchang Reels...")
+            run_clock_reel()
             run_panchang_reel()
         else:
             print(f"🌌 Evening Slot ({hour}:00 IST): Executing Cosmic Deity Dance Video...")
