@@ -36,6 +36,13 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Ensure essential runtime packages are present
+for _pkg, _name in [("edge_tts", "edge-tts"), ("imageio_ffmpeg", "imageio-ffmpeg"), ("PIL", "Pillow")]:
+    try:
+        __import__(_pkg)
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", _name], check=False)
+
 WEEKDAY_DEITY_MAP = {
     0: ("shiva", "Lord Shiva", "Somavara", "॥ श्री शिव ताण्डव स्तोत्रम् ॥", "Lord Shiva Someshwara Ananda Tandava"),
     1: ("hanuman", "Lord Hanuman", "Mangalavara", "॥ श्री हनुमान चालीसा ॥", "Lord Hanuman Veer Cosmic Tandava"),
