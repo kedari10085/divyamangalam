@@ -28,11 +28,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DAY_DEITY_MAP = {
     0: ("somavara", "shiva", "Lord Shiva", "॥ श्री शिव ताण्डव स्तोत्रम् ॥", "Lord Shiva Someshwara Ananda Tandava Dance"),
-    1: ("mangalavara", "hanuman", "Lord Hanuman", "॥ श्री हनुमान चालीसा ॥", "Lord Hanuman Veer Cosmic Tandava"),
-    2: ("budhavara", "krishna", "Lord Krishna", "॥ श्री मधुराष्टकम् ॥", "Lord Krishna Murlidhar Divine Raas Leela"),
-    3: ("guruvara", "krishna", "Lord Krishna", "॥ श्री मधुराष्टकम् ॥", "Lord Krishna Divine Flute Dance"),
-    4: ("shukravara", "durga", "Maa Durga", "॥ श्री महिषासुरमर्दिनी स्तोत्रम् ॥", "Maa Durga Mahishasura Mardini Classical Dance"),
-    5: ("shanivara", "hanuman", "Lord Hanuman", "॥ श्री हनुमान चालीसा ॥", "Lord Hanuman Sankat Mochan Cosmic Motion"),
+    1: ("mangalavara", "hanuman", "Lord Hanuman & Lord Murugan", "॥ श्री हनुमान चालीसा ॥", "Lord Hanuman Veer Cosmic Tandava"),
+    2: ("budhavara", "ganesha", "Lord Ganesha", "॥ श्री गणपति अथर्वशीर्षम् ॥", "Lord Ganesha Vighnaharta Divine Motion"),
+    3: ("guruvara", "venkateswara", "Lord Venkateswara", "॥ श्री वेङ्कटेश्वर सुप्रभातम ॥", "Lord Venkateswara Tirumala Divine Darshan"),
+    4: ("shukravara", "durga", "Maa Durga & Mahalakshmi", "॥ श्री महिषासुरमर्दिनी स्तोत्रम् ॥", "Maa Durga & Mahalakshmi Auspicious Classical Motion"),
+    5: ("shanivara", "ayyappa", "Lord Ayyappa", "॥ श्री हरिवरासनम् ॥", "Lord Ayyappa Swamiye Saranam Sabarimala Motion"),
     6: ("ravivara", "surya", "Bhagavan Surya", "॥ श्री आदित्य हृदय स्तोत्रम् ॥", "Bhagavan Surya Narayana Celestial Chariot Motion")
 }
 

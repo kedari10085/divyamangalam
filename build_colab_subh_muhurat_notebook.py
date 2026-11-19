@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+import json
+import os
+
+notebook = {
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# 🕉️ Divya Mangalam — Daily Multi-Deity Subh Muhurat Video Engine\n",
+    "### Autonomous Cloud Video Generator & Multi-Platform Publisher (Instagram + YouTube)\n",
+    "\n",
+    "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/kedari10085/divyamangalam/blob/main/DivyaMangalam_Daily_Subh_Muhurat_Engine.ipynb)\n",
+    "\n",
+    "---\n",
+    "### 🌟 Features\n",
+    "1. **Zero Local PC Resource Consumption**: Renders on Google Colab's Cloud Tesla T4 GPU ($0 free).\n",
+    "2. **7-Day Vedic Cadence**:\n",
+    "   - **Sunday**: Bhagavan Surya Narayana (Aditya Hridaya Stotram)\n",
+    "   - **Monday**: Lord Shiva Someshwara (Shiva Tandava Stotram)\n",
+    "   - **Tuesday**: Lord Hanuman & Murugan (Hanuman Chalisa)\n",
+    "   - **Wednesday**: Lord Ganesha Vighnaharta (Ganapati Atharvashirsha)\n",
+    "   - **Thursday**: Lord Venkateswara & Vishnu (Venkateswara Suprabhatam)\n",
+    "   - **Friday**: Maa Durga & Mahalakshmi (Aigiri Nandini & Mahalakshmi Ashtakam)\n",
+    "   - **Saturday**: Lord Ayyappa & Shani Dev (Harivarasanam & Swamiye Saranam)\n",
+    "3. **Multiple Videos at Subh Muhurat**:\n",
+    "   - **Video 1: Daily Vedic Panchang Reel** (Today's Tithi, Nakshatra, Yoga, Rahu Kaal, Brahma Muhurta)\n",
+    "   - **Video 2: Deity Sacred Cosmic Motion Video** (Pure sacred devotional music & Sanskrit shlokas)\n",
+    "   - **Video 3: Morning Subh Muhurat Darshan Reel** (Temple garbhagriha morning darshan & blessings)\n",
+    "4. **Anti-Theft Watermark**: `DIVYAMANGALAM.COM` subtle badge embedded on every frame.\n",
+    "5. **Auto-Publish**: Direct publishing to **Instagram Reels** (@divyamangalam.info) and **YouTube Shorts**."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 1. ⚙️ Hardware Acceleration & System Setup\n",
+    "#@markdown Run this cell once to verify GPU and install media tools & Sanskrit fonts.\n",
+    "!nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader\n",
+    "\n",
+    "print(\"📦 Installing FFmpeg, Sanskrit Devanagari fonts, and neural speech synthesis...\")\n",
+    "!apt-get update -qq > /dev/null\n",
+    "!apt-get install -y -qq ffmpeg fonts-deva fonts-noto-core fonts-noto-color-emoji > /dev/null\n",
+    "!pip install -q pillow imageio-ffmpeg google-api-python-client google-auth-oauthlib google-auth yt-dlp edge-tts\n",
+    "print(\"✅ System Media & Sanskrit Tools Ready!\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 2. 📥 Clone or Update Divya Mangalam Repository\n",
+    "#@markdown Clones the repository or pulls the latest updates.\n",
+    "import os\n",
+    "if not os.path.exists(\"divyamangalam\"):\n",
+    "    !git clone https://github.com/kedari10085/divyamangalam.git\n",
+    "    %cd divyamangalam\n",
+    "else:\n",
+    "    %cd /content/divyamangalam\n",
+    "    !git pull origin main\n",
+    "\n",
+    "print(\"✅ Divya Mangalam Repository synced in Colab!\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 3. 🕉️ Configure Daily Video Parameters\n",
+    "#@markdown Choose the date, deity, and videos to generate.\n",
+    "\n",
+    "target_date = \"today\" #@param [\"today\", \"tomorrow\"] {allow-input: true}\n",
+    "selected_deity = \"auto\" #@param [\"auto\", \"surya\", \"shiva\", \"hanuman\", \"ganesha\", \"venkateswara\", \"durga\", \"ayyappa\"]\n",
+    "video_bundle = \"all\" #@param [\"all\", \"panchang\", \"deity\", \"darshan\"]\n",
+    "publish_to_instagram = True #@param {type:\"boolean\"}\n",
+    "publish_to_youtube = True #@param {type:\"boolean\"}\n",
+    "\n",
+    "import datetime\n",
+    "utc_now = datetime.datetime.now(datetime.timezone.utc)\n",
+    "ist_now = utc_now + datetime.timedelta(hours=5, minutes=30)\n",
+    "\n",
+    "if target_date == \"today\":\n",
+    "    run_date_str = ist_now.strftime(\"%Y-%m-%d\")\n",
+    "elif target_date == \"tomorrow\":\n",
+    "    run_date_str = (ist_now + datetime.timedelta(days=1)).strftime(\"%Y-%m-%d\")\n",
+    "else:\n",
+    "    run_date_str = target_date\n",
+    "\n",
+    "pub_flag = \"all\" if (publish_to_instagram and publish_to_youtube) else (\"instagram\" if publish_to_instagram else (\"youtube\" if publish_to_youtube else \"none\"))\n",
+    "\n",
+    "print(\"===================================================\")\n",
+    "print(f\"📅 Target Date (IST):  {run_date_str}\")\n",
+    "print(f\"🕉️ Selected Deity:     {selected_deity.upper()}\")\n",
+    "print(f\"🎬 Video Bundle:       {video_bundle.upper()}\")\n",
+    "print(f\"🚀 Auto-Publish:       {pub_flag.upper()}\")\n",
+    "print(\"===================================================\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 4. 🎬 Render Multi-Deity Subh Muhurat Videos & Auto-Publish\n",
+    "#@markdown Generates all high-definition videos with pure sacred music and anti-theft watermark.\n",
+    "\n",
+    "!python cloud_daily_subh_muhurat_pipeline.py \\\n",
+    "  --mode \"{video_bundle}\" \\\n",
+    "  --deity \"{selected_deity}\" \\\n",
+    "  --publish \"{pub_flag}\" \\\n",
+    "  --date \"{run_date_str}\"\n",
+    "\n",
+    "print(\"\\n🎉 Video Generation and Multi-Platform Publishing Completed!\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 5. 📱 Interactive Video Preview Widget\n",
+    "#@markdown Preview any rendered video directly inside Colab.\n",
+    "import glob\n",
+    "from IPython.display import HTML, display\n",
+    "\n",
+    "video_files = sorted(glob.glob(\"images/*.mp4\"))\n",
+    "if video_files:\n",
+    "    print(\"Rendered Video Files Found:\")\n",
+    "    for i, vf in enumerate(video_files):\n",
+    "        sz_mb = os.path.getsize(vf) / (1024 * 1024)\n",
+    "        print(f\"[{i+1}] {vf} ({sz_mb:.2f} MB)\")\n",
+    "    \n",
+    "    # Preview most recent video\n",
+    "    latest_video = video_files[-1]\n",
+    "    print(f\"\\nShowing Player for: {latest_video}\")\n",
+    "    display(HTML(f'''\n",
+    "    <div style=\"text-align: center; background: #0f172a; padding: 20px; border-radius: 12px; max-width: 450px; margin: auto;\">\n",
+    "        <h3 style=\"color: #f59e0b; font-family: sans-serif;\">🕉️ Divya Mangalam Reel Preview</h3>\n",
+    "        <video width=\"320\" height=\"568\" controls autoplay loop style=\"border-radius: 10px; border: 2px solid #f59e0b;\">\n",
+    "            <source src=\"{latest_video}\" type=\"video/mp4\">\n",
+    "            Your browser does not support HTML5 video.\n",
+    "        </video>\n",
+    "        <p style=\"color: #94a3b8; font-size: 13px; margin-top: 10px;\">Official Release • Anti-Theft Watermarked</p>\n",
+    "    </div>\n",
+    "    '''))\n",
+    "else:\n",
+    "    print(\"No mp4 videos found in images/ yet.\")"
+   ]
+  }
+ ],
+ "metadata": {
+  "accelerator": "GPU",
+  "colab": {
+   "gpuType": "T4",
+   "provenance": []
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}
+
+out_path = r"C:\Users\kedar\Downloads\DivyaMangalam\DivyaMangalam_Daily_Subh_Muhurat_Engine.ipynb"
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(notebook, f, indent=1, ensure_ascii=False)
+
+print(f"✅ Generated Colab Notebook: {out_path} ({os.path.getsize(out_path)} bytes)")

@@ -61,6 +61,25 @@ SURYA_SHLOKAS = [
     ("नमः पूर्वाय गिरये पश्चिमायाद्रये नमः ।", "ज्योतिर्गणानां पतये दिनाधिपतये नमः ॥", "जयाय जयभद्राय हर्यश्वाय नमो नमः ।", "नमो नमः सहस्रांशो आदित्याय नमो नमः ॥")
 ]
 
+GANESHA_SHLOKAS = [
+    ("प्रणम्य शिरसा देवं गौरीपुत्रं विनायकम् ।", "भक्तावासं स्मरेन्नित्यमायुःकामार्थसिद्धये ॥ १ ॥", "प्रथमं वक्रतुण्डं च एकदन्तं द्वितीयकम् ।", "तृतीयं कृष्णपिङ्गाक्षं गजवक्त्रं चतुर्थकम् ॥ २ ॥"),
+    ("लम्बोदरं पञ्चमं च षष्ठं विकटमेव च ।", "सप्तमं विघ्नराजेन्द्रं धूम्रवर्णं तथाष्टमम् ॥ ३ ॥", "नवमं भालचन्द्रं च दशमं तु विनायकम् ।", "एकादशं गणपतिं द्वादशं तु गजाननम् ॥ ४ ॥"),
+    ("द्वादशैतानि नामानि त्रिसन्ध्यं यः पठेन्नरः ।", "न च विघ्नभयं तस्य सर्वसिद्धिकरं प्रभो ॥ ५ ॥", "विद्यार्थी लभते विद्यां धनार्थी लभते धनम् ।", "पुत्रार्थी लभते पुत्रान् मोक्षार्थी लभते गतिम् ॥ ६ ॥")
+]
+
+VENKATESWARA_SHLOKAS = [
+    ("कौसल्या सुप्रजा राम पूर्वा सन्ध्या प्रवर्तते ।", "उत्तिष्ठ नरशार्दूल कर्तव्यं दैवनिह्निकम् ॥ १ ॥", "उत्तिष्ठोत्तिष्ठ गोविन्द उत्तिष्ठ गरुडध्वज ।", "उत्तिष्ठ कमलाकान्त त्रैलोक्यं मङ्गलं कुरु ॥ २ ॥"),
+    ("मातस्समस्तजगतां मधुकैटभारेः", "वक्षोविहारिणि मनोहरदिव्यरूपे ।", "श्रीपद्मवासिनि महोन्नतदीप्तिधाम्ने", "श्रीवेङ्कटेशदयिते तव सुप्रभातम् ॥ ३ ॥"),
+    ("तव सुप्रभातमरविन्दलोचने", "भवतु प्रसन्नमुखचन्द्रमण्डले ।", "विधिशङ्करेन्द्रवनिताभिरर्चिते", "वृषशैलेशदयिते दयानिधे ॥ ४ ॥")
+]
+
+AYYAPPA_SHLOKAS = [
+    ("हरिवरासनं विश्वमोहनम् ।", "हरिदधीश्वरम् आराध्यपादुकम् ।", "अरिविमर्दनं नित्यनर्तनम् ।", "हरिवरात्मजं देवमाश्रये ॥ १ ॥"),
+    ("शरणकीर्तनं शक्तमानसम् ।", "भरणलोलुपं नर्तनालसम् ।", "अरुणभासुरं भूतनायकम् ।", "हरिवरात्मजं देवमाश्रये ॥ २ ॥"),
+    ("प्रणयसत्यकं प्राणनायकम् ।", "प्रणतरक्षकं पन्नगाभरणम् ।", "प्रणवदर्पणं भद्रमोहनम् ।", "हरिवरात्मजं देवमाश्रये ॥ ३ ॥"),
+    ("तुरगवाहनं सुन्दराननम् ।", "वरगदाधरं वेदवर्णितम् ।", "गुरुकृपाकरं कीर्तनप्रियम् ।", "हरिवरात्मजं देवमाश्रये ॥ ४ ॥")
+]
+
 def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=None):
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
 
@@ -130,6 +149,56 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
             "fire": "#DC2626",
             "shlokas": HANUMAN_SHLOKAS,
             "stotram_title": "॥ श्री हनुमान चालीसा ॥"
+        },
+        "ganesha": {
+            "music": os.path.join(BASE_DIR, "audio", "ganesha_atharvashirsha.mp3"),
+            "fallback_url": "https://archive.org/download/GanapatiAtharvashirsha/GanapatiAtharvashirsha.mp3",
+            "art": os.path.join(BASE_DIR, "images", "ganesha_ji.jpg"),
+            "title": "LORD GANESHA • VIGHNAHARTA DANCE",
+            "accent": "#10B981",
+            "fire": "#F59E0B",
+            "shlokas": GANESHA_SHLOKAS,
+            "stotram_title": "॥ श्री गणपति अथर्वशीर्षम् ॥"
+        },
+        "venkateswara": {
+            "music": os.path.join(BASE_DIR, "audio", "venkateswara_suprabhatam_5min.mp3"),
+            "fallback_url": "https://archive.org/download/VenkateswaraSuprabhatam/Suprabhatam.mp3",
+            "art": os.path.join(BASE_DIR, "images", "venkateswara_swamy.jpg"),
+            "title": "LORD VENKATESWARA • SUPRABHATA SEVA",
+            "accent": "#FBBF24",
+            "fire": "#EA580C",
+            "shlokas": VENKATESWARA_SHLOKAS,
+            "stotram_title": "॥ श्री वेङ्कटेश्वर सुप्रभातम ॥"
+        },
+        "vishnu": {
+            "music": os.path.join(BASE_DIR, "audio", "venkateswara_suprabhatam_5min.mp3"),
+            "fallback_url": "https://archive.org/download/VenkateswaraSuprabhatam/Suprabhatam.mp3",
+            "art": os.path.join(BASE_DIR, "images", "venkateswara_swamy.jpg"),
+            "title": "LORD VISHNU • JAGADGURU DARSHAN",
+            "accent": "#FBBF24",
+            "fire": "#EA580C",
+            "shlokas": VENKATESWARA_SHLOKAS,
+            "stotram_title": "॥ श्री वेङ्कटेश्वर सुप्रभातम ॥"
+        },
+        "ayyappa": {
+            "music": os.path.join(BASE_DIR, "audio", "swamiye_saranam_ayyappa_5min.mp3"),
+            "fallback_url": "https://archive.org/download/Harivarasanam/Harivarasanam.mp3",
+            "art": os.path.join(BASE_DIR, "images", "ayyappa_swamy.jpg"),
+            "title": "LORD AYYAPPA • SWAMIYE SARANAM",
+            "accent": "#F59E0B",
+            "fire": "#DC2626",
+            "shlokas": AYYAPPA_SHLOKAS,
+            "stotram_title": "॥ श्री हरिवरासनम् ॥"
+        },
+        "lakshmi": {
+            "music": os.path.join(BASE_DIR, "audio", "aigiri_nandini_dance.mp3"),
+            "fallback_url": "https://archive.org/download/AigiriNandiniStotram/Aigiri%20Nandini.mp3",
+            "art": os.path.join(BASE_DIR, "images", "deepavali_maha_lakshmi.jpg"),
+            "title": "MAHALAKSHMI • DIVINE ABUNDANCE",
+            "accent": "#EC4899",
+            "fire": "#F59E0B",
+            "shlokas": DURGA_SHLOKAS,
+            "stotram_title": "॥ श्री महालक्ष्मी अष्टकम् ॥"
         }
     }
     cfg = configs.get(deity, configs["durga"])
@@ -330,6 +399,11 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
         # 7. Permanent Professional Footer CTA
         draw.text((CX, H - 90), "✦ Sanatana Dharma • Pure Devotional Chanting • divyamangalam.com ✦", fill=theme_accent, font=f_url, anchor='mm')
         draw.text((CX, H - 45), "Follow @divyamangalam.info • YouTube: @DivyaMangalam", fill='#E2E8F0', font=f_sub, anchor='mm')
+
+        # 8. Anti-Theft Watermark Badge (Prominent Brand Protection)
+        wm_box = [W - 400, 60, W - 70, 115] if mode == "shorts" else [W - 360, 40, W - 60, 90]
+        draw.rounded_rectangle(wm_box, radius=14, fill=(15, 23, 42, 230), outline='#F59E0B', width=2)
+        draw.text(((wm_box[0] + wm_box[2]) // 2, (wm_box[1] + wm_box[3]) // 2), "🕉️ DIVYAMANGALAM.COM", fill='#FDE68A', font=f_sub, anchor='mm')
 
         # Push to ffmpeg pipe
         proc.stdin.write(frame.tobytes())

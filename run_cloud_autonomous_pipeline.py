@@ -157,14 +157,18 @@ def main():
         run_panchang_reel()
     elif args.mode == "deity_dance":
         run_deity_dance(args.deity)
-    else: # auto mode based on IST hour
+    else: # auto mode: execute the unified Multi-Deity Subh Muhurat Cloud Pipeline
         hour = ist_now.hour
-        if 5 <= hour < 12:
-            print(f"🌅 Morning Slot ({hour}:00 IST): Executing 24-Hour Vedic Clock & Daily Panchang Reels...")
-            run_clock_reel()
+        print(f"🌅 Scheduled Cloud Slot ({hour}:00 IST): Running Autonomous Multi-Deity Subh Muhurat Pipeline...")
+        subh_script = os.path.join(BASE_DIR, "cloud_daily_subh_muhurat_pipeline.py")
+        cmd = [sys.executable, subh_script, "--mode", "all", "--deity", args.deity, "--publish", "all"]
+        try:
+            subprocess.run(cmd, check=True)
+            print("✅ Autonomous Multi-Deity Subh Muhurat Pipeline successfully finished!")
+        except Exception as e:
+            print(f"⚠️ Error executing subh muhurat pipeline: {e}")
+            # Fallback to individual components
             run_panchang_reel()
-        else:
-            print(f"🌌 Evening Slot ({hour}:00 IST): Executing Cosmic Deity Dance Video...")
             run_deity_dance(args.deity)
 
 if __name__ == '__main__':
