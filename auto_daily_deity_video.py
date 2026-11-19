@@ -97,12 +97,13 @@ def run_daily_pipeline(duration=60.0, deity_override=None):
         json.dump(meta, f, indent=2, ensure_ascii=False)
     print(f"[STAGE 2] SEO Metadata written to {output_meta}")
 
-    # Step 3: Publish to Instagram Reels via node publish script
+    # Step 3: Publish to Instagram Reels via universal publish script
     print("[STAGE 3] Publishing Cosmic Dance Reel to Instagram (@divyamangalam.info)...")
-    insta_script = os.path.join(BASE_DIR, "instagram-agent", "publish_viral_reel.js")
+    insta_script = os.path.join(BASE_DIR, "instagram-agent", "publish_universal_reel.js")
+    raw_video_url = f"https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/daily_{deity_key}_motion_shorts.mp4"
     if os.path.exists(insta_script):
         try:
-            subprocess.run(["node", insta_script], check=True)
+            subprocess.run(["node", insta_script, f"--video_url={raw_video_url}", f"--caption={meta['description']}"], check=True)
             print("✅ Successfully published to Instagram Reels!")
         except Exception as e:
             print(f"⚠️ Instagram publication error: {e}")

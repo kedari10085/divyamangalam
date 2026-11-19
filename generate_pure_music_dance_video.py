@@ -440,7 +440,7 @@ def render_dance_video(deity="shiva", mode="shorts", duration=60.0, output_mp4=N
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate Pure Music Dance Video")
-    parser.add_argument('--deity', type=str, default="durga", choices=["durga", "shiva", "krishna", "surya", "hanuman"])
+    parser.add_argument('--deity', type=str, default="shiva")
     parser.add_argument('--mode', type=str, default="shorts", choices=["shorts", "full"])
     parser.add_argument('--duration', type=float, default=60.0, help="Duration in seconds (e.g. 60.0 for Shorts, 300.0 for 5 mins)")
     parser.add_argument('--out', type=str, default=None)

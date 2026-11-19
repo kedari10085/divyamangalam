@@ -298,14 +298,35 @@ Shubham Bhavatu."""
     with open(temp_txt, "w", encoding="utf-8") as f:
         f.write(script)
 
-    cmd = [
-        sys.executable, "-m", "edge_tts",
-        "--voice", "en-IN-PrabhatNeural",
-        "--rate=+6%",
-        "-f", temp_txt,
-        "--write-media", out_audio
-    ]
-    subprocess.run(cmd, check=True)
+    # Ensure edge-tts is installed
+    try:
+        import edge_tts
+    except ImportError:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "edge-tts"], check=False)
+
+    try:
+        cmd = [
+            sys.executable, "-m", "edge_tts",
+            "--voice", "en-IN-PrabhatNeural",
+            "--rate=+6%",
+            "-f", temp_txt,
+            "--write-media", out_audio
+        ]
+        subprocess.run(cmd, check=True)
+    except Exception as e:
+        print(f"[VOICE SYNTHESIS] Edge-TTS notice ({e}). Using audio fallback...")
+        ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+        fallback_audio = os.path.join(BASE_DIR, "audio", "panchang_voice_today.mp3")
+        if os.path.exists(fallback_audio):
+            import shutil
+            shutil.copyfile(fallback_audio, out_audio)
+        else:
+            subprocess.run([
+                ffmpeg_exe, '-y',
+                '-f', 'lavfi', '-i', 'sine=frequency=432:duration=45',
+                '-af', 'afade=t=in:ss=0:d=1.5,afade=t=out:st=43:d=2.0,volume=0.3',
+                out_audio
+            ], check=False)
     if os.path.exists(temp_txt):
         try: os.remove(temp_txt)
         except Exception: pass
