@@ -270,9 +270,72 @@ def run_darshan_reel_step(deity_key, target_date_str, do_publish=True):
         )
     return True
 
+def run_full_length_video(mode, do_publish=True):
+    """Handles 5-minute full length epic devotional releases."""
+    configs = {
+        "5min_suprabhatam": {
+            "name": "Lord Venkateswara 5-Minute Suprabhatam",
+            "video": "images/venkateswara_suprabhatam_5min_instagram.mp4",
+            "insta": "instagram-agent/publish_suprabhatam_video.js",
+            "yt": "publish_suprabhatam_to_youtube.py"
+        },
+        "5min_ayyappa": {
+            "name": "Lord Ayyappa Swamiye Saranam 5-Minute Master",
+            "video": "images/ayyappa_swamiye_saranam_5min_instagram.mp4",
+            "insta": "instagram-agent/publish_ayyappa_video.js",
+            "yt": "publish_ayyappa_to_youtube.py"
+        },
+        "5min_durga": {
+            "name": "Maa Durga Aigiri Nandini 5-Minute Epic",
+            "video": "images/durga_aigiri_nandini_5min_instagram.mp4",
+            "insta": "instagram-agent/publish_durga_5min_video.js",
+            "yt": "publish_durga_to_youtube.py"
+        },
+        "5min_ramayana": {
+            "name": "Complete Epic Ramayanam 5-Minute Feature",
+            "video": "images/ramayana_5min_full_epic.mp4",
+            "insta": "instagram-agent/publish_ramayana_5min_video.js",
+            "yt": "publish_ramayana_to_youtube.py"
+        },
+        "mahabharata_p1": {
+            "name": "Srimad Mahabharata Part 1 Adi Parva 1080p",
+            "video": "images/mahabharata_part1_adi_parva_action_multilang_1080p.mp4",
+            "insta": "instagram-agent/publish_mahabharata_video.js",
+            "yt": "publish_mahabharata_to_youtube.py"
+        }
+    }
+    cfg = configs.get(mode)
+    if not cfg:
+        print(f"Unknown full-length mode: {mode}")
+        return False
+    print("\n" + "="*60)
+    print(f"🎬 [FULL-LENGTH RELEASE] {cfg['name']}")
+    print("="*60)
+
+    if do_publish:
+        git_push_assets([cfg["video"]], f"feat(release): publish {cfg['name']} [skip ci]")
+
+        insta_script = os.path.join(BASE_DIR, cfg["insta"])
+        if os.path.exists(insta_script):
+            try:
+                subprocess.run(["node", insta_script], check=True)
+            except Exception as e:
+                print(f"⚠️ Instagram error: {e}")
+
+        yt_script = os.path.join(BASE_DIR, cfg["yt"])
+        if os.path.exists(yt_script):
+            try:
+                subprocess.run([sys.executable, yt_script], check=True)
+            except Exception as e:
+                print(f"⚠️ YouTube error: {e}")
+    return True
+
 def main():
     parser = argparse.ArgumentParser(description="Divya Mangalam Autonomous Cloud Subh Muhurat Video Pipeline")
-    parser.add_argument("--mode", type=str, default="all", choices=["all", "panchang", "deity", "darshan"])
+    parser.add_argument("--mode", type=str, default="all", choices=[
+        "all", "panchang", "deity", "darshan",
+        "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"
+    ])
     parser.add_argument("--deity", type=str, default="auto")
     parser.add_argument("--publish", type=str, default="all", choices=["all", "instagram", "youtube", "none"])
     parser.add_argument("--date", type=str, default=None)
@@ -300,6 +363,11 @@ def main():
     print("==================================================================")
 
     setup_cloud_credentials()
+
+    if args.mode in ["5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
+        run_full_length_video(args.mode, do_publish=do_publish)
+        print("\n🎉 [COMPLETED] Full Length Video Execution Finished Successfully!")
+        return
 
     if args.mode in ["all", "panchang"]:
         run_panchang_reel_step(target_date_str, do_publish=do_publish)
