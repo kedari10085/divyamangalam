@@ -59,20 +59,42 @@ function buildDynamicCaption(targetDateStr) {
   const dayOfWeek = d.getDay();
   const cfg = WEEKDAY_DEITIES[dayOfWeek];
 
+  // Attempt to read live JSON metadata if generated
+  let livePanchang = null;
+  const pJsonDate = path.join(__dirname, `../images/panchang_${targetDateStr}.json`);
+  const pJsonToday = path.join(__dirname, `../images/panchang_today.json`);
+  try {
+    if (fs.existsSync(pJsonDate)) {
+      livePanchang = JSON.parse(fs.readFileSync(pJsonDate, 'utf8'));
+    } else if (fs.existsSync(pJsonToday)) {
+      livePanchang = JSON.parse(fs.readFileSync(pJsonToday, 'utf8'));
+    }
+  } catch (e) {}
+
+  const abhijit = livePanchang?.abhijit || '11:34 AM – 12:22 PM';
+  const brahma = livePanchang?.brahma_muhurta || '04:39 AM – 05:27 AM';
+  const amrit = livePanchang?.amrit_kaal || '10:32 AM – 12:02 PM';
+  const rahu = livePanchang?.rahu_kaal || cfg.rahu;
+  const yama = livePanchang?.yamagandam || cfg.yama;
+  const gulika = livePanchang?.gulika || '02:49 PM – 04:14 PM';
+  const tithi = livePanchang?.tithi ? `\n📜 Tithi: ${livePanchang.tithi}` : '';
+  const nakshatra = livePanchang?.nakshatra ? `\n⭐ Nakshatra: ${livePanchang.nakshatra}` : '';
+  const yoga = livePanchang?.yoga ? ` | Yoga: ${livePanchang.yoga}` : '';
+
   return `🕉️ Divya Mangalam — Daily Vedic Calendar & Panchang
 📅 ${targetDateStr} (${cfg.vara} / ${cfg.day})
 Presiding Deity: ${cfg.deity}
-Mantra: ${cfg.mantra}
+Mantra: ${cfg.mantra}${tithi}${nakshatra}${yoga}
 ✦ ──────────────────────── ✦
 ✨ SHUBH MUHURAT (AUSPICIOUS):
-• Abhijit Muhurta: 11:45 AM – 12:35 PM (Ideal for new beginnings & worship)
-• Brahma Muhurta: 04:36 AM – 05:24 AM (Sadhana & Meditation)
-• Amrit Kaal: 08:15 AM – 09:45 AM
+• Abhijit Muhurta: ${abhijit} (Ideal for new beginnings & worship)
+• Brahma Muhurta: ${brahma} (Sadhana & Meditation)
+• Amrit Kaal: ${amrit}
 
 ⚠️ ASHUBH KAAL (INAUSPICIOUS - AVOID NEW TASKS):
-• Rahu Kaal: ${cfg.rahu} (Inauspicious window — avoid launching ventures)
-• Yamagandam: ${cfg.yama} (Avoid new travel)
-• Gulika Kalam: 12:00 PM – 01:30 PM
+• Rahu Kaal: ${rahu} (Inauspicious window — avoid launching ventures)
+• Yamagandam: ${yama} (Avoid new travel)
+• Gulika Kalam: ${gulika}
 
 🔊 Audio: Pure Soothing Neural Voiceover (Zero Clashing Music for maximum clarity)
 

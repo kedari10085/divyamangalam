@@ -18,6 +18,10 @@ import subprocess
 from PIL import Image, ImageDraw, ImageFont
 import imageio_ffmpeg
 
+# ── Live panchang fetcher (drikpanchang scrape → astral sunrise → ephemeris fallback)
+# Import lazily inside calculate_panchang to avoid module-level caching issues
+_LIVE_PANCHANG_AVAILABLE = None  # None = not yet checked; True/False = checked
+
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -247,7 +251,7 @@ def calculate_panchang(target_date):
 
     deity_cfg = WEEKDAY_DEITY_CONFIGS[day_of_week]
 
-    return {
+    panchang_result = {
         "date_str": target_date.strftime("%Y-%m-%d"),
         "date_formatted": target_date.strftime("%B %d, %Y"),
         "day_of_week": day_of_week,
@@ -262,8 +266,25 @@ def calculate_panchang(target_date):
         "yamagandam": YAMAGANDAM_WINDOWS[day_of_week],
         "gulika": GULIKA_WINDOWS[day_of_week],
         "abhijit": "11:45 AM – 12:35 PM",
-        "brahma_muhurta": "04:30 AM – 05:18 AM"
+        "brahma_muhurta": "04:30 AM – 05:18 AM",
+        "amrit_kaal": "Evening Auspicious Puja Window",
+        "sunrise": "06:15 AM",
+        "sunset": "05:45 PM",
+        "panchang_source": "ephemeris_fallback"
     }
+
+    # ── Enrich with live/dynamic computed data (overrides hardcoded values)
+    # Direct call to fetch_live_panchang — most robust approach
+    try:
+        import sys as _sys
+        # BASE_DIR is the directory of generate_dynamic_daily_calendar_reel.py
+        if BASE_DIR not in _sys.path:
+            _sys.path.insert(0, BASE_DIR)
+        import fetch_live_panchang as _flp
+        panchang_result = _flp.enrich_panchang(panchang_result)
+    except Exception as _e:
+        print(f"[panchang] Live enrichment unavailable: {_e}")
+    return panchang_result
 
 def synthesize_panchang_voice(pdata, out_audio):
     """Synthesize pure soothing Indian neural voiceover (ZERO music track)."""
@@ -461,6 +482,12 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         draw.text((CX - 240, grid_y + 130), f"YOGA: {pdata['yoga']}", fill='#FDE68A', font=f_text, anchor='mm')
         draw.text((CX + 240, grid_y + 130), f"MOON: {pdata['moon_rashi']}", fill='#FDE68A', font=f_text, anchor='mm')
 
+        # Sunrise/Sunset row (live data)
+        sr = pdata.get("sunrise", "")
+        ss = pdata.get("sunset", "")
+        if sr and ss:
+            draw.text((CX, grid_y + 170), f"🌅 Sunrise {sr}  |  Sunset {ss} 🌇", fill='#FCD34D', font=f_small, anchor='mm')
+
         # 7. Dynamic Stage Focus Based on Speech Flow
         is_shubh_focus = (16.0 <= t < 42.0)
         is_ashubh_focus = (42.0 <= t < 60.0)
@@ -482,7 +509,8 @@ def render_dynamic_calendar_reel(pdata, voice_path, out_mp4):
         draw.text((CX, shubh_y + 172), "Supreme midday window for major starts, meetings & success", fill='#FFFFFF', font=f_text, anchor='mm')
 
         draw.text((CX, shubh_y + 235), f"Brahma Muhurta: {pdata['brahma_muhurta']} (Meditation & Sadhana)", fill='#FFFFFF', font=f_text, anchor='mm')
-        draw.text((CX, shubh_y + 275), "Amrit Kaal: Evening Auspicious Puja Window", fill='#A7F3D0', font=f_text, anchor='mm')
+        amrit_text = pdata.get('amrit_kaal', 'Evening Auspicious Puja Window')
+        draw.text((CX, shubh_y + 275), f"Amrit Kaal: {amrit_text}", fill='#A7F3D0', font=f_text, anchor='mm')
 
         # 🔴 ASHUBH KAAL CARD (Red)
         ashubh_y = 1115
@@ -574,6 +602,18 @@ def generate_daily_panchang_reel(target_date_str=None):
     try:
         import shutil
         shutil.copyfile(out_mp4, today_copy)
+    except Exception:
+        pass
+
+    # Save Panchang metadata JSON for caption generators & publishers
+    json_path = os.path.join(BASE_DIR, "images", f"panchang_{pdata['date_str']}.json")
+    today_json = os.path.join(BASE_DIR, "images", "panchang_today.json")
+    try:
+        import json
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(pdata, f, indent=2, ensure_ascii=False)
+        with open(today_json, "w", encoding="utf-8") as f:
+            json.dump(pdata, f, indent=2, ensure_ascii=False)
     except Exception:
         pass
 

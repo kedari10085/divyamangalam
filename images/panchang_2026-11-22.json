@@ -1,0 +1,37 @@
+{
+  "date_str": "2026-11-22",
+  "date_formatted": "November 22, 2026",
+  "day_of_week": 0,
+  "day_en": "Sunday",
+  "day_vedic": "Ravivara",
+  "deity": {
+    "day_en": "Sunday",
+    "day_vedic": "Ravivara",
+    "deity_name": "Bhagavan Surya Narayana",
+    "deity_title": "BHAGAVAN SURYA (SURYA NARAYANA)",
+    "mantra_sanskrit": "॥ ॐ घृणिः सूर्याय नमः ॥",
+    "mantra_translit": "Om Ghrinih Suryaya Namah",
+    "art_file": "surya_bhagavan.jpg",
+    "accent": "#F59E0B",
+    "remedy_title": "SUNDAY SACRED GUIDANCE & REMEDY",
+    "remedy_bullets": [
+      "• Offer Arghya with water and red flowers in a copper Kalash",
+      "• Chant Aditya Hridaya Stotram for vitality and leadership",
+      "• Avoid excess salt intake; cultivate gratitude and inner radiance"
+    ],
+    "remedy_audio": "Offer pure water with a copper Kalash to the rising Sun, and chant the Aditya Hridaya Stotram for vitality, health, and cosmic strength."
+  },
+  "tithi": "Trayodashi (Shukla Paksha)",
+  "nakshatra": "Krittika",
+  "yoga": "Siddha",
+  "moon_rashi": "Vrishabha (Taurus)",
+  "rahu_kaal": "04:15 PM – 05:40 PM",
+  "yamagandam": "11:58 AM – 01:23 PM",
+  "gulika": "02:49 PM – 04:14 PM",
+  "abhijit": "11:34 AM – 12:22 PM",
+  "brahma_muhurta": "04:39 AM – 05:27 AM",
+  "amrit_kaal": "10:32 AM – 12:02 PM",
+  "sunrise": "06:15 AM",
+  "sunset": "05:41 PM",
+  "panchang_source": "astral_computed"
+}
