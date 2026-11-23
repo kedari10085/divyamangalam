@@ -273,6 +273,12 @@ def run_darshan_reel_step(deity_key, target_date_str, do_publish=True):
 def run_full_length_video(mode, do_publish=True):
     """Handles 5-minute full length epic devotional releases."""
     configs = {
+        "5min_shiva": {
+            "name": "Lord Shiva Kartika Pournami 5-Minute Master",
+            "video": "images/shiva_kartika_pournami_5min_instagram.mp4",
+            "insta": "instagram-agent/publish_shiva_5min_video.js",
+            "yt": "publish_shiva_5min_to_youtube.py"
+        },
         "5min_suprabhatam": {
             "name": "Lord Venkateswara 5-Minute Suprabhatam",
             "video": "images/venkateswara_suprabhatam_5min_instagram.mp4",
@@ -334,7 +340,7 @@ def main():
     parser = argparse.ArgumentParser(description="Divya Mangalam Autonomous Cloud Subh Muhurat Video Pipeline")
     parser.add_argument("--mode", type=str, default="all", choices=[
         "all", "panchang", "deity", "darshan",
-        "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"
+        "5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"
     ])
     parser.add_argument("--deity", type=str, default="auto")
     parser.add_argument("--publish", type=str, default="all", choices=["all", "instagram", "youtube", "none"])
@@ -369,7 +375,7 @@ def main():
 
     setup_cloud_credentials()
 
-    if args.mode in ["5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
+    if args.mode in ["5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
         run_full_length_video(args.mode, do_publish=do_publish)
         print("\n🎉 [COMPLETED] Full Length Video Execution Finished Successfully!")
         return

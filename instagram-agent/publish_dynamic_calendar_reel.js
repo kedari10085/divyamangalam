@@ -105,6 +105,12 @@ Mantra: ${cfg.mantra}${tithi}${nakshatra}${yoga}
 }
 
 async function publishDynamicCalendarReel(dateStr, videoRawUrl, captionText = null) {
+  const stopFlag = path.join(__dirname, '../STOP_AUTOMATION');
+  if (fs.existsSync(stopFlag)) {
+    console.log('🛑 STOP_AUTOMATION flag active — Instagram Reel publishing is paused per user request.');
+    return null;
+  }
+
   if (!captionText) {
     captionText = buildDynamicCaption(dateStr);
   }

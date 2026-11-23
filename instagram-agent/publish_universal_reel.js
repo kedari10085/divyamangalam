@@ -45,6 +45,12 @@ function req(url, method = 'GET', data = null) {
 }
 
 async function publishReel({ videoUrl, caption, coverUrl = null }) {
+  const stopFlag = path.join(__dirname, '../STOP_AUTOMATION');
+  if (fs.existsSync(stopFlag)) {
+    console.log('🛑 STOP_AUTOMATION flag active — Instagram Reel publishing is paused per user request.');
+    return null;
+  }
+
   if (!token) {
     console.error('❌ Error: META_ACCESS_TOKEN not found in environment or .env');
     return null;

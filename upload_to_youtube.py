@@ -13,6 +13,11 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 def upload_video(video_path, metadata_path=None):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    if os.path.exists(os.path.join(base_dir, "STOP_AUTOMATION")):
+        print("🛑 STOP_AUTOMATION flag active — YouTube upload is paused per user request.")
+        return False
+
     if not os.path.exists(video_path):
         print(f"Error: Video file not found at {video_path}")
         return False
