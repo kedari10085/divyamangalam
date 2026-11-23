@@ -80,10 +80,12 @@ def render_shiva_5min(video_format="both"):
             "-map", "[aout]",
             "-c:v", "libx264",
             "-preset", "fast",
-            "-crf", "20",
+            "-b:v", "2200k",
+            "-maxrate", "2600k",
+            "-bufsize", "4500k",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac",
-            "-b:a", "192k",
+            "-b:a", "128k",
             out_h
         ]
         res_h = subprocess.run(cmd_h)
@@ -121,10 +123,12 @@ def render_shiva_5min(video_format="both"):
             "-map", "[aout]",
             "-c:v", "libx264",
             "-preset", "fast",
-            "-crf", "20",
+            "-b:v", "2200k",
+            "-maxrate", "2600k",
+            "-bufsize", "4500k",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac",
-            "-b:a", "192k",
+            "-b:a", "128k",
             out_v
         ]
         res_v = subprocess.run(cmd_v)
