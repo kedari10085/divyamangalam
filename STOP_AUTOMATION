@@ -1,0 +1,9 @@
+# =======================================================
+# Divya Mangalam — AUTOMATION KILL SWITCH (PAUSED)
+# =======================================================
+# When this file exists, all automated pipelines, schedulers,
+# and daily posting agents immediately exit cleanly without
+# performing any video generation, encoding, or publishing.
+#
+# Status: STOPPED
+# Timestamp: 2026-11-23T10:34:00+05:30

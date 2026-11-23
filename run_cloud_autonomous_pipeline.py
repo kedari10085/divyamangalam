@@ -147,6 +147,11 @@ def main():
     print(f"Mode:       {args.mode}")
     print("==================================================")
 
+    stop_flag = os.path.join(BASE_DIR, "STOP_AUTOMATION")
+    if os.path.exists(stop_flag):
+        print("🛑 STOP_AUTOMATION flag active! All autonomous pipelines are paused per user request.")
+        sys.exit(0)
+
     if args.mode == "mahabharata_p1":
         run_mahabharata_publish()
     elif args.mode == "ramayana_5min":

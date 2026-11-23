@@ -42,6 +42,12 @@ function loadEnv() {
 }
 loadEnv();
 
+const STOP_FLAG = path.join(__dirname, '..', 'STOP_AUTOMATION');
+if (fs.existsSync(STOP_FLAG)) {
+  console.log("🛑 STOP_AUTOMATION flag active! All Instagram automated postings are paused per user request.");
+  process.exit(0);
+}
+
 const INSTAGRAM_ACCOUNT_ID = process.env.INSTAGRAM_ACCOUNT_ID;
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const IS_DRY_RUN = process.argv.includes('--dry-run') || (!INSTAGRAM_ACCOUNT_ID || !META_ACCESS_TOKEN);

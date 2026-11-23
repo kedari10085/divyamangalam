@@ -362,6 +362,11 @@ def main():
     print(f"Auto-Publish:      {args.publish}")
     print("==================================================================")
 
+    stop_flag = os.path.join(BASE_DIR, "STOP_AUTOMATION")
+    if os.path.exists(stop_flag):
+        print("🛑 STOP_AUTOMATION flag active! All autonomous pipelines are paused per user request.")
+        sys.exit(0)
+
     setup_cloud_credentials()
 
     if args.mode in ["5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:

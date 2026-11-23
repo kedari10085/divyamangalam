@@ -34,6 +34,11 @@ def run_step(cmd, desc):
     return True
 
 def execute_daily_panchang_reel(target_date_str=None):
+    stop_flag = os.path.join(BASE_DIR, "STOP_AUTOMATION")
+    if os.path.exists(stop_flag):
+        print("🛑 STOP_AUTOMATION flag active! Panchang reel automation is paused per user request.")
+        return True
+
     if not target_date_str:
         ist_date = get_ist_date()
         target_date_str = ist_date.strftime("%Y-%m-%d")
