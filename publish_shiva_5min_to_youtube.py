@@ -21,8 +21,12 @@ if __name__ == '__main__':
     print("Video: 1920x1080 Full HD Landscape (5-Minute Epic)")
     print("==================================================")
     if not os.path.exists(video_file):
-        print("❌ Error: Video not found at:", video_file)
-        sys.exit(1)
+        alt_file = os.path.join(BASE_DIR, "images", "shiva_kartika_pournami_5min_instagram.mp4")
+        if os.path.exists(alt_file):
+            video_file = alt_file
+        else:
+            print("❌ Error: Video not found at:", video_file)
+            sys.exit(1)
 
     success = upload_video(video_file, meta_file)
     if success:
