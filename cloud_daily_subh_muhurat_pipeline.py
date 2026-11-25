@@ -273,6 +273,13 @@ def run_darshan_reel_step(deity_key, target_date_str, do_publish=True):
 def run_full_length_video(mode, do_publish=True):
     """Handles 5-minute full length epic devotional releases."""
     configs = {
+        "karthika_2min": {
+            "name": "Lord Shiva Karthika Deepotsavam 2-Minute Landscape Cinema",
+            "render": "render_shiva_karthika_deepotsavam_2min.py",
+            "video": "images/shiva_karthika_deepotsavam_2min_instagram.mp4",
+            "insta": "instagram-agent/publish_karthika_deepotsavam_2min.js",
+            "yt": "publish_karthika_deepotsavam_to_youtube.py"
+        },
         "5min_shiva": {
             "name": "Lord Shiva Kartika Pournami 5-Minute Master",
             "video": "images/shiva_kartika_pournami_5min_instagram.mp4",
@@ -318,6 +325,11 @@ def run_full_length_video(mode, do_publish=True):
     print(f"🎬 [FULL-LENGTH RELEASE] {cfg['name']}")
     print("="*60)
 
+    if cfg.get("render") and not os.path.exists(os.path.join(BASE_DIR, cfg["video"])):
+        render_script = os.path.join(BASE_DIR, cfg["render"])
+        if os.path.exists(render_script):
+            subprocess.run([sys.executable, render_script], check=True)
+
     if do_publish:
         git_push_assets([cfg["video"]], f"feat(release): publish {cfg['name']} [skip ci]")
 
@@ -340,7 +352,7 @@ def main():
     parser = argparse.ArgumentParser(description="Divya Mangalam Autonomous Cloud Subh Muhurat Video Pipeline")
     parser.add_argument("--mode", type=str, default="all", choices=[
         "all", "panchang", "deity", "darshan",
-        "5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"
+        "karthika_2min", "5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"
     ])
     parser.add_argument("--deity", type=str, default="auto")
     parser.add_argument("--publish", type=str, default="all", choices=["all", "instagram", "youtube", "none"])
@@ -375,7 +387,7 @@ def main():
 
     setup_cloud_credentials()
 
-    if args.mode in ["5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
+    if args.mode in ["karthika_2min", "5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
         run_full_length_video(args.mode, do_publish=do_publish)
         print("\n🎉 [COMPLETED] Full Length Video Execution Finished Successfully!")
         return
