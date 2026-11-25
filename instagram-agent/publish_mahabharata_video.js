@@ -20,35 +20,34 @@ if (fs.existsSync(envPath)) {
 }
 
 const token = process.env.META_ACCESS_TOKEN;
-const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/mahabharata_part1_adi_parva_action_multilang_1080p.mp4';
+const videoUrl = 'https://raw.githubusercontent.com/kedari10085/divyamangalam/main/images/mahabharata_adi_parva_ep1_instagram.mp4';
 
 const caption = `🏹 శ్రీమన్మహాభారతమ్ (SRIMAD MAHABHARATA) • PART 1: ADI PARVA (ఆది పర్వము) 🕉️
 ✦ ──────────────────────── ✦
-Witness the eternal epic of Veda Vyasa come alive with real humanoid action and multi-language sacred narration!
+Witness the eternal epic of Maharshi Veda Vyasa in full luminous cinema — preserved in complete 16:9 widescreen framing inside a sacred gold theater frame with synchronized narration & orchestral flute score!
 
 नारायणं नमस्कृत्य नरं चैव नरोत्तमम् ।
 देवीं सरस्वतीं व्यासं ततो जयमुदीरयेत् ॥
 
 📖 6 CANONICAL CHAPTERS OF ADI PARVA:
-✦ 00:00 • Chapter 1: The Divine Beginning & Maharshi Vyasa (అనుక్రమణికా పర్వము)
-✦ 00:30 • Chapter 2: Bhishma Pitamaha's Terrible Vow of Celibacy (భీష్మ ప్రతిజ్ఞ)
-✦ 01:00 • Chapter 3: Guru Dronacharya & Arjuna's Single-Pointed Focus (ద్రోణ శిక్షణ)
-✦ 01:28 • Chapter 4: The Burning House of Lac & Bhima's Heroic Escape (లక్కఇంటి దహనం)
-✦ 01:58 • Chapter 5: Draupadi Swayamvara & Matsya Yantra Piercing (మత్స్యయంత్ర ఛేదన)
-✦ 02:28 • Chapter 6: Indraprastha Sovereign Glory & The Divine Gandiva Bow (ఖాండవ వనం)
+✦ 00:00 • Chapter 1: The Divine Origin & Maharshi Vyasa (आदि पर्व आरम्भ)
+✦ 00:31 • Chapter 2: Bhishma Pitamaha's Immortal Vow on River Ganga (भीष्म प्रतिज्ञा)
+✦ 01:03 • Chapter 3: Guru Dronacharya & Arjuna's Unrivaled Focus (गुरु द्रोण • अर्जुन)
+✦ 01:34 • Chapter 4: Conspiracy of Lakshagriha & Bhima's Heroic Escape (लाक्षागृह दाह)
+✦ 02:06 • Chapter 5: Draupadi Swayamvara & Matsya Yantra Piercing (द्रौपदी स्वयंवर)
+✦ 02:37 • Chapter 6: Sri Krishna, Celestial Gandiva Bow & Indraprastha Glory (गाण्डीव • इन्द्रप्रस्थ)
 
-🔥 Full 1080p Cinematic Film
-🔥 Multi-Language Audio: Telugu (తెలుగు) • Hindi (हिन्दी) • English (Original)
-🔥 Interactive Cinema Theater Live at divyamangalam.com/mahabharata.html
+🔥 Full HD Sacred Cinema (Devanagari Gold Cards + Optical Fire & Lotus Petals)
+🔥 Interactive Epic Reader & 18 Canonical Parvas: divyamangalam.com/mahabharata.html
 
 Chant with devotion:
-॥ यतो धर्मस्ततो जयः ॥ | Where there is Dharma, there is Victory! 🏹
+॥ यतो धर्मस्ततो जयः ॥ | Where there is Dharma, there is Victory!
 
 ✦ ──────────────────────── ✦
 🌐 Explore All 18 Canonical Parvas: https://divyamangalam.com/mahabharata.html
-🔔 Follow @divyamangalam.info for daily Vedic wisdom & divine epics!
+🔔 Follow @divyamangalam.info for daily Vedic wisdom & sacred epics!
 
-#Mahabharata #AdiParva #MahabharatInTelugu #MahabharatInHindi #Arjuna #Bhishma #LordKrishna #Draupadi #Indraprastha #VedaVyasa #SanatanaDharma #DivyaMangalam #Bhakti #EpicMahabharata`;
+#Mahabharata #AdiParva #SrimadMahabharata #Arjuna #Bhishma #LordKrishna #Draupadi #Indraprastha #VedaVyasa #SanatanaDharma #DivyaMangalam #Bhakti #EpicMahabharata`;
 
 function req(url, method = 'GET', data = null) {
   return new Promise((resolve, reject) => {
@@ -103,7 +102,7 @@ async function publishMahabharataVideo() {
   while (attempts < 60) {
     await new Promise(r => setTimeout(r, 8000));
     attempts++;
-    const statusUrl = `https://graph.instagram.com/v20.0/${containerId}?fields=status_code&access_token=${token}`;
+    const statusUrl = `https://graph.instagram.com/v20.0/${containerId}?fields=status_code,status,error_message&access_token=${token}`;
     const statusRes = await req(statusUrl);
     console.log(`[Poll ${attempts}] Status: ${statusRes.status_code || JSON.stringify(statusRes)}`);
 

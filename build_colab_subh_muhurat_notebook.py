@@ -44,7 +44,7 @@ notebook = {
     "\n",
     "print(\"📦 Installing FFmpeg, Sanskrit Devanagari fonts, and neural speech synthesis...\")\n",
     "!apt-get update -qq > /dev/null\n",
-    "!apt-get install -y -qq ffmpeg fonts-deva fonts-noto-core fonts-noto-color-emoji > /dev/null\n",
+    "!apt-get install -y -qq ffmpeg fonts-deva fonts-noto-core fonts-noto-color-emoji libraqm0 libfribidi0 libharfbuzz0b > /dev/null\n",
     "!pip install -q pillow opencv-python-headless imageio-ffmpeg google-api-python-client google-auth-oauthlib google-auth yt-dlp edge-tts astral requests beautifulsoup4 lxml\n",
     "print(\"✅ System Media & Sanskrit Tools Ready!\")"
    ]
@@ -205,6 +205,33 @@ notebook = {
     "    !node instagram-agent/publish_karthika_deepotsavam_2min.js\n",
     "\n",
     "print(\"\\n🎉 Karthika Deepotsavam 2-Min Cinema Release Completed!\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": None,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#@title 🏹 8. Render & Publish Srimad Mahabharata Part 1: Adi Parva (Colab GPU Cinema)\n",
+    "#@markdown Broadcast-grade 16:9 widescreen cinema + 9:16 Luxury Framed Instagram Reel over cinema_engine.py.\n",
+    "duration_seconds = 189 #@param {type:\"integer\"}\n",
+    "publish_instagram = True #@param {type:\"boolean\"}\n",
+    "publish_youtube = False #@param {type:\"boolean\"}\n",
+    "\n",
+    "!python render_mahabharata_adi_parva_master.py --duration {duration_seconds}\n",
+    "\n",
+    "if publish_instagram:\n",
+    "    print(\"\\n▶️ Syncing Reel asset & publishing Mahabharata Part 1 to Instagram...\")\n",
+    "    !git add images/mahabharata_adi_parva_ep1_instagram.mp4 && git commit -m \"feat(mahabharata): update Adi Parva Ep1 IG reel from Colab [skip ci]\" || true\n",
+    "    !git push origin main || true\n",
+    "    !node instagram-agent/publish_mahabharata_video.js\n",
+    "\n",
+    "if publish_youtube:\n",
+    "    print(\"\\n▶️ Uploading Mahabharata Part 1 16:9 Master to YouTube...\")\n",
+    "    !python publish_mahabharata_to_youtube.py\n",
+    "\n",
+    "print(\"\\n🎉 Srimad Mahabharata Part 1: Adi Parva Colab Release Completed!\")\n"
    ]
   }
  ],

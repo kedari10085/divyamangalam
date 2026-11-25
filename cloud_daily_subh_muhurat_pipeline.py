@@ -270,8 +270,8 @@ def run_darshan_reel_step(deity_key, target_date_str, do_publish=True):
         )
     return True
 
-def run_full_length_video(mode, do_publish=True):
-    """Handles 5-minute full length epic devotional releases."""
+def run_full_length_video(mode, do_publish=True, publish_target="all"):
+    """Handles full-length epic devotional cinema releases."""
     configs = {
         "karthika_2min": {
             "name": "Lord Shiva Karthika Deepotsavam 2-Minute Landscape Cinema",
@@ -311,8 +311,9 @@ def run_full_length_video(mode, do_publish=True):
             "yt": "publish_ramayana_to_youtube.py"
         },
         "mahabharata_p1": {
-            "name": "Srimad Mahabharata Part 1 Adi Parva 1080p",
-            "video": "images/mahabharata_part1_adi_parva_action_multilang_1080p.mp4",
+            "name": "Srimad Mahabharata Part 1 Adi Parva Cinema Master",
+            "render": "render_mahabharata_adi_parva_master.py",
+            "video": "images/mahabharata_adi_parva_ep1_instagram.mp4",
             "insta": "instagram-agent/publish_mahabharata_video.js",
             "yt": "publish_mahabharata_to_youtube.py"
         }
@@ -333,19 +334,21 @@ def run_full_length_video(mode, do_publish=True):
     if do_publish:
         git_push_assets([cfg["video"]], f"feat(release): publish {cfg['name']} [skip ci]")
 
-        insta_script = os.path.join(BASE_DIR, cfg["insta"])
-        if os.path.exists(insta_script):
-            try:
-                subprocess.run(["node", insta_script], check=True)
-            except Exception as e:
-                print(f"⚠️ Instagram error: {e}")
+        if publish_target in ("all", "instagram"):
+            insta_script = os.path.join(BASE_DIR, cfg["insta"])
+            if os.path.exists(insta_script):
+                try:
+                    subprocess.run(["node", insta_script], check=True)
+                except Exception as e:
+                    print(f"⚠️ Instagram error: {e}")
 
-        yt_script = os.path.join(BASE_DIR, cfg["yt"])
-        if os.path.exists(yt_script):
-            try:
-                subprocess.run([sys.executable, yt_script], check=True)
-            except Exception as e:
-                print(f"⚠️ YouTube error: {e}")
+        if publish_target in ("all", "youtube"):
+            yt_script = os.path.join(BASE_DIR, cfg["yt"])
+            if os.path.exists(yt_script):
+                try:
+                    subprocess.run([sys.executable, yt_script], check=True)
+                except Exception as e:
+                    print(f"⚠️ YouTube error: {e}")
     return True
 
 def main():
@@ -388,7 +391,7 @@ def main():
     setup_cloud_credentials()
 
     if args.mode in ["karthika_2min", "5min_shiva", "5min_suprabhatam", "5min_ayyappa", "5min_durga", "5min_ramayana", "mahabharata_p1"]:
-        run_full_length_video(args.mode, do_publish=do_publish)
+        run_full_length_video(args.mode, do_publish=do_publish, publish_target=args.publish)
         print("\n🎉 [COMPLETED] Full Length Video Execution Finished Successfully!")
         return
 

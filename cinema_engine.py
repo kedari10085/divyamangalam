@@ -67,7 +67,10 @@ class CinemaProjectConfig:
     youtube_description: str = ""
     youtube_tags: list[str] = field(default_factory=list)
     instagram_header_text: str = "ॐ नमः शिवाय • KARTHIKA DEEPOTSAVAM"
+    instagram_header_subtitle: str = "DIVYA MANGALAM • FULL MOTION SACRED CINEMA"
+    instagram_footer_title: str = "॥ हर हर महादेव • ॐ नमः शिवाय ॥"
     instagram_footer_text: str = "DIVYAMANGALAM.COM • FULL HD CINEMA"
+    instagram_video_bitrate: str = "3200k"
     watermark_domain: str = "DIVYAMANGALAM.COM"
     watermark_signature: str = "divyamangalam.info"
     width: int = 1920
@@ -253,7 +256,7 @@ if ($spec.ig_frame_png) {
     $dcI = $dvI.RenderOpen()
     $dcI.DrawRoundedRectangle($darkFill, $goldPen2, (New-Object System.Windows.Rect(60, 410, 960, 150)), 18, 18)
     $tH1 = New-Text $spec.instagram_header_text $tfDevBold 40 $goldBright
-    $tH2 = New-Text "DIVYA MANGALAM • FULL MOTION SACRED CINEMA" $tfLatSemi 24 $whiteText
+    $tH2 = New-Text $spec.instagram_header_subtitle $tfLatSemi 24 $whiteText
     $dcI.DrawText($tH1, (New-Object System.Windows.Point(((1080 - $tH1.Width) / 2.0), 432)))
     $dcI.DrawText($tH2, (New-Object System.Windows.Point(((1080 - $tH2.Width) / 2.0), 498)))
 
@@ -261,7 +264,7 @@ if ($spec.ig_frame_png) {
     $dcI.DrawRectangle($goldBar, $null, (New-Object System.Windows.Rect(0, 1264, 1080, 4)))
 
     $dcI.DrawRoundedRectangle($darkFill, $goldPen2, (New-Object System.Windows.Rect(60, 1345, 960, 170)), 18, 18)
-    $tF1 = New-Text "॥ हर हर महादेव • ॐ नमः शिवाय ॥" $tfDevBold 40 $goldBright
+    $tF1 = New-Text $spec.instagram_footer_title $tfDevBold 40 $goldBright
     $tF2 = New-Text $spec.instagram_footer_text $tfLatSemi 24 $whiteText
     $dcI.DrawText($tF1, (New-Object System.Windows.Point(((1080 - $tF1.Width) / 2.0), 1372)))
     $dcI.DrawText($tF2, (New-Object System.Windows.Point(((1080 - $tF2.Width) / 2.0), 1445)))
@@ -295,6 +298,8 @@ def render_overlays_wpf(cfg: CinemaProjectConfig, tmp_dir: str) -> tuple[list[tu
         "watermark_domain": cfg.watermark_domain,
         "watermark_signature": cfg.watermark_signature,
         "instagram_header_text": cfg.instagram_header_text,
+        "instagram_header_subtitle": cfg.instagram_header_subtitle,
+        "instagram_footer_title": cfg.instagram_footer_title,
         "instagram_footer_text": cfg.instagram_footer_text,
         "watermark_png": wm_png,
         "ig_frame_png": ig_png,
@@ -585,11 +590,11 @@ class CinemaEngine:
         draw = ImageDraw.Draw(frame_img, "RGBA")
         draw.rounded_rectangle([(60, 410), (1020, 560)], radius=18, fill=(10, 8, 18, 190), outline=(245, 195, 65, 225), width=2)
         draw.text((540, 462), self.cfg.instagram_header_text, font=fonts["title"], fill=(255, 232, 150, 255), anchor="mm")
-        draw.text((540, 518), "DIVYA MANGALAM • FULL MOTION SACRED CINEMA", font=fonts["sub"], fill=(235, 235, 245, 235), anchor="mm")
+        draw.text((540, 518), self.cfg.instagram_header_subtitle, font=fonts["sub"], fill=(235, 235, 245, 235), anchor="mm")
         draw.rectangle([(0, 652), (1080, 656)], fill=(245, 195, 65, 235))
         draw.rectangle([(0, 1264), (1080, 1268)], fill=(245, 195, 65, 235))
         draw.rounded_rectangle([(60, 1345), (1020, 1515)], radius=18, fill=(10, 8, 18, 190), outline=(245, 195, 65, 225), width=2)
-        draw.text((540, 1400), "॥ हर हर महादेव • ॐ नमः शिवाय ॥", font=fonts["title"], fill=(255, 232, 150, 255), anchor="mm")
+        draw.text((540, 1400), self.cfg.instagram_footer_title, font=fonts["title"], fill=(255, 232, 150, 255), anchor="mm")
         draw.text((540, 1465), self.cfg.instagram_footer_text, font=fonts["sub"], fill=(225, 225, 235, 235), anchor="mm")
         frame_img.save(overlay_png)
 
@@ -610,11 +615,14 @@ class CinemaEngine:
             "[vid][1:v]overlay=0:0"
         )
         preset_args = encoder_args[:4]
+        v_kbps = int(self.cfg.instagram_video_bitrate.rstrip("kKmM")) * (1000 if self.cfg.instagram_video_bitrate[-1].lower() == "m" else 1)
+        maxrate = f"{int(v_kbps * 1.25)}k"
+        bufsize = f"{int(v_kbps * 1.85)}k"
         cmd = [
             self.ffmpeg, "-y", "-i", master_mp4, "-i", ig_overlay_png,
             "-filter_complex", fc,
             *preset_args,
-            "-b:v", "3200k", "-maxrate", "4000k", "-bufsize", "6000k",
+            "-b:v", self.cfg.instagram_video_bitrate, "-maxrate", maxrate, "-bufsize", bufsize,
             "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart",
             reel_mp4,
         ]
