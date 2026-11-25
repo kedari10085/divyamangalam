@@ -1,0 +1,37 @@
+{
+  "date_str": "2026-11-25",
+  "date_formatted": "November 25, 2026",
+  "day_of_week": 3,
+  "day_en": "Wednesday",
+  "day_vedic": "Budhavara",
+  "deity": {
+    "day_en": "Wednesday",
+    "day_vedic": "Budhavara",
+    "deity_name": "Lord Ganesha (Vighnaharta)",
+    "deity_title": "LORD GANESHA (VIGHNAHARTA)",
+    "mantra_sanskrit": "॥ ॐ गं गणपतये नमः ॥",
+    "mantra_translit": "Om Gam Ganapataye Namah",
+    "art_file": "durga_mata.jpg",
+    "accent": "#10B981",
+    "remedy_title": "WEDNESDAY SACRED GUIDANCE & REMEDY",
+    "remedy_bullets": [
+      "• Offer 21 fresh Durva grass blades and modak to Lord Ganesha",
+      "• Chant 'Om Gam Ganapataye Namah' to clear business and intellect blocks",
+      "• Donate green vegetables or feed birds for communicative clarity"
+    ],
+    "remedy_audio": "Offer 21 Durva blades to Lord Ganesha, and chant Om Gam Ganapataye Namah to bless your intellectual, communicative, and financial pursuits."
+  },
+  "tithi": "Pratipada (Krishna Paksha)",
+  "nakshatra": "Ardra",
+  "yoga": "Brahma",
+  "moon_rashi": "Mithuna (Gemini)",
+  "rahu_kaal": "01:24 PM – 02:49 PM",
+  "yamagandam": "07:42 AM – 09:07 AM",
+  "gulika": "10:33 AM – 11:58 AM",
+  "abhijit": "11:35 AM – 12:23 PM",
+  "brahma_muhurta": "04:40 AM – 05:28 AM",
+  "amrit_kaal": "10:33 AM – 12:03 PM",
+  "sunrise": "06:16 AM",
+  "sunset": "05:41 PM",
+  "panchang_source": "astral_computed"
+}
