@@ -1,0 +1,37 @@
+{
+  "date_str": "2026-11-27",
+  "date_formatted": "November 27, 2026",
+  "day_of_week": 5,
+  "day_en": "Friday",
+  "day_vedic": "Shukravara",
+  "deity": {
+    "day_en": "Friday",
+    "day_vedic": "Shukravara",
+    "deity_name": "Maa Durga & Mahalakshmi",
+    "deity_title": "MAA DURGA (ADI PARASHAKTI)",
+    "mantra_sanskrit": "॥ ॐ श्रीं महालक्ष्म्यै नमः ॥",
+    "mantra_translit": "Om Shreem Mahalakshmyai Namah",
+    "art_file": "durga_mata.jpg",
+    "accent": "#EC4899",
+    "remedy_title": "FRIDAY SACRED GUIDANCE & REMEDY",
+    "remedy_bullets": [
+      "• Light a pure cow ghee lamp and chant Mahalakshmi Ashtakam",
+      "• Offer white/lotus flowers and fragrant incense to the Divine Mother",
+      "• Practice generosity and cultivate aesthetic, heart-centered harmony"
+    ],
+    "remedy_audio": "Light a pure cow ghee lamp, chant the Mahalakshmi Ashtakam, and offer fragrant flowers to welcome auspicious abundance and divine grace."
+  },
+  "tithi": "Chaturthi (Krishna Paksha)",
+  "nakshatra": "Pushya",
+  "yoga": "Vaidhriti",
+  "moon_rashi": "Karka (Cancer)",
+  "rahu_kaal": "11:59 AM – 01:24 PM",
+  "yamagandam": "02:50 PM – 04:15 PM",
+  "gulika": "07:43 AM – 09:08 AM",
+  "abhijit": "11:35 AM – 12:23 PM",
+  "brahma_muhurta": "04:41 AM – 05:29 AM",
+  "amrit_kaal": "10:34 AM – 12:04 PM",
+  "sunrise": "06:17 AM",
+  "sunset": "05:41 PM",
+  "panchang_source": "astral_computed"
+}
