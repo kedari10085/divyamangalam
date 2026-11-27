@@ -1,0 +1,37 @@
+{
+  "date_str": "2026-11-28",
+  "date_formatted": "November 28, 2026",
+  "day_of_week": 6,
+  "day_en": "Saturday",
+  "day_vedic": "Shanivara",
+  "deity": {
+    "day_en": "Saturday",
+    "day_vedic": "Shanivara",
+    "deity_name": "Lord Venkateswara & Shani Dev",
+    "deity_title": "LORD VENKATESWARA (BALAJI GOVINDA)",
+    "mantra_sanskrit": "॥ ॐ नमो वेङ्कटेशाय ॥",
+    "mantra_translit": "Om Namo Venkateshaya",
+    "art_file": "shiva_kailash.jpg",
+    "accent": "#6366F1",
+    "remedy_title": "SATURDAY SACRED GUIDANCE & REMEDY",
+    "remedy_bullets": [
+      "• Light a sesame or mustard oil lamp under the sacred Peepal tree",
+      "• Chant Govinda Namavali or Hanuman Chalisa for karmic protection",
+      "• Feed black sesame seeds to birds and practice selfless humility"
+    ],
+    "remedy_audio": "Light a sesame oil lamp, chant Govinda Namavali or Hanuman Chalisa, and practice humble acts of charity to mitigate karmic obstacles."
+  },
+  "tithi": "Panchami (Krishna Paksha)",
+  "nakshatra": "Ashlesha",
+  "yoga": "Vishkambha",
+  "moon_rashi": "Karka (Cancer)",
+  "rahu_kaal": "10:34 AM – 11:59 AM",
+  "yamagandam": "04:16 PM – 05:41 PM",
+  "gulika": "06:18 AM – 07:43 AM",
+  "abhijit": "11:36 AM – 12:24 PM",
+  "brahma_muhurta": "04:42 AM – 05:30 AM",
+  "amrit_kaal": "10:34 AM – 12:04 PM",
+  "sunrise": "06:18 AM",
+  "sunset": "05:42 PM",
+  "panchang_source": "astral_computed"
+}
